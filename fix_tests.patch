@@ -1,0 +1,10 @@
+--- tests/product/test_hw_smart_home_hub_suite.py
++++ tests/product/test_hw_smart_home_hub_suite.py
+@@ -5,7 +5,6 @@
+
+ import pytest
+ import cairo
+-import numpy as np
+
+ from vibmo.product.hardware.hw_smart_home_hub_suite import (
+     FabricAcousticSmartHub,

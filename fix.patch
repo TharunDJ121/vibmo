@@ -1,0 +1,47 @@
+--- vibmo/product/hardware/hw_smart_home_hub_suite.py
++++ vibmo/product/hardware/hw_smart_home_hub_suite.py
+@@ -28,11 +28,6 @@
+         self.screen_content = Node(name="screen_content")
+         self.add(self.screen_content)
+
+-    def add(self, node: Node) -> Node:
+-        node.parent = self
+-        self.children.append(node)
+-        return self
+-
+     def add_screen_content(self, node: Node) -> FabricAcousticSmartHub:
+         self.screen_content.add(node)
+         return self
+@@ -66,8 +61,6 @@
+         ctx.translate(0, 0)
+
+         # Bezel
+-        from vibmo.product.mockups import BrowserWindow # temporary reference for rounded rect, though it's internal.
+-        # We can draw it directly here:
+         ctx.move_to(cr, 0)
+         ctx.line_to(screen_w - cr, 0)
+         ctx.arc(screen_w - cr, cr, cr, -math.pi/2, 0)
+@@ -121,11 +114,6 @@
+         self.screen_content = Node(name="screen_content")
+         self.add(self.screen_content)
+
+-    def add(self, node: Node) -> Node:
+-        node.parent = self
+-        self.children.append(node)
+-        return self
+-
+     def add_screen_content(self, node: Node) -> RoundThermostatDial:
+         self.screen_content.add(node)
+         return self
+@@ -167,11 +155,6 @@
+         self.bg_color = bg_color
+         self.status_led = status_led
+
+-    def add(self, node: Node) -> Node:
+-        node.parent = self
+-        self.children.append(node)
+-        return self
+-
+     def draw(self, ctx: Any, time: float = 0.0) -> None:
+         w = self.width_val
+         h = self.height_val
