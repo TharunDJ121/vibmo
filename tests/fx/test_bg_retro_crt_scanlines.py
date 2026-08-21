@@ -21,11 +21,11 @@ def test_crt_phosphor_scanline_backdrop():
     surface1 = cairo.ImageSurface(cairo.FORMAT_ARGB32, 800, 600)
     ctx1 = cairo.Context(surface1)
     backdrop.draw(ctx1, time=0.0)
-
+    
     surface2 = cairo.ImageSurface(cairo.FORMAT_ARGB32, 800, 600)
     ctx2 = cairo.Context(surface2)
     backdrop.draw(ctx2, time=1.0)
-
+    
     # We could theoretically extract surface data and compare but
     # it's easiest to verify there's output and it didn't crash.
     # To check temporal output changes, we can look at the buffer data.
@@ -39,15 +39,15 @@ def test_tv_signal_noise_static():
     assert node.width == 320
     assert node.height == 240
     assert node.coarseness == 2
-
+    
     surface1 = cairo.ImageSurface(cairo.FORMAT_ARGB32, 320, 240)
     ctx1 = cairo.Context(surface1)
     node.draw(ctx1, time=0.0)
-
+    
     surface2 = cairo.ImageSurface(cairo.FORMAT_ARGB32, 320, 240)
     ctx2 = cairo.Context(surface2)
     node.draw(ctx2, time=0.1)
-
+    
     buf1 = surface1.get_data()
     buf2 = surface2.get_data()
     assert buf1 != buf2, "Noise output should be different across time"
@@ -59,17 +59,18 @@ def test_vcr_blue_screen_glitch():
     assert node.blue_color.r == 0.0
     assert node.blue_color.g == 0.0
     assert node.blue_color.b == 1.0
-
+    
     surface1 = cairo.ImageSurface(cairo.FORMAT_ARGB32, 640, 480)
     ctx1 = cairo.Context(surface1)
     node.draw(ctx1, time=0.0)
-
+    
     surface2 = cairo.ImageSurface(cairo.FORMAT_ARGB32, 640, 480)
     ctx2 = cairo.Context(surface2)
     node.draw(ctx2, time=1.0)
-
+    
     buf1 = surface1.get_data()
     buf2 = surface2.get_data()
-
+    
     # VCR tracking noise should be different
     assert buf1 != buf2, "Glitch tracking noise output should be temporal"
+
