@@ -1,0 +1,266 @@
+import math
+from typing import Any, Tuple
+import cairo
+
+from vibmo.core.color import Color
+from vibmo.scene.node import Node
+
+def rounded_rect(ctx: cairo.Context, x: float, y: float, width: float, height: float, r: float):
+    ctx.move_to(x + r, y)
+    ctx.line_to(x + width - r, y)
+    ctx.arc(x + width - r, y + r, r, -math.pi / 2, 0)
+    ctx.line_to(x + width, y + height - r)
+    ctx.arc(x + width - r, y + height - r, r, 0, math.pi / 2)
+    ctx.line_to(x + r, y + height)
+    ctx.arc(x + r, y + height - r, r, math.pi / 2, math.pi)
+    ctx.line_to(x, y + r)
+    ctx.arc(x + r, y + r, r, math.pi, 3 * math.pi / 2)
+    ctx.close_path()
+
+class BaseWatch(Node):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.screen = Node()
+        self.add(self.screen)
+
+    def add_screen_content(self, *nodes: Node) -> 'BaseWatch':
+        self.screen.add(*nodes)
+        return self
+
+class TitaniumRuggedWatch(BaseWatch):
+    def __init__(self, width: float = 300, height: float = 380, corner_radius: float = 40, **kwargs):
+        super().__init__(**kwargs)
+        self.width = float(width)
+        self.height = float(height)
+        self.cr = float(corner_radius)
+
+        self.bezel_padding = 20
+        self.screen_width = self.width - 2 * self.bezel_padding
+        self.screen_height = self.height - 2 * self.bezel_padding
+        self.screen_cr = max(0, self.cr - self.bezel_padding)
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        return (0.0, 0.0, self.width, self.height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        # Band (Ribbed Ocean Band)
+        ctx.save()
+        band_width = self.width * 0.8
+        band_x = (self.width - band_width) / 2
+        ctx.set_source_rgba(0.2, 0.2, 0.22, 1.0)
+        # Top band
+        rounded_rect(ctx, band_x, -100, band_width, 150, 10)
+        ctx.fill()
+        # Bottom band
+        rounded_rect(ctx, band_x, self.height - 50, band_width, 150, 10)
+        ctx.fill()
+
+        # Ribs
+        ctx.set_source_rgba(0.15, 0.15, 0.17, 1.0)
+        ctx.set_line_width(4)
+        for i in range(5):
+            ctx.move_to(band_x, -90 + i * 15)
+            ctx.line_to(band_x + band_width, -90 + i * 15)
+            ctx.stroke()
+        for i in range(5):
+            ctx.move_to(band_x, self.height + 40 + i * 15)
+            ctx.line_to(band_x + band_width, self.height + 40 + i * 15)
+            ctx.stroke()
+        ctx.restore()
+
+        # Action Button (Orange)
+        ctx.save()
+        button_w, button_h = 10, 60
+        rounded_rect(ctx, -button_w, self.height/2 - button_h/2, button_w + 5, button_h, 4)
+        ctx.set_source_rgba(1.0, 0.4, 0.0, 1.0) # Orange
+        ctx.fill()
+        ctx.restore()
+
+        # Digital Crown
+        ctx.save()
+        crown_w, crown_h = 18, 50
+        rounded_rect(ctx, self.width - 5, self.height/3 - crown_h/2, crown_w, crown_h, 6)
+        ctx.set_source_rgba(0.8, 0.8, 0.8, 1.0)
+        ctx.fill()
+        # Crown ridges
+        ctx.set_source_rgba(0.6, 0.6, 0.6, 1.0)
+        ctx.set_line_width(2)
+        for i in range(8):
+            y = self.height/3 - crown_h/2 + 5 + i*5
+            ctx.move_to(self.width - 5, y)
+            ctx.line_to(self.width - 5 + crown_w, y)
+            ctx.stroke()
+        ctx.restore()
+
+        # Titanium Case
+        ctx.save()
+        rounded_rect(ctx, 0, 0, self.width, self.height, self.cr)
+        # Gradient or solid for titanium
+        ctx.set_source_rgba(0.85, 0.85, 0.88, 1.0)
+        ctx.fill_preserve()
+        # Raised bezel
+        ctx.set_source_rgba(0.75, 0.75, 0.78, 1.0)
+        ctx.set_line_width(4)
+        ctx.stroke()
+        ctx.restore()
+
+        # Screen black border
+        ctx.save()
+        rounded_rect(ctx, self.bezel_padding/2, self.bezel_padding/2,
+                     self.width - self.bezel_padding, self.height - self.bezel_padding,
+                     self.cr - self.bezel_padding/2)
+        ctx.set_source_rgba(0.0, 0.0, 0.0, 1.0)
+        ctx.fill()
+        ctx.restore()
+
+        # Draw screen content with clip
+        ctx.save()
+        # Translate to screen origin
+        ctx.translate(self.bezel_padding, self.bezel_padding)
+        # Set clip
+        rounded_rect(ctx, 0, 0, self.screen_width, self.screen_height, self.screen_cr)
+        ctx.clip()
+
+        # Manually draw children to pass context down
+        for child in self.screen.children:
+            child.draw(ctx, time)
+        ctx.restore()
+
+
+class MinimalistSquareWatch(BaseWatch):
+    def __init__(self, width: float = 280, height: float = 340, corner_radius: float = 45, **kwargs):
+        super().__init__(**kwargs)
+        self.width = float(width)
+        self.height = float(height)
+        self.cr = float(corner_radius)
+
+        self.bezel_padding = 15
+        self.screen_width = self.width - 2 * self.bezel_padding
+        self.screen_height = self.height - 2 * self.bezel_padding
+        self.screen_cr = max(0, self.cr - self.bezel_padding)
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        return (0.0, 0.0, self.width, self.height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        # Band (Simple silicone)
+        ctx.save()
+        band_width = self.width * 0.75
+        band_x = (self.width - band_width) / 2
+        ctx.set_source_rgba(0.1, 0.1, 0.15, 1.0)
+        rounded_rect(ctx, band_x, -100, band_width, self.height + 200, 5)
+        ctx.fill()
+        ctx.restore()
+
+        # Aluminum Case
+        ctx.save()
+        rounded_rect(ctx, 0, 0, self.width, self.height, self.cr)
+        ctx.set_source_rgba(0.2, 0.2, 0.2, 1.0)
+        ctx.fill_preserve()
+        # 2.5D glass edge curve (inner shadow/highlight)
+        ctx.set_source_rgba(1.0, 1.0, 1.0, 0.1)
+        ctx.set_line_width(2)
+        ctx.stroke()
+        ctx.restore()
+
+        # Screen black border
+        ctx.save()
+        rounded_rect(ctx, self.bezel_padding/2, self.bezel_padding/2,
+                     self.width - self.bezel_padding, self.height - self.bezel_padding,
+                     self.cr - self.bezel_padding/2)
+        ctx.set_source_rgba(0.0, 0.0, 0.0, 1.0)
+        ctx.fill()
+        ctx.restore()
+
+        # Draw screen content with clip
+        ctx.save()
+        ctx.translate(self.bezel_padding, self.bezel_padding)
+        rounded_rect(ctx, 0, 0, self.screen_width, self.screen_height, self.screen_cr)
+        ctx.clip()
+
+        for child in self.screen.children:
+            child.draw(ctx, time)
+        ctx.restore()
+
+
+class ClassicRoundSmartwatchFace(BaseWatch):
+    def __init__(self, radius: float = 160, **kwargs):
+        super().__init__(**kwargs)
+        self.radius = float(radius)
+        self.width = self.radius * 2
+        self.height = self.radius * 2
+
+        self.bezel_padding = 25
+        self.screen_radius = self.radius - self.bezel_padding
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        return (0.0, 0.0, self.width, self.height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        cx, cy = self.radius, self.radius
+
+        # Lugs and band
+        ctx.save()
+        band_width = self.radius * 1.1
+        band_x = cx - band_width / 2
+        # Leather-style band
+        ctx.set_source_rgba(0.4, 0.25, 0.15, 1.0)
+        rounded_rect(ctx, band_x, -80, band_width, self.height + 160, 4)
+        ctx.fill()
+
+        # Metal Lugs
+        ctx.set_source_rgba(0.7, 0.7, 0.7, 1.0)
+        # Top left
+        rounded_rect(ctx, band_x - 10, -20, 15, 40, 2)
+        # Top right
+        rounded_rect(ctx, band_x + band_width - 5, -20, 15, 40, 2)
+        # Bottom left
+        rounded_rect(ctx, band_x - 10, self.height - 20, 15, 40, 2)
+        # Bottom right
+        rounded_rect(ctx, band_x + band_width - 5, self.height - 20, 15, 40, 2)
+        ctx.fill()
+        ctx.restore()
+
+        # Stainless Steel Case / Outer Bezel
+        ctx.save()
+        ctx.arc(cx, cy, self.radius, 0, 2 * math.pi)
+        ctx.set_source_rgba(0.15, 0.15, 0.15, 1.0)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.7, 0.7, 0.7, 1.0)
+        ctx.set_line_width(4)
+        ctx.stroke()
+
+        # Rotating bezel notches
+        num_notches = 60
+        ctx.set_source_rgba(0.6, 0.6, 0.6, 1.0)
+        ctx.set_line_width(2)
+        for i in range(num_notches):
+            angle = i * (2 * math.pi / num_notches)
+            r1 = self.radius
+            r2 = self.radius - 8
+            if i % 5 == 0:
+                r2 = self.radius - 12
+                ctx.set_line_width(3)
+            else:
+                ctx.set_line_width(1)
+            ctx.move_to(cx + r1 * math.cos(angle), cy + r1 * math.sin(angle))
+            ctx.line_to(cx + r2 * math.cos(angle), cy + r2 * math.sin(angle))
+            ctx.stroke()
+        ctx.restore()
+
+        # Inner black border (Display deadzone)
+        ctx.save()
+        ctx.arc(cx, cy, self.screen_radius + 4, 0, 2 * math.pi)
+        ctx.set_source_rgba(0.0, 0.0, 0.0, 1.0)
+        ctx.fill()
+        ctx.restore()
+
+        # Screen content with circular clip
+        ctx.save()
+        ctx.translate(self.bezel_padding, self.bezel_padding)
+        ctx.arc(self.screen_radius, self.screen_radius, self.screen_radius, 0, 2 * math.pi)
+        ctx.clip()
+
+        for child in self.screen.children:
+            child.draw(ctx, time)
+        ctx.restore()
