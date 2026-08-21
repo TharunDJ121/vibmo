@@ -1,11 +1,10 @@
-from .hw_smartwatch_rugged_suite import (
-    TitaniumRuggedWatch,
-    MinimalistSquareWatch,
-    ClassicRoundSmartwatchFace,
-)
+"""
+Hardware mockup components for vibmo.
+"""
+from .hw_gaming_handheld_suite import SteamDeckHandheldChassis, SwitchJoyConFrame, RetroGameBoyEnclosure
 
 __all__ = [
-    "TitaniumRuggedWatch",
-    "MinimalistSquareWatch",
-    "ClassicRoundSmartwatchFace",
+    "SteamDeckHandheldChassis",
+    "SwitchJoyConFrame",
+    "RetroGameBoyEnclosure",
 ]
