@@ -32,47 +32,47 @@ class HyperspaceWarpTunnel(Node):
         depth = self.tunnel_depth.get(time)
         color = self.ring_color.get(time)
         thickness = self.thickness.get(time)
-
+        
         ctx.save()
-
+        
         # We need a perspective projection for Z to scale
         # Simple projection: scale = focal_length / (focal_length + Z)
         # We assume focal_length = depth / 2 roughly, or just scale = 1 / (z/focal_length + 1)
         focal_length = 500.0
-
+        
         z_offset = (time * speed * 500.0) % (depth / self.rings)
-
+        
         for i in range(self.rings):
             # Calculate Z for this ring
             z = depth - (i * (depth / self.rings)) - z_offset
-
+            
             if z <= -focal_length:
                 # Keep it looping effectively
                 z += depth
-
+                
             if z <= -focal_length * 0.9:
                 continue
 
             # Scale based on distance Z
             scale = focal_length / (focal_length + z)
-
+            
             if scale <= 0:
                 continue
-
+                
             # Rotation can also vary by distance/time
             rotation = time * speed * 0.5 + i * 0.1
-
+            
             ctx.save()
             ctx.scale(scale, scale)
             ctx.rotate(rotation)
-
+            
             ctx.set_source_rgba(color.r, color.g, color.b, color.a * min(1.0, scale))
             ctx.set_line_width(thickness / scale) # Maintain line thickness
-
+            
             ctx.new_path()
             ctx.arc(0, 0, radius, 0, 2.0 * math.pi)
             ctx.stroke()
-
+            
             ctx.restore()
 
         ctx.restore()
@@ -105,34 +105,34 @@ class HexagonalSpeedTunnel(Node):
         depth = self.tunnel_depth.get(time)
         color = self.edge_color.get(time)
         thickness = self.thickness.get(time)
-
+        
         ctx.save()
-
+        
         focal_length = 500.0
         panel_spacing = depth / self.panels
         z_offset = (time * speed * 800.0) % panel_spacing
-
+        
         for i in range(self.panels):
             z = depth - (i * panel_spacing) - z_offset
-
+            
             if z <= -focal_length * 0.9:
                 continue
 
             scale = focal_length / (focal_length + z)
             if scale <= 0:
                 continue
-
+                
             rotation = time * speed * 0.2
-
+            
             ctx.save()
             ctx.scale(scale, scale)
             ctx.rotate(rotation)
-
+            
             # Opacity fades into distance
             opacity = color.a * min(1.0, max(0.0, 1.0 - (z / depth)))
             ctx.set_source_rgba(color.r, color.g, color.b, opacity)
             ctx.set_line_width(thickness / scale)
-
+            
             ctx.new_path()
             for j in range(6):
                 angle = j * (math.pi / 3)
@@ -144,7 +144,7 @@ class HexagonalSpeedTunnel(Node):
                     ctx.line_to(px, py)
             ctx.close_path()
             ctx.stroke()
-
+            
             ctx.restore()
 
         # Draw connecting lines
@@ -159,16 +159,16 @@ class HexagonalSpeedTunnel(Node):
                 if scale <= 0:
                     continue
                 rotation = time * speed * 0.2
-
+                
                 # We need absolute projection coords here
                 px = math.cos(angle + rotation) * radius * scale
                 py = math.sin(angle + rotation) * radius * scale
-
+                
                 if i == 0:
                     ctx.move_to(px, py)
                 else:
                     ctx.line_to(px, py)
-
+            
             ctx.set_source_rgba(color.r, color.g, color.b, color.a * 0.5)
             ctx.set_line_width(thickness * 0.5)
             ctx.stroke()
@@ -201,44 +201,44 @@ class InfiniteZoomVortex(Node):
         twists = self.twists.get(time)
         color = self.vortex_color.get(time)
         thickness = self.thickness.get(time)
-
+        
         ctx.save()
-
+        
         rotation_offset = time * speed * 2.0
         zoom_offset = (time * speed) % 1.0 # This handles the zoom aspect continuously
-
+        
         ctx.set_source_rgba(color.r, color.g, color.b, color.a)
-
+        
         for i in range(self.arms):
             arm_angle_offset = i * (2.0 * math.pi / self.arms)
-
+            
             ctx.new_path()
-
+            
             steps = 200
             for j in range(steps):
                 # t goes from 0.01 (center) to 1.0 (edge)
                 t = (j + 1) / steps
-
+                
                 # Apply zoom effect continuously by shifting t logarithmically
                 # We want continuous zoom, so scale t by zoom_offset logarithmically
                 # r = a * e^(b * theta)
                 # Let's map t to a distance exponentially.
-
+                
                 # Let distance go from a small value to large
                 dist = math.exp((t + zoom_offset) * 6.0) * 0.1
-
+                
                 # Angle twists as we go out
                 angle = arm_angle_offset + rotation_offset + t * twists * 2.0 * math.pi
-
+                
                 px = math.cos(angle) * dist
                 py = math.sin(angle) * dist
-
+                
                 if j == 0:
                     ctx.move_to(px, py)
                 else:
                     ctx.line_to(px, py)
-
+                    
             ctx.set_line_width(thickness)
             ctx.stroke()
-
+            
         ctx.restore()
