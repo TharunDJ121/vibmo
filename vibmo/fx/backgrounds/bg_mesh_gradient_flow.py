@@ -19,7 +19,7 @@ def noise(x: float, y: float) -> float:
 
 class MeshGradientFlow(Node):
     """
-    Animated 4-point to 9-point multi-color control mesh where gradient color control nodes
+    Animated 4-point to 9-point multi-color control mesh where gradient color control nodes 
     orbit organically using harmonic sine/cosine paths as time advances.
     """
 
@@ -90,7 +90,7 @@ class MeshGradientFlow(Node):
             pat = cairo.RadialGradient(cx, cy, 0, cx, cy, max_radius)
             pat.add_color_stop_rgba(0, color.r, color.g, color.b, color.a * 0.8)
             pat.add_color_stop_rgba(1, color.r, color.g, color.b, 0.0)
-
+            
             ctx.set_source(pat)
             ctx.rectangle(0, 0, self.width, self.height)
             ctx.fill()
@@ -145,24 +145,24 @@ class AuroraGradientWave(Node):
         for i in range(num_waves):
             color = self.colors_list[i % len(self.colors_list)]
             ctx.set_source_rgba(color.r, color.g, color.b, color.a * 0.5)
-
+            
             wave_offset_y = self.height * (0.3 + 0.2 * i)
             amplitude = self.height * 0.2
-
+            
             ctx.move_to(0, self.height)
             ctx.line_to(0, wave_offset_y)
-
+            
             for p in range(points_per_wave + 1):
                 x = (p / points_per_wave) * self.width
                 # Undulation logic
                 phase = p * 0.5 + t_adj * (0.5 + 0.2 * i) + i * 1.5
                 y = wave_offset_y + math.sin(phase) * amplitude + math.cos(phase * 0.7) * amplitude * 0.5
                 ctx.line_to(x, y)
-
+                
             ctx.line_to(self.width, self.height)
             ctx.close_path()
             ctx.fill()
-
+            
         ctx.restore()
 
 
@@ -205,7 +205,7 @@ class LiquidPlasmaBackdrop(Node):
             ctx.rectangle(0, 0, self.width, self.height)
             ctx.fill()
             return
-
+            
         ctx.save()
 
         # Render at lower resolution for plasma speed
@@ -219,42 +219,42 @@ class LiquidPlasmaBackdrop(Node):
         # Generate a numpy array of pixels
         # For simplicity in cairo drawing without complex shaders,
         # we generate an image surface manually.
-
+        
         # We will create a small cairo image surface
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, res_w, res_h)
         buf = surface.get_data()
         a = np.ndarray(shape=(res_h, res_w, 4), dtype=np.uint8, buffer=buf)
-
+        
         # Simple plasma generation
         x = np.linspace(0, 5, res_w)
         y = np.linspace(0, 5, res_h)
         X, Y = np.meshgrid(x, y)
-
+        
         v1 = np.sin(X + t_adj)
         v2 = np.sin(Y + t_adj)
         v3 = np.sin(X + Y + t_adj)
         v4 = np.sin(np.sqrt(X**2 + Y**2) + t_adj)
-
+        
         v = v1 + v2 + v3 + v4 # range approx -4 to 4
-
+        
         # Map v to 0-1
         v_norm = (v + 4) / 8.0
         v_norm = np.clip(v_norm, 0, 1)
 
         # Interpolate between colors based on v_norm
         num_colors = len(self.colors_list)
-
+        
         color_indices = v_norm * (num_colors - 1)
         idx0 = np.floor(color_indices).astype(int)
         idx1 = np.clip(idx0 + 1, 0, num_colors - 1)
         f = color_indices - idx0
-
+        
         # Create color arrays
         c0_r = np.array([c.r for c in self.colors_list])
         c0_g = np.array([c.g for c in self.colors_list])
         c0_b = np.array([c.b for c in self.colors_list])
         c0_a = np.array([c.a for c in self.colors_list])
-
+        
         r = c0_r[idx0] * (1 - f) + c0_r[idx1] * f
         g = c0_g[idx0] * (1 - f) + c0_g[idx1] * f
         b = c0_b[idx0] * (1 - f) + c0_b[idx1] * f
@@ -265,13 +265,13 @@ class LiquidPlasmaBackdrop(Node):
         a[:, :, 1] = (g * 255).astype(np.uint8) # G
         a[:, :, 2] = (r * 255).astype(np.uint8) # R
         a[:, :, 3] = (alpha * 255).astype(np.uint8) # A
-
+        
         surface.mark_dirty()
-
+        
         # Draw scaled surface
         ctx.scale(self.width / res_w, self.height / res_h)
         ctx.set_source_surface(surface, 0, 0)
         # Using BILINEAR filter is default, makes it smooth
         ctx.paint()
-
+        
         ctx.restore()
