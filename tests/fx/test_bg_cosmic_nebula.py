@@ -44,15 +44,15 @@ def test_starfield_warp_drift_drawing():
 
 def test_starfield_warp_drift_time_dependency():
     node = StarfieldWarpDrift(width=100, height=100, num_stars=10, seed=1)
-
+    
     mock_ctx_1 = MagicMock()
     node.draw(mock_ctx_1, time=0.0)
     call_args_1 = mock_ctx_1.line_to.call_args_list
-
+    
     mock_ctx_2 = MagicMock()
     node.draw(mock_ctx_2, time=1.0)
     call_args_2 = mock_ctx_2.line_to.call_args_list
-
+    
     assert call_args_1 != call_args_2, "Star positions should change over time"
 
 
@@ -73,13 +73,14 @@ def test_constellation_grid_drawing():
 
 def test_constellation_grid_time_dependency():
     node = ConstellationGrid(width=100, height=100, num_points=10, seed=1)
-
+    
     mock_ctx_1 = MagicMock()
     node.draw(mock_ctx_1, time=0.0)
     call_args_1 = mock_ctx_1.arc.call_args_list
-
+    
     mock_ctx_2 = MagicMock()
     node.draw(mock_ctx_2, time=1.0)
     call_args_2 = mock_ctx_2.arc.call_args_list
-
+    
     assert call_args_1 != call_args_2, "Constellation points should change over time"
+
