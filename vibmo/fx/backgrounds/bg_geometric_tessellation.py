@@ -35,7 +35,7 @@ class VoronoiCellEvolution(Node):
         self.fill_color = Color.from_any(fill_color) if isinstance(fill_color, (str, Color)) else fill_color
         self.border_width = border_width
         self.seed = seed
-
+        
         # Initialize random base points
         rng = np.random.default_rng(self.seed)
         self.base_points = rng.random((self.num_cells, 2)) * [self.width, self.height]
@@ -59,10 +59,10 @@ class VoronoiCellEvolution(Node):
         t = time * self.speed
         offsets = np.sin(t * self.freqs + self.phases) * 50.0  # Undulation amplitude
         current_points = self.base_points + offsets
-
+        
         # Combine with boundary points
         all_points = np.vstack([current_points, self.boundary_points])
-
+        
         try:
             vor = Voronoi(all_points)
         except Exception:
@@ -74,21 +74,21 @@ class VoronoiCellEvolution(Node):
             region = vor.regions[region_index]
             if not region or -1 in region:
                 continue
-
+            
             polygon = [vor.vertices[i] for i in region]
             if len(polygon) < 3:
                 continue
-
+                
             ctx.new_path()
             ctx.move_to(polygon[0][0], polygon[0][1])
             for p in polygon[1:]:
                 ctx.line_to(p[0], p[1])
             ctx.close_path()
-
+            
             # Fill
             ctx.set_source_rgba(self.fill_color.r, self.fill_color.g, self.fill_color.b, self.fill_color.a)
             ctx.fill_preserve()
-
+            
             # Border (glow is simulated by setting color and width)
             ctx.set_source_rgba(self.border_color.r, self.border_color.g, self.border_color.b, self.border_color.a)
             ctx.set_line_width(self.border_width)
@@ -143,7 +143,7 @@ class PenroseTilingFlow(Node):
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         t = time * self.speed
-
+        
         # Initial sun configuration
         triangles = []
         for i in range(10):
@@ -174,10 +174,10 @@ class PenroseTilingFlow(Node):
             # Morphing aspect by oscillating alpha based on distance from center
             dist = abs((A.real - self.width/2) + 1j*(A.imag - self.height/2))
             alpha_mod = 0.5 + 0.5 * math.sin(dist / 100.0 - t * 2.0)
-
+            
             ctx.set_source_rgba(fill_c.r, fill_c.g, fill_c.b, fill_c.a * alpha_mod)
             ctx.fill_preserve()
-
+            
             ctx.set_source_rgba(self.border_color.r, self.border_color.g, self.border_color.b, self.border_color.a)
             ctx.set_line_width(self.border_width)
             ctx.stroke()
@@ -209,7 +209,7 @@ class HexagonalHoneyGridPulse(Node):
         self.pulse_color = Color.from_any(pulse_color) if isinstance(pulse_color, (str, Color)) else pulse_color
         self.border_color = Color.from_any(border_color) if isinstance(border_color, (str, Color)) else border_color
         self.border_width = border_width
-
+        
         self.hex_width = math.sqrt(3) * self.hex_radius
         self.hex_height = 2 * self.hex_radius
 
@@ -227,13 +227,13 @@ class HexagonalHoneyGridPulse(Node):
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         t = time * self.speed
-
+        
         cx_center = self.width / 2
         cy_center = self.height / 2
-
+        
         cols = int(self.width / self.hex_width) + 2
         rows = int(self.height / (self.hex_height * 0.75)) + 2
-
+        
         ctx.save()
         for row in range(-1, rows):
             for col in range(-1, cols):
@@ -241,22 +241,22 @@ class HexagonalHoneyGridPulse(Node):
                 if row % 2 == 1:
                     cx += self.hex_width / 2
                 cy = row * self.hex_height * 0.75
-
+                
                 dist = math.hypot(cx - cx_center, cy - cy_center)
-
+                
                 # Breathing radial wave formula
                 wave_val = 0.5 + 0.5 * math.sin(dist / 100.0 - t * 3.0)
-
+                
                 # Interpolate color
                 r = self.base_color.r + (self.pulse_color.r - self.base_color.r) * wave_val
                 g = self.base_color.g + (self.pulse_color.g - self.base_color.g) * wave_val
                 b = self.base_color.b + (self.pulse_color.b - self.base_color.b) * wave_val
                 a = self.base_color.a + (self.pulse_color.a - self.base_color.a) * wave_val
-
+                
                 self.draw_hexagon(ctx, cx, cy, self.hex_radius * 0.95) # Slight gap
                 ctx.set_source_rgba(r, g, b, a)
                 ctx.fill_preserve()
-
+                
                 ctx.set_source_rgba(self.border_color.r, self.border_color.g, self.border_color.b, self.border_color.a)
                 ctx.set_line_width(self.border_width)
                 ctx.stroke()

@@ -24,7 +24,7 @@ def test_voronoi_cell_evolution_init():
 def test_voronoi_cell_evolution_draw():
     node = VoronoiCellEvolution(width=800, height=600, num_cells=5)
     ctx = _create_mock_context()
-
+    
     # Check that draw executes without exceptions
     try:
         node.draw(ctx, time=0.0)
@@ -41,7 +41,7 @@ def test_penrose_tiling_flow_init():
 def test_penrose_tiling_flow_draw():
     node = PenroseTilingFlow(width=800, height=600, generations=2) # Low generations for faster test
     ctx = _create_mock_context()
-
+    
     # Check that draw executes without exceptions
     try:
         node.draw(ctx, time=0.0)
@@ -51,16 +51,16 @@ def test_penrose_tiling_flow_draw():
 
 def test_penrose_tiling_subdivide():
     node = PenroseTilingFlow(width=800, height=600, generations=1)
-
+    
     import cmath
     # Create dummy triangles
     A, B, C = 0j, 1+0j, 0+1j
     triangles = [(0, A, B, C)]
-
+    
     subdivided = node.subdivide(triangles)
     # A half-kite subdivides into 2 smaller triangles
     assert len(subdivided) == 2
-
+    
     triangles = [(1, A, B, C)]
     subdivided = node.subdivide(triangles)
     # A half-dart subdivides into 3 smaller triangles
@@ -77,7 +77,7 @@ def test_hexagonal_honey_grid_pulse_init():
 def test_hexagonal_honey_grid_pulse_draw():
     node = HexagonalHoneyGridPulse(width=200, height=200, hex_radius=50)
     ctx = _create_mock_context()
-
+    
     # Check that draw executes without exceptions
     try:
         node.draw(ctx, time=0.0)
