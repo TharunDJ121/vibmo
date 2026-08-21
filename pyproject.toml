@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vibmo"
+version = "0.2.0"
+description = "Production-grade, AI-Agent native motion graphics & compositing suite in Python with Desktop Studio and WGPU acceleration."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Vibmo Contributors" }
+]
+keywords = ["motion graphics", "animation", "video", "compositing", "vfx", "nle", "wgpu", "pyside6", "mcp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Multimedia :: Video",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pycairo>=1.20.0",
+    "numpy>=1.22.0",
+    "pillow>=9.0.0",
+    "scipy>=1.8.0",
+    "pydantic>=2.0.0",
+    "rich>=12.0.0",
+    "requests>=2.28.0",
+    "svgelements>=1.9.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "websockets>=11.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "httpx>=0.24.0",
+]
+audio = [
+    "pydub>=0.25.1",
+]
+gpu = [
+    "moderngl>=5.8.0",
+    "wgpu>=0.14.0",
+]
+desktop = [
+    "pyside6>=6.5.0",
+    "wgpu>=0.14.0",
+]
+all = [
+    "vibmo[audio,gpu,desktop,dev]",
+]
+
+[project.scripts]
+vibmo = "vibmo.cli.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vibmo*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,85 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Pytest / Unit test artifacts
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.test-*/
+.test-*
+
+# Vibmo runtime caches & render outputs
+.vibmo_cache/
+.motio_cache/
+.sample_frames/
+output/
+*.tmp
+
+# Loose root media and storyboard files
+/*.mp4
+/*.mov
+/*.webm
+/*.gif
+/*.png
+/*.jpg
+/*.jpeg
+/*.wav
+/*.mp3
+/*.vibmo
+
+# Ensure core project assets are tracked
+!assets/
+!assets/**
+
+# Vendored / external reference code
+manim-master/
+remotion-main/
+vendored/
+
+# Environments & credentials
+.env
+.env.*
+.venv
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE / OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Aider / Assistant history
+.aider*

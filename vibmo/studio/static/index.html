@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✦ Vibmo Studio Pro — Motion Graphics & Fusion Workstation</title>
+    <link rel="stylesheet" href="/static/css/studio.css">
+    <link rel="stylesheet" href="/static/css/timeline.css">
+    <link rel="stylesheet" href="/static/css/fusion.css">
+    <link rel="stylesheet" href="/static/css/inspector.css">
+</head>
+<body>
+
+    <!-- App Header & DaVinci Workspace Tabs -->
+    <header class="app-header">
+        <div class="brand-section">
+            <div class="brand-logo">✦ Vibmo Studio <span class="brand-badge">PRO</span></div>
+        </div>
+
+        <!-- 5 DaVinci Workspace Tabs -->
+        <nav class="workspace-tabs">
+            <button class="tab-btn active" data-page="motion">🎬 Motion</button>
+            <button class="tab-btn" data-page="fusion">⚡ Fusion</button>
+            <button class="tab-btn" data-page="color">🎨 Color</button>
+            <button class="tab-btn" data-page="fairlight">🔊 Fairlight</button>
+            <button class="tab-btn" data-page="deliver">📦 Deliver</button>
+        </nav>
+
+        <!-- Workspace Controls & Global Actions -->
+        <div class="header-actions">
+            <button class="btn-icon" id="openAiDirectorBtn" style="color:#c084fc; border-color:rgba(192, 132, 252, 0.4); background:rgba(192, 132, 252, 0.08);" title="AI Director (Ctrl+K)">✨ AI Director</button>
+            <button class="btn-icon" id="openApiKeysBtn" style="color:#34d399; border-color:rgba(52, 211, 153, 0.4); background:rgba(52, 211, 153, 0.08);" title="API Keys & Settings">🔑 API Keys</button>
+            <button class="btn-icon" id="openScriptModalBtn" style="color:#38bdf8; border-color:rgba(56, 189, 248, 0.3);" title="Open In-Studio Python Code Editor (Ctrl+E)">&lt;/&gt; Script Editor</button>
+            <button class="btn-icon" id="undoBtn" title="Undo (Ctrl+Z)" onclick="window.historyStack.undo()">↩ Undo</button>
+            <button class="btn-icon" id="redoBtn" title="Redo (Ctrl+Y)" onclick="window.historyStack.redo()">↪ Redo</button>
+            <select class="btn-icon" id="qualitySelect" style="background:#111827; cursor:pointer;">
+                <option value="0.25">Preview: 25% (Ultra Fast)</option>
+                <option value="0.5" selected>Preview: 50% (Fast)</option>
+                <option value="1.0">Preview: 100% (Retina)</option>
+            </select>
+            <button class="btn-icon" id="copyCodeBtn">📋 Copy Python</button>
+            <button class="btn-icon btn-primary" id="renderMasterBtn">⚡ Deliver Export</button>
+        </div>
+    </header>
+
+
+    <!-- Main Workspace Stage Area -->
+    <main class="main-stage">
+
+        <!-- 1. Motion (Edit / NLE) Page -->
+        <div class="page-view active" id="page_motion">
+            <div class="motion-workspace">
+                <div class="motion-split">
+                    <!-- Left: Layers Tree -->
+                    <aside class="layers-panel">
+                        <div class="panel-title">
+                            <span>Scene Layers</span>
+                            <span style="font-size:10px; color:#818cf8;" id="layerCount"></span>
+                        </div>
+                        <div class="layers-list" id="layersList"></div>
+                    </aside>
+
+                    <!-- Center: Viewport Stage -->
+                    <section class="viewport-stage">
+                        <div class="canvas-wrapper">
+                            <img id="renderCanvas" alt="Scene Canvas" />
+                            <canvas id="overlayCanvas"></canvas>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Bottom: NLE Multi-Track Timeline -->
+                <section class="nle-timeline">
+                    <div class="timeline-header">
+                        <div class="timeline-controls">
+                            <button class="btn-icon" id="rewindBtn">⏮ 0.0s</button>
+                            <button class="btn-icon btn-primary" id="playPauseBtn">▶ Play</button>
+                            <button class="btn-icon" id="snapBtn" style="color:#06b6d4;" onclick="window.motionPage.snappingEnabled = !window.motionPage.snappingEnabled; this.style.opacity = window.motionPage.snappingEnabled ? '1' : '0.5';">🧲 Snapping</button>
+                        </div>
+                        <div class="timecode" id="timecodeDisplay">0.00s / 0.00s</div>
+                        <div style="font-size:11px; color:var(--text-dim);">Space: Play/Pause • ←/→: Step Frame • Ctrl+Z: Undo</div>
+                    </div>
+
+                    <div class="timeline-scroll-area">
+                        <div class="timeline-ruler" id="timelineRuler"></div>
+                        <div class="playhead-needle" id="playheadNeedle"></div>
+                        <div class="tracks-stack" id="tracksStack"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- 2. Fusion (Node-Based Compositing Graph) Page -->
+        <div class="page-view" id="page_fusion">
+            <div class="fusion-workspace">
+                <div class="panel-title" style="background:#0b1120;">
+                    <span>⚡ Fusion Node Graph (Compositing & Shader Pipeline)</span>
+                    <span style="font-size:11px; color:#38bdf8;">Drag nodes to organize</span>
+                </div>
+                <div class="fusion-canvas-area">
+                    <svg class="fusion-svg-wires" id="fusionSvgWires"></svg>
+                    <div class="fusion-node-container" id="fusionNodeContainer"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Color (Grading & Tone Curve) Page -->
+        <div class="page-view" id="page_color">
+            <div style="flex:1; padding:24px; overflow-y:auto; background:#070b14;">
+                <div class="panel-title" style="margin-bottom:16px;">🎨 Color Wheels & Primary Grading</div>
+                <div id="colorControlsContainer"></div>
+            </div>
+        </div>
+
+        <!-- 4. Fairlight (Audio & Foley Soundboard) Page -->
+        <div class="page-view" id="page_fairlight">
+            <div style="flex:1; padding:24px; overflow-y:auto; background:#070b14;">
+                <div class="panel-title" style="margin-bottom:16px;">🔊 Fairlight Foley Soundboard & Audio Mixer</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;" id="fairlightSoundboard"></div>
+            </div>
+        </div>
+
+        <!-- 5. Deliver (Render & Code Export) Page -->
+        <div class="page-view" id="page_deliver">
+            <div style="flex:1; padding:24px; overflow-y:auto; background:#070b14;">
+                <div class="panel-title" style="margin-bottom:16px;">📦 Deliver Export Queue & Presets</div>
+                <div id="deliverPresetsContainer" style="max-width:700px;"></div>
+            </div>
+        </div>
+
+        <!-- Right: Inspector Panel -->
+        <aside class="inspector-panel">
+            <div class="panel-title">
+                <span>Inspector</span>
+                <span style="font-size:10px; background:#1e293b; color:#38bdf8; padding:2px 8px; border-radius:999px;" id="selectedBadge">No Selection</span>
+            </div>
+
+            <div class="inspector-section">
+                <div class="section-head">Transform & 3D Tilt</div>
+                <div id="inspectorProperties">
+                    <div style="text-align:center; padding:20px; color:#64748b; font-size:12px; font-style:italic;">Select a layer on canvas or timeline</div>
+                </div>
+            </div>
+
+            <div class="inspector-section">
+                <div class="section-head">Scene Parameters</div>
+                <div id="inspectorParams"></div>
+            </div>
+
+            <div class="inspector-section">
+                <div class="section-head">Generated Python Code</div>
+                <div class="code-preview-box" id="generatedCodeBox"># Overrides will appear here in real time</div>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- In-Studio Python Script Editor Modal -->
+    <div class="script-modal-backdrop" id="scriptModalBackdrop">
+        <div class="script-modal">
+            <div class="script-modal-header">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-weight:800; font-size:15px; color:#38bdf8;">✦ Python Scene Script Editor</span>
+                    <span id="scriptStatusBadge" style="font-size:11px; background:#1e293b; color:#94a3b8; padding:3px 10px; border-radius:999px;">Live Dynamic Scene</span>
+                </div>
+                <button class="btn-icon" id="closeScriptModalBtn" style="border:none; font-size:16px; color:#94a3b8;">✕</button>
+            </div>
+
+            <div class="script-modal-body">
+                <!-- Top Toolbar: Templates & AI Text-to-Motion -->
+                <div class="script-toolbar">
+                    <select id="scriptTemplateSelect" class="btn-icon" style="background:#0f172a; max-width:240px; cursor:pointer;">
+                        <option value="">✦ Choose a Template...</option>
+                    </select>
+
+                    <div style="display:flex; flex:1; gap:8px; align-items:center;">
+                        <input id="promptInput" type="text" placeholder="✨ AI Prompt to Motion (e.g. 'Hero SaaS launch with $250K MRR and neon glow')..." style="flex:1; background:#030712; border:1px solid #1e293b; border-radius:6px; color:#f8fafc; padding:6px 12px; font-size:12px; outline:none;" />
+                        <button id="generatePromptBtn" class="btn-icon" style="background:#4f46e5; border-color:#4f46e5; color:#fff;">✨ Generate</button>
+                    </div>
+                </div>
+
+                <!-- Python Code Textarea -->
+                <textarea id="scriptCodeEditor" class="script-code-area" spellcheck="false" placeholder="# Write or paste Python Vibmo scene code here..."></textarea>
+
+                <!-- Console Output / Error Log -->
+                <div id="scriptConsoleBox" class="script-console"></div>
+
+                <!-- Bottom Actions -->
+                <div style="display:flex; justify-content:space-between; align-items:center; pt:8px;">
+                    <div style="display:flex; gap:8px;">
+                        <button id="saveScriptBtn" class="btn-icon" title="Save code to file on disk">💾 Save Script</button>
+                        <button id="revertScriptBtn" class="btn-icon" title="Revert to previously loaded code">📥 Revert</button>
+                    </div>
+
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <span style="font-size:11px; color:#64748b;">Ctrl+Enter: Run • Ctrl+E: Toggle Editor</span>
+                        <button id="runScriptBtn" class="btn-icon btn-primary" style="padding:8px 18px; font-size:13px;">▶ Run & Hot Reload (Ctrl+Enter)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Director (LangGraph Surgical Scene & Frame Editor) Modal -->
+    <div class="script-modal-backdrop" id="aiDirectorModalBackdrop">
+        <div class="script-modal" style="max-width: 680px;">
+            <div class="script-modal-header" style="background: linear-gradient(90deg, #1e1b4b, #0f172a);">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-weight:800; font-size:16px; color:#c084fc;">✨ AI Motion Director (LangGraph)</span>
+                    <span style="font-size:11px; background:rgba(192, 132, 252, 0.2); color:#e9d5ff; padding:3px 10px; border-radius:999px;">Surgical Scene & Frame Editor</span>
+                </div>
+                <button class="btn-icon" id="closeAiDirectorModalBtn" style="border:none; font-size:16px; color:#94a3b8;">✕</button>
+            </div>
+
+            <div class="script-modal-body" style="gap: 14px;">
+                <p style="font-size:12px; color:#94a3b8; margin:0;">
+                    Type instructions in natural language. The LangGraph state machine will surgically modify specific scenes, timing, speeds, colors, or generate complete new sequences without breaking existing code.
+                </p>
+
+                <div style="display:flex; gap:8px;">
+                    <input id="aiDirectorInput" type="text" placeholder="e.g. 'In Scene 3, change text to Think Bigger and make Scene 2 type 30% faster'..." style="flex:1; background:#030712; border:1px solid #3b0764; border-radius:8px; color:#f8fafc; padding:10px 14px; font-size:13px; outline:none;" />
+                    <button id="aiDirectorSubmitBtn" class="btn-icon btn-primary" style="background:#9333ea; border-color:#9333ea; padding:0 20px;">⚡ Apply Edit</button>
+                </div>
+
+                <div id="aiDirectorLogsBox" class="script-console" style="height: 160px; display:block; color:#c084fc; font-size:11px;">
+                    ✦ LangGraph Engine Ready. Awaiting director instructions...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Key Attachment & Settings Modal -->
+    <div class="script-modal-backdrop" id="apiKeysModalBackdrop">
+        <div class="script-modal" style="max-width: 620px;">
+            <div class="script-modal-header" style="background: linear-gradient(90deg, #064e3b, #0f172a);">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-weight:800; font-size:16px; color:#34d399;">🔑 AI Provider API Keys</span>
+                    <span style="font-size:11px; background:rgba(52, 211, 153, 0.2); color:#a7f3d0; padding:3px 10px; border-radius:999px;">Encrypted & Persisted in .env</span>
+                </div>
+                <button class="btn-icon" id="closeApiKeysModalBtn" style="border:none; font-size:16px; color:#94a3b8;">✕</button>
+            </div>
+
+            <div class="script-modal-body" style="gap: 14px;">
+                <p style="font-size:12px; color:#94a3b8; margin:0;">
+                    Configure and verify your AI provider keys. Keys are tested live and stored locally in your project's <code>.env</code> file.
+                </p>
+
+                <div id="apiKeysListContainer" style="display:flex; flex-direction:column; gap:10px;">
+                    <!-- Dynamically populated provider cards -->
+                </div>
+
+                <div id="apiKeyStatusMessage" style="font-size:12px; color:#34d399; min-height:18px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Frontend Core & Subsystems -->
+    <script src="/static/js/core/socket.js"></script>
+    <script src="/static/js/core/state.js"></script>
+    <script src="/static/js/core/history.js"></script>
+    <script src="/static/js/core/spline.js"></script>
+    <script src="/static/js/core/audio.js"></script>
+    <script src="/static/js/core/editor.js"></script>
+    <script src="/static/js/pages/motion.js"></script>
+    <script src="/static/js/pages/fusion.js"></script>
+    <script src="/static/js/pages/color.js"></script>
+    <script src="/static/js/pages/fairlight.js"></script>
+    <script src="/static/js/pages/deliver.js"></script>
+    <script src="/static/js/viewport.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
+
+

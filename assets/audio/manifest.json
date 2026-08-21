@@ -1,0 +1,230 @@
+{
+  "license": "CC0 1.0 Universal / Public Domain / 100% Royalty Free for Commercial & Agentic Use",
+  "sample_rate": 48000,
+  "assets": {
+    "sfx/ui/ui_click_soft.wav": {
+      "path": "sfx/ui/ui_click_soft.wav",
+      "description": "Soft UI button click",
+      "duration_seconds": 0.035,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/ui/ui_click_mechanical.wav": {
+      "path": "sfx/ui/ui_click_mechanical.wav",
+      "description": "Mechanical switch tap",
+      "duration_seconds": 0.05,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/ui/ui_pop_bubble.wav": {
+      "path": "sfx/ui/ui_pop_bubble.wav",
+      "description": "Playful bubbly pop toggle",
+      "duration_seconds": 0.12,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/ui/ui_toggle_switch.wav": {
+      "path": "sfx/ui/ui_toggle_switch.wav",
+      "description": "Toggle switch snap",
+      "duration_seconds": 0.08,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/ui/ui_keyboard_typing.wav": {
+      "path": "sfx/ui/ui_keyboard_typing.wav",
+      "description": "Keyboard mechanical key stroke",
+      "duration_seconds": 0.06,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/ui/ui_camera_shutter.wav": {
+      "path": "sfx/ui/ui_camera_shutter.wav",
+      "description": "Camera shutter snapshot click",
+      "duration_seconds": 0.14,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/ui/ui_slider_tick.wav": {
+      "path": "sfx/ui/ui_slider_tick.wav",
+      "description": "Precision slider notch tick",
+      "duration_seconds": 0.025,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/transitions/whoosh_fast.wav": {
+      "path": "sfx/transitions/whoosh_fast.wav",
+      "description": "Fast whip whoosh for quick slide cuts",
+      "duration_seconds": 0.3,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/transitions/whoosh_cinematic.wav": {
+      "path": "sfx/transitions/whoosh_cinematic.wav",
+      "description": "Deep cinematic sub whoosh for card fly-ins",
+      "duration_seconds": 0.65,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/transitions/whoosh_air.wav": {
+      "path": "sfx/transitions/whoosh_air.wav",
+      "description": "Airy breath whoosh for smooth fade reveals",
+      "duration_seconds": 0.4,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/transitions/whoosh_heavy.wav": {
+      "path": "sfx/transitions/whoosh_heavy.wav",
+      "description": "Heavy low-end cinematic whoosh",
+      "duration_seconds": 0.8,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/transitions/swoosh_transition.wav": {
+      "path": "sfx/transitions/swoosh_transition.wav",
+      "description": "Dynamic swoosh transition for camera pans",
+      "duration_seconds": 0.5,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/transitions/riser_tension_build.wav": {
+      "path": "sfx/transitions/riser_tension_build.wav",
+      "description": "Tension building pitch riser before drop",
+      "duration_seconds": 1.6,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/transitions/riser_cyber_pitch.wav": {
+      "path": "sfx/transitions/riser_cyber_pitch.wav",
+      "description": "Cyber pitch sweep riser with modulation",
+      "duration_seconds": 2.2,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/transitions/reverse_cymbal_sweep.wav": {
+      "path": "sfx/transitions/reverse_cymbal_sweep.wav",
+      "description": "Reverse cymbal swelling sweep",
+      "duration_seconds": 1.4,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/impacts/bass_drop_impact.wav": {
+      "path": "sfx/impacts/bass_drop_impact.wav",
+      "description": "Heavy 808 sub bass drop and thud",
+      "duration_seconds": 0.8,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/impacts/sub_hit_punch.wav": {
+      "path": "sfx/impacts/sub_hit_punch.wav",
+      "description": "Tight acoustic sub punch hit",
+      "duration_seconds": 0.5,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/impacts/card_thud_impact.wav": {
+      "path": "sfx/impacts/card_thud_impact.wav",
+      "description": "Solid UI card impact on canvas",
+      "duration_seconds": 0.35,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/impacts/cinematic_boom_hit.wav": {
+      "path": "sfx/impacts/cinematic_boom_hit.wav",
+      "description": "Cinematic sub bass trailer boom",
+      "duration_seconds": 1.2,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/chimes/success_bell_chime.wav": {
+      "path": "sfx/chimes/success_bell_chime.wav",
+      "description": "Harmonic success chime for milestones",
+      "duration_seconds": 0.9,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/chimes/sparkle_magic_glimmer.wav": {
+      "path": "sfx/chimes/sparkle_magic_glimmer.wav",
+      "description": "Sparkle shimmer chime cascade",
+      "duration_seconds": 0.7,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/chimes/notification_ping.wav": {
+      "path": "sfx/chimes/notification_ping.wav",
+      "description": "Crisp mobile notification ping",
+      "duration_seconds": 0.45,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/chimes/error_alert_beep.wav": {
+      "path": "sfx/chimes/error_alert_beep.wav",
+      "description": "Two-tone error alert warning",
+      "duration_seconds": 0.35,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/glitch/digital_glitch_stutter.wav": {
+      "path": "sfx/glitch/digital_glitch_stutter.wav",
+      "description": "Cyberpunk digital data stutter and glitch",
+      "duration_seconds": 0.4,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/glitch/cyber_data_burst.wav": {
+      "path": "sfx/glitch/cyber_data_burst.wav",
+      "description": "Data packet network burst glitch",
+      "duration_seconds": 0.5,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "sfx/glitch/analog_tape_stop.wav": {
+      "path": "sfx/glitch/analog_tape_stop.wav",
+      "description": "Analog vinyl / tape machine stop slowdown",
+      "duration_seconds": 0.6,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "music/tech_ambient_pulse.wav": {
+      "path": "music/tech_ambient_pulse.wav",
+      "description": "Tech ambient pulse (120 BPM) for SaaS product videos",
+      "duration_seconds": 8.0,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "music/lofi_chill_groove.wav": {
+      "path": "music/lofi_chill_groove.wav",
+      "description": "Mellow lofi chill beats (85 BPM) for tutorials",
+      "duration_seconds": 8.0,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "music/cyberpunk_synth_drive.wav": {
+      "path": "music/cyberpunk_synth_drive.wav",
+      "description": "130 BPM Darksynth Cyberpunk bass drive",
+      "duration_seconds": 8.0,
+      "format": "WAV 16-bit PCM 48kHz Mono",
+      "license": "CC0 1.0 Universal"
+    },
+    "music/tech_corporate_ambient.mp3": {
+      "path": "music/tech_corporate_ambient.mp3",
+      "description": "Tech Corporate Ambient Soundtrack (Full MP3)",
+      "format": "MP3",
+      "source": "https://raw.githubusercontent.com/rafaelreis-hotmart/Audio-Sample-files/master/sample.mp3",
+      "license": "CC0 / Public Domain / Royalty Free"
+    },
+    "music/electronic_upbeat_groove.mp3": {
+      "path": "music/electronic_upbeat_groove.mp3",
+      "description": "Electronic Upbeat Groove (Full MP3)",
+      "format": "MP3",
+      "source": "https://github.com/mdn/webaudio-examples/raw/main/audio-basics/outfoxing.mp3",
+      "license": "CC0 / Public Domain / Royalty Free"
+    },
+    "sfx/cinematic/crowd_cheer_ambience.ogg": {
+      "path": "sfx/cinematic/crowd_cheer_ambience.ogg",
+      "description": "Concert Crowd Ambience & Cheer (OGG)",
+      "format": "OGG",
+      "source": "https://raw.githubusercontent.com/mdn/webaudio-examples/main/voice-change-o-matic/audio/concert-crowd.ogg",
+      "license": "CC0 / Public Domain / Royalty Free"
+    }
+  }
+}
