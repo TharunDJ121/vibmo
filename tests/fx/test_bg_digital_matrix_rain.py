@@ -42,15 +42,15 @@ def test_digital_matrix_rain_initialization(mock_ctx):
 def test_binary_stream_falling_logic(mock_ctx):
     bg = BinaryStreamBackdrop(width=100, height=100, font_size=10)
     bg.draw(mock_ctx, time=0.0) # Init
-
+    
     col = bg.columns[0]
     initial_y = col.head_y
     speed = col.speed * bg.speed_multiplier
-
+    
     # Advance time
     bg.draw(mock_ctx, time=1.0)
     expected_y = initial_y + speed
-
+    
     # The logic correctly recycles if it goes offscreen, so we bypass checking the EXACT expected_y if it recycled
     if expected_y - (col.num_chars * col.font_size) > bg.h:
         # It recycled
@@ -61,7 +61,7 @@ def test_binary_stream_falling_logic(mock_ctx):
 def test_hex_code_drawing(mock_ctx):
     bg = HexCodeColumnBackdrop(width=200, height=200, font_size=20)
     bg.draw(mock_ctx, time=0.0)
-
+    
     # Hex columns are wider, so fewer of them: 200 / (20 * 2) = 5
     assert len(bg.columns) == 5
     assert mock_ctx.show_text.called
@@ -69,12 +69,13 @@ def test_hex_code_drawing(mock_ctx):
 def test_column_recycling(mock_ctx):
     bg = DigitalMatrixRainBackdrop(width=100, height=100, font_size=10)
     bg.draw(mock_ctx, time=0.0)
-
+    
     col = bg.columns[0]
     # Move column way past the bottom
     col.head_y = 1000.0
     col.last_update = 0.0
-
+    
     bg.draw(mock_ctx, time=1.0)
     # It should have been recycled to a negative or zero Y value
     assert col.head_y <= 100.0
+

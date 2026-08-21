@@ -22,7 +22,7 @@ class _CodeColumn:
         self.font_size = font_size
         self.charset = charset
         self.chars = [random.choice(self.charset) for _ in range(self.num_chars)]
-
+        
         # State
         self.head_y = y_offset  # logical Y position in pixels
         self.last_update = 0.0
@@ -30,7 +30,7 @@ class _CodeColumn:
     def get_char_y(self, index: int) -> float:
         """Get pixel Y coordinate for character at index (0 is head, 1 is trail...)"""
         return self.head_y - (index * self.font_size)
-
+    
     def mutate_glitch(self, chance: float = 0.05):
         for i in range(self.num_chars):
             if random.random() < chance:
@@ -51,7 +51,7 @@ class _BaseRainBackdrop(Node):
         self.h = float(height)
         self.font_size = float(font_size)
         self.speed_multiplier = float(speed_multiplier)
-
+        
         self.columns: List[_CodeColumn] = []
         self._initialized = False
 
@@ -60,7 +60,7 @@ class _BaseRainBackdrop(Node):
 
     def _init_columns(self):
         pass # Implemented by subclasses
-
+        
     def _draw_column(self, ctx: Any, col: _CodeColumn, time: float):
         pass
 
@@ -71,13 +71,13 @@ class _BaseRainBackdrop(Node):
             for col in self.columns:
                 col.last_update = time
             self._initialized = True
-
+            
         ctx.save()
-
+        
         # Clip to bounds
         ctx.rectangle(0, 0, self.w, self.h)
         ctx.clip()
-
+        
         ctx.select_font_face("monospace", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         ctx.set_font_size(self.font_size)
 
@@ -90,21 +90,21 @@ class _BaseRainBackdrop(Node):
                 if col.head_y - (col.num_chars * col.font_size) > self.h:
                     col.head_y = -random.uniform(0, self.h)
                     col.chars = [random.choice(col.charset) for _ in range(col.num_chars)]
-
+            
             self._draw_column(ctx, col, time)
             col.last_update = time
-
+            
         ctx.restore()
 
 
 class DigitalMatrixRainBackdrop(_BaseRainBackdrop):
     """Cascading vertical columns of glowing green katakana/alphanumeric glyphs with bright white leading drops."""
-
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # Katakana 0x30A0 to 0x30FF + Alphanumeric
         self.charset = "".join(chr(i) for i in range(0x30A0, 0x30FF)) + "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
+        
     def _init_columns(self):
         num_cols = int(self.w / self.font_size)
         self.columns = []
@@ -117,12 +117,12 @@ class DigitalMatrixRainBackdrop(_BaseRainBackdrop):
 
     def _draw_column(self, ctx: Any, col: _CodeColumn, time: float):
         col.mutate_glitch(0.01) # occasional mutation
-
+        
         for i, char in enumerate(col.chars):
             y = col.get_char_y(i)
             if y < 0 or y > self.h + self.font_size:
                 continue
-
+                
             if i == 0:
                 # Leading drop is white/bright green
                 ctx.set_source_rgba(0.8, 1.0, 0.8, 1.0)
@@ -131,19 +131,19 @@ class DigitalMatrixRainBackdrop(_BaseRainBackdrop):
                 alpha = max(0.0, 1.0 - (i / col.num_chars))
                 # Neon green
                 ctx.set_source_rgba(0.0, 0.8, 0.2, alpha)
-
+                
             ctx.move_to(col.x, y)
             ctx.show_text(char)
 
 
 class BinaryStreamBackdrop(_BaseRainBackdrop):
     """Futuristic high-speed cyan stream of 0s and 1s with variable column speeds."""
-
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.charset = "01"
         self.speed_multiplier *= 2.0  # High speed
-
+        
     def _init_columns(self):
         num_cols = int(self.w / self.font_size)
         self.columns = []
@@ -156,30 +156,30 @@ class BinaryStreamBackdrop(_BaseRainBackdrop):
 
     def _draw_column(self, ctx: Any, col: _CodeColumn, time: float):
         col.mutate_glitch(0.05) # more mutation
-
+        
         for i, char in enumerate(col.chars):
             y = col.get_char_y(i)
             if y < 0 or y > self.h + self.font_size:
                 continue
-
+                
             # Cyan trail
             alpha = max(0.0, 1.0 - (i / col.num_chars))
             if i == 0:
                 ctx.set_source_rgba(0.5, 1.0, 1.0, 1.0)
             else:
                 ctx.set_source_rgba(0.0, 0.8, 1.0, alpha * 0.8)
-
+                
             ctx.move_to(col.x, y)
             ctx.show_text(char)
 
 
 class HexCodeColumnBackdrop(_BaseRainBackdrop):
     """Cryptographic hexadecimal memory dump columns with random character mutating glitches."""
-
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.charset = "0123456789ABCDEF"
-
+        
     def _init_columns(self):
         # Wider columns for hex pairs
         num_cols = int(self.w / (self.font_size * 2))
@@ -193,17 +193,18 @@ class HexCodeColumnBackdrop(_BaseRainBackdrop):
 
     def _draw_column(self, ctx: Any, col: _CodeColumn, time: float):
         col.mutate_glitch(0.1)  # High glitch rate
-
+        
         for i in range(0, col.num_chars - 1, 2):
             y = col.get_char_y(i)
             if y < 0 or y > self.h + self.font_size:
                 continue
-
+                
             char_pair = col.chars[i] + col.chars[i+1]
-
+            
             # Amber/Orange cryptography theme
             alpha = max(0.1, 1.0 - (i / col.num_chars))
             ctx.set_source_rgba(1.0, 0.6, 0.0, alpha)
-
+                
             ctx.move_to(col.x, y)
             ctx.show_text(char_pair)
+
