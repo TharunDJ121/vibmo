@@ -1,11 +1,10 @@
-from .hw_automotive_cockpit_suite import (
-    TeslaCenterTouchscreen,
-    CarPlayDashboardPill,
-    DigitalGaugeClusterHud,
-)
+"""
+Hardware mockup components for vibmo.
+"""
+from .hw_gaming_handheld_suite import SteamDeckHandheldChassis, SwitchJoyConFrame, RetroGameBoyEnclosure
 
 __all__ = [
-    "TeslaCenterTouchscreen",
-    "CarPlayDashboardPill",
-    "DigitalGaugeClusterHud",
+    "SteamDeckHandheldChassis",
+    "SwitchJoyConFrame",
+    "RetroGameBoyEnclosure",
 ]
