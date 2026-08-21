@@ -1,0 +1,273 @@
+"""
+Smart Home Hub & IoT Device Mockup suite.
+"""
+
+from __future__ import annotations
+import math
+from typing import Any, Optional, Union
+import cairo
+
+from vibmo.core.color import Color
+from vibmo.scene.node import Node
+
+class FabricAcousticSmartHub(Node):
+    """
+    Google Nest Hub style angled touchscreen mounted on a woven fabric acoustic speaker base.
+    """
+
+    def __init__(
+        self,
+        width: float = 800.0,
+        height: float = 600.0,
+        base_color: Color = Color(0.9, 0.9, 0.92, 1.0),
+        screen_bg_color: Color = Color(0.1, 0.1, 0.1, 1.0),
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.base_color = base_color
+        self.screen_bg_color = screen_bg_color
+
+        # Screen slots
+        self.screen_content = Node(name="screen_content")
+        self.add(self.screen_content)
+
+    def add_screen_content(self, node: Node) -> FabricAcousticSmartHub:
+        self.screen_content.add(node)
+        return self
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w = self.width_val
+        h = self.height_val
+
+        ctx.save()
+
+        # Draw fabric base (angled elliptical/trapezoid)
+        ctx.save()
+        ctx.translate(w * 0.1, h * 0.6)
+
+        ctx.move_to(0, 0)
+        ctx.line_to(w * 0.8, 0)
+        ctx.curve_to(w * 0.85, h * 0.2, w * 0.7, h * 0.4, w * 0.4, h * 0.4)
+        ctx.curve_to(w * 0.1, h * 0.4, -w * 0.05, h * 0.2, 0, 0)
+        ctx.close_path()
+
+        ctx.set_source_rgba(self.base_color.r, self.base_color.g, self.base_color.b, self.base_color.a)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.0, 0.0, 0.0, 0.1)
+        ctx.set_line_width(2.0)
+        ctx.stroke()
+
+        # Optional: draw some fabric texture points or crosshatch
+        ctx.set_line_width(0.5)
+        ctx.set_source_rgba(0.0, 0.0, 0.0, 0.05)
+        for i in range(10, int(w*0.8), 20):
+            ctx.move_to(i, 0)
+            ctx.line_to(i - 20, h * 0.3)
+            ctx.stroke()
+        ctx.restore()
+
+        # Draw screen bezel and display area (angled up slightly)
+        screen_w = w
+        screen_h = h * 0.7
+        cr = 24.0
+
+        ctx.save()
+        # Translate to screen position
+        ctx.translate(0, 0)
+
+        # Bezel
+        ctx.move_to(cr, 0)
+        ctx.line_to(screen_w - cr, 0)
+        ctx.arc(screen_w - cr, cr, cr, -math.pi/2, 0)
+        ctx.line_to(screen_w, screen_h - cr)
+        ctx.arc(screen_w - cr, screen_h - cr, cr, 0, math.pi/2)
+        ctx.line_to(cr, screen_h)
+        ctx.arc(cr, screen_h - cr, cr, math.pi/2, math.pi)
+        ctx.line_to(0, cr)
+        ctx.arc(cr, cr, cr, math.pi, -math.pi/2)
+        ctx.close_path()
+
+        ctx.set_source_rgba(1.0, 1.0, 1.0, 1.0)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.8, 0.8, 0.8, 1.0)
+        ctx.set_line_width(4.0)
+        ctx.stroke()
+
+        # Inner screen
+        inner_m = 16.0
+        inner_w = screen_w - inner_m * 2
+        inner_h = screen_h - inner_m * 2
+        inner_cr = 8.0
+
+        ctx.translate(inner_m, inner_m)
+        ctx.move_to(inner_cr, 0)
+        ctx.line_to(inner_w - inner_cr, 0)
+        ctx.arc(inner_w - inner_cr, inner_cr, inner_cr, -math.pi/2, 0)
+        ctx.line_to(inner_w, inner_h - inner_cr)
+        ctx.arc(inner_w - inner_cr, inner_h - inner_cr, inner_cr, 0, math.pi/2)
+        ctx.line_to(inner_cr, inner_h)
+        ctx.arc(inner_cr, inner_h - inner_cr, inner_cr, math.pi/2, math.pi)
+        ctx.line_to(0, inner_cr)
+        ctx.arc(inner_cr, inner_cr, inner_cr, math.pi, -math.pi/2)
+        ctx.close_path()
+
+        ctx.set_source_rgba(self.screen_bg_color.r, self.screen_bg_color.g, self.screen_bg_color.b, self.screen_bg_color.a)
+        ctx.fill()
+
+        ctx.restore()
+        ctx.restore()
+
+class RoundThermostatDial(Node):
+    """
+    Nest style circular glass smart thermostat with rotating temperature ring and temperature status display.
+    """
+
+    def __init__(
+        self,
+        radius: float = 150.0,
+        temperature: float = 72.0,
+        ring_color: Color = Color(0.2, 0.2, 0.2, 1.0),
+        screen_color: Color = Color(0.05, 0.05, 0.05, 1.0),
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.radius = float(radius)
+        self.temperature = float(temperature)
+        self.ring_color = ring_color
+        self.screen_color = screen_color
+
+        # Content slot
+        self.screen_content = Node(name="screen_content")
+        self.add(self.screen_content)
+
+    def add_screen_content(self, node: Node) -> RoundThermostatDial:
+        self.screen_content.add(node)
+        return self
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        r = self.radius
+        cx = r
+        cy = r
+
+        ctx.save()
+
+        # Outer ring (metallic/plastic)
+        ctx.arc(cx, cy, r, 0, math.pi * 2)
+        ctx.set_source_rgba(self.ring_color.r, self.ring_color.g, self.ring_color.b, self.ring_color.a)
+        ctx.fill_preserve()
+
+        # Inner screen
+        screen_r = r * 0.85
+        ctx.arc(cx, cy, screen_r, 0, math.pi * 2)
+        ctx.set_source_rgba(self.screen_color.r, self.screen_color.g, self.screen_color.b, self.screen_color.a)
+        ctx.fill()
+
+        # Subtle glass reflection
+        ctx.arc(cx, cy - r*0.3, r*0.6, 0, math.pi * 2)
+        pat = cairo.LinearGradient(cx, cy - r, cx, cy)
+        pat.add_color_stop_rgba(0, 1, 1, 1, 0.1)
+        pat.add_color_stop_rgba(1, 1, 1, 1, 0.0)
+        ctx.set_source(pat)
+        ctx.fill()
+
+        ctx.restore()
+
+class WallMountSecurityKeypad(Node):
+    """
+    Smart home alarm panel with numerical keypad and status LED icons.
+    """
+
+    def __init__(
+        self,
+        width: float = 300.0,
+        height: float = 400.0,
+        bg_color: Color = Color(0.95, 0.95, 0.95, 1.0),
+        status_led: Color = Color(0.1, 0.8, 0.2, 1.0), # Green armed
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.bg_color = bg_color
+        self.status_led = status_led
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w = self.width_val
+        h = self.height_val
+        cr = 16.0
+
+        ctx.save()
+
+        # Body
+        ctx.move_to(cr, 0)
+        ctx.line_to(w - cr, 0)
+        ctx.arc(w - cr, cr, cr, -math.pi/2, 0)
+        ctx.line_to(w, h - cr)
+        ctx.arc(w - cr, h - cr, cr, 0, math.pi/2)
+        ctx.line_to(cr, h)
+        ctx.arc(cr, h - cr, cr, math.pi/2, math.pi)
+        ctx.line_to(0, cr)
+        ctx.arc(cr, cr, cr, math.pi, -math.pi/2)
+        ctx.close_path()
+
+        ctx.set_source_rgba(self.bg_color.r, self.bg_color.g, self.bg_color.b, self.bg_color.a)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.8, 0.8, 0.8, 1.0)
+        ctx.set_line_width(2.0)
+        ctx.stroke()
+
+        # Status LED indicator at top right
+        ctx.arc(w - 30.0, 30.0, 8.0, 0, math.pi * 2)
+        ctx.set_source_rgba(self.status_led.r, self.status_led.g, self.status_led.b, self.status_led.a)
+        ctx.fill()
+
+        # Screen
+        screen_m = 20.0
+        screen_w = w - screen_m * 2
+        screen_h = 80.0
+        screen_y = 50.0
+
+        ctx.rectangle(screen_m, screen_y, screen_w, screen_h)
+        ctx.set_source_rgba(0.1, 0.1, 0.15, 1.0)
+        ctx.fill()
+
+        # Keypad Grid
+        grid_cols = 3
+        grid_rows = 4
+        btn_w = 60.0
+        btn_h = 40.0
+        gap_x = (screen_w - (grid_cols * btn_w)) / (grid_cols - 1)
+        gap_y = 15.0
+
+        start_y = screen_y + screen_h + 30.0
+
+        for row in range(grid_rows):
+            for col in range(grid_cols):
+                if row == 3 and (col == 0 or col == 2):
+                    continue # Skip empty bottom corners (typically for 0)
+
+                btn_x = screen_m + col * (btn_w + gap_x)
+                btn_y = start_y + row * (btn_h + gap_y)
+
+                # Draw rounded button
+                bcr = 8.0
+                ctx.move_to(btn_x + bcr, btn_y)
+                ctx.line_to(btn_x + btn_w - bcr, btn_y)
+                ctx.arc(btn_x + btn_w - bcr, btn_y + bcr, bcr, -math.pi/2, 0)
+                ctx.line_to(btn_x + btn_w, btn_y + btn_h - bcr)
+                ctx.arc(btn_x + btn_w - bcr, btn_y + btn_h - bcr, bcr, 0, math.pi/2)
+                ctx.line_to(btn_x + bcr, btn_y + btn_h)
+                ctx.arc(btn_x + bcr, btn_y + btn_h - bcr, bcr, math.pi/2, math.pi)
+                ctx.line_to(btn_x, btn_y + bcr)
+                ctx.arc(btn_x + bcr, btn_y + bcr, bcr, math.pi, -math.pi/2)
+                ctx.close_path()
+
+                ctx.set_source_rgba(0.98, 0.98, 0.98, 1.0)
+                ctx.fill_preserve()
+                ctx.set_source_rgba(0.85, 0.85, 0.85, 1.0)
+                ctx.set_line_width(1.0)
+                ctx.stroke()
+
+        ctx.restore()

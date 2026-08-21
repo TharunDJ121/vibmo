@@ -1,3 +1,10 @@
-from vibmo.product.hardware.hw_vintage_crt_suite import BeigeCrtMonitor1990s, ArcadeCabinetBezel, RetroPortableTvAntenna
+"""
+Hardware mockup components for vibmo.
+"""
+from .hw_gaming_handheld_suite import SteamDeckHandheldChassis, SwitchJoyConFrame, RetroGameBoyEnclosure
 
-__all__ = ["BeigeCrtMonitor1990s", "ArcadeCabinetBezel", "RetroPortableTvAntenna"]
+__all__ = [
+    "SteamDeckHandheldChassis",
+    "SwitchJoyConFrame",
+    "RetroGameBoyEnclosure",
+]
