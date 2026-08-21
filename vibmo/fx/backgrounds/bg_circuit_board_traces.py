@@ -1,7 +1,10 @@
 import math
 import random
 from typing import Any, List, Tuple
-from motio.agent_api import *
+from vibmo.scene.node import Node
+from vibmo.core.color import Color, colors
+from vibmo.core.signal import Signal
+
 
 class PcbCircuitTracesFlow(Node):
     """
@@ -25,9 +28,9 @@ class PcbCircuitTracesFlow(Node):
         self.trace_color = trace_color
         self.pulse_color = pulse_color
         self.num_traces = num_traces
-
+        
         self.traces = self._generate_traces()
-
+        
     def _generate_traces(self) -> List[dict]:
         # Generate some 45-degree angled paths
         traces = []
@@ -42,27 +45,34 @@ class PcbCircuitTracesFlow(Node):
                 length = random.uniform(50, 200)
                 next_x = current_x + direction[0] * length
                 next_y = current_y + direction[1] * length
-
-                # To maintain 45 degree angles, we can't clamp independently.
-                # If we go out of bounds, we just stop the trace here.
+                
+                # To maintain 45 degree angles, we clamp within canvas bounds
                 if next_x < 0 or next_x > self.width or next_y < 0 or next_y > self.height:
+                    if len(path) == 1:
+                        # Ensure at least 2 points
+                        next_x = max(10.0, min(self.width - 10.0, current_x - direction[0] * length))
+                        next_y = max(10.0, min(self.height - 10.0, current_y - direction[1] * length))
+                        path.append((next_x, next_y))
                     break
-
+                    
                 path.append((next_x, next_y))
                 current_x, current_y = next_x, next_y
+            if len(path) == 1:
+                path.append((current_x + 50.0, current_y))
             traces.append({"path": path, "offset": random.random(), "speed": random.uniform(0.3, 0.8)})
         return traces
+
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         # Draw board background
         ctx.set_source_rgba(self.board_color.r, self.board_color.g, self.board_color.b, self.board_color.a)
         ctx.rectangle(0, 0, self.width, self.height)
         ctx.fill()
-
+        
         # Draw traces
         ctx.set_line_width(2.0)
         ctx.set_source_rgba(self.trace_color.r, self.trace_color.g, self.trace_color.b, self.trace_color.a * 0.5)
-
+        
         for trace in self.traces:
             path = trace["path"]
             if not path:
@@ -71,14 +81,14 @@ class PcbCircuitTracesFlow(Node):
             for pt in path[1:]:
                 ctx.line_to(pt[0], pt[1])
             ctx.stroke()
-
+            
             # Draw pulses on the path based on time
             pulse_progress = (time * trace["speed"] + trace["offset"]) % 1.0
             # A simple approach to find the pulse position
             total_length = sum(math.hypot(path[i+1][0] - path[i][0], path[i+1][1] - path[i][1]) for i in range(len(path)-1))
             if total_length == 0:
                 continue
-
+            
             target_length = total_length * pulse_progress
             current_length = 0.0
             for i in range(len(path)-1):
@@ -87,7 +97,7 @@ class PcbCircuitTracesFlow(Node):
                     t = (target_length - current_length) / seg_len
                     px = path[i][0] + t * (path[i+1][0] - path[i][0])
                     py = path[i][1] + t * (path[i+1][1] - path[i][1])
-
+                    
                     ctx.set_source_rgba(self.pulse_color.r, self.pulse_color.g, self.pulse_color.b, self.pulse_color.a)
                     ctx.arc(px, py, 4.0, 0, 2 * math.pi)
                     ctx.fill()
@@ -124,36 +134,36 @@ class MicrochipLogicPulse(Node):
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
         ctx.translate(self.center_x, self.center_y)
-
+        
         # Draw central die
         ctx.set_source_rgba(self.die_color.r, self.die_color.g, self.die_color.b, self.die_color.a)
         ctx.rectangle(-self.die_size/2, -self.die_size/2, self.die_size, self.die_size)
         ctx.fill()
-
+        
         ctx.set_source_rgba(0.2, 0.2, 0.2, 1.0)
         ctx.set_line_width(2.0)
         ctx.rectangle(-self.die_size/2, -self.die_size/2, self.die_size, self.die_size)
         ctx.stroke()
-
+        
         # Draw pins and radiating signals
         pins_per_side = self.num_pins // 4
         pin_length = 40.0
         pin_spacing = self.die_size / (pins_per_side + 1)
-
+        
         for side in range(4):
             ctx.save()
             ctx.rotate(side * math.pi / 2)
-
+            
             for i in range(pins_per_side):
                 offset = (i + 1) * pin_spacing - self.die_size / 2
-
+                
                 # Draw pin
                 ctx.set_source_rgba(self.pin_color.r, self.pin_color.g, self.pin_color.b, self.pin_color.a)
                 ctx.set_line_width(4.0)
                 ctx.move_to(offset, self.die_size / 2)
                 ctx.line_to(offset, self.die_size / 2 + pin_length)
                 ctx.stroke()
-
+                
                 # Draw radiating signal
                 # Offset by i so they don't all pulse at exactly the same time
                 pulse_phase = (time * 2.0 + i * 0.2 + side * 0.5) % 1.0
@@ -162,15 +172,15 @@ class MicrochipLogicPulse(Node):
                     ctx.set_source_rgba(self.signal_color.r, self.signal_color.g, self.signal_color.b, intensity)
                     ctx.arc(offset, self.die_size / 2 + pin_length + 10.0, 5.0, 0, 2 * math.pi)
                     ctx.fill()
-
+                    
                     # Trace signal line outward
                     ctx.set_line_width(2.0)
                     ctx.move_to(offset, self.die_size / 2 + pin_length)
                     ctx.line_to(offset, self.die_size / 2 + pin_length + 50.0)
                     ctx.stroke()
-
+                    
             ctx.restore()
-
+            
         ctx.restore()
 
 
@@ -195,9 +205,9 @@ class CopperBusCurrentBackdrop(Node):
         self.bus_color = bus_color
         self.pulse_color = pulse_color
         self.num_buses = num_buses
-
+        
         self.buses = self._generate_buses()
-
+        
     def _generate_buses(self) -> List[dict]:
         buses = []
         for i in range(self.num_buses):
@@ -215,12 +225,12 @@ class CopperBusCurrentBackdrop(Node):
         ctx.set_source_rgba(self.bg_color.r, self.bg_color.g, self.bg_color.b, self.bg_color.a)
         ctx.rectangle(0, 0, self.width, self.height)
         ctx.fill()
-
+        
         for bus in self.buses:
             # Draw bus line
             ctx.set_source_rgba(self.bus_color.r, self.bus_color.g, self.bus_color.b, self.bus_color.a * 0.6)
             ctx.set_line_width(bus["thickness"])
-
+            
             if bus["horizontal"]:
                 ctx.move_to(0, bus["pos"])
                 ctx.line_to(self.width, bus["pos"])
@@ -228,17 +238,17 @@ class CopperBusCurrentBackdrop(Node):
                 ctx.move_to(bus["pos"], 0)
                 ctx.line_to(bus["pos"], self.height)
             ctx.stroke()
-
+            
             # Draw pulsing clock signal along the bus
             # Divide bus into segments that light up
             segment_length = 100.0
             gap = 50.0
             total_length = self.width if bus["horizontal"] else self.height
-
+            
             offset = (time * 150.0 * bus["speed"]) % (segment_length + gap)
-
+            
             ctx.set_source_rgba(self.pulse_color.r, self.pulse_color.g, self.pulse_color.b, self.pulse_color.a)
-
+            
             pos = - (segment_length + gap) + offset
             while pos < total_length:
                 if bus["horizontal"]:
