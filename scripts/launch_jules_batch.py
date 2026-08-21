@@ -117,7 +117,16 @@ def main():
         sys.exit(1)
 
     jules_bin = Path(os.environ.get("LOCALAPPDATA", "")) / "Temp" / "jules_tmp" / "jules.exe"
-    bin_cmd = str(jules_bin) if jules_bin.exists() else "jules"
+    npm_bin = Path(os.environ.get("APPDATA", "")) / "npm" / "node_modules" / "@google" / "jules" / "jules.exe"
+    
+    use_shell = False
+    if jules_bin.exists():
+        bin_cmd = str(jules_bin)
+    elif npm_bin.exists():
+        bin_cmd = str(npm_bin)
+    else:
+        bin_cmd = "jules.cmd" if sys.platform == "win32" else "jules"
+        use_shell = sys.platform == "win32"
 
     print(f"\n🚀 Ready to launch {len(selected_tasks)} task(s) for repo '{args.repo}'...\n")
 
@@ -136,6 +145,7 @@ def main():
                     stdin=subprocess.DEVNULL,
                     capture_output=True,
                     text=True,
+                    shell=use_shell,
                     timeout=30,
                 )
                 print(res.stdout)
@@ -145,6 +155,7 @@ def main():
                 print(f"Execution failed: {e}")
 
     print("Batch processing complete.")
+
 
 
 

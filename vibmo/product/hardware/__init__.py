@@ -1,14 +1,10 @@
 """
-Hardware mockups and devices.
+Hardware mockup components for vibmo.
 """
-from vibmo.product.hardware.hw_spatial_visor_suite import (
-    VisionProSpatialGlassVisor,
-    QuestGoggleFrame,
-    SpatialHudCurvedProjection,
-)
+from .hw_gaming_handheld_suite import SteamDeckHandheldChassis, SwitchJoyConFrame, RetroGameBoyEnclosure
 
 __all__ = [
-    "VisionProSpatialGlassVisor",
-    "QuestGoggleFrame",
-    "SpatialHudCurvedProjection",
+    "SteamDeckHandheldChassis",
+    "SwitchJoyConFrame",
+    "RetroGameBoyEnclosure",
 ]
