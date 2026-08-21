@@ -1,4 +1,4 @@
-"""Hardware chassis and device enclosure suites."""
+"""Hardware chassis & device enclosure suites."""
 from __future__ import annotations
 
 from vibmo.product.hardware.hw_automotive_cockpit_suite import (
