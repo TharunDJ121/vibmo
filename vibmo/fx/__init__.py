@@ -133,6 +133,11 @@ from vibmo.fx.light_effects import (
     god_rays,
     thermal_vision,
 )
+from vibmo.fx.backgrounds import (
+    CosmicNebulaBackdrop,
+    StarfieldWarpDrift,
+    ConstellationGrid,
+)
 from vibmo.fx.blur_suite import (
     LinearProgressiveBlur,
     RadialProgressiveBlur,
@@ -148,6 +153,10 @@ from vibmo.fx.blur_suite import (
 )
 
 __all__ = [
+    # Backgrounds
+    "CosmicNebulaBackdrop",
+    "StarfieldWarpDrift",
+    "ConstellationGrid",
     # Core filters
     "FilmGrain",
     "Vignette",
