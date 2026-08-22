@@ -53,6 +53,12 @@ from vibmo.charts.chart_surface_mesh_3d_suite import (
     WireframeContourGrid,
     Animated3DSurfaceMesh,
 )
+from vibmo.charts.chart_waterfall_flow_suite import (
+    CumulativeBridgeConnector,
+    NetGainColumn,
+    DeductionColumn,
+    WaterfallCostChart,
+)
 
 __all__ = [
     "AnimatedOutlierPings",
@@ -89,4 +95,8 @@ __all__ = [
     "SunburstRadialHierarchy",
     "WireframeContourGrid",
     "Animated3DSurfaceMesh",
+    "CumulativeBridgeConnector",
+    "NetGainColumn",
+    "DeductionColumn",
+    "WaterfallCostChart",
 ]
