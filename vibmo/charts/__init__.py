@@ -25,6 +25,12 @@ from vibmo.charts.chart_polar_rose_suite import (
     AngularCategoryAxis,
     PolarRoseAreaChart,
 )
+from vibmo.charts.chart_speedometer_hud_suite import (
+    SpeedometerNeedleGauge,
+    RedlineRpmArc,
+    DigitalSpeedNumberTicker,
+    TurboBoostBar,
+)
 from vibmo.charts.chart_streamgraph_wave_suite import (
     OrganicWaveBand,
     FlowingStreamgraphArea,
@@ -55,6 +61,10 @@ __all__ = [
     "ConcentricRadiusRings",
     "AngularCategoryAxis",
     "PolarRoseAreaChart",
+    "SpeedometerNeedleGauge",
+    "RedlineRpmArc",
+    "DigitalSpeedNumberTicker",
+    "TurboBoostBar",
     "OrganicWaveBand",
     "FlowingStreamgraphArea",
     "TimeAxisScrubber",
