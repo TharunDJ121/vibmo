@@ -400,6 +400,23 @@ from vibmo.plugins.registry import PluginRegistry, register_component, register_
 from vibmo.timeline.marker import Marker
 from vibmo.timeline.track import LayerTrack
 
+# Production Asset Suites across Sections 1 to 7
+from vibmo.audio.generators import *
+from vibmo.fx.backgrounds import *
+from vibmo.product.hardware import *
+from vibmo.product.ai import *
+from vibmo.charts import *
+from vibmo.typography.kinetic import *
+from vibmo.fx.shaders import *
+
+import vibmo.audio.generators as _generators
+import vibmo.fx.backgrounds as _backgrounds
+import vibmo.product.hardware as _hardware
+import vibmo.product.ai as _ai_ui
+import vibmo.charts as _charts
+import vibmo.typography.kinetic as _kinetic_typo
+import vibmo.fx.shaders as _shaders
+
 __version__ = "0.2.0"
 
 __all__ = [
@@ -776,3 +793,12 @@ __all__ = [
     "Marker",
     "LayerTrack",
 ]
+
+__all__.extend(_generators.__all__)
+__all__.extend(_backgrounds.__all__)
+__all__.extend(_hardware.__all__)
+__all__.extend(_ai_ui.__all__)
+__all__.extend(_charts.__all__)
+__all__.extend(_kinetic_typo.__all__)
+__all__.extend(_shaders.__all__)
+

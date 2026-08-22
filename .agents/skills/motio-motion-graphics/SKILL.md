@@ -43,8 +43,10 @@ scene = Scene(
     background=colors.DARK_NAVY,
 )
 
-# 2. Cinematic Post-Processing
-scene.add_post_fx(Vignette(intensity=0.25), FilmGrain(amount=0.01))
+# 2. Add Background & Cinematic Post-Processing
+bg = MeshGradientFlow(speed=0.6, complexity=4)
+scene.add(bg)
+scene.add_post_fx(Vignette(intensity=0.25), FilmGrain(amount=0.015))
 
 # 3. Assemble Semantic UI Components
 card = GlassCard(direction="column", gap=16, padding=32, corner_radius=24, position=(240, 200))
@@ -75,19 +77,61 @@ def main():
 # 5. Output
 if __name__ == "__main__":
     scene.storyboard("storyboard.png")          # Instant 6-frame progression
+    # scene.preview()                           # Live Web Studio inspector
     scene.render("output.mp4", quality="high")  # Master 1080p 60FPS export
 ```
 
 ---
 
-## 📚 Deep-Dive Specialized References
+## 📖 Master Asset Suite Catalog Across All 7 Sections
 
-For full specifications on assets, components, verbs, and templates, consult the dedicated reference manuals:
+Every asset below is available directly via `from motio.agent_api import *`.
 
-- 🎨 **[Asset Creation & Registration Guide](./references/asset_creation_guide.md)**: How to create, generate, load, and register every single asset type (Images, Videos, Vector Icons, Audio Tracks, Procedural SFX, Gradients, Textures, HTML/Tailwind, Lottie, Custom Components, and Shaders).
-- 🧩 **[Component Catalog](./references/component_catalog.md)**: Complete catalog of all Mockups, Hardware Frames, UI Cards, AI Badges, Form Controls, Tables, and Charts.
-- 🎬 **[Motion Verbs & Transitions Cheat Sheet](./references/motion_verbs_cheat_sheet.md)**: All motion actions, 17+ transition types, spring parameters, easing curves, and physics force fields.
-- 🚀 **[Showcase Recipes & Scenarios](./examples/recipes.md)**: End-to-end production scripts for SaaS launches, mobile demos, audio visualizers, and shape morphing.
+### 1. 🔊 Procedural Audio & Sound Effects (`vibmo.audio.generators`)
+- `WhooshDesignerSuite`: `WhooshDesignerSuite.cinematic_passby()`
+- `CyberUiSuite`: `CyberUiSuite.holographic_click()`
+- `GlitchStutterSuite`: `GlitchStutterSuite.digital_stutter_burst()`
+- `ImpactSubSuite`: `ImpactSubSuite.cinematic_trailer_sub_drop()`
+- `KeyboardFoleySuite`: `KeyboardFoleySuite.mechanical_keystroke()`
+- `RiserTensionSuite`: `RiserTensionSuite.shepard_tone_riser()`
+- `AmbientDroneSuite`: `AmbientDroneSuite.sci_fi_deep_space_drone()`
+- `VinylCrackleSuite`: `VinylCrackleSuite.vintage_turntable_hiss()`
+- `LaserPlasmaSuite`: `LaserPlasmaSuite.plasma_beam_fire()`
+- `LiquidBubblesSuite`: `LiquidBubblesSuite.water_bubble_pop()`
+- `PaperCardSuite`: `PaperCardSuite.card_flip_shuffle()`
+- `Retro8bitSuite`: `Retro8bitSuite.arcade_coin_jump()`
+- `AlarmSirenSuite`: `AlarmSirenSuite.emergency_klaxon_sweep()`
+- `ChimesHarmonicSuite`: `ChimesHarmonicSuite.celestial_wind_chime()`
+- `CameraShutterSuite`: `CameraShutterSuite.dslr_rapid_burst()`
+
+### 2. 🌌 Non-Static Animated Backdrops (`vibmo.fx.backgrounds`)
+- `MeshGradientFlow`, `CyberGridHorizon`, `DigitalMatrixRain`, `FluidCaustics`, `TopographicContours`
+- `CircuitBoardTraces`, `CosmicNebula`, `RetroCrtScanlines`, `SunsetHorizonGlow`, `GeometricTessellation`
+- `BokehLightBubbles`, `HyperspaceTunnel`, `MinimalStudioInfinity`, `IsometricCityGrid`, `ParticleConstellation`
+
+### 3. 💻 Hardware Chassis & Device Enclosures (`vibmo.product.hardware`)
+- `FoldableDeviceFrame`, `RuggedSmartwatchFrame`, `SuperUltrawideMonitorFrame`, `PosTerminalFrame`, `CameraViewfinderOverlay`
+- `MinimalistEInkTabletFrame`, `SmartHomeHubFrame`, `RetroArcadeCrtCabinet`, `CctvQuadViewOverlay`, `SpatialVisorFrame`
+- `OledCinemaTvFrame`, `AutomotiveCockpitDash`, `HandheldGamingConsoleFrame`, `CyberdeckChassisFrame`, `MultiMonitorDeveloperRig`
+
+### 4. 🤖 AI & SaaS Interactive UI Suites (`vibmo.product.ai`)
+- `StreamingTokenOutput`, `TreeOfThoughtTree`, `DiffusionCanvas`, `AgentTeamThread`, `VectorEmbeddingsVisualizer`
+- `PricingTierMatrix`, `ApiKeyVault`, `GitPrTimeline`, `TelemetryDialHUD`, `VisualSqlQueryBuilder`
+- `WebhookActivityFeed`, `TokenQuotaMeter`, `CodeSandboxPlayground`, `FeatureComparisonMatrix`, `PromptDiffViewer`
+
+### 5. 📈 Financial, 3D Spatial & Motion Charts (`vibmo.charts`)
+- `CandlestickChartPro`, `RadialSunburstHierarchy`, `SpeedometerHudDial`, `SurfaceMesh3DPlot`, `BubbleScatter4DPlot`
+- `WaterfallFinancialChart`, `ChoroplethGeoMap`, `ViolinDensityPlot`, `MarketCapTreemap`, `SankeyFlowDiagram`
+- `OrganicWaveStreamgraph`, `PolarRoseCoxcombChart`, `BoxAndWhiskerPlot`, `ParetoAnalysisChart`
+
+### 6. ✍️ Kinetic Typography & Title Sequences (`vibmo.typography.kinetic`)
+- `GlitchDecryptorText`, `LiquidWaveText`, `IsometricExtruded3DText`, `RealisticNeonStrobeSign`, `ParticleFlameText`
+- `SplitFlapAirportBoard`, `MatrixRainTypography`, `SlitScanVideoSynthText`, `OdometerTumblerCounter`, `RubberStampTitleSlam`
+- `MagneticGravityLetters`, `HologramChromaText`, `PhosphorTerminalTypewriter`, `BrushCalligraphyPathReveal`, `ElasticSquashBounceTitle`
+
+### 7. 🔮 Visual Post-FX Shaders & Turnkey Suites (`vibmo.fx.shaders` & `vibmo.templates`)
+- Shaders: `CrtPhosphorBloomShader`, `VhsTapeTrackingShader`, `AnamorphicStreakFlare`, `LiquidGlassRefractionFilter`, `AsciiMatrixArtFilter`
+- Turnkey Scenes: `TmplAiCodeAssistantSuite`, `TmplFintechCryptoCardSuite`, `TmplDeveloperCliLaunchSuite`, `TmplSaasYcPitchSuite`, `TmplSocialAudiogramSuite`
 
 ---
 
@@ -100,8 +144,8 @@ When fulfilling a user request for motion graphics or video assets:
    - Theme and aesthetic palette (`DARK_NAVY`, `SLATE_900`, `CYBERPUNK`, `MINIMAL_LIGHT`).
    - Assets needed (Icons, mockups, audio, logos, charts).
 2. **Assemble the Hierarchy**:
-   - Nest child elements inside containers (`GlassCard`, `FlexContainer`, `BrowserWindow`, `PhoneFrame`).
-   - Use `scene.add()` to register top-level elements and post-processing filters (`Vignette`, `FilmGrain`, `BackdropBlur`).
+   - Nest child elements inside containers (`GlassCard`, `FlexContainer`, `BrowserWindow`, `PhoneFrame`, `FoldableDeviceFrame`).
+   - Use `scene.add()` to register top-level elements and post-processing filters (`Vignette`, `FilmGrain`, `CrtPhosphorBloomShader`).
 3. **Decorate the Choreography**:
    - Write `@scene.animate` generator functions.
    - Use `yield scene.all(...)` for concurrent actions and `yield action` for sequential steps.
@@ -110,7 +154,7 @@ When fulfilling a user request for motion graphics or video assets:
    - Run `scene.validate()` to catch duration overflows (`delay + duration > scene.duration`).
    - Export `scene.storyboard("storyboard.png")` to verify 6-frame composition progression.
 5. **Render Final Output**:
-   - Use `scene.render("output.mp4", quality="high")` or `--resume` for fast resumption.
+   - Use `scene.render("output.mp4", quality="high")` for full render or `quality="draft"` for instant preview.
 
 ---
 

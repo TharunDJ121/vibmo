@@ -46,26 +46,26 @@ def run(cmd):
 def update_all_init_files():
     """Dynamically scan and rebuild all subpackage __init__.py files cleanly."""
     packages = [
-        ("vibmo/audio/generators", "gen_*.py", "Procedural audio and sound synthesis generators."),
-        ("vibmo/fx/backgrounds", "bg_*.py", "Procedural non-static animated backgrounds."),
-        ("vibmo/product/hardware", "hw_*.py", "Hardware chassis and device enclosure suites."),
-        ("vibmo/product/ai", "ui_*.py", "AI & SaaS Interactive UI Component Suites."),
-        ("vibmo/charts", "chart_*.py", "Financial, 3D spatial and motion chart suites."),
-        ("vibmo/typography/kinetic", "typo_*.py", "Kinetic typography and title sequence suites."),
-        ("vibmo/fx/shaders", "fx_*.py", "Visual post-fx and shader filters."),
-        ("vibmo/templates/turnkey", "tmpl_*.py", "Turnkey production scene templates."),
+        ("vibmo/audio/generators", "*.py", "Procedural audio and sound synthesis generators."),
+        ("vibmo/fx/backgrounds", "*.py", "Procedural non-static animated backgrounds."),
+        ("vibmo/product/hardware", "*.py", "Hardware chassis and device enclosure suites."),
+        ("vibmo/product/ai", "*.py", "AI & SaaS Interactive UI Component Suites."),
+        ("vibmo/charts", "*.py", "Financial, 3D spatial and motion chart suites."),
+        ("vibmo/typography/kinetic", "*.py", "Kinetic typography and title sequence suites."),
+        ("vibmo/fx/shaders", "*.py", "Visual post-fx and shader filters."),
+        ("vibmo/templates/turnkey", "*.py", "Turnkey production scene templates."),
     ]
 
     for pkg_rel, pattern, doc in packages:
         pkg_dir = ROOT_DIR / pkg_rel
         if pkg_dir.exists():
-            mod_files = sorted([f for f in pkg_dir.glob(pattern) if f.is_file() and not f.name.endswith(".orig")])
+            mod_files = sorted([f for f in pkg_dir.glob(pattern) if f.is_file() and f.name != "__init__.py" and not f.name.endswith(".orig")])
             imports = []
             all_exports = []
             for f in mod_files:
                 mod = f.stem
                 content = f.read_text(encoding="utf-8", errors="ignore")
-                classes = re.findall(r"^class\s+([A-Za-z0-9_]+)\s*\(", content, re.MULTILINE)
+                classes = re.findall(r"^class\s+([A-Za-z0-9_]+)\s*[:\(]", content, re.MULTILINE)
                 if classes:
                     mod_path = pkg_rel.replace("/", ".")
                     imports.append(f"from {mod_path}.{mod} import (\n    " + ",\n    ".join(classes) + ",\n)")
