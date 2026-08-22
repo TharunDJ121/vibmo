@@ -40,14 +40,14 @@ def test_agent_typing_wave():
     # Draw to advance harmonic positions
     surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 100, 50)
     ctx = cairo.Context(surface)
-
+    
     # Save base pos. In FlexContainer, Y might start at 0 before layout.
     wave.draw(ctx, time=0.0)
     pos_before = wave.dots[0].position.get(0.0)
-
+    
     # Simulate time=0.25 (to get a non-zero sine wave offset)
     wave.draw(ctx, time=0.25)
-
+    
     pos_after = wave.dots[0].position.get(0.25)
     assert pos_after[1] != pos_before[1]  # Y should have changed
 
@@ -57,7 +57,7 @@ def test_tool_calling_payload_card():
     assert len(card.children) == 2
     header = card.children[0]
     assert len(header.children) == 2
-
+    
     body = card.children[1]
     assert body.text.get() == "{'k': 'v'}"
 
@@ -68,7 +68,7 @@ def test_tool_calling_payload_card():
 
     surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 200, 100)
     ctx = cairo.Context(surface)
-
+    
     # Check spinner rotation updates on draw
     rot_before = card.spinner.rotation.get(0.0)
     card.draw(ctx, time=1.0)
@@ -90,12 +90,12 @@ def test_agent_conversation_bubble():
 
     assert isinstance(avatar, Circle)
     assert isinstance(content_col, FlexContainer)
-
+    
     # Header row should contain Name, Role badge, and timestamp
     header = content_col.children[0]
     assert len(header.children) == 3
     assert header.children[0].text.get() == "AI Assistant"
-
+    
     # Body text
     body_text = content_col.children[1]
     assert body_text.text.get() == "Here is the fix."
@@ -104,5 +104,5 @@ def test_agent_conversation_bubble():
     surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 500, 200)
     ctx = cairo.Context(surface)
     bubble.draw(ctx, time=0.0)
-
+    
     # Draw logic passes without errors

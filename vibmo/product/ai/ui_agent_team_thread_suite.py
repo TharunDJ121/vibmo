@@ -67,7 +67,7 @@ class AgentTypingWave(FlexContainer):
             Circle(radius=5.0, fill=dot_color) for _ in range(3)
         ]
         self.add(*self.dots)
-
+        
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         # compute layout first to establish baseline dot positions
         self.compute_layout(time)
@@ -82,7 +82,7 @@ class AgentTypingWave(FlexContainer):
             # we need to append the offset relative to that.
             base_x, base_y = dot.position.get(time)
             dot.position.set((base_x, base_y + offset))
-
+            
         # call Node's draw to render (bypassing FlexContainer's compute_layout so we don't overwrite positions)
         super(FlexContainer, self).draw(ctx, time)
 
@@ -106,7 +106,7 @@ class ToolCallingPayloadCard(FlexContainer):
             stroke_width=1.0,
             **kwargs,
         )
-
+        
         header = FlexContainer(
             direction="row",
             gap=8.0,
@@ -116,9 +116,9 @@ class ToolCallingPayloadCard(FlexContainer):
         # Mock spinner (simple circle for now)
         self.spinner = Circle(radius=6.0, stroke=colors.CYAN_500 if is_executing else colors.EMERALD_500, stroke_width=2.0, fill=None)
         title = Text(text=f"Tool: {tool_name}", font_size=14.0, font_family="Inter", bold=True, color=colors.CYAN_500)
-
+        
         header.add(self.spinner, title)
-
+        
         body = Text(
             text=payload,
             font_size=12.0,
@@ -126,7 +126,7 @@ class ToolCallingPayloadCard(FlexContainer):
             color=colors.SLATE_400,
             line_height=1.4,
         )
-
+        
         self.add(header, body)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
@@ -155,10 +155,10 @@ class AgentConversationBubble(FlexContainer):
             align_items="start",
             **kwargs,
         )
-
+        
         # Avatar
         self.avatar = Circle(radius=20.0, fill=avatar_color)
-
+        
         # Right column
         self.content_col = FlexContainer(
             direction="column",
@@ -167,7 +167,7 @@ class AgentConversationBubble(FlexContainer):
             fill=None,
             align_items="start",
         )
-
+        
         # Header row
         header = FlexContainer(
             direction="row",
@@ -176,9 +176,9 @@ class AgentConversationBubble(FlexContainer):
             fill=None,
             align_items="center",
         )
-
+        
         name_text = Text(text=name, font_size=16.0, font_family="Inter", bold=True, color=colors.WHITE)
-
+        
         # Role badge (simple rounded rect with text)
         role_badge = FlexContainer(
             direction="row",
@@ -190,11 +190,11 @@ class AgentConversationBubble(FlexContainer):
         )
         role_text = Text(text=role, font_size=10.0, font_family="Inter", bold=True, color=colors.SLATE_200)
         role_badge.add(role_text)
-
+        
         time_text = Text(text=timestamp, font_size=12.0, font_family="Inter", color=colors.SLATE_400)
-
+        
         header.add(name_text, role_badge, time_text)
-
+        
         # Message body
         self.message = Text(
             text=body,
@@ -203,7 +203,7 @@ class AgentConversationBubble(FlexContainer):
             color=colors.SLATE_200,
             line_height=1.5,
         )
-
+        
         self.content_col.add(header, self.message)
-
+        
         self.add(self.avatar, self.content_col)
