@@ -43,6 +43,12 @@ from vibmo.typography.kinetic.typo_matrix_code_rain_suite import (
     HeadlineConsolidation,
     GlyphMatrixSubText,
 )
+from vibmo.typography.kinetic.typo_particle_flame_suite import (
+    ParticleFlameText,
+    DisintegratingEmbers,
+    IgnitionSparkBurst,
+    SmokeDissipateHeading,
+)
 from vibmo.typography.kinetic.typo_slit_scan_synth_suite import (
     SlitScanVideoSynthText,
     AnalogFeedbackSmear,
@@ -83,6 +89,10 @@ __all__ = [
     "PhosphorTrailDecay",
     "HeadlineConsolidation",
     "GlyphMatrixSubText",
+    "ParticleFlameText",
+    "DisintegratingEmbers",
+    "IgnitionSparkBurst",
+    "SmokeDissipateHeading",
     "SlitScanVideoSynthText",
     "AnalogFeedbackSmear",
     "ChromaWarpWave",
