@@ -7,6 +7,12 @@ from vibmo.charts.chart_box_whisker_suite import (
     InterquartileBox,
     StatisticalBoxPlot,
 )
+from vibmo.charts.chart_candlestick_pro_suite import (
+    ProCandlestickChart,
+    MovingAverageCurves,
+    VolumeProfileOverlay,
+    CrosshairPriceTracker,
+)
 from vibmo.charts.chart_pareto_curve_suite import (
     FrequencyBarChart,
     Cumulative8020Curve,
@@ -25,12 +31,22 @@ from vibmo.charts.chart_streamgraph_wave_suite import (
     TimeAxisScrubber,
     StreamgraphLegend,
 )
+from vibmo.charts.chart_sunburst_radial_suite import (
+    ExpandingRingArc,
+    RadialSliceHighlight,
+    BreadcrumbPathTrail,
+    SunburstRadialHierarchy,
+)
 
 __all__ = [
     "AnimatedOutlierPings",
     "WhiskersErrorBars",
     "InterquartileBox",
     "StatisticalBoxPlot",
+    "ProCandlestickChart",
+    "MovingAverageCurves",
+    "VolumeProfileOverlay",
+    "CrosshairPriceTracker",
     "FrequencyBarChart",
     "Cumulative8020Curve",
     "CriticalThresholdLine",
@@ -43,4 +59,8 @@ __all__ = [
     "FlowingStreamgraphArea",
     "TimeAxisScrubber",
     "StreamgraphLegend",
+    "ExpandingRingArc",
+    "RadialSliceHighlight",
+    "BreadcrumbPathTrail",
+    "SunburstRadialHierarchy",
 ]

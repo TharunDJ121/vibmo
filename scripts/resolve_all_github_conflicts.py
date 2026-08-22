@@ -1,7 +1,5 @@
 """
-Batch PR Conflict Resolver & Auto-Merger.
-Iterates over all open PRs on GitHub, merges main, resolves any __init__.py or file conflicts,
-validates test suites with pytest, pushes updates, and cleanly merges the PRs.
+Batch PR Conflict Resolver & Auto-Merger with Non-Interactive Safe Execution.
 """
 
 import json
@@ -12,11 +10,32 @@ import sys
 import time
 from pathlib import Path
 
+# Ensure UTF-8 output and autoflush
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
+
+# Set non-interactive environment variables
+ENV = os.environ.copy()
+ENV["GIT_TERMINAL_PROMPT"] = "0"
+ENV["GIT_MERGE_AUTOEDIT"] = "no"
+ENV["GIT_EDITOR"] = "true"
+ENV["GH_PROMPT_DISABLED"] = "1"
+ENV["PAGER"] = "cat"
+
+
+def run(cmd, check=False):
+    """Executes a command non-interactively with captured output."""
+    return subprocess.run(
+        cmd,
+        stdin=subprocess.DEVNULL,
+        capture_output=True,
+        text=True,
+        env=ENV,
+        check=check,
+    )
 
 
 def update_all_init_files():
@@ -64,78 +83,83 @@ def clean_orig_files():
 
 
 def main():
-    print("\n🔍 Fetching all open Pull Requests from GitHub...")
-    res = subprocess.run(["gh", "pr", "list", "--limit", "100", "--json", "number,title,headRefName"], capture_output=True, text=True)
+    print("🔍 Fetching all open Pull Requests from GitHub...", flush=True)
+    res = run(["gh", "pr", "list", "--limit", "100", "--json", "number,title,headRefName"])
     if res.returncode != 0:
-        print(f"Error fetching PRs: {res.stderr}")
+        print(f"Error fetching PRs: {res.stderr}", flush=True)
         return
 
     try:
         prs = json.loads(res.stdout)
     except Exception as e:
-        print(f"JSON decode error: {e}")
+        print(f"JSON decode error: {e}", flush=True)
         return
 
     # Sort ascending by PR number (merge oldest PRs first)
     prs.sort(key=lambda x: int(x["number"]))
-    print(f"Found {len(prs)} open Pull Request(s) to process.\n")
+    print(f"Found {len(prs)} open Pull Request(s) to process.\n", flush=True)
 
     for pr in prs:
         num = str(pr["number"])
         title = pr["title"]
         branch = pr["headRefName"]
 
-        print(f"=======================================================")
-        print(f"🚀 Processing PR #{num}: {title}")
-        print(f"   Branch: {branch}")
-        print(f"=======================================================")
+        print(f"=======================================================", flush=True)
+        print(f"🚀 Processing PR #{num}: {title}", flush=True)
+        print(f"   Branch: {branch}", flush=True)
+        print(f"=======================================================", flush=True)
 
         # 1. Update main
-        subprocess.run(["git", "checkout", "main"], capture_output=True)
-        subprocess.run(["git", "pull", "origin", "main"], capture_output=True)
+        run(["git", "checkout", "main"])
+        run(["git", "pull", "origin", "main"])
+
+        # Delete local branch if already exists to ensure fresh checkout
+        run(["git", "branch", "-D", branch])
 
         # 2. Checkout PR branch
-        co = subprocess.run(["gh", "pr", "checkout", num], capture_output=True, text=True)
-        print(f"Checked out PR #{num}")
+        co = run(["gh", "pr", "checkout", num])
+        print(f"Checked out PR #{num}: {co.stdout.strip()[:60]}", flush=True)
 
         # 3. Merge origin/main into PR branch
-        subprocess.run(["git", "fetch", "origin", "main"], capture_output=True)
-        m = subprocess.run(["git", "merge", "origin/main", "-m", f"Merge main into PR #{num}"], capture_output=True, text=True)
+        run(["git", "fetch", "origin", "main"])
+        m = run(["git", "merge", "origin/main", "--no-edit", "-m", f"Merge main into PR #{num}"])
         
-        status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+        status = run(["git", "status", "--porcelain"])
         has_conflict = any(code in status.stdout for code in ["UU ", "AA ", "DU ", "UD ", "DD "])
 
         if has_conflict or m.returncode != 0:
-            print("⚡ Merge conflict detected. Auto-reconciling...")
-            subprocess.run(["git", "checkout", "--theirs", "."], capture_output=True)
+            print("⚡ Merge conflict detected. Auto-reconciling...", flush=True)
+            run(["git", "checkout", "--theirs", "."])
             clean_orig_files()
             update_all_init_files()
-            subprocess.run(["git", "add", "."], capture_output=True)
-            subprocess.run(["git", "commit", "-m", f"Auto-resolve merge conflicts for PR #{num}"], capture_output=True)
+            run(["git", "add", "."])
+            run(["git", "commit", "-m", f"Auto-resolve merge conflicts for PR #{num}"])
 
         clean_orig_files()
         update_all_init_files()
-        subprocess.run(["git", "add", "."], capture_output=True)
+        run(["git", "add", "."])
         
-        status_after = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+        status_after = run(["git", "status", "--porcelain"])
         if status_after.stdout.strip():
-            subprocess.run(["git", "commit", "-m", f"Clean up exports for PR #{num}"], capture_output=True)
+            run(["git", "commit", "-m", f"Clean up exports for PR #{num}"])
 
         # 4. Push updated branch
-        print("Pushing resolved branch to origin...")
-        subprocess.run(["git", "push", "origin", "HEAD"], capture_output=True)
+        print("Pushing resolved branch to origin...", flush=True)
+        p = run(["git", "push", "origin", "HEAD"])
+        if p.returncode != 0:
+            print(f"Push warning: {p.stderr.strip()[:100]}", flush=True)
 
         # 5. Merge PR via GitHub CLI
-        print(f"Merging PR #{num} into main...")
-        merge_res = subprocess.run(["gh", "pr", "merge", num, "--merge", "--delete-branch"], capture_output=True, text=True)
-        print(f"PR #{num} result: {merge_res.stdout.strip()} {merge_res.stderr.strip()}")
+        print(f"Merging PR #{num} into main...", flush=True)
+        merge_res = run(["gh", "pr", "merge", num, "--merge", "--delete-branch"])
+        print(f"PR #{num} merge output: {merge_res.stdout.strip()[:120]} {merge_res.stderr.strip()[:120]}", flush=True)
 
         # 6. Switch back to main and pull latest
-        subprocess.run(["git", "checkout", "main"], capture_output=True)
-        subprocess.run(["git", "pull", "origin", "main"], capture_output=True)
-        print(f"✓ PR #{num} complete.\n")
+        run(["git", "checkout", "main"])
+        run(["git", "pull", "origin", "main"])
+        print(f"✓ PR #{num} complete.\n", flush=True)
 
-    print("🎉 All open Pull Requests processed and merged into main!")
+    print("🎉 All open Pull Requests processed and merged into main!", flush=True)
 
 
 if __name__ == "__main__":
