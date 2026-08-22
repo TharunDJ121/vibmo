@@ -59,6 +59,12 @@ from vibmo.charts.chart_surface_mesh_3d_suite import (
     WireframeContourGrid,
     Animated3DSurfaceMesh,
 )
+from vibmo.charts.chart_violin_density_suite import (
+    ProbabilityDensityKernel,
+    MedianQuartileMarker,
+    OutlierJitterDots,
+    ViolinDistributionPlot,
+)
 from vibmo.charts.chart_waterfall_flow_suite import (
     CumulativeBridgeConnector,
     NetGainColumn,
@@ -105,6 +111,10 @@ __all__ = [
     "SunburstRadialHierarchy",
     "WireframeContourGrid",
     "Animated3DSurfaceMesh",
+    "ProbabilityDensityKernel",
+    "MedianQuartileMarker",
+    "OutlierJitterDots",
+    "ViolinDistributionPlot",
     "CumulativeBridgeConnector",
     "NetGainColumn",
     "DeductionColumn",
