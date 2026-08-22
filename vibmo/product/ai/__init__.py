@@ -154,3 +154,31 @@ __all__ = [
     "PayloadJsonInspector",
     "RetryEventButton",
 ]
+
+# Semantic Aliases
+StreamingTokenOutput = TokenStreamerBox
+DiffusionCanvas = DiffusionGenerationCanvas
+VectorEmbeddingsVisualizer = EmbeddingScatterCluster
+PricingTierMatrix = PricingTierGrid
+ApiKeyVault = ApiKeyVaultCard
+GitPrTimeline = GitPullRequestCard
+TokenQuotaMeter = CircularTokenQuotaRing
+CodeSandboxPlayground = SplitCodePlayground
+FeatureComparisonMatrix = InteractiveFeatureMatrix
+PromptDiffViewer = PromptDiffCard
+WebhookActivityFeed = WebhookEventStreamCard
+
+__all__.extend([
+    "StreamingTokenOutput",
+    "DiffusionCanvas",
+    "VectorEmbeddingsVisualizer",
+    "PricingTierMatrix",
+    "ApiKeyVault",
+    "GitPrTimeline",
+    "TokenQuotaMeter",
+    "CodeSandboxPlayground",
+    "FeatureComparisonMatrix",
+    "PromptDiffViewer",
+    "WebhookActivityFeed",
+])
+

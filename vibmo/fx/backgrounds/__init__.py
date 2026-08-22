@@ -128,3 +128,29 @@ __all__ = [
     "BathymetricMapBackdrop",
     "RadarElevationSweep",
 ]
+
+# Semantic Aliases
+CosmicNebula = CosmicNebulaBackdrop
+DigitalMatrixRain = DigitalMatrixRainBackdrop
+CircuitBoardTraces = PcbCircuitTracesFlow
+FluidCaustics = FluidWaterCaustics
+TopographicContours = AnimatedTopographicContours
+ParticleConstellation = ParticleConstellationNetwork
+BokehLightBubbles = DriftingBokehOrbs
+HyperspaceTunnel = HyperspaceWarpTunnel
+MinimalStudioInfinity = AppleStudioInfinityCyc
+IsometricCityGrid = IsometricCityGridBackdrop
+
+__all__.extend([
+    "CosmicNebula",
+    "DigitalMatrixRain",
+    "CircuitBoardTraces",
+    "FluidCaustics",
+    "TopographicContours",
+    "ParticleConstellation",
+    "BokehLightBubbles",
+    "HyperspaceTunnel",
+    "MinimalStudioInfinity",
+    "IsometricCityGrid",
+])
+

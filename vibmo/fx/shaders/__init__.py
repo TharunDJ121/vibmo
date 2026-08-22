@@ -9,10 +9,14 @@ from vibmo.fx.shaders.fx_crt_phosphor_bloom_suite import (
     HorizontalRGBBeamBleed,
 )
 
+from vibmo.fx.filters import LensFlare as AnamorphicStreakFlare
+
 __all__ = [
     "GpuFilterBase",
     "CrtPhosphorBloomShader",
     "CurvedGlassBarrelDistortion",
     "PhosphorPersistenceTrail",
     "HorizontalRGBBeamBleed",
+    "AnamorphicStreakFlare",
 ]
+

@@ -137,8 +137,42 @@ __all__ = [
     "MonitorArmPivotingBase",
     "GamerBackGlowRgbLed",
     "Curved49InchUltrawide",
-    "_VintageNode",
-    "BeigeCrtMonitor1990s",
     "ArcadeCabinetBezel",
     "RetroPortableTvAntenna",
 ]
+
+# Semantic Aliases
+SuperUltrawideMonitorFrame = Curved49InchUltrawide
+FoldableDeviceFrame = FoldableBookPhone
+RuggedSmartwatchFrame = TitaniumRuggedWatch
+PosTerminalFrame = NfcHandheldPosTerminal
+CameraViewfinderOverlay = DslrCameraViewfinderHud
+MinimalistEInkTabletFrame = PaperEInkReaderFrame
+SmartHomeHubFrame = FabricAcousticSmartHub
+RetroArcadeCrtCabinet = ArcadeCabinetBezel
+CctvQuadViewOverlay = CctvQuadCameraGrid
+SpatialVisorFrame = VisionProSpatialGlassVisor
+OledCinemaTvFrame = OledSmartTvFrame
+AutomotiveCockpitDash = TeslaCenterTouchscreen
+HandheldGamingConsoleFrame = SteamDeckHandheldChassis
+CyberdeckChassisFrame = IndustrialBumperCase
+MultiMonitorDeveloperRig = DualDeveloperMonitors
+
+__all__.extend([
+    "SuperUltrawideMonitorFrame",
+    "FoldableDeviceFrame",
+    "RuggedSmartwatchFrame",
+    "PosTerminalFrame",
+    "CameraViewfinderOverlay",
+    "MinimalistEInkTabletFrame",
+    "SmartHomeHubFrame",
+    "RetroArcadeCrtCabinet",
+    "CctvQuadViewOverlay",
+    "SpatialVisorFrame",
+    "OledCinemaTvFrame",
+    "AutomotiveCockpitDash",
+    "HandheldGamingConsoleFrame",
+    "CyberdeckChassisFrame",
+    "MultiMonitorDeveloperRig",
+])
+
