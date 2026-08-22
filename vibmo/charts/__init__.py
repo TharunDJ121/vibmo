@@ -25,6 +25,12 @@ from vibmo.charts.chart_polar_rose_suite import (
     AngularCategoryAxis,
     PolarRoseAreaChart,
 )
+from vibmo.charts.chart_streamgraph_wave_suite import (
+    OrganicWaveBand,
+    FlowingStreamgraphArea,
+    TimeAxisScrubber,
+    StreamgraphLegend,
+)
 from vibmo.charts.chart_sunburst_radial_suite import (
     ExpandingRingArc,
     RadialSliceHighlight,
@@ -49,6 +55,10 @@ __all__ = [
     "ConcentricRadiusRings",
     "AngularCategoryAxis",
     "PolarRoseAreaChart",
+    "OrganicWaveBand",
+    "FlowingStreamgraphArea",
+    "TimeAxisScrubber",
+    "StreamgraphLegend",
     "ExpandingRingArc",
     "RadialSliceHighlight",
     "BreadcrumbPathTrail",
