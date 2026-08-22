@@ -1,6 +1,12 @@
 """Kinetic typography and title sequence suites."""
 from __future__ import annotations
 
+from vibmo.typography.kinetic.typo_brush_calligraphy_suite import (
+    BrushCalligraphyPathReveal,
+    BristleTextureStroke,
+    InkSplatterBleed,
+    WaterColorWashBackdrop,
+)
 from vibmo.typography.kinetic.typo_elastic_squash_bounce_suite import (
     ElasticSquashBounceTitle,
     RhythmicImpactPumping,
@@ -15,6 +21,10 @@ from vibmo.typography.kinetic.typo_glitch_decryptor_suite import (
 )
 
 __all__ = [
+    "BrushCalligraphyPathReveal",
+    "BristleTextureStroke",
+    "InkSplatterBleed",
+    "WaterColorWashBackdrop",
     "ElasticSquashBounceTitle",
     "RhythmicImpactPumping",
     "JellyMorphTypography",
