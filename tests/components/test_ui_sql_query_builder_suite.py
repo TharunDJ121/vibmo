@@ -33,7 +33,7 @@ def test_visual_sql_query_block():
     assert block.table_name == "orders"
     assert len(block.select_columns) == 2
     assert block.height == 40.0 + 32.0 * (2 + 1 + 2) # header + (cols + conds + headers) * row
-
+    
     ctx = MockContext()
     block.draw(ctx, 0.0)
     methods_called = [call[0] for call in ctx.calls]
@@ -52,7 +52,7 @@ def test_table_join_connector_curve():
     )
     assert conn.start_pos == (10, 20)
     assert conn.end_pos == (100, 50)
-
+    
     ctx = MockContext()
     conn.draw(ctx, 0.0)
     methods_called = [call[0] for call in ctx.calls]
@@ -67,7 +67,7 @@ def test_sql_syntax_highlight_view():
         height=150.0
     )
     assert view.sql_query == "SELECT id FROM orders"
-
+    
     ctx = MockContext()
     view.draw(ctx, 0.0)
     methods_called = [call[0] for call in ctx.calls]
@@ -79,7 +79,7 @@ def test_execution_time_pill():
     pill = ExecutionTimePill(time_ms=5.5, scan_type="Seq Scan")
     assert pill.time_ms == 5.5
     assert pill.scan_type == "Seq Scan"
-
+    
     ctx = MockContext()
     pill.draw(ctx, 0.0)
     methods_called = [call[0] for call in ctx.calls]

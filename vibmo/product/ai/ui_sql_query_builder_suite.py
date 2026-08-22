@@ -195,12 +195,12 @@ class SqlSyntaxHighlightView(Node):
         # Simple Syntax Highlighting
         ctx.select_font_face("monospace", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
         ctx.set_font_size(14.0)
-
+        
         current_x = 20.0
         current_y = 50.0
 
         keywords = ["SELECT", "FROM", "WHERE", "JOIN", "ON", "AND", "OR", "ORDER BY", "GROUP BY", "LIMIT"]
-
+        
         # Super simple tokenizer for demonstration
         tokens = self.sql_query.split()
         for token in tokens:
@@ -208,10 +208,10 @@ class SqlSyntaxHighlightView(Node):
                 ctx.set_source_rgba(0.7, 0.3, 0.7, 1.0) # Purple for keywords
             else:
                 ctx.set_source_rgba(0.9, 0.9, 0.9, 1.0) # White for other text
-
+            
             ctx.move_to(current_x, current_y)
             ctx.show_text(token)
-
+            
             te = ctx.text_extents(token + " ")
             current_x += te.x_advance
             if current_x > self.width - 40.0:
@@ -245,16 +245,16 @@ class ExecutionTimePill(Node):
         ctx.translate(self.x, self.y)
 
         text = f"⚡ {self.time_ms:.1f}ms ({self.scan_type})"
-
+        
         ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         ctx.set_font_size(14.0)
         te = ctx.text_extents(text)
-
+        
         padding_x = 16.0
         padding_y = 8.0
         width = te.x_advance + padding_x * 2
         height = te.height + padding_y * 2
-
+        
         r = height / 2.0
 
         ctx.new_path()
