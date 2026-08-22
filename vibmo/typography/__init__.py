@@ -3,7 +3,7 @@ Typography, Kinetic character animations, typography effects, and kinetic subtit
 """
 
 from vibmo.typography.text import Text
-from vibmo.typography.kinetic import KineticText, GlyphNode
+from vibmo.typography.kinetic import KineticText, GlyphNode, HexMatrixCycle, LockInGlitchFlash, PasswordUnmaskEffect, GlitchDecryptorText
 from vibmo.typography.captions import KineticCaptions, CaptionWord
 from vibmo.typography.effects import (
     NeonText,
@@ -27,6 +27,10 @@ __all__ = [
     "Text",
     "KineticText",
     "GlyphNode",
+    "HexMatrixCycle",
+    "LockInGlitchFlash",
+    "PasswordUnmaskEffect",
+    "GlitchDecryptorText",
     "KineticCaptions",
     "CaptionWord",
     # Advanced Typography Effects
