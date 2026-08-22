@@ -49,6 +49,10 @@ from vibmo.typography.kinetic.typo_slit_scan_synth_suite import (
     ChromaWarpWave,
     CRTScanBeamWipe,
 )
+from vibmo.typography.kinetic.typo_split_flap_suite import (
+    MechanicalFlapTile,
+    SplitFlapAirportBoard,
+)
 
 __all__ = [
     "DustPuffShockwave",
@@ -83,4 +87,6 @@ __all__ = [
     "AnalogFeedbackSmear",
     "ChromaWarpWave",
     "CRTScanBeamWipe",
+    "MechanicalFlapTile",
+    "SplitFlapAirportBoard",
 ]
