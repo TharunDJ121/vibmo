@@ -1,6 +1,12 @@
 """Kinetic typography and title sequence suites."""
 from __future__ import annotations
 
+from vibmo.typography.kinetic.typo_badge_stamp_slam_suite import (
+    DustPuffShockwave,
+    InkedTextureMask,
+    SpringReboundSettling,
+    RubberStampTitleSlam,
+)
 from vibmo.typography.kinetic.typo_brush_calligraphy_suite import (
     BrushCalligraphyPathReveal,
     BristleTextureStroke,
@@ -33,6 +39,10 @@ from vibmo.typography.kinetic.typo_magnetic_gravity_suite import (
 )
 
 __all__ = [
+    "DustPuffShockwave",
+    "InkedTextureMask",
+    "SpringReboundSettling",
+    "RubberStampTitleSlam",
     "BrushCalligraphyPathReveal",
     "BristleTextureStroke",
     "InkSplatterBleed",
