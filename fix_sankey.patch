@@ -1,0 +1,56 @@
+--- vibmo/charts/chart_sankey_flow_suite.py
++++ vibmo/charts/chart_sankey_flow_suite.py
+@@ -194,6 +194,7 @@
+
+         for link in self.links_data:
+             src = link["source"]
+             tgt = link["target"]
+             val = link["value"]
+             drop = link.get("dropoff", 0.0)
+@@ -208,6 +209,7 @@
+                 self.add(drop_indicator)
+                 self.dropoffs.append(drop_indicator)
+                 self.source_offsets[src] += drop_w
++            self.source_offsets[src] += val * self.value_scale
+
+     def draw(self, ctx: Any, time: float = 0.0) -> None:
+         prog = self.flow_progress.get(time)
+@@ -236,19 +238,22 @@
+                 start_x = src_pos[0] + src_node.width.get()
+                 start_y = src_pos[1] + src_offsets[src]
+
+                 end_x = tgt_pos[0]
+                 end_y = tgt_pos[1] + tgt_offsets[tgt]
+
++                cur_end_x = start_x + (end_x - start_x) * prog
++                cur_end_y = start_y + (end_y - start_y) * prog
++
+                 # Bezier control points for smooth S-curve ribbon
+-                cp1_x = start_x + (end_x - start_x) * 0.5 * prog
++                cp1_x = start_x + (cur_end_x - start_x) * 0.5
+                 cp1_y = start_y
+-                cp2_x = end_x - (end_x - start_x) * 0.5 * prog
+-                cp2_y = end_y
++                cp2_x = cur_end_x - (cur_end_x - start_x) * 0.5
++                cp2_y = cur_end_y
+
+                 # Draw the ribbon path
+                 ctx.set_source_rgba(color.r, color.g, color.b, color.a * 0.4)
+
+                 ctx.move_to(start_x, start_y)
+
+                 # Top curve
+-                ctx.curve_to(cp1_x, cp1_y, cp2_x, cp2_y, start_x + (end_x - start_x)*prog, start_y + (end_y - start_y)*prog)
++                ctx.curve_to(cp1_x, cp1_y, cp2_x, cp2_y, cur_end_x, cur_end_y)
+
+                 # Right edge (down)
+-                ctx.line_to(start_x + (end_x - start_x)*prog, start_y + (end_y - start_y)*prog + w)
++                ctx.line_to(cur_end_x, cur_end_y + w)
+
+                 # Bottom curve (backwards)
+                 ctx.curve_to(
+-                    cp2_x, cp2_y + w,
++                    cp2_x, cur_end_y + w,
+                     cp1_x, cp1_y + w,
+                     start_x, start_y + w
+                 )

@@ -31,26 +31,26 @@ class ExplorationScoreBadge(Node):
         ctx.save()
         op = self.opacity.get(time)
         ctx.set_line_width(1.0)
-
+        
         # Pill background
         radius = self.height / 2.0
         ctx.arc(radius, radius, radius, math.pi / 2, 3 * math.pi / 2)
         ctx.arc(self.width - radius, radius, radius, -math.pi / 2, math.pi / 2)
         ctx.close_path()
-
+        
         if self.is_winner:
             bg_color = colors.EMERALD_500.to_tuple_rgba()
             text_color = (1.0, 1.0, 1.0, op)
         else:
             bg_color = colors.SLATE_800.to_tuple_rgba()
             text_color = colors.SLATE_300.to_tuple_rgba()
-
+            
         ctx.set_source_rgba(bg_color[0], bg_color[1], bg_color[2], bg_color[3] * op)
         ctx.fill_preserve()
-
+        
         ctx.set_source_rgba(text_color[0], text_color[1], text_color[2], op * 0.2)
         ctx.stroke()
-
+        
         # Text
         ctx.set_source_rgba(text_color[0], text_color[1], text_color[2], text_color[3] * op)
         ctx.select_font_face("sans-serif", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
@@ -61,7 +61,7 @@ class ExplorationScoreBadge(Node):
         y = (self.height - extents.height) / 2.0 - extents.y_bearing
         ctx.move_to(x, y)
         ctx.show_text(text)
-
+        
         ctx.restore()
 
 
@@ -78,23 +78,23 @@ class ReasoningNodeBranch(Node):
         self.height = 60.0
         self.opacity = Signal(1.0)
         self.scale_sig = Signal(1.0)
-
+        
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
         op = self.opacity.get(time)
         scale = self.scale_sig.get(time)
-
+        
         ctx.translate(self.width / 2.0, self.height / 2.0)
         ctx.scale(scale, scale)
         ctx.translate(-self.width / 2.0, -self.height / 2.0)
-
+        
         radius = 8.0
         ctx.arc(self.width - radius, radius, radius, -math.pi / 2, 0)
         ctx.arc(self.width - radius, self.height - radius, radius, 0, math.pi / 2)
         ctx.arc(radius, self.height - radius, radius, math.pi / 2, math.pi)
         ctx.arc(radius, radius, radius, math.pi, 3 * math.pi / 2)
         ctx.close_path()
-
+        
         if self.status == "Evaluating":
             bg_color = colors.SLATE_800.to_tuple_rgba()
             border_color = colors.BLUE_500.to_tuple_rgba()
@@ -109,19 +109,19 @@ class ReasoningNodeBranch(Node):
         else:
             bg_color = colors.SLATE_800.to_tuple_rgba()
             border_color = colors.SLATE_500.to_tuple_rgba()
-
+            
         ctx.set_source_rgba(bg_color[0], bg_color[1], bg_color[2], bg_color[3] * op)
         ctx.fill_preserve()
-
+        
         ctx.set_source_rgba(border_color[0], border_color[1], border_color[2], border_color[3] * op)
         ctx.set_line_width(2.0)
         ctx.stroke()
-
+        
         # Text
         ctx.set_source_rgba(1.0, 1.0, 1.0, op)
         ctx.select_font_face("sans-serif", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
         ctx.set_font_size(11)
-
+        
         # Simple text wrapping for thought
         words = self.thought.split()
         lines = []
@@ -133,14 +133,14 @@ class ReasoningNodeBranch(Node):
             else:
                 current_line += word + " "
         lines.append(current_line)
-
+        
         y = 20.0
         for line in lines[:3]: # max 3 lines
             extents = ctx.text_extents(line)
             ctx.move_to(10.0, y)
             ctx.show_text(line)
             y += 14.0
-
+            
         super().draw(ctx, time)
         ctx.restore()
 
@@ -155,43 +155,43 @@ class PrunedBranchFade(Node):
         self.end_pos = end_pos
         self.progress = Signal(1.0)
         self.opacity = Signal(1.0)
-
+        
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
         op = self.opacity.get(time)
         prog = self.progress.get(time)
-
+        
         if prog <= 0 or op <= 0:
             ctx.restore()
             return
-
+            
         color = colors.ROSE_500.to_tuple_rgba()
         ctx.set_source_rgba(color[0], color[1], color[2], color[3] * op)
         ctx.set_line_width(2.0)
-
+        
         # Dashed line
         ctx.set_dash([6.0, 4.0], 0)
-
+        
         x1, y1 = self.start_pos
         x2, y2 = self.end_pos
-
+        
         dx = x2 - x1
         dy = y2 - y1
-
+        
         # Draw a cubic bezier curve for the branch
         ctrl_x1 = x1 + dx * 0.5
         ctrl_y1 = y1
         ctrl_x2 = x1 + dx * 0.5
         ctrl_y2 = y2
-
+        
         # If we want to animate drawing the path, we'd need to interpolate.
         # For simplicity, just fade it or scale it.
         # Since cairo path interpolation is complex without MorphPath, we just draw full path and fade.
-
+        
         ctx.move_to(x1, y1)
         ctx.curve_to(ctrl_x1, ctrl_y1, ctrl_x2, ctrl_y2, x1 + dx * prog, y1 + dy * prog)
         ctx.stroke()
-
+        
         ctx.restore()
 
 
@@ -202,11 +202,11 @@ class TreeOfThoughtTree(Node):
     def __init__(self, root_thought: str = "Root", **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self.nodes_data = {"root": {"thought": root_thought, "status": "Valid", "parent": None, "children": []}}
-
+        
         self.node_components = {}
         self.badges = {}
         self.edges = []
-
+        
         root_comp = ReasoningNodeBranch("root", root_thought, "Valid")
         root_comp.position = Signal((50.0, 300.0))
         self.add(root_comp)
@@ -219,7 +219,7 @@ class TreeOfThoughtTree(Node):
         """
         if parent_id not in self.nodes_data:
             return parallel_all()
-
+            
         parent_comp = self.node_components[parent_id]
         parent_x, parent_y = parent_comp.position.get(0.0)
 
@@ -238,9 +238,9 @@ class TreeOfThoughtTree(Node):
 
             self.nodes_data[parent_id]['children'].append(c_id)
             self.nodes_data[c_id] = {
-                "thought": c_thought,
-                "status": c_status,
-                "parent": parent_id,
+                "thought": c_thought, 
+                "status": c_status, 
+                "parent": parent_id, 
                 "children": []
             }
 
@@ -279,48 +279,48 @@ class TreeOfThoughtTree(Node):
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
-
+        
         # Draw edges for Valid/Evaluating nodes
         ctx.set_line_width(2.0)
         ctx.set_source_rgba(0.4, 0.4, 0.5, 0.5) # Slate color for standard edges
-
+        
         for p_id, data in self.nodes_data.items():
             if not data['children']:
                 continue
-
+                
             p_comp = self.node_components.get(p_id)
             if not p_comp:
                 continue
-
+                
             px, py = p_comp.position.get(time)
             px += 160.0 # width of node
             py += 30.0 # half height
-
+            
             for c_id in data['children']:
                 c_comp = self.node_components.get(c_id)
                 if not c_comp:
                     continue
-
+                    
                 # Skip pruned as they have custom PrunedBranchFade components
                 if self.nodes_data[c_id]['status'] == "Pruned":
                     continue
-
+                    
                 cx, cy = c_comp.position.get(time)
                 cy += 30.0 # half height
-
+                
                 op = c_comp.opacity.get(time)
                 if op <= 0:
                     continue
-
+                    
                 ctx.set_source_rgba(0.4, 0.4, 0.5, 0.5 * op)
-
+                
                 # Cubic bezier connector
                 dx = cx - px
                 ctx.move_to(px, py)
                 ctx.curve_to(px + dx * 0.5, py, px + dx * 0.5, cy, cx, cy)
                 ctx.stroke()
-
+                
         # Draw children nodes
         super().draw(ctx, time)
-
+        
         ctx.restore()
