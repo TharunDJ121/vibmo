@@ -121,7 +121,7 @@ class InteractiveTerminalLogs(Node):
         # Header with execution timer
         ctx.move_to(16, 24)
         ctx.show_text(f"Terminal Output — Execution time: {self.execution_time}")
-
+        
         ctx.set_line_width(1.0)
         ctx.move_to(16, 32)
         ctx.line_to(self.width_val - 16, 32)
@@ -135,7 +135,7 @@ class InteractiveTerminalLogs(Node):
             ctx.move_to(16, y)
             ctx.show_text(log)
             y += 20
-
+        
         ctx.restore()
 
 
@@ -155,26 +155,26 @@ class RunCodeSuccessIndicator(Node):
         self.radius_val = float(radius)
         self.base_color = Color.from_any(base_color)
         self.success = Signal(1.0 if success else 0.0, f"{self.name}.success")
-
+        
     def animate_success(self, duration: float = 0.5) -> AnimationAction:
         return self.success.to(1.0, duration=duration, ease=Ease.out_back)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         success_val = float(self.success.get(time))
         pulse = (math.sin(time * 5.0) * 0.1 + 1.0) if success_val < 0.5 else 1.0
-
+        
         ctx.save()
         r = self.radius_val * pulse
-
+        
         # Draw circular background
         ctx.new_path()
         ctx.arc(self.radius_val, self.radius_val, r, 0, 2 * math.pi)
         ctx.set_source_rgba(*self.base_color.to_tuple_rgba())
         ctx.fill()
-
+        
         # Icon logic: Play button (triangle) morphed to Checkmark
         ctx.set_source_rgba(1, 1, 1, 1)  # White icon
-
+        
         if success_val < 0.5:
             # Play Triangle
             ctx.new_path()
@@ -193,7 +193,7 @@ class RunCodeSuccessIndicator(Node):
             ctx.set_line_cap(cairo.LINE_CAP_ROUND)
             ctx.set_line_join(cairo.LINE_JOIN_ROUND)
             ctx.stroke()
-
+            
         ctx.restore()
 
 
@@ -219,21 +219,22 @@ class DependencyInstallPill(Node):
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
-
+        
         ctx.select_font_face("sans-serif", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         ctx.set_font_size(12)
         xbearing, ybearing, width, height, dx, dy = ctx.text_extents(self.text)
-
+        
         w = width + self.padding * 2
         h = self.height_val
         r = h / 2.0
-
+        
         _rounded_rect(ctx, 0, 0, w, h, r)
         ctx.set_source_rgba(*self.bg_color.to_tuple_rgba())
         ctx.fill()
-
+        
         ctx.set_source_rgba(*self.text_color.to_tuple_rgba())
         ctx.move_to(self.padding, h / 2.0 - ybearing / 2.0)
         ctx.show_text(self.text)
-
+        
         ctx.restore()
+
