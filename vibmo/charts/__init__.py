@@ -43,6 +43,10 @@ from vibmo.charts.chart_sunburst_radial_suite import (
     BreadcrumbPathTrail,
     SunburstRadialHierarchy,
 )
+from vibmo.charts.chart_surface_mesh_3d_suite import (
+    WireframeContourGrid,
+    Animated3DSurfaceMesh,
+)
 
 __all__ = [
     "AnimatedOutlierPings",
@@ -73,4 +77,6 @@ __all__ = [
     "RadialSliceHighlight",
     "BreadcrumbPathTrail",
     "SunburstRadialHierarchy",
+    "WireframeContourGrid",
+    "Animated3DSurfaceMesh",
 ]
