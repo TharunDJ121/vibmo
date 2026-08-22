@@ -27,20 +27,20 @@ class ShimmeringCaretIndicator(Rect):
             **kwargs
         )
         self.pulse_speed = 4.0
-
+        
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         # Pulse opacity using sine wave based on time
         base_opacity = 0.4 + 0.6 * (0.5 * (1.0 + math.sin(time * self.pulse_speed)))
-
+        
         ctx.save()
         # Scale locally based on bounds to give a breathing effect
         ctx.translate(self.width.get(time) * 0.5, self.height.get(time) * 0.5)
         # Apply glowing alpha locally
         ctx.set_source_rgba(self.fill.get(time).r, self.fill.get(time).g, self.fill.get(time).b, self.fill.get(time).a * base_opacity)
         ctx.translate(-self.width.get(time) * 0.5, -self.height.get(time) * 0.5)
-
+        
         super().draw(ctx, time)
-
+        
         # Add a glow ring
         ctx.new_path()
         r = self.corner_radius.get(time)
@@ -49,7 +49,7 @@ class ShimmeringCaretIndicator(Rect):
         ctx.rectangle(-4, -4, w+8, h+8)
         ctx.set_source_rgba(self.fill.get(time).r, self.fill.get(time).g, self.fill.get(time).b, 0.2 * base_opacity)
         ctx.fill()
-
+        
         ctx.restore()
 
 
@@ -69,7 +69,7 @@ class TokenSpeedVelocityCounter(FlexContainer):
             **kwargs
         )
         self.tokens_count = Signal(0.0)
-
+        
         self.text_node = Text(
             text="0.0 tok/s",
             font_size=14.0,
@@ -78,12 +78,12 @@ class TokenSpeedVelocityCounter(FlexContainer):
             bold=True
         )
         self.add(self.text_node)
-
+        
         # Metrics state
         self._last_time = 0.0
         self._last_tokens = 0.0
         self._velocity = 0.0
-
+        
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         # Update metrics logic
         current_tokens = self.tokens_count.get(time)
@@ -94,10 +94,10 @@ class TokenSpeedVelocityCounter(FlexContainer):
                 self._velocity = self._velocity * 0.7 + (d_tok / dt) * 0.3 # Smoothing
             self._last_time = time
             self._last_tokens = current_tokens
-
+            
             # Format text
             self.text_node.text.set(f"{self._velocity:.1f} tok/s")
-
+            
         super().draw(ctx, time)
 
 
@@ -125,7 +125,7 @@ class StopGenerationButton(FlexContainer):
             fill=colors.RED_500
         )
         self.add(self.icon)
-
+        
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         # Pulsating effect on the icon
         pulse = 0.8 + 0.2 * math.sin(time * 6.0)
@@ -150,18 +150,18 @@ class TokenStreamerBox(FlexContainer):
             align_items="start",
             **kwargs
         )
-
+        
         # Internal layout
         self.header = FlexContainer(direction="row", justify_content="space_between", align_items="center", padding=0)
         self.header.width.set(width - 48.0) # padding compensation
-
+        
         self.velocity_counter = TokenSpeedVelocityCounter()
         self.stop_btn = StopGenerationButton()
-
+        
         self.header.add(self.velocity_counter, self.stop_btn)
-
+        
         self.content_area = FlexContainer(direction="row", padding=0, gap=8)
-
+        
         self.streaming_text = StreamingText(
             content="",
             variant=TypingVariant.STREAM,
@@ -170,21 +170,21 @@ class TokenStreamerBox(FlexContainer):
             speed=0.0, # Controlled externally via stream_text
             show_cursor=False # Use custom cursor
         )
-
+        
         self.cursor = ShimmeringCaretIndicator()
-
+        
         self.content_area.add(self.streaming_text)
-
+        
         # Cursor positioning is tricky since StreamingText calculates it internally.
-        # But we can approximate or use a trick by making it a sibling and adjusting its position
+        # But we can approximate or use a trick by making it a sibling and adjusting its position 
         # based on the text bounding box, or just having it next to it in a row container.
         self.content_area.add(self.cursor)
-
+        
         self.add(self.header, self.content_area)
-
+        
         self._current_text = ""
         self._is_streaming = False
-
+        
     def stream_text(self, text: str, duration: float) -> List[AnimationAction]:
         """
         Animation generator that updates the text buffer over the duration.
@@ -192,7 +192,7 @@ class TokenStreamerBox(FlexContainer):
         self._current_text = text
         self.streaming_text.content = text
         self.streaming_text.total_chars = len(text)
-
+        
         # Parse lines as StreamingText does internally so local_bounds work
         self.streaming_text.lines = []
         for raw_line in text.split("\n"):
@@ -208,14 +208,14 @@ class TokenStreamerBox(FlexContainer):
                 self.streaming_text.lines.append((True, 1.20, line[2:-2]))
             else:
                 self.streaming_text.lines.append((False, 1.0, line))
-
+                
         # Calculate speed needed to finish text in 'duration' seconds
         speed = len(text) / duration if duration > 0 else 0.0
         self.streaming_text.speed = speed
         self.streaming_text.start_delay = 0.0 # reset delay
-
+        
         self._is_streaming = True
-
+        
         # Animate the token counter
         from vibmo.timeline.scheduler import ParallelGroup
         return [self.velocity_counter.tokens_count.to(float(len(text)), duration=duration, ease=Ease.linear)]
@@ -223,3 +223,4 @@ class TokenStreamerBox(FlexContainer):
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         # Draw background and children
         super().draw(ctx, time)
+
