@@ -8,6 +8,7 @@ import re
 from typing import Any, Callable, List, NamedTuple, Optional, Tuple, Union
 import cairo
 
+from vibmo.typography.kinetic.typo_glitch_decryptor_suite import HexMatrixCycle, LockInGlitchFlash, PasswordUnmaskEffect, GlitchDecryptorText
 
 from vibmo.core.vector import Vector2D
 from vibmo.core.color import Color, LinearGradient, colors
