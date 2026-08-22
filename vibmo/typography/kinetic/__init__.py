@@ -37,6 +37,12 @@ from vibmo.typography.kinetic.typo_magnetic_gravity_suite import (
     MagnetPullReassembly,
     FloorContactShadow,
 )
+from vibmo.typography.kinetic.typo_matrix_code_rain_suite import (
+    MatrixRainTypography,
+    PhosphorTrailDecay,
+    HeadlineConsolidation,
+    GlyphMatrixSubText,
+)
 from vibmo.typography.kinetic.typo_slit_scan_synth_suite import (
     SlitScanVideoSynthText,
     AnalogFeedbackSmear,
@@ -69,6 +75,10 @@ __all__ = [
     "ExplosiveScatterForce",
     "MagnetPullReassembly",
     "FloorContactShadow",
+    "MatrixRainTypography",
+    "PhosphorTrailDecay",
+    "HeadlineConsolidation",
+    "GlyphMatrixSubText",
     "SlitScanVideoSynthText",
     "AnalogFeedbackSmear",
     "ChromaWarpWave",
