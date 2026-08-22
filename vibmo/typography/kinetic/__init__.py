@@ -37,6 +37,12 @@ from vibmo.typography.kinetic.typo_magnetic_gravity_suite import (
     MagnetPullReassembly,
     FloorContactShadow,
 )
+from vibmo.typography.kinetic.typo_slit_scan_synth_suite import (
+    SlitScanVideoSynthText,
+    AnalogFeedbackSmear,
+    ChromaWarpWave,
+    CRTScanBeamWipe,
+)
 
 __all__ = [
     "DustPuffShockwave",
@@ -63,4 +69,8 @@ __all__ = [
     "ExplosiveScatterForce",
     "MagnetPullReassembly",
     "FloorContactShadow",
+    "SlitScanVideoSynthText",
+    "AnalogFeedbackSmear",
+    "ChromaWarpWave",
+    "CRTScanBeamWipe",
 ]
