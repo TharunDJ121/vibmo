@@ -37,6 +37,12 @@ from vibmo.charts.chart_polar_rose_suite import (
     AngularCategoryAxis,
     PolarRoseAreaChart,
 )
+from vibmo.charts.chart_sankey_flow_suite import (
+    FlowRibbonNode,
+    ConversionDropoffIndicator,
+    RevenuePathHighlighter,
+    SankeyFlowDiagram,
+)
 from vibmo.charts.chart_speedometer_hud_suite import (
     SpeedometerNeedleGauge,
     RedlineRpmArc,
@@ -97,6 +103,10 @@ __all__ = [
     "ConcentricRadiusRings",
     "AngularCategoryAxis",
     "PolarRoseAreaChart",
+    "FlowRibbonNode",
+    "ConversionDropoffIndicator",
+    "RevenuePathHighlighter",
+    "SankeyFlowDiagram",
     "SpeedometerNeedleGauge",
     "RedlineRpmArc",
     "DigitalSpeedNumberTicker",
