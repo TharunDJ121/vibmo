@@ -25,6 +25,12 @@ from vibmo.charts.chart_polar_rose_suite import (
     AngularCategoryAxis,
     PolarRoseAreaChart,
 )
+from vibmo.charts.chart_sunburst_radial_suite import (
+    ExpandingRingArc,
+    RadialSliceHighlight,
+    BreadcrumbPathTrail,
+    SunburstRadialHierarchy,
+)
 
 __all__ = [
     "AnimatedOutlierPings",
@@ -43,4 +49,8 @@ __all__ = [
     "ConcentricRadiusRings",
     "AngularCategoryAxis",
     "PolarRoseAreaChart",
+    "ExpandingRingArc",
+    "RadialSliceHighlight",
+    "BreadcrumbPathTrail",
+    "SunburstRadialHierarchy",
 ]
