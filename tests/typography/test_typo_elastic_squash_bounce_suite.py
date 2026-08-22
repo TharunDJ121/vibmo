@@ -19,16 +19,16 @@ class TestElasticSquashBounceTitle:
     def test_volume_conservation(self):
         title = ElasticSquashBounceTitle(text="BOUNCE", font_size=50)
         title.bounce_progress.set(0.6) # First impact wobble
-        
+
         mock_ctx = MagicMock()
         title.draw(mock_ctx, time=0.6)
-        
+
         # Check that scale was called.
         scale_calls = [call for call in mock_ctx.mock_calls if call[0] == 'scale']
         assert len(scale_calls) > 0
         scale_args = scale_calls[0][1]
         scale_x, scale_y = scale_args
-        
+
         # Check volume conservation ScaleX * ScaleY == 1.0 (with slight tolerance)
         assert abs(scale_x * scale_y - 1.0) < 1e-5
 
@@ -56,15 +56,15 @@ class TestJellyMorphTypography:
     def test_volume_conservation(self):
         title = JellyMorphTypography(text="JELLY")
         title.progress.set(0.5)
-        
+
         mock_ctx = MagicMock()
         title.draw(mock_ctx, time=0.5)
-        
+
         scale_calls = [call for call in mock_ctx.mock_calls if call[0] == 'scale']
         assert len(scale_calls) > 0
         scale_args = scale_calls[0][1]
         scale_x, scale_y = scale_args
-        
+
         assert abs(scale_x * scale_y - 1.0) < 1e-5
 
     def test_cairo_drawing(self):
@@ -80,7 +80,7 @@ class TestComicSpeedLines:
         # Progress 0 won't draw anything, so set to 0.5
         lines.progress.set(0.5)
         lines.draw(ctx, time=0.5)
-        
+
     def test_burst_generator(self):
         lines = ComicSpeedLines()
         action = lines.burst(duration=0.5)
