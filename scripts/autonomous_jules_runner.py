@@ -255,11 +255,12 @@ def run_scheduled_pipeline(interval_minutes: int = 45):
     print(f"\n⏰ Starting Autonomous Jules Scheduler with {interval_minutes}-minute intervals.")
     print("Will automatically pull, test, create PRs, resolve conflicts, and merge into main.\n")
 
-    section = 3
+    section = 4
     while section <= 7:
         print(f"\n=======================================================")
         print(f"🔄 CYCLE START: Section {section} Pipeline [{time.strftime('%Y-%m-%d %H:%M:%S')}]")
         print(f"=======================================================")
+
 
         # 1. Resolve and merge any open PRs
         resolve_and_merge_all_prs()

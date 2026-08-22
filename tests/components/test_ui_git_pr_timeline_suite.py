@@ -33,7 +33,7 @@ def test_git_pr_card_open():
     assert status_icon_color.r == colors.GREEN.r
     assert status_icon_color.g == colors.GREEN.g
     assert status_icon_color.b == colors.GREEN.b
-
+    
     ctx = MockContext()
     card.draw(ctx, 0.0)
 
@@ -45,7 +45,7 @@ def test_git_pr_card_merged():
     assert status_icon_color.r == colors.PURPLE.r
     assert status_icon_color.g == colors.PURPLE.g
     assert status_icon_color.b == colors.PURPLE.b
-
+    
     ctx = MockContext()
     card.draw(ctx, 0.0)
 
@@ -53,7 +53,7 @@ def test_commit_sha_badge():
     badge = CommitShaBadge(sha="1234abc", message="Fix bug")
     assert badge.sha_text.text.get() == "1234abc"
     assert badge.message_text.text.get() == "Fix bug"
-
+    
     ctx = MockContext()
     badge.draw(ctx, 0.0)
 
@@ -64,7 +64,7 @@ def test_cicd_check_passed():
     assert icon_color.r == colors.GREEN.r
     assert icon_color.g == colors.GREEN.g
     assert icon_color.b == colors.GREEN.b
-
+    
     ctx = MockContext()
     pill.draw(ctx, 0.0)
 
@@ -75,7 +75,7 @@ def test_cicd_check_pending():
     assert icon_color.r == colors.AMBER.r
     assert icon_color.g == colors.AMBER.g
     assert icon_color.b == colors.AMBER.b
-
+    
     ctx = MockContext()
     pill.draw(ctx, 0.0)
 
@@ -86,6 +86,6 @@ def test_merge_squash_button():
     assert fill_color.r == colors.GREEN.r
     assert fill_color.g == colors.GREEN.g
     assert fill_color.b == colors.GREEN.b
-
+    
     ctx = MockContext()
     btn.draw(ctx, 0.0)

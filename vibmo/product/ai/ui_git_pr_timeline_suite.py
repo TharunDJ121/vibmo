@@ -80,7 +80,7 @@ class CommitShaBadge(FlexContainer):
             corner_radius=4,
             **kwargs
         )
-
+        
         self.sha_pill = FlexContainer(
             padding=(4, 8),
             corner_radius=4,
@@ -114,11 +114,11 @@ class CiCdCheckStatusPill(FlexContainer):
             fill=colors.SLATE_800,
             **kwargs
         )
-
+        
         icon_color = colors.GREEN if status == "passed" else colors.AMBER
         icon_name = "lucide:check-circle" if status == "passed" else "lucide:loader"
         self.icon = Icon(icon_name, size=16, color=icon_color)
-
+        
         self.status_text = Text(text, font_size=14, color=colors.SLATE_200)
 
         self.add(self.icon, self.status_text)
@@ -145,7 +145,7 @@ class MergeSquashButton(FlexContainer):
             fill=colors.GREEN,
             **kwargs
         )
-
+        
         self.main_btn = FlexContainer(
             direction="row",
             gap=8,
@@ -169,3 +169,4 @@ class MergeSquashButton(FlexContainer):
         self.dropdown_btn.add(self.dropdown_arrow)
 
         self.add(self.main_btn, self.divider, self.dropdown_btn)
+
