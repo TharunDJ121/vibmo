@@ -28,7 +28,7 @@ class EmbeddingScatterCluster(Node):
 
         rng = random.Random(seed)
         self.points: List[Tuple[Vector2D, Color]] = []
-
+        
         cluster_centers = []
         cluster_colors = [
             colors.CYAN,
@@ -37,7 +37,7 @@ class EmbeddingScatterCluster(Node):
             colors.EMERALD_500,
             colors.VIOLET_500,
         ]
-
+        
         for _ in range(num_clusters):
             angle = rng.uniform(0, 2 * math.pi)
             dist = rng.uniform(0, self.radius * 0.6)
@@ -47,7 +47,7 @@ class EmbeddingScatterCluster(Node):
             cluster_idx = rng.randint(0, num_clusters - 1)
             center = cluster_centers[cluster_idx]
             color = cluster_colors[cluster_idx % len(cluster_colors)]
-
+            
             # Scatter around the center
             angle = rng.uniform(0, 2 * math.pi)
             dist = rng.gauss(0, self.radius * 0.3)
@@ -83,14 +83,14 @@ class CosineSimilarityLink(Node):
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
-
+        
         prog = self.progress.get()
         if prog <= 0:
             ctx.restore()
             return
-
+            
         end_pt = self.p1.lerp(self.p2, prog)
-
+        
         # Draw glowing line
         ctx.set_source_rgba(*self.color.to_cairo())
         ctx.set_line_width(2.0)
@@ -99,31 +99,31 @@ class CosineSimilarityLink(Node):
         ctx.line_to(end_pt.x, end_pt.y)
         ctx.stroke()
         ctx.set_dash([])
-
+        
         # Draw badge
         mid_pt = self.p1.lerp(self.p2, 0.5)
         text = f"sim: {self.similarity:.2f}"
-
+        
         ctx.select_font_face("sans-serif")
         ctx.set_font_size(12)
         extents = ctx.text_extents(text)
-
+        
         padding = 4
         bw = extents.width + padding * 2
         bh = extents.height + padding * 2
         bx = mid_pt.x - bw / 2
         by = mid_pt.y - bh / 2 - extents.height / 2
-
+        
         # Background
         ctx.set_source_rgba(0.1, 0.1, 0.1, 0.8)
         ctx.rectangle(bx, by, bw, bh)
         ctx.fill()
-
+        
         # Text
         ctx.set_source_rgba(*self.color.to_cairo())
         ctx.move_to(bx + padding, by + bh - padding)
         ctx.show_text(text)
-
+        
         ctx.restore()
 
 
@@ -152,16 +152,16 @@ class VectorDimensionBar(Node):
         if num_dims == 0:
             ctx.restore()
             return
-
+            
         bar_w = self.w / num_dims
-
+        
         for i, val in enumerate(self.dimensions):
             x = i * bar_w
-
+            
             # Normalize to 0-1 for drawing height
             h_val = abs(val) * self.h
             y = self.h / 2
-
+            
             if val >= 0:
                 ctx.set_source_rgba(*self.color_pos.to_cairo())
                 ctx.rectangle(x, y - h_val, bar_w - 1, h_val)
@@ -169,7 +169,7 @@ class VectorDimensionBar(Node):
                 ctx.set_source_rgba(*self.color_neg.to_cairo())
                 ctx.rectangle(x, y, bar_w - 1, h_val)
             ctx.fill()
-
+            
         ctx.restore()
 
 
@@ -188,28 +188,28 @@ class SearchQueryProbe(Node):
         self.color = color
         self.ripple_color = ripple_color
         self.pulse = Signal(0.0)
-
+        
     def trigger_pulse(self):
         # In a real scenario we'd yield an animation here
         self.pulse.set(1.0)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
-
+        
         pulse_val = (math.sin(time * 5.0) + 1.0) / 2.0
-
+        
         # Base node
         ctx.set_source_rgba(*self.color.to_cairo())
         ctx.arc(0, 0, self.radius + pulse_val * 2.0, 0, 2 * math.pi)
         ctx.fill()
-
+        
         # Ripple
         ripple_radius = self.radius + (time % 2.0) * 50.0
         ripple_alpha = max(0.0, 1.0 - (time % 2.0) / 2.0)
-
+        
         r, g, b, _ = self.ripple_color.to_cairo()
         ctx.set_source_rgba(r, g, b, ripple_alpha)
         ctx.arc(0, 0, ripple_radius, 0, 2 * math.pi)
         ctx.stroke()
-
+        
         ctx.restore()
