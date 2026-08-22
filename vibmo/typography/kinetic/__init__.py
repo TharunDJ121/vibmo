@@ -1,6 +1,7 @@
 """Kinetic typography and title sequence suites."""
 from __future__ import annotations
 
+from vibmo.typography.kinetic.kinetic_core import KineticText, GlyphNode
 from vibmo.typography.kinetic.typo_badge_stamp_slam_suite import (
     DustPuffShockwave,
     InkedTextureMask,
@@ -67,6 +68,8 @@ from vibmo.typography.kinetic.typo_split_flap_suite import (
 )
 
 __all__ = [
+    "KineticText",
+    "GlyphNode",
     "DustPuffShockwave",
     "InkedTextureMask",
     "SpringReboundSettling",
