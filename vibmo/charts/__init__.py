@@ -31,6 +31,12 @@ from vibmo.charts.chart_speedometer_hud_suite import (
     DigitalSpeedNumberTicker,
     TurboBoostBar,
 )
+from vibmo.charts.chart_streamgraph_wave_suite import (
+    OrganicWaveBand,
+    FlowingStreamgraphArea,
+    TimeAxisScrubber,
+    StreamgraphLegend,
+)
 from vibmo.charts.chart_sunburst_radial_suite import (
     ExpandingRingArc,
     RadialSliceHighlight,
@@ -59,6 +65,10 @@ __all__ = [
     "RedlineRpmArc",
     "DigitalSpeedNumberTicker",
     "TurboBoostBar",
+    "OrganicWaveBand",
+    "FlowingStreamgraphArea",
+    "TimeAxisScrubber",
+    "StreamgraphLegend",
     "ExpandingRingArc",
     "RadialSliceHighlight",
     "BreadcrumbPathTrail",
