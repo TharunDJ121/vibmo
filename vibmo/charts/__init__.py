@@ -19,6 +19,12 @@ from vibmo.charts.chart_candlestick_pro_suite import (
     VolumeProfileOverlay,
     CrosshairPriceTracker,
 )
+from vibmo.charts.chart_choropleth_map_suite import (
+    RegionalHeatPolygon,
+    GeoDataTooltip,
+    CountryRankLeaderboard,
+    ChoroplethWorldMiniMap,
+)
 from vibmo.charts.chart_pareto_curve_suite import (
     FrequencyBarChart,
     Cumulative8020Curve,
@@ -73,6 +79,10 @@ __all__ = [
     "MovingAverageCurves",
     "VolumeProfileOverlay",
     "CrosshairPriceTracker",
+    "RegionalHeatPolygon",
+    "GeoDataTooltip",
+    "CountryRankLeaderboard",
+    "ChoroplethWorldMiniMap",
     "FrequencyBarChart",
     "Cumulative8020Curve",
     "CriticalThresholdLine",
