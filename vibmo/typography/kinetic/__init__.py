@@ -25,6 +25,12 @@ from vibmo.typography.kinetic.typo_hologram_chroma_suite import (
     HologramEmitterCone,
     GlitchDeconstruct,
 )
+from vibmo.typography.kinetic.typo_magnetic_gravity_suite import (
+    MagneticGravityLetters,
+    ExplosiveScatterForce,
+    MagnetPullReassembly,
+    FloorContactShadow,
+)
 
 __all__ = [
     "BrushCalligraphyPathReveal",
@@ -43,4 +49,8 @@ __all__ = [
     "InterferenceFringeLines",
     "HologramEmitterCone",
     "GlitchDeconstruct",
+    "MagneticGravityLetters",
+    "ExplosiveScatterForce",
+    "MagnetPullReassembly",
+    "FloorContactShadow",
 ]
