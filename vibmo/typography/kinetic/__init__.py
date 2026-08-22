@@ -19,6 +19,12 @@ from vibmo.typography.kinetic.typo_glitch_decryptor_suite import (
     PasswordUnmaskEffect,
     GlitchDecryptorText,
 )
+from vibmo.typography.kinetic.typo_hologram_chroma_suite import (
+    HologramChromaText,
+    InterferenceFringeLines,
+    HologramEmitterCone,
+    GlitchDeconstruct,
+)
 
 __all__ = [
     "BrushCalligraphyPathReveal",
@@ -33,4 +39,8 @@ __all__ = [
     "LockInGlitchFlash",
     "PasswordUnmaskEffect",
     "GlitchDecryptorText",
+    "HologramChromaText",
+    "InterferenceFringeLines",
+    "HologramEmitterCone",
+    "GlitchDeconstruct",
 ]
