@@ -22,6 +22,7 @@ from vibmo.fx.backgrounds.bg_cyber_grid_horizon import (
     WireframeMountainHorizon,
 )
 from vibmo.fx.backgrounds.bg_digital_matrix_rain import (
+    _CodeColumn,
     _BaseRainBackdrop,
     DigitalMatrixRainBackdrop,
     BinaryStreamBackdrop,
@@ -91,6 +92,7 @@ __all__ = [
     "CyberGridHorizon",
     "NeonSunBackdrop",
     "WireframeMountainHorizon",
+    "_CodeColumn",
     "_BaseRainBackdrop",
     "DigitalMatrixRainBackdrop",
     "BinaryStreamBackdrop",

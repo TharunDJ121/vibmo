@@ -62,10 +62,13 @@ from vibmo.charts.chart_sunburst_radial_suite import (
     SunburstRadialHierarchy,
 )
 from vibmo.charts.chart_surface_mesh_3d_suite import (
+    ElevationColorGradient,
+    CameraRotationRig,
     WireframeContourGrid,
     Animated3DSurfaceMesh,
 )
 from vibmo.charts.chart_treemap_market_suite import (
+    PercentageDeltaColor,
     ZoomableTreemapTile,
     MarketSectorLegend,
     TreemapMarketCapGrid,
@@ -124,8 +127,11 @@ __all__ = [
     "RadialSliceHighlight",
     "BreadcrumbPathTrail",
     "SunburstRadialHierarchy",
+    "ElevationColorGradient",
+    "CameraRotationRig",
     "WireframeContourGrid",
     "Animated3DSurfaceMesh",
+    "PercentageDeltaColor",
     "ZoomableTreemapTile",
     "MarketSectorLegend",
     "TreemapMarketCapGrid",
