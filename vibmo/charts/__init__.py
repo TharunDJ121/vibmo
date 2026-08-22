@@ -65,6 +65,11 @@ from vibmo.charts.chart_surface_mesh_3d_suite import (
     WireframeContourGrid,
     Animated3DSurfaceMesh,
 )
+from vibmo.charts.chart_treemap_market_suite import (
+    ZoomableTreemapTile,
+    MarketSectorLegend,
+    TreemapMarketCapGrid,
+)
 from vibmo.charts.chart_violin_density_suite import (
     ProbabilityDensityKernel,
     MedianQuartileMarker,
@@ -121,6 +126,9 @@ __all__ = [
     "SunburstRadialHierarchy",
     "WireframeContourGrid",
     "Animated3DSurfaceMesh",
+    "ZoomableTreemapTile",
+    "MarketSectorLegend",
+    "TreemapMarketCapGrid",
     "ProbabilityDensityKernel",
     "MedianQuartileMarker",
     "OutlierJitterDots",
