@@ -31,6 +31,12 @@ from vibmo.typography.kinetic.typo_hologram_chroma_suite import (
     HologramEmitterCone,
     GlitchDeconstruct,
 )
+from vibmo.typography.kinetic.typo_isometric_3d_suite import (
+    IsometricExtruded3DText,
+    CastShadowExtrusion,
+    BevelGleamLight,
+    IsometricFloatIdle,
+)
 from vibmo.typography.kinetic.typo_magnetic_gravity_suite import (
     MagneticGravityLetters,
     ExplosiveScatterForce,
@@ -81,6 +87,10 @@ __all__ = [
     "InterferenceFringeLines",
     "HologramEmitterCone",
     "GlitchDeconstruct",
+    "IsometricExtruded3DText",
+    "CastShadowExtrusion",
+    "BevelGleamLight",
+    "IsometricFloatIdle",
     "MagneticGravityLetters",
     "ExplosiveScatterForce",
     "MagnetPullReassembly",
