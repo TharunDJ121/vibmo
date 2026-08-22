@@ -49,19 +49,19 @@ def test_diffusion_generation_canvas():
     canvas = DiffusionGenerationCanvas(width=400, height=400, total_steps=20)
     assert canvas.width.get() == 400
     assert canvas.height.get() == 400
-
+    
     # Check initial step text and opacity
     assert "Step 0/20" in canvas.step_text.text.get()
     assert canvas.noise_overlay.opacity.get() == 1.0
-
+    
     # Animate
     canvas.denoise_to(10, duration=1.0).apply_at(0.0)
-
+    
     # Fast forward
     assert canvas.current_step.get(1.0) == 10.0
     assert "Step 10/20" in canvas.step_text.text.get(1.0)
     assert canvas.noise_overlay.opacity.get(1.0) == 0.5
-
+    
     # Test rendering hooks
     ctx = MockContext()
     canvas.draw(ctx, 1.0)
@@ -69,55 +69,55 @@ def test_diffusion_generation_canvas():
 def test_prompt_aspect_selector():
     selector = PromptAspectSelector()
     assert len(selector.aspect_ratios) == 4
-
+    
     # Run layout to populate positions
     selector.compute_layout(0.0)
-
+    
     # Active indicator should be at first pill
     assert selector.indicator.position.get().x == selector.pills[0].position.get().x
-
+    
     # Select second option
     selector.select(1, duration=1.0).apply_at(0.0)
-
+    
     # Test interpolation at 0.5s (halfway between 0 and 1)
     selector.compute_layout(0.5)
     # The active_index is cubic ease by default, let's just check final position
     selector.compute_layout(1.0)
     assert selector.indicator.position.get(1.0).x == selector.pills[1].position.get(1.0).x
-
+    
     ctx = MockContext()
     selector.draw(ctx, 1.0)
 
 def test_seed_variation_pills():
     pills = SeedVariationPills()
     assert len(pills.cards) == 4
-
+    
     # Run layout
     pills.compute_layout(0.0)
-
+    
     # Highlight second card
     action = pills.highlight(1, duration=1.0)
     action.apply_at(0.0)
-
+    
     # At 1.0s, the second card should have a stroke width of 4.0 and INDIGO color
     assert pills.cards[1].stroke_width.get(1.0) == 4.0
-
+    
     ctx = MockContext()
     pills.draw(ctx, 1.0)
 
 def test_magic_prompt_enhance_bar():
     bar = MagicPromptEnhanceBar()
-
+    
     # Run layout
     bar.compute_layout(0.0)
-
+    
     # Shimmer animation
     action = bar.shimmer(duration=1.0)
     action.apply_at(0.0)
-
+    
     # At 0.5s, scale should be 1.05
     assert bar.button.scale.get(0.5).x == 1.05
     assert bar.button.scale.get(0.5).y == 1.05
-
+    
     ctx = MockContext()
     bar.draw(ctx, 1.0)
