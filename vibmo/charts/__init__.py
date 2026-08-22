@@ -7,6 +7,12 @@ from vibmo.charts.chart_box_whisker_suite import (
     InterquartileBox,
     StatisticalBoxPlot,
 )
+from vibmo.charts.chart_bubble_scatter_suite import (
+    MultiVariableBubbleScatter,
+    MotionTrailBubble,
+    QuadrantPartitionLines,
+    BubbleScaleLegend,
+)
 from vibmo.charts.chart_candlestick_pro_suite import (
     ProCandlestickChart,
     MovingAverageCurves,
@@ -53,6 +59,10 @@ __all__ = [
     "WhiskersErrorBars",
     "InterquartileBox",
     "StatisticalBoxPlot",
+    "MultiVariableBubbleScatter",
+    "MotionTrailBubble",
+    "QuadrantPartitionLines",
+    "BubbleScaleLegend",
     "ProCandlestickChart",
     "MovingAverageCurves",
     "VolumeProfileOverlay",
