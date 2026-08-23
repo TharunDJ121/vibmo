@@ -43,7 +43,7 @@ class ExplorationScoreBadge(Node):
             text_color = (1.0, 1.0, 1.0, op)
         else:
             bg_color = colors.SLATE_800.to_tuple_rgba()
-            text_color = colors.SLATE_300.to_tuple_rgba()
+            text_color = colors.SLATE_200.to_tuple_rgba()
             
         ctx.set_source_rgba(bg_color[0], bg_color[1], bg_color[2], bg_color[3] * op)
         ctx.fill_preserve()
