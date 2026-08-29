@@ -1,5 +1,5 @@
 """
-Turnkey One-Liner Production Scene Builders (SaaS Launch, Feature Spotlight, Metrics Reveal).
+Turnkey One-Liner Production Scene Builders and Template Suites.
 """
 
 from __future__ import annotations
@@ -15,6 +15,19 @@ from vibmo.product.charts import AreaChart
 from vibmo.product.cursor import Cursor
 from vibmo.product.command_palette import CommandPalette, CommandItem
 from vibmo.fx.filters import Bloom, FilmGrain, Vignette, Dither
+
+from vibmo.templates.turnkey.tmpl_social_audiogram_suite import (
+    TmplSocialAudiogramSuite,
+    SocialAudiogramTemplate,
+)
+from vibmo.templates.turnkey.tmpl_developer_cli_launch_suite import (
+    TmplDeveloperCliLaunchSuite,
+    DeveloperCliLaunchTemplate,
+)
+from vibmo.templates.turnkey.tmpl_ai_code_assistant_suite import (
+    TmplAiCodeAssistantSuite,
+    AiCodeAssistantTemplate,
+)
 
 
 def create_saas_launch_scene(
@@ -122,3 +135,14 @@ def create_saas_launch_scene(
         yield scene.wait(1.5)
 
     return scene
+
+
+__all__ = [
+    "create_saas_launch_scene",
+    "TmplSocialAudiogramSuite",
+    "SocialAudiogramTemplate",
+    "TmplDeveloperCliLaunchSuite",
+    "DeveloperCliLaunchTemplate",
+    "TmplAiCodeAssistantSuite",
+    "AiCodeAssistantTemplate",
+]

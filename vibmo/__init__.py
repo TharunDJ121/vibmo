@@ -365,7 +365,15 @@ from vibmo.composition.timing import (
 )
 
 # Turnkey Templates & Exporter
-from vibmo.templates.turnkey import create_saas_launch_scene
+from vibmo.templates.turnkey import (
+    create_saas_launch_scene,
+    TmplSocialAudiogramSuite,
+    SocialAudiogramTemplate,
+    TmplDeveloperCliLaunchSuite,
+    DeveloperCliLaunchTemplate,
+    TmplAiCodeAssistantSuite,
+    AiCodeAssistantTemplate,
+)
 from vibmo.templates.catalog import TEMPLATES
 from vibmo.templates.library import SceneTemplateLibrary
 from vibmo.render.export import Exporter, ExportQuality, QUALITY_PRESETS
@@ -763,6 +771,12 @@ __all__ = [
     "create_saas_launch_scene",
     "TEMPLATES",
     "SceneTemplateLibrary",
+    "TmplSocialAudiogramSuite",
+    "SocialAudiogramTemplate",
+    "TmplDeveloperCliLaunchSuite",
+    "DeveloperCliLaunchTemplate",
+    "TmplAiCodeAssistantSuite",
+    "AiCodeAssistantTemplate",
     "Exporter",
     "ExportQuality",
     "QUALITY_PRESETS",

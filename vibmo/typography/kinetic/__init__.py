@@ -73,6 +73,30 @@ from vibmo.typography.kinetic.typo_split_flap_suite import (
     MechanicalFlapTile,
     SplitFlapAirportBoard,
 )
+from vibmo.typography.kinetic.typo_liquid_wave_suite import (
+    LiquidWaveText,
+    ChromaticBaselineDrift,
+    SubmergedTextRefraction,
+    RippleWordReveal,
+)
+from vibmo.typography.kinetic.typo_neon_strobe_suite import (
+    RealisticNeonStrobeSign,
+    BallastFlickerFailure,
+    GasIgnitionSurge,
+    NeonTubeConnectors,
+)
+from vibmo.typography.kinetic.typo_odometer_tumbler_suite import (
+    VerticalRollingGlyphs,
+    MechanicalSeparatorCommas,
+    TumblerBezelSlot,
+    OdometerTumblerCounter,
+)
+from vibmo.typography.kinetic.typo_terminal_typewriter_suite import (
+    PhosphorTerminalTypewriter,
+    BlinkingBlockCaret,
+    CommandPromptPrefix,
+    TypingAudioSyncHook,
+)
 
 __all__ = [
     "RichToken",
@@ -123,4 +147,20 @@ __all__ = [
     "RapidLetterScramble",
     "MechanicalFlapTile",
     "SplitFlapAirportBoard",
+    "LiquidWaveText",
+    "ChromaticBaselineDrift",
+    "SubmergedTextRefraction",
+    "RippleWordReveal",
+    "RealisticNeonStrobeSign",
+    "BallastFlickerFailure",
+    "GasIgnitionSurge",
+    "NeonTubeConnectors",
+    "VerticalRollingGlyphs",
+    "MechanicalSeparatorCommas",
+    "TumblerBezelSlot",
+    "OdometerTumblerCounter",
+    "PhosphorTerminalTypewriter",
+    "BlinkingBlockCaret",
+    "CommandPromptPrefix",
+    "TypingAudioSyncHook",
 ]

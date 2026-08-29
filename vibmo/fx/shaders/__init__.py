@@ -8,8 +8,37 @@ from vibmo.fx.shaders.fx_crt_phosphor_bloom_suite import (
     PhosphorPersistenceTrail,
     HorizontalRGBBeamBleed,
 )
-
-from vibmo.fx.filters import LensFlare as AnamorphicStreakFlare
+from vibmo.fx.shaders.fx_ascii_matrix_art_suite import (
+    AsciiMatrixArtShader,
+    AsciiMatrixArtShader as AsciiMatrixArtFilter,
+    TerminalColorPaletteFilter,
+    DynamicCharResolutionGrid,
+    DynamicCharResolutionGrid as LuminescenceGrid,
+    EdgeContourAsciiOverlay,
+)
+from vibmo.fx.shaders.fx_liquid_glass_refraction_suite import (
+    LiquidGlassRefractionShader,
+    LiquidGlassRefractionShader as LiquidGlassRefractionFilter,
+    ChromaticDispersionFilter,
+    ChromaticDispersionFilter as ChromaticDispersion,
+    SpecularRimSheen,
+    FrostedBackdropBlur,
+)
+from vibmo.fx.shaders.fx_anamorphic_flare_suite import (
+    ThresholdGlowPass,
+    AnamorphicStreakFlareShader,
+    AnamorphicStreakFlareShader as AnamorphicStreakFlare,
+    AnamorphicStreakFlareShader as HorizontalBlueStreak,
+    LensGhostArtifacts,
+    StarburstSpikeCross,
+)
+from vibmo.fx.shaders.fx_vhs_tape_tracking_suite import (
+    VhsTapeTrackingShader,
+    HeadSwitchingJitterLine,
+    HeadSwitchingJitterLine as HeadSwitchJitter,
+    ColorBleedChromaShift,
+    AnalogStaticSnowBurst,
+)
 
 __all__ = [
     "GpuFilterBase",
@@ -17,6 +46,27 @@ __all__ = [
     "CurvedGlassBarrelDistortion",
     "PhosphorPersistenceTrail",
     "HorizontalRGBBeamBleed",
+    "AsciiMatrixArtShader",
+    "AsciiMatrixArtFilter",
+    "TerminalColorPaletteFilter",
+    "DynamicCharResolutionGrid",
+    "LuminescenceGrid",
+    "EdgeContourAsciiOverlay",
+    "LiquidGlassRefractionShader",
+    "LiquidGlassRefractionFilter",
+    "ChromaticDispersionFilter",
+    "ChromaticDispersion",
+    "SpecularRimSheen",
+    "FrostedBackdropBlur",
+    "ThresholdGlowPass",
+    "AnamorphicStreakFlareShader",
     "AnamorphicStreakFlare",
+    "HorizontalBlueStreak",
+    "LensGhostArtifacts",
+    "StarburstSpikeCross",
+    "VhsTapeTrackingShader",
+    "HeadSwitchingJitterLine",
+    "HeadSwitchJitter",
+    "ColorBleedChromaShift",
+    "AnalogStaticSnowBurst",
 ]
-
