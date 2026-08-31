@@ -1,6 +1,6 @@
 """
 FastAPI Router and WebSocket Protocol for Vibmo Studio Pro.
-Supports running without scripts, in-studio script creation & execution, and AI prompt generation.
+Supports running without scripts, in-studio script creation & execution, and AI Director prompt generation.
 """
 
 from __future__ import annotations
@@ -10,7 +10,7 @@ import threading
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from vibmo.studio.state import StudioState, DEFAULT_STARTER_SCRIPT
@@ -18,7 +18,12 @@ from vibmo.studio.frame_server import FrameServer
 from vibmo.studio.audio_server import AudioServer
 from vibmo.studio.pages.fusion import FusionGraph
 from vibmo.studio.pages.fairlight import FAIRLIGHT_FOLEY_SOUNDBOARD
-from vibmo.studio.pages.deliver import EXPORT_PRESETS
+from vibmo.studio.pages.deliver import EXPORT_PRESETS, get_render_queue
+from vibmo.ai.keys import get_all_keys, save_key, test_key_connection
+from vibmo.ai.graph import run_motion_edit
+from vibmo.ai.llm_bridge import LLMBridge
+from vibmo.ai.prompts import build_system_prompt, build_surgical_edit_prompt
+from vibmo.ai.memory import get_global_memory
 
 
 class KeyUpdateRequest(BaseModel):
@@ -30,10 +35,12 @@ class AiEditRequest(BaseModel):
     prompt: str
     code: Optional[str] = None
     target_scene: Optional[int] = None
+    provider: Optional[str] = None
 
 
 class AiGenerateRequest(BaseModel):
     prompt: str
+    provider: Optional[str] = None
 
 
 STUDIO_STARTER_TEMPLATES = [
@@ -47,7 +54,7 @@ STUDIO_STARTER_TEMPLATES = [
         "id": "kinetic_typography",
         "name": "✨ Kinetic Typography Reveal",
         "description": "Dynamic character and word wave animations with spring deceleration.",
-        "code": '''from vibmo.agent_api import *
+        "code": '''from motio.agent_api import *
 
 scene = Scene(width=1920, height=1080, duration=3.5, background=colors.SLATE_950)
 
@@ -70,7 +77,7 @@ def main():
         "id": "product_dashboard",
         "name": "📊 Product KPI Dashboard",
         "description": "Multi-card KPI dashboard with growing bar charts and timeline views.",
-        "code": '''from vibmo.agent_api import *
+        "code": '''from motio.agent_api import *
 
 scene = Scene(width=1920, height=1080, duration=4.0, background=colors.DARK_NAVY)
 
@@ -94,7 +101,7 @@ def main():
         "id": "blank_canvas",
         "name": "🎨 Blank Creative Canvas",
         "description": "Clean canvas ready for custom design primitives.",
-        "code": '''from vibmo.agent_api import *
+        "code": '''from motio.agent_api import *
 
 scene = Scene(width=1920, height=1080, fps=60, duration=3.0, background=colors.DARK_NAVY)
 
@@ -125,11 +132,12 @@ class SaveScriptRequest(BaseModel):
 class PromptGenerateRequest(BaseModel):
     prompt: str
     duration: float = 4.0
+    provider: Optional[str] = None
 
 
 def create_studio_app(scene: Optional[Any] = None, script_path: Optional[str] = None) -> FastAPI:
     """Factory creating the complete Vibmo Studio Pro application."""
-    app = FastAPI(title="Vibmo Studio Pro", version="3.1.0")
+    app = FastAPI(title="Vibmo Studio Pro", version="3.2.0")
 
     state = StudioState(scene=scene, script_path=script_path)
     frame_server = FrameServer(state.scene)
@@ -206,17 +214,21 @@ def create_studio_app(scene: Optional[Any] = None, script_path: Optional[str] = 
     @app.post("/api/prompt/generate")
     async def generate_from_prompt(req: PromptGenerateRequest):
         try:
-            from vibmo.ai.agent_scene import AgentSceneGenerator
-            gen_scene = AgentSceneGenerator.generate_from_prompt(req.prompt, duration=req.duration)
-            # Reconstruct clean code representation
-            state.scene = gen_scene
-            frame_server.update_scene(state.scene)
-            audio_server.update_scene(state.scene)
+            res = run_motion_edit(prompt=req.prompt, provider=req.provider)
+            updated_code = res.get("updated_code", "")
+            if updated_code:
+                state.load_python_code(updated_code)
+                frame_server.clear_cache()
+                frame_server.update_scene(state.scene)
+                audio_server.update_scene(state.scene)
+
             meta = state.get_metadata(current_time=0.0)
             await broadcast_ws(meta)
             return {
-                "success": True,
+                "success": res.get("is_valid", True),
                 "meta": meta,
+                "code": updated_code,
+                "message": res.get("response_message", ""),
                 "prompt": req.prompt,
             }
         except Exception as e:
@@ -224,16 +236,16 @@ def create_studio_app(scene: Optional[Any] = None, script_path: Optional[str] = 
 
     @app.get("/api/audio")
     async def get_audio_stream():
-        from fastapi.responses import Response
         import wave
         import io
+        from fastapi.responses import Response
         
         audio_path = audio_server.get_audio_filepath()
         if audio_path and os.path.exists(audio_path):
             media_type = "audio/wav" if audio_path.endswith(".wav") else "audio/mpeg"
             return FileResponse(audio_path, media_type=media_type)
             
-        # Return a generated silent 100ms WAV file so HTML5 Audio player remains happy
+        # Return a generated silent 100ms WAV file
         buf = io.BytesIO()
         with wave.open(buf, 'wb') as wf:
             wf.setnchannels(1)
@@ -277,41 +289,119 @@ def create_studio_app(scene: Optional[Any] = None, script_path: Optional[str] = 
     async def get_presets():
         return {"presets": EXPORT_PRESETS}
 
+    @app.get("/api/render/queue")
+    async def get_render_queue_jobs():
+        q = get_render_queue()
+        return {"jobs": q.get_all_jobs()}
+
+    @app.post("/api/render/queue/add")
+    async def add_render_queue_job(req: Dict[str, Any]):
+        preset_id = req.get("preset_id", "mp4_1080p")
+        name = req.get("name")
+        custom_out = req.get("output_filename")
+        q = get_render_queue()
+        job = q.add_job(preset_id=preset_id, name=name, custom_output=custom_out)
+        return {"status": "ok", "job": job.to_dict()}
+
+    @app.delete("/api/render/queue/{job_id}")
+    async def delete_render_queue_job(job_id: str):
+        q = get_render_queue()
+        removed = q.remove_job(job_id)
+        return {"status": "ok" if removed else "not_found"}
+
+    @app.post("/api/render/queue/clear_completed")
+    async def clear_completed_jobs():
+        q = get_render_queue()
+        q.clear_completed()
+        return {"status": "ok"}
+
+    @app.post("/api/render/queue/start_batch")
+    async def start_batch_render():
+        q = get_render_queue()
+        
+        def _process_queue():
+            with q._lock:
+                if q._is_processing:
+                    return
+                q._is_processing = True
+
+            try:
+                for job in q.jobs:
+                    if job.status == "queued":
+                        job.status = "rendering"
+                        job.progress = 10.0
+                        try:
+                            # Render output
+                            out_p = job.output_filename
+                            # Check if social aspect ratio requires dimension swap
+                            orig_w, orig_h = getattr(state.scene, "width", 1920), getattr(state.scene, "height", 1080)
+                            if job.width != orig_w or job.height != orig_h:
+                                state.scene.width = job.width
+                                state.scene.height = job.height
+                            
+                            state.scene.render(
+                                output_path=out_p,
+                                quality=job.quality,
+                                preset=job.format_type if job.format_type in ("mp4", "webm", "gif", "mov") else "mp4",
+                                show_progress=False,
+                            )
+                            # Restore dimensions
+                            state.scene.width = orig_w
+                            state.scene.height = orig_h
+
+                            job.progress = 100.0
+                            job.status = "completed"
+                            job.completed_at = time.time()
+                        except Exception as e:
+                            job.status = "failed"
+                            job.error_message = str(e)
+            finally:
+                with q._lock:
+                    q._is_processing = False
+
+        threading.Thread(target=_process_queue, daemon=True).start()
+        return {"status": "started"}
+
     @app.get("/api/export_code")
     async def get_export_code():
         return {"code": state.export_python_code()}
 
     # =========================================================================
-    # AI DIRECTOR & API KEY ATTACHMENT ENDPOINTS (LANGGRAPH POWERED)
+    # AI DIRECTOR & API KEY ATTACHMENT ENDPOINTS (LANGGRAPH & LLM POWERED)
     # =========================================================================
 
     @app.get("/api/settings/keys")
     async def get_settings_keys():
-        from vibmo.ai.keys import get_all_keys
         return {"providers": get_all_keys()}
 
     @app.post("/api/settings/keys")
     async def update_settings_key(req: KeyUpdateRequest):
-        from vibmo.ai.keys import save_key, test_key_connection
         success, msg = test_key_connection(req.provider, req.key)
-        if success:
-            save_key(req.provider, req.key)
-            return {"status": "ok", "message": msg}
-        else:
-            # Still allow saving if user confirms
-            save_key(req.provider, req.key)
-            return {"status": "warning", "message": msg}
+        save_key(req.provider, req.key)
+        return {"status": "ok" if success else "warning", "message": msg}
+
+    @app.get("/api/ai/history")
+    async def get_ai_history():
+        memory = get_global_memory()
+        return {"turns": memory.to_list()}
+
+    @app.post("/api/ai/history/clear")
+    async def clear_ai_history():
+        memory = get_global_memory()
+        memory.clear()
+        return {"status": "ok"}
 
     @app.post("/api/ai/edit")
     async def ai_surgical_edit(req: AiEditRequest):
-        from vibmo.ai.graph import run_motion_edit
         current_code = req.code or state.export_python_code() or DEFAULT_STARTER_SCRIPT
-        result = run_motion_edit(prompt=req.prompt, current_code=current_code)
+        result = run_motion_edit(prompt=req.prompt, current_code=current_code, provider=req.provider)
         
         updated_code = result.get("updated_code", current_code)
         if updated_code:
             state.load_python_code(updated_code)
             frame_server.clear_cache()
+            frame_server.update_scene(state.scene)
+            audio_server.update_scene(state.scene)
             
         return {
             "status": "ok" if result.get("is_valid", True) else "error",
@@ -323,13 +413,14 @@ def create_studio_app(scene: Optional[Any] = None, script_path: Optional[str] = 
 
     @app.post("/api/ai/generate")
     async def ai_generate_story(req: AiGenerateRequest):
-        from vibmo.ai.graph import run_motion_edit
-        result = run_motion_edit(prompt=req.prompt, current_code="")
+        result = run_motion_edit(prompt=req.prompt, current_code="", provider=req.provider)
         
         updated_code = result.get("updated_code", "")
         if updated_code:
             state.load_python_code(updated_code)
             frame_server.clear_cache()
+            frame_server.update_scene(state.scene)
+            audio_server.update_scene(state.scene)
             
         return {
             "status": "ok" if result.get("is_valid", True) else "error",
@@ -337,6 +428,24 @@ def create_studio_app(scene: Optional[Any] = None, script_path: Optional[str] = 
             "code": updated_code,
             "logs": result.get("execution_log", []),
         }
+
+    @app.post("/api/ai/stream")
+    async def ai_stream_endpoint(req: AiEditRequest):
+        """SSE streaming endpoint for real-time AI code generation in Studio."""
+        current_code = req.code or state.export_python_code() or DEFAULT_STARTER_SCRIPT
+        system_p = build_system_prompt()
+        user_p = build_surgical_edit_prompt(current_code=current_code, instruction=req.prompt)
+
+        def _generate():
+            for chunk in LLMBridge.stream(prompt=user_p, system_prompt=system_p, provider=req.provider):
+                yield f"data: {json.dumps({'delta': chunk})}\n\n"
+            yield "data: [DONE]\n\n"
+
+        return StreamingResponse(_generate(), media_type="text/event-stream")
+
+    # =========================================================================
+    # WEBSOCKET REAL-TIME INTERACTIVE PROTOCOL
+    # =========================================================================
 
     @app.websocket("/ws")
     async def websocket_endpoint(websocket: WebSocket):
@@ -436,9 +545,7 @@ def create_studio_app(scene: Optional[Any] = None, script_path: Optional[str] = 
                             "output": out_name,
                         }))
 
-
                 except Exception as inner_err:
-                    # Never let individual message errors crash the websocket
                     print(f"[Studio WS Error] {inner_err}")
 
         except WebSocketDisconnect:
@@ -449,7 +556,6 @@ def create_studio_app(scene: Optional[Any] = None, script_path: Optional[str] = 
             with ws_lock:
                 if websocket in active_websockets:
                     active_websockets.remove(websocket)
-
 
     return app
 

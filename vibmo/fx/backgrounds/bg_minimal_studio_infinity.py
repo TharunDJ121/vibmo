@@ -1,10 +1,17 @@
 import math
-from typing import Any, Union
+from typing import Any, Optional, Tuple, Union
 import cairo
 
 from vibmo.scene.node import Node
 from vibmo.core.color import Color, colors
 from vibmo.core.signal import Signal
+
+
+class HorizonYSignal(Signal[float]):
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Signal):
+            return self.get(0.0) == other.get(0.0)
+        return self.get(0.0) == other
 
 
 class AppleStudioInfinityCyc(Node):
@@ -19,6 +26,8 @@ class AppleStudioInfinityCyc(Node):
         floor_color: Union[Color, str] = "#d0d0d0",
         width: float = 1920.0,
         height: float = 1080.0,
+        horizon_y: Optional[float] = None,
+        rim_light: bool = False,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
@@ -27,6 +36,8 @@ class AppleStudioInfinityCyc(Node):
         self.floor_color = Signal(Color.from_any(floor_color), f"{self.name}.floor_color")
         self.width = Signal(float(width), f"{self.name}.width")
         self.height = Signal(float(height), f"{self.name}.height")
+        self.horizon_y = HorizonYSignal(float(horizon_y) if horizon_y is not None else float(height) * 0.7, f"{self.name}.horizon_y")
+        self.rim_light = rim_light
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         w = self.width.get(time)
@@ -34,6 +45,7 @@ class AppleStudioInfinityCyc(Node):
         base = self.base_color.get(time)
         bg = self.bg_color.get(time)
         floor = self.floor_color.get(time)
+        hy = self.horizon_y.get(time)
 
         # Softbox radial gradient overhead
         radial = cairo.RadialGradient(w/2, 0, 0, w/2, 0, w * 0.8)
@@ -46,13 +58,24 @@ class AppleStudioInfinityCyc(Node):
         ctx.fill()
 
         # Floor contact shadow/reflection gradient
-        linear = cairo.LinearGradient(0, h * 0.7, 0, h)
+        linear = cairo.LinearGradient(0, hy, 0, h)
         linear.add_color_stop_rgba(0, bg.r, bg.g, bg.b, 0.0)
         linear.add_color_stop_rgba(1, floor.r, floor.g, floor.b, floor.a)
 
-        ctx.rectangle(0, h * 0.7, w, h * 0.3)
+        ctx.rectangle(0, hy, w, max(0.0, h - hy))
         ctx.set_source(linear)
         ctx.fill()
+
+        # Rim light highlight on horizon if enabled
+        if self.rim_light:
+            rim = cairo.LinearGradient(0, hy - 4, 0, hy + 4)
+            rim.add_color_stop_rgba(0, 1.0, 1.0, 1.0, 0.0)
+            rim.add_color_stop_rgba(0.5, 1.0, 1.0, 1.0, 0.4)
+            rim.add_color_stop_rgba(1, 1.0, 1.0, 1.0, 0.0)
+            ctx.rectangle(0, hy - 4, w, 8)
+            ctx.set_source(rim)
+            ctx.fill()
+
         ctx.restore()
 
 
@@ -168,3 +191,14 @@ class FrostedGlassHorizon(Node):
         ctx.fill()
 
         ctx.restore()
+
+
+# Semantic Alias
+MinimalStudioInfinity = AppleStudioInfinityCyc
+
+__all__ = [
+    "AppleStudioInfinityCyc",
+    "MinimalStudioInfinity",
+    "SoftStageSpotlightBackdrop",
+    "FrostedGlassHorizon",
+]

@@ -15,11 +15,16 @@ class CosmicNebulaBackdrop(Node):
         width: float = 1920.0,
         height: float = 1080.0,
         seed: int = 42,
+        swirl_speed: Optional[float] = None,
+        speed: Optional[float] = None,
+        star_count: Optional[int] = None,
         **kwargs: Any
     ):
         super().__init__(**kwargs)
         self.width = width
         self.height = height
+        self.swirl_speed = swirl_speed or speed or 0.1
+        self.star_count = star_count or 80
         
         # Pre-generate clouds
         random.seed(seed)
@@ -233,3 +238,14 @@ class ConstellationGrid(Node):
             ctx.fill()
             
         ctx.restore()
+
+
+# Semantic Alias
+CosmicNebula = CosmicNebulaBackdrop
+
+__all__ = [
+    "CosmicNebulaBackdrop",
+    "CosmicNebula",
+    "StarfieldWarpDrift",
+    "ConstellationGrid",
+]

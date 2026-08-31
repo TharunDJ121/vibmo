@@ -67,5 +67,15 @@ class TestGlitchStutterSuite(unittest.TestCase):
         extremes = np.sum(np.abs(out) >= 0.99)
         self.assertGreater(extremes, expected_len * 0.1) # At least 10% extreme values
 
+    def test_digital_stutter_burst(self):
+        duration = 0.8
+        out = GlitchStutterSuite.digital_stutter_burst(duration=duration)
+        expected_len = int(duration * self.sr)
+        self.assertEqual(len(out), expected_len)
+        self.assertEqual(out.dtype, np.float32)
+        self.assertTrue(np.any(np.abs(out) > 0.01))
+        self.assertLessEqual(np.max(np.abs(out)), 1.0)
+
 if __name__ == '__main__':
     unittest.main()
+

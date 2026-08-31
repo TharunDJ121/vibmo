@@ -1,28 +1,46 @@
 import random
 import math
-from typing import List, Tuple, Dict, Any
+from typing import Any, Dict, List, Optional, Tuple, Union
 from vibmo.scene.node import Node
 from vibmo.core.vector import Vector2D
 from vibmo.core.color import Color, colors
 
 class ParticleConstellationNetwork(Node):
-    def __init__(self, num_particles: int = 50, connection_distance: float = 150.0, speed: float = 20.0, width: float = 1920, height: float = 1080, **kwargs):
+    def __init__(
+        self,
+        num_particles: int = 50,
+        particle_count: Optional[int] = None,
+        connection_distance: float = 150.0,
+        link_radius: Optional[float] = None,
+        speed: float = 20.0,
+        width: float = 1920,
+        height: float = 1080,
+        **kwargs: Any
+    ):
         super().__init__(**kwargs)
-        self.num_particles = num_particles
-        self.connection_distance = connection_distance
-        self.speed = speed
-        self.width = width
-        self.height = height
+        self.num_particles = int(particle_count if particle_count is not None else num_particles)
+        self.connection_distance = float(link_radius if link_radius is not None else connection_distance)
+        self.speed = float(speed)
+        self.width = float(width)
+        self.height = float(height)
         self.particles = []
         for _ in range(self.num_particles):
-            pos = Vector2D(random.uniform(0, width), random.uniform(0, height))
+            pos = Vector2D(random.uniform(0, self.width), random.uniform(0, self.height))
             rx, ry = random.uniform(-1, 1), random.uniform(-1, 1)
             if rx == 0 and ry == 0:
                 rx = 1
-            vel = Vector2D(rx, ry).normalize() * speed
+            vel = Vector2D(rx, ry).normalize() * self.speed
             self.particles.append({"pos": pos, "vel": vel, "radius": random.uniform(2, 5)})
             
         self.last_time = 0.0
+
+    @property
+    def particle_count(self) -> int:
+        return self.num_particles
+
+    @property
+    def link_radius(self) -> float:
+        return self.connection_distance
         
     def _update_particles(self, dt: float):
         for p in self.particles:
@@ -223,3 +241,14 @@ class PlexusDistanceLines(Node):
             ctx.line_to(x - r, y)
             ctx.close_path()
             ctx.fill()
+
+
+# Semantic Alias
+ParticleConstellation = ParticleConstellationNetwork
+
+__all__ = [
+    "ParticleConstellationNetwork",
+    "ParticleConstellation",
+    "SynapseNeuralGraph",
+    "PlexusDistanceLines",
+]

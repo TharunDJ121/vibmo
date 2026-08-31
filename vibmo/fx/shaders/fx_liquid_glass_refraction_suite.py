@@ -1,6 +1,6 @@
 import numpy as np
 import moderngl
-from typing import Optional, Tuple
+from typing import Any, Optional, Tuple, Union
 from PIL import Image, ImageFilter
 
 try:
@@ -104,9 +104,17 @@ class GpuFilterBase(Filter):
         raise NotImplementedError
 
 class LiquidGlassRefractionShader(GpuFilterBase):
-    def __init__(self, refraction_index: float = 1.5, distortion: float = 20.0, normal_map: Optional[np.ndarray] = None, use_gpu: bool = True):
-        self.refraction_index = refraction_index
-        self.distortion = distortion
+    def __init__(
+        self,
+        refraction_index: float = 1.5,
+        distortion: float = 20.0,
+        normal_map: Optional[np.ndarray] = None,
+        use_gpu: bool = True,
+        refraction: Optional[float] = None,
+        **kwargs: Any
+    ):
+        self.refraction_index = float(1.0 + refraction if refraction is not None else refraction_index)
+        self.distortion = float(refraction * 50.0 if refraction is not None else distortion)
         self.normal_map = normal_map
         import scipy.ndimage as ndimage
         self.ndimage = ndimage
@@ -416,3 +424,18 @@ class FrostedBackdropBlur(GpuFilterBase):
         out = rgba.copy()
         out[:, :, :3] = out_rgb
         return out
+
+
+# Semantic Aliases
+LiquidGlassRefractionFilter = LiquidGlassRefractionShader
+ChromaticDispersion = ChromaticDispersionFilter
+
+__all__ = [
+    "GpuFilterBase",
+    "LiquidGlassRefractionShader",
+    "LiquidGlassRefractionFilter",
+    "ChromaticDispersionFilter",
+    "ChromaticDispersion",
+    "SpecularRimSheen",
+    "FrostedBackdropBlur",
+]

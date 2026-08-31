@@ -1,11 +1,11 @@
 import math
-from typing import Any, Tuple
+from typing import Any, Tuple, Optional
 import cairo
 
 from vibmo.core.color import Color, colors
 from vibmo.core.vector import Vector2D
 from vibmo.core.signal import Signal, AnimationAction
-from vibmo.core.easing import Ease
+from vibmo.core.easing import Ease, EasingFunc
 from vibmo.scene.node import Node
 from vibmo.typography.text import Text
 
@@ -19,8 +19,15 @@ class ElasticSquashBounceTitle(Node):
 
         self.bounce_progress = Signal(0.0, f"{self.name}.bounce_progress")
 
-    def bounce_in(self, duration: float = 0.8) -> AnimationAction:
-        return self.bounce_progress.to(1.0, duration=duration, ease=Ease.linear)
+    def bounce_in(
+        self,
+        duration: float = 0.8,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+    ) -> AnimationAction:
+        self.bounce_progress.set(0.0)
+        e = ease or Ease.linear
+        return self.bounce_progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         prog = self.bounce_progress.get(time)
@@ -151,6 +158,16 @@ class JellyMorphTypography(Node):
         self.font_family = font_family
         self.color = Signal(color, f"{self.name}.color")
         self.progress = Signal(0.0, f"{self.name}.progress")
+
+    def bounce_in(
+        self,
+        duration: float = 0.8,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+    ) -> AnimationAction:
+        self.progress.set(0.0)
+        e = ease or Ease.linear
+        return self.progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         prog = self.progress.get(time)

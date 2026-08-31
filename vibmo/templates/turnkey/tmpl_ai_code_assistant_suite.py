@@ -14,8 +14,19 @@ from vibmo.product.ai.ui_token_streamer_suite import TokenStreamerBox
 
 class AiCodeAssistantTemplate:
     @classmethod
-    def create_scene(cls, title: str = "AI Code Assistant", code_snippet: str = "print('Hello world!')", duration: float = 6.0) -> Scene:
-        scene = Scene(width=1920, height=1080, fps=60, duration=duration, background=colors.SLATE_950)
+    def create_scene(
+        cls,
+        title: str = "AI Code Assistant",
+        code_snippet: str = "print('Hello world!')",
+        duration: float = 6.0,
+    ) -> Scene:
+        scene = Scene(
+            width=1920,
+            height=1080,
+            fps=60,
+            duration=duration,
+            background=colors.SLATE_950,
+        )
 
         # Add ambient particles to the background (subtle ambient dust)
         particles = ParticleEmitter(preset="ambient_dust", position=(960, 540))
@@ -52,23 +63,19 @@ class AiCodeAssistantTemplate:
         def script():
             # Stage 1: Entrance
             yield scene.all(
-                *browser.pop_in(duration=1.0)
+                browser.pop_in(duration=1.0)
             )
 
             # Stage 2: Realtime code autocompletion and token typing
-            yield scene.all(
-                *token_box.stream_text(code_snippet, duration=2.0)
-            )
+            yield token_box.stream_text(code_snippet, duration=2.0)
 
             # Stage 3: Instant execution pill
-            yield scene.all(
-                pill.scale.to((1.0, 1.0), duration=0.5, ease=Ease.out_back)
-            )
+            yield pill.scale.to((1.0, 1.0), duration=0.5, ease=Ease.out_back)
 
             # Stage 4: Celebration milestone counter
             yield scene.all(
                 counter.scale.to((1.0, 1.0), duration=0.5, ease=Ease.out_back),
-                counter.count_to(duration=1.0, ease=Ease.out_expo)
+                counter.count_to(duration=1.0, ease=Ease.out_expo),
             )
 
             yield scene.wait(1.0)
@@ -78,11 +85,11 @@ class AiCodeAssistantTemplate:
 
 class TmplAiCodeAssistantSuite(AiCodeAssistantTemplate):
     @classmethod
-    def build_scene(cls, **kwargs):
+    def build_scene(cls, **kwargs: Any) -> Scene:
         return cls.create_scene(
             title=kwargs.get("title", "AI Code Assistant"),
             code_snippet=kwargs.get("prompt", kwargs.get("code", "def solve():\n    return True")),
-            duration=kwargs.get("duration", 6.0),
+            duration=float(kwargs.get("duration", 6.0)),
         )
 
 

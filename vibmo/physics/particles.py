@@ -57,17 +57,30 @@ class ParticleEmitter(Node):
 
     def __init__(
         self,
-        preset: str = "sparkles",  # "sparkles", "confetti", "ambient_dust"
+        preset: str = "sparkles",  # "sparkles", "confetti", "ambient_dust", "fire_embers", "laser_sparks"
         gravity: Union[Vector2D, Tuple[float, float]] = (0.0, 980.0),
         drag: float = 0.0,
         colors_palette: Optional[List[Color]] = None,
+        blend_mode: str = "normal",
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
         self.preset = preset
         self.gravity = Vector2D.from_any(gravity)
         self.drag = drag
-        self.colors_palette = colors_palette or [colors.WHITE, colors.AMBER, colors.PINK, colors.CYAN]
+        self.blend_mode = blend_mode
+        
+        if colors_palette is not None:
+            self.colors_palette = colors_palette
+        elif preset == "fire_embers":
+            self.colors_palette = [colors.AMBER, colors.ROSE, Color.from_hex("#ff4500"), colors.YELLOW]
+            self.gravity = Vector2D(0.0, -180.0)  # Upward buoyancy
+        elif preset == "laser_sparks":
+            self.colors_palette = [colors.CYAN, colors.WHITE, colors.BLUE]
+            self.blend_mode = "add"
+        else:
+            self.colors_palette = [colors.WHITE, colors.AMBER, colors.PINK, colors.CYAN]
+            
         self._particles: List[ParticleDef] = []
         self.forces: List[Any] = []
 
@@ -93,8 +106,7 @@ class ParticleEmitter(Node):
             if val >= threshold:
                 self.burst(count=burst_count, time=t)
 
-    def burst(self, count: int = 50, time: float = 0.0) -> None:
-
+    def burst(self, count: int = 50, time: float = 0.0) -> AnimationAction:
         """Injects a burst of particles starting at the given time."""
         rnd = random.Random(hash(self.name) + int(time * 1000))  # Deterministic seed based on time
         
@@ -115,6 +127,20 @@ class ParticleEmitter(Node):
                 end_scale = 0.0
                 ang_vel = rnd.uniform(-3.0, 3.0)
                 drag = 0.5
+            elif self.preset == "fire_embers":
+                speed = rnd.uniform(60, 240)
+                life = rnd.uniform(1.2, 2.8)
+                scale = rnd.uniform(0.4, 1.0)
+                end_scale = 0.1
+                ang_vel = rnd.uniform(-4.0, 4.0)
+                drag = 0.3
+            elif self.preset == "laser_sparks":
+                speed = rnd.uniform(400, 900)
+                life = rnd.uniform(0.3, 0.8)
+                scale = rnd.uniform(0.2, 0.6)
+                end_scale = 0.0
+                ang_vel = rnd.uniform(-8.0, 8.0)
+                drag = 1.8
             else: # ambient
                 speed = rnd.uniform(10, 50)
                 life = rnd.uniform(4.0, 8.0)
@@ -158,9 +184,10 @@ class ParticleEmitter(Node):
         from vibmo.core.easing import Ease
         return AnimationAction(self.opacity, float(self.opacity.get(0.0)), duration=duration, ease=Ease.linear, delay=start_time)
 
-
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
+        from vibmo.compositing.blend_modes import get_cairo_operator
+        ctx.set_operator(get_cairo_operator(self.blend_mode))
         
         for p in self._particles:
             age = time - p.start_time
@@ -170,8 +197,6 @@ class ParticleEmitter(Node):
             progress = age / p.life
             
             # Deterministic Physics Integration
-            # For linear drag: v = v0 * exp(-drag * t) + g/drag * (1 - exp(-drag * t))
-            # Pos: x = x0 + v0/drag * (1 - exp(-drag * t)) + g/drag * t - g/drag^2 * (1 - exp(-drag * t))
             if p.drag > 0.001:
                 exp_d = math.exp(-p.drag * age)
                 inv_d = 1.0 / p.drag
@@ -189,7 +214,6 @@ class ParticleEmitter(Node):
                     py += f.y * 0.5 * (age ** 2) * 0.05
 
             scale = p.start_scale + (p.end_scale - p.start_scale) * progress
-
             rot = p.angular_vel * age
             
             # Color interpolate
@@ -206,7 +230,19 @@ class ParticleEmitter(Node):
             ctx.set_source_rgba(r, g, b, a)
             
             if self.preset == "confetti":
-                ctx.rectangle(-4, -8, 8, 16)
+                ctx.rectangle(-5, -9, 10, 18)
+                ctx.fill()
+            elif self.preset in ("sparkles", "laser_sparks"):
+                # 4-point star glint
+                ctx.move_to(0, -8)
+                ctx.line_to(2, -2)
+                ctx.line_to(8, 0)
+                ctx.line_to(2, 2)
+                ctx.line_to(0, 8)
+                ctx.line_to(-2, 2)
+                ctx.line_to(-8, 0)
+                ctx.line_to(-2, -2)
+                ctx.close_path()
                 ctx.fill()
             else:
                 ctx.arc(0, 0, 5, 0, math.pi * 2)

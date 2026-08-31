@@ -9,6 +9,7 @@ from vibmo.fx.filters import (
     MotionBlur,
     Bloom,
     Glow,
+    AnamorphicStreak,
     ChromaticAberration,
     DepthOfField,
     TiltShift,
@@ -24,6 +25,7 @@ from vibmo.fx.filters import (
     Halftone,
     Duotone,
 )
+from vibmo.color.grading import ColorGrade
 from vibmo.fx.patterns import (
     Checkerboard,
     Gridlines,
@@ -164,6 +166,8 @@ __all__ = [
     "MotionBlur",
     "Bloom",
     "Glow",
+    "AnamorphicStreak",
+    "ColorGrade",
     "ChromaticAberration",
     "DepthOfField",
     "TiltShift",

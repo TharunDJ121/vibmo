@@ -11,6 +11,10 @@ from vibmo.templates.turnkey import (
     DeveloperCliLaunchTemplate,
     TmplAiCodeAssistantSuite,
     AiCodeAssistantTemplate,
+    TmplFintechCryptoCardSuite,
+    FintechCryptoCardTemplate,
+    TmplSaasYcPitchSuite,
+    SaasYcPitchTemplate,
 )
 from vibmo.templates.library import SceneTemplateLibrary
 
@@ -19,10 +23,14 @@ __all__ = [
     "TEMPLATES_CATALOG",
     "create_saas_launch_scene",
     "SceneTemplateLibrary",
-    "TmplSocialAudiogramSuite",
-    "SocialAudiogramTemplate",
-    "TmplDeveloperCliLaunchSuite",
-    "DeveloperCliLaunchTemplate",
     "TmplAiCodeAssistantSuite",
     "AiCodeAssistantTemplate",
+    "TmplFintechCryptoCardSuite",
+    "FintechCryptoCardTemplate",
+    "TmplDeveloperCliLaunchSuite",
+    "DeveloperCliLaunchTemplate",
+    "TmplSaasYcPitchSuite",
+    "SaasYcPitchTemplate",
+    "TmplSocialAudiogramSuite",
+    "SocialAudiogramTemplate",
 ]

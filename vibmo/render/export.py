@@ -52,6 +52,7 @@ class Exporter:
         scene: Scene,
         output_path: str = "output.mp4",
         quality: Union[str, ExportQuality] = ExportQuality.HIGH,
+        engine: str = "local",
         on_progress: Optional[Callable[[float], None]] = None,
     ) -> str:
         """Export a Scene to video file using the specified quality preset."""
@@ -65,8 +66,13 @@ class Exporter:
         scene.fps = preset.fps
 
         try:
-            res = scene.render(output_path=output_path, on_progress=on_progress)
-            return output_path
+            if engine == "lambda":
+                from vibmo.render.cloud.lambda_orchestrator import CloudRenderOrchestrator
+                CloudRenderOrchestrator.run(scene, output_path)
+                return output_path
+            else:
+                res = scene.render(output_path=output_path, on_progress=on_progress)
+                return output_path
         finally:
             scene.width = original_w
             scene.height = original_h

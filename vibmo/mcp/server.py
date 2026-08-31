@@ -15,7 +15,10 @@ from vibmo.mcp.tools import (
     tool_search_icons,
     tool_validate_scene,
     tool_inspect_storyboard,
+    tool_get_frame_preview,
     tool_generate_scene_from_prompt,
+    tool_ai_edit,
+    tool_autonomous_render,
     tool_render_scene,
     tool_get_project_state,
     tool_mutate_state_graph,
@@ -73,6 +76,19 @@ MCP_TOOLS_DEFINITIONS = [
         },
     },
     {
+        "name": "get_frame_preview",
+        "description": "Renders a single frame at timestamp `time` and returns base64 JPEG for instant visual inspection.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "code": {"type": "string", "description": "Python code snippet containing a Vibmo Scene"},
+                "time": {"type": "number", "description": "Timestamp in seconds to preview", "default": 1.0},
+                "scale": {"type": "number", "description": "Resolution scale factor (0.25 to 1.0)", "default": 0.5},
+            },
+            "required": ["code"],
+        },
+    },
+    {
         "name": "generate_scene_from_prompt",
         "description": "Synthesizes an animated motion graphic scene from a text prompt and generates a storyboard / video preview.",
         "inputSchema": {
@@ -82,6 +98,35 @@ MCP_TOOLS_DEFINITIONS = [
                 "duration": {"type": "number", "description": "Scene duration in seconds", "default": 4.0},
                 "output_video": {"type": "string", "description": "Optional filepath to save rendered MP4"},
                 "output_storyboard": {"type": "string", "description": "Optional filepath to save storyboard PNG"},
+                "provider": {"type": "string", "description": "Optional AI provider: 'openai', 'anthropic', 'gemini', 'groq'"},
+            },
+            "required": ["prompt"],
+        },
+    },
+    {
+        "name": "ai_edit",
+        "description": "Surgically modifies an existing Vibmo script using AI reasoning without breaking untouched scenes.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "prompt": {"type": "string", "description": "Surgical modification instruction (e.g., 'make the card blue and increase speed')"},
+                "current_code": {"type": "string", "description": "Current Python script code"},
+                "provider": {"type": "string", "description": "Optional AI provider override"},
+            },
+            "required": ["prompt", "current_code"],
+        },
+    },
+    {
+        "name": "autonomous_render",
+        "description": "End-to-end autonomous pipeline: prompts -> generates code -> validates -> renders master video.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "prompt": {"type": "string", "description": "Natural language description of video to create"},
+                "output_video": {"type": "string", "description": "Target MP4 output path", "default": "output.mp4"},
+                "quality": {"type": "string", "description": "Render quality: 'fast', 'high', '4k'", "default": "high"},
+                "provider": {"type": "string", "description": "Optional AI provider override"},
+                "visual_critique": {"type": "boolean", "description": "Whether to run multimodal visual critique on storyboard", "default": False},
             },
             "required": ["prompt"],
         },
@@ -157,7 +202,7 @@ class MCPServer:
                         },
                         "serverInfo": {
                             "name": "vibmo-mcp",
-                            "version": "1.0.0",
+                            "version": "2.0.0",
                         },
                     },
                 }
@@ -250,12 +295,29 @@ class MCPServer:
             return tool_validate_scene(args.get("code", ""))
         elif name == "inspect_storyboard":
             return tool_inspect_storyboard(args.get("code", ""), rows=args.get("rows", 2), cols=args.get("cols", 3))
+        elif name == "get_frame_preview":
+            return tool_get_frame_preview(args.get("code", ""), time=args.get("time", 1.0), scale=args.get("scale", 0.5))
         elif name == "generate_scene_from_prompt":
             return tool_generate_scene_from_prompt(
                 args.get("prompt", ""),
                 duration=args.get("duration", 4.0),
                 output_video=args.get("output_video"),
                 output_storyboard=args.get("output_storyboard"),
+                provider=args.get("provider"),
+            )
+        elif name == "ai_edit":
+            return tool_ai_edit(
+                prompt=args.get("prompt", ""),
+                current_code=args.get("current_code", ""),
+                provider=args.get("provider"),
+            )
+        elif name == "autonomous_render":
+            return tool_autonomous_render(
+                prompt=args.get("prompt", ""),
+                output_video=args.get("output_video", "output.mp4"),
+                provider=args.get("provider"),
+                quality=args.get("quality", "high"),
+                visual_critique=args.get("visual_critique", False),
             )
         elif name == "render_scene":
             return tool_render_scene(
@@ -278,7 +340,6 @@ class MCPServer:
 
     def run_stdio(self) -> None:
         """Main stdio loop reading JSON-RPC lines from stdin and writing to stdout."""
-        # Ensure utf-8
         if sys.platform == "win32":
             sys.stdin.reconfigure(encoding="utf-8", errors="replace")
             sys.stdout.reconfigure(encoding="utf-8", errors="replace")

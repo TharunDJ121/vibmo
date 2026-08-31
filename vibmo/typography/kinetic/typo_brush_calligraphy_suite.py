@@ -1,10 +1,11 @@
 import cairo
 import math
 import random
-from typing import List, Tuple
+from typing import List, Tuple, Union, Optional, Any
 from vibmo.scene.node import Node
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.color import Color, colors
+from vibmo.core.easing import Ease, EasingFunc
 
 def _bezier_point(p0, p1, p2, p3, t):
     """Cubic Bezier interpolation."""
@@ -18,20 +19,83 @@ def _bezier_point(p0, p1, p2, p3, t):
     return (x, y)
 
 class BrushCalligraphyPathReveal(Node):
-    def __init__(self, path: List[Tuple[Tuple[float, float], Tuple[float, float], Tuple[float, float], Tuple[float, float]]], color=colors.BLACK, stroke_width=5.0):
-        super().__init__()
-        self.path = path # List of (p0, p1, p2, p3) representing cubic bezier curves
-        self.progress = Signal(0.0) # 0 to 1
+    """
+    Fluid Chinese/Japanese ink calligraphy brush strokes revealing along bezier paths or text outlines.
+    """
+    def __init__(
+        self,
+        text_or_path: Union[str, List] = "Zenith",
+        path: Optional[List] = None,
+        font_size: float = 64.0,
+        font_family: str = "Inter",
+        color: Any = colors.BLACK,
+        stroke_width: float = 5.0,
+        **kwargs
+    ):
+        super().__init__(**kwargs)
+        if isinstance(text_or_path, list):
+            self.path = text_or_path
+            self.text = ""
+        elif path is not None:
+            self.path = path
+            self.text = str(text_or_path) if isinstance(text_or_path, str) else ""
+        else:
+            self.text = str(text_or_path)
+            self.path = []
+
+        self.font_size = Signal(float(font_size), f"{self.name}.font_size")
+        self.font_family = font_family
+        self.progress = Signal(0.0, f"{self.name}.progress")
         self.color = Color.from_any(color)
-        self.stroke_width = Signal(stroke_width)
+        self.stroke_width = Signal(stroke_width, f"{self.name}.stroke_width")
+
+    def draw_strokes(
+        self,
+        duration: float = 2.0,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+    ) -> AnimationAction:
+        """Animates ink calligraphy strokes flowing and revealing with realistic fluid dynamics."""
+        self.progress.set(0.0)
+        e = ease or Ease.in_out_cubic
+        return self.progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def draw(self, ctx: cairo.Context, time: float):
-        progress = self.progress.get()
+        progress = float(self.progress.get(time))
         if progress <= 0:
             return
 
+        if self.text and not self.path:
+            # Render text outline reveal with calligraphy brush styling
+            fs = self.font_size.get(time)
+            ctx.save()
+            ctx.select_font_face(self.font_family, cairo.FONT_SLANT_ITALIC, cairo.FONT_WEIGHT_BOLD)
+            ctx.set_font_size(fs)
+            extents = ctx.text_extents(self.text)
+            total_w = extents.width if extents.width > 0 else fs * len(self.text) * 0.7
+            
+            # Clip rectangle to reveal progress
+            ctx.rectangle(0, -fs * 0.5, total_w * progress + 20.0, fs * 2.0)
+            ctx.clip()
+
+            # Brush fill + stroke
+            ctx.set_source_rgba(*self.color.to_cairo())
+            ctx.move_to(0, fs * 0.88)
+            ctx.show_text(self.text)
+
+            # Extra bristle ink bleed at leading edge
+            lead_x = total_w * progress
+            if 0.0 < progress < 1.0:
+                ctx.set_source_rgba(self.color.r, self.color.g, self.color.b, 0.4)
+                ctx.arc(lead_x, fs * 0.7, fs * 0.15, 0, 2 * math.pi)
+                ctx.fill()
+
+            ctx.restore()
+            super().draw(ctx, time)
+            return
+
         ctx.set_source_rgba(*self.color.to_cairo())
-        ctx.set_line_width(self.stroke_width.get())
+        ctx.set_line_width(self.stroke_width.get(time))
         ctx.set_line_cap(cairo.LINE_CAP_ROUND)
         ctx.set_line_join(cairo.LINE_JOIN_ROUND)
 

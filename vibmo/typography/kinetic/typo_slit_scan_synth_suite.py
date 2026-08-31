@@ -1,10 +1,11 @@
 import math
 import cairo
-from typing import Any
+from typing import Any, Optional
 
 from vibmo.core.color import Color, colors
 from vibmo.core.vector import Vector2D
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
 from vibmo.scene.node import Node
 
 class SlitScanVideoSynthText(Node):
@@ -23,6 +24,18 @@ class SlitScanVideoSynthText(Node):
         self.scan_speed = scan_speed
         self.amplitude = amplitude
         self.frequency = frequency
+        self.warp_progress = Signal(1.0, f"{self.name}.warp_progress")
+
+    def warp_scan(
+        self,
+        duration: float = 2.0,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+    ) -> AnimationAction:
+        """Animates a dynamic optical slit-scan warp sweep across the text."""
+        self.warp_progress.set(0.0)
+        e = ease or Ease.in_out_sine
+        return self.warp_progress.to(1.0, duration=duration, ease=e, delay=delay)
         
     def _setup_cairo_font(self, ctx: cairo.Context, font_size: float) -> None:
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)

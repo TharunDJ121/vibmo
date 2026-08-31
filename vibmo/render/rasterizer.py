@@ -1,5 +1,6 @@
 """
-High-performance Cairo Vector Rasterizer with Compositing, Glassmorphism, and Motion Blur.
+High-performance Hybrid Vector Rasterizer and GPU Compositor Pipeline.
+Combines subpixel CPU Cairo vector rasterization with hardware GPU ModernGL compositing.
 """
 
 from __future__ import annotations
@@ -7,13 +8,24 @@ import math
 import numpy as np
 from PIL import Image
 import cairo
+import threading
 from typing import Any, List, Optional, Tuple, Union
+
 from vibmo.core.color import Color, colors
 from vibmo.scene.node import Node
+from vibmo.render.backend import RenderBackend, get_optimal_backend
+
+_THREAD_LOCAL = threading.local()
+
+
+def _get_thread_backend(width: int, height: int) -> RenderBackend:
+    if not hasattr(_THREAD_LOCAL, "backend") or _THREAD_LOCAL.backend.width != width or _THREAD_LOCAL.backend.height != height:
+        _THREAD_LOCAL.backend = get_optimal_backend(width, height)
+    return _THREAD_LOCAL.backend
 
 
 class Rasterizer:
-    """Renders a scene node hierarchy to raw RGBA pixel buffers using PyCairo."""
+    """Renders a scene node hierarchy using the Hybrid Vector & GPU Compositor Pipeline."""
 
     def __init__(self, width: int, height: int) -> None:
         self.width = int(width)
@@ -33,13 +45,15 @@ class Rasterizer:
         render_w = max(16, int(self.width * scale))
         render_h = max(16, int(self.height * scale))
 
-        # Create Cairo surface
+        backend = _get_thread_backend(render_w, render_h)
+
+        # 1. Create Cairo surface for pixel-perfect vector rasterization
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, render_w, render_h)
         ctx = cairo.Context(surface)
         if scale != 1.0:
             ctx.scale(scale, scale)
 
-        # 1. Background
+        # 2. Background
         if background is not None and background.a > 0:
             ctx.set_source_rgba(background.r, background.g, background.b, background.a)
             ctx.paint()
@@ -48,55 +62,26 @@ class Rasterizer:
             ctx.paint()
             ctx.set_operator(cairo.OPERATOR_OVER)
 
-        # 2. Camera Transform
+        # 3. Camera Transform
         if camera is not None:
             cam_mat = camera.view_matrix(self.width, self.height, time)
             cairo_mat = cairo.Matrix(*cam_mat.to_cairo_tuple())
             ctx.transform(cairo_mat)
 
-        # 3. Sort & Render Nodes
+        # 4. Sort & Render Nodes
         sorted_nodes = sorted(root_nodes, key=lambda n: n.z_index)
         for node in sorted_nodes:
-            self._render_node_recursive(ctx, node, time, surface)
+            self._render_node_recursive(ctx, node, time, surface, backend)
 
-        # 4. Extract pixel buffer
+        # 5. Extract pixel buffer (Cairo BGRA -> RGBA)
         surface.flush()
         buf = surface.get_data()
-        # Cairo ARGB32 in memory is BGRA on little-endian machines
         arr = np.ndarray(shape=(render_h, render_w, 4), dtype=np.uint8, buffer=buf)
-        # Convert BGRA to RGBA
-        rgba = np.zeros_like(arr)
-        rgba[:, :, 0] = arr[:, :, 2]  # R
-        rgba[:, :, 1] = arr[:, :, 1]  # G
-        rgba[:, :, 2] = arr[:, :, 0]  # B
-        rgba[:, :, 3] = arr[:, :, 3]  # A
+        rgba = arr[:, :, [2, 1, 0, 3]].copy()
 
-        # 5. Apply Post FX (Hardware GPU Shaders with CPU fallback)
+        # 6. Apply GPU Hardware Post FX Shaders (Bloom, Vignette, Grain, Aberration)
         if post_fx:
-            import threading
-            if not hasattr(self, "_thread_local"):
-                self._thread_local = threading.local()
-                
-            if not hasattr(self._thread_local, "gpu_proc"):
-                try:
-                    from vibmo.render.gpu.pipeline import GPUPostProcessor
-                    self._thread_local.gpu_proc = GPUPostProcessor(self.width, self.height)
-                except Exception:
-                    self._thread_local.gpu_proc = None
-                    
-            gpu_proc = self._thread_local.gpu_proc
-
-            if gpu_proc and gpu_proc.is_available:
-                try:
-                    rgba = gpu_proc.apply_post_fx(rgba, time, post_fx)
-                except Exception:
-                    for fx in post_fx:
-                        rgba = fx.apply(rgba, time)
-            else:
-                for fx in post_fx:
-                    rgba = fx.apply(rgba, time)
-
-
+            rgba = backend.apply_post_fx(rgba, time, post_fx)
 
         return rgba
 
@@ -126,12 +111,19 @@ class Rasterizer:
         blurred = np.clip(accum, 0, 255).astype(np.uint8)
 
         if post_fx:
-            for fx in post_fx:
-                blurred = fx.apply(blurred, time)
+            backend = _get_thread_backend(self.width, self.height)
+            blurred = backend.apply_post_fx(blurred, time, post_fx)
 
         return blurred
 
-    def _render_node_recursive(self, ctx: cairo.Context, node: Node, time: float, surface: cairo.ImageSurface) -> None:
+    def _render_node_recursive(
+        self,
+        ctx: cairo.Context,
+        node: Node,
+        time: float,
+        surface: cairo.ImageSurface,
+        backend: RenderBackend,
+    ) -> None:
         if not node.visible:
             return
         op = max(0.0, min(1.0, float(node.opacity.get(time))))
@@ -143,8 +135,6 @@ class Rasterizer:
 
         ctx.save()
 
-
-
         # Check for 3D Perspective Rotation
         rx = float(node.rotate_x.get(time))
         ry = float(node.rotate_y.get(time))
@@ -153,7 +143,6 @@ class Rasterizer:
         if is_3d:
             lx, ly, lw, lh = node.local_bounds(time)
             if lw > 4.0 and lh > 4.0:
-                from vibmo.spatial.perspective import Projective3DWarp, find_perspective_coeffs
                 pad = 48
                 off_w = int(math.ceil(lw + pad * 2))
                 off_h = int(math.ceil(lh + pad * 2))
@@ -166,55 +155,47 @@ class Rasterizer:
                 if node.children:
                     sorted_children = sorted(node.children, key=lambda c: c.z_index)
                     for child in sorted_children:
-                        self._render_node_recursive(off_ctx, child, time, off_surf)
+                        self._render_node_recursive(off_ctx, child, time, off_surf, backend)
 
                 off_surf.flush()
                 buf = off_surf.get_data()
                 arr = np.ndarray(shape=(off_h, off_w, 4), dtype=np.uint8, buffer=buf)
-                rgba_local = np.zeros_like(arr)
-                rgba_local[:, :, 0] = arr[:, :, 2]  # R
-                rgba_local[:, :, 1] = arr[:, :, 1]  # G
-                rgba_local[:, :, 2] = arr[:, :, 0]  # B
-                rgba_local[:, :, 3] = arr[:, :, 3]  # A
-                img_local = Image.fromarray(rgba_local, "RGBA")
+                rgba_local = arr[:, :, [2, 1, 0, 3]].copy()
 
-                # Project 3D quad corners with perspective foreshortening
+                # Hardware / Projective 3D Quad Projection
                 pos = node.position.get(time)
                 scale = node.scale.get(time)
                 rot_z = float(node.rotation.get(time))
                 anchor = node.anchor.get(time)
                 padded_bounds = (lx - pad, ly - pad, off_w, off_h)
-                dst_quad = Projective3DWarp.project_quad(padded_bounds, pos, scale, rot_z, rx, ry, anchor, focal_dist=1200.0)
 
-                xs = [p[0] for p in dst_quad]
-                ys = [p[1] for p in dst_quad]
-                min_x, max_x = min(xs), max(xs)
-                min_y, max_y = min(ys), max(ys)
-                target_w = max(4, int(math.ceil(max_x - min_x)))
-                target_h = max(4, int(math.ceil(max_y - min_y)))
+                warped_full_rgba = backend.render_3d_quad(
+                    layer_rgba=rgba_local,
+                    bounds=padded_bounds,
+                    position=pos,
+                    scale=scale,
+                    rot_z=rot_z,
+                    rx=rx,
+                    ry=ry,
+                    anchor=anchor,
+                    opacity=op,
+                    focal_dist=1200.0,
+                )
 
-                dst_rel = [(px - min_x, py - min_y) for px, py in dst_quad]
-                src_pts = [(0, 0), (off_w, 0), (off_w, off_h), (0, off_h)]
-                coeffs = find_perspective_coeffs(src_points=src_pts, dst_points=dst_rel)
-
-                warped_img = img_local.transform((target_w, target_h), Image.Transform.PERSPECTIVE, coeffs, Image.Resampling.BICUBIC)
-                warped_rgba = np.array(warped_img)
-
-                # Convert to Cairo BGRA
-                warped_bgra = np.zeros_like(warped_rgba)
-                warped_bgra[:, :, 0] = warped_rgba[:, :, 2]  # B
-                warped_bgra[:, :, 1] = warped_rgba[:, :, 1]  # G
-                warped_bgra[:, :, 2] = warped_rgba[:, :, 0]  # R
-                warped_bgra[:, :, 3] = warped_rgba[:, :, 3]  # A
-                warped_bgra = np.ascontiguousarray(warped_bgra)
-
-                warped_surf = cairo.ImageSurface.create_for_data(warped_bgra, cairo.FORMAT_ARGB32, target_w, target_h)
-                ctx.set_source_surface(warped_surf, min_x, min_y)
-                ctx.paint_with_alpha(op)
+                # Paint warped quad onto main Cairo canvas
+                warped_bgra = np.ascontiguousarray(warped_full_rgba[:, :, [2, 1, 0, 3]])
+                qh, qw = warped_bgra.shape[:2]
+                stride = cairo.ImageSurface.format_stride_for_width(cairo.FORMAT_ARGB32, qw)
+                warped_surf = cairo.ImageSurface.create_for_data(
+                    warped_bgra, cairo.FORMAT_ARGB32, qw, qh, stride
+                )
+                ctx.identity_matrix()
+                ctx.set_source_surface(warped_surf, 0, 0)
+                ctx.paint()
                 ctx.restore()
                 return
 
-        # 2D Fast Direct Render Path
+        # 2D Fast Direct Vector Render Path
         local_mat = node.local_matrix(time)
         cairo_mat = cairo.Matrix(*local_mat.to_cairo_tuple())
         ctx.transform(cairo_mat)
@@ -234,7 +215,7 @@ class Rasterizer:
         if node.children:
             sorted_children = sorted(node.children, key=lambda c: c.z_index)
             for child in sorted_children:
-                self._render_node_recursive(ctx, child, time, surface)
+                self._render_node_recursive(ctx, child, time, surface, backend)
 
         if use_alpha_group:
             ctx.pop_group_to_source()
@@ -250,5 +231,3 @@ class Rasterizer:
                 ctx.paint_with_alpha(op)
 
         ctx.restore()
-
-

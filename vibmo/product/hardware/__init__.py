@@ -2,166 +2,141 @@
 from __future__ import annotations
 
 from vibmo.product.hardware.hw_automotive_cockpit_suite import (
+    AutomotiveCockpitSuite,
+    AutomotiveCockpitDash,
     TeslaCenterTouchscreen,
     CarPlayDashboardPill,
     DigitalGaugeClusterHud,
 )
 from vibmo.product.hardware.hw_camera_viewfinder_suite import (
+    CameraViewfinderSuite,
+    CameraViewfinderOverlay,
     DslrCameraViewfinderHud,
     CinemaCameraCageRig,
     DroneGimbalTelemetryHud,
 )
 from vibmo.product.hardware.hw_cctv_surveillance_suite import (
+    CctvSurveillanceSuite,
+    CctvQuadViewOverlay,
     CctvQuadCameraGrid,
     PtzCameraTargetingHud,
     BodyCamRecOverlay,
 )
 from vibmo.product.hardware.hw_cyberdeck_terminal_suite import (
+    CyberdeckTerminalSuite,
+    CyberdeckChassisFrame,
+    IndustrialBumperCase,
     CyberdeckMechanicalKeyboard,
     PopUpLcdScreen,
-    IndustrialBumperCase,
     PatchCablesAndAntenna,
 )
 from vibmo.product.hardware.hw_eink_tablet_suite import (
+    EInkTabletSuite,
+    MinimalistEInkTabletFrame,
     PaperEInkReaderFrame,
     StylusPenMockup,
     TextureMatteScreenBezel,
 )
 from vibmo.product.hardware.hw_foldable_device_suite import (
+    FoldableDeviceSuite,
+    FoldableDeviceFrame,
     FoldableBookPhone,
     ClamshellFlipPhone,
     DualScreenBookDevice,
     HingeCreaseIndicator,
 )
 from vibmo.product.hardware.hw_gaming_handheld_suite import (
-    ClippedScreenContainer,
-    HandheldBase,
+    GamingHandheldSuite,
+    HandheldGamingConsoleFrame,
     SteamDeckHandheldChassis,
     SwitchJoyConFrame,
     RetroGameBoyEnclosure,
+    ClippedScreenContainer,
+    HandheldBase,
 )
 from vibmo.product.hardware.hw_multi_monitor_suite import (
-    ScreenContainer,
+    MultiMonitorSuite,
+    MultiMonitorDeveloperRig,
     DualDeveloperMonitors,
     VerticalSidecarDisplay,
     TripleCurvedSimulatorDeck,
+    ScreenContainer,
 )
 from vibmo.product.hardware.hw_pos_retail_suite import (
+    PosRetailSuite,
+    PosTerminalFrame,
     NfcHandheldPosTerminal,
     CountertopRegisterScreen,
     ThermalReceiptSlot,
     TapPaymentSensor,
 )
 from vibmo.product.hardware.hw_smart_home_hub_suite import (
+    SmartHomeHubSuite,
+    SmartHomeHubFrame,
     FabricAcousticSmartHub,
     RoundThermostatDial,
     WallMountSecurityKeypad,
 )
 from vibmo.product.hardware.hw_smart_tv_display_suite import (
-    WallMountedDisplayShadow,
-    FloatingTvStand,
+    SmartTvDisplaySuite,
+    OledCinemaTvFrame,
     OledSmartTvFrame,
     CurvedCinemaDisplay,
+    WallMountedDisplayShadow,
+    FloatingTvStand,
 )
 from vibmo.product.hardware.hw_smartwatch_rugged_suite import (
-    BaseWatch,
+    SmartwatchRuggedSuite,
+    RuggedSmartwatchFrame,
     TitaniumRuggedWatch,
     MinimalistSquareWatch,
     ClassicRoundSmartwatchFace,
+    BaseWatch,
 )
 from vibmo.product.hardware.hw_spatial_visor_suite import (
+    SpatialVisorSuite,
+    SpatialVisorFrame,
     VisionProSpatialGlassVisor,
     QuestGoggleFrame,
     SpatialHudCurvedProjection,
 )
 from vibmo.product.hardware.hw_super_ultrawide_suite import (
+    SuperUltrawideSuite,
+    SuperUltrawideMonitorFrame,
+    Curved49InchUltrawide,
     MonitorArmPivotingBase,
     GamerBackGlowRgbLed,
-    Curved49InchUltrawide,
 )
 from vibmo.product.hardware.hw_vintage_crt_suite import (
-    _VintageNode,
-    BeigeCrtMonitor1990s,
+    VintageCrtSuite,
+    RetroArcadeCrtCabinet,
     ArcadeCabinetBezel,
+    BeigeCrtMonitor1990s,
     RetroPortableTvAntenna,
+    _VintageNode,
 )
 
 __all__ = [
-    "TeslaCenterTouchscreen",
-    "CarPlayDashboardPill",
-    "DigitalGaugeClusterHud",
-    "DslrCameraViewfinderHud",
-    "CinemaCameraCageRig",
-    "DroneGimbalTelemetryHud",
-    "CctvQuadCameraGrid",
-    "PtzCameraTargetingHud",
-    "BodyCamRecOverlay",
-    "CyberdeckMechanicalKeyboard",
-    "PopUpLcdScreen",
-    "IndustrialBumperCase",
-    "PatchCablesAndAntenna",
-    "PaperEInkReaderFrame",
-    "StylusPenMockup",
-    "TextureMatteScreenBezel",
-    "FoldableBookPhone",
-    "ClamshellFlipPhone",
-    "DualScreenBookDevice",
-    "HingeCreaseIndicator",
-    "ClippedScreenContainer",
-    "HandheldBase",
-    "SteamDeckHandheldChassis",
-    "SwitchJoyConFrame",
-    "RetroGameBoyEnclosure",
-    "ScreenContainer",
-    "DualDeveloperMonitors",
-    "VerticalSidecarDisplay",
-    "TripleCurvedSimulatorDeck",
-    "NfcHandheldPosTerminal",
-    "CountertopRegisterScreen",
-    "ThermalReceiptSlot",
-    "TapPaymentSensor",
-    "FabricAcousticSmartHub",
-    "RoundThermostatDial",
-    "WallMountSecurityKeypad",
-    "WallMountedDisplayShadow",
-    "FloatingTvStand",
-    "OledSmartTvFrame",
-    "CurvedCinemaDisplay",
-    "BaseWatch",
-    "TitaniumRuggedWatch",
-    "MinimalistSquareWatch",
-    "ClassicRoundSmartwatchFace",
-    "VisionProSpatialGlassVisor",
-    "QuestGoggleFrame",
-    "SpatialHudCurvedProjection",
-    "MonitorArmPivotingBase",
-    "GamerBackGlowRgbLed",
-    "Curved49InchUltrawide",
-    "ArcadeCabinetBezel",
-    "RetroPortableTvAntenna",
-]
-
-# Semantic Aliases
-SuperUltrawideMonitorFrame = Curved49InchUltrawide
-FoldableDeviceFrame = FoldableBookPhone
-RuggedSmartwatchFrame = TitaniumRuggedWatch
-PosTerminalFrame = NfcHandheldPosTerminal
-CameraViewfinderOverlay = DslrCameraViewfinderHud
-MinimalistEInkTabletFrame = PaperEInkReaderFrame
-SmartHomeHubFrame = FabricAcousticSmartHub
-RetroArcadeCrtCabinet = ArcadeCabinetBezel
-CctvQuadViewOverlay = CctvQuadCameraGrid
-SpatialVisorFrame = VisionProSpatialGlassVisor
-OledCinemaTvFrame = OledSmartTvFrame
-AutomotiveCockpitDash = TeslaCenterTouchscreen
-HandheldGamingConsoleFrame = SteamDeckHandheldChassis
-CyberdeckChassisFrame = IndustrialBumperCase
-MultiMonitorDeveloperRig = DualDeveloperMonitors
-
-__all__.extend([
-    "SuperUltrawideMonitorFrame",
+    # 15 Core Suite Classes
+    "FoldableDeviceSuite",
+    "SmartwatchRuggedSuite",
+    "SuperUltrawideSuite",
+    "PosRetailSuite",
+    "CameraViewfinderSuite",
+    "EInkTabletSuite",
+    "SmartHomeHubSuite",
+    "VintageCrtSuite",
+    "CctvSurveillanceSuite",
+    "SpatialVisorSuite",
+    "SmartTvDisplaySuite",
+    "AutomotiveCockpitSuite",
+    "GamingHandheldSuite",
+    "CyberdeckTerminalSuite",
+    "MultiMonitorSuite",
+    # 15 Core Frame Classes
     "FoldableDeviceFrame",
     "RuggedSmartwatchFrame",
+    "SuperUltrawideMonitorFrame",
     "PosTerminalFrame",
     "CameraViewfinderOverlay",
     "MinimalistEInkTabletFrame",
@@ -174,5 +149,59 @@ __all__.extend([
     "HandheldGamingConsoleFrame",
     "CyberdeckChassisFrame",
     "MultiMonitorDeveloperRig",
-])
-
+    # Specific Component & Enclosure Classes
+    "FoldableBookPhone",
+    "ClamshellFlipPhone",
+    "DualScreenBookDevice",
+    "HingeCreaseIndicator",
+    "BaseWatch",
+    "TitaniumRuggedWatch",
+    "MinimalistSquareWatch",
+    "ClassicRoundSmartwatchFace",
+    "Curved49InchUltrawide",
+    "MonitorArmPivotingBase",
+    "GamerBackGlowRgbLed",
+    "NfcHandheldPosTerminal",
+    "CountertopRegisterScreen",
+    "ThermalReceiptSlot",
+    "TapPaymentSensor",
+    "DslrCameraViewfinderHud",
+    "CinemaCameraCageRig",
+    "DroneGimbalTelemetryHud",
+    "PaperEInkReaderFrame",
+    "StylusPenMockup",
+    "TextureMatteScreenBezel",
+    "FabricAcousticSmartHub",
+    "RoundThermostatDial",
+    "WallMountSecurityKeypad",
+    "BeigeCrtMonitor1990s",
+    "ArcadeCabinetBezel",
+    "RetroPortableTvAntenna",
+    "_VintageNode",
+    "CctvQuadCameraGrid",
+    "PtzCameraTargetingHud",
+    "BodyCamRecOverlay",
+    "VisionProSpatialGlassVisor",
+    "QuestGoggleFrame",
+    "SpatialHudCurvedProjection",
+    "OledSmartTvFrame",
+    "CurvedCinemaDisplay",
+    "WallMountedDisplayShadow",
+    "FloatingTvStand",
+    "TeslaCenterTouchscreen",
+    "CarPlayDashboardPill",
+    "DigitalGaugeClusterHud",
+    "SteamDeckHandheldChassis",
+    "SwitchJoyConFrame",
+    "RetroGameBoyEnclosure",
+    "ClippedScreenContainer",
+    "HandheldBase",
+    "IndustrialBumperCase",
+    "PopUpLcdScreen",
+    "CyberdeckMechanicalKeyboard",
+    "PatchCablesAndAntenna",
+    "DualDeveloperMonitors",
+    "VerticalSidecarDisplay",
+    "TripleCurvedSimulatorDeck",
+    "ScreenContainer",
+]

@@ -50,3 +50,12 @@ def test_analog_tape_hiss():
     audio_cold = VinylCrackleSuite.analog_tape_hiss(duration=1.0, warm_color=False)
     assert isinstance(audio_cold, np.ndarray)
     assert audio_cold.dtype == np.float32
+
+def test_vintage_turntable_hiss():
+    duration = 5.0
+    audio = VinylCrackleSuite.vintage_turntable_hiss(duration=duration)
+    assert isinstance(audio, np.ndarray)
+    assert audio.dtype == np.float32
+    assert len(audio) == int(duration * 48000)
+    assert np.max(np.abs(audio)) > 0
+

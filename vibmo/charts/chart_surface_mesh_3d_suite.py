@@ -1,8 +1,10 @@
 import math
-from typing import Any, Callable, List, Tuple
+from typing import Any, Callable, List, Optional, Tuple, Union
 from vibmo.scene.node import Node
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.color import Color, colors
+from vibmo.core.easing import Ease, EasingFunc
+from vibmo.timeline.scheduler import ParallelGroup
 
 class ElevationColorGradient:
     """Continuous color gradient mapping height to color (Blue valley -> Green plains -> White mountain peaks)."""
@@ -111,21 +113,49 @@ class Animated3DSurfaceMesh(Node):
 
     def __init__(
         self,
-        rig: CameraRotationRig,
-        func: Callable[[float, float, float], float] = lambda x, y, t: math.sin(math.sqrt(x*x + y*y) - t),
+        rig: Optional[CameraRotationRig] = None,
+        func: Optional[Callable] = None,
+        fn: Optional[Callable] = None,
         size: float = 10.0,
         resolution: int = 20,
-        gradient: ElevationColorGradient = None,
-        wireframe_color: Color = Color.hex("#ffffff").with_alpha(0.3),
-        **kwargs
+        gradient: Optional[ElevationColorGradient] = None,
+        wireframe_color: Union[Color, str] = Color.hex("#ffffff").with_alpha(0.3),
+        **kwargs: Any
     ):
         super().__init__(**kwargs)
-        self.rig = rig
-        self.func = func
+        self.rig = rig or CameraRotationRig()
+        raw_func = fn if fn is not None else (func if func is not None else (lambda x, y, t: math.sin(math.sqrt(x*x + y*y) - t)))
+
+        def _safe_func(x: float, y: float, t: float) -> float:
+            try:
+                return float(raw_func(x, y, t))
+            except TypeError:
+                return float(raw_func(x, y))
+
+        self.func = _safe_func
         self.size = size
         self.resolution = resolution
         self.gradient = gradient or ElevationColorGradient()
-        self.wireframe_color = wireframe_color
+        self.wireframe_color = Color.from_any(wireframe_color)
+
+    def rotate_3d(
+        self,
+        duration: float = 2.0,
+        azimuth_delta: float = math.pi * 2,
+        elevation_delta: float = 0.0,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None
+    ) -> ParallelGroup:
+        """Smoothly rotates camera rig around the 3D surface mesh."""
+        e = ease or Ease.in_out_sine
+        curr_az = self.rig.azimuth.get()
+        actions = [
+            self.rig.azimuth.to(curr_az + azimuth_delta, duration=duration, delay=delay, ease=e)
+        ]
+        if elevation_delta != 0.0:
+            curr_el = self.rig.elevation.get()
+            actions.append(self.rig.elevation.to(curr_el + elevation_delta, duration=duration, delay=delay, ease=e))
+        return ParallelGroup(actions)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
@@ -192,3 +222,7 @@ class Animated3DSurfaceMesh(Node):
 
         ctx.restore()
         super().draw(ctx, time)
+
+
+SurfaceMesh3DPlot = Animated3DSurfaceMesh
+WireframeTopology = WireframeContourGrid

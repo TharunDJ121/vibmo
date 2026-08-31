@@ -1,13 +1,13 @@
-# ✦ Motio: The AI Agent Vibe Coding Guide
+# ✦ Vibmo: The AI Agent Vibe Coding Guide
 
 > **For LLMs & AI Coding Agents (Claude, Codex, Antigravity, ChatGPT, Gemini, Cursor).**
-> This guide teaches you how to generate world-class, aesthetic motion graphics with **zero boilerplate** using `motio` (and `vibmo`).
+> This guide teaches you how to generate world-class, aesthetic vibmon graphics with **zero boilerplate** using `vibmo` (and `vibmo`).
 
 ---
 
-## 🧭 The 5 Motio Principles for Agents
+## 🧭 The 5 Vibmo Principles for Agents
 
-1. **Single-Line God Import**: Always import everything in one line: `from motio.agent_api import *`.
+1. **Single-Line God Import**: Always import everything in one line: `from vibmo.agent_api import *`.
 2. **High-Level Intent & Method Chaining**: Never manually compute per-frame coordinates. Chain fluent helpers: `scene.add(GlassCard()).align("center").pop_in()`.
 3. **Beautiful Defaults**: Every preset comes with natural spring overshoot, smooth deceleration, and visual polish. Keep default parameters unless explicitly requested.
 4. **Semantic Primitives**: Think in design components (`BrowserWindow`, `GlassCard`, `MetricCounter`, `Cursor`, `Spotlight`, `MorphPath`, `Icon`, `CandlestickChartPro`, `SplitFlapAirportBoard`, `RealisticNeonStrobeSign`).
@@ -15,10 +15,10 @@
 
 ---
 
-## ⚡ Canonical Motio Recipe
+## ⚡ Canonical Vibmo Recipe
 
 ```python
-from motio.agent_api import *
+from vibmo.agent_api import *
 
 # 1. Initialize Scene (1080p @ 60 FPS, Dark aesthetic)
 scene = Scene(
@@ -37,7 +37,7 @@ scene.add_post_fx(Vignette(intensity=0.25), FilmGrain(amount=0.015))
 # 3. Assemble Semantic UI Components
 card = GlassCard(direction="column", gap=16, padding=32, corner_radius=24, position=(240, 200))
 icon = Icon("lucide:sparkles", size=36, color=colors.CYAN)
-title = KineticText("Automated Motion in Python", font_size=32, bold=True)
+title = KineticText("Automated Vibmon in Python", font_size=32, bold=True)
 counter = MetricCounter(start_val=0, end_val=250000, prefix="$", suffix=" MRR", font_size=52, bold=True, color=colors.EMERALD)
 
 card.add(icon, title, counter)
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
 ## 📖 Complete Master Asset Suite Catalog (Sections 1 through 7)
 
-Every class below is directly available via `from motio.agent_api import *`.
+Every class below is directly available via `from vibmo.agent_api import *`.
 
 ### 🔊 Section 1: Procedural Audio & Sound Synthesis (`vibmo/audio/generators/`)
 Procedural 48kHz sound effects with zero external audio assets required.
@@ -97,7 +97,7 @@ Procedural 48kHz sound effects with zero external audio assets required.
 ---
 
 ### 🌌 Section 2: Non-Static Animated Backdrops (`vibmo/fx/backgrounds/`)
-Procedural animated canvas backgrounds with dynamic procedural motion over time.
+Procedural animated canvas backgrounds with dynamic procedural vibmon over time.
 
 | Suite | Component Classes | Usage Recipe |
 | :--- | :--- | :--- |
@@ -165,7 +165,7 @@ Modern interactive components designed for AI tools, developer platforms, and Sa
 
 ---
 
-### 📈 Section 5: Financial, 3D Spatial & Motion Charts (`vibmo/charts/`)
+### 📈 Section 5: Financial, 3D Spatial & Vibmon Charts (`vibmo/charts/`)
 High-precision animated chart engines with smooth interpolations and metric axes.
 
 | Suite | Component Classes | Usage Recipe |
@@ -222,15 +222,35 @@ Cinematic viewport shaders and turnkey 1-line scene setups.
 | **ASCII Matrix Art** | `AsciiMatrixArtFilter`, `LuminescenceGrid` | `scene.add_post_fx(AsciiMatrixArtFilter(char_size=12, green_phosphor=True))` |
 | **AI Coding Assistant** | `TmplAiCodeAssistantSuite` | `scene = TmplAiCodeAssistantSuite.build_scene(prompt="Build a SaaS in Python")` |
 | **Fintech Crypto Card**| `TmplFintechCryptoCardSuite` | `scene = TmplFintechCryptoCardSuite.build_scene(cardholder="SATOSHI NAKAMOTO")` |
-| **Developer CLI Launch**| `TmplDeveloperCliLaunchSuite` | `scene = TmplDeveloperCliLaunchSuite.build_scene(command="npm install -g vibmo")` |
 | **YC SaaS Pitch Deck** | `TmplSaasYcPitchSuite` | `scene = TmplSaasYcPitchSuite.build_scene(mrr="$120k", growth="+40%")` |
 | **Podcast Audiogram** | `TmplSocialAudiogramSuite` | `scene = TmplSocialAudiogramSuite.build_scene(audio="podcast.mp3", title="The Future of AI")` |
 
 ---
 
+### 🧠 Section 8: Quality Gates, Developer UI & Intelligent Video Post (`vibmo/quality/`, `vibmo/components/`, `vibmo/rigging/`, `vibmo/video_post/`)
+
+| Suite | Component Classes | Usage Recipe |
+| :--- | :--- | :--- |
+| **Slideshow Risk Scorer** | `SlideshowRiskScorer`, `SlideshowRiskReport` | `report = SlideshowRiskScorer.evaluate_scene(scene); if report.verdict == "fail": print(report.suggestions)` |
+| **Scene Pacing Verifier** | `ScenePacingVerifier`, `TimelineLandmark` | `pacing = ScenePacingVerifier.verify_alignment(steps, scene_start=0, scene_end=5.0, narration_cues=[(2.0, "build")])` |
+| **Terminal Window** | `TerminalWindow`, `TerminalStep` | `term = TerminalWindow(); term.add_command("pip install vibmo").add_output("Successfully installed"); scene.add(term)` |
+| **Code Card** | `CodeCard` | `card = CodeCard(code="import vibmo\nscene = Scene()", theme="dracula"); scene.add(card)` |
+| **Diagram Flowchart** | `DiagramNode`, `DiagramBox` | `diag = DiagramNode(); diag.add_box("1", "User").add_box("2", "Vibmo").connect("1", "2"); scene.add(diag)` |
+| **2D Mocap Puppetry** | `MocapStickFigure`, `FabrikSolver2D` | `figure = MocapStickFigure(action="dance"); figure.reach_left((100, -50)); scene.add(figure)` |
+| **Audio Energy & Drops** | `AudioEnergyAnalyzer` | `profile = AudioEnergyAnalyzer.analyze("soundtrack.mp3"); print("Drop at:", profile.peak_timestamp)` |
+| **Voiceover Ducker** | `VoiceoverDucker` | `ducker = VoiceoverDucker(); vol = ducker.compute_volume_at(t=2.5, segments=[(2.0, 4.0)])` |
+| **Cinematography Builder** | `ShotPromptBuilder`, `ShotSpecification` | `prompt = ShotPromptBuilder.build_prompt({"shot_size": "medium_wide", "movement": "orbital"})` |
+| **Color & Contrast Token** | `ColorHarmonizer`, `ContrastEvaluation` | `contrast = ColorHarmonizer.evaluate_contrast("#FFFFFF", "#0A0D14"); print(contrast.rating)` |
+| **Face Auto-Reframe** | `AutoReframe` | `AutoReframe.reframe_video("input.mp4", "output_reels.mp4", target_aspect="portrait")` |
+| **Silence Cutter** | `SilenceCutter` | `intervals = SilenceCutter.detect_silence("voiceover.mp4", silence_threshold_db=-35)` |
+| **Public Stock Media** | `StockAssetConnector` | `items = StockAssetConnector.search_nasa("nebula", limit=4)` |
+
+---
+
+
 ## 🔄 Agent Storyboard Inspection Loop
 
-When writing or editing a Motio scene:
+When writing or editing a Vibmo scene:
 1. Run `scene.validate()` to pre-flight check all assets, bounds, and timings.
 2. Run `scene.storyboard("storyboard.png")`.
 3. Inspect the generated 6-frame contact sheet.
@@ -244,10 +264,94 @@ When writing or editing a Motio scene:
 
 | Pitfall | What Went Wrong | Correct Fix |
 | :--- | :--- | :--- |
-| `from motio import Scene, ...` | Importing individual symbols leads to missing imports | Always use: `from motio.agent_api import *` |
+| `from vibmo import Scene, ...` | Importing individual symbols leads to missing imports | Always use: `from vibmo.agent_api import *` |
 | `card.position = (100, 200)` | Direct assignment bypasses Signal reactivity | Use: `card.position.set((100, 200))` or `card.at(100, 200)` |
 | `yield *cursor.click()` | Unpacking return list with `*` is not valid syntax in Python generators | Simply use: `yield cursor.click()` or `yield scene.all(cursor.click(), ...)` |
 | `GlassCard(glow=True)` | Hallucinating invalid constructor parameters | Use: `GlassCard(specular_rim=True, shadow=DropShadow.glow(colors.CYAN))` |
 | `scene.animate` not decorated | Calling animate function directly without `@scene.animate` | Decorate the generator: `@scene.animate\ndef main():\n    yield ...` |
 | Animation ends after scene ends | `card.pop_in(delay=5.0, duration=2.0)` on a 4.0s scene | Call `scene.validate()` to catch timing overflows; ensure `delay + duration <= scene.duration` |
 | Missing fonts crash | Requesting custom system fonts not installed | `FontManager` auto-fetches Google Fonts; prefer standard font names like `"Inter"`, `"Roboto"`, `"Space Grotesk"` |
+
+
+### 🚀 Section 9: HDR, Color Science & Resolution Independence (`vibmo/color/` & `vibmo/core/`)
+Advanced pipeline tools for 32-bit float color science, HDR mastering, and dynamic resolution scaling.
+
+| Suite | Component Classes | Usage Recipe |
+| :--- | :--- | :--- |
+| **Resolve Color Management** | `RCMPipeline`, `DRTMode` | `rgb = RCMPipeline.apply_drt_tone_mapping(rgb, mode=DRTMode.DAVINCI)` |
+| **SDR to HDR Diffuse White** | `RCMPipeline` | `rgb = RCMPipeline.sdr_to_hdr_diffuse_white(rgb, target_nits=203.0)` |
+| **Dolby Vision Analysis** | `DolbyVisionAnalyzer` | `l1_metrics = DolbyVisionAnalyzer.analyze_frame(rgb_nits)` |
+| **MultiMaster Trim** | `MultiMasterTrimManager`, `TrimPass` | `trim = MultiMasterTrimManager(master_nits=4000); trim.add_trim_pass(TrimPass('SDR_Rec709'))` |
+| **Dynamic Sizing Pipeline** | `SizingPipeline`, `FitMode` | `matrix = SizingPipeline.concatenate_affine_matrix(fit, edit, input)` |
+| **HDR Light Level Report** | `HDRReportGenerator` | `report_md = HDRReportGenerator.generate_markdown_report(data)` |
+| **Automated Audio Soft-Fades** | `FairlightAudioEngine` | `clean_audio = FairlightAudioEngine.apply_soft_fades(audio, fade_ms=1.5)` |
+| **Hierarchical Render Cache**| `HierarchicalRenderCache`, `CacheTier`| `frame = cache.get_or_render(CacheTier.TIER2_NODE_GRAPH, key, fn)` |
+
+
+
+### 🎨 Section 11: Remocn Motion Graphics, Shaders & 6-Beat Video Spine (`vibmo/templates/`, `vibmo/fx/shaders/`, `vibmo/typography/`, `vibmo/product/ai/`, `vibmo/quality/`)
+Production suites inspired and optimized from the Remocn ecosystem for high-converting SaaS product demos and developer launches.
+
+| Suite | Component Classes | Usage Recipe |
+| :--- | :--- | :--- |
+| **6-Beat Product Spine** | `TmplSaasProductDemoSpineSuite`, `ProductDemoSpine` | `scene = TmplSaasProductDemoSpineSuite.build_scene(spine=ProductDemoSpine(product_name="Vibmo"))` |
+| **Changelog Video** | `TmplChangelogReleaseSuite` | `scene = TmplChangelogReleaseSuite.build_scene(version="v2.4.0", release_title="Hardware Shaders")` |
+| **CLI Developer Launch** | `TmplCliDeveloperLaunchSuite` | `scene = TmplCliDeveloperLaunchSuite.build_scene(tool_name="vibmo-cli", command="vibmo build")` |
+| **Claude Code & Terminal**| `ClaudeCodeSimulator`, `TerminalCursorZoom` | `term = ClaudeCodeSimulator(); term.add_command("pip install vibmo").add_output("Installed ✓")` |
+| **AI Prompt Composer** | `AiPromptFlow`, `ModelSelectorPill` | `flow = AiPromptFlow(prompt_text="Build SaaS", model_name="Claude 3.7"); yield flow.type_prompt()` |
+| **Interactive Checkout** | `InteractiveCheckoutFlow`, `PaymentCreditCardField` | `checkout = InteractiveCheckoutFlow(amount="$99/yr"); yield checkout.trigger_payment()` |
+| **Social Follow & Stars** | `XFollowCard`, `GitHubStarsCard` | `card = XFollowCard(name="Vibmo"); yield card.click_follow()` |
+| **Infinite Bento Pan** | `InfiniteBentoPan`, `BentoGridCard` | `bento = InfiniteBentoPan(); yield bento.pan_camera((100, 50))` |
+| **ASCII Render Filter** | `AsciiRenderFilter`, `AsciiRenderShader` | `scene.add_post_fx(AsciiRenderFilter(glyph_size=16, ink="#00ff00"))` |
+| **CCTV Security Cam** | `SecurityCamOverlay`, `CctvSurveillanceHud` | `scene.add_post_fx(SecurityCamOverlay(camera_name="CAM 01 // LOBBY", show_rec=True))` |
+| **Neural Noise & Voronoi**| `ShaderNeuroNoise`, `ShaderVoronoiGrid` | `scene.add(ShaderNeuroNoise(speed=0.8, color_core=(14, 165, 233)))` |
+| **Underwater Wave Ripple**| `UnderwaterRippleFilter` | `scene.add_post_fx(UnderwaterRippleFilter(frequency=0.02, amplitude=8.0))` |
+| **Blur Out Up Title** | `BlurOutUpText`, `BlurOutUpCharacterNode` | `text = BlurOutUpText("Launch Week"); yield text.blur_out_up()` |
+| **Matrix Cipher Decode** | `MatrixDecodeText`, `MatrixGlyphScrambler` | `matrix = MatrixDecodeText("QUANTUM SECURE"); yield matrix.decode()` |
+| **Rolling Number Wheel** | `RollingNumberWheel`, `SlotMachineRoller` | `roller = RollingNumberWheel(start_val=0, end_val=5000); yield roller.roll_to(4200)` |
+| **Inline Pill Takeover** | `InlinePillTakeoverText`, `StrikethroughReplaceText`| `pill = InlinePillTakeoverText(pill_text="zero boilerplate"); yield pill.expand_pill()` |
+| **Push-Through Zoom** | `PushThroughTransition` | `trans = PushThroughTransition(max_scale=3.0)` |
+| **Focus-Pull Rack Focus**| `FocusPullTransition` | `trans = FocusPullTransition(max_blur=24.0)` |
+| **Anti-Slop Quality Gate**| `AntiSlopValidator`, `AntiSlopReport` | `report = AntiSlopValidator.evaluate_scene(scene); assert report.verdict != "fail"` |
+
+
+### 🎬 Section 12: Video-Shotcraft Staging Suites, Beat-Sync & NLE Draft Export (`vibmo/product/shotcraft/`, `vibmo/audio/`, `vibmo/exporters/`, `vibmo/quality/`)
+Cinematic staging suites, physical UI metaphors, audio transient beat-syncing, CapCut / JianYing export, and production aesthetic case law derived from `video-shotcraft`.
+
+| Suite | Component Classes | Usage Recipe |
+| :--- | :--- | :--- |
+| **Deck Deal Fly-In** | `DeckDealFlyIn` | `deck = DeckDealFlyIn(cards=[{"title": "AI", "metric": "99%"}]); yield deck.deal_cards(); yield deck.fan_out()` |
+| **Doc Park & Pill Deal** | `DocParkPillDeal` | `doc = DocParkPillDeal(doc_title="Research"); yield doc.dock_left(); yield doc.deal_pills()` |
+| **Spotlight Hero Card** | `SpotlightHeroCard`, `DarkMetallicFloor` | `hero = SpotlightHeroCard(title="Core Engine"); scene.add(hero); yield hero.ignite_spotlight()` |
+| **Autolayout Gap Dial** | `AutolayoutGapDial` | `dial = AutolayoutGapDial(block_labels=["A", "B", "C"]); yield dial.expand_gap(48.0)` |
+| **Chip Grid Blackout** | `ChipGridSelectBlackout` | `chips = ChipGridSelectBlackout(options=["A", "B"]); yield chips.trigger_select()` |
+| **Avatar Bracket Carousel**| `AvatarBracketCarousel` | `bracket = AvatarBracketCarousel(roles=["Coder", "Architect"]); yield bracket.cycle_to(1.0)` |
+| **Bezier Convergence** | `BezierSourceConvergeMerge` | `merge = BezierSourceConvergeMerge(sources=["PRs", "DB"]); yield merge.animate_flow()` |
+| **Keynote Family Portrait**| `OutroGroupPhotoLaunch` | `outro = OutroGroupPhotoLaunch(brand_name="Vibmo"); yield outro.launch_family_portrait()` |
+| **Brand Ink Open** | `BrandInkOpen` | `ink = BrandInkOpen(brand_name="VIBMO"); yield ink.animate_intro()` |
+| **Brace Expand Reveal** | `BraceExpand` | `brace = BraceExpand(title_text="ZERO BOILERPLATE"); yield brace.expand()` |
+| **Beat Cut Accelerando** | `BeatCutAccelerando` | `cuts = BeatCutAccelerando(cut_labels=["CUT 1", "CUT 2"]); yield cuts.step_cut(1)` |
+| **Paparazzi Strobe Flash**| `PaparazziFlash` | `flash = PaparazziFlash(); yield flash.trigger_flash()` |
+| **Musical Beat Grid** | `BeatSyncGrid`, `TimelineSFXTable` | `grid = BeatSyncGrid(bpm=126.0); sfx = TimelineSFXTable(grid); sfx.add_cue("whoosh", target_beat=4.0)` |
+| **CapCut / JianYing Draft**| `JianYingDraftExporter` | `exporter = JianYingDraftExporter(); exporter.add_video_segment("Hero", 0, 120); exporter.export_to_file("draft.json")` |
+| **Aesthetic Case Law** | `AestheticCaseLawValidator` | `report = AestheticCaseLawValidator.evaluate_scene(scene); assert report.verdict != "fail"` |
+
+
+### 🌌 Section 13: Video Production Skills, Dark Magic UI & Anti-PPT Director (`vibmo/product/magic_ui/`, `vibmo/typography/`, `vibmo/ai/`, `vibmo/quality/`)
+Presenton-style dark magic UI, black & white Foley typing openers, Anti-PPT meta-director, and full-frame replica QC.
+
+| Suite | Component Classes | Usage Recipe |
+| :--- | :--- | :--- |
+| **Dark Starfield Stage** | `DarkStarfieldStage` | `scene.add(DarkStarfieldStage(particle_count=65, horizon_color="#7c3aed"))` |
+| **Prompt Invocation** | `PromptInvocationCard` | `card = PromptInvocationCard(prompt_text="Build AI video"); yield card.enter_card(); yield card.type_prompt()` |
+| **Model Orbit Ring** | `ModelCapabilityOrbit` | `orbit = ModelCapabilityOrbit(models=["Claude 3.7", "GPT-4o"]); yield orbit.open_ring(); yield orbit.rotate_orbit()` |
+| **Export Burst** | `ExportBurstContainer` | `burst = ExportBurstContainer(headline="Instant Export"); yield burst.trigger_burst()` |
+| **Connected Ecosystem** | `ConnectEcosystemSlot` | `slot = ConnectEcosystemSlot(hub_name="Cloud API"); yield slot.animate_connect()` |
+| **Turnkey Dark Magic** | `TmplDarkSaasMagicSuite` | `scene = TmplDarkSaasMagicSuite.build_scene(prompt_text="Ship SaaS Promo in Python")` |
+| **B&W Typing Opener** | `BlackWhiteTypingOpener` | `opener = BlackWhiteTypingOpener(title_prefix="AI Video Engine"); yield opener.type_intro()` |
+| **Anti-PPT Meta-Director**| `MotionThesis`, `BeatGraph`, `AntiPptGate` | `thesis = MotionThesis("river", "stream", "network", "speed"); graph = BeatGraph(thesis); report = AntiPptGate.evaluate_beat_graph(graph)` |
+| **Video Replica QC** | `VideoReplicaVerifier`, `FidelityLevel` | `verdict = VideoReplicaVerifier.evaluate_three_gates(result); assert verdict.overall_status == "aligned"` |
+
+
+
+

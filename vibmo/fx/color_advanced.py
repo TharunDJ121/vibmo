@@ -495,6 +495,93 @@ class Vibrance:
         return saturation.apply(rgba, time)
 
 
+class Lut3D:
+    """
+    3D LUT (Look-Up Table) color grading filter.
+    Parses DaVinci Resolve standard .cube files and applies trilinear interpolation.
+    """
+
+    def __init__(self, cube_file_path: str, intensity: float = 1.0) -> None:
+        self.cube_file_path = cube_file_path
+        self.intensity = max(0.0, min(1.0, intensity))
+        self.size = 0
+        self.lut: Optional[np.ndarray] = None
+        self._load_cube_file()
+
+    def _load_cube_file(self) -> None:
+        import os
+        if not os.path.exists(self.cube_file_path):
+            raise FileNotFoundError(f"LUT file not found: {self.cube_file_path}")
+            
+        data = []
+        with open(self.cube_file_path, "r") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                if line.startswith("LUT_3D_SIZE"):
+                    self.size = int(line.split()[1])
+                elif not line.startswith("TITLE") and not line.startswith("DOMAIN"):
+                    # Parse R G B floats
+                    parts = line.split()
+                    if len(parts) == 3:
+                        data.append([float(p) for p in parts])
+                        
+        if self.size == 0 or not data:
+            raise ValueError(f"Invalid .cube file: {self.cube_file_path}")
+            
+        # Reshape to (size, size, size, 3). The order in .cube files is usually R changes fastest, then G, then B.
+        self.lut = np.array(data, dtype=np.float32).reshape((self.size, self.size, self.size, 3))
+
+    def apply(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
+        if self.intensity <= 0.0 or self.lut is None:
+            return rgba
+            
+        result = rgba.copy()
+        rgb = rgba[:, :, :3].astype(np.float32) / 255.0
+        
+        # Scale to LUT indices
+        rgb_scaled = rgb * (self.size - 1)
+        
+        # Get integer indices and fractional parts for trilinear interpolation
+        idx0 = np.clip(np.floor(rgb_scaled).astype(np.int32), 0, self.size - 2)
+        idx1 = idx0 + 1
+        frac = rgb_scaled - idx0
+        
+        # Extract slices from the LUT (using advanced indexing)
+        b0, g0, r0 = idx0[..., 2], idx0[..., 1], idx0[..., 0]
+        b1, g1, r1 = idx1[..., 2], idx1[..., 1], idx1[..., 0]
+        
+        # Trilinear interpolation
+        c000 = self.lut[b0, g0, r0]
+        c100 = self.lut[b0, g0, r1]
+        c010 = self.lut[b0, g1, r0]
+        c110 = self.lut[b0, g1, r1]
+        c001 = self.lut[b1, g0, r0]
+        c101 = self.lut[b1, g0, r1]
+        c011 = self.lut[b1, g1, r0]
+        c111 = self.lut[b1, g1, r1]
+        
+        fx = frac[..., 0:1]
+        fy = frac[..., 1:2]
+        fz = frac[..., 2:3]
+        
+        c00 = c000 * (1 - fx) + c100 * fx
+        c10 = c010 * (1 - fx) + c110 * fx
+        c01 = c001 * (1 - fx) + c101 * fx
+        c11 = c011 * (1 - fx) + c111 * fx
+        
+        c0 = c00 * (1 - fy) + c10 * fy
+        c1 = c01 * (1 - fy) + c11 * fy
+        
+        lut_color = c0 * (1 - fz) + c1 * fz
+        
+        # Apply intensity blend
+        final_rgb = (rgb * (1.0 - self.intensity)) + (lut_color * self.intensity)
+        result[:, :, :3] = np.clip(final_rgb * 255.0, 0, 255).astype(np.uint8)
+        
+        return result
+
 # Convenience functions for common color effects
 
 def duotone(light_color: Union[str, tuple] = 'white', 

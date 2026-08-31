@@ -1,11 +1,12 @@
 import math
 import random
-from typing import Any
+from typing import Any, Optional
 import cairo
 
 from vibmo.core.color import Color, colors
 from vibmo.core.vector import Vector2D
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
 from vibmo.scene.node import Node
 
 class HologramChromaText(Node):
@@ -15,12 +16,29 @@ class HologramChromaText(Node):
         self.text = text
         self.font_size = Signal(float(font_size), f"{self.name}.font_size")
         self.font_family = font_family
+        self.projection_progress = Signal(1.0, f"{self.name}.projection_progress")
+
+    def project_emitter(
+        self,
+        duration: float = 1.5,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+    ) -> AnimationAction:
+        """Projects holographic beam upward from floor emitter and materializes text."""
+        self.projection_progress.set(0.0)
+        e = ease or Ease.out_expo
+        return self.projection_progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def _setup_cairo_font(self, ctx: cairo.Context, font_size: float) -> None:
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         ctx.set_font_size(font_size)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
+        p = float(self.projection_progress.get(time))
+        if p <= 0.0:
+            super().draw(ctx, time)
+            return
+
         fs = self.font_size.get(time)
         ctx.save()
         self._setup_cairo_font(ctx, fs)
@@ -34,12 +52,13 @@ class HologramChromaText(Node):
             offset = i / 10.0
             # hue shifts over space (offset) and time
             hue = (offset + time * 0.5) % 1.0
-            color = Color.hsl(hue * 360, 0.8, 0.6, 0.7)
+            color = Color.hsl(hue * 360, 0.8, 0.6, 0.7 * min(1.0, p))
             r, g, b, a = color.to_cairo()
             gradient.add_color_stop_rgba(offset, r, g, b, a)
             
         ctx.set_source(gradient)
-        ctx.move_to(0, fs)
+        y_offset = (1.0 - p) * 20.0
+        ctx.move_to(0, fs + y_offset)
         ctx.show_text(self.text)
         
         ctx.restore()

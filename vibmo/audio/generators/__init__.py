@@ -14,6 +14,7 @@ from vibmo.audio.generators.sfx_chimes_harmonic_suite import (
     ChimesHarmonicSuite,
 )
 from vibmo.audio.generators.sfx_cyber_ui_suite import (
+    CyberUiSuite,
     CyberUISFXSuite,
 )
 from vibmo.audio.generators.sfx_glitch_stutter_suite import (
@@ -35,6 +36,7 @@ from vibmo.audio.generators.sfx_paper_card_suite import (
     PaperCardSuite,
 )
 from vibmo.audio.generators.sfx_retro_8bit_suite import (
+    Retro8bitSuite,
     Retro8BitSuite,
 )
 from vibmo.audio.generators.sfx_riser_tension_suite import (
@@ -52,6 +54,7 @@ __all__ = [
     "AmbientDroneSuite",
     "CameraShutterSuite",
     "ChimesHarmonicSuite",
+    "CyberUiSuite",
     "CyberUISFXSuite",
     "GlitchStutterSuite",
     "ImpactSubSuite",
@@ -59,8 +62,10 @@ __all__ = [
     "LaserPlasmaSuite",
     "LiquidBubblesSuite",
     "PaperCardSuite",
+    "Retro8bitSuite",
     "Retro8BitSuite",
     "RiserTensionSuite",
     "VinylCrackleSuite",
     "WhooshDesignerSuite",
 ]
+

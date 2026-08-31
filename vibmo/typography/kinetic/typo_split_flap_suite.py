@@ -8,7 +8,7 @@ import cairo
 from typing import Any, Callable, List, Optional, Tuple, Union
 
 from vibmo.core.color import Color, colors
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.scene.node import Node
 from vibmo.typography.text import Text
 from vibmo.core.vector import Vector2D
@@ -203,13 +203,31 @@ class MechanicalFlapTile(Node):
 
 class SplitFlapAirportBoard(Node):
     """Matrix of mechanical split-flap character modules flipping through letters to form titles."""
-    def __init__(self, initial_text: str = "", tile_width: float = 60.0, tile_height: float = 90.0, gap: float = 10.0, **kwargs):
+    def __init__(
+        self,
+        initial_text: Union[str, List[str]] = "",
+        rows: int = 1,
+        cols: int = 16,
+        tile_width: float = 60.0,
+        tile_height: float = 90.0,
+        gap: float = 10.0,
+        **kwargs
+    ):
         super().__init__(**kwargs)
+        self.rows = rows
+        self.cols = cols
         self.tile_width = tile_width
         self.tile_height = tile_height
         self.gap = gap
         
-        self.text_signal = Signal(initial_text, f"{self.name}.text")
+        if isinstance(initial_text, list):
+            init_str = " ".join(initial_text)
+        else:
+            init_str = str(initial_text)
+        if not init_str and (rows > 1 or cols > 1):
+            init_str = " " * (rows * cols)
+
+        self.text_signal = Signal(init_str, f"{self.name}.text")
         
         self.tiles: List[MechanicalFlapTile] = []
         self.scrambles: List[RapidLetterScramble] = []
@@ -218,31 +236,39 @@ class SplitFlapAirportBoard(Node):
         self.anim_progress = Signal(0.0, f"{self.name}.anim_progress")
         self.anim_duration = 0.0
         
-        self._setup_tiles(initial_text)
+        self._setup_tiles(init_str)
         
     def _setup_tiles(self, text: str):
-        # Clear old children if any
-        for tile in self.tiles:
-            # Node class doesn't have a built-in remove(), but we can clear children list if needed
-            # For simplicity, we just rebuild or reuse. Let's rebuild for now.
-            pass
         self.children.clear()
         self.tiles.clear()
         
         for i, char in enumerate(text):
             tile = MechanicalFlapTile(width=self.tile_width, height=self.tile_height)
-            tile.position.set(((self.tile_width + self.gap) * i, 0))
+            row_idx = i // self.cols if self.cols > 0 else 0
+            col_idx = i % self.cols if self.cols > 0 else i
+            tile.position.set(((self.tile_width + self.gap) * col_idx, (self.tile_height + self.gap) * row_idx))
             tile.set_state(char, char, 0.0)
             self.tiles.append(tile)
             self.add(tile)
             
-    def flip_to(self, target_text: str, duration: float = 1.5):
+    def flip_to(
+        self,
+        target_text: Union[str, List[str]],
+        duration: float = 1.5,
+        delay: float = 0.0,
+        ease: Optional[Any] = None,
+    ) -> AnimationAction:
+        if isinstance(target_text, list):
+            target_str = " ".join(target_text)
+        else:
+            target_str = str(target_text)
+
         current_text = self.text_signal.get()
         
         # Pad strings to equal length
-        max_len = max(len(current_text), len(target_text))
+        max_len = max(len(current_text), len(target_str))
         current_text = current_text.ljust(max_len, " ")
-        target_text = target_text.ljust(max_len, " ")
+        target_str = target_str.ljust(max_len, " ")
         
         if len(self.tiles) != max_len:
             self._setup_tiles(current_text)
@@ -251,15 +277,16 @@ class SplitFlapAirportBoard(Node):
         
         for i in range(max_len):
             start_char = current_text[i]
-            target_char = target_text[i]
+            target_char = target_str[i]
             # Staggered total flaps: later characters flip longer
             flaps = 5 + i * 3
             self.scrambles.append(RapidLetterScramble(start_char, target_char, flaps))
             
         self.anim_progress.set(0.0)
-        self.anim_progress.to(1.0, duration, ease=Ease.linear)
+        e = ease or Ease.linear
         self.anim_duration = duration
-        self.text_signal.set(target_text)
+        self.text_signal.set(target_str)
+        return self.anim_progress.to(1.0, duration=duration, ease=e, delay=delay)
         
     def draw(self, ctx: cairo.Context, time: float):
         prog = self.anim_progress.get(time)

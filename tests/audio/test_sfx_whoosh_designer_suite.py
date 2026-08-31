@@ -33,3 +33,13 @@ def test_quick_snap_whoosh():
     assert audio.dtype == np.float32
     assert audio.shape == (2, int(WhooshDesignerSuite.SAMPLE_RATE * duration))
     assert np.isclose(np.max(np.abs(audio)), 1.0, atol=1e-5)
+
+def test_cinematic_passby():
+    duration = 1.2
+    audio = WhooshDesignerSuite.cinematic_passby(duration=duration)
+
+    assert audio.dtype == np.float32
+    assert audio.shape == (2, int(WhooshDesignerSuite.SAMPLE_RATE * duration))
+    assert np.isclose(np.max(np.abs(audio)), 1.0, atol=1e-5)
+    assert np.max(np.abs(audio)) > 0.0
+

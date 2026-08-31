@@ -9,6 +9,39 @@ class CyberUISFXSuite:
     Produces 48kHz float32 NumPy audio arrays normalized to [-1.0, 1.0].
     """
 
+    SAMPLE_RATE = 48000
+
+    @staticmethod
+    def holographic_click(pitch: float = 800.0, duration: float = 0.05) -> np.ndarray:
+        """Holographic tactile UI click with dual FM resonance."""
+        if duration <= 0:
+            return np.array([], dtype=np.float32)
+
+        sr = SAMPLE_RATE
+        t = np.linspace(0, duration, int(sr * duration), endpoint=False)
+
+        # Resonant click with transient exponential sweep
+        f_instant = pitch * np.exp(-t * 50) + pitch * 1.5
+        phase = 2 * np.pi * np.cumsum(f_instant) / sr
+        carrier = np.sin(phase)
+
+        # High harmonic ping
+        harmonic = np.sin(2 * np.pi * (pitch * 3.2) * t) * np.exp(-t * 120)
+
+        # Fast attack, exponential decay envelope
+        env = np.exp(-t * 80)
+        attack_len = min(int(0.002 * sr), len(t))
+        if attack_len > 0:
+            env[:attack_len] = np.linspace(0, 1, attack_len)
+
+        out = (carrier * 0.7 + harmonic * 0.3) * env
+
+        max_val = np.max(np.abs(out))
+        if max_val > 0:
+            out = out / max_val
+
+        return out.astype(np.float32)
+
     @staticmethod
     def holo_chirp(duration: float = 0.08, freq_start: float = 1800.0, freq_end: float = 3200.0) -> np.ndarray:
         """Dual-frequency resonant FM chirp for button hover/touch."""
@@ -197,6 +230,9 @@ class CyberUISFXSuite:
         return output.astype(np.float32)
 
 # Standalone convenience functions
+def holographic_click(pitch: float = 800.0, duration: float = 0.05) -> np.ndarray:
+    return CyberUISFXSuite.holographic_click(pitch, duration)
+
 def holo_chirp(duration: float = 0.08, freq_start: float = 1800.0, freq_end: float = 3200.0) -> np.ndarray:
     return CyberUISFXSuite.holo_chirp(duration, freq_start, freq_end)
 
@@ -211,3 +247,7 @@ def access_denied_klaxon(duration: float = 0.35, freq: float = 180.0) -> np.ndar
 
 def cyber_pip(duration: float = 0.04, freq: float = 2200.0) -> np.ndarray:
     return CyberUISFXSuite.cyber_pip(duration, freq)
+
+# Canonical AGENTS.md alias
+CyberUiSuite = CyberUISFXSuite
+

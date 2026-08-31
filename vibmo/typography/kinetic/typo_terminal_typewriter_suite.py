@@ -128,6 +128,7 @@ class PhosphorTerminalTypewriter(Node):
         prompt_text: Optional[str] = "user@vibmo:~$ ",
         prompt_color: Union[Color, str] = colors.GREEN_500,
         audio_hook: Optional[Callable[[str, float], None]] = None,
+        prompt: Optional[str] = None,
         **kwargs: Any
     ) -> None:
         super().__init__(**kwargs)
@@ -140,11 +141,12 @@ class PhosphorTerminalTypewriter(Node):
         self.typing_progress = Signal(0.0, f"{self.name}.typing_progress")
         self.typing_speed = 35.0
 
+        resolved_prompt = prompt if prompt is not None else prompt_text
         self.prompt_node: Optional[CommandPromptPrefix] = None
         self.prompt_width = 0.0
-        if prompt_text:
+        if resolved_prompt:
             self.prompt_node = CommandPromptPrefix(
-                prompt=prompt_text,
+                prompt=resolved_prompt,
                 font_size=font_size,
                 font_family=font_family,
                 color=prompt_color

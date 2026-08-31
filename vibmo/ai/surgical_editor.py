@@ -121,6 +121,34 @@ class SurgicalSceneEditor:
         return modified, changes
 
     @classmethod
+    def apply_schema_edit(cls, project: Any, op_type: str, payload: Dict[str, Any]) -> Tuple[Any, List[str]]:
+        """
+        Applies a typed schema operation to a VibmoProject IR instead of regexing Python strings.
+        This provides a reversible, deterministic editing capability.
+        """
+        changes = []
+        if op_type == "change_shot_duration":
+            shot_id = payload.get("shot_id")
+            new_dur = payload.get("duration")
+            for track in project.tracks:
+                for shot in track.shots:
+                    if shot.id == shot_id or shot_id is None:
+                        shot.duration = new_dur
+                        changes.append(f"Updated shot '{shot.name}' duration to {new_dur}s")
+        
+        elif op_type == "set_font_asset":
+            layer_id = payload.get("layer_id")
+            new_font = payload.get("font_family")
+            for track in project.tracks:
+                for shot in track.shots:
+                    for layer in shot.layers:
+                        if layer.id == layer_id or layer_id is None:
+                            layer.properties["font_family"] = new_font
+                            changes.append(f"Updated layer '{layer.name}' font to {new_font}")
+                            
+        return project, changes
+
+    @classmethod
     def execute_and_test(cls, code: str, storyboard_out: Optional[str] = None) -> Tuple[bool, List[str]]:
         """
         Executes code in a sandbox namespace to verify syntax and runtime validity instantaneously.

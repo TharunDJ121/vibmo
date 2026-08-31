@@ -84,3 +84,13 @@ def test_retro_8bit_suite_triangle_wave():
     assert len(unique_vals) > 2
     # Ensure values are steps
     assert len(unique_vals) <= 16
+
+def test_retro_8bit_suite_arcade_coin_jump():
+    from vibmo.audio.generators.sfx_retro_8bit_suite import Retro8bitSuite
+    assert Retro8bitSuite is Retro8BitSuite
+    duration = 0.30
+    out = Retro8bitSuite.arcade_coin_jump(duration=duration)
+    assert out.dtype == np.float32
+    assert len(out) == int(48000 * duration)
+    assert np.max(np.abs(out)) <= 1.0
+

@@ -28,7 +28,10 @@ class MeshGradientFlow(Node):
         width: float = 1920.0,
         height: float = 1080.0,
         colors_list: Optional[List[Union[Color, str]]] = None,
+        colors: Optional[List[Union[Color, str]]] = None,
         speed_multiplier: float = 1.0,
+        speed: Optional[float] = None,
+        complexity: Optional[int] = None,
         resolution_scale: float = 1.0,
         auto_resize: bool = True,
         **kwargs: Any,
@@ -37,18 +40,29 @@ class MeshGradientFlow(Node):
         self.width = width
         self.height = height
         self.auto_resize = auto_resize
-        self.speed_multiplier = speed_multiplier
+        self.speed_multiplier = speed if speed is not None else speed_multiplier
+        self.complexity = complexity or 4
         self.resolution_scale = resolution_scale
 
-        if colors_list is None:
+        from vibmo.core.color import colors as c_palette
+        resolved_colors = colors if colors is not None else colors_list
+        if resolved_colors is None:
             self.colors_list = [
-                colors.INDIGO,
-                colors.PURPLE,
-                colors.CYAN,
-                colors.EMERALD,
+                c_palette.INDIGO,
+                c_palette.PURPLE,
+                c_palette.CYAN,
+                c_palette.EMERALD,
             ]
         else:
-            self.colors_list = [Color.from_any(c) for c in colors_list]
+            self.colors_list = [Color.from_any(c) for c in resolved_colors]
+
+    @property
+    def colors(self) -> List[Color]:
+        return self.colors_list
+
+    @property
+    def speed(self) -> float:
+        return self.speed_multiplier
 
     def _get_node_pos(self, index: int, t: float) -> Tuple[float, float]:
         """Calculates orbiting path for a control node."""

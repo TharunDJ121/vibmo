@@ -23,6 +23,18 @@ class LiquidWaveText(Node):
         self.amplitude = amplitude
         self.frequency = frequency
         self.speed = speed
+        self.reveal_progress = Signal(1.0, f"{self.name}.reveal_progress")
+
+    def ripple_reveal(
+        self,
+        duration: float = 1.8,
+        delay: float = 0.0,
+        ease: Optional[Any] = None,
+    ) -> AnimationAction:
+        """Animates a staggered fluid wave reveal where characters emerge with liquid ripple dynamics."""
+        self.reveal_progress.set(0.0)
+        e = ease or Ease.out_cubic
+        return self.reveal_progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def _setup_cairo_font(self, ctx: cairo.Context, font_size: float) -> None:
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
@@ -31,19 +43,41 @@ class LiquidWaveText(Node):
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         fs = self.font_size.get(time)
         c = self.color.get(time)
+        prog = float(self.reveal_progress.get(time))
 
         ctx.save()
         self._setup_cairo_font(ctx, fs)
-        ctx.set_source_rgba(*c.to_cairo())
 
         current_x = 0.0
+        n_chars = max(1, len(self.text))
         for i, char in enumerate(self.text):
             # Calculate wave offset
             wave_offset = math.sin((i * self.frequency) + (time * self.speed)) * self.amplitude
 
+            if prog < 1.0:
+                char_start = i / n_chars
+                char_end = (i + 1) / n_chars
+                if prog <= char_start:
+                    local_p = 0.0
+                elif prog >= char_end:
+                    local_p = 1.0
+                else:
+                    local_p = (prog - char_start) / (char_end - char_start)
+                
+                eased_p = Ease.out_cubic(local_p)
+                char_alpha = eased_p * c.a
+                y_emerge = (1.0 - eased_p) * fs * 0.8
+                ripple_mod = math.sin(local_p * math.pi) * (self.amplitude * 1.5) if local_p < 1.0 else 0.0
+            else:
+                char_alpha = c.a
+                y_emerge = 0.0
+                ripple_mod = 0.0
+
             extents = ctx.text_extents(char)
-            ctx.move_to(current_x, fs * 0.88 + wave_offset)
-            ctx.show_text(char)
+            if char_alpha > 0.01:
+                ctx.set_source_rgba(c.r, c.g, c.b, char_alpha)
+                ctx.move_to(current_x, fs * 0.88 + wave_offset + y_emerge - ripple_mod)
+                ctx.show_text(char)
             current_x += extents.x_advance
 
         ctx.restore()

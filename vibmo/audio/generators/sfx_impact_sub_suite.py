@@ -7,6 +7,7 @@ class ImpactSubSuite:
     """
 
     SR = 48000
+    SAMPLE_RATE = 48000
 
     @staticmethod
     def _generate_time_array(duration):
@@ -189,3 +190,10 @@ class ImpactSubSuite:
         audio *= 0.8
 
         return audio.astype(np.float32)
+
+    @staticmethod
+    def cinematic_trailer_sub_drop(decay: float = 2.0, duration: float = None) -> np.ndarray:
+        """Massive cinematic trailer sub-bass drop with exponential pitch decay and saturation."""
+        dur = duration if duration is not None else decay
+        return ImpactSubSuite.cinematic_808_drop(duration=dur, start_freq=180.0, end_freq=28.0, saturation=1.6)
+

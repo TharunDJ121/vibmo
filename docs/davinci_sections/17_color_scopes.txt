@@ -1,0 +1,1225 @@
+Chapter 127
+Viewers, Monitoring, 
+and Video Scopes
+Viewers let you see what you’re working on, provide a UI for transport controls 
+and image comparison, draw windows and drag on-screen controls, and provide a 
+variety of warnings and information not found anywhere else. 
+However, at the same time, professional workflows require real time monitoring via supported video 
+I/O devices on a calibrated display. Lastly, video scopes provide a more precise analysis of the state 
+of the video signal you’re viewing, and DaVinci Resolve has built-in scopes you can use for creative 
+decision making and troubleshooting.
+This chapter covers the Color page Viewer, external monitoring and display calibration, and video 
+scopes in more detail. 
+Contents
+Using the Viewer ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3117
+The Viewer Title Bar ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3117
+Viewer Guides ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3119
+Proxy Handling  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3123
+Timeline Resolution  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3123
+Bypass Color Grades and Fusion  ������������������������������������������������������������������������������������������������������������������������������������������������ 3124
+Viewing Isolated Channels  ������������������������������������������������������������������������������������������������������������������������������������������������������������� 3124
+The Viewer Toolbar ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3124
+Showing Marker Overlays and Annotations  ������������������������������������������������������������������������������������������������������������������������� 3125
+The Onscreen Control (OSC)  Menu �������������������������������������������������������������������������������������������������������������������������������������������  3125
+Toggling Viewer Overlays On and Off ��������������������������������������������������������������������������������������������������������������������������������������� 3127
+Onscreen Controls and External Displays �������������������������������������������������������������������������������������������������������������������������������  3127
+Zooming into the Viewer ����������������������������������������������������������������������������������������������������������������������������������������������������������������  3128
+Using the Jog Bar and Transport Controls ���������������������������������������������������������������������������������������������������������������������������  3129
+Navigating Using the Arrow Keys �����������������������������������������������������������������������������������������������������������������������������������������������  3129
+Controlling Playback Using the Spacebar and JKL Keys  ������������������������������������������������������������������������������������������������ 3129
+Skimming in the Viewer  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3130
+3115Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Fast Review on the Color Page ���������������������������������������������������������������������������������������������������������������������������������������������������� 3130
+Navigating Using Timecode  ���������������������������������������������������������������������������������������������������������������������������������������������������������� 3130
+Viewer and Transport Timecode Displays  ���������������������������������������������������������������������������������������������������������������������������� 3130
+Enhanced, Full, and Cinema Viewing  ��������������������������������������������������������������������������������������������������������������������������������������� 3131
+Enhanced Viewing Mode  ����������������������������������������������������������������������������������������������������������������������������������������������������������������� 3131
+Full Viewing Mode �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3131
+Cinema Viewing Mode  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3132
+Safe Area Overlays in the Viewer ����������������������������������������������������������������������������������������������������������������������������������������������  3133
+Use Gray Background ����������������������������������������������������������������������������������������������������������������������������������������������������������������������  3134
+Monitor Calibration  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3134
+Viewing Broadcast Safe Exceptions  ���������������������������������������������������������������������������������������������������������������������������������������� 3135
+Comparing Clips in the Viewer  ���������������������������������������������������������������������������������������������������������������������������������������������������  3136
+Saving and Wiping Stills in the Gallery and Timeline  �������������������������������������������������������������������������������������������������������� 3136
+Different Viewer Reference Modes for Wipes ����������������������������������������������������������������������������������������������������������������������  3139
+Wiping Between Clips in the Timeline  �������������������������������������������������������������������������������������������������������������������������������������� 3139
+Using Split Screen Modes ��������������������������������������������������������������������������������������������������������������������������������������������������������������  3140
+Marker Overlays and Navigation ������������������������������������������������������������������������������������������������������������������������������������������������  3143
+Timeline Marker List Available in Color Page Viewer Option Menu ��������������������������������������������������������������������������  3143
+Using Video Scopes  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3144
+Video Scope Location  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������  3144
+Video Scope Measurement Using Scales  ������������������������������������������������������������������������������������������������������������������������������ 3146
+Video Scope Performance and Detail  �������������������������������������������������������������������������������������������������������������������������������������� 3148
+Display Qualifier Focus in Video Scope Graphs ������������������������������������������������������������������������������������������������������������������ 3150
+Explanation of Each Video Scope ���������������������������������������������������������������������������������������������������������������������������������������������� 3150
+Waveform Monitor ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3150
+Parade ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3151
+Vectorscope ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3151
+Histogram (RGB/YRGB parade histogram) ������������������������������������������������������������������������������������������������������������������������������  3152
+CIE Chromaticity Scope  �������������������������������������������������������������������������������������������������������������������������������������������������������������������  3153
+Panning and Zooming the Video Scopes  ������������������������������������������������������������������������������������������������������������������������������  3154
+Customizing the Video Scopes ���������������������������������������������������������������������������������������������������������������������������������������������������  3154
+3116Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Using the Viewer
+The Viewer is your window into the Timeline. The clip and frame at the current position of the playhead 
+appears in the Viewer. The Viewer also provides a workspace for picking colors, adjusting Windows, 
+using split screen stills for reference, and many other display-oriented tasks. If you have a video out 
+interface connected to a broadcast display or projector, then the contents of the Viewer are typically 
+mirrored by the video output.
+The Viewer Title Bar
+The Viewer title bar has controls and indicators making it easy to control and keep track of what it is 
+you’re looking at.
+The Color page Viewer title bar with its controls
+The Viewer title bar has the following controls:
+Zoom and Fit menu: Lets you zoom to a specific percentage, or choose Fit to fit the 
+image to the total available area of the Viewer.
+Viewer Mode: Lets you switch the Viewer type to Image Wipe. Split Screen, or 
+Highlight modes.
+Viewer Mode: Lets you switch the Viewer type to Split Screen
+Viewer Mode: Lets you switch the Viewer type to Highlight
+Playback frame rate indicator:  A dot shows green if playback performance matches the 
+frame rate of the project, or red if playback performance drops below real time. To the 
+right, the current frame rate is displayed.
+Timeline name and selection drop-down:  The name of the currently open timeline 
+is displayed. A drop-down to the right lets you open any other timeline in the current 
+project to take its place.
+Timecode viewer and drop-down:  A second timecode viewer lets you choose an 
+alternate timecode/frame count/KeyKode value to display simultaneously to the 
+timecode viewer next to the transport controls below. A drop-down lets you pick 
+whether to display source (clip) or record (timeline) timecode.
+Viewer Guides: Lets you setup Safe Area and custom Guides and Rulers.
+Proxy Handling: Lets you choose to use either proxies or original media for playback.
+Switch Timeline Resolution:  Lets you change the timeline resolution preset. 
+Bypass Color and Fusion and drop-down:  Lets you disable grades and/or 
+Fusion effects.
+Expand Viewer drop-down:  Expands the Viewer to take up the full area of your 
+workstation’s display above the palettes.
+Option menu: Has options that affect the Viewer’s functionality.
+3117Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+The Color Viewer’s option menu,  
+showing all the Viewer-related commands
+  Highlight: Has options for activating the Highlight, Black and White, and Difference views.
+  Show RGB Picker Values In: Select if the RGB picker shows values in 8-bit or 10-bit scale.
+  Show Viewer Channels: Has options to select all or individual R, G, or B channels in the Viewer. 
+  Split Screen: Has options for turning on and off and what to display in the Split Screen view.
+  Timeline Sort Order:  Has options for how to order the timelines in the drop-down menu at the 
+top of the Viewer. Options are: Alphabetical, Creation Date, or Recently Used (shows the last 
+10 actively used timelines).Previous Timeline: Opens the previous timeline in the Timeline 
+drop-down menu list.
+  Next Timeline: Opens the next timeline in the Timeline drop-down menu list.
+  Show Viewer Options: Show or hide the second row of icons at the top of the Viewer, depending 
+on the mode you’re in.
+  Show Marker Overlays: Markers that intercept the playhead when playback is paused appear 
+superimposed in the Viewer. 
+  Window Outline: Has options on how to display the window outline for a Power Window. 
+On, Off, or only on the UI viewer and not on your video output.
+  Video Output Options:  Has options to choose what to display on your video output signal, 
+Flags, Markers, Keyer Overlays, and to Gang the Zoom level with the Viewer.
+  Markers: Displays any markers that have been set on the timeline. Select one in the list to go to 
+that marker.
+  Show Reference Wipe: Turns on or off the reference wipe.
+  Reference Wipe Mode: Has options to change what sources are used in the reference wipe.
+  Wipe Style: Has options to change what type of reference wipe is used.
+  Invert Wipe: Inverts the current reference wipe.
+  Reference Reposition: Opens the Reference Sizing controls that allow you to resize and 
+move the reference clip.
+  Gang Timeline Wipe With Current Clip:  Lets you maintain the offset between the current clip and 
+a timeline clip you’re wiping against when you move the current clip selection to other clips.
+3118Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Viewer Guides
+Safe Area
+This drop-down menu overlays many useful framing guides over the Viewer to let you see what part 
+of the image will be included and what part will be cropped out if you change the Timeline’s aspect 
+ratio. The framing guides can be turned on and off by toggling the Safe Area Framing Guide icon in the 
+Viewer, and the exact guides can be selected in the drop-down menu.
+Social Media: 1:1, 4:5, 9:16, 1.91:1, 16:9.
+Broadcast and Film: Default (your current timeline aspect ratio), 1.33, 1.66, 1.77, 1.85, 2.35.
+Safe Area Guides: These options add additional guide lines on the Viewer to protect your 
+composition from possibly being cut off at the extreme edges of a physical cathode ray tube. 
+While somewhat anachronistic in this age of flat screen digital televisions, many legacy programs 
+still adhere to these guidelines. Safe Areas still can be useful guides in ensuring your image is not 
+inadvertently cropped by the variety of mobile devices and social media sites in use today. 
+  Extents: Show the full boundary of the frame.
+  Action: Keep all movement and important action within this box.
+  Title: Keep all on screen text within this box.
+  Center: Designates the exact middle of the image.
+You can toggle the extents safe area overlay on or off, in addition to the Action, Title, and Center 
+overlays. You can access this features at View > Safe Area > Extents.”
+The Safe Area Framing Guide icon and the possible framing options
+3119Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Custom Guides and Snapping in the Timeline Viewer
+You can create your own custom guides in the timeline viewer. This lets you fully customize and 
+create specific geographic locations in the frame, and then have the image snap to those locations in 
+other operations. You can create Guides, which are colored lines that cross the frame horizontally or 
+vertically, and Rulers, which provide measurement metrics along the edges of the frame. Both Guides 
+and Rulers are overlay tools for adjusting your video position, and only show in the viewer, not your 
+final project output.
+The Timeline Viewer with Guides and Rulers enabled
+Both Guides and Rulers can be shown independently by clicking on their icon in the Ruler 
+Guides section of the Viewer Guides drop-down menu on the Timeline viewer. They can also be 
+independently activated in the View > Rulers, and View > Guides menus.
+The Ruler Guides section of the 
+Viewer Guides dropdown
+3120Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+To Show and Modify a Ruler:
+1 Activate the Ruler by choosing View > Rulers > On, or clicking on the Ruler Icon in the Viewer 
+Guides dropdown in the Timeline Viewer.
+2 Choose which metric you want the Ruler to use in View > Rulers, or by right-clicking on the Ruler in 
+the Viewer.
+Pixel: Shows the ruler in number of pixels from the origin point (0,0) in the middle of the frame using 
+a standard x/y cartesian coordinate graph, that reflects the Position field in the Video Inspector.
+Percentage: Shows the ruler in percentage distance from the origin point (0%, 0%) in the top-left of 
+the frame. The top ruler runs from 0% at the left to 100% at the right, while the side ruler measures 
+0% from the top to 100% at the bottom. For example, a point at the exact center of the frame would 
+be at (50%, 50%).
+The Add/Edit Guide dialog
+To Show and Create a Guide Line:
+1 Activate the Guides by choosing View > Guides > On, or clicking on the Guides Icon in the Viewer 
+Guides dropdown in the Timeline Viewer.
+2 Create a new Guide by choosing View > Guides > Add Guide, or by right-clicking on the Ruler in 
+the Viewer and selecting Add Guides.
+3 In the Add Guide dialog, choose the position and orientation you want the new guide to be, and 
+click Add.
+Units: Choose which metric you want the guideline to use. Pixel shows the number of pixels from 
+the guide’s origin point, while Percentage shows the percentage distance from the top left of the 
+frame at 0%,0%.
+Position: Enter a value for where in the frame you want the guideline to intersect. You can also 
+click and drag this line in the viewer to position it by eye (a small popup will reveal the exact 
+position value as you move it). Optionally you can click the lock icon to prevent this guide from 
+being moved accidentally.
+Orientation: Choose either a horizontal or vertical orientation for the line.
+Color: Choose the color of the guideline from the available options.
+To Modify a Guideline:
+  Click and Drag the line to any position in the viewer, a small pop-up window will appear to show 
+you the exact position value.
+  You can change the color of the Guidelines for legibility by right-clicking in the Ruler and selecting 
+a new color from the Guide Color context menu.
+  You can delete a line by right-clicking on the line in the viewer and choosing Remove Guide.
+3121Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+  You can change an existing line’s position and orientation by right-clicking on it in the viewer and 
+choosing Edit Guide.
+  You can delete all, only horizontal, or only vertical lines, by choosing View > Guides > and 
+selecting the appropriate lines to remove. You can also do this by right-clicking on the ruler.
+  Guides can be locked in place to avoid accidental movement by clicking on the small lock icon in 
+the upper-left of the ruler, or by choosing View > Guides > Lock Guides.
+Right-clicking on the Ruler opens a context menu letting 
+you adjust all parameters of the Rulers and Guidelines
+Snapping to Guidelines
+By default, when moving the clip inside the frame using the Transform Viewer controls, whenever the 
+edge of the image gets near a guideline it will automatically snap the image edge to it, turning the 
+guideline purple so you know that it is exactly placed. If you want to disable this behavior, simply hold 
+down the option key while moving the image in the viewer to bypass the snapping.
+The Guidelines turn purple when the edge of the image snaps to that location
+3122Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Proxy Handling
+You can switch between using your original source media and the proxy media for playback in the Cut 
+page by using the Proxy Handling icon in the Viewer, and selecting one of the following options:
+  Disable All Proxies: This option disables the proxies altogether and forces the original 
+media playback only. If the original media is not available, the clip is replaced with a Media 
+Offline graphic. 
+  Prefer Proxies: This option will use proxies files for playback, and if there is no proxy file for a clip, 
+the original media will automatically be used instead.
+  Prefer Camera Originals:  This option will use the original media files for playback, and if there is 
+no original media file for a clip, the proxy media will automatically be used instead. 
+The Proxy Handling icon in the Viewer lets you 
+select how you want to use proxy files
+Timeline Resolution 
+This drop-down menu, to the top-right of the Viewer, lets you quickly choose at which resolution you 
+want to work. A Custom option lets you open up the Timeline Settings panel in order to choose your 
+own options. 
+The Project Settings quick menu
+For more information on the Timeline Settings, jump to this chapter: Project  Settings.
+3123Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Bypass Color Grades and Fusion
+The Bypass Color Grades and Fusion Effects button/dropdown lets you turn off all grades and 
+effects that you may have applied in the Color page and/or Fusion page in order to improve playback 
+performance on low power computers. Click the button (Shift-D) to disable or reenable grading and 
+effects, or right-click this button to access a menu that lets you choose which things you want this 
+button to control.
+The Bypass Grades and Fusion button, shown 
+being right-clicked to view its options
+Viewing Isolated Channels
+Use the Show Viewer Channels submenu in the Viewer’s option menu to switch the Color page Viewer 
+among RGB, R, G, or B channels. This can be useful when evaluating a single channel of an image 
+for noise or other artifacts, or for doing color matching by comparing and adjusting the individual red, 
+green, and blue channels of two different clips.
+The Viewer Toolbar
+The Color page also exposes a toolbar at the top of the image (underneath the title bar) that makes 
+it easy to enable and disable image wipe, split screen, and highlight viewing by clicking one of 
+these buttons, which then exposes additional controls relating to each of these modes of operation 
+(described elsewhere in this chapter). Those options can be shown or hidden by clicking the Viewer 
+option menu and unchecking Show Viewer Options.
+The Color page Viewer toolbar showing the 
+Wipe, Split Screen, and Highlight controls. 
+The Highlight options are seen in the bar below.
+In the process, these buttons provide an easy reference for when a comparison mode is 
+enabled. In each of these Viewer modes, the appropriate controls for customizing that view 
+appear to the right of the Viewer toolbar.
+3124Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Showing Marker Overlays and Annotations
+The Color page Viewer supports viewing Marker Overlays and Annotations for Timeline and Clip 
+markers. From the Viewer’s 3-dot option menu select Show Marker Overlays, or from the Viewer 
+overlay controls drop-down (bottom left) select the annotation mode.
+When Show Marker Overlays is checked, the Color Viewer  
+will display any Marker Overlays (upper left) and annotations.
+The Onscreen Control (OSC) Menu
+The Onscreen Control drop-down menu lets you choose which onscreen controls you want to display 
+and adjust in the Viewer. Some palettes automatically enable corresponding onscreen controls when 
+you open them. For example, opening the Window palette displays the Power Window onscreen 
+controls, and opening the Qualifier palette displays the Qualifier onscreen controls.
+The onscreen control menu for the Viewer
+3125Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+There are a variety of choices, each corresponding to different adjustments you can make:
+Off: All onscreen controls are hidden from view, giving you an unimpeded display of 
+the image in the Viewer.
+Qualifier: Turns on the Color Sample cursor. 
+For more information on using Color Sample controls, jump to this chapter: 
+ColorSlice.
+Power Window: Turns the Power Windows onscreen control on and off. 
+For more information on adjusting windows in the Viewer, jump to this chapter: 
+Secondary Windows.
+Image Wipe: Toggles mouse control of dragging the split screen directly on the 
+Viewer on and off. 
+For more information on working with split screens, jump to Comparing Clips 
+in the Viewer later in this chapter.
+Open FX Overlay: Shows and hides whatever onscreen controls are exposed by an 
+Open FX plugin in the currently selected node.
+Color Chart: Shows and hides the color chart overlay that lets you identify a color 
+chart in the picture that you want to use with the Color Match palette to create an 
+automatic grade.
+Annotations: Shows the annotation tools in the toolbar. Drawing annotations on a 
+frame without a marker creates a new Timeline marker. 
+For more information on using Annotations, jump to this chapter: Marking and 
+Finding Clips in the Timeline.
+TIP: As you work, you may find you want to temporarily hide or show the onscreen controls 
+so you can get an uncluttered look at the image you’re adjusting. You can toggle any set of 
+onscreen controls off and on without selecting Off in the menu by pressing Shift-` (tilde).
+3126Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Toggling Viewer Overlays On and Off
+Pressing Shift-` (Tilde) turns the current Viewer overlay on and off. The View > Viewer Overlay 
+submenu contains commands for showing, hiding, and switching different overlays in the Color page 
+Viewer. While most of the options in this menu are unassigned by default, they can be assigned to 
+keys using the Keyboard Customization window.
+Onscreen Controls and External Displays
+DaVinci Resolve has been designed for use with calibrated external displays connected to video 
+output interfaces, and for most colorists working on broadcast or theatrical programs, this is the 
+recommended way to work for color critical evaluation. 
+Because of this, many of the onscreen controls associated with tasks such as color sampling, window 
+adjustment, and key manipulation are mirrored to your video output, making it possible to hide the 
+Viewer on your computer’s monitor and work with only an external display.
+To choose whether onscreen controls are mirrored to video out or disabled:
+Choose an option from the Window Outline submenu in the Viewer’s option menu. There are 
+three options:
+  Off: Hides the window outline on both the external display and the Viewer.
+  On: The default, shows the window outline on both the external display and the Viewer.
+  Only UI: Hides the window outline on your external display, but leaves it in the Viewer.
+To show clip flags on video output:
+Turn on the “Show clip flags on video output” checkbox option in the Color page Viewer’s option 
+menu. This enables drawing one or more small colored flag overlays in the bottom-left corner of video 
+output. This way, you can always see which clips are flagged on your grading hero display as you work, 
+if that helps you to keep track of whatever you’re using flags to stay on top of. This is off by default.
+Limitations When Grading With the Viewer on a Computer Display
+Most computer displays do not operate at the color critical tolerances or specifications 
+required for quality control for streaming, broadcast, or theatrical delivery. An additional issue, 
+however, is that depending on your combination of workstation and computer display, the 
+Viewer does not necessarily display each clip’s image data as it is displayed by the calibration 
+that your operating system applies to your computer display, depending on which OS you’re 
+running DaVinci Resolve on. This makes your computer display potentially unsuitable for 
+monitoring projects destined for the sRGB standard of the web in its default state. 
+For example, if you grade a project using the Color page Viewer on your computer display, 
+the resulting clip may not look the same in the QuickTime player, or in other post -production 
+applications.
+You can address this in one of two ways:
+• If you’re using DaVinci Resolve on macOS, you can turn on “Use Mac Display Color Profile 
+for viewers” in the Hardware Configuration panel of the System Settings. This lets DaVinci 
+Resolve use whichever of the color profiles you choose in the Color tab of the Displays 
+panel in the macOS System Preferences, thereby taking advantage of ColorSync on macOS 
+to let DaVinci Resolve display color the way your computer monitor does. This now works 
+for all color profiles that ship with macOS, as well as color profiles that have been generated 
+by calibration software, such as that available from X-rite, Datacolor, or other applications. 
+On supported computers, there’s also an option to “Use 10-bit precision in viewers,” 
+if available, that you can turn on. With this option enabled, rendered output displayed in 
+QuickTime Player will match what is seen in the DaVinci Resolve Viewer.
+3127Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+• Alternately, you can apply a dedicated Color Viewer LUT for calibration, using the 1D/3D 
+Color Viewer Lookup Table drop-down menu that’s found in the Color Management panel of 
+the Project Settings. This lets you analyze your computer display for calibration in the same 
+way you would calibrate an external display, using a probe and color management software, 
+and apply the resulting calibration LUT in DaVinci Resolve. Keep in mind that monitor 
+calibration can only make a high quality display standards compliant; it cannot make up for a 
+display gamut that’s too small. 
+For more information, jump to this chapter: System and User Pr eferences.
+Strictly speaking, if you’re doing professional work, you should restrict your grading using 
+a calibrated, 10- or 12-bit class A external broadcast display of some type, connected via a 
+Blackmagic Design video interface. Assuming everything is running properly, an image that is 
+output to video from DaVinci Resolve should match an image output to video from any other 
+post-production application you’re using, and this should be your basis for comparison when 
+examining the output of two different applications.
+Zooming into the Viewer
+When using the Viewer to sample tricky colors or draw a detailed PowerCurve, it can be advantageous 
+to zoom into the image.
+To zoom into or out of the Viewer, do one of the following:
+  Move the pointer to within the Viewer, and then roll the scroll wheel to zoom in or out of the image.
+  Press Command-Equal to zoom in, or Command-Minus to zoom out.
+To pan around the Viewer:
+  Move the pointer to within the Viewer, then middle-click and drag to pan around the image.
+To reset the size of the Viewer image:
+  Choose 100% (Actual Size) (Option-Shift-Z) from the sizing drop-down menu in the 
+upper left of the Viewer.
+  Choose View > Zoom > Zoom to Fit (Shift-Z).
+To enable or disable image zoom being sent to video out:
+  Choose “Gang viewer zoom with video output” from the option menu of the Viewer to zoom the 
+image shown on video out identically to the zoom level of the Viewer, enabling you to evaluate a 
+zoomed-in portion of the image on your suite’s hero display.
+3128Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Using the Jog Bar and Transport Controls
+One of the principal uses of the Viewer is to control playback. The jog bar, directly underneath the 
+image in the Viewer, contains a playhead that you can drag to the left and right to navigate quickly 
+through the currently selected clip as fast as you can move the pointer. The playhead in the jog bar 
+is locked to the playheads found in the Timeline and Keyframe Editor. Moving one playhead moves 
+all three.
+How much of the Timeline the jog bar navigates depends on whether the Node Editor is set to Clip or 
+Timeline mode. In Clip mode, the jog bar width equals the duration of the currently selected clip. In 
+Timeline mode, the jog bar width equals the total duration of the entire Timeline.
+A row of transport controls below the jog bar provides more specific control over timeline playback.
+  Previous clip: Moves the playhead to the first frame of the previous clip.
+  Reverse: Initiates 100% playback in reverse.
+  Stop: Stops playback.
+  Play: Initiates 100% playback.
+  Next clip: Moves the playhead to the first frame of the next clip.
+  Loop: Lets you restrict playback to the current clip, looping to the first frame if you’re playing 
+forward to the end of a clip, or looping to the last frame if you’re playing in reverse to the 
+beginning of a clip.
+Two other buttons let you control audio playback and clip display in the Viewer:
+  Unmix: Turning on Unmix disables all transitions, composited superimpositions, and effects 
+that mix two or more clips together. Unmix allows you to judge the appearance of a clip without 
+distraction whenever you need to make an adjustment based on how the clip looks on its own, 
+or whenever you need to make changes based on frames that would otherwise be hidden 
+underneath a transition such as a dissolve or fade from black. When you’re ready to see how your 
+grades work in context with transitions and composites again, turn Unmix off.
+  Mute: Audio playback can be turned on or off by clicking on the speaker icon, or adjust the level 
+by right-clicking on the speaker icon and dragging the slider.
+Navigating Using the Arrow Keys
+You can use the Arrow Keys of the keyboard to navigate clips and the Timeline in different ways.
+  Up/Down Arrow: Moves the playhead to the first frame of the previous or next clip.
+  Left/Right Arrow:  Moves the playhead back or forward one frame at a time.
+  Shift-Left/Right Arrow:  Moves the playhead back or forward one second at a time.
+Controlling Playback Using the Spacebar and JKL Keys
+You can also use the spacebar to start and stop playback, or the JKL keyboard shortcut convention for 
+controlling playback, where J plays in reverse, K stops playback, and L plays forward. There are many 
+additional uses of these keyboard shortcuts. 
+For more information jump to this chapter: Preparing Clips for Editing and Viewer Playback  in 
+“Using JKL to Control Playback”
+3129Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Skimming in the Viewer
+You can skim footage in any viewer in the Media, Cut, Edit, Color, and Deliver pages by holding down 
+the C key, and scrubbing the pointer back and forth in the viewer.
+Fast Review on the Color Page
+The Fast Review playback command (Playback > Fast Review) is now available on the Color page. 
+Intended to help you watch through long sequences of clips quickly, clicking this option begins 
+accelerated playback through the Timeline, where the speed of playback is relative to the length of 
+each clip you’re playing through. Long clips play faster, whereas shorter clips play closer to real time.
+Navigating Using Timecode
+You can also use absolute or relative timecode entry to move the playhead in the Color page Viewer. 
+When entering timecode, type each pair of hour, minute, second, and frame values consecutively, with 
+a period representing a pair of zeros for fast entry. The last pair of timecode values (or period) you 
+enter is always assumed to be the frame number, with any untyped values assumed to be zero. It’s not 
+necessary to enter colons or semicolons. 
+For more information, jump to this chapter: Preparing Clips for Editing and Viewer Playback  
+in “Moving the Playhead Using Timecode.”
+Viewer and Transport Timecode Displays
+The Viewer has two timecode displays, each of which defaults to a different timecode setting. 
+A timecode display at the top, the Header timecode display, shows the Source timecode by default. 
+The timecode display at the bottom, the Transport timecode display, shows the Record timecode by 
+default. The bottom timecode display can be changed to show one of four different options, which are 
+similar to those found in the Data Burn-In palette.
+To change a timecode display to a different setting:
+The top timecode display is a drop-down menu that can be changed to whatever timecode, frame 
+number, or KeyKode you want to display. The bottom timecode display can also be changed by 
+right-clicking on it and choosing the type of value to show from the contextual menu that appears. 
+There are the following options:
+  Timeline Timecode: The timecode corresponding to the playhead’s position in the overall Timeline.
+  Source Timecode: The timecode corresponding to the playhead’s position relative to the 
+currently selected clip.
+  Timeline Frame: The frame count corresponding to the playhead’s position in the overall Timeline.
+  Source Frame: The frame count corresponding to the playhead’s position relative to the currently 
+selected clip.
+  KeyKode: The KeyKode number corresponding to the media’s KeyKode track, if there is one.
+  Show Timecode at 30 FPS: Displays 24 fps timecode, via 3:2 pulldown, as 29.97 fps timecode. 
+Has no effect on video playback.
+  Copy and Paste Timecode: Two commands make it easy to copy and paste timecode values.
+In the same way, the top timecode display can alternately be changed to show KeyKode, if it’s 
+available, within a DPX media file’s header.
+3130Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Enhanced, Full, and Cinema Viewing
+You can expand the Viewer into Enhanced Viewing mode by choosing Workspace > Viewer Mode > 
+Enhanced Viewer Mode (Option-F).
+Enhanced Viewing Mode
+In Enhanced Viewing mode, the Viewer works exactly as it does at its regular size, but it expands to 
+fill up the entire area of the screen above the palettes and Keyframe Editor. To exit Enhanced Viewing 
+mode, press (Option-F) again.
+This can be useful if you need a closer view of the image for purposes of making detailed corrections, 
+examining noise patterns up close, making a tricky color selection, or drawing a complicated 
+PowerCurve.
+Color page in Enhanced Viewer mode
+Full Viewing Mode
+In Full Viewing mode (available by choosing Workspace > Viewer Mode > Full Page Viewer, pressing 
+Shift-F, or Option-clicking the Enhanced Viewing mode button), the Viewer takes up even more room 
+by hiding the palette controls, but leaves room for the transport controls, the Onscreen Control drop-
+down menu, the timecode display, and the page buttons along the bottom of the DaVinci Resolve UI. 
+This mode is useful when you need an even closer look at the image, but you still want access to a 
+minimal set of onscreen controls.
+3131Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Color page in Full Viewer mode
+Cinema Viewing Mode
+Another option, Cinema mode, allows for full-screen viewing. Cinema mode is available by choosing 
+Workspace > Viewer Mode > Cinema Mode Viewer (P). In Cinema mode, the menu bar is hidden, 
+and the image is presented full screen without any of the ordinary onscreen controls. Moving the 
+pointer over the screen reveals a set of hidden onscreen controls that include a play button, jog 
+bar, mute button, and exit button (which lets you turn off Cinema mode). You also have the option of 
+superimposing scopes over the image, which can be valuable in on-set situations.
+Color page in Cinema mode
+Cinema mode is useful for doing detailed reviews of media in on-set and digital dailies workflows 
+when working remotely without a secondary video display.
+3132Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+TIP: If you’d like to superimpose timecode over the image in Cinema mode for reference, you 
+can use the controls within the Data Burn-In window (Workspace > Data Burn-In) to set up 
+whatever information you’d like to display during playback.
+Safe Area Overlays in the Viewer
+You can show or hide a series of safe area overlays in the Viewer. All safe area overlay options are 
+found in the View > Safe Area menu. Each safe area overlay option can be individually enabled or 
+disabled from this menu.
+Viewer displaying extents, center, safe, action and title area overlays
+  On/Off: Turns all currently selected safe area marker options on or off at once.
+  Extents: An outline showing the exact outer edge of the frame. Especially useful when the safe 
+markers are set to an aspect ratio other than that currently used by the Viewer.
+  Action: An outline showing the outer 90% action safe area of the frame.
+  Title: An outline showing the outer 80% title safe area of the frame.
+  Center: A crosshairs showing the center of the frame.
+  Aspect: Enables use of the View > Select Aspect Ratio submenu to change the aspect ratio of the 
+safe area markers. You can choose among the following aspect ratios: 1.33 (a.k.a. 4:3), 1.66, 1.77 
+(a.k.a. 16:9), 1.85, and 2.35.
+3133Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Use Gray Background
+Checking the “Use gray background in viewers” box in the User Preference’s UI Settings sets the 
+empty area of the Viewer (if there is any) to a lighter gray, making it easier to see which parts of the 
+Viewer are black because of blanking, and which parts are simply empty because of the way the 
+image is zoomed or panned.
+Monitor Calibration
+If you use Light Illusion’s LightSpace CMS or SpectraCal’s Calman for display calibration, you can now 
+use DaVinci Resolve as a sync-able pattern generator. This means you can use DaVinci Resolve to 
+output color patches, synchronized by LightSpace, to your display through whichever video interface 
+is connected to your computer. These synchronized color patches will be analyzed by a monitor probe 
+that’s also controlled by LightSpace, which stores the probe data and compares it to the original color 
+values of the output color values in order to characterize that display.
+To use this feature, you must first have a licensed copy of LightSpace CMS, which is a Windows 
+application. Synchronization depends on a wired or wireless LAN being available to connect the 
+LightSpace application with DaVinci Resolve.
+To synchronize LightSpace CMS to DaVinci Resolve as a pattern generator client:
+1 Open LightSpace on the Windows computer that’s running it.
+2 When LightSpace is open, click the Network Manager button. A window appears displaying the 
+two network IP addresses used by LightSpace. Note these, and click the Enable button.
+The Network Manager dialog 
+in LightSpace CMS 
+3 In DaVinci Resolve, choose Workspace > Monitor Calibration > LightSpace. 
+4 When the LightSpace dialog opens, enter the second of the two network IP addresses LightSpace 
+lists into the Remote Machine field, and make sure the Port number matches. Then click the 
+Connect button.
+3134Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+The Calibration dialog in DaVinci Resolve, 
+connected to LightSpace CMS via WiFi
+If everything is working correctly, the LightSpace dialog in DaVinci Resolve should show the 
+word “Connected,” and the Network Manager dialog in LightSpace should show that there is 1 
+available client/s. 
+You can now close the Network Manager dialog in LightSpace and follow the procedures outlined 
+in the LightSpace CMS documentation for characterizing your display and building and exporting a 
+display LUT (in the .cube format) that you can use as a display LUT in DaVinci Resolve. Alternately, 
+you can export a display LUT from LightSpace that can be loaded onto an outboard video 
+processing device.
+5 When you’re finished, click Disconnect in the LightSpace dialog, and then click Cancel to close 
+the window.
+Viewing Broadcast Safe Exceptions
+Choosing View > Display Broadcast Safe Exceptions sets the Color page Viewer to show a false-color 
+overlay that indicates in blue the regions of the picture that violate the currently selected broadcast 
+safe level in the Color Management panel of the Project Settings. 
+Areas of the image that violate broadcast safe are highlighted in blue
+More information on broadcast safe limiting in the Color Management panel of the Project 
+Settings jump to this chapter: Automated Grading Commands and Import ed Grades.
+3135Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Comparing Clips in the Viewer
+The ability to compare different clips to one another is an important part of the color correction 
+process. DaVinci Resolve provides three different ways of doing so. You can use the Gallery to display 
+two clips for split screen comparison. You can also use different reference modes to see a timeline clip 
+or reference movie directly as part of a split screen comparison. Finally, you can use the Split Screen 
+controls to display multi-frame arrangements in the Viewer.
+Saving and Wiping Stills in the Gallery and Timeline
+The Gallery on the Color page provides fast access to stills that you’ve saved from various clips in the 
+Timeline. While the dedicated Gallery page provides a more comprehensive interface for browsing 
+presaved “looks,” as well as for importing stills from other projects, you can save, organize, and 
+browse stills directly within the Gallery of the Color page.
+Stills are saved in the DPX file format. Once you’ve saved one or more stills, you can set up split 
+screen wipes in the Viewer, which will be mirrored to your external display. 
+Stills from the Gallery can be compared to the current shot, making it easier to match grades
+This section provides an abbreviated summary of still store and split screen functionality to get you 
+started quickly.
+To save a still, do one of the following:
+  Choose Color > Stills > Grab Still (Option-Command-G).
+  Right-click on the Viewer and choose Grab Still.
+3136Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+To wipe a still, do one of the following:
+  Select a still in the Gallery, and click the Image Wipe button on the top Viewer toolbar. 
+  Choose Color > Stills > Play Still (Command-W), or right-click in the Viewer and choose Toggle Wipe.
+  Double-click a still in the Gallery.
+To adjust a wipe in the Viewer, do one of the following:
+  Drag the pointer within the Viewer to move the wipe.
+To customize a wipe in the Viewer: 
+The different wipe customization modes
+Click one of the Wipe mode buttons in the Viewer toolbar. There are the following modes:
+Horizontal: Lets you compare both halves of the wipe to either side of a vertical border. 
+Dragging the pointer moves the wipe border left and right.
+Vertical: Lets you compare both halves of the wipe above and below a horizontal 
+border. Dragging the pointer moves the wipe border up and down.
+Diagonal: Lets you compare both halves of the wipe via an adjustable diagonal border. 
+Dragging the pointer repositions the wipe to the left and right. Hold the Option key 
+down and drag while moving the pointer around in a circle to rotate the border of the 
+wipe to any angle you like.
+Mix: Lets you blend both images together to compare them. Dragging the pointer 
+controls the fade percentage from one image to the other.
+Alpha: Lets you use a qualifier to define transparency in the image of the current 
+clip while comparing it to a Gallery still used as the background. Add a node to the 
+grade and use the qualifier to key a particular color you want to turn transparent 
+(the green of a green screen, for example). Then, connect that node’s KEY output to 
+the Alpha Output that appears in the Node Editor. The part of the foreground image 
+isolated by the key becomes transparent, allowing the Gallery still in the background 
+to show through. This can be useful for previewing how the lighting or grade of 
+a foreground VFX plate looks when the image is composited against a particular 
+background image stored in the Gallery.
+Difference (A/B):  Lets you view only the pixels that change due to an operation on the 
+node. For example, if you select this highlight and adjust the gain, only the pixels that 
+the gain modified would be visible in the Viewer.
+Box: Lets you view the current clip as a picture-in-picture effect against the still in 
+the background. Dragging the pointer resizes the crop box around the outside of the 
+reference image.
+Venetian Blind: Lets you compare both images being wiped via alternating horizontal 
+strips. Drag the pointer up or down to change the size of the alternating strips. Good 
+for quickly comparing vertical color uniformity, focusing on color and contrast changes 
+that occur from top to bottom.
+Checkerboard: Lets you compare both images being wiped via an alternating 
+checkerboard. Drag the mouse left or right to alternate between images by squeezing 
+each check horizontally. Good for comparing color uniformity across the width and 
+height of two images.
+3137Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Choose one of the following from the Wipe Style submenu in the Viewer’s option menu.
+• Wipe Style: Cycles among the Horizontal, Vertical, Diagonal, Mix, Alpha, Difference, Box, 
+Venetian Blind, and Checkerboard modes.
+• Invert Wipe: Reverses each half of the wipe (Option-W).
+Hover Scrub in the Gallery
+When Live Preview is enabled in the Gallery option menu, the Hover Scrub Preview submenu lets you 
+choose how you want Live Preview to be shown by a thumbnail in the Gallery and in the Viewer when 
+you hover the pointer over a still or LUT in the LUT Browser:
+  You can choose to scrub both the thumbnail you’re hovering over and the Viewer, letting you 
+preview the current still’s grade or a LUT over the duration of the current clip in both the thumbnail 
+and Viewer. 
+  You can choose to scrub just the thumbnail, leaving the Viewer to show just the grade or LUT over 
+the frame at the position of the playhead.
+  You can disable scrubbing altogether, in which case both the thumbnail and the Viewer will only 
+show the grade or LUT over the frame at the position of the playhead.
+Copying Grades from Stills in the Gallery
+Stills also store the grade from the clip they came from, and can be used to copy grades from one clip 
+to another, or to store grades that you might want to use later.
+To copy a grade from a still to a clip, do one of the following:
+  Select one or more clips in the Timeline, then right-click a still in the Gallery 
+and choose Apply Grade.
+  Select one or more clips in the Timeline, then middle-click a still in the Gallery.
+When you copy a still in this way, the saved grade completely overwrites the grade in the 
+target clip, unless you’ve used the “Preserve number of nodes” option, found in the contextual 
+menu of the Gallery. 
+For more information on using the Gallery, including options for organizing the Gallery 
+browser, instructions for using Albums, Power Grades, and Memories, as well as other 
+methods of copying grades and performing advanced grade management tasks, jump to 
+these chapters: Using the Gallery  and Grade Management.
+3138Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Different Viewer Reference Modes for Wipes
+While it’s common to use the Gallery to wipe against reference stills, by changing the reference mode 
+you can also create a wipe against a clip in the Timeline, or against an Offline Reference Clip or 
+Timeline, if one has been assigned to the current Timeline.
+To change the Viewer reference mode, do one of the following:
+  Choose an option from the Reference Wipe Mode submenu in the Viewer’s option menu.
+  Choose an option from the Reference Mode icons at the top of the Viewer.
+There are three reference modes:
+  Gallery: The default reference mode. Lets you wipe the current clip against a Gallery still.
+  Timeline: Lets you wipe the current clip against another clip in the Timeline using the Wipe 
+Timeline Clip command (see below).
+  Offline: Lets you wipe the current clip against an offline video that’s been assigned 
+to the current Timeline. 
+For more information on assigning Offline References to a timeline for comparison,  
+jump to this chapter: Importing and Conforming Timelines .
+Wiping Between Clips in the Timeline
+If you want to wipe the current clip against another clip in the Timeline without saving a still to the 
+Gallery first, there’s a special procedure you can follow.
+To wipe between two clips using the Timeline reference mode:
+1 Click the thumbnail of the first clip you want to compare.
+2 (Optional) A “Gang timeline wipe with current clip” option, available from the Viewer option menu, 
+lets you maintain the offset between the current clip and a timeline clip you’re wiping against when 
+you move the current clip selection to other clips. With this option enabled, the offset between the 
+timeline wiped clip and the current clip is maintained when you move the clip selection. You can 
+step the timeline reference clip forward one frame by pressing Command-Option-Right Arrow, 
+and back one frame by pressing Command-Option-Left Arrow. This allows for precise positioning. 
+When this option is disabled, the timeline wiped clip stays where it is regardless of what clip 
+you select. 
+3 Right-click the thumbnail of the second clip you want to compare against, and choose Wipe 
+Timeline Clip from the contextual menu.
+Both clips appear split screened against one another.
+NOTE: Wipe Timeline Clip only appears in the contextual menu if you right-click on a 
+thumbnail in the Timeline that has not been selected as the current clip.
+3139Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Change a Timeline Wipe Using the Timelines Album of the Gallery
+While you’re using the Wipe Timeline Clip to show a wipe of the current clip against any other 
+clip in the Timeline, you can open the Timelines album of the Gallery and click different clips to 
+change which timeline clip you’re wiping against (outlined in blue) without changing the current clip 
+(outlined in orange).
+Using Split Screen Modes
+A set of split screen modes provides additional ways of comparing multiple images in the Viewer at the 
+same time. These provide side-by-side and grid comparisons of multiple shots and multiple versions, 
+all of which are output to video for monitoring on your external video display. For example, you can 
+use the Split Screen Versions mode to display every single version that’s applied to the current clip in 
+a grid, for easy evaluation. The currently selected clip in the Timeline is highlighted in gray, so you can 
+keep track of what you’re doing.
+To enable a split screen mode, do one of the following:
+  Click the Split Screen button on the top Viewer toolbar, and choose a split screen method from the 
+drop-down menu that appears in the Viewer toolbar at the right.
+  Choose an option from the Split Screen submenu in the Viewer’s option menu.
+  Press Option-Command-W to turn Split Screen on and off, using the last selected option.
+  Right-click the Viewer and choose an option from the Split Screen submenu in the 
+contextual menu.
+NOTE: When any of the split screen modes are selected, you cannot see any other onscreen 
+controls in the Viewer, such as Power Window shapes, until you first disable split screen.
+Four shots shown in a grid using the Split Screen > Selected Clips mode
+3140Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Viewing and Choosing the Current Selection
+In any of the split screen modes, the current selection is indicated by a gray outline. This outline can 
+be disabled for a more direct comparison by choosing Split Screen > Show Outline in the Viewer’s 
+option menu to toggle the outline off and on.
+In certain modes, you can also double-click a particular frame of the split screen view to change the 
+current clip, choose the active version, or apply a gallery grade.
+Available Split Screen Modes
+You can choose from among the following split screen modes:
+  Current Group: Shows up to 16 clips that share the same group as the current clip. Double-clicking 
+a frame does nothing in this mode.
+  Highlight Modes: Shows a four-up display that lets you simultaneously see (clockwise) the clip’s 
+RGB image, the gray matte, the high contrast matte, and a difference matte generated by the 
+node’s input compared against its output. Double-clicking a frame does nothing in this mode.
+Viewing a key using the Split Screen > Highlight Modes
+  Neighbor Clips: Shows four clips that immediately surround the current clip. The previous two 
+clips appear as the upper left- and right-hand clips, the current clip appears at the lower left-
+hand corner, and the next clip appears at the lower right. Double-clicking a frame does nothing 
+in this mode. The “Neighboring Clips in Split Screen” parameter in the Color panel of the User 
+Preferences lets you customize how many neighboring clips appear in this mode.
+  Playheads: Shows simultaneous comparisons in the Color page Viewer of up to four playheads 
+displayed in the Mini-timeline when you choose multiple playheads from the Color > Active 
+Playhead submenu. For every playhead you expose (up to 4), the frame at each playhead will be 
+displayed in a 2-up, 3-up, or 4-up grid. An outline in the Viewer (if enabled) shows which playhead 
+3141Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+is currently active. This is useful both for comparing multiple clips, as well as for comparing 
+different frames within the same clip. Switching between the active playheads can be done by 
+clicking on the clips in the split screen Viewer
+Placing three playheads in the Mini-timeline
+  Selected Album: When you choose this option, a split screen of the grades of every still in that 
+album are shown in the Viewer as they appear applied to the current clip. Double-clicking a frame 
+applies that gallery grade to the current clip. Up to 16 grades will be shown.
+  Selected Clips: Shows all currently selected clips in the Timeline, up to 16 at one time. Clicking a 
+clip moves the playhead to the first frame of that clip.
+  Selected LUTs: Lets you simultaneously display previews of different LUTs effect on the current 
+clip as a split screen in the Viewer by using the LUTs browser to Command-click up to 16 LUTs you 
+want to preview.
+The Selected LUTs split screen option lets you preview a bunch of LUT looks at once
+3142Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+  Selected Still Grades:  When you choose this option, the act of selecting stills in the Gallery of the 
+Color page shows each of the grades associated with those stills as they appear applied to the 
+current clip, in a split screen arrangement. Double-clicking a frame applies that gallery grade to 
+the current clip.
+Previewing four gallery grades using the Split Screen > Gallery Grades mode
+  Selected Still Images:  Lets you view the current clip against a variety of other stills in the Gallery 
+that you select. This is not a grading preview, you’re actually doing a split screen of the selected 
+still images in the Gallery.
+  Version: Shows up to 16 versions for the current clip, all at once, making it easy to evaluate a 
+series of different versions in relation to one another. If you have more then 16 versions, you 
+deserve some manner of award. Double-clicking a version changes the active version.
+  Versions and Original: Shows up to the first 15 versions for the current clip, along with the original 
+ungraded clip at the upper left-hand corner. Double-clicking a version changes the active version, 
+but you cannot double-click to select the original.
+Marker Overlays and Navigation
+If you part the playhead on top of a marker in the Timeline of the Color page, that marker’s information 
+appears in a Viewer overlay, just as in the Edit page, making it easier to read notes and see what 
+information is available. These overlays can be easily hidden by clicking the Viewer option menu and 
+turning off “Show marker overlays.” 
+Timeline Marker List Available in 
+Color Page Viewer Option Menu
+The option menu of the Color page Viewer has a submenu that lists all Timeline Markers in the 
+currently open timeline. This makes it easy to run down client notes. 
+3143Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Timeline markers list available for quick  
+access in the Viewer’s option menu
+Using Video Scopes
+While not directly tied to use of the Viewers, video scopes nonetheless work hand in hand to help 
+you evaluate the images you’re working on. DaVinci Resolve has a set of five real-time video scopes 
+that you can use to monitor the internal data levels of clips in your project as you work. Each scope 
+provides an unambiguous graphical analysis of different characteristics of the video signal, showing 
+you the relative strength and range of individual color components including luma, chroma, saturation, 
+hue, gamut, white point, and the red, green, and blue channels that, together, comprise the color and 
+contrast of the images in your program. 
+Video Scope Location
+By default, you can view any one of these scopes at a time at the bottom right corner of the Color 
+page, by clicking the Video Scope button in the palette button bar.
+The video scope, docked next to the other palettes 
+at the bottom of the Color page
+3144Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Optionally, you can click the Expand button at the top right of the video scope to open the 
+video scopes into a floating window, within which you can display all four video scopes 
+together, or individually, on any monitor connected to your workstation.
+Video scopes in a floating window in HDR (ST.2084/HLG) mode
+Additionally, the video scopes can appear docked on a second display as part of many of 
+the dual-screen layouts available in DaVinci Resolve. However, if you have three computer 
+displays and you’re using dual screen layouts, you still have the option to open the floating 
+Scopes window and place it on your third display, as large as you need.
+The video scopes aren’t just available in the Color page. They’re also available in the Media 
+and Deliver pages for whenever you need to evaluate the video signal more objectively, such 
+as when you’re setting up to capture from tape or scan from film, or when you’re setting up 
+for output.
+To open video scopes from the Media, Color, or Deliver pages, do one of the following:
+• Choose Workspace > Video Scopes > On/Off (Command-Shift-W) to open video scopes 
+into a floating window.
+• Choose Workspace > Dual Screen > On to open video scopes as part of a dual 
+screen layout.
+3145Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Video Scope Measurement Using Scales
+Because you’re evaluating the internal state of the image data, by default the numeric scales of the 
+WFM and Parade scopes always reflect 10-bit full range data from 0–1023, regardless of the Video/
+Data Level setting you’ve selected in the Master Settings panel of the Project Settings. This gives you 
+a window into how the image is being processed by DaVinci Resolve prior to being output via your 
+computer’s video I/O interface.
+If you’re working on an HDR (High Dynamic Range) grade, you can choose HDR (ST.2084/HLG) from 
+the Video Scopes option menu (this feature is only available in Studio version). This replaces the 
+10-bit scale of the Waveform, Parade, and Histogram video scopes with a scale based on nit values 
+(or cd/m2) instead. 
+The Parade scope 
+showing the data 
+range scale
+The Parade scope 
+showing the HDR 
+“nit” scale
+Changing Waveform Scales
+A Waveform Scale Style submenu in the Video Scopes option menu (the three dots menu) lets you 
+choose how you want the numeric scale at the left of Waveform and Parade scopes to be represented. 
+There are options for 10-bit display (the default), 12-bit display, Percentage (0 to 100), millivolt (mV), and 
+HDR (ST.2084/HLG). Aside from the added flexibility this gives you, this also means that it’s no longer 
+necessary to go to the Preferences to change the scope to have an HDR scale shown in nits (cd/m 2).
+Waveform scale options
+3146Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+IMPORTANT: If you are working in a non-DaVinci Resolve Color managed workflow and 
+activate the HDR (ST.2084/HLG) scopes, the waveform will always reflect HDR levels, even if 
+you’ve manually selected the output color space as Rec.709, and thus not be 100% accurate.
+Changing Vectorscope Scales
+A Vectorscope Scale Style submenu in the Video Scopes option menu (the three dots menu) 
+lets you choose how you want the hue reference indicators to be displayed.
+Vectorscope scale options
+There are four available graticule options:
+• Off: Disables all graticule overlays in the Vectorscope, giving you a clean view of the 
+Vectorscope graph against black.
+• Standard: The default layout. Cross hairs indicate the center of the scope, while boxes 
+indicate the center target of each primary and secondary hue (red, magenta, blue, cyan, 
+green, yellow). An outer circle provides a general frame of reference for the angle that any 
+part of the graph might fall along.
+• Simplified: Shows a crosshairs to indicate the center of the scope and smaller crosshairs 
+to indicate each primary and secondary hue. Useful when you want references without 
+extra complications.
+• Hue Vectors: A graticule designed to provide a more useful colorist reference for creative 
+decisions and image comparison. This isn’t simply decorative. Graticule lines stretch along 
+the reference angle of each primary and secondary hue from the hue targets to the center, 
+providing a more immediately useful frame of reference when comparing different vector 
+scope graphs to one another. These reference lines fade out within the region of average 
+saturation in most images, so they don’t get in the way of discerning faint details. The center 
+crosshairs are aligned with the red -cyan and yellow-blue axes, indicating the naturalistic 
+warm to cool axis that lies between them. Tic marks indicate both the 75% and 100% levels 
+of image saturation for each hue.
+You also have the option of choosing whether or not the primary and secondary hue targets 
+are shown for 75% image saturation, 100% image saturation, or both, and whether or not you 
+want to show the text labels for each hue.
+3147Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Displaying Scopes With Data or Video Levels
+For projects being worked on at video levels, a setting in the Video Scope option menu’s Waveform 
+Scale Style submenu lets you toggle between displaying video scopes scaled to either Data Levels 
+(the default) or Video Levels (by turning on Video Level Scopes). This only affects how your scopes are 
+displayed; it has no effect on monitored or rendered output.
+The Waveform scope shown at default Data Levels,
+The same waveform shown with Video Level Scopes turned on
+Video Scope Performance and Detail
+All video scopes were updated for DaVinci Resolve 16 to show more detail with faster performance 
+than in previous versions. While they’re GPU-accelerated, the video scopes require a certain amount 
+of video processing power to operate. Depending on which combination of video scopes and scope 
+options you have selected, you may notice your real time processing capabilities ever so slightly 
+affected. Closing the video scopes frees up all processing for color correction and effects. On 
+high-powered workstations, you probably won’t notice a difference, but on less powerful computers, 
+closing the scopes might make a small difference.
+Two global settings in the Video Scope option menu affect the performance and detail of all video 
+scopes equally. 
+  On slower workstations, a quality submenu lets you choose High, Medium, or Low quality scope 
+drawing, to trade off legibility for performance. High quality shows you the most information about 
+the video signal, while an Auto option makes a selection based on your workstation’s capabilities.
+The Quality setting in the Video Scope option menu
+3148Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+  All video scopes have a Low Pass Filter setting in the Video Scope option menu that filters out a 
+signal’s noise to make the scope graphs clearer to read. While this can act as an “x-ray” to better 
+see detail in the scope graph interiors, it can make the highlight and shadow excursions on the 
+graph seem a bit shy of where they actually are, so it’s recommended to enable the “Extents” 
+option of whichever scope you’re using to get an unambiguous look at the maximum excursions in 
+your scopes. Extents draws an outline highlighting all graph excursions to show you the true level 
+of all overshoots and undershoots in the video signal, even when the Low Pass Filter is on.
+The Waveform scope with Low Pass Filter turned off
+The Waveform scope with Low Pass Filter turned on
+3149Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Display Qualifier Focus in Video Scope Graphs
+The Display Qualifier Focus setting in the Video Scope option menu helps you identify which features 
+in the video image correspond to which parts of the video scopes. With Display Qualifier Focus turned 
+on, choosing the Qualifier mode of the Viewer and moving the eyedropper around the image draws 
+circles around the sampled pixels as they appear in the currently visible video scope graph. If multiple 
+video scopes are visible, each scope will have an indication of the location of the sampled pixels that’s 
+specific to each scope.
+Hovering the eyedropper over a feature in the Viewer   The regional analysis of those pixels 
+shown in the overlaid red, blue, and green 
+waveforms of the Waveform scope.
+Explanation of Each Video Scope
+There are five available video scopes, each of which shows a different analysis of the video signal 
+you’re adjusting.
+Waveform Monitor
+Overlays waveform analyses of the Y (luma/luminance), CBCR (the color difference channels of 
+Y’CBCR), or RGB (red, green, and blue) channels over one another so that you can see how they align. 
+The Waveform scope showing Y’ (luma) only, with colorization and extents enabled
+The Y option presents a true Luma scope that can have Colorize enabled to show false color, which 
+lets you see which colors in the Viewer image are where in the video scope graph. 
+3150Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+For the RGB scopes, the relative heights of the red, green, and blue graphs indicate is identical to the 
+description seen for the Parade scope below, and with color enabled the red, green, and blue graphs 
+are tinted with the color they represent. This makes it easy to see where all three graphs align, by 
+looking for where parts of the waveform monitor appear in white, which is the result of the red, green, 
+and blue graphs lining up and adding their color together.
+Parade
+The Parade scope shows separate waveforms side by side that analyze the strength of individual 
+video signal components. The Parade scope can be set to analyze RGB, YRGB, and Y’CBCR. 
+By showing a comparison of the intensity of the luma, red, green, and blue channels, the Parade scope 
+makes it possible to detect and compare imbalances by comparing the relative heights of the RGB 
+graphs in the highlights (the top of the R, G, and B graphs), shadows (the bottom of the R, G, and B 
+graphs), and midtones (the middle of the R, G, and B graphs) for the purposes of identifying color casts 
+and performing scene-by-scene correction. 
+When the YRGB channels are taken altogether, the bottom of all graphs indicates the black point 
+of the image, while the tops of all graphs indicate the white point. It then follows that the difference 
+between the height of the bottom and top of all graphs indicates the overall contrast ratio of the image 
+you’re evaluating. Tall parade graphs indicate a wide contrast ratio, while short parade graphs indicate 
+a narrow contrast ratio.
+The Parade scope showing YRGB waveforms, with colorization and extents enabled
+Vectorscope
+Measures the overall range of hue and saturation within an image. Measurements are relative to 
+a centered graticule that you can enable that’s overlaid on the scope, which provides a frame of 
+reference via crosshairs. DaVinci Resolve has a traditional vectorscope, the graph of which emulates 
+a trace-drawn graph, with 75 percent color bar targets indicating the angle of each of the primary 
+and secondary colors around the edge of the graph, and an optional skin tone reference graticule 
+(otherwise known as the In-phase reference). 
+The Vectorscope can have Colorize enabled to show false color which lets you see which colors in the 
+Viewer image are where in the video scope graph.
+More saturated colors in the frame stretch those parts of the graph farther toward the edge, while 
+less saturated colors remain closer to the center of the vectorscope, which represents 0 saturation. 
+By judging how many parts of the vectorscope graph stick out at different angles, you can see how 
+3151Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+many hues there are in the image, with the specific angle of each part of the graph showing you which 
+hues they are. Furthermore, by judging how well centered the middle of the vectorscope graph is 
+relative to the crosshairs, you can get an idea of whether there’s a color imbalance in the image. If the 
+vectorscope graph is off-centered, the direction in which it leans lets you know that there’s a color cast 
+(tint) in the image.
+The Vectorscope shown in 2x mode, with combined 
+highlights, mid-tones, and shadows extents
+Histogram (RGB/YRGB parade histogram)
+Displays a statistical analysis of how many pixels of each color channel lie at each percentage of 
+tonality, plotted along a digital scale from 0 percent (black) to 100 percent (white). Comparing the left, 
+middle, and right parts of the Y, R, G, and B graphs (Y is optional) lets you evaluate the color balance in 
+the shadows, midtones, and highlights of the image. 
+The Histogram scope set to YRGB
+Taken altogether, the left of all graphs indicates the black point of the image, while the right of all 
+graphs indicate the white point. It then follows that the difference between the width of the left and 
+right of all graphs indicates the overall contrast ratio of the image you’re evaluating. Wide histogram 
+graphs indicate a wide contrast ratio, while narrow histogram graphs indicate a narrow contrast ratio.
+3152Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+CIE Chromaticity Scope
+DaVinci Resolve contains CIE 1931 xy and CIE 1976 uv scopes, which let you see the current image 
+analysis as a graph superimposed against a triangle that represents the tristimulus values of the color 
+gamut you’re working within, along with an indication of the current white point. A label shows the 
+currently selected gamut, with the specific coordinates of these Red, Green, and Blue values as well 
+as the White point, while the overall “horseshoe” shape represents the entire range of visible light, all 
+plotted against an xy graph. 
+The white point ordinarily appears atop a curve along the center of the shape. This curve indicates 
+the black body locus, along which the various color temperatures of an image’s white point correlate, 
+from orange-ish warm to blue-ish cool. This black body locus corresponds to the color temperatures 
+obtained by progressively heating carbon to different temperatures.
+You also have the option of showing a second gamut triangle, in cases where you want to compare 
+the current analysis to two different gamuts. This can be useful when you need to create deliverables 
+in multiple gamuts, and you want to see which parts of the video signal are safe in all gamuts and 
+which parts are exceeding the smaller of the two. When you do this, both gamuts are labeled, and the 
+coordinates of the Red, Green, and Blue values of both gamuts are listed to the side.
+The CIE 1931 xy scope showing both P3 and Rec. 709 gamuts
+In a way, the Chromaticity scope is a 3D scope, but it’s drawn as if you’re looking down at the top of a 
+3D shape that plots every color value in an image in X, Y, Z space, but you can only perceive the 2D 
+outline around the widest parts of this shape drawn on an X, Y plot. The graph does indeed represent 
+every single value found within a 3D plot of the image data, but the triangle only indicates the widest 
+“slice” of the current gamut and of this 3D shape within the mid-tones. 
+What this means is that while the Chromaticity scope’s graph gives you a rough idea of whether or not 
+the current image is within gamut relative to your delivery spec, it’s not exact and it’s not foolproof, 
+as part of the image data could fall within this wide triangle and yet overshoot the required gamut 
+elsewhere in the highlights at the top or the shadows near the bottom of the 3D shape you’re looking 
+down on. On the other hand, if any part of the graph does extend past the boundaries of the gamut 
+triangle, then that definitely indicates a gamut violation. 
+You can add an additional gamut triangle in the scope settings in order to compare the color space 
+you’re working in to another color space, for reference.
+Most people who’ve had any exposure to color grading concepts are familiar with the traditional CIE 
+1931 horseshoe graph, which plots the portion of the spectrum visible to the human eye according 
+to studies done in the late 1920s (subsequent studies have confirmed this analysis). The optional CIE 
+3153Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+1976 uv graph is based on an updated color space (CIELUV) that was an attempt by the International 
+Commission on Illumination (CIE) to create a more perceptually uniform graph of color. Whereas the 
+CIE 1931 analysis visually exaggerates certain parts of a color graph, the CIE 1976 graph draws all parts 
+of a color graph more or less proportionally to one another. Overall, neither analysis is more “correct” 
+than the other, it’s simply a matter of what you prefer to look at.
+The CIE 1976 scope showing both P3 and Rec. 709 gamuts
+Panning and Zooming the Video Scopes
+If you want to examine any part of a video scope’s graph in more detail, you can do the following:
+  To zoom into a graph: Hold the Option key down, and roll the scroll control.
+  To pan around a graph: Click and drag with the middle pointer button.
+Customizing the Video Scopes
+Once you’ve opened the video scopes, there are a variety of ways you can customize how the scopes 
+look, and expose additional onscreen graticule information to help you measure what you need.
+Methods of customizing the Scopes window:
+  To change the size of the Scopes window: Drag the lower right-hand corner to resize the Scopes 
+window to the desired size.
+  To change how many scopes are displayed at once: Click one of the buttons in the upper right-
+hand corner of the Scopes window to set 1, 2, 4, or 9 up arrangements of the video scopes. You 
+can also choose how many scopes are simultaneously displayed by choosing Workspace > Video 
+Scopes > 1-Up, 2-Up, or 4-Up.
+  To change which scopes appear in which pane: Click the Name drop-down at the upper left 
+corner of each scope’s pane, and choose a different scope. If you like, you can instantiate more 
+than one of each kind of video scope in multi-scope layouts, for instances where you want to view 
+variations on a particular type of scope with different settings. 
+3154Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+For example, you might want to expose three Vectorscopes, setting each to a different 
+tonal range so you can simultaneously view Vectorscope analyses of Low (shadows), Mid 
+(midtones), and High (highlights).
+Different layout options in the Scope window
+Once open, you can resize the Scopes window to make it as large or small as you require, 
+positioning on a second display if you want to make it even larger. 
+To customize each video scope’s display options:
+1 Click the Option button to the right of the Scope drop-down menu to expose the current scope’s 
+Custom Controls window.
+Clicking to open the current  
+scope’s custom controls
+2 Adjust any of the available controls to customize the look of that particular scope.
+3 Click anywhere outside of the Custom Controls window to make it disappear.
+Parade Scope Display Options
+The Parade scope has the following options:
+  RGB, YRGB, and YCbCr modes, allowing you to evaluate more channels than before.
+  A colorize checkbox lets you view graphs in monochrome or false-color (indicating red, 
+green, and blue).
+  An Extents checkbox draws an outline highlighting all graph excursions, to unambiguously show 
+you all overshoots and undershoots in each waveform.
+  The Parade slider makes that scope’s graph brighter or dimmer. Brighter graphs make it easier to 
+see fine detail, but harder to see which parts of the graph are stronger and weaker.
+  The Graticule slider makes that scope’s scale brighter or dimmer, making it more or less visible 
+(or distracting) relative to the graph.
+  The Scale Display Range checkbox lets you customize the HDR Parade scopes with custom 
+ranges. Adjusting these range sliders stretches the waveforms inside the scope, so you can focus 
+on a specific portion of the waveform.
+  The Show Reference Levels checkbox lets you turn on adjustable Low and High 
+reference level markers by setting the low and high sliders to something other than their 
+defaults. This is especially useful for HDR grading where you’re working within a specific peak 
+luminance threshold.
+3155Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Options in the Parade scope.
+ Options in the Waveform scope.
+Waveform Scope Display Options
+The Waveform scope has the following options:
+  Y (luma) and CbCr (chrominance) modes to show you the true luma or chroma signals in isolation, 
+and RGB to show you only an RGB analysis.
+  In RGB mode, R, G, and B buttons that can be individually toggled on and off to see any 
+combination of graphs.
+  A colorize checkbox lets you view overlaid graphs in monochrome or false-color (indicating red, 
+green, and blue). If you’re only enabling the Y or C scopes, the different areas of these graphs are 
+drawn with color taken from the image being analyzed, which makes it easier to see which part of 
+the scope graph corresponds to which part of the image.
+  An Extents checkbox draws an outline highlighting all graph excursions, to unambiguously show 
+you all overshoots and undershoots in each waveform.
+  The Waveform slider makes that scope’s graph brighter or dimmer. Brighter graphs make it easier 
+to see fine detail, but harder to see which parts of the graph are stronger and weaker.
+  The Graticule slider makes that scope’s scale brighter or dimmer, making it more or less visible (or 
+distracting) relative to the graph.
+  The Show Reference Levels checkbox lets you turn on adjustable Low and High reference 
+level markers by setting the low and high sliders to something other than their defaults. 
+This is especially useful for HDR grading where you’re working within a specific peak 
+luminance threshold.
+3156Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Vectorscope Display Options
+The Vectorscope has the following options:
+  Choose ALL to view the entire tonal range of the image as a Vectorscope graph analysis, or to 
+selectively view just the shadows (Low), mid-tones (Mid), or highlights (High) of the image as a 
+vectorscope graph analysis.
+  A Colorize checkbox draws the different areas of these graphs with color taken from the image 
+being analyzed, which makes it easier to see which part of the scope graph corresponds to which 
+part of the image. With colorize turned off, graphs only appear white.
+  An Extents checkbox draws an outline highlighting all graph excursions to unambiguously show 
+you all overshoots and undershoots.
+  A Combine checkbox lets you see simultaneous overlapping extents for the highlights, mid-tones, 
+and shadows overlaid on one another.
+  The Vectorscope slider makes that scope’s graph brighter or dimmer. Brighter graphs make it 
+easier to see fine detail, but harder to see which parts of the graph are stronger and weaker.
+  The Graticule slider makes that scope’s scale brighter or dimmer, making it more or less visible (or 
+distracting) relative to the graph.
+  Low Range and High Range sliders let you manually define the boundaries separating shadows 
+from mid-tones and highlights. Low Range defaults to 0.30, and High Range defaults to 0.70.
+  Show 2X Zoom zooms the vectorscope graph by 200%, making it easier to see fine detail and use 
+the vectorscope with charts.
+  Show Skin Tone Indicator checkbox shows a line at the traditional Inphase angle that is useful as a 
+general guidepost for average skin tone hue.
+  Show Graticule checkbox lets you show or hide the circular degrees indicator surrounding the 
+outer edge and the cross hairs that indicate the center of the vectorscope.
+Histogram Display Options
+The Histogram has the following options:
+  You can view either RGB or YRGB histograms.
+  Gain slider scales that scope’s graph taller or shorter. Taller graphs expand to show greater detail 
+in the histogram’s peaks, shorter graphs reduce the apparent detail.
+  Graticule slider makes that scope’s scale brighter or dimmer, making it more or less visible 
+(or distracting) relative to the graph.
+  The Show Reference Levels checkbox lets you enable adjustable Low and High reference 
+level markers by setting the Low and High sliders to something other than their defaults. These 
+reference markers are especially useful for HDR grading where you’re working within a specific 
+peak luminance threshold.
+CIE Chromaticity Display Options
+The CIE Chromaticity scope has the following options: 
+  You can view a chromaticity analysis in either a CIE 1931 xy graph, or a CIE 1976 uv graph.
+  CIE Chromaticity slider makes that scope’s graph brighter or dimmer. Brighter graphs make it 
+easier to see fine detail, but harder to see which parts of the graph are stronger and weaker.
+  Graticule slider makes that scope’s scale brighter or dimmer, making it more or less visible (or 
+distracting) relative to the graph.
+  Additional Gamut drop-down menu lets you expose a second gamut triangle, for instances where 
+you want to compare how an image fits into two different gamut ranges.
+3157Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+  Show 2X Zoom zooms the CIE graph and graticule by 200%, making it easier to see fine detail and 
+use the vectorscope with the charts.
+  Show Graticule checkbox lets you show or hide the circular degrees indicator surrounding the 
+outer edge and the cross hairs that indicate the center of the vectorscope.
+Options in the Vectorscope.
+ Options in the Histogram scope.
+ Options in the Chromaticity scope.
+Resetting Scope Display Options
+You can reset all the scopes to their default values by clicking on the scopes option menu, and 
+selecting Reset All.
+3158Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR
+Chapter 128
+Color Page Timeline 
+and Lightbox
+The Timeline in the Color page, consisting of the Thumbnail Timeline and the 
+Mini-Timeline, is primarily used for navigating the current arrangement of clips, and 
+for keeping track of clip properties such as whether they’re graded and ungraded, 
+whether they use tracking, which version they’re using, and so on. 
+It can also be used for quickly copying grades from one clip to another, for creating groups, and for 
+comparing clips in the Viewer.
+The Lightbox is the twin sibling of the Thumbnail Timeline, and provides an image -based method of 
+comparing clips, managing grades, and performing a wide variety of organizational tasks.
+This chapter covers the use of the Timeline and Lightbox.
+Contents
+Navigating Using the Color Page Timeline ��������������������������������������������������������������������������������������������������������������������������� 3160
+Thumbnail Timeline ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3160
+Mini-Timeline ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3160
+Using Multiple Timeline Playheads  �������������������������������������������������������������������������������������������������������������������������������������������� 3162
+Show Current Clip With Handles  �������������������������������������������������������������������������������������������������������������������������������������������������  3163
+Thumbnail Info ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3163
+Thumbnail Contextual Menu Commands ������������������������������������������������������������������������������������������������������������������������������ 3165
+Sorting and Filtering Clips in the Thumbnail Timeline ���������������������������������������������������������������������������������������������������� 3165
+Changing Timelines  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3165
+A and C Mode Sorting ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3166
+Flags, Clip Colors, and Markers  ��������������������������������������������������������������������������������������������������������������������������������������������������� 3167
+Timeline Filtering ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3168
+Using the Lightbox ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3172
+3159Color | Chapter 128 Color Page Timeline and Lightbox
+COLOR
+Navigating Using the Color Page Timeline
+The Color page Timeline consists of two parts that work together, the Thumbnail Timeline and the 
+Mini Timeline. These work together to let you examine and navigate the Timeline of your program in 
+different ways.
+The Color page Timeline
+The scroll bar for the Mini-Timeline is independent of the scroll bar for the Thumbnail Timeline, and 
+both can be set to show different ranges of clips. Using the scroll control of your pointing device lets 
+you zoom into or out of the Mini-Timeline. When zoomed all the way out, the Mini-Timeline displays 
+the entire timeline within the available width of the screen, making it a fast way of navigating the entire 
+program from the beginning to the end. However, you can zoom into a particular section when you 
+need more information about how an intricate arrangement of superimposed clips are organized while 
+you’re grading.
+Thumbnail Timeline
+Provides a concise visual representation of your project where each clip is a single numbered 
+thumbnail, regardless of its duration. Clicking a thumbnail moves the playhead to the first frame 
+of that clip, while using the Up/Down Arrow keys moves the selection to the previous or next clip. 
+Whichever clip is at the current position of the playhead appears with its thumbnail outlined in orange. 
+Middle-clicking and dragging as well as using the scroll wheel of your pointing device lets you scroll 
+backward and forward through the Thumbnail timeline.
+The Color page Thumbnail Timeline
+Each thumbnail displays a variety of information above and below it, including a rainbow outline 
+around the number of graded clips, the clip format, file name, or grading version text below each 
+thumbnail, tracking or stabilization badges, flag badges, and link badges to indicate clip groups or 
+automatic remote grade linking, where existent.
+Mini-Timeline
+Shows a miniature representation of the Timeline in the Edit page, where each clip’s width 
+is proportional to its duration, and superimposed clips are shown on top of one another. 
+The Mini-Timeline can show a maximum of six video tracks; if your edit uses more, a scroll bar lets you 
+change which tracks are displayed. Clicking a clip in the Mini-Timeline selects that clip and moves the 
+playhead to its first frame. 
+3160Color | Chapter 128 Color Page Timeline and Lightbox
+COLOR

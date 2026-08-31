@@ -7,6 +7,7 @@ from vibmo.primitives.circle import Circle, Ellipse
 from vibmo.primitives.polygon import Polygon, Star, Line
 from vibmo.primitives.path import Path
 from vibmo.primitives.morph import MorphPath, Shape
+from vibmo.primitives.shapes_brand import AnthropicAsterisk, AnthropicLogo
 
 __all__ = [
     "Rect",
@@ -19,4 +20,6 @@ __all__ = [
     "Path",
     "MorphPath",
     "Shape",
+    "AnthropicAsterisk",
+    "AnthropicLogo",
 ]

@@ -1,9 +1,10 @@
 import math
-from typing import Any
+from typing import Any, Optional
 import cairo
 
 from vibmo.core.color import Color, colors
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
 from vibmo.core.vector import Vector2D
 from vibmo.scene.node import Node
 
@@ -18,8 +19,24 @@ class IsometricExtruded3DText(Node):
         self.font_size = Signal(float(font_size), f"{self.name}.font_size")
         self.font_family = font_family
         self.color = Signal(color, f"{self.name}.color")
-        self.depth = depth
+        self.depth = int(depth)
         self.angle_deg = angle_deg
+        self.gleam_progress = Signal(-1.0, f"{self.name}.gleam_progress")
+        self.gleam_color = Color(1.0, 1.0, 1.0, 0.85)
+
+    def gleam(
+        self,
+        duration: float = 1.2,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+        color: Optional[Color] = None,
+    ) -> AnimationAction:
+        """Sweeps a brilliant specular light gleam across the 3D extruded lettering."""
+        self.gleam_progress.set(0.0)
+        if color is not None:
+            self.gleam_color = Color.from_any(color)
+        e = ease or Ease.in_out_cubic
+        return self.gleam_progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def _setup_cairo_font(self, ctx: cairo.Context, font_size: float) -> None:
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
@@ -37,7 +54,7 @@ class IsometricExtruded3DText(Node):
         dy = math.sin(angle_rad)
 
         # Draw extrusion layers (back to front)
-        for i in range(self.depth, 0, -1):
+        for i in range(int(self.depth), 0, -1):
             offset_x = i * dx
             offset_y = i * dy
             
@@ -57,6 +74,30 @@ class IsometricExtruded3DText(Node):
         ctx.set_source_rgba(c.r, c.g, c.b, c.a)
         ctx.move_to(0, fs * 0.88)
         ctx.show_text(self.text)
+
+        # Specular gleam overlay pass
+        gp = float(self.gleam_progress.get(time))
+        if 0.0 <= gp <= 1.0:
+            ctx.save()
+            ctx.move_to(0, fs * 0.88)
+            ctx.text_path(self.text)
+            ctx.clip()
+
+            extents = ctx.text_extents(self.text)
+            text_width = extents.width if extents.width > 0 else fs * len(self.text) * 0.7
+            gleam_w = fs * 1.5
+            gx = -gleam_w + (text_width + gleam_w * 2) * gp
+            gc = self.gleam_color
+
+            pat = cairo.LinearGradient(gx, 0, gx + gleam_w, 0)
+            pat.add_color_stop_rgba(0.0, gc.r, gc.g, gc.b, 0.0)
+            pat.add_color_stop_rgba(0.5, gc.r, gc.g, gc.b, gc.a)
+            pat.add_color_stop_rgba(1.0, gc.r, gc.g, gc.b, 0.0)
+            mat = cairo.Matrix(1, 0, -0.5, 1, 0, 0)
+            pat.set_matrix(mat)
+            ctx.set_source(pat)
+            ctx.paint()
+            ctx.restore()
 
         ctx.restore()
         super().draw(ctx, time)
@@ -115,6 +156,16 @@ class BevelGleamLight(Node):
         self.font_family = font_family
         self.gleam_color = Signal(gleam_color, f"{self.name}.gleam_color")
         self.progress = Signal(0.0, f"{self.name}.progress")
+
+    def gleam(
+        self,
+        duration: float = 1.2,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+    ) -> AnimationAction:
+        self.progress.set(0.0)
+        e = ease or Ease.in_out_cubic
+        return self.progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def _setup_cairo_font(self, ctx: cairo.Context, font_size: float) -> None:
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)

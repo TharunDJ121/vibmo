@@ -20,7 +20,7 @@ from vibmo.timeline.scheduler import all, sequence, wait, Choreographer
 
 # Layout & Flexbox
 from vibmo.layout.alignment import Align
-from vibmo.layout.container import FlexContainer, AutoResizeBox
+from vibmo.layout.container import FlexContainer, AutoResizeBox, GridContainer
 from vibmo.layout.flexbox import FlexLayout
 
 # Primitives & Morphing
@@ -29,6 +29,7 @@ from vibmo.primitives.circle import Circle, Ellipse
 from vibmo.primitives.polygon import Polygon, Star, Line
 from vibmo.primitives.path import Path
 from vibmo.primitives.morph import MorphPath, Shape
+from vibmo.primitives.shapes_brand import AnthropicAsterisk, AnthropicLogo
 
 # Typography & Captions
 from vibmo.typography.text import Text
@@ -56,6 +57,7 @@ from vibmo.typography.captions_advanced import (
 from vibmo.importers.fonts import FontManager
 from vibmo.importers.icons import Icon
 from vibmo.importers.lottie import LottieAnimation
+from vibmo.importers.rive import RiveAnimation
 from vibmo.importers.web import WebNode
 from vibmo.assets.asset import Asset, ImageNode
 from vibmo.assets.video import VideoNode, VideoClip
@@ -69,6 +71,7 @@ from vibmo.assets.library import (
     AssetCategory,
     get_asset_library,
 )
+from vibmo.packaging import ProjectArchive
 from vibmo.studio.asset_browser import AssetBrowser, get_asset_browser, BrowserFilter
 
 # Compositing Graph & Mattes
@@ -95,6 +98,7 @@ from vibmo.product.charts_advanced import (
     Heatmap,
     CandlestickChart,
 )
+from vibmo.charts.chart_candlestick_pro_suite import CandlestickChartPro
 from vibmo.product.ui_components import (
     ProgressBar,
     Slider,
@@ -141,6 +145,56 @@ from vibmo.themes import Themes, Theme
 from vibmo.components.glass import GlassCard
 from vibmo.components.counter import MetricCounter
 from vibmo.components.code import CodeWindow
+from vibmo.components.code_stream import SyntaxHighlightCode
+from vibmo.components.terminal_session import TerminalWindow, TerminalStep
+from vibmo.components.code_card import CodeCard
+from vibmo.components.diagram_node import DiagramNode, DiagramBox, DiagramConnection
+
+# Quality, Validation & Cinematography
+from vibmo.quality import (
+    SlideshowRiskScorer,
+    SlideshowRiskReport,
+    ScenePacingVerifier,
+    TimelineLandmark,
+    PacingReport,
+    PreflightValidator,
+    PreflightReport,
+    AntiSlopValidator,
+    AntiSlopReport,
+    SlopViolation,
+)
+from vibmo.ai.cinematography import ShotPromptBuilder, ShotSpecification
+from vibmo.styles.harmony import ColorHarmonizer, ContrastEvaluation, TypographicScale
+
+# 2D Mocap & Rigging
+from vibmo.rigging.mocap import (
+    FabrikSolver2D,
+    MocapStickFigure,
+    MocapClip,
+    MocapLibrary,
+)
+
+# Video Post-Processing & Smart Reframing
+from vibmo.video_post import (
+    AutoReframe,
+    ReframePlan,
+    SilenceCutter,
+    SilenceInterval,
+    BackgroundRemover,
+)
+from vibmo.tracking.scene_detect import (
+    SceneDetector,
+    SceneBoundary,
+)
+from vibmo.typography.subtitles import (
+    SubtitleGenerator,
+    SubtitleCue,
+)
+
+
+# Stock Asset Ingestion
+from vibmo.assets.stock import StockAssetConnector, StockMediaItem
+
 
 # Physics & Particles
 from vibmo.physics.particles import ParticleEmitter
@@ -178,6 +232,8 @@ from vibmo.audio.sfx_library import (
     AudioDucker,
 )
 from vibmo.audio.stems import AudioStemMixer
+from vibmo.audio.energy import AudioEnergyAnalyzer, AudioEnergyProfile
+from vibmo.audio.ducker import VoiceoverDucker
 
 # Math & Plots
 from vibmo.math.formula import MathFormula
@@ -196,6 +252,8 @@ from vibmo.fx.filters import (
     MotionBlur,
     Bloom,
     Glow,
+    AnamorphicStreak,
+    ColorGrade,
     ChromaticAberration,
     DepthOfField,
     TiltShift,
@@ -211,6 +269,7 @@ from vibmo.fx.filters import (
     Halftone,
     Duotone,
 )
+from vibmo.color.grading import ColorGrade
 from vibmo.fx.patterns import (
     Checkerboard,
     Gridlines,
@@ -236,6 +295,7 @@ from vibmo.fx.color_advanced import (
     Vibrance,
     Levels,
     Curves,
+    Lut3D,
     duotone,
     tint,
     color_correction,
@@ -330,6 +390,12 @@ from vibmo.composition.transitions import (
     ShapeWipe,
     DipToColor,
 )
+from vibmo.composition.transitions_remocn import (
+    PushThroughTransition,
+    FocusPullTransition,
+    WhipPanTransition,
+    DitherDissolveTransition,
+)
 from vibmo.composition.transitions_expanded import (
     Slide,
     PushCut,
@@ -373,6 +439,14 @@ from vibmo.templates.turnkey import (
     DeveloperCliLaunchTemplate,
     TmplAiCodeAssistantSuite,
     AiCodeAssistantTemplate,
+    TmplFintechCryptoCardSuite,
+    FintechCryptoCardTemplate,
+    TmplSaasYcPitchSuite,
+    SaasYcPitchTemplate,
+    TmplSaasProductDemoSpineSuite,
+    ProductDemoSpine,
+    TmplChangelogReleaseSuite,
+    TmplCliDeveloperLaunchSuite,
 )
 from vibmo.templates.catalog import TEMPLATES
 from vibmo.templates.library import SceneTemplateLibrary
@@ -413,14 +487,23 @@ from vibmo.audio.generators import *
 from vibmo.fx.backgrounds import *
 from vibmo.product.hardware import *
 from vibmo.product.ai import *
+from vibmo.product.shotcraft import *
+from vibmo.product.magic_ui import *
 from vibmo.charts import *
 from vibmo.typography.kinetic import *
 from vibmo.fx.shaders import *
+from vibmo.audio.beat_sync import BeatSyncGrid, TimelineSFXTable, SFXCue
+from vibmo.exporters.jianying_draft_exporter import JianYingDraftExporter
+from vibmo.quality.aesthetic_case_law import AestheticCaseLawValidator, AestheticReport, CaseLawViolation
+from vibmo.ai.meta_director import MotionThesis, BeatGraph, BeatNode, AntiPptGate, AntiPptReport
+from vibmo.quality.replica_verifier import VideoReplicaVerifier, FidelityLevel, FrameComparisonResult, GateVerdict
 
 import vibmo.audio.generators as _generators
 import vibmo.fx.backgrounds as _backgrounds
 import vibmo.product.hardware as _hardware
 import vibmo.product.ai as _ai_ui
+import vibmo.product.shotcraft as _shotcraft
+import vibmo.product.magic_ui as _magic_ui
 import vibmo.charts as _charts
 import vibmo.typography.kinetic as _kinetic_typo
 import vibmo.fx.shaders as _shaders
@@ -454,6 +537,7 @@ __all__ = [
     "Align",
     "FlexContainer",
     "AutoResizeBox",
+    "GridContainer",
     "FlexLayout",
     "Rect",
     "RoundedRect",
@@ -465,6 +549,8 @@ __all__ = [
     "Path",
     "MorphPath",
     "Shape",
+    "AnthropicAsterisk",
+    "AnthropicLogo",
     # Typography
     "Text",
     "KineticText",
@@ -501,6 +587,7 @@ __all__ = [
     "get_asset_browser",
     "BrowserFilter",
     "LottieAnimation",
+    "RiveAnimation",
     "WebNode",
     # Compositing
     "Precomp",
@@ -534,6 +621,7 @@ __all__ = [
     "FunnelChart",
     "Heatmap",
     "CandlestickChart",
+    "CandlestickChartPro",
     "CommandPalette",
     "CommandItem",
     "DataTable",
@@ -579,6 +667,7 @@ __all__ = [
     "GlassCard",
     "MetricCounter",
     "CodeWindow",
+    "SyntaxHighlightCode",
     # Physics & Particles
     "ParticleEmitter",
     "AdvancedParticleEmitter",
@@ -610,6 +699,9 @@ __all__ = [
     "ProceduralSFXGenerator",
     "AudioDucker",
     "AudioStemMixer",
+    "AudioEnergyAnalyzer",
+    "AudioEnergyProfile",
+    "VoiceoverDucker",
     # Math & Spatial
     "MathFormula",
     "Axes",
@@ -623,6 +715,8 @@ __all__ = [
     "MotionBlur",
     "Bloom",
     "Glow",
+    "AnamorphicStreak",
+    "ColorGrade",
     "ChromaticAberration",
     "DepthOfField",
     "TiltShift",
@@ -659,6 +753,7 @@ __all__ = [
     "Vibrance",
     "Levels",
     "Curves",
+    "Lut3D",
     "duotone",
     "tint",
     "color_correction",
@@ -777,6 +872,18 @@ __all__ = [
     "DeveloperCliLaunchTemplate",
     "TmplAiCodeAssistantSuite",
     "AiCodeAssistantTemplate",
+    "TmplFintechCryptoCardSuite",
+    "FintechCryptoCardTemplate",
+    "TmplSaasYcPitchSuite",
+    "SaasYcPitchTemplate",
+    "TmplSaasProductDemoSpineSuite",
+    "ProductDemoSpine",
+    "TmplChangelogReleaseSuite",
+    "TmplCliDeveloperLaunchSuite",
+    "PushThroughTransition",
+    "FocusPullTransition",
+    "WhipPanTransition",
+    "DitherDissolveTransition",
     "Exporter",
     "ExportQuality",
     "QUALITY_PRESETS",
@@ -806,12 +913,70 @@ __all__ = [
     "register_filter",
     "Marker",
     "LayerTrack",
+    # OpenMontage & Remocn Quality Additions
+    "TerminalWindow",
+    "TerminalStep",
+    "CodeCard",
+    "DiagramNode",
+    "DiagramBox",
+    "DiagramConnection",
+    "SlideshowRiskScorer",
+    "SlideshowRiskReport",
+    "ScenePacingVerifier",
+    "TimelineLandmark",
+    "PacingReport",
+    "PreflightValidator",
+    "PreflightReport",
+    "AntiSlopValidator",
+    "AntiSlopReport",
+    "SlopViolation",
+    "AestheticCaseLawValidator",
+    "AestheticReport",
+    "CaseLawViolation",
+    "BeatSyncGrid",
+    "TimelineSFXTable",
+    "SFXCue",
+    "JianYingDraftExporter",
+    "MotionThesis",
+    "BeatGraph",
+    "BeatNode",
+    "AntiPptGate",
+    "AntiPptReport",
+    "VideoReplicaVerifier",
+    "FidelityLevel",
+    "FrameComparisonResult",
+    "GateVerdict",
+    "ShotPromptBuilder",
+    "ShotSpecification",
+    "ColorHarmonizer",
+    "ContrastEvaluation",
+    "TypographicScale",
+    "FabrikSolver2D",
+    "MocapStickFigure",
+    "MocapClip",
+    "MocapLibrary",
+    "AutoReframe",
+    "ReframePlan",
+    "SilenceCutter",
+    "SilenceInterval",
+    "BackgroundRemover",
+    "SceneDetector",
+    "SceneBoundary",
+    "SubtitleGenerator",
+    "SubtitleCue",
+    "StockAssetConnector",
+    "StockMediaItem",
+    "ProjectArchive",
 ]
+
+
 
 __all__.extend(_generators.__all__)
 __all__.extend(_backgrounds.__all__)
 __all__.extend(_hardware.__all__)
 __all__.extend(_ai_ui.__all__)
+__all__.extend(_shotcraft.__all__)
+__all__.extend(_magic_ui.__all__)
 __all__.extend(_charts.__all__)
 __all__.extend(_kinetic_typo.__all__)
 __all__.extend(_shaders.__all__)

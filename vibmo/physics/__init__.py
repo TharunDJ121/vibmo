@@ -14,6 +14,7 @@ from vibmo.physics.spring import SpringSimulation, SpringParameters
 from vibmo.physics.dynamics import PendulumDynamics, BounceDynamics
 from vibmo.physics.path_animation import CubicBezierCurve, PathFollower
 from vibmo.physics.particles_advanced import AdvancedParticleEmitter
+import vibmo.physics.easing as easing
 
 __all__ = [
     "ParticleEmitter",

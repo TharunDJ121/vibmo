@@ -1,0 +1,2380 @@
+EDIT
+Editing Effects 
+and Transitions
+CONTENTS
+54 Editing, Adding, and Copying Effects and Filters ������������������������������������������������������������������������  1177
+55 Using Transitions  ��������������������������������������������������������������������������������������������������������������������������������������  1193
+56 Titles, Generators, and Stills  ����������������������������������������������������������������������������������������������������������������  1212
+57 Compositing and Transforms in the Timeline  ������������������������������������������������������������������������������  1236
+58 Speed Effects  ��������������������������������������������������������������������������������������������������������������������������������������������  1253
+59 Subtitles and Closed Captioning  ������������������������������������������������������������������������������������������������������  1267
+60 Keyframing Effects ����������������������������������������������������������������������������������������������������������������������������������  1289
+61 VFX Connect  ����������������������������������������������������������������������������������������������������������������������������������������������  1310
+Chapter 54
+Editing, Adding, 
+and Copying Effects 
+and Filters
+This chapter covers how to browse for and apply effects to clips in the Timeline, 
+how to copy them from clip to clip, how to remove them, and how to edit them 
+in the Inspector once they’ve been added. 
+For more information on the specific Resolve FX available, jump to chapter: R esolve FX.
+Contents
+Using the Effects Library  ������������������������������������������ 1178
+Shift-Space to Display the 
+Effects Search Dialog  �������������������������������������������������� 1178
+The Toolbox ��������������������������������������������������������������������� 1179
+Open FX ���������������������������������������������������������������������������  1180
+Audio FX ��������������������������������������������������������������������������� 1180
+Effects Library Favorites �������������������������������������������  1180
+Converting Fusion 
+Compositions to Edit Effects  ����������������������������������� 1181
+Seeing Effects in the Timeline  ������������������������������� 1182
+Using the Inspector ����������������������������������������������������� 1182
+Inspector Effects Controls  ���������������������������������������� 1183
+Adding Filters to Video Clips ���������������������������������  1184
+Render in Place �������������������������������������������������������������� 1187
+Fusion Effect Templates Cache  ���������������������������� 1189
+Adjusting Multiple Clips at the Same Time  ����� 1189
+Adjustment Clips  ��������������������������������������������������������� 1190
+Paste Attributes �������������������������������������������������������������� 1191
+Keyframe Options for 
+Pasting Keyframed Attributes  ���������������������������������� 1191
+Option to Ripple the Timeline 
+for Pasting Speed Effects  ����������������������������������������� 1192
+Paste and Remove Attributes 
+to Retain Image Position  �������������������������������������������� 1192
+Remove Attributes ������������������������������������������������������� 1192
+1177Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Using the Effects Library
+All effects that you can add to your edit, including filters, transitions, titles, and generators, are found 
+in the Effects panel. The Effects panel shows a hierarchical list of all of the different transitions, title 
+effects, generators, and filters that are available, sorted by category.
+To preview a video effect before placing it on a clip, ensure that “Hover Scrub Preview” is checked 
+in the Effects option menu, then simply hover your pointer over any thumbnail in the Effects tab and 
+move it across the thumbnail. The effect will preview in the Viewer using its default parameters, and 
+scrub through the clip that is selected in the Timeline. If no clip is selected then it will use the clip 
+currently under the playhead.
+To activate a specific video effect on a clip, simply drag the thumbnail of the selected effect to a clip 
+on the Timeline. You can also double click the thumbnail, or drag an effect directly into the Inspector 
+to apply the effect to the selected clip. To adjust the effect’s parameters, open the Effects tab 
+in the Inspector. 
+Scrubbing over an Effect Thumbnail previews that effect in the Viewer.
+You can search for a particular effect by clicking on the magnifying glass icon at the top of the 
+Effects Library. A drop-down menu just to the right of it lets you choose whether to search the 
+entire FX library (All Folders) or just the current folder.
+You can search for effects and transitions using Category Names as a search term. 
+For example, searching for “Stylize” will bring up all the Resolve FX under the Stylize section. 
+You can also search for effects using the language set in DaVinci Resolve > Preferences > 
+User > UI Settings, in addition to English.
+Shift-Space to Display the Effects Search Dialog
+Pressing Shift-Space will now bring up the Effects Search dialog in the Cut, Edit, Color and Fairlight 
+pages, similar to how it always worked in the Fusion page. If you have a clip selected, clicking on the 
+effect in the search list will apply that effect to the selected clip.
+1178Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Pressing Shift-Space will pop up the Effects Search Dialog. In this 
+case typing “film” will pull up any effect with Film in the name.
+The Toolbox
+All of the video and audio transitions, titles, and generators that ship along with DaVinci Resolve:
+Toolbox
+Exposes all transitions, titles, generators, and effects at once.
+Video Transitions: Contains all of the built-in transitions that are available from DaVinci, 
+organized by category. At the bottom of the list, a User category shows presets that 
+you’ve saved. You can drag any video transition to any edit point in the Timeline that has 
+overlapping clip handles to add it to your edit; you have the option to drag the transition so 
+that it ends on, is centered on, or starts on the edit point. 
+For more information, jump to this chapter: Using Tr ansitions.
+Audio Transitions: Contains audio transitions for creating crossfades.
+Titles: Titles can be edited into the Timeline like any other clip. Once edited into the Timeline, 
+you can edit the title text and position directly in the Timeline Viewer, or you can access its 
+controls in the Inspector for further customization.
+Generators: Generators can also be edited into the Timeline like any other clip. Selecting a 
+generator and opening the Inspector lets you access its controls for further customization. 
+You can also choose a standard duration for generators to appear within the Editing panel of 
+the User Preferences.
+Effects: Effects are essentially placeholders in the Timeline that allow for more specialized 
+compositing in Fusion, or that let you modify the underlying tracks with an adjustment clip.
+1179Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Open FX
+DaVinci Resolve supports the use of third-party Open FX filters, transitions, and generators in the 
+Edit page. Once you install these effects on your workstation, they appear in this section of the Effects 
+Library, organized by type and group depending on the metadata within each effect.
+Open FX
+Exposes all Resolve FX and third-party Open FX installed on your workstation at once.
+Filters: Contains the Resolve FX filters that ship with DaVinci Resolve, as well as any third-
+party OFX plugins you’ve installed on your workstation. Filters can be dragged onto video 
+clips to apply an effect to that clip. Once applied, filters can be edited and customized by 
+opening the Open FX panel of the Inspector.
+Generators: Contains any third-party OFX generators you have installed on your workstation. 
+Can be edited into the Timeline just like the native generators that ship with DaVinci Resolve, 
+but they also expose an Open FX panel next to the Transition panel in the Inspector, where 
+you can customize settings that are unique to that transition.
+Transitions: Contains any third-party OFX transitions you have installed on your workstation. 
+OFX transitions can be used similarly to any other transition, but they also expose an Open FX 
+panel next to the Transition panel in the Inspector, where you can customize settings that are 
+unique to that transition.
+Audio FX
+On all platforms, DaVinci Resolve supports a set of built-in Fairlight FX, a native audio plugin format 
+that makes various audio tools and effects available on macOS, Windows, and Linux. On macOS and 
+Windows, DaVinci Resolve supports the use of third-party VST audio plugins, which includes most of 
+the professional third-party tools and effects used in the audio postproduction industry. On macOS, 
+DaVinci Resolve supports Audio Unit (AU) audio plugins. Once you install these effects on your 
+workstation, they appear in this panel of the Effects Library. Audio plugins let you apply effects to 
+audio clips or entire tracks’ worth of audio, to add creative qualities such as echo or reverb, or to take 
+care of mastering issues using noise reduction, compression, or EQ.
+Effects Library Favorites
+You can click on the far right of any transition, title, or generator flag that effect with a star as a favorite 
+effect. When you do so, the favorited effects appear in a separate Favorites area at the bottom of the 
+Effects Library Bin list. Favorited effects will be automatically categorized in the list.
+1180Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Stars indicate a flagged favorite effect; all favorites 
+are filtered and automatically categorized.
+Converting Fusion 
+Compositions to Edit Effects
+If you have created a Fusion Composition that you would like to use across a number of projects, you 
+can now save it to the Effects toolbox in the Edit page. This allows easy access to the effect from the 
+Edit page, and simple application to video clips in the Timeline.
+To convert a Fusion composition to an Edit effect:
+1 Export the composition as a macro in Fusion, by right clicking on a node and selecting Create 
+Macro from the contextual menu.
+2 Save the macro file (.setting) to the following directory: 
+MacOS: /Library/Application Support/Blackmagic Design/DaVinci Resolve/Fusion/
+Templates/Edit/Effects
+Windows: C:\ProgramData\Blackmagic Design\DaVinci Resolve\Fusion\Templates\Edit\Effects
+Linux: /opt/resolve/Fusion/Templates/Edit/Effects
+The effect will now be available as a drag and drop effect in the Fusion Effects section of the 
+toolbox in the Effects Library on the Edit page.
+1181Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Seeing Effects in the Timeline
+When you apply any kind of an effect to a clip in the Timeline, be it an adjustment in the Inspector, a 
+speed effect, a plugin you’ve applied, etc., clips with that effect appear a darker shade of whatever 
+color they are to show you there’s an effect applied. Removing all effects from a clip (for example, 
+using the Remove Attributes command) returns that clip to its original color. This makes it easy to see, 
+at a glance, which clips have effects, and which clips don’t.
+A clip with effects that’s shaded darker between two other regularly-shaded clips without effects
+Using the Inspector
+Once you’ve added effects to a timeline, the Effects Inspector is where you can edit their parameters. 
+The Inspector is the central area for editing all of the settings relating to filters, compositing, sizing, 
+titling, transitions, generators, and effects of all kinds. 
+The Inspector displays different 
+parameters depending on 
+what you’ve selected in the 
+Timeline; (left) parameters of a 
+clip, (right) parameters of a title.
+1182Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Many of the instructions in this section require the use of the Inspector, which can be opened or 
+closed by clicking the Inspector button at the far right of the Edit and Cut page toolbars, or by double-
+clicking a transition or generator in the Timeline. 
+There are three ways that the parameters of clips in the Timeline 
+can be displayed in the Inspector:
+• If no clips are selected in the Timeline, then the clip in the highest auto-select-enabled track 
+that intersects the playhead will have its parameters shown in the Inspector.
+• The Inspector always shows the parameters of one or more selected items in the Timeline, 
+which will override the clip in the highest track that intersects the playhead, if necessary. 
+Changing the selection changes which parameters are displayed, and the parameters you 
+edit in the Inspector only alter the currently selected clip. If multiple clips are selected, the 
+Inspector displays “Multiple Clips” and allows you to adjust the parameters of all selected 
+clips at the same time.
+• Choosing Timeline > Selection Follows Playhead sets DaVinci Resolve to always select 
+whichever clip intersects the playhead in the Timeline. The result is that the Inspector 
+always displays the parameters of the clip at the playhead, with the added bonus that 
+the clip at the playhead is also selected for other editorial functions. If there are multiple 
+superimposed clips intersecting the playhead all at once, the topmost video clip with an 
+enabled Auto Select control will be selected, thus exposing its parameters in the Inspector, 
+and all other clips will be ignored.
+Inspector Effects Controls
+Different Effects clips in the Timeline expose different controls. Whichever panels are exposed, 
+parameters within each panel are organized into groups, with a title bar providing the name of that 
+group, along with other controls that let you control all parameters within that group at the same time. 
+The Effects Inspector controls
+These controls include:
+  Enable button: A toggle control to the left of the parameter group’s name lets you disable 
+and re-enable every parameter within that group at once. Orange means that track’s enabled. 
+Gray is disabled.
+  Parameter group title bar: Double-clicking the title bar of any group of parameters collapses or 
+opens them. Even more exciting than that, Option-double-clicking the title bar of one parameter 
+group collapses or opens all parameter groups at once.
+1183Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+  Keyframe and Next/Previous Keyframe buttons: This button lets you add or remove keyframes at 
+the position of the playhead to or from every single parameter within the group. When the button 
+is highlighted orange, a keyframe is at the current position of the playhead. When it’s dark gray, 
+there is no keyframe. Left and right arrow buttons let you jump the playhead from keyframe to 
+keyframe for further adjustment.
+  Reset button: Lets you reset all parameters within that group to their default settings.
+Adding Filters to Video Clips
+DaVinci Resolve supports both built-in Resolve FX and third-party OFX plugins to create various 
+effects. These effects can be applied both to clips in the Edit page, and to nodes in the Color page. 
+This section shows how to apply, edit, and remove these filters in the Edit page. 
+For more information on using video effects in the Color page, jump to this chapter:  
+Using Open FX and Resolve FX 
+For more information on each of the Resolve FX plugins that accompany DaVinci Resolve, 
+jump to this chapter: Resolve FX.
+Methods of applying video filters in the Edit page:
+To apply a video filter to a clip: 
+  Drag any filter from the Effects Library onto the clip in the Timeline you want to apply it to.
+  Double Click the filter in the Effects Library to apply it to the selected clip.
+  Drag the Filter from the Effects Library to the Inspector to apply it to the selected clip.
+  Drag the Filter from the Effects Library to the Viewer to apply it to the clip being viewed.
+To apply a video filter to multiple clips: Select all of the clips you want to apply a filter to in the 
+Timeline, and then drag any filter from the Open FX category of the Effects Library onto any of the 
+selected clips. This is undoable.
+Applying a video filter to a single clip in the Timeline
+1184Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+To edit a clip’s video filters:
+Select that clip and open the Inspector’s Effects tab. The effects will be further sub-grouped 
+by type: Fusion, Open FX, or Audio. If a clip does not have any effects assigned to it, this 
+panel will be dimmed.
+Resolve FX controls appear in  
+the Effects panel of the Inspector.
+Some video filters have custom onscreen controls that can be modified in the Viewer. 
+These can be exposed in the Edit page using the OFX mode of the Viewer.
+Turning on the onscreen controls for  
+Resolve FX in the Edit page Timeline Viewer
+1185Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Once enabled, the OFX onscreen controls appear in the Viewer.
+Modifying onscreen controls foµr Resolve FX in the Edit page Timeline Viewer
+Many audio filters expose custom controls that appear in a floating window.
+To expose a filter’s custom controls: 
+Open the parameters if they’re not open already by double-clicking that filter’s title bar. 
+A button should appear at the top of the parameters for filters that have custom UI. Clicking 
+this button opens a floating window with all the custom controls. When you’re finished 
+adjusting the custom controls, close the window.
+The Fairlight FX Noise Reduction custom UI interface
+1186Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Methods of working with video filters in the Inspector:
+• To rearrange the order of multiple video filters applied to a clip: Click the move up or 
+move down buttons in any filter’s title bar, to the left of each filter’s Trash Can button.
+• To disable or re-enable a filter: Click the toggle control at the far left of each filter’s title bar. 
+Orange means that track’s enabled. Gray is disabled.
+• To remove a filter: Click the Trash Can button.
+• To reset a filter: Click the Reset button at the far right of the filter’s title bar.
+• To open or collapse a filter’s parameters: Double-click the title bar.
+• To open or collapse the parameters of all filters: Option-click the title bar.
+Once applied to a clip, video filters can also be keyframed or automated just like any other 
+Inspector setting, to create dynamic effects that change over time.
+Render in Place
+Render in Place allows you to render and bake in all effects that are applied to a single clip on the 
+Edit page Timeline. This command, which only works in the Edit page, creates an entirely new media 
+file that replaces the original clip on the Timeline. This new file is created in the same directory as the 
+original source file and is added to the Media Pool automatically.
+You can use Render in Place to improve the playback performance of a computationally intensive clip, 
+or use it to create a new high-quality master media with effects that have been finalized baked in. 
+For example, perhaps you have created a clip with a complicated speed ramp, and you want to pass it 
+to another editor or vfx artist in a round-trip rendering scenario, but you are worried about how other 
+programs may interpret the speed effects. In this scenario you could render the clip in place at master 
+quality, and then render and deliver the program.
+Render in Place is not a one way operation. Afterwards, you have the option to “Decompose to 
+Original” to bring back the original clip with the original effects, if you need to make a change because 
+the clip was not really as finalized as you were hoping.
+To Render in Place:
+1 Select one or more clips on the Edit Page timeline. Selecting multiple clips results in each clip 
+being individually rendered in place, but as a batch operation.
+2 Right-click the selection, and choose “Render in Place” from the contextual menu.
+3 Choose the appropriate Render Clip Options, and then click the “Render” button.
+Start Timecode: Sets the starting timecode value for the clip.
+Format: Selects the media file format.
+Codec: Selects the video codec.
+Type: Specifies the compression parameters of the selected codec.
+Include Handles: Gives you the option to specify the number of frames before and after the clip 
+In/Out points to be rendered.
+Include Video Effects: Turn on this checkbox to bake in all effects that have been applied to the 
+clip, such as sizing, Open FX or Resolve FX, and speed effects. Turning this checkbox off renders 
+the clip with speed effects baked in, but no other effects applied.
+1187Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Include Fusion Composition:  Turn on this checkbox to bake in any compositions 
+attached to the clip. 
+Include Color Grading Effects:  Turn on this checkbox to bake in any color grading attached to the 
+clip from the Color page.
+Render at Source Resolution: When checked the newly rendered media will be at the resolution 
+of the original source media, rather than the timeline resolution.
+The Render in Place options
+4 Use the File dialog that appears to choose where you want to save the resulting media. Choose a 
+location and click Open. 
+A progress bar appears to show you how long this will take. When finished, your new media is 
+saved in the designated location, added to the Media Pool, and will replace each corresponding 
+source clip on the Timeline.
+If you’ve used Render in Place and end up having buyer’s remorse, or a late-breaking change 
+comes back to you later, you can easily decompose to the original clip with its editable 
+effects to make the change.
+To Decompose to Original:
+1 Select one or more clips that have already been Rendered in Place, on the Edit Page timeline. 
+2 Right-click the selection, and choose “Decompose to Original” from the contextual menu.
+The original clip, along with all of its editable effects, will be returned to the Timeline. The new 
+media created in the Render in Place process will not be deleted from the source folder, nor will it 
+be removed from the Media Pool. It is effectively a new clip.
+1188Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Fusion Effect Templates Cache
+Fusion effect templates applied to clips on the timeline have more granular caching as well as 
+automatic render caching options. 
+The Render Cache Fusion Effect Filter menu in the timeline clip context menu has an Auto option that 
+is enabled by default. When render cache is set to Smart, any Fusion effects and templates applied to 
+a clip are automatically cached. Disabling auto allows you to individually pick which effects to cache. 
+When render cache is set to User, the Auto option automatically caches the Fusion effects, if the 
+project setting to Automatically Cache Fusion Effects in User mode is enabled. If the project setting is 
+disabled, Auto mode does not cache any Fusion effects, unless you individually select them.
+Adjusting Multiple Clips at the Same Time
+There’s an easy way to make adjustments to the Inspector parameters of multiple clips at the same 
+time, without needing to use Paste Attributes (described later in this chapter). All you need to do is 
+simultaneously select every clip you want to alter, and then modify the parameter in the Inspector that 
+you want to change. As a result, every selected clip will be adjusted by the same amount. This works 
+for compositing effects, transforms, text parameters, filters, and audio settings, just about anything that 
+can be simultaneously exposed in the Inspector for multiple selected clips.
+When you select multiple clips, the Inspector will display “Multiple Clips” as the title. If each of the 
+selected clips have different values in the parameter you’re adjusting, that parameter will have two 
+dashes in the value field. There are two ways you can make adjustments to multiple clips:
+  If you want to make a relative adjustment to all selected clips while keeping their original offsets 
+from one another, then drag the virtual slider in the parameter field which will display a + or – 
+before however many units your adjustment is.
+  However, if you want to set all selected clips to the same value, you can double-click in the 
+number field, type the value, and press Return.
+Making a relative adjustment of plus 4.9 in the 
+Rotation Angle of all selected clips
+1189Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Adjustment Clips
+You can also apply all sorts of effects to multiple clips in the Timeline using Adjustment clips, available 
+from the Effects bin of the Toolbox in the Effects Library. When an Adjustment Clip is superimposed 
+above one or more clips in the Timeline, any filters or other effects that are applied to the Adjustment 
+clip are also applied to all clips underneath it. 
+Adjustment clips can be used to apply the following types of effects:
+  Resolve FX and Open FX plugins
+  Inspector parameters including Composite, Transform, Cropping, and Dynamic Zoom
+  Fusion page effects
+  Color page grading and sizing
+Adjustment clips are a fast and easily revised way to apply one or more effects and grades to a 
+range of clips. Adjustment clips that are difficult to playback in real time can be rendered to cache, 
+just like any normal video clip. Adjustment Clips can be named using the Inspector. To store an 
+Adjustment clip, simply drag it from the Timeline to the Media Pool. You can then manage the 
+Adjustment clip just like any other media type. 
+An Adjustment clip applying a Prism Blur Resolve FX’s vignette to two other clips
+1190Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Paste Attributes
+You can copy and paste video and audio attributes, as well as color corrections, from one clip 
+to multiple clips using the Paste Attributes command. This is a fast way to apply video and audio 
+adjustments and effects from one clip to many others in the Timeline.
+To copy attributes:
+1 Select a clip with attributes you want to apply to other clips, and press Command-C.
+2 Select one or more other clips to paste to.
+3 Choose Edit > Paste Attributes (Option-V), or right-click one of the selected clips and choose Paste 
+Attributes from the contextual menu.
+4 When the Paste Attributes window appears, click the checkboxes of each of the attributes you 
+want to paste, and click Apply when you’re done.
+The Paste Attributes window
+The Paste Attributes window shows you the clip you’re copying from and the clip(s) you’re pasting to at 
+the top, and provides checkboxes you can use to select which attributes you’d like to paste. 
+Keyframe Options for Pasting Keyframed Attributes
+A pop-up menu below lets you choose how you’d like to apply any keyframes that are part of the 
+attributes being pasted; the options are Maintain Timing or Stretch to Fit.
+1191Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Option to Ripple the Timeline for Pasting Speed Effects
+When using Paste Attributes to copy speed effects from one clip to another, the Ripple Sequence 
+checkbox lets you choose whether or not the pasted speed effect will ripple the Timeline.
+Paste and Remove Attributes to Retain Image Position
+When using the Paste or Remove Attributes window, there is now a checkbox for Retain Image 
+Position in the Crop section. This allows you to choose whether to lock the crop parameters in place 
+when you resize the image using the Transform tool.
+Remove Attributes
+You can also eliminate specific attributes from one or more clips, using a window that’s the opposite of 
+the Paste Attributes window.
+The Remove Attributes window
+To remove attributes:
+1 Select one or more other clips that have effects you want to remove.
+2 Choose Edit > Remove Attributes, or right-click one of the selected clips and choose Remove 
+Attributes from the contextual menu.
+3 When the Remove Attributes window appears, the checkboxes of effects that can be removed are 
+enabled, so turn on attributes you want to remove.
+4 (Optional) If one of the attributes you’re removing is a retime effect, use the Ripple Sequence 
+checkbox to choose whether or not the Timeline will ripple as a result.
+5 Click Apply when you’re done.
+1192Editing Effects and Transitions | Chapter 54 Editing, Adding, and Copying Effects and Filters
+EDIT
+Chapter 55
+Using Transitions
+Transitions are the connective tissue binding together moments requiring a more 
+significant way of changing from one image to the next than a simple cut. 
+This chapter shows the many ways you can add and edit transitions in your program.
+Contents
+Working With Transitions ����������������������������������������� 1194
+Previewing Transitions ���������������������������������������������� 1194
+Adding and Editing Transitions  ����������������������������� 1195
+Adding Transitions When 
+There’s Not Enough Handles  ��������������������������������� 1197
+Adding Transitions By 
+Dragging to Create Overlap ������������������������������������ 1197
+Transition Properties in the Inspector  ��������������� 1198
+Favorite Transitions ����������������������������������������������������� 1199
+Changing the Standard Transition  ���������������������� 1199
+Creating Transition Presets  ������������������������������������� 1201
+Changing Transitions to 
+Fusion Compositions  �������������������������������������������������� 1201
+Video Transitions ��������������������������������������������������������� 1202
+Dissolve ���������������������������������������������������������������������������� 1202
+Iris ���������������������������������������������������������������������������������������� 1203
+Motion �������������������������������������������������������������������������������� 1204
+Shape �������������������������������������������������������������������������������� 1205
+Wipe�����������������������������������������������������������������������������������  1206
+User Transitions ������������������������������������������������������������ 1207
+Fusion Transitions �������������������������������������������������������� 1207
+Resolve FX Transitions �������������������������������������������� 1209
+Burn Away Transition ������������������������������������������������  1209
+DCTL Transition ������������������������������������������������������������  1210
+Audio Transitions ����������������������������������������������������������� 1211
+OpenFX Transitions ����������������������������������������������������� 1211
+1193Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Working With Transitions
+Transitions provide another way of bridging the change from one clip to another, and are often used 
+to indicate a change in time or location when changing scenes. DaVinci Resolve supports a variety 
+of transitions ranging from various forms of the traditional cross dissolve to different types of wipes, 
+allowing for great flexibility when finishing creative edits. In addition, DaVinci Resolve supports 
+third-party OpenFX transitions that you install on your system. Transitions are applied at edit points, 
+and appear as editable objects in the Timeline.
+Video and audio transitions in the Timeline
+Previewing Transitions
+To preview a transition before you place it into the Timeline, ensure that “Hover Scrub Preview” is 
+checked in the Transitions option menu, then simply hover your pointer over any transition in the 
+Transitions tab (Cut page) or Effects Library Toolbox (Edit page) and move it across the thumbnail. 
+The transition will preview in the Viewer using the two clips nearest the smart indicator in the Cut 
+page, or the two clips nearest the playhead in the Edit page.
+Scrubbing over a Transition Thumbnail previews the transition in the Viewer.
+Pressing Shift-Space will bring up the Effects Search dialog which also includes transitions. Start typing 
+in the search field to bring up the appropriate transitions. Clicking on the transition in the search list will 
+apply that transition to the nearest edit point to the playhead.
+1194Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Adding and Editing Transitions
+The following procedures describe how to work with add and edit transitions in the Timeline using 
+both the mouse and keyboard shortcuts.
+Methods of adding transitions using the mouse:
+  To add a transition by dragging it from the Effects Library: Drag a video transition from the 
+Effects Library to an edit point in the Timeline so that it’s centered at, ends at, or starts at the edit 
+point. If there is no overlap between the heads and tails of the two clips, you may not be able to 
+add a transition where you want.
+  To add a transition by double-clicking its icon in the Effects Library: Double click a transition’s 
+icon in the Effects Library to apply that transition to the edit point indicated by the smart indicator 
+(Cut page), or at the end of the clip that is currently under the playhead (Edit page).
+  To add a transition by clicking the Transition Alignment icons: In the Cut page, at the bottom of 
+the Transitions Library, are three Transition Alignment icons. Clicking any of these icons applies the 
+selected transition to the edit point indicated by the smart indicator, with the specified alignment.
+  To add a transition using the Effects Library contextual menu: Select one or more edit points 
+(one per track), then right-click a video transition in the Effects Library and choose Add to Selected 
+Edit Points. That transition will be added to every selected edit point at once.
+The Transition contextual menu in the Effects Library
+  To add a transition using the Edit Point contextual menu: In the Edit page, right-click any edit 
+point between clips with overlapping handles, and choose one of the four durations available for 
+the standard transition; the available choices are quarter-second, half-second, one second, and 
+two seconds, expressed in frames at whatever the current frame rate of the Timeline is.
+The Transition contextual menu for an edit in the Timeline
+Methods of adding transitions using keyboard shortcuts:
+  To add a video+audio transition using the Effects Search: Pressing Shift-Space will bring up the 
+Effects Search dialog which also includes transitions. Start typing in the search field to bring up the 
+appropriate transitions. Clicking on the transition in the search list will apply that transition to the 
+nearest edit point to the playhead. 
+1195Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+  To add a video+audio transition using the keyboard: Select one or more edit points using the 
+Selection tool, or move the playhead near an edit you want to select and press V to select it, then 
+press Command-T (Timeline > Add Transition) to add the standard transition. Transitions are added 
+using the “Standard transition duration” as specified in the Editing panel of the User Preferences, 
+which defaults to one second, or however long the overlapping handles of the selected 
+edit point allow.
+  To add a video or audio-only transition using the keyboard: Select one or more edit points, and 
+press Option-T (Timeline > Add Video Only Transition) to add only a video transition, or Shift-T 
+(Timeline > Add Audio Only Transition) to add only an audio transition. Transitions are added using 
+the “Standard transition duration” as specified in the Editing panel of the User Preferences, which 
+defaults to one second, or however long the overlapping handles of the selected edit point allow.
+  To add a transition with specific alignment using the keyboard:  Select an edit, press the U key 
+to choose the start, center, or end of the edit, then press Command-T. The standard transition will 
+be added with its alignment based on the edit selection; selecting the start of the edit places a 
+transition that ends on the edit; selecting the end of the edit places a transition that starts on the 
+edit, and choosing the center of the edit places a transition that is similarly centered.
+Selecting all transitions:
+To select all transitions on a timeline, go to Timeline > Select Transitions. This command automatically 
+selects all transitions in a timeline, or in a set in-out range. It can also be limited by the track 
+selector controls.
+Methods of moving and duplicating transitions:
+  To move a transition from one edit to another: Select a transition, then drag it to 
+another edit point.
+  To copy a transition from one edit to another: Select a transition, then option-drag it 
+to another edit point.
+Copying a transition from one edit to multiple edit points:
+1 Right-Click on the transition you want to duplicate, and select copy (or hit Command-C). 
+2 Hold down the Command-Key, and select all the edit points in the Timeline you want to copy the 
+transition to, so they’re highlighted green. Release the Command-Key.
+3 Right-Click on any one of the green highlighted edit points, and select Paste (or hit Command-V) 
+to duplicate the selected transition to all selected edit points.
+Methods of altering transitions in the Timeline:
+  To change a transition’s type: Drag a different transition from the Effects Library onto the current 
+one in the Timeline.
+  To change a transition’s duration: Drag the beginning or end of the transition in the Timeline to be 
+longer or shorter symmetrically about the current edit. Alternately, you can do one of the following:
+  Right-click any transition and select Change Transition Duration, or select the transition and 
+press Command-D, then alter the duration in the dialog that appears, and click Change.
+  Double-click any transition to open it in the Inspector, and set a new duration in seconds 
+or frames.
+  Click and drag a transition’s edge on the Timeline to alter its duration. Holding down the 
+Command key while you drag allows you to adjust the duration of just one side of the transition. 
+  To change a transition’s alignment: Right-click a transition in the Timeline and choose a new 
+method of alignment from the contextual menu. Alternately, you can double-click any transition to 
+open it in the Inspector, and choose a new option from the Alignment drop-down.
+  To remove a transition: Select a transition in the Timeline and press the Delete key. Or, right-click 
+a transition in the Timeline and choose Delete from the contextual menu.
+1196Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Adding Transitions When 
+There’s Not Enough Handles
+If the outgoing and incoming overlapping handles at a given edit point don’t have enough frames to 
+fit the standard transition duration, and you try to add a transition by selecting one or more edit points 
+and pressing Command-T, or by right-clicking an edit point and using the transition options in the 
+resulting contextual menu, then you’ll be presented with a dialog that gives you three choices:
+  Trim Clips: You can automatically trim the incoming and outgoing sides of each selected edit point 
+to create the overlap needed for adding the standard transition.
+  Skip Clips: Don’t add transitions to the selected edit points that lack the appropriate overlap.
+  Cancel: Cancel the operation entirely.
+Adding Transitions By 
+Dragging to Create Overlap
+There’s another method you can use to create transitions that makes it easy to create transitions while 
+you’re doing drag and drop editing by simply overlapping the beginning and end of two clips where 
+you want a transition to appear. Just press and hold the Option and Shift keyboard modifiers together 
+while you drag a clip or edit to create overlap with another clip. You can do this in three ways:
+Select the In or Out point of a clip, then press and hold Option-Shift down and drag the 
+selected edit point to overlap a neighboring clip where you want to create a transition.
+Creating a transition by Option-Shift dragging an  
+edit point to create an overlap between two clips
+Select a clip, then press and hold Option-Shift down and drag the entire clip to overlap a 
+neighboring clip where you want to create a transition.
+Creating a transition by Option-Shift dragging a whole  
+clip to create an overlap between it and another clip
+1197Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Hold the Option-Shift keys down while you drag a clip from the Media Pool to overlap a clip 
+that’s already in the Timeline.
+Creating a transition by Option-Shift dragging a clip  
+from the Media Pool to overlap a clip in the Timeline
+Transition Properties in the Inspector
+Double-clicking a transition in the Timeline opens that Transition tab in the Inspector. Each transition 
+has the following properties you can edit.
+  Transition Type: The currently selected transition. You can change to any other installed transition 
+by selecting one in the drop-down menu. 
+  Duration: The duration of the transition, shown in both seconds and frames.
+  Alignment: A drop-down that lets you choose the transition’s position relative to the edit point it’s 
+applied to. Your choices are “Start on Edit,” “Center on Edit,” and “End on Edit.”
+Additional properties that are specific to each type of transition appear in another group below. 
+Since the Cross Dissolve transition is the most common transition used, its properties will be 
+shown as an example.
+  Style: The different Dissolve transitions (Cross Dissolve, Additive Dissolve, and so on) expose this 
+drop-down that lets you choose different ways for the outgoing clip to blend into the incoming clip 
+during the dissolve. There are six different options to choose from:
+Video: A simple linear dissolve; the outgoing clip fades out as the incoming clip fades in.
+Film: A logarithmic dissolve, simulating film dissolves as created by an optical printer.
+Additive: The outgoing and incoming clips are cross faded using the Additive composite mode. As 
+a result, the transition seems to brighten at the halfway point.
+Subtractive: The outgoing and incoming clips are cross faded using the Subtractive composite 
+mode. As a result, the transition seems to darken at the halfway point.
+Highlights: The outgoing and incoming clips are cross faded using the Lighten composite mode. 
+The lightest parts of each clip are emphasized during this transition.
+Shadows: The outgoing and incoming clips are cross faded using the Darken composite mode. 
+The darkest parts of each clip are emphasized during this transition.
+  Start Ratio: Defines the percentage of completion for the transition at its first frame, from 0 to 100 
+percent. Setting the Start Ratio to anything but 0 results in the transition immediately appearing at 
+a more fully cross-dissolved state from the very first frame.
+  End Ratio: Defines the percentage of completion for the transition at its last frame. Setting the 
+End Ratio to anything but 0 results in the transition never fully dissolving to the incoming shot at its 
+last frame.
+1198Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+  Reverse: Reverses the transition. This parameter is disabled for Dissolve transitions.
+  Ease: A drop-down that lets you apply nonlinear acceleration to the beginning, ending, or overall 
+duration of a transition. The result is to add inertia to the transition from the outgoing clip to the 
+incoming clip, and providing a gentler change from each clip into and out of the transition.
+None: The outgoing clip fades away to the next shot in a linear fashion.
+In: The outgoing clip lingers as the beginning of the transition dissolves more slowly than the end.
+Out: The outgoing clip fades away more quickly, as the beginning of the transition dissolves more 
+quickly than the end.
+In & Out: Both the outgoing and incoming clips make slower transitions at the beginning and end 
+of the dissolve, but the very center of the transition is faster as a result.
+Custom: Lets you modify the parameters of the fade manually using the Transition Curves below.
+  Transition Curve: Allows you to manually set keyframes controlling the progress of the transition 
+along its duration.
+Other types of transitions display properties that are specific to that transition’s particular effect. 
+These are described at length in the following section.
+Favorite Transitions
+While DaVinci Resolve provides a wide variety of transitions by default, most editors typically only use 
+a subset of these in their day-to-day work. Also, it’s typical to save customized versions of a particular 
+transition in order to reuse that specific set of transition settings over and over again.
+To set a transition or other effect as a favorite in the Effects Library: 
+Move the pointer over any transition, and click the star button when it appears to set that 
+transition as a favorite. Click any transition’s star to “un-favorite” it. Favorites are displayed 
+in the Favorites area of the Effects Library bin list in the Edit page, or the Favorites tab in the 
+Transitions panel in the Cut page. 
+Changing the Standard Transition
+Different projects may require different transitions be used as the standard transition. DaVinci Resolve 
+gives you several tools for dealing with this.
+To change the standard transition:
+Right-click any transition or effect and choose “Set as Standard Transition.” The standard 
+transition appears with an orange indicator to the left of its name in the Effects Library.
+1199Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+ 
+The Effects Library open in the Edit page, showing starred transitions that have been 
+favorited, and the standard transition with an orange indicator to the left of its name
+The Transitions tab open in the Cut page, showing starred transitions that have been favorited, 
+and the standard transition with an orange indicator to the left of its name
+To change the standard transition duration:
+Open the Editing panel of the User Preferences, and change the “Standard transition 
+duration” setting (there are controls for setting the duration in either Seconds or Frames). 
+Click Save when you’re finished.
+1200Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Creating Transition Presets
+If you find yourself using a particular transition that’s customized in a particular way over and over 
+in your work, you can create a Preset of that transition for easy recall. Once saved, Presets can be 
+favorited or set to be the Standard Transition to make them more easily available.
+To save a transition preset for future use:
+1 Add a transition to the Timeline, then double-click it to open it in the Inspector to adjust its settings 
+to be the way you need it to be.
+2 (Optional) if necessary, open the transition’s Curve Editor and set the type of curve you want the 
+transition to have. A customized transition curve will be saved inside of that transition’s preset.
+3 Right-click on the transition you want to save, and choose Create Transition Preset. 
+4 Type a name for the transition preset in the dialog that appears, and click OK. That transition is 
+saved to the User section at the bottom of the Toolbox Video Transitions area, where you can 
+apply it just like any other transition.
+To remove a transition preset:
+Right-click any preset and choose Delete Transition Preset.
+Changing Transitions to 
+Fusion Compositions
+If you need to create a more complex transition than you can get from the Inspector, it is now possible 
+to change any transition to a Fusion Composition on the Edit page Timeline.
+To convert a Resolve transition to a Fusion composition:
+1 Add a transition between two clips on your Timeline.
+2 Right-click on the transition and select “Convert to Fusion Cross Dissolve.”
+3 Right-click on the transition again and select “Open in Fusion Page.”
+A new Fusion composition opens with the base Cross Dissolve nodes and tools already set. You now 
+can use all of the powerful tools in the Fusion page to customize your transition.
+The node tree you start with after converting a transition to a Fusion cross dissolve
+1201Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Video Transitions
+The following are transitions that are available within DaVinci Resolve by default, along with the 
+parameters that are available for each of them from the Inspector:
+Dissolve
+A dissolve in the visual language of film generally denotes a passage of time or place. It indicates to 
+your audience that one scene has ended and another is beginning.
+  Additive Dissolve: Start Ratio lets you adjust how far along the transition is when it first begins. 
+End Ratio lets you adjust how far the transition gets at the very end.
+  Blur Dissolve: Horizontal/Vertical Strength sets how much blur is performed in the X and 
+Y dimensions during the course of this transition. Start Ratio lets you adjust how far along 
+the transition is when it first begins. End Ratio lets you adjust how far the transition gets at 
+the very end.
+  Cross Dissolve: Style lets you choose what type of cross dissolve you want; choices include: 
+Video, Film, Additive, Subtractive, Highlights, Shadows. Start Ratio lets you adjust how far along 
+the transition is when it first begins. End Ratio lets you adjust how far the transition gets at 
+the very end.
+  Dip to Color Dissolve: Start Ratio lets you adjust how far along the transition is when it first begins. 
+End Ratio lets you adjust how far the transition gets at the very end. Color lets you choose what 
+color the dissolve dips to at the midpoint.
+  Non-Additive Dissolve:  Start Ratio lets you adjust how far along the transition is when it first 
+begins. End Ratio lets you adjust how far the transition gets at the very end.
+  Smooth Cut: A special-purpose transition designed to make short jump cuts in the middle of a 
+clip less noticeable. This is done by using AI powered Speed Warp processing to match the same 
+features on either side of a cut in order to automatically morph a subject from one position to 
+another over the duration of the transition.
+A Mode drop-down menu provides two options: Faster and Better. The Better option is default, 
+with excellent quality and the capability of preserving the motion of subjects for the duration of the 
+transition. The Faster option morphs between stills of the outgoing and incoming frames. In most 
+practical circumstances, the Better mode will give you a superior result, but certain cuts or effects 
+may be better addressed with the Faster option. 
+The Smooth Cut effect works best on clips such as sit-down interviews and close-up head shots 
+with a minimum of background and subject motion, and where the subject’s position on either 
+side of the cut is not significantly different. A good example of when Smooth Cut is effective is 
+when you’re cutting pauses, partial repeats, filler sounds such as “um” or “you know,” or other 
+speech disfluencies out of an interview clip to tighten the dialog, and you want to eliminate the 
+little “jump” that occurs at the cut without having to cut away to B-roll. Applying a short two or four 
+frame Smooth Cut transition to the edit can make this kind of edit invisible, as long as the speaker 
+doesn’t change position significantly during the cut. The more motion there is in the background 
+of the shot, and the more the speaker changes position, the harder it will be to get a useful result 
+using Smooth Cut. Although the default duration for any transition is one second, you’ll find that 
+Smooth Cut transitions work much better when they’re short; 2- to 6-frame Smooth Cut transitions 
+often work best to disguise jump cuts.
+NOTE: As of DaVinci Resolve 20, Smooth Cut uses a new AI powered Speed Warp to 
+perform the transition. If you would prefer to revert to the older optical flow version, simply 
+uncheck the Speed Warp box in the Transition inspector.
+1202Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Iris
+Irises are directional transitions that are commonly used to both call attention to a specific part of the 
+frame and indicate to the audience that one scene has ended and another begun. Irises were widely 
+used in the silent film era instead of the more technically complicated dissolve.
+  Arrow Iris: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Aspect Ratio allows you to change the proportions of the 
+shape. Offset to center lets you alter the center point at which this transition is positioned. Rotation 
+changes the angle of the iris. Feather is a checkbox that, when turned on, uses the Border slider to 
+determine the amount of feathering at the edge of the transition. The Reverse checkbox reverses 
+the direction of the transition. 
+Preset lets you choose one of the following presets:
+  Arrow Up
+  Arrow Down
+  Arrow Left
+  Arrow Right
+  Cross Iris: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Offset to Center identifies the center point at which the cross 
+wipe begins, as X and Y coordinates on the screen. Feather is a checkbox that, when turned on, 
+uses the Border slider to determine the amount of feathering at the edge of the transition. The 
+Reverse checkbox reverses the direction of the transition.
+  Diamond Iris: Color sets the color of the border, if there is one. Border sets the width of the 
+border, in pixels, with 0 creating no border. Offset to Center identifies the center point at which the 
+diamond-shaped wipe begins, as X and Y coordinates on the screen. Feather is a checkbox that, 
+when turned on, uses the Border slider to determine the amount of feathering at the edge of the 
+transition. The Reverse checkbox reverses the direction of the transition.
+  Eye Iris: Color sets the color of the border, if there is one. Border sets the width of the border, in 
+pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition.
+  Hexagon Iris: Color sets the color of the border, if there is one. Border sets the width of the 
+border, in pixels, with 0 creating no border. Aspect Ratio allows you to change the proportions 
+of the shape. Offset to center lets you alter the center point at which this transition is positioned. 
+Rotation changes the angle of the iris. Feather is a checkbox that, when turned on, uses 
+the Border slider to determine the amount of feathering at the edge of the transition. The 
+Reverse checkbox reverses the direction of the transition. Preset lets you choose one of the 
+following presets:
+  Hexagon
+  Hexagon Vertical
+  Oval Iris: Color sets the color of the border, if there is one. Border sets the width of the border, in 
+pixels, with 0 creating no border. Offset to Center identifies the center point at which this circular 
+wipe begins, as X and Y coordinates on the screen. Oval Ratio changes the aspect ratio of the 
+oval, making it either wider or taller. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition.
+1203Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+  Pentagon Iris: Color sets the color of the border, if there is one. Border sets the width of the 
+border, in pixels, with 0 creating no border. Aspect Ratio allows you to change the proportions 
+of the shape. Offset to center lets you alter the center point at which this transition is positioned. 
+Rotation changes the angle of the iris. Feather is a checkbox that, when turned on, uses the 
+Border slider to determine the amount of feathering at the edge of the transition. The Reverse 
+checkbox reverses the direction of the transition. Preset mode lets you choose one of the 
+following presets:
+  Pentagon Up
+  Pentagon Down
+  Square Iris: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Aspect Ratio allows you to change the proportions of the 
+shape. Offset to center lets you alter the center point at which this transition is positioned. Rotation 
+changes the angle of the iris. Feather is a checkbox that, when turned on, uses the Border slider to 
+determine the amount of feathering at the edge of the transition. The Reverse checkbox reverses 
+the direction of the transition. Preset mode lets you choose one of the following presets:
+  Square Flat
+  Square Point
+  Triangle Iris: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Aspect Ratio allows you to change the proportions of the 
+shape. Offset to center lets you alter the center point at which this transition is positioned. Rotation 
+changes the angle of the iris. Feather is a checkbox that, when turned on, uses the Border slider to 
+determine the amount of feathering at the edge of the transition. The Reverse checkbox reverses 
+the direction of the transition. Preset mode lets you choose one of the following presets:
+  Triangle Up
+  Triangle Bottom
+  Triangle Left
+  Triangle Right
+Motion
+Motion transitions use the movement of the frames to impart simulated physical momentum to the 
+transition between the outgoing and incoming clips.
+  Barn Door: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. Motion Blur smooths out 
+the motion of the transition between frames. The Reverse checkbox reverses the direction of the 
+transition. Preset mode lets you choose one of the following presets:
+  Barn Door Vertical
+  Barn Door Horizontal
+  Push: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the 
+Border slider to determine the amount of feathering at the edge of the transition. Motion Blur 
+smooths out the motion of the transition between frames. Preset mode lets you choose one of the 
+following presets:
+  Push Left
+  Push Right
+  Push Up
+  Push Down
+1204Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+  Slide: Direction determines whether or not the incoming clip slides in or the outgoing clip slides 
+out. Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the 
+Border slider to determine the amount of feathering at the edge of the transition. Motion Blur 
+smooths out the motion of the transition between frames. Preset mode lets you choose one of the 
+following presets:
+  Slide, Left-Right
+  Slide, Right-Left
+  Slide, Bottom-Up
+  Slide, Top-Down
+  Slide, Top-Left
+  Slide, Bottom-Right
+  Split: Color sets the color of the border, if there is one. Border sets the width of the border, in 
+pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition. Motion Blur smooths out the motion of the transition 
+between frames.
+Shape
+Shape transitions use geometrical outlines to define the transition from the outgoing to the incoming 
+clip. Ideally the shape used will be motivated by the content of the scenes involved.
+  Box: Color sets the color of the border, if there is one. Border sets the width of the border, in 
+pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition. Box mode lets you choose one of the following options:
+  Upper Left
+  Upper Right
+  Lower Left
+  Lower Right
+  Left Center
+  Top Center
+  Right Center
+  Bottom Center
+  Heart: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Aspect Ratio allows you to change the proportions of the 
+shape. Offset to Center identifies the center point at which this circular wipe begins, as X and 
+Y coordinates on the screen. Rotation changes the angle of the shape. Feather is a checkbox that, 
+when turned on, uses the Border slider to determine the amount of feathering at the edge of the 
+transition. The Reverse checkbox reverses the direction of the transition.
+  Star: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Aspect Ratio allows you to change the proportions of 
+the shape. Offset to Center identifies the center point at which this circular wipe begins, as 
+X and Y coordinates on the screen. Rotation changes the angle of the shape. Feather is a 
+checkbox that, when turned on, uses the Border slider to determine the amount of feathering at 
+the edge of the transition. 
+1205Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+The Reverse checkbox reverses the direction of the transition. Preset lets you choose one of 
+the following options:
+  4-Point Star
+  5-Point Star
+  6-Point Star
+  Triangle Left: Color sets the color of the border, if there is one. Border sets the width of the 
+border, in pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the 
+Border slider to determine the amount of feathering at the edge of the transition. The Reverse 
+checkbox reverses the direction of the transition.
+  Triangle Right: Color sets the color of the border, if there is one. Border sets the width of the 
+border, in pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the 
+Border slider to determine the amount of feathering at the edge of the transition. The Reverse 
+checkbox reverses the direction of the transition.
+Wipe
+Wipe transitions are intended to preserve the continuity of motion between two clips. They do this by 
+matching the overall movement and direction of the subjects across the outgoing and incoming clips.
+  Band Wipe: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition. Preset lets you choose one of the following presets:
+  Horizontal
+  Vertical
+  Horizontal Bilinear
+  Vertical Bilinear
+  Center Wipe: Color sets the color of the border, if there is one. Border sets the width of the 
+border, in pixels, with 0 creating no border. Angle specifies the angle of the wipe as it emerges 
+from the middle of the screen. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition.
+  Clock Wipe: Color sets the color of the border, if there is one. Border sets the width of the 
+border, in pixels, with 0 creating no border. Angle specifies the starting angle of the wipe as it 
+spins around the center of the screen. The Clockwise checkbox sets the direction of the clock 
+wipe. Feather is a checkbox that, when turned on, uses the Border slider to determine the 
+amount of feathering at the edge of the transition. The Reverse checkbox reverses the direction 
+of the transition.
+  Edge Wipe: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Angle specifies the angle of the wipe as it moves across 
+the screen. Feather is a checkbox that, when turned on, uses the Border slider to determine the 
+amount of feathering at the edge of the transition.
+  Radial Wipe: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition.
+  Spiral Wipe: Color sets the color of the border, if there is one. Border sets the width of the border, 
+in pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition.
+1206Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+  Venetian Blind Wipe: Color sets the color of the border, if there is one. Border sets the width 
+of the border, in pixels, with 0 creating no border. Repeat specifies how many “blinds” appear 
+within the wipe effect. Angle specifies the angle of this multi-wipe effect. Feather is a checkbox 
+that, when turned on, uses the Border slider to determine the amount of feathering at the edge 
+of the transition.
+  X Wipe: Color sets the color of the border, if there is one. Border sets the width of the border, in 
+pixels, with 0 creating no border. Feather is a checkbox that, when turned on, uses the Border 
+slider to determine the amount of feathering at the edge of the transition. The Reverse checkbox 
+reverses the direction of the transition.
+User Transitions
+Any transition presets you’ve created are stored in the User category. These are the only transitions 
+that can be deleted.
+Fusion Transitions
+The Fusion Transitions section of the Transitions panel contains Fusion effects that have been made 
+into reusable transitions. Fusion Transitions work like any other transition. Once edited into the 
+Timeline, they can be edited like any other transition, and when selected, they expose customizable 
+parameters in the Inspector that let you tailor their effect to meet your needs.
+However, Fusion Transitions are highly customizable. Simply right-click a Fusion Transition and choose 
+Open in Fusion Page to expose all of the Fusion nodes that create that transition’s effect, enabling 
+you to rebuild it to do whatever you need. When you go back to the Edit page, that transition is 
+automatically saved.
+Furthermore, if you know how to create effects in Fusion, you can create your own Transitions by 
+making Fusion Macros and saving them to the Effects Library, so they appear in the Fusion Transitions 
+section of the Effects Library. 
+For more information on how to do this, jump to this chapter: Node Groups, Macros, and 
+Fusion Templates.
+  Brightness Flash: Ramps up brightness as it transitions between the two clips. Brightness controls 
+the luminance level of the flash. Saturation controls the saturation of the flash. 
+  Camera Shake: Performs a shaking of the frames with color channel separation as a transition. 
+Shake Speed controls how fast the shaking is. Shake Strength controls how large the shakes are. 
+Contrast, Brightness and Saturation control their respective parameters on the transition.
+  Circles: Transitions between two frames using concentric circles. Circle Color chooses the 
+transition color. Red, Green, Blue, and Alpha control the relative strengths of each channel. 
+Circle Thickness lets you adjust the width of the circles.
+  Crash Zoom: Performs two rapid zoom-ins on the clips as a transition. 
+  Cross Dissolve: Dissolves between two clips. This is the base Fusion transition to use if you want 
+to create your own custom transition in Fusion.
+  Drop Warp: Creates a virtual water drop to transition between the two clips. Warp Scale adjusts 
+the amount of image warping to the drop.
+  Fall and Bounce: The trailing clip falls into the frame and bounces as a transition. Fall Angle 
+controls the direction of the fall-in.
+1207Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+  Film Strip: Performs a zoom of a moving virtual film strip as a transition between the two clips. 
+Color selects the color of the film base. Red, Green, Blue, and Alpha control the relative strengths 
+of each channel.
+  Flip 3D: Performs a simple rotation between the sides of a plane as a transition.
+  Foreground Wipe: Performs a zoomed-in column wiping across the frame as a transition. Invert 
+Wipe changes the direction of the wipe. Shadow Softness controls the “depth” of the column. 
+Border Width controls the width of the column.
+  Glitch: Performs a digital breakup of the image as a transition. Best used in very short durations of 
+a few frames.
+  Noise Dissolve: Uses Fusion’s FastNoise tool as a transition. You can store up to 6 versions of 
+this transition. Mix controls the dissolve’s progress through the frame. Type controls the direction 
+the noise emanates from. Softness controls the feathering of the border between the two clips. 
+Animation controls the speed of the noise changes. Border allows you to set a colored border on 
+the boundary of the noise between the two clips.
+  Paint On: This performs virtual paint brush strokes as a transition. Shadow Blend controls the 
+“depth” of the strokes. This transition is best used in longer durations.
+  Pan (Down, Left, Right, Up): This performs mirrored images in motion as a transition. The direction 
+of the motion is respective of which transition you choose.
+  Rotate: This performs a combination of counterclockwise 180 degree rotation and 
+dissolve as a transition.
+  Rotate 90: This performs a combination of counterclockwise 90 degree rotation and 
+dissolve as a transition.
+  Round and Down: This performs a counterclockwise rotation around a central pivot point as it 
+dissolves between two clips.
+  Slice Push: Performs a transition consisting of several columns sliding out and pushing across 
+the two clips. Slices control the number of columns. Angle lets you set the angle of the columns. 
+Shadow sets the strength of the column’s drop shadow. Shadow Softness controls the spread of 
+the drop shadow. Shadow Offset controls the angle of the shadow.
+  Slide (Down, Left, Right, Up): Performs a mirrored slide in the direction indicated. The Curve 
+control lets you set the following animation curve options:
+  Linear
+  Easing
+  Custom
+  Tunnel of Light: Performs a glowing transition where the first clip is sucked into a point, then the 
+second clip expands from that same point. Contrast lets you determine the contrast of the light 
+rays. Glow Gain controls the glow’s brightness. Glow Size controls the amount of glow. Glow Red, 
+Green, and Blue allow you to change the color of the glow.
+  Warp: Performs a warping transition like a water circling a drain between the two clips.
+  Zoom In: Performs a transition that zooms in and blends the two clips together. Zoom Scale 
+controls the strength of the zoom (a negative value zooms out instead of in). Zoom Center allows 
+you to set the point around which the zoom occurs. The Curve control lets you set the following 
+animation curve options:
+  Linear
+  Easing
+  Custom
+  Zoom In and Out: Performs a transition that zooms in on the first clip blended with a zoom out on 
+the second clip. Zoom Scale controls the strength of the zoom. Zoom Center allows you to set the 
+point around which the zoom occurs.
+1208Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Resolve FX Transitions
+Resolve FX Transitions are stylized graphical transitions that are more computationally intensive than 
+the standard wipes and dissolves.
+Burn Away Transition
+This transition replicates the visual of a film print burning up in the projector. Use this transition to 
+achieve a classically retro effect, or to strike terror into the hearts of projectionists everywhere. 
+Burn Away transition showing two pirates concerned about the state of their release print
+The Burn Away effect has the following parameters:
+Progression 
+This set of controls affects the type of movement the burn takes as it passes through the frame.
+  Motion: Allows you to pick a type of burning effect. Each option reveals different parameters.
+Directional: The burn moves linearly from one edge of the frame to another. This setting replicates 
+the film being torn away by the take-up reel as it burns. In this mode, the OFX overlay in the 
+Viewer lets you choose the direction.
+Hotspots: The burn erupts from one or more central points. This setting replicates the film 
+jamming in front of a projector bulb and melting away. In this mode, the OFX overlay in the Viewer 
+lets you move the burn points directly in the Viewer.
+Path: Creates a curved path that the burn follows. This setting allows you to specify the burn 
+direction precisely, to account for elements in the frame that you want to burn first. In this mode, 
+the OFX overlay in the Viewer lets you add points to a spline with which to create any curved 
+motion path you want the effect to use.
+  Angle: (Directional Only) The angle that the burn moves along. You can also change this in the 
+Viewer directly in Open FX Overlay mode.
+1209Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+  Number of Hotspots:  (Hotspots Only) The number of points that the burn erupts from. 
+The possible values are from 1 to 8.
+  Randomize Hotspots: (Hotspots Only) Will pick a random distribution of the hotspots in the frame.
+  Number of Points: (Path Only) The number of points on the onscreen curve control. The range is 
+from 2 to 5. These points can be manipulated directly in the Viewer in Open FX Overlay mode.
+Adjust Timing
+This set of parameters allows you to control the start and end progression of the burn. 
+  Adjust Start: Adjusts how far along in the transition the effect starts. Values are 
+from -1.000 to 1.000.
+  Adjust End: Adjusts how far along in the transition the effect ends. Values are 
+from 0.000 to 2.000. 
+Edge
+These controls let you adjust the qualities of the edge of the film as it burns.
+  Raggedness: How rough the edge of the burn is. Values are from 0.000 (perfectly flat) 
+to 1.000 (extremely rough). 
+  Scale: The scale of the raggedness. Values are from 1.00 to 10.00. 
+Appearance
+These controls adjust the look and color of the burn as it moves through the transition.
+  Melt: Controls the amount of distortion in the image as it burns away. Values are 
+from 0.000 to 1.000.
+  Char: Controls the amount of darkened charring along the edge. Values are from 0.000 to 1.000.
+  Char Color: Lets you select the color of the Char effect.
+  Burn: Lets you set the thickness of the burn effect. Values are from 0.000 (no burn) 
+to 1.000 (maximum thickness).
+  Burn Hue: Lets you select the hue of the Burn effect.
+  Burn Sat: Lets you select the intensity of the color of the Burn effect.
+  Burn Brightness: Lets you set the brightness of the Burn effect. At lower values, the burning edge 
+assumes a motley, irregular effect. Values are from 0.000 to 1.000.
+  Glow Brightness: Lets you control the intensity of a glow effect emanating from the Burn effect. 
+Values are from 0.000 to 2.000.
+  Glow Spread: Lets you control the width of the glow effect. Values are from 0.000 to 2.000.
+  Ash: Controls how much ash trails behind the burn as it moves through the frame. 
+Values are from 0.000 to 1.000.
+  Ash Color: The color of the Ash parameter.
+DCTL Transition
+DCTL (DaVinci Color Transform Language)-based transitions are now supported in DaVinci Resolve. 
+See the DaVinci Resolve Developer Documentation in the help menu for more details.
+1210Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Audio Transitions
+A single audio transition handles all of your crossfade needs.
+Cross Fade +3/–3/0 dB: An audio-only transition that lets you fade from one audio clip to 
+another. Three different crossfades let you choose the power of the actual transition from one 
+level to the other.
+OpenFX Transitions
+If you’ve installed one or more sets of OpenFX plugins on your DaVinci Resolve workstation, any 
+transitions within those sets will appear in the OpenFX panel of the Effects Library.
+OpenFX transitions in the Effects Library
+1211Editing Effects and Transitions | Chapter 55 Using Transitions
+EDIT
+Chapter 56
+Titles, Generators, 
+and Stills
+Using the Edit page, you can add titles, effects generators, and stills to your 
+timelines. You can also save customized titles, generators, and stills back to the 
+Media Pool for future use.
+Contents
+Adding Titles ������������������������������������������������������������������� 1213
+Using Safe Area Overlays ���������������������������������������� 1214
+Custom Action and Title Safe Areas �������������������� 1215
+Toggle Extents for 
+Selected Safe Area Overlays  ���������������������������������� 1215
+Types of Title Generators ����������������������������������������� 1215
+Font Browser ������������������������������������������������������������������ 1216
+Show Font Previews Preference ���������������������������  1217
+Spell Checking for all Text Elements �����������������  1218
+Emoji and Color Fonts 
+for Text+ and MultiText ���������������������������������������������� 1219
+DaVinci Resolve Title Generators  ������������������������ 1219
+Editing Titles Within the Timeline Viewer  ��������� 1219
+Title Generator Panels  ���������������������������������������������� 1220
+Shared Title Generator Parameters  ��������������������� 1221
+Title Generator Settings Parameters ������������������ 1222
+The Text+ Title Generator ��������������������������������������� 1223
+Text+ Viewer Controls ����������������������������������������������� 1225
+Fusion Titles and Fusion Templates ������������������� 1226
+MultiText Titles �������������������������������������������������������������� 1227
+Saving Titles in the 
+Media Pool for Future Use �������������������������������������� 1229
+Using Generators  �������������������������������������������������������� 1229
+ITU-R BT.2111-1 Color Bar Generators ����������������  1230
+Fusion Generators  �������������������������������������������������������� 1231
+Using Stills ���������������������������������������������������������������������� 1232
+Viewer Updates to Still Images 
+by other Applications  ������������������������������������������������� 1232
+Photoshop File Support  �������������������������������������������� 1234
+1212Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Adding Titles
+There’s a collection of titles and generators in the Toolbox that you can use to create leader 
+when outputting to tape, add slates, create subtitles, and otherwise fulfill any textual needs your 
+program has.
+To select and audition titles before you place them into the Timeline, ensure that “Hover Scrub 
+Preview” is checked in the Titles option menu, then simply hover your pointer over any thumbnail 
+in the Titles tab. If the title is animated (i.e., Fusion titles), moving the pointer across the thumbnail 
+will preview the animation. Once you’ve chosen your title, you can drag it from the Titles tab to your 
+Timeline in the Edit page or in the Cut page to either the upper or lower Timelines, or use the editing 
+selection modes at the bottom of the tab.
+Scrubbing over a Title Thumbnail previews the title in the Viewer.
+Titles and generators can be edited much like any other clip. Furthermore, when selected, both titles 
+and generators expose the same Composite, Transform, and Cropping parameter groups as any other 
+clip; these parameters can be used to composite titles and fly them around in order to create different 
+text effects.
+Methods of adding and editing generators and titles:
+  To drag and drop a generator directly into the Timeline:  If you simply drag and drop titles or 
+generators into the Timeline, the default duration of the resulting clip is 5 seconds. This duration 
+can be customized in the Edit panel of the User Preferences.
+  To edit a generator using the edit overlays of the Timeline Viewer:  Click the destination control 
+of the clip you want to edit a generator into, then set Timeline In and Out points to define the 
+duration of the resulting edit, and drag the generator you want to edit onto the edit overlay of the 
+Timeline Viewer that corresponds to the type of edit you want to perform.
+  To reposition the text of a title in the Timeline Viewer: Select the title generator you want to 
+edit in the Timeline, then click the visible text in the Timeline Viewer so that its bounding box is 
+selected; in this state you can reposition, scale, and rotate the text item. As you reposition text, it 
+will snap to key regions of the frame such as the vertical and horizontal center of the Viewer; hold 
+the Option key down to suspend snapping if you want to freely position the text.
+  To edit the text of a title in the Timeline Viewer: Select the title generator you want to edit in 
+the Timeline, then double-click the visible text in the Timeline Viewer to insert a text editing 
+cursor. At this point, you can select, delete, or add any text you want by typing directly in the 
+Timeline Viewer.
+  To edit the parameters of a generator or title: Open the Inspector, and select the generator or 
+title you want to edit to open it into the Inspector.
+1213Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Using Safe Area Overlays
+This drop-down menu overlays many useful framing guides over the Viewer to let you see what part of 
+the image will be included and what will part will be cropped out if you change the Timeline’s aspect 
+ratio. The framing guides can be turned on and off by toggling the Safe Area Framing Guide icon in the 
+Viewer, and the exact guides can be selected in the drop-down menu.
+  Social Media: 1:1, 4:5, 9:16, 1.91:1, 16:9.
+  Broadcast and Film: Default (your current timeline aspect ratio), 1.33, 1.66, 1.77, 1.85, 2.35.
+  Safe Area Guides: These options add additional guide lines on the Viewer to protect your 
+composition from possibly being cut off at the extreme edges of a physical cathode ray tube. 
+While somewhat anachronistic in this age of flat screen digital televisions, many legacy programs 
+still adhere to these guidelines. Safe Areas still can be useful guides in ensuring your image is not 
+inadvertently cropped by the variety of mobile devices and social media sites in use today.
+Action: Keep all movement and important action within this box.
+Title: Keep all on screen text within this box.
+Center: Designates the exact middle of the image.
+The Safe Area Framing Guide icon (circled) 
+and the possible framing options
+The safe area overlays
+1214Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Custom Action and Title Safe Areas
+The Editing panel of the User Preferences has a new “Use custom safe area overlays” checkbox that, 
+when turned on, displays Action Area and Title Area fields that let you set a custom percentage for 
+each. The default values are 93% for Action Area and 90% for Title Area. 
+Toggle Extents for Selected Safe Area Overlays
+You can toggle the Extents Safe Area overlay on or off, in addition to the Action, Title, and Center 
+overlays. You can access this features at View > Safe Area > Extents.
+Types of Title Generators
+When opened into the Inspector, titles expose a set of text parameters that allow you to style the 
+contents of that clip’s Text field within the Inspector. Each of the titles supports rich text, so you can 
+individually style words, lines, or paragraphs of text using the available parameters including Color, 
+Font, and Size. Other attributes such as Alignment, Anchor, Position, and Shadow affect the entire title.
+The following titles are available:
+  L Lower 3rd: (supports rich text) Automatically positions two lines of text at the bottom left 
+corner of title safe, each with a different set of rich text and Position/Zoom/Rotation controls for 
+independent sizing and animating.
+  M Lower 3rd: (supports rich text) Automatically positions two lines of text at the bottom middle of 
+title safe, each with a different set of rich text and Position/Zoom/Rotation controls for independent 
+sizing and animating.
+  R Lower 3rd: (supports rich text) Automatically positions two lines of text at the bottom right 
+corner of title safe, each with a different set of rich text and Position/Zoom/Rotation controls for 
+independent sizing and animating.
+  Scroll: (supports rich text) Automatically automates a scrolling title sequence from the bottom to 
+the top of the screen. The duration of the generator clip in the Timeline determines the speed of 
+the scroll. Identical parameters as the Simple title.
+  Text: (supports rich text) Useful for creating titles consisting of a word, line, or paragraph of text. 
+A single body of text shares one set of rich text controls that let you style selected parts of the title 
+text differently.
+  Text+: (does not support rich text) An advanced title generator based on the title generation 
+tools on the Fusion page. This generator has significantly more options for styling, rendering, and 
+animating than the simple title generator above, but all title text shares a single style.
+  Fusion Titles: A variety of pre-built title templates assembled in Fusion. DaVinci Resolve comes 
+with a library of pre-assembled Fusion titles, but you can also create your own to appear in this 
+category of the Effects browser.
+1215Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Font Browser
+When selecting and choosing a font for text-based elements, you can opt to show an expanded Font 
+Browser. This expands and emphasizes the text faces, making it easier to choose the perfect font.
+To launch the Font Browser, click on the icon located next to the font selection box in various tools.
+The Font Browser can be launched by clicking on its icon (circled red).
+The Font Browser presents a detailed view of your installed fonts. To pick one, simply click on it in the 
+Font Browser, then press the Select button. That font will now be loaded in the font selection field of 
+your tool.
+The Font Browser in Thumbnail View.
+1216Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+When you click on a font, you are actually selecting the entire font family. If the family has multiple 
+styles in thumbnail mode, you can cycle through each font iteration by clicking on the left and right 
+arrows. In List view, there is a disclosure triangle near the font name that will show them all. There is 
+also a star icon that can be clicked in the upper right of the font face, which will add the selected font 
+to your Favorites tab.
+With the Font Family selected, you can navigate 
+each iteration by clicking on the left and right arrows. 
+To add a font to your Favorites tab, clicking on the 
+star in the upper right corner of each font box.
+The Font Browser is resizable, and includes a simple toolset to help you identify the perfect font.
+The Font Browser Toolbar.
+  All Fonts: Click this tab to show all installed fonts on your machine.
+  Favorites: Click this tab to show only fonts that you have favorited.
+  Scale: This slider increases or decreases the size of the font boxes.
+  Thumbnail View: Presents fonts in a series of square thumbnails.
+  List View: Presents fonts in a series of long rectangles.
+  Search Bar: Use this field to search for a specific font. You can also search for its partial name. For 
+example, you could search for “Proxima Nova”, or simply “Nova”.
+  Light / Dark Mode: Light mode activates dark text on a white background, while dark mode 
+activates white text on a dark background.
+  Filter: Lets you filter fonts by classification and weight parameters such as serif, monospaced, 
+extra bold, and so on.
+  Option Menu: Choose the following options:
+Display Default Text: Displays “The Quick Brown Fox…” text string in the font windows.
+Display User Custom Text: Lets you enter custom text to display in the font windows.
+Reset User Custom Text: Resets any custom text that has been entered.
+Show Font Previews Preference
+For a quicker view of the different typefaces, Preview Fonts preference is useful.
+By default, Preview Fonts displays an expanded window with the font name and its corresponding 
+typeface. Selecting a font from this window will insert it into the Font Field in a variety of text tools.
+1217Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+To disable this behavior, go to DaVinci Resolve > Preferences > User > UI Settings and uncheck the 
+Show font previews box.
+Choosing a font with the Show font previews preference turned on.
+Spell Checking for all Text Elements
+As a nice quality-of-life improvement for the orthographically challenged, DaVinci Resolve now 
+includes a multi-language text spell checker. Any misspelled words are highlighted red in both the 
+viewer and inspector. To preview suggested fixes or ignore the typo, right-click on the word. 
+Misspelled words are underlined in red. Right-click on an underlined word for 
+suggested fixes, and an option to ignore the suggestion.
+1218Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+There is also an associated preference set for Spell Checking in DaVinci Resolve > Preferences > 
+User > Language and Spelling.
+  Spelling and Formatting Tool: Lets you modify the spell checker.
+Spelling Check: Check this box to turn on or off the spell checker throughout DaVinci Resolve.
+Ignore Words: Opens a text box where you can add words to the spell checker’s ignore list.
+Ignore words with numbers: Will not flag a misspelled word if it includes numbers.
+Ignore words with ALL CAPS: Will not flag a misspelled word if it includes all capital letters.
+TIP: You can toggle off all red underlines in the viewer to ensure clean previews by 
+selecting View > Show Spelling Errors on Viewer.
+Emoji and Color Fonts 
+for Text+ and MultiText
+Emoji support is included for both Text+ and MultiText, giving you the flexibility to add expressive 
+icons and visual accents directly within your text for more dynamic and engaging designs.
+You can add emoji directly into the text fields by pressing Control-Command-Space on 
+macOS, and Windows key-. (period) on Windows.
+In addition, Text+ and MultiText features a more robust font support, with improved support 
+for color fonts, bitmap fonts, and font styles. With supported color fonts, the Text+ inspector 
+shows additional controls for Color Palettes under Advanced Controls, where you can select 
+display options for the font.
+DaVinci Resolve Title Generators
+The original title generators that shipped with DaVinci Resolve all share similar controls, and they all 
+share the ability to support rich text styling.
+Editing Titles Within the Timeline Viewer
+Once you add a title generator to the Timeline, the original title generators that shipped with DaVinci 
+Resolve have onscreen controls that let you edit text and transform and position blocks of text directly 
+within the Timeline Viewer.
+Positioning and Transforming Text
+So long as the Timeline playhead is positioned over a text generator that’s on top of one or more 
+background clips, clicking on the text in the Timeline Viewer reveals onscreen transform controls that 
+correspond to the Position, Zoom, and Rotation parameters in the Inspector.
+1219Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Drag the text to position it in the Viewer
+While dragging text to reposition it, snapping occurs at the X and Y center of the frame, as well 
+as around the outer third of the frame. Holding the Shift key down while dragging a text object 
+constrains movement to just the X or Y axes.
+Editing Text
+Double-clicking on text in the Timeline Viewer puts that text into an editable state, wherein you can 
+insert a text cursor or select characters to edit the text as you would in any text editor.
+Double-click on the text to edit it in the Viewer
+Title Generator Panels
+The parameters of text generators are divided into two panels in the Video Inspector: the Title panel 
+and the Settings panel. 
+  The Title panel contains all of the text editing, styling, and sizing controls used to edit the contents 
+and look of a title in your project, including the Rich Text, Drop Shadow, Stroke, and Background 
+parameters.
+  The Settings panel contains the same Composite, Transform, and Cropping parameters that 
+all other clips in DaVinci Resolve have. These parameters are intended for compositing and 
+animating a title.
+1220Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Shared Title Generator Parameters
+With the exception of the Text+ generator, all other title generators in DaVinci Resolve are capable 
+of rich text styling. This means you can select any portion of a generator’s text and style it differently. 
+For example, you could have three lines of text within a single generator and style each line 
+individually to create a particular design.
+A single generator with three lines of differently styled text
+Each title generator shares the same parameters in the Video Title panel of the Inspector for editing 
+and styling text:
+  Rich Text: A control group consisting of a text entry field and parameters that can be used to style 
+different parts of the text independently.
+Text: A text entry field for editing the title being generated. If no characters are selected, the 
+styling controls affect the entire block of text. If you select a specific set of characters, the 
+styling controls only affect the selection. Text in this field can also be edited directly in the 
+Timeline Viewer.
+Font family: A pop-up for choosing one of the font families installed on your workstation.
+Font face: A pop-up for choosing which face of the font family currently selected to use.
+Color: Opens the standard color picker for choosing a font color.
+Size: Slider for choosing the text size.
+Tracking: Slider that sets the spacing between characters.
+Line spacing: Slider for setting the spacing between the selected line of text and the 
+next one below.
+Font style: Buttons to apply underline, overhead line, strikethrough, superscript, 
+and subscript styling.
+Font case: A pop-up for forcing the text selection to be Mixed Case (the default), All Caps, All 
+Lowercase, Small Caps, or Title Caps.
+Alignment: Buttons to select the method of alignment: left, centered, right, or justified.
+Anchor: Buttons for selecting how text is anchored to the current position, both horizontally (top, 
+centered, bottom) and vertically (right, centered, left).
+Position: X and Y parameters determining the bottom left-hand corner (the default Anchor 
+settings) of the rich text block being generated. Corresponds to the act of dragging a selected text 
+box in the Timeline Viewer.
+1221Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Zoom: X and Y parameters determining the scale of the text. A link button lets you keep the X 
+and Y parameters locked together. Corresponds to the act of resizing a selected text box in the 
+Timeline Viewer from either the corners (to resize proportionally), or the top/bottom/sides (to 
+stretch or squeeze the text).
+Rotation Angle: A slider for rotating the orientation of the text. Corresponds to the act of rotating a 
+selected text box in the Timeline Viewer using the rotation handle.
+  Drop Shadow: A group of controls that lets you apply a customizable drop shadow to every 
+character of text being generated.
+Color: Opens the standard color picker for choosing a drop shadow color.
+Offset: X and Y parameters determining how offset the drop shadow is from the original text.
+Blur: A slider for blurring the drop shadow.
+Opacity: A slider determining how transparent the drop shadow is.
+  Stroke: Lets you add an outline to every character of text being generated.
+Color: Opens the standard color picker for choosing the stroke color.
+Size: A slider lets you choose the thickness of the stroke, in pixels.
+  Background: This group of controls provides an extremely flexible rectangle or rounded rectangle 
+shape that you can use to add a background, bar, outline, or other intersecting shape to use when 
+designing a title.
+Color: Opens the standard color picker for choosing the interior color of the background shape.
+Outline color: Opens the standard color picker for choosing outline color of the 
+background shape.
+Outline width: A slider lets you choose the thickness of the background shape outline, in pixels.
+Width: A slider lets you choose how wide to make the background shape.
+Height: A slider lets you choose how tall to make the background shape.
+Corner radius: A slider lets you choose the roundness of the rectangle edges.
+Center: X and Y parameters you can use to offset the background shape from the text 
+being generated.
+Opacity: A slider lets you set the transparency of the background shape.
+Title Generator Settings Parameters
+Additionally, each generator has Composite, Transform, and Cropping parameters in the Settings 
+panel of the Video Inspector that let you composite, resize, and animate titles against other clips in the 
+Timeline for motion graphics effects. These parameters are the same as those available for every clip, 
+as described later in this chapter.
+1222Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+The Text+ Title Generator
+A new kind of title generator, named Text+, is available in the Titles category of the Effects Library’s 
+toolbox. This is the exceptionally fully-featured 2D text generator from Fusion, available for editing and 
+customizing right in the Edit page. It’s capable of most of what the Text generator can do, including rich 
+text editing and use of on-screen controls in the Timeline Viewer. It also has many more styling and 
+animation controls than the Text generator.
+TIP: At the time of this writing, the Text generator is still very useful for quickly creating text 
+pages with multiple styles, whereas the Text+ generator excels at creating text for animated 
+motion graphics.
+The new Text+ title generator, along with new Fusion titles below
+You can use the Text+ generator the same way you use any generator in the Edit page. Simply 
+edit it into a video track of the Timeline, select it, and open the Inspector to edit and keyframe 
+its numerous properties to create whatever kind of title you need. 
+In addition to having many more styling options, the origin of the Text+ generator in a 
+compositing tool means that it offers many more panels worth of keyframable parameters, 
+along with advanced animation controls built-in. These include keyframable Write On/
+Write Off controls, layout and animation using shapes (options include point, frame, circle, 
+and path), character, word, and line transforms and animation, advanced shading, and full 
+interlacing support.
+1223Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Four panels of the Text+ title generator, 
+including Text, Layout, Transform, and Shading
+1224Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Better yet, with the playhead parked on your new Text+ “Fusion Title,” you can open the Fusion 
+page and access its parameters there too, if you want to start building upon this single generator 
+to create a multi-layered motion graphics extravaganza.
+Opening the Text+ node in the Fusion page reveals it as an actual Fusion page operation
+NOTE: If you receive a project with a Text+ title and are missing a specific font used in the title 
+on your local machine, an overlay will appear on the Viewer informing you of this.
+Text+ Viewer Controls
+You can perform various editing actions directly on Text+ in the viewer overlay, such as editing text, 
+displaying a cursor, and selecting text. This capability extends to the viewer within Edit page when the 
+Fusion overlay is enabled.
+The Text+ Viewer controls are activated by selecting Fusion Overlay 
+(circled) from the Timeline Viewer Overlay menu.
+  To enable Text+ Viewer controls: Select Fusion Overlay from the Timeline Viewer Overlay 
+drop-down menu.
+From here you can use your mouse on the text in the Viewer to select and edit text, as well as 
+move it around in the frame.
+1225Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+For more information on the extensive capabilities of the Text+ generator, jump to this chapter: 
+Generator Nodes.
+Fusion Titles and Fusion Templates
+The abundance of other Fusion titles in the Effects Library are custom-built text compositions with 
+built-in animation that expose custom controls in the Inspector.
+A Fusion title creating an animated lower third, with controls open in the Inspector
+In actuality, these text generators are Fusion templates , which are Fusion compositions that have been 
+turned into macros and come installed with DaVinci Resolve to be used from within the Edit page like 
+any other generator. 
+It’s possible to make all kinds of Fusion title compositions in the Fusion page, and save them for 
+use in the Edit page by creating a macro and placing it within the /Library/Application Support/
+Blackmagic Design/DaVinci Resolve/Fusion/Templates/Edit/Titles directory, but this is a topic for 
+another day.
+There’s one other benefit to Text+ generators and that is they can be graded like any other 
+clip, without needing to create a compound clip first.
+1226Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+MultiText Titles
+Built on Text+, the MultiText tool in the Titles category gives you greater flexibility to add and format 
+multiple text layers, all within the single tool. It introduces a Text List and a slight rearrangement of 
+controls, prioritizing functionality based on editors’ needs.
+The MultiText tool in the Titles section lets you create multiple text layers 
+and styles and composite them all within a single interface.
+Text
+The Text List serves as a master panel, displaying all created text layers. The list and controls remain 
+available across Inspector tabs, allowing quick access to tweak both text and its properties at any 
+time. Directly below the Text List, the Add Text buttons offer three commonly used layout types: Point, 
+Text Box, and Circle, making it effortless to add your preferred input style.
+  Point: The text starts from a single point on the screen, with no horizontal or vertical restraints.
+  Text Box: The text is constrained horizontally and vertically by a bounding box. When Text Box is 
+selected, the Wrap to Text Box and Clip to Text Box checkboxes can be found under the Layout 
+tab. With Wrap to Text Box selected, your text will automatically continue on the next line when 
+it reaches the edge of the text box. When Clip to Text Box is selected it ensures that any text 
+extending beyond the text box’s boundaries is visually cut off, preventing overflow while keeping 
+the excess content intact.
+  Circle: The text is placed along a user-defined arc.
+  CSV: Imports a Comma Separated Value (.csv) spreadsheet into MultiText and automatically 
+formats it as columned aligned text. Once in MultiText, you can change the titles however 
+you see fit.
+1227Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+A simple spreadsheet saved in .csv format
+The resulting .csv file brought into MultiText each column is brought in as a separate text list item
+The Text tab also features various animation and text formatting tools similar to a 
+word processor.
+Layout: These parameters control the position of the text.
+Shading: These parameters control the attributes of the text, like drop shadows and outlines.
+Page: These parameters let you add a custom-colored background behind the text layers.
+Image: These parameters let you control the overall image, like aspect ratio, color and 
+gamma spaces.
+Settings: These parameters are the standard Settings controls for Fusion Generator Nodes.
+For more detailed information on the various options refer to Text+ Tool in MultiText,  
+jump to this chapter: Genera tor Nodes.
+1228Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Saving Titles in the 
+Media Pool for Future Use
+If you’ve created a title in a style that you want to later reuse, for example, a particularly formatted 
+lower third that will be the basis for every lower-third in your program, you can drag any title from the 
+Timeline to the Media Pool, and it will be saved as a separate clip. Title clips in the Media Pool are 
+shown with a thumbnail showing a preview of the text they contain. If you’ve keyframed any animated 
+text or video adjustments, those keyframes are also saved with this clip.
+Once saved in the Media Pool, text generators can be opened in the Source Viewer and 
+edited just like any other clip.
+A text generator saved as a clip in the Media Pool
+Using Generators
+Generators, with the exception of Solid Color, lack editable parameters other than the Composite, 
+Transform, Cropping, and Dynamic Zoom parameters that are standard for every clip. Additionally, 
+generators have a Display Name field in the Inspector that lets you give a particular clip a custom 
+name that appears in the Timeline.
+The various video generators included in DaVinci Resolve can be previewed by hovering your pointer 
+over any thumbnail in the Generators tab. To edit a generator into your timeline, simply grab the 
+thumbnail of the generator you wish to use, and place it in your Timeline in the Edit page, or in either 
+the upper or lower Timelines in the Cut page.
+The following generators are available:
+  10 Step: A grayscale ramp segmented into 10 steps from black to white.
+  100mV Steps: A grayscale ramp segmented into segments of exactly 100mV each.
+  BT.2111 Color Bar HLG Narrow: Use these bars if your HDR timeline is using a Hybrid Log Gamma 
+curve (HLG). This is most commonly used in broadcast for its simple backward compatibility with 
+SDR televisions.
+  BT.2111 Color Bar PQ Full: While PQ Full is a part of the Rec. 2100 (BT.2100) specification, it is not 
+commonly in use at this time. Use this setting only if you know you need it.
+1229Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+  BT.2111 Color Bar PQ Narrow: Use these bars if your HDR timeline is using a format with a PQ 
+gamma curve (i.e., DolbyVision or HDR10). This is most commonly used for video streaming 
+services and Blu-ray discs.
+  EBU Color Bar: A 1.77:1 aspect ratio set of color bars for PAL-using countries.
+  Four Color Gradient:  A gradient that blends four different colors at each corner of the frame. You 
+can adjust the Center X and Center Y parameters to move the center at which all four colors blend 
+together, and you can change the four colors that appear at each corner using corresponding 
+color parameters.
+  Grey Scale: A simple grayscale ramp from black to white.
+  SMPTE Color Bar: An updated 1.77:1 aspect ratio set of color bars for NTSC-using countries.
+  Solid Color: A simple fullscreen color generator. A Color parameter lets you choose what 
+color this generator outputs.
+  Window: A simple white-on-black shape generator, defaulting to a white rectangle against a 
+black background.
+  YCbCr Ramp: A gradient designed to test the Y’CbCr signal.
+ITU-R BT.2111-1 Color Bar Generators
+DaVinci Resolve now includes a ITU-R BT.2111-1 specification Color Bar Generator for HDR video. 
+These are the color bars to use when calibrating, analyzing, or mastering a Rec. 2100 (BT.2100) 
+HDR signal.
+These new color bars have saturation levels set at 100% at the top, and 75% in the middle 
+section. They also contain Rec. 709 (BT.709) color bars in the lower corners for compatibility with 
+HD SDR signals. Commonly referenced levels are indicated on the image below. The full color bar 
+specification can be found on the ITU’s web site: https://www.itu.int/rec/R-REC-B T.2111/en.
+The BT.2111-1 color bars and some of the more commonly used levels
+1230Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+The BT.2111-1 color bars on the Vectorscope, hitting their targets at 100% levels on the outside, 
+75% levels in the middle, and with the Rec. 709 bars represented in the interior 
+Fusion Generators
+The Fusion Generators section of the Generators panel contains Fusion effects that have been made 
+into reusable generators. By default, a single generator, Noise Gradient, appears as an example of 
+how these work. Fusion Generators work like any other generator. Once edited into the Timeline, they 
+act like any other clip, and when selected, they expose customizable parameters in the Inspector that 
+let you tailor their effect to meet your needs.
+However, Fusion Generators are highly customizable. Simply opening the Fusion page while the 
+playhead intersects a Fusion Generator on the topmost track of the Timeline exposes all of the Fusion 
+nodes that create that generator’s effect, enabling you to rebuild the effect to do whatever you need. 
+Furthermore, if you know how to create effects in Fusion, you can create your own generators by 
+making Fusion Macros and saving them to the Effects Library, so they appear in the Fusion Generators 
+section of the Effects Library. 
+For more information on how to do this, jump to this chapter: Node Groups, Macros, and 
+Fusion Templates.
+1231Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Using Stills
+You can import still images into the Media Pool, and edit them into the Timeline as clips with custom 
+durations. By default, imported stills are 10 seconds long, but you can extend a still image’s Out point 
+to a maximum of 17 hours and 40 minutes in length, which ought to cover just about any project you’re 
+planning on working on, so long as you’re not Andy Warhol. DaVinci Resolve is correspondingly 
+capable of importing still image clips referenced by XML or AAF project files, so long as they’re in a 
+supported format. 
+DaVinci Resolve supports the use of stills in the following formats:
+File Format Alpha Channel Support
+.tif Yes
+.png Yes
+.jpg No
+.dpx No
+.exr Yes
+.dng No
+.psd No
+.tga Yes
+.heif No
+.NEF No
+.CR2 No
+Once edited into the Timeline, still image clips have the same Composite, Transform, Cropping, 
+Retime, and Scaling attributes as any other clip.
+Viewer Updates to Still Images by other Applications
+If you are working with a still image in a Viewer in DaVinci Resolve, you can now modify that same 
+image in another image editing application, save it, and the image in the Viewer will automatically 
+update to the new version. 
+1232Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+The original still image in a DaVinci Resolve Viewer
+Modifying the image in another application, in this case drawing a red circle in Pixelmator Pro, then saving it
+After saving the still image in the other application, 
+it automatically updates in DaVinci Resolve
+1233Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Photoshop File Support
+Photoshop (.psd) files initially appear as a single clip displaying only the bitmapped layers within the 
+Edit page and Color page of DaVinci Resolve. 
+However if you’re in the Edit page, you can right-click on an Adobe Photoshop Document (.psd) in a 
+timeline and select Split PSD Layers in Place to expand each layer of the file into its own track. The 
+number of new tracks created will correspond with the number of layers in the file.
+You can split Photoshop PSD layers into individual tracks by right -clicking 
+on them and selecting Split PSD Layers in Place
+The results of splitting a PSD file
+DaVinci Resolve reads and splits rasterized flattened layers, so some steps need to be taken when 
+preparing the underlying PSD asset before import. Merging layers in Photoshop to create flattened 
+layers is generally a manual process. The intention is to simplify the image structure, bake Photoshop-
+specific effects and rasterize fonts to ensure compatibility with DaVinci Resolve. Here is a breakdown 
+of the process:
+1234Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Rasterize transparency and effects
+If your layers/fonts contain effects like shadows or gradients, merging them can sometimes 
+alter their appearance. Consider rasterizing before merging. To do this, select one or 
+more layers, right-click and choose Rasterize Layer Style. This is recommended for text 
+layers as well.
+Merge and flatten similar layers
+Arrange similar layers together and select the layers you want to merge. Right-click on the 
+selected layers and choose Merge Layers (Cmd/Control+E) to combine the selected layers 
+into one ‘flat’ layer. Depending on the complexity of the Photoshop document, consider using 
+the option: File > Scripts > Flatten All Layer Effects.
+Name layers
+Rename the layers to describe the underlying image, effect or element. Naming the flattened 
+layers at this stage allows DaVinci Resolve to use the names in the split clips.
+1235Editing Effects and Transitions | Chapter 56 Titles, Generators, and Stills
+EDIT
+Chapter 57
+Compositing 
+and Transforms 
+in the Timeline
+The Edit page is also home to many of the compositing and transform 
+effects found in DaVinci Resolve. 
+Many of these kinds of effects can be imported into DaVinci Resolve, including composite modes, 
+opacity settings, and clips using alpha channels. Once in DaVinci Resolve, you can make changes 
+to these effects in the Edit page. Alternately, you can also use DaVinci Resolve’s controls to create 
+effects from scratch.
+Contents
+Composite Modes and  
+Transparency Effects  ������������������������������������������������� 1237
+More About Composite Modes  ���������������������������� 1238
+Opacity ������������������������������������������������������������������������������ 1242
+Video Fader Handles  ������������������������������������������������� 1242
+Fade In and Out to Playhead Commands ��������  1243
+Alpha Channel Support  �������������������������������������������� 1243
+Keying in the Timeline Using Resolve FX  ������� 1244
+Setting Up a Green Screen 
+(Chroma Key) on the Timeline  �������������������������������� 1244
+Using Resolve FX and Open FX  
+Alpha for Track Compositing  ��������������������������������� 1245
+Transform and Cropping  
+in the Video Inspector ����������������������������������������������  1245
+Transform ������������������������������������������������������������������������� 1246
+Smart Reframe (Studio Version Only) �����������������  1246
+Cropping ��������������������������������������������������������������������������� 1247
+Dynamic Zoom �������������������������������������������������������������� 1247
+Stabilization �������������������������������������������������������������������� 1247
+Lens Correction  ������������������������������������������������������������ 1249
+Retime and Scaling  ����������������������������������������������������� 1249
+Onscreen Controls for Transform,  
+Crop, and Dynamic Zoom ��������������������������������������  1250
+Object Snapping in the Viewer ����������������������������  1250
+Using Onscreen Controls  ���������������������������������������� 1250
+1236Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Composite Modes and  
+Transparency Effects
+Composite modes are effects that use various mathematical operations to combine one superimposed 
+clip with another, relying on standard image processing math for each color channel whereby black 
+pixels have a value of 0, white pixels have a value of 1, and descending levels of gray are represented 
+by decimal point values (for instance, 0.5 represents 50% gray). When using composite modes to 
+blend two clips together on the Timeline, the three color channels of each pair of pixels are combined 
+using that particular composite mode’s math. The results can create transparency effects, increase 
+image exposure, and combine multiple images in many creative and useful ways.
+Two source clips combined with the Subtract composite mode
+When using composite modes, it’s easy to push parts of the resulting image above the maximum or 
+below the minimum values for brightness. However, this image data is not clipped, even through such 
+areas of the picture may appear flat white or black. Out-of-range data as a result of a composite mode 
+effect is preserved, and may be retrieved by later image processing operations in the Color page.
+When you import XML project files, DaVinci Resolve imports whatever composite modes were used by 
+clips in the original sequence. If necessary, you can then change a clip’s composite mode to one that 
+will work better with whatever grade you’re creating. Of course, you can also add composite modes to 
+clips that didn’t originally have them, adding new effects of your own. 
+All composite modes interact with the Opacity slider (found below the Composite Mode pop-up menu 
+in the Inspector) to make a clip more or less transparent in addition to compositing already being done.
+Composite modes can be used on clips that are superimposed over other clips in the Timeline. 
+However, these composite modes are also available for use within a grade on the Color page using 
+the Layer Mixer node, within which you can combine differently graded versions of an image in 
+creative ways. For example, the Add and Overlay composite modes can be useful for creating glow 
+effects, while Subtract and Difference can create more surreal effects.
+1237Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Working with composite modes in the Edit page is simple.
+To set or change a composite mode for any clip:
+Select a clip in the Timeline, then open the Video Inspector and choose one of the options 
+from the Composite Mode pop-up menu.
+Composite mode and Opacity controls in the Timeline
+To turn a clip’s composite mode off:
+Select a clip in the Timeline, then open the Inspector and choose Normal from the Composite 
+Mode pop-up menu.
+More About Composite Modes
+There are ten composite modes to choose from. For clarity, simple image math is used to help explain 
+the available Composite Mode effects.
+Normal
+No image compositing is done. The topmost image on the Timeline or the bottom input of the Layer 
+Mixer node occupies the entire frame.
+Add
+Each pair of pixels in both superimposed layers is added together. Layer order does not matter. This 
+can result in a dramatic brightening of light areas of both images with areas of the picture that are 
+blown out to maximum white, and this effect is often used by adding the brighter part of an image to 
+itself to create hot glow effects. Image data going above 1.0 is preserved and may be retrieved by later 
+color correction operations. On the other hand, black areas of either image do not alter the combined 
+image at all (0 + n = n).
+Color
+Recombines two layers using HSL image components by combining the Luma of the bottom layer with 
+the Hue and Saturation of the top layer.
+Color Burn
+Inverts the bottom layer, which is divided by the top layer, and the end result is itself inverted.
+Color Dodge
+The bottom layer pixels are divided by the top layer, which has been inverted.
+1238Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Darken
+Each pair of pixels in each color channel is compared, and the darker of the two is the output. Layer 
+order does not matter. Darken is useful when you want the darker features of both layers to take 
+precedence, but the output for any given pixel may be a color that doesn’t actually exist for that pixel 
+in either of the source layers.
+Darker Color
+For each pair of pixels, all three color channels from the bottom layer are added together, and all three 
+color channels from the top layer are added together. These results are compared, and the darker 
+pixel of the two layers is the output. Layer order does not matter. Darker Color is useful when you want 
+the darker features of both layers to take precedence. Unlike the Darken composite mode, the result 
+will always be a specific color from either the bottom or top layers.
+Difference
+The absolute value is taken of the top layer minus the bottom layer, and returned as the result, which 
+is always a positive number. Layer order does not matter. This Blend mode is often used to compare 
+two differently processed versions of the same image to see if there are any alterations, and how 
+large they are.
+Divide
+Divides the bottom layer by the top layer. Any color divided by itself = 1.0, or white, while any color 
+divided by white (1.0) = itself.
+Exclusion
+Similar to the Difference composite mode, but results in lower contrast.
+Hard Mix
+The R, G, and B channel values of the bottom layer are added to the R, G, and B channel values of the 
+top layer. Layer order does not matter. Can result in extreme effects.
+Hardlight
+Hardlight is the opposite of Overlay. All bottom layer pixels above 50% are Multiplied, while all bottom 
+layer pixels 50% and below are Screened.
+Hue
+Recombines two layers using HSL image components, by combining the Luma and Saturation of the 
+bottom layer, with the Hue of the top layer.
+Lighten
+Each pair of pixels in each color channel is compared, and the lighter of the two is the output. Layer 
+order does not matter. Lighten is useful when you want the lightest features of both layers to take 
+precedence, but the output for any given pixel may be a color that doesn’t actually exist for that pixel 
+in either of the source layers.
+1239Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Lighter Color
+For each pair of pixels, all three color channels from the bottom layer are added together, and all three 
+color channels from the top layer are added together. These results are compared, and the lighter 
+pixel of the two layers is the output. Layer order does not matter. Lighten Color is useful when you 
+want the lighter features of both layers to take precedence. Unlike the Lighten composite mode, the 
+result will always be a specific color from either the bottom or top layers.
+Linear Burn
+Each pair of pixels is summed, and 1 is subtracted from the total. Layer order does not matter. Regions 
+of white in one layer let the other layer show through, while colors and darker tones from both layers 
+interact to tint or darken the resulting image.
+Linear Dodge
+Each pair of pixels is summed. This composite mode is identical to Add.
+Linear Light
+All regions where the bottom layer is above 50% are Linear Dodged so as to lighten these parts of the 
+final result, while all regions where the bottom layer is below 50% are Linear Burned so as to darken 
+these parts of the final result. This composite mode intensifies image contrast in the final result.
+Luminosity
+Recombines two layers using HSL image components by combining the Hue and Saturation of the 
+bottom layer with the Luma of the top layer.
+Multiply
+Each pair of pixels is multiplied together. Layer order does not matter. This generally has the effect of 
+emphasizing the darkest parts of both images in the resulting output; in particular black areas of either 
+image are preserved (0 * n = 0) while white areas of either image have no effect on the output image 
+(1 * n = n). Multiply is good for compositing darker elements in a field of white into an image, and can be 
+used to emphasize the darkest parts of a noise, grain, or damage layer you’re blending with an image.
+Overlay
+Overlay combines useful aspects of both the Screen and Multiply composite modes, based on the pixel 
+values of the bottom-most image on the Timeline; all bottom layer pixels above 50% are Screened, 
+while all bottom layer pixels 50% and below are Multiplied. Overlay is an excellent composite mode for 
+combining a layer of noise, grain, or damage imagery with another clip, as it combines both images in 
+visually useful ways throughout the tonal range of shadows through highlights.
+Pin Light
+In regions where bottom layer pixels are below 50% gray, lighter pixels in the top layer are replaced 
+by darker pixels from the bottom layer, and darker pixels in the top layer replace lighter pixels in the 
+bottom layer, so that the darker half of the final image combines darker pixels from both layers. In 
+regions where bottom layer pixels are above 50% gray, darker pixels in the top layer are replaced by 
+lighter pixels from the bottom layer, and lighter pixels in the top layer replace darker pixels from the 
+bottom layer, so that the brighter half of the final image combines lighter pixels from both layers.
+1240Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Saturation
+Recombines two layers using HSL image components, by combining the Luma and Hue of the bottom 
+layer, with the Saturation of the top layer.
+Screen
+The pixel values of each layer are inverted, then multiplied, and the result is itself inverted. Layer order 
+does not matter. Screen is the inverse of Multiply, as it preserves the lightest parts of both images, 
+and is useful when compositing lighter elements in a field of black into an image, and can be used to 
+emphasize the lightest parts of a noise, grain, or damage layer you’re blending with an image.
+Softlight
+A less intense method of applying the Hardlight composite mode that results in a more even blend 
+between the two layers.
+Subtract
+Within each pair of pixels, those of the bottom layer are subtracted from those of the top. This can 
+result in dark areas of the image that hit flat black, but image data going below 0 is preserved and may 
+be retrieved by later color correction operations.
+Vivid Light
+All regions where the bottom layer is above 50% are Color Dodged so as to lighten these parts of 
+the final result, while all regions where the bottom layer is below 50% are Color Burned so as to 
+darken these parts of the final result. This composite mode vastly intensifies both image contrast and 
+saturation in the final result, for an extreme effect.
+Foreground
+When the Foreground composite mode is applied to the top layer, the transparency of its pixels is 
+affected by a bottom layer in one of the following composite modes:
+Alpha
+The Alpha composite mode applied to the bottom layer affects the transparency of the top layer in a 
+Foreground mode. The alpha of the layer is used.
+Inverted Alpha
+In the Inverted Alpha composite mode applied to the bottom layer, the transparency of the top layer in 
+a Foreground mode is affected. However, this is based on the inverted alpha of the bottom layer.
+Lum
+When the Lum mode is applied to the bottom layer, it changes the transparency of the top layer in a 
+Foreground mode. This is determined by the luminosity value of the pixels.
+Inverted Lum
+In the Inverted Lum mode, applied to the bottom layer, the transparency of the top layer in a 
+Foreground mode is changed. This is based on the inverted luminosity value of the pixels.
+1241Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Unknown
+When importing XML or AAF project files with composite modes that aren’t available in 
+DaVinci Resolve, the Composite Mode pop-up menu is set to Unknown; practically, this is the same 
+as Normal.
+TIP: To quickly audition different composite modes, hover your pointer over a mode in the 
+Composite Mode drop-down list. That particular composite mode will preview in the viewer.
+Opacity
+Each clip has an Opacity parameter, available in the Inspector, that lets you make it more transparent, 
+in a range from 0 (totally transparent) to 100 (totally opaque). When set to a value less than 100, 
+the selected clip is mixed with whatever clip is underneath it on the Timeline, according to the 
+composite mode that’s currently used. If no clip appears underneath the Timeline, then the clip is 
+mixed with black.
+By keyframing this parameter, you can create more complicated fade to black effects or cross 
+dissolves. Keyframing is covered in more detail, jump to this chapter: Keyframin g Effects.
+To change a clip’s opacity:
+Select the clip you want to adjust, open the Composite controls in the Video Inspector, and set 
+the Opacity slider to create the desired amount of transparency.
+Video Fader Handles
+If you want to dissolve a clip to or from another clip, or to or from black, the traditional way to do so has 
+been to use one of the transitions in the Effects Library. However, you can also use fader handles that 
+appear at the beginning and end a clip when you position the pointer right over it. Fader handles are a 
+fast, ubiquitous method of creating a fade to or from black. However, they also make it easy to fade to 
+or from other clips that are underneath one that’s superimposed, as seen in the following screenshot.
+Dragging a video fader handle on a clip in track V2
+1242Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+To use a fader handle, move the pointer over the clip you want to adjust, and when small white fader 
+handles appear at the upper left and upper right of the video of the clip, drag them to the left or right 
+for the duration you want the fade effect to last.
+Fade In and Out to Playhead Commands
+A pair of commands in the Trim menu let you use the playhead position over a clip to “Fade 
+In to Playhead” or “Fade Out to Playhead.” This can be done for a single clip or for multiple 
+superimposed clips. 
+These commands work for both audio and video items, in both the Edit and Fairlight pages.
+Alpha Channel Support
+If a superimposed video or still image clip in the Timeline has an embedded alpha channel, that alpha 
+channel automatically creates transparency within that clip, compositing it against whatever is in the 
+track underneath. There’s no need for you to do anything for this to work. 
+Superimposing a clip with an alpha channel above automatically composites that clip against the clip beneath it
+However, if you need to disable or alter the interpretation of an alpha channel for any clip, for example 
+if a clip is being interpreted as having an alpha channel of the wrong type, you can right-click that clip, 
+choose Clip Attributes from the contextual menu, and use the Alpha Mode pop-up menu of the Clip 
+Attributes Video panel to correct the problem.
+NOTE: If you’ve imported clips with alpha channels, those alpha channels can be rendered 
+back out for Round Trip workflows. Choose a Format and Codec combination that supports 
+alpha channel output, and turn on the Export Alpha checkbox in the Video panel of the 
+Render Settings list.
+1243Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Keying in the Timeline Using Resolve FX
+You can pull keys directly in the Timeline using the Resolve FX Key filters. These are found in the 
+Resolve FX section of the Open FX category, of the Effects Library. The filter options are 3D Keyer, 
+HSL Keyer, and Luma Keyer. 
+For more information on using Resolve FX Key filters, jump to this chapter: Resol ve FX Key.
+Below is an example of using the Resolve FX 3D Keyer filter in the Timeline.
+Setting Up a Green Screen (Chroma Key) on the Timeline
+To set up a green screen composite, place your background video on a track underneath your 
+foreground video, and drag the 3D Keyer onto the foreground clip.
+To adjust the key’s parameters, click on the Effects icon in the Inspector to reveal the Keyer’s controls, 
+and Select “Open FX Overlay” from the Transform Mode drop-down menu in the lower left of the 
+Timeline Viewer, to allow the effect qualifiers to work on the Timeline Viewer.
+Applying the 3D Keyer to the News Anchor clip on the V2 Timeline; note that the “Open FX Overlay” 
+mode on the Viewer is selected (circled), allowing you to use the Inspector Effect controls in the Viewer.
+1244Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+To pull a Chroma Key in the Timeline using the 3D Keyer.
+1 Superimpose your green screened foreground video on a track on top of your background video.
+2 Put the Timeline Viewer in Open FX Overlay mode, using the drop-down menu at the lower left of 
+the Viewer. This option allows you to use the effect GUI controls directly on the Viewer.
+3 Drag the 3D Keyer from the Effects Library onto the foreground video. The 3D Keyer is a fast and 
+high-quality keyer that’s easy to use, drawing strokes to identify the background and foreground 
+of the image you’re trying to key.
+4 Select the foreground video clip, and open the 3D Keyer from the Effects tab in the Inspector.
+5 Click the Pick eye dropper icon in the Controls section, and click and drag across the green 
+screen in the Timeline Viewer. A blue line will show you where you’ve selected, and the green 
+screen should mostly become transparent.
+6 Optional) Use the Add eye dropper (drawing blue lines), to click and drag over any parts of the 
+green screen that are still not transparent. Use the Subtract eye dropper (drawing red lines) to add 
+back any foreground elements that may have gone transparent by mistake.
+7 Turn on the Despill checkbox in the 3D Keyer to remove any green light (spill) that may have 
+reflected onto your foreground subject from the green screen.
+Using Resolve FX and Open FX  
+Alpha for Track Compositing
+DaVinci Resolve allows the direct use of the alpha channel from Resolve FX and Open FX plugins for 
+compositing on the Timeline. If an effect creates transparency in the image, a “Use alpha” checkbox 
+appears at the bottom of the effects parameters in the Effects tab of the Inspector. Checking this 
+box immediately applies the alpha channel to the selected clip, compositing it over any background 
+elements that appear in lower tracks. If more than one alpha-modifying effect is applied to a single 
+clip, the alpha channels are mixed together.
+The Use Alpha checkbox at the bottom 
+of the Effects tab in the Inspector
+Transform and Cropping  
+in the Video Inspector
+DaVinci Resolve is a resolution-independent application. This means that, whatever the resolution of 
+your source media, it can be output at whatever other resolution you like. This also means that you can 
+freely mix clips of any resolution, fitting 4K, HD, and SD clips into the same timeline, and scaling each 
+to fit the project resolution as necessary.
+Your project’s resolution can be changed at any time, allowing you to work at one resolution, and 
+then output at another resolution. This also makes it easy to output multiple versions of a program at 
+different resolutions, for example, outputting both HD and 4K sized versions of the same program.
+1245Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+DaVinci Resolve has a powerful toolset for making geometric transforms, using advanced algorithms 
+for optical-quality sizing operations. Within the Edit page, each clip has a set of transform parameters, 
+principally for use in storing sizing data imported from AAF or XML when you turn on the “Use sizing 
+information” checkbox. This has the advantage of keeping these imported Edit Transform settings 
+separate from the Input Sizing parameters found on the Color page, which are typically used by the 
+colorist to make pan and scan adjustments of various kinds.
+Of course, you can also use these controls to create your own adjustments while working in the 
+Timeline, zooming into clips, repositioning them to improve the composition, and so on. While there 
+is some overlap between these parameters and those in the sizing palette of the Color page, they’re 
+both separate sets of parameters, so you can keep each set of adjustments separate. 
+When the time comes to output your program, the final resolution of each clip is calculated taking into 
+account the original resolution of the source media, the timeline resolution, image scaling settings, Edit 
+page transforms, and Color page transforms, so that the final resolution correctly uses the cleanest 
+geometric transformation based on the maximum resolution available to each source clip.
+Transform
+The Video Inspector transform group includes the following parameters, which are also editable in the 
+Edit Sizing mode of the Sizing palette in the Color page:
+  Zoom X and Y: Allows you to blow the image up or shrink it down. The X and Y parameters can be linked 
+to lock the aspect ratio of the image, or released to stretch or squeeze the image in one direction only.
+  Position X and Y: Moves the image within the frame, allowing pan and scan adjustments to be 
+made. X moves the image left or right, and Y moves the image up or down.
+  Rotation Angle: Rotates the image around the anchor point.
+  Anchor Point X and Y: Defines the coordinate on that clip about which all transforms are centered. 
+  Pitch: Rotates the image toward or away from the camera along an axis running through the 
+center of the image, from left to right. Positive values push the top of the image away and bring 
+the bottom of the image forward. Negative values bring the top of the image forward and push the 
+bottom of the image away. Higher values stretch the image more extremely.
+  Yaw: Rotates the image toward or away from the camera along an axis running through the center 
+of the image from top to bottom. Positive values bring the left of the image forward and push the 
+right of the image away. Negative values push the left of the image away and push the right of the 
+image forward. Higher values stretch the image more extremely.
+  Flip Image: Two buttons let you flip the image in different dimensions.
+Flip Horizontal control: Reverses the image along the X axis, left to right.
+Flip Vertical control: Reverses the clip along the Y axis, turning it upside down.
+Smart Reframe (Studio Version Only)
+The Smart Reframe feature makes it easier to quickly reframe material across extreme aspect 
+ratio changes. It’s useful for situations where you’ve shot a 16:9 horizontal video and find yourself 
+needing to create a vertically-oriented 9:16 version for mobile phones and social media deliverables, 
+or using 4:3 archival footage in a 2.39:1 widescreen movie. Smart Reframe can be used manually, or 
+automatically executed using the DaVinci Resolve Neural Engine.
+  Object of Interest: Tools for selecting the subject that the resize will frame around.
+Auto: DaVinci Resolve’s Neural Engine will analyze the clip and choose its most representative 
+object. This will be the only option if more than one clip is selected for Smart Reframing.
+Reference Point: Allows you to manually adjust a bounding box around the subject 
+to reframe around.
+1246Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+  Mode: Tools for limiting the AI reframing to a specific axis.
+Auto: Smart Reframe will adjust the pan and tilt of a clip as it deems necessary to properly reframe 
+the target.
+Pan Only: Smart Reframe will adjust the pan (left and right) motion of the clip only.
+Tilt Only: Smart Reframe will adjust the tilt (up and down) motion of the clip only.
+  Reframe: This button executes the Smart Reframe command. This can take some time depending 
+on the length and number of clips. 
+Cropping
+The Video Inspector has an additional set of cropping parameters:
+  Crop Left, Right, Top, and Bottom: Lets you cut off, in pixels, the four sides of the image. Cropping 
+a clip creates transparency, so that whatever is underneath shows through.
+  Softness: Lets you blur the edges of a crop. Setting this to a negative value softens the edges inside 
+of the crop box, while setting this to a positive value softens the edges outside of the crop box.
+Dynamic Zoom
+The Dynamic Zoom controls, which are off by default, make it fast and easy to do pan and scan effects 
+to zoom into or out of a clip. Also, if you import a project from Final Cut Pro X with clips that use the 
+Ken Burns effect, then those clip’s effects will populate the Dynamic Zoom parameters in DaVinci 
+Resolve. Turning the Dynamic Zoom group on activates two controls in the Inspector that work hand-
+in-hand with the Dynamic Zoom onscreen adjustment controls you can expose in the Timeline Viewer 
+(described below):
+  Dynamic Zoom Ease: Lets you choose how the motion created by these controls accelerates. 
+You can choose from Linear, Ease In, Ease Out, and Ease In and Out.
+  Swap: This button reverses the start and end transforms that create the dynamic zoom effect.
+Stabilization
+Image Stabilization is available for clips right in the Timeline. These controls let you smooth out or even 
+steady unwanted camera motion within a clip. The analysis is performed in such a way as to preserve 
+the motion of individual subjects within the frame, as well as the overall direction of desirable camera 
+motion, while correcting for unsteadiness.
+These are the same stabilizer controls found in the Color page’s Tracker palette (minus the tracker 
+graph), and the resulting stabilization analysis is mirrored on the Color page, where you can see the 
+data visualized on the graph, if necessary.
+A pop-up menu provides three different options that determine how the selected clip is analyzed and 
+transformed during stabilization. You must choose an option first, before clicking the Stabilize button 
+above, because the option you choose changes how the image analysis is performed. If you choose 
+another option, you must click the Stabilize button again to reanalyze the clip.
+  Perspective: Enables perspective, pan, tilt, zoom, and rotation analysis and stabilization.
+  Similarity: Enables pan, tilt, zoom, and rotation analysis and stabilization, for instances where 
+perspective analysis results in unwanted motion artifacts.
+  Translation: Enables pan and tilt analysis and stabilization only, for instances where only X and Y 
+stabilization gives you acceptable results.
+1247Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Stabilization controls found in the 
+Edit page Inspector for each clip
+The other controls let you customize how aggressively the selected clip is stabilized.
+  Stabilization Toggle: The toggle control for the Stabilization controls lets you turn stabilization off 
+and on to be able to compare the stabilized and unstabilized image.
+  Camera Lock: Turning on this checkbox disables Cropping Ratio and Smooth, and 
+enables the stabilizer to focus on eliminating all camera motion from the shot in an effort to 
+create a locked shot.
+  Zoom: When this checkbox is turned on, the image is resized by a large enough percentage to 
+eliminate the blanking (black edges) that is the result of warping and transforming the image to 
+eliminate unwanted camera motion. The lower a value Cropping Ratio is set to, the more DaVinci 
+Resolve will need to zoom into an image to eliminate these blanked edges. If you turn this off, the 
+image is not zoomed at all, and whatever blanking intrudes into the image is output along with 
+the image, on the assumption that you’ll have dedicated compositing artists deal with eliminating 
+this blanking by filling in the missing image data in a more sophisticated manner. You may also 
+leave this checkbox turned off if you’re planning on animating the Input Sizing Zoom parameter to 
+dynamically zoom into and out of a shot being stabilized to eliminate blanking only where it occurs, 
+using only as much zooming as is necessary for each region of the shot.
+  Cropping Ratio: This value limits how hard the stabilizer tries to stabilize, by dictating how much 
+blanking or zooming you’re willing to accept in exchange for eliminating unwanted motion. 
+A value of 1.0 results in no stabilization being applied. Progressively lower values enable more 
+aggressive stabilization. Changing this value requires you to click the Stabilize button again to 
+reanalyze the clip.
+  Smooth: Lets you apply mathematical smoothing to the analyzed data used to stabilize the clip, 
+allowing camera motion in the shot while eliminating unwanted jittering. Lower values perform less 
+smoothing, allowing more of the character of the original camera motion to show through, while 
+higher values smooth the shot more aggressively. Changing this value requires you to click the 
+Stabilize button again to reanalyze the clip.
+  Strength: This value is a multiplier that lets you choose how tightly you want to use the 
+stabilization track to eliminate motion from a shot using the current analysis. With a value of 1, 
+stabilization is maximized. Since some clips might look more natural with looser stabilization, 
+choosing a number lower than 1 lets a percentage of the original camera motion show through. 
+Zero (0) disables stabilization altogether. As an additional tip, you can invert the stabilization by 
+choosing –1 when pasting a stabilization analysis from another clip to perform a match move 
+based on the overall motion of the scene, and you can use a negative value either lower than 0 or 
+higher than –1 to under or overcompensate when inverting the stabilization, simulating the effects 
+of parallax where foreground and background planes move together but at different speeds.
+1248Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Lens Correction
+The Lens Correction group (only available in Resolve Studio) has two controls that let you correct for 
+lens distortion in the image, or add lens distortion of your own.
+  Analyze: Automatically analyzes the frame in the Timeline at the position of the playhead for 
+edges that are being distorted by wide angle lens. Clicking the Analyze button moves the 
+Distortion slider to provide an automatic correction. If you’re analyzing a particularly challenging 
+clip, a progress bar will appear to let you know how long this will take.
+  Distortion: Dragging this slider to the right lets you manually apply a warp to the image that lets 
+you straighten the bent areas of the picture that can be caused by wide angle lenses. If you 
+clicked the Analyze button and the result was an overcorrection, then dragging this slider to the 
+left lets you back off of the automatic adjustment until the image looks correct.
+Retime and Scaling
+The Retime and Scaling group has four parameters that affect retiming quality and clip scale:
+  Retime Process: Lets you choose a default method of processing clips in mixed frame rate 
+timelines and those with speed effects (fast forward or slow motion) applied to them, on a clip-
+by-clip basis. The default setting is “Project Settings,” so all speed-effected clips are treated the 
+same way. 
+There are three options: Nearest, Frame Blend, and Optical Flow, which are explained in 
+more detail in the Speed Effect Processing section, jump to this chapter: Speed Effects .
+  Motion estimation mode:  When using Optical Flow to process speed change effects or clips with 
+a different frame rate than that of the Timeline, the Motion Estimation pop-up lets you choose 
+the best-looking rendering option for a particular clip. Each method has different artifacts, and 
+the highest quality option isn’t always the best choice for a particular clip. The default setting 
+is “Project Settings,” so all speed-effected clips are treated the same way. There are several 
+options. The “Standard Faster” and “Standard Better” settings are the same options that have 
+been available in previous versions of DaVinci Resolve. They’re more processor-efficient and yield 
+good quality that are suitable for most situations. However, “Enhanced Faster” and “Enhanced 
+Better” should yield superior results in nearly every case where the standard options exhibit 
+artifacts, at the expense of being more computationally intensive, and thus slower on most 
+systems. The Speed Warp setting is available for even higher-quality slow motion effects using 
+the DaVinci Neural Engine. Your results with this setting will vary according to the content of the 
+clip, but in ideal circumstances this will yield higher visual quality with fewer artifacts than even the 
+Enhanced Better setting. 
+  Scaling: Lets you choose how clips that don’t match the current project resolution are handled on 
+a clip-by-clip basis. The default setting is “Project Settings,” so that all mismatched clips use the 
+same method of being automatically resized. However, you can also choose an individual method 
+of automatic scaling for any clip. The options are Crop, Fit, Fill, and Stretch.
+For more information, jump to this chapter: Sizing and Image Stabilization .
+1249Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+  Resize Filter: For clips that are being resized in any way, this setting lets you choose the filter 
+method used to interpolate image pixels when resizing clips. Different settings work better for 
+different kinds of resizing. There are four options:
+Sharper: Usually provides the best quality in projects using clips that must be scaled up to fill a 
+larger frame size, or scaled down to HD resolutions.
+Smoother: May provide higher quality for projects using clips that must be scaled down to fit an 
+SD resolution frame size.
+Bicubic: While the Sharper and Smoother options are slightly higher quality, Bicubic is still an 
+exceptionally good resizing filter and is less processor intensive than either of those options.
+Bilinear: A lower quality setting that is less processor intensive. Useful for previewing your work 
+on a low-performance computer before rendering, when you can switch to one of the higher 
+quality options.
+Other Resize Methods: A selection of specific resize algorithms is available if you need to match 
+them to other VFX workflows.
+Onscreen Controls for Transform,  
+Crop, and Dynamic Zoom
+You also have the option of transforming, cropping, or adding dynamic zoom effects to clips using 
+the Transform/Crop/Dynamic Zoom button at the bottom left of the Timeline Viewer. These on-screen 
+controls can also be selected by choosing an option from the View > Viewer Overlay submenu; these 
+commands are not mapped to keyboard shortcuts by default, but you can make a manual mapping if 
+there’s a mode you find yourself using regularly. The currently selected overlay can be toggled on and 
+off by pressing Shift-` (Tilde), or by choosing View > Viewer Overlay > Toggle On/Off.
+Transform controls in the Timeline Viewer
+Object Snapping in the Viewer
+While dragging objects or dynamic zoom outlines to reposition them, snapping occurs at the X and Y 
+center of the frame, as well as around the outer third of the frame. Holding the Shift key down while 
+dragging a text object constrains movement to just the X or Y axis.
+Using Onscreen Controls
+For many, the onscreen controls provide a more intuitive experience for manipulating your clips.
+1250Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+To transform a clip using graphical controls in the Timeline Viewer:
+1 Click the Transform/Crop button at the bottom left of the Timeline Viewer to turn it on; white is 
+enabled, gray is disabled. When enabled, if no clips are selected in the Timeline, then the clip in 
+the highest auto-select-enabled track that intersects the playhead will display onscreen transform 
+controls. If a clip is selected, that specific clip can be transformed.
+2 Do one of the following:
+a) Choose the Transform mode from the pop-up menu, if necessary, to change modes. 
+The appropriate onscreen controls appear to let you manipulate the clip with the mouse. 
+When in Transform mode, you can drag anywhere within the clip’s bounding box to adjust pan 
+and tilt, drag any diagonal corner to proportionally resize, drag any side to squeeze or stretch 
+just width or height, or drag the center handle to rotate.
+Onscreen controls for transforming in the Timeline Viewer
+b) Choose the Cropping mode from the pop-up menu. In this mode, each side has a 
+handle for cropping.
+Onscreen controls for cropping in the Timeline Viewer
+1251Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+c) Choose the Dynamic Zoom mode from the pop-up menu. In this mode, the green box shows 
+the starting size and position of the animated transform, while the red box shows the ending 
+size and position of the animated transform. Drag anywhere within either bounding box to 
+adjust pan and tilt for either the start or the end of the animated effect, and drag any of the 
+corners to adjust the size. A motion path appears to show the motion that’s being created. 
+Adjusting the Dynamic Zoom controls automatically enables dynamic zoom in the Inspector.
+Onscreen controls for transforming and cropping in the Timeline Viewer
+3 If necessary, choose a smaller viewing percentage from the Timeline Viewer scale pop-up to 
+better see the onscreen controls if you’re rescaling the image, or use the scroll control of your 
+mouse, trackpad, or tablet to zoom out of the image.
+4 When you’re finished, turn the Transform/Crop/Dynamic Zoom button off.
+1252Editing Effects and Transitions | Chapter 57 Compositing and Transforms in the Timeline
+EDIT
+Chapter 58
+Speed Effects
+You can import both linear and nonlinear speed changes from other applications, or 
+you can create these effects from scratch in order to speed up or slow down clips 
+in your programs. 
+DaVinci Resolve has a comprehensive set of controls for creating these kinds of effects using 
+dedicated Retime controls, curves, and specific edit types. Once created, DaVinci Resolve also 
+provides different ways of processing these effects to create the smoothest possible playback.
+Contents
+Speed Effects and Retiming ���������������������������������������������������������������������������������������������������������������������������������������������������������  1254
+Creating Freeze Frames ������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1254
+Creating Simple Linear Speed Effects ������������������������������������������������������������������������������������������������������������������������������������  1255
+Speed Change Controls in the Video Inspector ����������������������������������������������������������������������������������������������������������������  1256
+Clip Retiming Controls  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1257
+Retiming an Entire Clip  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1257
+Rippling or Overwriting the Timeline When Using Retime  ��������������������������������������������������������������������������������������������� 1258
+Reading Clip Speed Arrows  ����������������������������������������������������������������������������������������������������������������������������������������������������������� 1258
+Creating Variable Speed Effects Using the Retime Controls  ���������������������������������������������������������������������������������������� 1258
+Closing Retime Controls  �������������������������������������������������������������������������������������������������������������������������������������������������������������������  1261
+Using Retime Curves  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1261
+Speed Effect Processing  ���������������������������������������������������������������������������������������������������������������������������������������������������������������� 1265
+Optical Flow Quality Settings Affecting Speed Effects ���������������������������������������������������������������������������������������������������� 1266
+1253Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Speed Effects and Retiming
+Speed effects describe any effect that speeds up, slows down, or otherwise changes the 
+playback speed of clips in the Timeline. There are four basic ways you can create speed effects in 
+DaVinci Resolve.
+  Importing speed effects:  DaVinci Resolve is capable of reading linear speed effects from 
+imported EDL, AAF, and XML projects, and nonlinear speed effects from XML and AAF project 
+files. When speed effects are present, DaVinci Resolve plays clips at the specified speed. 
+You can also create speed effects of your own using controls in the Edit page. There are two 
+methods of adjusting clip speed: using the Change Speed dialog, and using the Retiming 
+effect in the Timeline.
+  Creating speed effects using Fit to Fill edits: You can also change a clip’s speed in the Timeline 
+by editing it using the Fit to Fill command, which retimes the clip to fit into an arbitrary duration in 
+the Timeline of your choosing. 
+For more information on using Fit to Fill, jump to this chapter: Three- and Four-Point 
+Editing.
+  Creating freeze frames: You can use the freeze frame command to turn an entire clip into a freeze 
+frame of a frame intersecting the playhead.
+  Creating simple linear speed effects:  You can create simple fast or slow-motion speed effects 
+by using the Change Clip Speed command, or by using the left and right handles of the Retime 
+controls in the Timeline. Both of these methods are described in this section.
+  Creating variable speed effects:  You can create much more complex variable speed effects, 
+where the same clip speeds up or slows down multiple times by different amounts, using either 
+the Retime controls, or one of the two different speed curves that are available. These methods 
+are also covered later in this section.
+Speed Effects and Audio
+Any of the methods of creating linear speed effects that are available in DaVinci Resolve, 
+including the Change Clip Speed command, the Retime controls, and the Fit to Fill edit, will 
+retime a clip’s audio, without pitch correction on Linux and Windows, and with pitch correction 
+on Mac OS X (Yosemite and above), along with its video. However, audio that accompanies 
+variable speed effects will be muted.
+Creating Freeze Frames
+There are a few ways you can create a freeze frame, but the fastest is to position the playhead over 
+the frame you want to be the freeze frame, and choose Clip > Freeze Frame, or press Shift-R. The 
+entire clip becomes a freeze frame of the frame you parked the playhead over. 
+If you want to disable the freeze frame effect, you can select the clip and use the Remove Attributes 
+dialog to remove the speed effect, or you can simply open the Change Clip Speed dialog and turn the 
+Freeze Frame checkbox off.
+1254Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Creating Simple Linear Speed Effects
+If all you need to do is to make a clip play in slow motion, speed it up, reverse the clip, or create 
+a freeze frame, you can apply a simple speed effect using either the browser or the Change 
+Speed dialog.
+To change a clip’s speed, do one of the following:
+  Select a clip, choose Clip > Change Clip Speed, and use the controls of the 
+Edit Speed Change dialog.
+  Right-click a clip in the Timeline, choose Change Clip Speed, and use the controls of the 
+Edit Speed Change dialog.
+  You can change the speed of multiple selected clips at the same time using either the Inspector or 
+the Change Clip Speed dialog box.
+Change Clip Speed operations have the following options:
+  Change Clip Speed parameters:  Changes the speed of the selected clip by whatever percentage, 
+frame rate, or duration you like.
+  Ripple Sequence checkbox:  If you want the speed change you’re about to make to ripple the 
+Timeline, pushing or pulling all clips following the current one to accommodate the clip’s new size, 
+then turn on the checkbox.
+Speed effect parameters shown in the Speed dialog
+  Reverse Speed checkbox: Clicking this box sets the current speed to a negative value, reversing 
+the motion of the clip.
+  Freeze Frame checkbox: Changes the entire clip to a freeze frame of whichever frame is at the 
+current position of the playhead.
+1255Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+  Pitch Correction checkbox:  Checking this box will perform pitch correction on the audio attached 
+to the clip so that while the audio duration is changed to match the picture speed, it will still sound 
+natural. Be aware that pitch correction on large speed adjustments may not sound as good as 
+pitch corrections made to small speed adjustments.
+  Maintain Timing/Stretch to fit radio buttons: Choosing Maintain Timing leaves any keyframes 
+within the clip locked at their original position, while choosing Stretch Keyframes results in all 
+Composite, Transform, and Cropping keyframes being compressed or stretched by the same 
+percentage as the clip during a speed change.
+Speed Change Controls 
+in the Video Inspector
+You can also change the speed of your clip directly in the Video Inspector’s Speed Change controls. 
+This method has the benefit of being available in both Cut and Edit pages.
+  Direction: Selects the desired motion of the clip, forward, backward, or freeze frame.
+  Speed %: Adjusting this slider changes the clips motion on a percentage basis. 
+This value can be keyframed.
+  Frames Per Second: Adjusting this slider changes the clips motion by increasing or decreasing 
+the number of frames per second to play the clip back at. This value can be keyframed.
+  Duration: You can directly select how long you want the clip to be by setting a specific duration 
+here in HH:MM:SS:FF format. This will then automatically adjust the speed of the clip to playback 
+all frames in that exact amount of time.
+  Ripple Sequence checkbox:  If you want the speed change you’re about to make to ripple the 
+Timeline, pushing or pulling all clips following the current one to accommodate the clip’s new size, 
+then turn on the checkbox.
+  Pitch Correction checkbox:  Checking this box will perform pitch correction on the audio attached 
+to the clip so that while the audio duration is changed to match the picture speed, it will still sound 
+natural. Be aware that pitch correction on large speed adjustments may not sound as good as 
+pitch corrections made to small speed adjustments. 
+The Speed Change controls in the Video Inspector
+1256Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Clip Retiming Controls
+Another method of altering clip speed in the Timeline is to apply the Retime effect. This method of 
+clip retiming provides a convenient control overlay that you can use to adjust clip speed directly in the 
+Timeline, and it also provides the controls that are needed for creating variable-speed effects.
+To expose the Retime controls on a clip:
+  Select a clip, and choose Clip > Retime Controls (Command-R).
+  Right-click a clip and choose Retime Clip from the contextual menu.
+The Retime controls appear over that clip in the Timeline. They consist of a Retime control track 
+running along the top of the clip with arrows that indicate the speed and direction of playback 
+(the default blue right-facing arrows indicate normal 100% playback) and a Clip Speed pop-up menu at 
+the bottom center of the clip, which also shows the current speed of the clip.
+The Speed effect controls in the Timeline
+Retiming an Entire Clip
+The simplest way of using the Retiming effect is to change the playback speed of the entire clip, in the 
+process rippling the rest of the Timeline to the right of the retimed clip as you increase its duration by 
+stretching or compressing its duration.
+To retime a clip by dragging:
+Move the pointer to the left or right edge of the Speed Change name bar on top of the clip, and when 
+it turns into a Retime cursor, drag either side to stretch or squeeze the clip to retime it.
+To retime a clip by specific amounts:
+1 Select a clip and press Command-R.
+2 Click the pop-up next to the speed percentage text at the bottom of the clip.
+3 Do one of the following:
+  Choose a new playback speed from the Change Speed submenu.
+  Choose reverse segment to make the clip play in reverse. Reverse speed is shown in the Retime 
+control track as arrows facing left, instead of right.
+To return a clip to its original speed:
+Click the pop-up next to the speed percentage text at the bottom of the clip, 
+and choose Reset to 100%.
+1257Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Rippling or Overwriting the Timeline When Using Retime
+Whether or not clips to the right in the Timeline will ripple to accommodate the change in duration 
+resulting in speed changes you make with the Retime controls depends on whether you’re using 
+the Selection tool/mode (in which case the Timeline won’t ripple), or the Trim tool/mode (in which 
+case the Timeline will).
+Reading Clip Speed Arrows
+When you retime a clip, the Clip Speed pop-up menu displays the current speed of the entire clip. 
+Additionally, the arrows in the Retime control track show you the speed and direction of playback. 
+When clip speed is slowed down below 100%, the Retime control track shows yellow playback 
+triangles that are spaced farther apart. When clip speed is sped up above 100%, the Retime control 
+track shows blue triangles that are bunched closer together. At 100% normal speed, the Retime control 
+track shows blue, evenly spaced triangles, while left-facing blue arrows indicates reverse playback.
+Three clips set to different speeds. From left to right, 100% speed, 
+slow motion, and fast forward are indicated by the yellow arrows.
+Creating Variable Speed Effects Using the Retime Controls
+You can also use the Retime controls to insert freeze frames within the middle of a clip, and create 
+other custom variable speed effects using speed points. Additional variable speed options include 
+rewind and speed ramp effects, which automatically place speed points to create preset effects.
+To create a freeze frame at a particular moment in time:
+1 With the Retime controls exposed, move the playhead to the frame you want to freeze, within that 
+clip. Ideally, this will be for an effect where you want a character in motion to suddenly stop at a 
+particular frame.
+2 Open the Clip Speed pop-up menu (the pop-up next to the speed percentage text at the bottom 
+of the clip), and choose Freeze Frame. Two new speed points are added to the clip, defining a 
+range within which the clip is frozen at that frame. This can be seen by the vertical red bars in 
+the Retime control track. Past the second speed point, the clip resumes playback from the next 
+frame forward.
+Speed effect controls set to insert a momentary freeze frame within the clip
+1258Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+3 Drag the second speed point forward or back to define the duration of the freeze frame. The result 
+is that the clip plays normally up until the first speed point, then freezes on that frame until the 
+second speed point, at which playback resumes.
+To create variable-speed effects:
+1 With the Retime controls exposed, move the playhead to the frame at which you want to change 
+the speed of the clip, and choose Add Speed Point from the Clip Speed pop-up menu.
+2 Move the playhead forward to the next frame at which you want the clip speed to change again, 
+and add another speed point. It takes a minimum of two speed points to create a speed effect.
+3 To alter the speed of the clip segment appearing between these two speed points, 
+do one of the following:
+  Using the pointer, drag the top handle of the second speed point to the right to slow down clip 
+playback, or to the left to speed up clip playback within just that segment. Doing this either 
+shortens or lengthens the clip, and either overwrites or ripples neighboring clips depending on 
+whether you’re using the Selection or Trim modes.
+  Also using the pointer, you can drag the bottom handle of any speed point to widen the range 
+of the clip that plays at that particular speed. Doing this reallocates frames from before and after 
+the speed segment being adjusted to keep all speed segments playing at the same speed, and 
+this also shortens or lengthens the clip, but by a different amount.
+  Using the Clip Speed pop-up menu, choose a new speed for that segment from the 
+Change Speed pop-up menu. You can also set any segment to play in reverse by choosing 
+Reverse Segment.
+4 To clear a speed point and eliminate that particular clip’s speed segment from the effect, choose 
+Clear Speed Point from any Clip Speed pop-up menu to eliminate whichever speed point appears 
+to its left.
+When you create variable-speed effects, the arrows in the Retime control track can help you 
+keep track of what you’re doing, and each segment’s speed pop-up shows you the actual 
+numeric speed. The change in speed from each speed segment to the next is automatically 
+eased, for a smooth transition from one speed to another.
+Speed controls set to ramp among three different playback speeds; arrow spacing shows the timing
+There are two additional sets of commands for creating preset speed effects that use multiple 
+speed points.
+1259Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+To add a rewind effect:
+With a clip’s Retime controls exposed, open any Clip Speed pop-up menu and choose a preset 
+percentage from the Rewind submenu. This results in two additional speed points being added after 
+the rightmost speed point in the current segment, which creates the effect of the current segment 
+playing in fast reverse for the chosen percentage, and then playing a second time from the beginning.
+When Rewind is activated from the submenu, the added segment extends from the end of that 
+segment to the playhead, if the playhead is within the segment. If the playhead is outside the segment, 
+it extends from the start of the segment instead.
+Speed effect controls before and after creating a “rewind” effect
+To add a speed ramp:
+With a clip’s Retime controls exposed, open any Clip Speed pop-up menu and choose one of the two 
+options from the Speed Ramp submenu to replace the current speed effect with a series of five speed 
+segments that start at 10% and increase progressively to 30%, 50%, 70%, and then 90%. Once created, 
+you can drag the speed points to customize this effect to create whatever durations you require.
+Speed effect controls set to create a gradual ramp from 0 to 100 percent playback speed
+1260Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT

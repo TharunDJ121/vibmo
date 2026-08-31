@@ -152,3 +152,34 @@ class GlitchStutterSuite:
         audio = np.clip(audio * 2.0, -1.0, 1.0)
 
         return audio.astype(np.float32)
+
+    @staticmethod
+    def digital_stutter_burst(duration: float = 0.8, slice_count: int = 16) -> np.ndarray:
+        """
+        Rhythmic digital micro-stutter burst with granular buffer repeats and bitcrushed decay.
+        """
+        n_samples = int(duration * GlitchStutterSuite.SAMPLE_RATE)
+        if n_samples == 0:
+            return np.array([], dtype=np.float32)
+
+        stutter_raw = GlitchStutterSuite.digital_glitch_stutter(duration=duration, slice_count=slice_count, randomize=True)
+        bitcrushed = GlitchStutterSuite.bitcrush_buffer_freeze(duration=duration, bit_depth=6, sample_rate_reduction=4)
+
+        t = np.linspace(0, duration, n_samples, endpoint=False)
+        gate = np.sin(2 * np.pi * 12.0 * t) ** 2
+
+        mixed = (stutter_raw * 0.6 + bitcrushed * 0.4) * gate
+
+        # Master envelope with smooth fade out
+        env = np.exp(-1.5 * t / duration)
+        fade_len = int(0.02 * GlitchStutterSuite.SAMPLE_RATE)
+        if fade_len > 0 and len(env) > fade_len:
+            env[-fade_len:] *= np.linspace(1, 0, fade_len)
+
+        out = mixed * env
+        max_val = np.max(np.abs(out))
+        if max_val > 0:
+            out = (out / max_val) * 0.9
+
+        return out.astype(np.float32)
+

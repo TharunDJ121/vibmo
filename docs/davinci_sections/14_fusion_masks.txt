@@ -1,0 +1,987 @@
+With this accomplished, we’re happy with the key, so we load the Merge1 node back into the 
+viewer, and press C to set the Color control of the viewer back to RGB. We can see the graphic 
+in the background, but right now it’s too small to cover the whole frame, so we need to make 
+another adjustment.
+The final key is good, but now we need to work on the background
+Dealing with Spill
+The DeltaKeyer can handle any screen color that may bounce off the background and land on your 
+subject. This bounce screen light is called spill. However, instead of using one node to handle the 
+matte creation and the spill correction, consider disabling this in the DeltaKeyer and remove the spill 
+using a separate color correction node.
+To disable spill suppression in the DeltaKeyer, do the following.
+  Select the matte tab in the Inspector.
+  From the Replace Mode drop-down menu, choose Source. This uses the color from the original 
+source image, effectively disabling any spill correction in the DeltaKeyer.
+The Replace Mode menu determines how  
+spill suppression is handled in the DeltaKeyer
+1770Fusion Fundamentals | Chapter 78 Compositing Layers in Fusion
+FUSION
+Spill can now be handled using a color correction node placed directly after the DeltaKeyer or 
+branched from the original MediaIn or Loader node and combined with a MatteControl.
+Branching the original image with one branch for the DeltaKeyer and a second for color correction
+Masking a Graphic
+Next, it’s time to work on the top video track: the news graphic that will appear to the left of the 
+newscaster. The graphic we will use is actually a sheet of different logos, so we need to cut one out 
+using a mask and position it into place.
+A graphic of multiple logos that must be cropped down to isolate just one
+The easiest way to crop a MediaIn or Loader node is to add one of the mask shapes from the 
+toolbar directly to it. Selecting the MediaIn or Loader node and clicking the Rectangle mask 
+from the toolbar will crop, or mask off, the graphic.
+Masking the logo using a Rectangle mask connected directly to a Merge node
+1771Fusion Fundamentals | Chapter 78 Compositing Layers in Fusion
+FUSION
+Now, all we need to do is to use the onscreen controls of the Rectangle mask to crop the area we want 
+to use, dragging the position of the mask using the center handle, and resizing it by dragging the top/
+bottom and left/right handles of the outer border. 
+As an extra bonus, you can take care of rounded corners when masking a graphic by using the Corner 
+Radius slider in the Inspector controls for the Rectangle mask to add the same kind of rounding.
+Moving and resizing the mask to fit our logo, and rounding 
+the edges using the Corner Radius Inspector control
+For a simple over-the-shoulder graphic, masking the image may be all you need to do, but 
+masking an image does not change the actual dimensions of the graphic. It only changes the 
+area you see. So, accurately positioning the graphic based on the center of the composite 
+becomes more difficult, and any type of match moving would give incorrect results because 
+the graphic has a different resolution than the background. To fix this resolution mismatch, you 
+can place a Crop node after the MediaIn to change the actual dimensions of the graphic layer. 
+Adding a Crop node after the masked MediaIn to  
+center the cropped logo on the background
+With the Crop node selected, the viewer toolbar includes a Crop tool.
+Selecting the crop tool  
+in the viewer toolbar
+1772Fusion Fundamentals | Chapter 78 Compositing Layers in Fusion
+FUSION
+You can crop the image by dragging a bounding box around it. Unlike a mask which creates 
+a small window you view the image through, a crop effectively changes the resolution of the 
+graphic to the crop bounding box size.
+Dragging a bounding box using the Crop tool (left),  
+and the cropped logo now centered on the frame (right)
+NOTE: The Resize, Letterbox, and Scale nodes also change the resolution of an image.
+At this point, we’re all set to move the logo into place. Because the logo is the foreground input to a 
+Merge, you can select the Merge2 node, load it into the viewer, and use the built-in Center X and Y 
+controls or the onscreen controls to place the logo where you want it and make it a suitable size.
+Placing the logo using the foreground input transform controls of the Merge2 node
+1773Fusion Fundamentals | Chapter 78 Compositing Layers in Fusion
+FUSION
+Chapter 79
+Rotoscoping 
+with Masks
+This chapter covers how to use masks to rotoscope, one of the most common 
+tasks in compositing.
+Contents
+Introduction to Masks and Polylines �����������������  1775
+Mask Nodes �������������������������������������������������������������������� 1775
+Polyline Types ���������������������������������������������������������������� 1776
+Converting Polylines from 
+One Type to Another �������������������������������������������������� 1777
+How to Use Masks with Other Nodes ��������������� 1778
+Attaching Masks to an 
+Image for Rotoscoping  ���������������������������������������������� 1779
+Combining Multiple Masks  �������������������������������������� 1780
+Mask Inputs on Other Nodes ���������������������������������  1780
+Creating and Editing Polylines In -Depth ��������� 1783
+The Polyline Toolbar ��������������������������������������������������� 1783
+Selecting a Specific Polyline  ���������������������������������� 1784
+Polyline Creation Modes  ������������������������������������������ 1784
+Protection Modes  ��������������������������������������������������������� 1785
+Closing Polylines  ���������������������������������������������������������� 1786
+Selecting and Adjusting Polylines  ���������������������� 1786
+Polyline Points Selection  ������������������������������������������ 1786
+Moving Polyline Points  ���������������������������������������������� 1787
+Smoothing a Polyline Segment  ����������������������������� 1787
+Linearizing a Polyline Segment  ����������������������������� 1787
+Transforming Individual or Multiple Points  ������ 1788
+Deleting Selected Points ������������������������������������������ 1788
+Editing Bézier Handles  ���������������������������������������������� 1788
+Point Editor ���������������������������������������������������������������������� 1789
+Reduce Points ���������������������������������������������������������������� 1790
+Shape Box ����������������������������������������������������������������������� 1790
+Showing and Hiding 
+Onscreen Polyline Controls  ������������������������������������� 1791
+Stop Rendering ������������������������������������������������������������� 1792
+Roto Assist ����������������������������������������������������������������������� 1792
+Creating Softness Using Double Polylines  ���� 1793
+Converting a Single Polyline 
+to a Double Polyline  �������������������������������������������������� 1794
+Adding Softness to a Segment ����������������������������� 1794
+Adding Additional Points to the Shape  ������������� 1794
+Locking/Unlocking Point Pairs ������������������������������� 1795
+Animating Polyline Masks ��������������������������������������� 1795
+Removing Animation from a Polyline Mask  ����� 1795
+Adding and Removing Points 
+from an Animated Mask �������������������������������������������� 1795
+Publishing Specific Control Points  ���������������������� 1795
+1774Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Introduction to Masks and Polylines
+Polylines are splines that are used whenever a control is animated with a motion path or when a 
+node’s effect is masked with a drawn shape. They are also used in the Paint and Grid Warp nodes. 
+In a more basic form, polylines are used to control the animation in the Spline Editor. Since these 
+splines are used for just about everything, they are extremely flexible, with a considerable amount of 
+controls, modes, and options. This chapter offers an overview of polylines and their operation, with 
+specific information on how to use them for masks.
+Mask Nodes
+Mask nodes create an image that is used to define transparency in another image. Unlike other image 
+creation nodes in Fusion, mask nodes create a single channel image rather than a full RGBA image. 
+The most used mask tool, the Polygon mask tool, is located in the toolbar.
+For more information on these mask tools, jump to this chapter: Mask Nodes . You can also 
+refer to Chapter 49 in the Fusion Reference Manual .
+The available nodes in the Mask bin of the Effects Library
+Polygon Mask
+Polygon masks are user-created Bézier shapes. This is the most common type of polyline and the 
+basic workhorse of rotoscoping. Polygon mask tools are automatically set to animate as soon as you 
+add them to the Node Editor.
+B-Spline Masks
+B-Spline masks are user-created shapes made with polylines that are drawn using the B-Splines. 
+They behave identically to polyline shapes when linear, but when smoothed the control points 
+influence the shape through tension and weight. This generally produces smoother shapes while 
+requiring fewer control points. B-Spline mask tools are automatically set to animate as soon as you add 
+them to the Node Editor.
+1775Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Bitmap Masks
+The Bitmap mask allows images from the Node Editor to act as masks for nodes and effects. Bitmap 
+masks can be based on values from any of the color, alpha, hue, saturation, luminance, and the 
+auxiliary coverage channels of the image. The mask can also be created from the Object or Material ID 
+channels contained in certain 3D-rendered image formats.
+Mask Paint
+Mask Paint allows a mask to be painted using Fusion’s built-in vector paint nodes.
+Wand Mask
+A Wand mask provides a crosshair that can be positioned in the image. The color of the pixel under 
+the crosshair is used to create a mask, where every contiguous pixel of a similar color is also included 
+in the mask. This type of mask is ideal for isolating color adjustments.
+Ellipse, Rectangle, and Triangle Masks
+These are primitive shape masks. 
+For more information on these mask tools, jump to this chapter: Mask Nodes . You can also 
+refer to Chapter 49 in the Fusion Reference Manual .
+Ranges Mask
+Similar to the Bitmap mask, the Ranges mask allows images from the Node Editor to act as masks for 
+nodes and effects. Instead of creating a simple luminance-based mask from a given channel, Ranges 
+allows spline-based selection of low, mid, and high ranges, similar to to the Color Corrector node.
+Polyline Types
+You can draw polylines using either B-Spline or Bézier spline types. Which you choose depends on 
+the shape you want to make and your comfort with each spline style.
+Bézier Polylines
+Bézier polylines are shapes composed of control points and handles. Several points together are used 
+to form the overall shape of a polyline.
+Bézier control point with direction handles 
+extended to create a smooth curve
+1776Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Each control point has a pair of handles used to define the exact shape of the polyline 
+segments passing through each control point. Adjusting the angle or length of the direction 
+handles will affect whether that segment of the polyline is smooth or linear.
+Bézier control point with direction handles  
+aligned to create a linear segment
+If you’re familiar with applications such as Adobe Photoshop or Illustrator, you’ll already be 
+familiar with many of the basic concepts of editing Bézier polylines.
+B-Spline Polylines
+A B-Spline polyline is similar to a Bézier spline; however, these polylines excel at creating smooth 
+shapes. Instead of using a control point and direction handles for smoothness, the B-Spline polyline 
+uses points without direction handles to define a bounding box for the shape. The smoothness of the 
+polyline is determined by the tension of the point, which can be adjusted as needed.
+B-Splines excel at creating smooth curves
+Converting Polylines from One Type to Another
+Just because you created a shape using a B-Spline or polyline, that doesn’t mean you’re stuck with 
+the controls you started with. You can convert any shape from B-Spline to Bézier, or Bézier to B-Spline, 
+as needed. 
+To switch a shape between Polyline and B-Spline controls:
+Right-click a shape in the viewer and choose Convert Bézier Spline to B-Spline or Convert B-Spline to 
+Bézier from the spline’s contextual menu (only the appropriate option will be displayed).
+1777Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+When converting from one type to another, the original shape is preserved. The new polyline 
+generally has twice as many control points as the original shape to ensure the minimum change to the 
+shape. While animation is also preserved, this conversion process will not always yield perfect results. 
+It’s a good idea to review the animation after you convert spline types.
+How to Use Masks with Other Nodes
+Typically, a node applies its effect to every pixel of an image. However, many nodes have mask inputs 
+that can be used to limit the effect that node has on the image.
+A Blur node with a Polygon 
+node masking its effect
+Masks are single-channel images  that can be used to define which regions of an image you want 
+to affect. Masks can be created using primitive shapes (such as circles and rectangles), complex 
+polyline shapes that are useful for rotoscoping, or by extracting channels from another image. 
+A Polygon node’s mask seen in the viewer
+Each mask node is capable of creating a single shape. However, Mask nodes are designed to 
+be added one after the other, so you can combine multiple masks of different kinds to create 
+complex shapes. For example, two masks can be subtracted from a third mask to cut holes into 
+the resulting mask channel.
+Fusion offers several different ways you can use masks to accomplish different tasks. You can 
+attach Mask nodes after other nodes in which you want to create transparency, or you can attach 
+Mask nodes directly to the specialized inputs of other nodes to limit or create different kinds 
+of effects.
+1778Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Attaching Masks to an Image for Rotoscoping
+There are two ways you’ll typically attach a Mask node, such as a Polygon node, so that it adds an 
+alpha channel to an image for compositing later in the node tree.
+Using a MatteControl Node
+The MatteControl node is the main node used for combining masks in different ways and inserting the 
+result into an image stream. The MatteControl node is attached downstream of the node outputting 
+the image you want to rotoscope. You’ll typically attach a Polygon or B-Spline node to the Garbage 
+Matte input of the MatteControl node to use the spline as an alpha channel.
+Feeding a Polygon node to a MatteControl node to perform rotoscoping
+To use this setup, you’ll load the MatteControl node into the viewer and select the Polygon node to 
+expose its controls so you can draw and modify a spline while viewing the image you’re rotoscoping. 
+The MatteControl node’s Garbage Matte > Invert checkbox lets you choose which part of the image 
+becomes transparent.
+Connecting a Mask to a MediaIn or Loader Node’s Input
+This method is a bit simpler but requires you to know that you can view one node while adjusting 
+another node, even if that other node is disconnected. If you add an unattached Mask node such as 
+a Polygon or B-Spline node, and then place a MediaIn or Loader node directly into the viewer while 
+selecting the Mask node, you can draw a spline to rotoscope the image.
+When you’re finished rotoscoping, you simply connect the Polygon node’s output to the Loader node’s 
+input, and an alpha channel is automatically added to that node.
+Rotoscopingµ a MediaIn node using 
+a disconnected Polygon node
+Connecting a Polygon node to a MediaIn node 
+to use a spline as an alpha channel
+TIP: If you connect a Mask node to a MediaIn or Loader node’s effect input without any 
+shapes drawn, that mask outputs full transparency, so the immediate result is that the image 
+output by the MediaIn or Loader node becomes completely blank. This is why when you want 
+to rotoscope by connecting a mask to the input of a MediaIn or Loader node, you need to 
+work within a disconnected Mask node first. Once the shape you’re drawing has been closed, 
+connect the Mask node to the MediaIn or Loader’s input, and you’re good to go.
+1779Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Combining Multiple Masks
+Masks are designed to be added one after the other, with each Mask node acting as an additional 
+layer of masking. 
+When a Mask node’s input is attached to another mask, a Paint Mode drop-down menu appears, which 
+allows you to choose how you want to combine the two masks. 
+Combining multiple Polygon nodes 
+one after the other in the node tree
+The Paint Mode parµameter in the 
+Polygon node Inspector parameters
+The default option is Merge, but you can also choose Subtract, Minimum, Maximum, Multiply, 
+or any other operation that will give you the mask boolean interaction you need. Additionally, 
+a pair of Invert and Solid checkboxes let you further customize how to combine the current 
+mask with the one before it.
+The Invert and Solid options
+Mask Inputs on Other Nodes
+Masks can be used for a variety of reasons, so there are several categories of mask inputs that 
+different nodes include to accommodate these different uses. Incidentally, in most cases you can 
+connect either masks or mattes to a mask input to take advantage of that input’s functionality.
+TIP: If you select a node with an empty effect mask input, adding a Mask node automatically 
+connects to the open effect mask input.
+1780Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Effects Mask Inputs
+Almost every node in Fusion has an Effect mask input (colored blue), which lets you choose which 
+parts of the image will or will not be affected by that node.
+A Blur node with a Polygon 
+node masking its effect
+While masks (or mattes) are connected via an input, they are actually applied “post effect,” which 
+means the node first applies its effect to the entire image, and then the mask is used to limit the result 
+by copying over unaffected image data from the input.
+Although many nodes support effects masking, there are a few where this type of mask does not 
+apply—notably Savers, Time nodes, and Resize, Scale, and Crop nodes.
+TIP: Effects masks define the domain of definition (DoD) for that effect, 
+making it more efficient.
+A Polygon node used as a mask to limit the Blur node’s effect
+1781Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Pre-Masking Inputs
+Unlike effect masks, a pre-mask input (the name of which is usually specific to each node using them) 
+is used by the node before the effect is applied. This usually causes the node to render more quickly 
+and to produce a more realistic result. In the case of the Highlight and the Glow nodes, a pre-mask 
+restricts the effect to certain areas of the image but allows the result of that effect to extend beyond 
+the limits of the mask.
+The advantage to pre-masking is that the behavior of glows and highlights in the real world can be 
+more closely mimicked. For example, if an actor is filmed in front of a bright light, the light will cause 
+a glow in the camera lens. Because the glow happens in the lens, the luminance of the actor will be 
+affected even though the source of the glow is only from the light.
+In the case of the DVE node, a pre-mask is used to apply a transformation to a selected portion of 
+the image, without affecting portions of the image outside of the mask. This is useful for applying 
+transformations to only a region of the image.
+Garbage Matte Inputs
+Garbage Matte inputs (usually colored gray) are used to exclude light stands, rigging, and boom 
+microphones that intrude upon masks being pulled via blue-screen and green-screen keys. In the 
+following example, a lighting stand to the left is removed from the image via a B-Spline node’s mask 
+connected to the Garbage Matte input of the DeltaKeyer node.
+A B-Spline node is connected to the Garbage Matte input 
+of a DeltaKeyer node to eliminate a light stand at the left of frame
+TIP: You can quickly add a mask node to the Effect/Solid/Garbage Matte inputs of a keyer 
+node by right-clicking the header bar of that node in the Inspector and choosing whichever 
+mask node you want to use from the Effect Mask, SolidMatte, and GarbageMatte submenus.
+You choose whether a garbage matte is applied to a keying node as opaque or transparent in 
+the Inspector for the node to which it’s connected.
+Solid Matte
+Solid Matte inputs (colored white) are intended to fill unwanted holes in a matte, often with a less 
+carefully pulled key producing a dense matte with eroded edges, although you could also use a 
+polygon or mask paint to serve this purpose. In the example below, a gentle key designed to preserve 
+the soft edges of the talent’s hair leaves holes in the mask of the woman’s face, but using another 
+DeltaKeyer to create a solid matte for the interior of the key that can be eroded to be smaller than the 
+original matte lets you fill the holes while leaving the soft edges alone. This is also sometimes known 
+as a hold-out matte.
+1782Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Filling in holes in the mask pulled by the DeltaKeyer1 node (left) with another, harder but eroded 
+key in DeltaKeyer2 that’s connected to the SolidMatte input of DeltaKeyer1 (right)
+Creating and Editing Polylines In-Depth
+This section covers the Polygon node’s capabilities in depth.
+The Polyline Toolbar
+Whenever a node that contains one or more polylines is selected, the polyline is shown on all viewers 
+and the Polyline toolbar is displayed along the side of each viewer. The toolbar contains several 
+buttons that make switching polyline modes and options easy to access.
+The Polyline toolbar
+If you hover the pointer over any of the Polyline toolbar buttons, a tooltip that describes the button’s 
+function appears. Clicking on a button will affect the currently active polyline or the selected polyline 
+points, depending on the button.
+You can change the size of the toolbar icons, add labels to the buttons, or make other adjustments 
+to the toolbar’s appearance in order to make polylines easier to use. All the options can by found by 
+right-clicking on the toolbar and selecting from the options displayed in the contextual menu.
+1783Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Selecting a Specific Polyline
+It is possible to have several polylines in the viewer at once if you select multiple Mask nodes in the 
+Node Editor, so it’s important to be able to switch between polylines easily.
+To make a polyline active, do one of the following:
+  Click one of the polyline’s control points or segments.
+  Press Tab and Shift-Tab to cycle between available polylines.
+  Right-click in the viewer and choose the desired polyline by name from the 
+Controls > Select menu.
+Polyline Creation Modes
+There are several different modes available from the toolbar for creating and modifying polylines. 
+The specific mode used when a polyline is first added will depend on whether it is used as a path 
+or a mask.
+Each of the modes is described in more detail below.
+Click Append
+This mode is the default mode for mask creation. It’s used to quickly define the rough shape of the 
+mask, after which you switch to Insert and Modify mode to refine the mask further.
+The Click Append  
+toolbar button (Shift-C)
+To create a mask using the Click Append mode, do the following:
+1 Select Click Append from the toolbar or press Shift-C.
+2 Click the pointer where you want to start the shape.
+3 Move and click the pointer to append a point to the last one.
+4 To close the shape, place the mouse pointer over the first point created and click when the pointer 
+changes shape.
+When a shape is closed, the polyline is automatically switched to Insert and Modify mode.
+Although the Click Append mode is rarely used with paths, it can be helpful when you know 
+the overall shape of a motion path, but you don’t yet know the timing.
+TIP: Holding Shift while you draw a mask constrains subsequent points to 45-degree angles 
+relative to the previous point. This can be very helpful when drawing regular geometry.
+1784Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Insert and Modify
+Masks, which are created in Click Append mode, automatically switch to Insert and Modify mode when 
+the mask shape is closed. You can also manually switch to this mode by clicking the Insert and Modify 
+button in the toolbar or using the Shift-I keyboard shortcut. This mode makes it easier to add additional 
+points and refine the shape of the mask. Dragging the control points or direction handles modifies 
+existing points on the polyline.
+The Insert Modify toolbar button (Shift-I)
+Insert and Modify mode is also the default mode for creating motion paths. A new control point is 
+automatically added to the end of the polyline, extending or refining the path, any time a parameter 
+that is animated with a motion path is moved.
+Draw Append
+The Draw Append mode creates a freehand polyline shape directly on the viewer, like drawing with 
+a pencil or a paintbrush. This mode is ideal to use in conjunction with a tablet and for the creation of 
+garbage mattes and effect masks around complex shapes.
+The Draw Append toolbar button (Shift-D)
+Protection Modes
+In addition to the modes used to create a polyline, two other modes are used to protect the points 
+from further changes after they have been created.
+Modify Only
+Modify Only mode allows existing points on the polyline to be modified, but new points may not be 
+added to the shape.
+The Modify Only toolbar button (Shift-M)
+TIP: Even with Modify Only selected, it is still possible to delete points from a polyline.
+1785Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Done
+The Done mode prohibits the creation of any new points, as well as further modification of any existing 
+points on the polyline.
+The Done toolbar button (Shift-N)
+Closing Polylines
+There are several ways to close a polyline, which will connect the last point to the first.
+To close a polyline, do one of the following:
+  Hover the pointer over the first point created, and then click on the point.
+  Press Shift-O on the keyboard.
+  Click the Close button on the polyline toolbar.
+  Draw a polyline until you are ready to close the shape, and then right-click and choose 
+Polygon:Polyline > Closed.
+All these options are toggles that can also be used to open a closed polygon.
+The Close toolbar button (Shift-O)
+Selecting and Adjusting Polylines
+To create the shape you need for a mask or a motion path, you need to know how to manipulate the 
+splines. Fusion provides a number of simple techniques for selecting, moving, and smoothing a spline, 
+but also includes more complex adjustment techniques for scale, skewing, and twisting a spline.
+Polyline Points Selection
+To select one or more control points on a polyline, do one of the following:
+  Click directly on the control points.
+  Lasso around the points.
+1786Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+To add or remove points from the current selection, do one of the following:
+  Hold the Shift key to select a continuous range of points.
+  Hold Command and click each control point you want to add or remove.
+  Press Command-A to select all the points on the active polyline.
+TIP: Once a control point is selected, you can press Page Down or Page Up on the keyboard 
+to select the next control point in a clockwise or counterclockwise rotation. This can be very 
+helpful when control points are very close to each other.
+Moving Polyline Points
+The selected polyline points can be moved using either the keyboard or the mouse.
+To move selected control points using the pointer, do one of the following:
+  Drag on the selected points anywhere in the viewer.
+  Hold Shift while dragging to restrict movement to a single axis.
+  Hold Option and drag anywhere in the viewer to move the selected control point.
+To move selected control points using the keyboard, do one of the following:
+  Press the Up or Down Arrow keys on the keyboard to nudge a point up or down in the viewer.
+  Hold Command-Up or Down Arrow keys to move in smaller increments.
+  Hold Shift-Up or Down Arrow keys to move in larger increments.
+Smoothing a Polyline Segment
+If you want to shape the polyline and control its slope, you can choose to smooth a spline segment by 
+adjusting the Bézier direction handles.
+To smooth the selected points on an active polyline, do one of the following:
+  Press Shift-S.
+  Click the Smooth button on the Polyline toolbar.
+  Choose Smooth from the polyline’s contextual menu.
+The Smooth button in the toolbar (Shift-S)
+Linearizing a Polyline Segment
+To make certain that a polyline segment is perfectly straight, that segment must be linearized. A linear 
+segment aligns the Bézier direction handles with the segment and therefore has no curvatures. The 
+segment is always drawn in a straight line between two points on the polyline.
+1787Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+To linearize the selected points on an active polyline, do one of the following:
+  Press Shift-L.
+  Click the Linear button on the polyline’s toolbar.
+  Choose Linear from the polyline’s contextual menu.
+The Linear button in the toolbar (Shift-L)
+Transforming Individual or Multiple Points
+Select the points to be transformed, and then do one of the following:
+  Hold T and drag to twist.
+  Hold S and drag to scale.
+  Hold X and drag to scale horizontally only.
+  Hold Y and drag to scale vertically only.
+  Hold O and drag to offset the points perpendicular to the tangent.
+The position of the pointer when the transformation begins becomes the center 
+used for the transformation.
+Deleting Selected Points
+You can delete a selected point or group of points by pressing Delete or Backspace, choosing Delete 
+from the contextual menu, or by clicking the Delete Point button in the toolbar. The shape of the 
+polyline changes to reflect the removal of these points.
+TIP: Deleting all the points in a polyline does not delete the polyline itself. To delete a 
+polyline, you must delete the node or modifier that created the polyline.
+Editing Bézier Handles
+For Bézier polylines, each control point has two direction handles that adjust the slope of a curve 
+through the control point. These direction handles appear only when the point is selected.
+Dragging a direction handle makes adjustments to the curve of the segment that emerges from the 
+control point. The direction handle on the opposing side of the control point will also move to maintain 
+the relationship between these two handles.
+1788Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+To break the relationship between direction handles and adjust one independently, hold Command 
+while dragging a handle. Subsequent changes will maintain the relationship, unless Command is held 
+during each adjustment.
+Hold Command to adjust one handle independently
+If you want to adjust the length of a handle without changing the angle, hold Shift while 
+moving a direction handle.
+Point Editor
+The Point Editor dialog can be used to reposition control points using precise X and Y coordinates. 
+Pressing the E key on the keyboard will bring up the Point Editor dialog and allow you to reposition 
+one or more selected control points.
+The Point Editor dialog can  
+be used to position control points
+The dialog box contains the X- and Y-axis values for that point. Entering new values in those boxes 
+repositions the control point. When multiple control points are selected, all the points move to the 
+same position. This is useful for aligning control points along the X- or Y-axis.
+If more than one point is selected, a pair of radio buttons at the top of the dialog box determines 
+whether adjustments are made to all selected points or to just one. If the Individual option is selected, 
+the affected point is displayed in the viewer with a larger box. If the selected point is incorrect, you can 
+use the Next and Previous buttons that appear at the bottom of the dialog to change the selection.
+1789Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+In addition to absolute values for the X- and Y-axis, you can adjust points using relative values 
+from their current position. Clicking once on the label for the axis will change the value to an 
+offset value. The label will change from X to X-offset or from Y to Y-offset.
+The Point Editor dialog  
+with Offset values
+If you are not sure of the exact value, you can also perform mathematical equations in the 
+dialog box. For example, typing 1.0-5 will move the point to 0.5 along the given axis.
+Reduce Points
+When freehand drawing a polyline or an editable paint stroke, the spline is often created using more 
+control points than you need to efficiently make the shape. If you choose Reduce Points from the 
+polyline’s contextual menu or toolbar, a dialog box will open allowing you to decrease the number of 
+points used to create the polyline.
+The Reduce Points  
+button in the toolbar
+The overall shape will be maintained while eliminating redundant control points from the path. When 
+the value is 100, no points are removed from the spline. As you drag the slider to the left, you reduce 
+the number of points in the path.
+Shape Box
+If you have a polyline shape or a group of control points you want to scale, stretch, squish, skew, or 
+move, you can use the shape box to easily perform these operations.
+To enable the shape box, do one of the following:
+  Click the Shape Box toolbar button.
+  Choose Shape Box from the contextual menu.
+  Press Shift-B.
+The Shape Box button  
+in the Polyline toolbar
+1790Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+If there are selected points on the polyline when the Shape Box mode is enabled, the shape box is 
+drawn around those points. Otherwise, you can drag the shape box around the area of control points 
+you want to include.
+If you want to freely resize the shape box horizontally and vertically, you can drag a corner handle. 
+Dragging a handle on the side of the shape box resizes the polyline along a specific axis.
+Dragging a side handle resizes along a specific axis
+Holding Command while dragging a shape box handle will apply adjustments from the center 
+of the shape box, constraining the transformation to the existing proportions of the shape box. 
+Holding Shift while dragging a corner handle affects only that handle, allowing skewed and non-
+uniform transformations.
+Hold Shift while dragging a corner to perform non-uniform transformations
+Showing and Hiding Onscreen Polyline Controls
+It is often difficult to identify individual points when they are placed closely together. You can choose 
+to display both points and their direction handles, just points, or just handles. These display mode 
+options are selected using the Show Key Points and Show Handles toolbar buttons, or from the 
+polyline’s context menu.
+The Show Key Points and Show 
+Handles buttons in the toolbar
+1791Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+You use these options to simplify the screen display when adjusting control points placed 
+closely together and to avoid accidentally modifying controls and handles that are adjacent to 
+the intended target.
+Stop Rendering
+While points along the polyline are being moved, the results are rendered to the viewer to provide 
+constant interactive feedback. Although extremely useful, there are situations where this can be 
+distracting and can slow down performance on a complex effect. To disable this behavior so renders 
+happen only when the points stop moving, you can toggle the Stop Rendering button in the toolbar or 
+select this option from the polyline contextual menu.
+Roto Assist
+You can enable the Roto Assist button in the toolbar when you begin drawing your shape to have 
+points snap to the closest high-contrast edge as you draw the shape. The points that have snapped to 
+an edge are indicated by a cyan outline. 
+There are three main Roto Assist options.
+• Multiple Points: Allows adding multiple points along an entire edge with a single click 
+instead of having to add each point individually.
+• Distance: Defines the pixel range within which searching for an edge will take place. 
+• Reset: Used for resetting the snap attribute of the snapped points. After resetting, the points 
+will become unavailable for tracking.
+The Roto Assist options in the toolbar
+1792Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Creating Softness Using Double Polylines
+The standard soft edge control available in all Mask nodes softens the entire mask equally. However, 
+there are times, particularly with a lot of motion blur, when softening part of the curve while keeping 
+other portions of the curve sharp is required.
+This form of softness is called non-uniform softness, which is accomplished by converting the shape 
+from a single polyline to a double polyline. The double polyline is composed of two shapes: an inner 
+and an outer shape. The inner shape is the original shape from the single polyline, whereas the outer 
+shape is used to determine the spread of the softness. The further the outer shape gets from the inner 
+shape, the softer that segment of the shape becomes.
+A double polyline uses an inner and outer shape for non-uniform softness
+1793Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Converting a Single Polyline to a Double Polyline 
+To convert a mask into a double polyline, click the Double Polyline button in the Polyline toolbar or 
+right-click in the viewer and select Make Outer Polyline from the mask’s contextual menu.
+The shape will be converted into an inner and an outer polyline spline. Both polylines start 
+with exactly the same shape as the original single polyline. This keeps the mask sharp to start 
+with and allows any animation that may have already been applied to the shape to remain.
+Make Double Polyline button
+The control points on the outer shape are automatically parented to their matching points on 
+the inner shape. This means that any changes made to the inner shape will also be made to 
+the outer shape. The relationship is one-way; adjustments to the outer shape can be made 
+without affecting the inner shape.
+A dashed line drawn between the points indicates the relationship between the points on the 
+inner and outer shapes.
+Adding Softness to a Segment
+The outer shape is drawn using a green dashed line instead of a solid line to help distinguish it from 
+the inner shape. 
+To select the outer soft edge shape, do one of the following:
+  Use the Tab key to cycle between the onscreen controls until the dashed outline is visible
+  Right-click over a spline in the view and choose Controls > Select > Polygon: Outer Polygon.
+Once the outer polyline is selected, you can drag any of the points away from the inner polyline to 
+add some softness to the mask.
+TIP: Press Shift-A to select all the points on a shape, and then hold O and drag to offset the 
+points from the inner shape. This gives you a starting point to edit the falloff.
+The farther the outer shape segment is from the inner shape, the larger the falloff will be in 
+that area.
+Adding Additional Points to the Shape
+It is not necessary for every point on the inner shape to have a match on the outer shape, or vice 
+versa. You can add additional control points to refine the shape of either shape.
+Each polyline stores its animation separately; however, if a point is adjusted on the inner shape that is 
+parented to a point on the outer shape, a keyframe will be set for both splines. Adjusting a parented 
+point on the outer shape only sets a keyframe for the outer shape’s spline. If a point that is not parented 
+is adjusted, it will only set a keyframe on the relevant spline. You can disable this behavior entirely for 
+this polyline by selecting Polygon: Outer Polygon > Follow Inner Polyline from the contextual menu.
+1794Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Locking/Unlocking Point Pairs
+If you want to parent additional control points, you can select the points, right-click in the viewer, and 
+choose Lock Point Pairs from the contextual menu for either spline. This will cause the selected point 
+on the outer shape to become parented to the selected point on the inner shape.
+Any animation already applied to either point is preserved when the points become parented.
+To unlock a point so it is no longer parented, select the point, right-click in the viewer, and deselect 
+Lock Point Pairs from the contextual menu.
+Animating Polyline Masks
+Animating masks is surprisingly easy. When Polygon or B-Spline masks are added to the Node Editor, 
+the spline’s control points are automatically ready to be animated. All you have to do to animate a 
+mask is move the playhead to a new frame and then change the shape of the mask. A new keyframe 
+is added in the Spline Editor and Timeline Editor. This one keyframe controls the position of all control 
+points for that mask at that frame. Once two or more keyframes have been created, the shape of the 
+polygon or B-Spline is automatically interpolated from one keyframe to the next. 
+TIP: The center point and rotation of a shape are not auto-animated. Only the control points 
+are automatically animated. To animate the center position or rotation, enable keyframes for 
+that parameter in the Inspector.
+To adjust the overall timing of the mask animation, you edit the Keyframe horizontal position spline 
+using the Spline Editor or Timeline Editor. Additional points can be added to the mask at any point to 
+refine the shape as areas of the image become more detailed.
+Removing Animation from a Polyline Mask
+If you want a Polyline mask to remain static, you can remove the automatic animation setting. In the 
+Inspector for the mask, right-click in the bottom of the panel where it says Right Click Here For Shape 
+Animation. From the contextual menu, choose Remove Bézier Spline. If you decide you need to 
+animate the mask at a later time, right-click in the same area again and choose Animate.
+Adding and Removing Points from an Animated Mask
+When adding points to an animated mask, the new point is fit into the shape at all keyframes. Deleting 
+a point removes that point from all keyframes in the animated mask.
+Publishing Specific Control Points
+Although you can rapidly animate the entire shape of a polyline using a single keyframe, by default the 
+Spline Editor and Timeline display only one keyframe for the entire shape at any given frame. 
+This default keyframing behavior is convenient when quickly animating shapes from one form 
+to another, but it doesn’t allow for specific individual control points that need to be keyframed 
+independently of all other control points for a particular shape. If you’re working on a complex mask 
+that would benefit from more precise timing or interpolation of individual control points, you can 
+expose one or more specific control points on a polyline by publishing  them.
+1795Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Be aware that publishing a control point on a polyline removes that point from the standard 
+animation spline. From that point forward, that control point can only be animated via its own 
+keyframes on its own animation spline. Once removed, this point will not be connected to 
+paths, modifiers, expressions, or trackers that are connected to the main polyline spline.
+To publish a selected point or points, do one of the following:
+  Click on the Publish Points button in the Polyline toolbar.
+  Select Publish Points from the Polyline’s contextual menu.
+A new coordinate control is added to the Polyline mask controls for each published point, named 
+Point 0, Point 1, and so on.
+The Publish Points controls in the Inspector
+The onscreen control indicates published points on the polyline by drawing that control point 
+much larger. Once a published point is created, it can be connected to a tracker, path, expression, 
+or modifier by right-clicking on this control and selecting the desired option from the point’s 
+contextual menu.
+The published point in the viewer
+Using “Publish to Path” to Preserve Animation
+When a point is published, any animation already applied to that point is removed. However, 
+if you need to keep the animation, you can use the “Publish to Path” option. This Polyline 
+contextual menu option publishes the selected points and converts their existing animation to 
+a path. You can also use the Publish to Path button in the Polyline toolbar.
+Using “Follow Published Points” to Add Points
+There are times when you will need to have control points that lie between two other 
+published points follow the motion of the published points, while still maintaining their relative 
+offset and shape. For this reason, points in a Polyline mask can be set to “Follow Published 
+Points” using the Polyline’s contextual menu.
+1796Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+When a point of an effect mask is set to follow points, the point will be drawn as a diamond 
+shape rather than a small box.
+A control point set to Follow Published Points
+When this mode is enabled, the new “following” control points will maintain their position 
+relative to the motion of any published points in the mask, while attempting to maintain the 
+shape of that segment of the mask. Unlike published points, the position of the following 
+points can still be animated to allow for morphing of that segment’s shape over time.
+1797Fusion Fundamentals | Chapter 79 Rotoscoping with Masks
+FUSION
+Chapter 80
+Paint
+This chapter describes how to use Fusion’s non-destructive Paint tool to repair 
+images, remove objects, and add creative elements. 
+Contents
+Paint Overview  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1799
+Types of Paint Nodes �����������������������������������������������������������������������������������������������������������������������������������������������������������������������  1799
+Setting Up the Paint Node  �����������������������������������������������������������������������������������������������������������������������������������������������������������  1800
+Setting the Paint Node’s Resolution  ����������������������������������������������������������������������������������������������������������������������������������������� 1800
+Paint Node Workflow  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1801
+Select the Correct Paint Stroke Type  ����������������������������������������������������������������������������������������������������������������������������������������� 1801
+Setting the Brush Size  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1804
+Choosing an Apply Mode  �������������������������������������������������������������������������������������������������������������������������������������������������������������� 1804
+Editing Paint Strokes ������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1808
+Editing Paint Strokes in the Modifiers Tab ������������������������������������������������������������������������������������������������������������������������������  1809
+Deleting Strokes  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1809
+Animating and Tracking Paint Strokes  ������������������������������������������������������������������������������������������������������������������������������������� 1810
+Animating with Write-On Controls  ����������������������������������������������������������������������������������������������������������������������������������������������� 1810
+Tracking a Paint Stroke ��������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1810
+Using the Planar Tracker with the Paint Tool  �������������������������������������������������������������������������������������������������������������������������� 1812
+Painting a Clean Plate  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1820
+1798Fusion Fundamentals | Chapter 80 Paint
+FUSION
+Paint Overview
+The Paint node is a procedural paint tool, which means that each paint stroke is a live, editable object 
+that’s drawn with properties that you can mix and match to address a wide variety of painting tasks. 
+You can use it to paint masks, retouch images, perform beauty work, clone out objects, or even create 
+motion graphics. Each element of a paint stroke can be altered long after you apply it. Since strokes 
+are editable, you can apply, change, ignore, delete, and even reorder them in a node tree.
+Types of Paint Nodes
+There are two types of paint nodes in Fusion. The Paint node is a full-featured creative and retouch 
+vector-based paint tool that requires an input on which to paint. The Mask Paint node lets you 
+specifically paint an alpha channel to limit the area of an effect. It allows you to create paint strokes on 
+an alpha channel without needing to have an input.
+  The Paint node is located in the Paint category of the Effects Library.
+  The Mask Paint node is located in the Mask category of the Effects Library.
+The main difference between these two Paint tools is that the Mask Paint tool only paints on 
+the Alpha channel, so there are no channel selector buttons. The Paint tool can paint on any 
+or all channels. The majority of this chapter covers the Paint node, since it shares identical 
+parameters and settings with the Mask Paint node.
+The Paint node available in the Paint  
+category of the Effects Library
+1799Fusion Fundamentals | Chapter 80 Paint
+FUSION
+Setting Up the Paint Node 
+The Paint node has two inputs. Typical of most Fusion nodes, the orange input background is the 
+primary input for connecting the “canvas” or image to paint on, while the second blue input is an 
+Effect Mask. Unlike the Mask Paint node, the Paint node requires a background input to begin painting.
+Setting the Paint Node’s Resolution 
+No matter how you use the Paint node in your node tree, the Paint node assumes the resolution of the 
+background input image as your working resolution for that operation. Although the Paint tool is in fact 
+resolution independent and you can change this assigned resolution at any time, it’s essential to make 
+sure you properly set the resolution of the media you’re working with, because it will affect operations 
+such as motion tracking that you’ll want to use as part of your paint workflow.
+Because of this, the Paint node requires a background input to set the resolution of the “canvas” you’ll 
+be painting upon. To do this, you can set up a Paint node in the node tree in one of two ways: painting 
+directly on an image or using Paint as the foreground.
+Painting Directly on an Image
+You can connect the image you want to paint on directly to the background input of the Paint node. 
+This is the easiest and cleanest node tree construction, but it doesn’t provide much in terms of 
+compositing flexibility.
+The Paint node is inserted directly after the node it is painting on
+Using Paint as the Foreground in a Merge Composite
+An alternative setup is to use a Background node to set the resolution for the Paint node, compositing 
+the result over the actual background using a Merge node. Working this way lets you use the Merge 
+node’s Apply Mode setting (also referred to as composite modes) to control how your paint strokes are 
+composited against the image, but it does require a bit more setup.
+The Paint node is composited over the image 
+you want to paint on using the merge
+1800Fusion Fundamentals | Chapter 80 Paint
+FUSION
+Setting this up requires some configuration of the nodes. The Background node must be fully 
+transparent and, unless you are doing something simple like using the Stroke tool set to Color to paint 
+over an image, you must drag the image you want to clone or smudge into the Source Tool field in the 
+Paint node’s inspector. These steps are described in more detail later in this chapter.
+Paint Node Workflow
+You begin painting by first selecting the paint stroke type from the Paint toolbar above the viewer. 
+There are ten stroke types to choose from as well as two additional tools for selecting and grouping 
+paint strokes. 
+For more information on the stroke types and tools, jump to this chapter Pa int Node.  
+You can also refer to Chapter 54 in the Fusion Reference Manual. 
+The primary tool for painting and cloning is the Stroke tool. The Stroke tool is a fully animatable and 
+editable vector-based paint stroke and initially uses a duration of the entire global range.
+The Stroke tool is most often used for cloning,  
+beauty work, and creative paint
+Select the Correct Paint Stroke Type
+Instead of having multiple dedicated Paint nodes for different operations, the procedural nature of 
+Fusion’s Paint tool means there is just one tool with a variety of different stroke types. Each stroke type 
+serves a different purpose. The Paint toolbar above the viewer allows you to choose between different 
+stroke types and drawing tools. These are grouped into a few categories.
+Single-Frame Stroke Types
+The Multistroke and Clone Multistroke are explicitly designed for single-frame retouching paint jobs 
+like removing raindrops in a shot that’s supposed to be a sunny day or removing scratch marks and 
+dust when restoring vintage content. When handling these types of jobs, these two Multistroke 
+options are faster than the other stroke types, but they’re not editable later on. This means you must 
+set up the size and function of the brush as well as the duration for the paint stroke before you paint. 
+The duration of each of these stoke types is one frame by default, but this can be changed using the 
+Stroke Duration slider in the Inspector. Multistroke and Clone MultiStroke are basically the same tools, 
+except Clone Multistroke automatically configures the tool for cloning. In contrast, the Multistroke 
+requires you to set up the tool for cloning manually.
+The Multistroke and Clone Multistroke are 
+non-editable single frame stroke types
+1801Fusion Fundamentals | Chapter 80 Paint
+FUSION
+Editable Stroke Types
+The Stroke and Polyline are similar in that they can be modified and animated at any time. Also, 
+they both begin with a duration lasting the entire comp, but that also can be changed using the 
+Keyframes Editor. 
+The Stroke and Polyline strokes are 
+editable and last for the entire comp
+The Stroke Tool
+One of the most flexible editable stroke types you’ll use for many tasks is the Stroke, because it is fully 
+animatable and editable. You can animate all elements of the Stroke, and you can use the Write-on/
+Write-off parameters to control how the stroke appears onscreen. You can also connect to a tracker 
+from the Center point of the Stroke if you want to make the stroke follow specific onscreen motion. 
+By default, the Stroke type does not expose control points for the shape of the path. You can move 
+and track the center and rotation of the Stroke, but the individual control points that create the spline 
+are hidden. To reveal the control points, you can open the Stroke Controls at the bottom of the 
+Inspector and click the Make Editable button.
+The Stroke’s control points can be revealed 
+using the Make Editable button
+Although the Stroke type is the most flexible, that flexibility can come at a performance penalty if 
+you’re painting hundreds of strokes on a frame. For larger numbers of strokes that do not need to be 
+animated, it’s better to use Multistroke or Clone Multistroke, as these are more processor efficient.
+The Polyline Stroke Tool
+The Polyline Stroke acts more like a drawing tool than a paintbrush. It includes the same functionality 
+as the Stroke tool, except that it is created not by dragging or “painting” like a paintbrush, but by 
+clicking to create a spline path, as you do with masks and motion paths. Without even creating a stroke 
+in the viewer, the Polyline Stroke can connect to existing polylines like a mask or a motion path.
+If a motion path is published, right-clicking on the Shape Animation label at the bottom of the Polyline 
+Stroke’s Stroke Controls allows you to use the Connect To menu to assume the shape of a motion path 
+or mask. You can also use this method if you import SVG graphics and want to “paint-on” the outlines.
+1802Fusion Fundamentals | Chapter 80 Paint
+FUSION
+The Polyline Stroke Shape Animation label
+Shape Drawing Tools
+Five shape-based drawing tools allow you to draw shapes and either fill them with a color or clone 
+an area from a source image. All these tools act similarly to the Stroke and Polyline stroke type in that 
+they are editable at any time and have a default duration spanning the entire global range of the comp. 
+However, you can edit the duration at any time in the Keyframes Editor.
+The Shape Strokes are used to create shapes or clone areas based on shapes
+All of the Copy [Shape Name] stroke types require that you connect the source node you are cloning 
+from into the Paint node, and set the Fill Type menu to Image.
+The Copy Shapes require a Source to be directly 
+connected to the Paint tool and set to Image
+1803Fusion Fundamentals | Chapter 80 Paint
+FUSION
+Setting the Brush Size 
+After selecting the Stroke type, the Brush size can be set in the Inspector or more intuitively in the 
+viewer. With the Paint node selected in the Node Editor and the pointer positioned over the viewer, 
+you can see an outline of the current brush size. To change the brush size, hold down the Command 
+key and drag. The circle changes size, so you can set it relative to other objects you may be 
+painting over.
+Brush size can be changed interactively in the viewer
+Choosing an Apply Mode 
+The Apply Mode buttons determine the functionality of the paintbrush. There are eight Apply modes 
+that set the brush to do things like paint a color, clone from a source, smudge an area, or remove 
+thin wires.
+Apply Mode buttons determine the paint brush functionality
+Picking a Paint Color 
+There are several ways to pick the paint color and opacity for a colored brush stroke. You use the Fill 
+button in the row of Apply modes when you want to paint with a solid color. 
+The Color swatch shows the current color  
+Clicking it opens the OS Color Picker window
+1804Fusion Fundamentals | Chapter 80 Paint
+FUSION
+To select a color for the paint brush, do one of the following:
+  Click the color swatch to open a standard OS Color Picker window.
+  Drag the Eyedropper into the viewer.
+  Drag inside the color chooser to select a saturation and luminance. Drag on the sidebars to 
+change the hue and transparency.
+When you paint, each stroke is unpremultiplied, so adjusting the Alpha slider in the Inspector 
+does not affect what you apply to the RGB channels. However, changing opacity affects all 
+four channels. 
+Cloning from the Frame
+Choosing the Clone Apply Mode allows you to paint from one area of an image over another area. 
+This is the most common use of the Paint tool. It allows you to remove objects or artifacts from a clip 
+by covering them up with another area of the frame. Depending on the Stroke type chosen, you may 
+clone on either a single frame or for the entire duration of the clip. 
+The Clone Apply Mode allows you to sample from one 
+area and use it as a source to paint over another area
+You can use the Clone Apply Mode to clone from the same image connected to the Paint node’s 
+background input or a different source from the node tree. 
+To clone from a different area of the same frame:
+1 Select a Stroke type from the Paint toolbar above the viewer.
+2 Using the size slider in the Brush controls section of the Inspector, set the size of the brush.
+3 From the Apply Mode buttons, select the Clone mode.
+4 Option-click over the area in the viewer you want to use as the source. A dot appears showing you 
+the center of what you’re sampling from.
+1805Fusion Fundamentals | Chapter 80 Paint
+FUSION
+The Clone source starting area identified by the X  
+and the paint brush size represented by the circle
+5 Paint over the area you want to cover up using the source pixels.
+The Clone completed after selecting the source area  
+and painting over the flag pole
+When trying to erase objects or artifacts from a clip using the Clone Apply Mode, it can sometimes 
+be easier if you sample from a different frame on the same clip. This works well when the object 
+you are trying to clone out moves during the clip, revealing the area behind the object. Sampling 
+from a different frame can use the revealed background by offsetting the source frame.
+To clone from a different frame of the same clip:
+1 Select a Stroke type from the Paint toolbar above the viewer.
+2 Set the size of the brush.
+3 From the Apply Mode buttons, select the Clone mode.
+4 Drag the clip (MediaIn or Loader) from the Node Editor into the Source Tool field in the Inspector.
+The Paint Inspector with the MediaIn1 dragged from  
+the Node Editor into the Source Tool field
+1806Fusion Fundamentals | Chapter 80 Paint
+FUSION
+5 Click the Overlay checkbox to see the current frame and the offset frame superimposed.
+6 Drag the Time Offset slider to select the source frame you want to use. 
+7 Option-click over the area in the viewer you want to use as the source or to offset the source 
+frame’s position.
+Overlay shows two frames overlapped with Time Offset, allowing you to clone from one frame onto another
+8 Paint over the area you want to cover up using the source pixels.
+The plane is half painted out using on the Overlay with Time Offset
+9 Disable the Overlay checkbox.
+The Clone Apply Mode can use a different 
+frame from the same clip
+1807Fusion Fundamentals | Chapter 80 Paint
+FUSION
+TIP: When using a Clone Apply Mode, you can hold down the O key instead of clicking the 
+Overlay checkbox in Inspector to see the Overlay. Releasing the O key will return to normal 
+viewing without the Overlay.
+Editing Paint Strokes
+Once you’ve painted using the Stroke or Polyline stroke type, you can change the look of the stroke 
+by selecting it and updating the parameters in the Inspector. Selecting the stroke requires you to 
+switch to the selection tool in the Paint toolbar above the viewer. Using the Paint node’s selection tool, 
+you can either click once on a stroke or drag a bounding box around a stroke to select it for editing. 
+TIP: To select multiple strokes, you can Shift-click or Command-click to select and deselect 
+multiple specific strokes, or you can drag a selection box around all strokes you want to select.
+Although you can make changes in the Tools tab in the Inspector, the Paint node uses both the Tools 
+tab and the Modifiers tab. In the Tools tab, you can create new brush strokes and select a stroke in the 
+viewer to edit. The Modifiers tab presents a list of all the strokes for the selected Paint node, which 
+makes it easy to modify any previously created paint stroke. 
+NOTE: Multistroke and Clone Multistroke each only appear as one item in the Modifiers tab 
+no matter how many strokes you create using those tools. Those two tools are not editable 
+after creating them.
+The same controls you used in the Tools tab to create the strokes are located in the Modifier’s tab to 
+modify them. You can also animate each individual stroke. 
+The Stroke or Polyline Stroke type can be edited 
+by selecting the stroke in the viewer
+1808Fusion Fundamentals | Chapter 80 Paint
+FUSION
+Editing Paint Strokes in the Modifiers Tab
+When you paint a stroke, the settings for that stroke appear in the Inspector’s Modifiers tab. You can 
+then change the settings in the Tools tab for the next stroke you are about to paint. Each time you 
+click, drag, and release the pointer button, you create a new stroke. Each stroke is numbered in the 
+Modifiers tab, where it can be selected and edited.
+Once you stop painting a stroke, it’s added to the Modifiers tab along with an additional Stroke 
+modifier that represents the next stroke. For instance, if you paint your first stroke, the Modifiers tab 
+shows your stroke as Stroke1 and then a stroke 2 as well, which represents the next stroke you create. 
+You always have one more stroke in the Modifiers tab than strokes in the viewer.
+Each stroke is listed in the Modifiers tab for editing
+Deleting Strokes 
+There are two ways you can delete paint strokes. 
+To delete any individual stroke, do the following:
+1 Select the Paint node.
+2 Click the Modifiers tab.
+3 Right-click over the Stroke header you want to delete and choose Delete from the menu.
+To delete all paint strokes you’ve made on every frame, do one of the following: 
+  Click the reset button in the upper-right corner of the Inspector.
+  Delete the Paint node in the Node Editor. 
+1809Fusion Fundamentals | Chapter 80 Paint
+FUSION
+Animating and Tracking Paint Strokes
+In some ways, animating paint strokes is no different than animating any other effect in the Inspector. 
+Each parameter that can be animated includes a gray diamond Keyframe button along the right side. 
+Clicking the Keyframe button sets a keyframe on the current frame and enables auto-keyframe mode 
+for the parameter. However, more commonly, the paint stroke is tracked using one of Fusion’s trackers, 
+or for motion graphics, animated using the Write-On Start and End sliders.
+Animating with Write-On Controls
+The Stroke and Polyline stroke types include Write-On controls located in the Stroke controls section 
+of the Inspector. These Write-On controls animate the appearance of a stroke along the path. You can 
+animate the Write-On controls using either the Stroke Animation drop-down menu or using the Start 
+and End sliders. 
+Stroke Animation Drop-Down Menu
+The Stroke Animation drop-down menu includes six options for auto-animating a paint stroke. The first 
+two options do not truly animate the stroke as much as set a duration. The Limited Duration option 
+uses the Duration slider to set the number of frames the stroke is onscreen.
+To auto-animate the stroke, you can choose one of the three Write options or the Trail option.
+Choosing Write On automatically creates a write-on animation. The duration is set by two keyframes 
+that get added when you choose Write On from the menu. The Start keyframe is set on the frame 
+where you first created the stroke. The End keyframe is added on the current frame when you choose 
+Write On from the menu. The remaining options in the menu set their Start and End keyframes similarly 
+but change the direction of the animation based on the menu selection.
+Write-On Start and End Parameters
+The Write-On Start and End parameters allow you to manually control the start point and end point 
+along any stroke’s path, and use keyframes to animate each parameter individually. The Start 
+parameter determines the point at which the stroke begins, measured as a percentage offset from the 
+beginning of the stroke’s path. For example, a Start value of 50 moves the starting point of the stroke 
+to the middle of the stroke’s path. The End parameter works the same way but from the other end of 
+the stroke. You can animate a stroke onscreen, creating a handwriting effect by setting keyframes for 
+the End parameter from 0 to 100 over several frames. 
+Tracking a Paint Stroke
+You can animate the position of a paint stroke using any of Fusion’s trackers. For instance, if you 
+cloned out a flag pole from a clip, but the camera moves, you can track the flag pole and attach the 
+resulting path to the paint stroke.
+Trackers can be attached to the Center parameters of a paint stroke
+1810Fusion Fundamentals | Chapter 80 Paint
+FUSION

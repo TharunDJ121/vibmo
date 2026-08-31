@@ -1,6 +1,6 @@
 import math
 import random
-from typing import Any, List, Tuple
+from typing import Any, List, Optional, Tuple, Union
 from vibmo.scene.node import Node
 from vibmo.core.color import Color, colors
 from vibmo.core.signal import Signal
@@ -15,19 +15,23 @@ class PcbCircuitTracesFlow(Node):
         self,
         width: float = 1920.0,
         height: float = 1080.0,
-        board_color: Color = Color.from_hex("#0a150e"),
-        trace_color: Color = Color.from_hex("#d4af37"),
-        pulse_color: Color = Color.from_hex("#ffea8c"),
+        board_color: Any = "#0a150e",
+        trace_color: Any = "#d4af37",
+        pulse_color: Any = "#ffea8c",
         num_traces: int = 20,
-        name: str = "PcbCircuitTracesFlow"
+        pulse_speed: float = 1.0,
+        speed: Optional[float] = None,
+        name: str = "PcbCircuitTracesFlow",
+        **kwargs: Any
     ):
-        super().__init__(name=name)
-        self.width = width
-        self.height = height
-        self.board_color = board_color
-        self.trace_color = trace_color
-        self.pulse_color = pulse_color
-        self.num_traces = num_traces
+        super().__init__(name=name, **kwargs)
+        self.width = float(width)
+        self.height = float(height)
+        self.board_color = Color.from_any(board_color)
+        self.trace_color = Color.from_any(trace_color)
+        self.pulse_color = Color.from_any(pulse_color)
+        self.num_traces = int(num_traces)
+        self.pulse_speed = float(speed if speed is not None else pulse_speed)
         
         self.traces = self._generate_traces()
         
@@ -83,7 +87,7 @@ class PcbCircuitTracesFlow(Node):
             ctx.stroke()
             
             # Draw pulses on the path based on time
-            pulse_progress = (time * trace["speed"] + trace["offset"]) % 1.0
+            pulse_progress = (time * trace["speed"] * self.pulse_speed + trace["offset"]) % 1.0
             # A simple approach to find the pulse position
             total_length = sum(math.hypot(path[i+1][0] - path[i][0], path[i+1][1] - path[i][1]) for i in range(len(path)-1))
             if total_length == 0:
@@ -259,3 +263,14 @@ class CopperBusCurrentBackdrop(Node):
                     ctx.line_to(bus["pos"], pos + segment_length)
                 ctx.stroke()
                 pos += segment_length + gap
+
+
+# Semantic Alias
+CircuitBoardTraces = PcbCircuitTracesFlow
+
+__all__ = [
+    "PcbCircuitTracesFlow",
+    "CircuitBoardTraces",
+    "MicrochipLogicPulse",
+    "CopperBusCurrentBackdrop",
+]

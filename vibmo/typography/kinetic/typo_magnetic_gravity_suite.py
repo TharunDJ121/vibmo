@@ -5,7 +5,8 @@ import cairo
 
 from vibmo.core.color import Color, colors
 from vibmo.core.vector import Vector2D
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
 from vibmo.scene.node import Node
 
 class MagneticGravityLetters(Node):
@@ -35,6 +36,17 @@ class MagneticGravityLetters(Node):
         self.restitution = restitution
         self.stagger_time = stagger_time
         self.progress = Signal(0.0, f"{self.name}.progress")
+
+    def snap_reassemble(
+        self,
+        duration: float = 1.5,
+        delay: float = 0.0,
+        ease: Optional[Any] = None,
+    ) -> AnimationAction:
+        """Animates scattered letters snapping back and reassembling under magnetic pull into resting alignment."""
+        self.progress.set(0.0)
+        e = ease or Ease.out_elastic
+        return self.progress.to(1.0, duration=duration, ease=e, delay=delay)
         
     def _setup_cairo_font(self, ctx: cairo.Context, font_size: float) -> None:
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
@@ -215,8 +227,18 @@ class MagnetPullReassembly(Node):
         self.color = Signal(color, f"{self.name}.color")
         self.pull_speed = pull_speed
         self.progress = Signal(0.0, f"{self.name}.progress")
-        self._rng = random.Random(hash(text))
-        
+        self._rng = random.Random(42)
+
+    def snap_reassemble(
+        self,
+        duration: float = 1.5,
+        delay: float = 0.0,
+        ease: Optional[Any] = None,
+    ) -> AnimationAction:
+        self.progress.set(0.0)
+        e = ease or Ease.out_elastic
+        return self.progress.to(1.0, duration=duration, ease=e, delay=delay)
+
     def _setup_cairo_font(self, ctx: cairo.Context, font_size: float) -> None:
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         ctx.set_font_size(font_size)

@@ -3,9 +3,12 @@ Film grain, Noise, Vignette, Blur, and Post-Processing Filters.
 """
 
 from __future__ import annotations
+import math
 import numpy as np
 from PIL import Image, ImageFilter
-from typing import Any, Tuple
+from typing import Any, Optional, Tuple, Union
+
+from vibmo.color.grading import ColorGrade
 
 
 class FilmGrain:
@@ -79,60 +82,160 @@ class MotionBlur:
 
 class Bloom:
     """
-    Cinematic emissive bloom and multi-octave glow filter.
-    Extracts luminous highlights and diffuses them softly across the scene.
+    Cinematic emissive bloom and 4-octave pyramid glow filter.
+    Extracts luminous highlights and diffuses them softly across multiple spatial frequencies.
     """
 
     def __init__(
         self,
-        threshold: float = 0.65,
-        intensity: float = 0.45,
-        radius: float = 24.0,
+        threshold: float = 0.60,
+        intensity: float = 0.55,
+        radius: float = 28.0,
+        soft_knee: float = 0.20,
+        tint: Optional[Tuple[float, float, float]] = None,
     ) -> None:
         self.threshold = float(threshold)
         self.intensity = float(intensity)
         self.radius = float(radius)
+        self.soft_knee = float(soft_knee)
+        self.tint = np.array(tint, dtype=np.float32) if tint is not None else None
 
     def apply(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
-        if self.intensity <= 0.001:
+        if self.intensity <= 0.001 or rgba.size == 0:
             return rgba
 
         h, w, _ = rgba.shape
         rgb = rgba[:, :, :3].astype(np.float32)
 
-        # 1. High-pass threshold filter
+        # 1. High-pass threshold filter with smooth knee
         luma = (0.2126 * rgb[:, :, 0] + 0.7152 * rgb[:, :, 1] + 0.0722 * rgb[:, :, 2]) / 255.0
-        thresh_val = self.threshold
-        bright_mask = np.clip((luma - thresh_val) / max(0.01, (1.0 - thresh_val)), 0.0, 1.0)
+        knee_min = max(0.0, self.threshold - self.soft_knee)
+        knee_max = min(1.0, self.threshold + self.soft_knee)
+        
+        # Smoothstep knee
+        if knee_max > knee_min:
+            t = np.clip((luma - knee_min) / (knee_max - knee_min), 0.0, 1.0)
+            bright_mask = t * t * (3.0 - 2.0 * t)
+        else:
+            bright_mask = np.where(luma >= self.threshold, 1.0, 0.0)
+            
         bright_pixels = (rgb * bright_mask[:, :, np.newaxis]).astype(np.uint8)
 
-        # 2. Fast multi-scale Gaussian blur on downscaled image
+        # 2. 4-Octave Downscaled Pyramid Blur
         img_bright = Image.fromarray(bright_pixels, "RGB")
-        scale_fac = 0.25
-        sw, sh = max(1, int(w * scale_fac)), max(1, int(h * scale_fac))
-        img_small = img_bright.resize((sw, sw * h // w), Image.Resampling.BILINEAR)
+        
+        # Octave 1: 50% scale (tight core)
+        s1 = (max(1, w // 2), max(1, h // 2))
+        oct1 = img_bright.resize(s1, Image.Resampling.BILINEAR).filter(ImageFilter.GaussianBlur(self.radius * 0.25))
+        arr1 = np.array(oct1.resize((w, h), Image.Resampling.BILINEAR), dtype=np.float32)
 
-        # Octave 1: tight bloom
-        blur1 = img_small.filter(ImageFilter.GaussianBlur(self.radius * scale_fac * 0.5))
-        # Octave 2: wide ambient bloom
-        blur2 = img_small.filter(ImageFilter.GaussianBlur(self.radius * scale_fac * 1.5))
+        # Octave 2: 25% scale (medium body)
+        s2 = (max(1, w // 4), max(1, h // 4))
+        oct2 = img_bright.resize(s2, Image.Resampling.BILINEAR).filter(ImageFilter.GaussianBlur(self.radius * 0.75))
+        arr2 = np.array(oct2.resize((w, h), Image.Resampling.BILINEAR), dtype=np.float32)
 
-        arr1 = np.array(blur1.resize((w, h), Image.Resampling.BILINEAR), dtype=np.float32)
-        arr2 = np.array(blur2.resize((w, h), Image.Resampling.BILINEAR), dtype=np.float32)
+        # Octave 3: 12.5% scale (ambient halo)
+        s3 = (max(1, w // 8), max(1, h // 8))
+        oct3 = img_bright.resize(s3, Image.Resampling.BILINEAR).filter(ImageFilter.GaussianBlur(self.radius * 1.50))
+        arr3 = np.array(oct3.resize((w, h), Image.Resampling.BILINEAR), dtype=np.float32)
 
-        bloom_combined = (arr1 * 0.6 + arr2 * 0.4) * self.intensity
+        # Octave 4: 6.25% scale (wide atmospheric spill)
+        s4 = (max(1, w // 16), max(1, h // 16))
+        oct4 = img_bright.resize(s4, Image.Resampling.BILINEAR).filter(ImageFilter.GaussianBlur(self.radius * 2.80))
+        arr4 = np.array(oct4.resize((w, h), Image.Resampling.BILINEAR), dtype=np.float32)
 
-        # 3. Additive composite with saturation preservation
-        out_rgb = np.clip(rgb + bloom_combined, 0, 255).astype(np.uint8)
+        # Weighted combination of pyramid octaves
+        bloom_pyramid = (arr1 * 0.35 + arr2 * 0.30 + arr3 * 0.20 + arr4 * 0.15) * self.intensity
+        
+        if self.tint is not None:
+            bloom_pyramid *= self.tint
+
+        # 3. Additive composite with saturation preserving soft knee
+        out_rgb = np.clip(rgb + bloom_pyramid, 0, 255).astype(np.uint8)
         out = rgba.copy()
         out[:, :, :3] = out_rgb
         return out
 
 
 class Glow(Bloom):
-    """Alias for Bloom with higher default intensity for neon graphics."""
-    def __init__(self, intensity: float = 0.7, radius: float = 32.0, threshold: float = 0.5) -> None:
-        super().__init__(threshold=threshold, intensity=intensity, radius=radius)
+    """High-intensity neon emissive glow filter."""
+    def __init__(
+        self,
+        intensity: float = 0.85,
+        radius: float = 36.0,
+        threshold: float = 0.45,
+        tint: Optional[Tuple[float, float, float]] = None,
+    ) -> None:
+        super().__init__(threshold=threshold, intensity=intensity, radius=radius, tint=tint)
+
+
+class AnamorphicStreak:
+    """
+    Cinematic horizontal anamorphic blue streak flare filter.
+    Diffuses specular highlights horizontally across the frame.
+    """
+
+    def __init__(
+        self,
+        intensity: float = 0.65,
+        threshold: float = 0.75,
+        streak_length: float = 120.0,
+        tint: Tuple[float, float, float] = (0.2, 0.7, 1.2),  # Sci-fi cyan/blue streak
+    ) -> None:
+        self.intensity = float(intensity)
+        self.threshold = float(threshold)
+        self.streak_length = float(streak_length)
+        self.tint = np.array(tint, dtype=np.float32)
+
+    def apply(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
+        if self.intensity <= 0.001 or rgba.size == 0:
+            return rgba
+
+        h, w, _ = rgba.shape
+        rgb = rgba[:, :, :3].astype(np.float32)
+
+        # 1. Extract specular highlights
+        luma = (0.2126 * rgb[:, :, 0] + 0.7152 * rgb[:, :, 1] + 0.0722 * rgb[:, :, 2]) / 255.0
+        mask = np.clip((luma - self.threshold) / max(0.01, 1.0 - self.threshold), 0.0, 1.0)
+        bright = rgb * mask[:, :, np.newaxis]
+
+        if not np.any(bright > 0):
+            return rgba
+
+        # 2. 1D Horizontal Anamorphic Streak Convolution
+        sigma = max(1.0, self.streak_length * 0.3)
+        radius = int(math.ceil(sigma * 3.0))
+        x_vals = np.arange(-radius, radius + 1, dtype=np.float32)
+        kernel = np.exp(-0.5 * (x_vals / sigma) ** 2)
+        kernel /= np.sum(kernel)
+
+        # Convolve horizontally per row with highlights
+        row_has_bright = np.any(mask > 0.01, axis=1)
+        streak_arr = np.zeros((h, w, 3), dtype=np.float32)
+
+        for y in range(h):
+            if row_has_bright[y]:
+                for c in range(3):
+                    conv = np.convolve(bright[y, :, c], kernel, mode="same")
+                    if len(conv) > w:
+                        start_idx = (len(conv) - w) // 2
+                        streak_arr[y, :, c] = conv[start_idx : start_idx + w]
+                    else:
+                        streak_arr[y, :len(conv), c] = conv
+
+        # Soft vertical spread
+        if np.any(streak_arr > 0):
+            streak_img = Image.fromarray(np.clip(streak_arr, 0, 255).astype(np.uint8), "RGB")
+            streak_diffused = streak_img.filter(ImageFilter.GaussianBlur(max(1.0, self.streak_length * 0.04)))
+            streak_arr = np.array(streak_diffused, dtype=np.float32)
+
+        # Apply tint and intensity
+        streak_arr = streak_arr * self.tint * (self.intensity * 2.0)
+
+        out_rgb = np.clip(rgb + streak_arr, 0, 255).astype(np.uint8)
+        out = rgba.copy()
+        out[:, :, :3] = out_rgb
+        return out
 
 
 class ChromaticAberration:

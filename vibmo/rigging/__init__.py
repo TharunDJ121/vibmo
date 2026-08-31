@@ -9,6 +9,12 @@ from vibmo.rigging.constraints import (
     PathConstraint,
 )
 from vibmo.rigging.expression import ExpressionSignal, expression
+from vibmo.rigging.mocap import (
+    FabrikSolver2D,
+    MocapStickFigure,
+    MocapClip,
+    MocapLibrary,
+)
 
 __all__ = [
     "Constraint",
@@ -17,4 +23,9 @@ __all__ = [
     "PathConstraint",
     "ExpressionSignal",
     "expression",
+    "FabrikSolver2D",
+    "MocapStickFigure",
+    "MocapClip",
+    "MocapLibrary",
 ]
+

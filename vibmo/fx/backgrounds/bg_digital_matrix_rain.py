@@ -100,16 +100,32 @@ class _BaseRainBackdrop(Node):
 class DigitalMatrixRainBackdrop(_BaseRainBackdrop):
     """Cascading vertical columns of glowing green katakana/alphanumeric glyphs with bright white leading drops."""
     
-    def __init__(self, **kwargs):
+    def __init__(
+        self,
+        density: Optional[int] = None,
+        glow_color: Optional[Union[Color, str]] = None,
+        speed: Optional[float] = None,
+        **kwargs: Any
+    ):
+        if speed is not None:
+            kwargs["speed_multiplier"] = speed
         super().__init__(**kwargs)
         # Katakana 0x30A0 to 0x30FF + Alphanumeric
         self.charset = "".join(chr(i) for i in range(0x30A0, 0x30FF)) + "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        self.density = int(density) if density is not None else None
+        self.glow_color = Color.from_any(glow_color) if glow_color is not None else Color(0.0, 0.8, 0.2, 1.0)
         
     def _init_columns(self):
-        num_cols = int(self.w / self.font_size)
+        if self.density is not None and self.density > 0:
+            num_cols = self.density
+            col_spacing = self.w / num_cols
+        else:
+            num_cols = int(self.w / self.font_size)
+            col_spacing = self.font_size
+            
         self.columns = []
         for i in range(num_cols):
-            x = i * self.font_size
+            x = i * col_spacing
             speed = random.uniform(100.0, 400.0)
             num_chars = random.randint(10, 40)
             y_offset = random.uniform(-self.h, self.h)
@@ -124,13 +140,17 @@ class DigitalMatrixRainBackdrop(_BaseRainBackdrop):
                 continue
                 
             if i == 0:
-                # Leading drop is white/bright green
-                ctx.set_source_rgba(0.8, 1.0, 0.8, 1.0)
+                # Leading drop is white/bright glow tint
+                ctx.set_source_rgba(
+                    min(1.0, self.glow_color.r * 0.5 + 0.6),
+                    min(1.0, self.glow_color.g * 0.5 + 0.6),
+                    min(1.0, self.glow_color.b * 0.5 + 0.6),
+                    1.0
+                )
             else:
-                # Fading phosphor trail
+                # Fading phosphor trail with glow_color
                 alpha = max(0.0, 1.0 - (i / col.num_chars))
-                # Neon green
-                ctx.set_source_rgba(0.0, 0.8, 0.2, alpha)
+                ctx.set_source_rgba(self.glow_color.r, self.glow_color.g, self.glow_color.b, alpha * self.glow_color.a)
                 
             ctx.move_to(col.x, y)
             ctx.show_text(char)
@@ -207,4 +227,17 @@ class HexCodeColumnBackdrop(_BaseRainBackdrop):
                 
             ctx.move_to(col.x, y)
             ctx.show_text(char_pair)
+
+
+# Semantic Alias
+DigitalMatrixRain = DigitalMatrixRainBackdrop
+
+__all__ = [
+    "_CodeColumn",
+    "_BaseRainBackdrop",
+    "DigitalMatrixRainBackdrop",
+    "DigitalMatrixRain",
+    "BinaryStreamBackdrop",
+    "HexCodeColumnBackdrop",
+]
 

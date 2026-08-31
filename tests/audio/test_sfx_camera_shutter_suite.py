@@ -6,7 +6,8 @@ from vibmo.audio.generators.sfx_camera_shutter_suite import CameraShutterSuite
     ("dslr_mirror_slap", 0.16),
     ("vintage_motor_advance", 0.65),
     ("smartphone_snap_flash", 0.12),
-    ("polaroid_eject", 0.85)
+    ("polaroid_eject", 0.85),
+    ("dslr_rapid_burst", 0.60)
 ])
 def test_camera_shutter_suite_lengths_and_types(method, expected_duration):
     """Test that all generator outputs match expected duration and dtype."""
@@ -23,7 +24,8 @@ def test_camera_shutter_suite_lengths_and_types(method, expected_duration):
     "dslr_mirror_slap",
     "vintage_motor_advance",
     "smartphone_snap_flash",
-    "polaroid_eject"
+    "polaroid_eject",
+    "dslr_rapid_burst"
 ])
 def test_camera_shutter_suite_bounds(method):
     """Test that all outputs are bounded between -1.0 and 1.0."""

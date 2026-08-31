@@ -4,14 +4,14 @@ Mechanical Odometer Tumbler Typography suite.
 
 from __future__ import annotations
 import math
-from typing import Any, Optional
+from typing import Any, Optional, Union
 import cairo
 
 from vibmo.scene.node import Node
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.color import Color, colors, LinearGradient
 from vibmo.typography.text import Text
-from vibmo.core.easing import Ease
+from vibmo.core.easing import Ease, EasingFunc
 
 class VerticalRollingGlyphs(Node):
     """Continuous vertical strip of digits (0-9) transitioning with exponential ease-out deceleration."""
@@ -30,12 +30,13 @@ class VerticalRollingGlyphs(Node):
         self.color = Color.from_any(color)
         self.radius = radius
 
-    def roll_to(self, target_value: float, duration: float = 2.0):
-        self.value.to(target_value, duration=duration, ease=Ease.out_expo)
+    def roll_to(self, target_value: float, duration: float = 2.0, delay: float = 0.0, ease: Optional[EasingFunc] = None) -> AnimationAction:
+        e = ease or Ease.out_expo
+        return self.value.to(target_value, duration=duration, ease=e, delay=delay)
 
     def draw(self, ctx: cairo.Context, time: float) -> None:
         super().draw(ctx, time)
-        current_value = self.value.get()
+        current_value = self.value.get(time)
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         ctx.set_font_size(self.font_size)
         rgba = self.color.to_cairo()
@@ -131,7 +132,9 @@ class OdometerTumblerCounter(Node):
     """High-precision rolling numeric odometer where digit wheels roll vertically with realistic cylindrical perspective."""
     def __init__(
         self,
-        num_digits: int = 5,
+        start_val: float = 0.0,
+        end_val: Optional[float] = None,
+        num_digits: Optional[int] = None,
         font_size: float = 32.0,
         font_family: str = "Inter",
         color: Any = colors.WHITE,
@@ -142,8 +145,14 @@ class OdometerTumblerCounter(Node):
         **kwargs: Any
     ):
         super().__init__(**kwargs)
-        self.value = Signal(0.0)
-        self.num_digits = num_digits
+        self.value = Signal(float(start_val), f"{self.name}.value")
+        if num_digits is not None:
+            self.num_digits = num_digits
+        elif end_val is not None:
+            self.num_digits = max(len(str(int(abs(end_val)))), len(str(int(abs(start_val)))), 4)
+        else:
+            self.num_digits = 5
+
         self.digit_spacing = digit_spacing
         self.radius = radius
         self.decimals = decimals
@@ -151,7 +160,7 @@ class OdometerTumblerCounter(Node):
         self.digits = []
         self.separators = []
 
-        total_slots = num_digits
+        total_slots = self.num_digits
         if decimals > 0:
             total_slots += 1 # for decimal point
         if prefix:
@@ -167,7 +176,7 @@ class OdometerTumblerCounter(Node):
             current_x += digit_spacing
 
         # Integer part digits
-        for i in range(num_digits - decimals):
+        for i in range(self.num_digits - decimals):
             d = VerticalRollingGlyphs(font_size=font_size, font_family=font_family, color=color, radius=radius)
             d.position.set((current_x, 0))
             self.digits.append(d)
@@ -194,11 +203,12 @@ class OdometerTumblerCounter(Node):
         self.bezel = TumblerBezelSlot(width=bezel_w, height=radius * 2.2)
         self.add(self.bezel)
 
-    def roll_to(self, target_value: float, duration: float = 2.0):
-        self.value.to(target_value, duration=duration, ease=Ease.out_expo)
+    def roll_to(self, target_value: float, duration: float = 2.0, delay: float = 0.0, ease: Optional[EasingFunc] = None) -> AnimationAction:
+        e = ease or Ease.out_expo
+        return self.value.to(target_value, duration=duration, ease=e, delay=delay)
 
     def draw(self, ctx: cairo.Context, time: float) -> None:
-        val = self.value.get()
+        val = self.value.get(time)
 
         # Distribute value across digits
         # self.digits contains integer digits then decimal digits (left to right)

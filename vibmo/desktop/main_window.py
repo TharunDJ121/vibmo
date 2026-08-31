@@ -306,6 +306,8 @@ class VibmoMainWindow(QMainWindow):
         QShortcut(QKeySequence("Ctrl+S"), self, self._save_project)
         QShortcut(QKeySequence("Ctrl+O"), self, self._open_project)
         QShortcut(QKeySequence("Ctrl+K"), self, self._open_ai_director)
+        QShortcut(QKeySequence("Ctrl+B"), self, self.timeline.split_at_playhead)
+        QShortcut(QKeySequence("Delete"), self, self.timeline.delete_selected_clip)
         QShortcut(QKeySequence("Space"), self, self.player.toggle_playback)
 
     def _on_state_changed(self, event_type: str, payload: dict) -> None:
@@ -314,3 +316,9 @@ class VibmoMainWindow(QMainWindow):
         self.timeline.refresh_headers()
         self.fusion_canvas.refresh_graph()
         self.player.render_frame_at(self.timeline.scene.current_frame)
+
+    def closeEvent(self, event: Any) -> None:
+        if hasattr(self, "player") and self.player:
+            self.player.play_timer.stop()
+            self.player.worker.stop()
+        super().closeEvent(event)

@@ -33,6 +33,7 @@
             <button class="btn-icon" id="openScriptModalBtn" style="color:#38bdf8; border-color:rgba(56, 189, 248, 0.3);" title="Open In-Studio Python Code Editor (Ctrl+E)">&lt;/&gt; Script Editor</button>
             <button class="btn-icon" id="undoBtn" title="Undo (Ctrl+Z)" onclick="window.historyStack.undo()">↩ Undo</button>
             <button class="btn-icon" id="redoBtn" title="Redo (Ctrl+Y)" onclick="window.historyStack.redo()">↪ Redo</button>
+            <button class="btn-icon" id="historyBtn" title="Visual History (Ctrl+H)" onclick="window.historyStack.openHistoryWindow()">📜 History</button>
             <select class="btn-icon" id="qualitySelect" style="background:#111827; cursor:pointer;">
                 <option value="0.25">Preview: 25% (Ultra Fast)</option>
                 <option value="0.5" selected>Preview: 50% (Fast)</option>
@@ -69,8 +70,14 @@
                     </section>
                 </div>
 
-                <!-- Bottom: NLE Multi-Track Timeline -->
+                <!-- Bottom: NLE Multi-Track Timeline (Dual Macro/Micro Timeline) -->
                 <section class="nle-timeline">
+                    <!-- DaVinci Cut Page Inspired Macro Overview Timeline -->
+                    <div class="macro-timeline-bar" id="macroTimelineBar" title="Macro Sequence Overview (Click or drag to scrub whole program)">
+                        <div class="macro-ruler" id="macroRuler"></div>
+                        <div class="macro-playhead" id="macroPlayhead"></div>
+                    </div>
+
                     <div class="timeline-header">
                         <div class="timeline-controls">
                             <button class="btn-icon" id="rewindBtn">⏮ 0.0s</button>
@@ -78,7 +85,7 @@
                             <button class="btn-icon" id="snapBtn" style="color:#06b6d4;" onclick="window.motionPage.snappingEnabled = !window.motionPage.snappingEnabled; this.style.opacity = window.motionPage.snappingEnabled ? '1' : '0.5';">🧲 Snapping</button>
                         </div>
                         <div class="timecode" id="timecodeDisplay">0.00s / 0.00s</div>
-                        <div style="font-size:11px; color:var(--text-dim);">Space: Play/Pause • ←/→: Step Frame • Ctrl+Z: Undo</div>
+                        <div style="font-size:11px; color:var(--text-dim);">Space: Play/Pause • J/K/L: Shuttle • ←/→: Step • Ctrl+Z: Undo</div>
                     </div>
 
                     <div class="timeline-scroll-area">
@@ -203,27 +210,50 @@
 
     <!-- AI Director (LangGraph Surgical Scene & Frame Editor) Modal -->
     <div class="script-modal-backdrop" id="aiDirectorModalBackdrop">
-        <div class="script-modal" style="max-width: 680px;">
+        <div class="script-modal" style="max-width: 720px;">
             <div class="script-modal-header" style="background: linear-gradient(90deg, #1e1b4b, #0f172a);">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-weight:800; font-size:16px; color:#c084fc;">✨ AI Motion Director (LangGraph)</span>
-                    <span style="font-size:11px; background:rgba(192, 132, 252, 0.2); color:#e9d5ff; padding:3px 10px; border-radius:999px;">Surgical Scene & Frame Editor</span>
+                    <span style="font-weight:800; font-size:16px; color:#c084fc;">✨ AI Motion Director (LangGraph v2)</span>
+                    <span style="font-size:11px; background:rgba(192, 132, 252, 0.2); color:#e9d5ff; padding:3px 10px; border-radius:999px;">Autonomous & Surgical Agent</span>
                 </div>
-                <button class="btn-icon" id="closeAiDirectorModalBtn" style="border:none; font-size:16px; color:#94a3b8;">✕</button>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <button class="btn-icon" id="clearAiHistoryBtn" style="font-size:11px; padding:3px 8px; color:#94a3b8;" title="Clear conversation history">🗑 Clear</button>
+                    <button class="btn-icon" id="closeAiDirectorModalBtn" style="border:none; font-size:16px; color:#94a3b8;">✕</button>
+                </div>
             </div>
 
-            <div class="script-modal-body" style="gap: 14px;">
-                <p style="font-size:12px; color:#94a3b8; margin:0;">
-                    Type instructions in natural language. The LangGraph state machine will surgically modify specific scenes, timing, speeds, colors, or generate complete new sequences without breaking existing code.
-                </p>
+            <div class="script-modal-body" style="gap: 12px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                    <p style="font-size:12px; color:#94a3b8; margin:0;">
+                        Instruct the AI Director to surgically modify scenes, tweak timing, update copy, change color palettes, or synthesize new motion graphics.
+                    </p>
+                    <select id="aiProviderSelect" class="btn-icon" style="background:#0b1329; font-size:11px; padding:4px 8px; color:#c084fc; cursor:pointer;">
+                        <option value="">Provider: Auto-Detect</option>
+                        <option value="anthropic">Anthropic (Claude 3.7)</option>
+                        <option value="openai">OpenAI (GPT-4o)</option>
+                        <option value="gemini">Google Gemini (2.0 Flash)</option>
+                        <option value="groq">Groq (Llama 3.3 70B)</option>
+                        <option value="openrouter">OpenRouter</option>
+                    </select>
+                </div>
 
+                <!-- Quick Suggestion Chips -->
+                <div style="display:flex; flex-wrap:wrap; gap:6px;" id="aiSuggestionChips">
+                    <button class="btn-icon ai-chip" style="font-size:11px; padding:3px 10px; background:#1e1b4b; border-color:#3b0764; color:#d8b4fe;" data-prompt="Change background to a sunset gradient">🌅 Sunset Gradient</button>
+                    <button class="btn-icon ai-chip" style="font-size:11px; padding:3px 10px; background:#1e1b4b; border-color:#3b0764; color:#d8b4fe;" data-prompt="Make the typing speed 40% faster">⚡ 40% Faster Typing</button>
+                    <button class="btn-icon ai-chip" style="font-size:11px; padding:3px 10px; background:#1e1b4b; border-color:#3b0764; color:#d8b4fe;" data-prompt="Change headline to Autonomous Intelligence">✍️ New Headline</button>
+                    <button class="btn-icon ai-chip" style="font-size:11px; padding:3px 10px; background:#1e1b4b; border-color:#3b0764; color:#d8b4fe;" data-prompt="Add subtle film grain and vignette post FX">🎥 Cinematic FX</button>
+                    <button class="btn-icon ai-chip" style="font-size:11px; padding:3px 10px; background:#1e1b4b; border-color:#3b0764; color:#d8b4fe;" data-prompt="Add a metric counter counting to $250K MRR">💰 $250K Counter</button>
+                </div>
+
+                <!-- Prompt Input Bar -->
                 <div style="display:flex; gap:8px;">
                     <input id="aiDirectorInput" type="text" placeholder="e.g. 'In Scene 3, change text to Think Bigger and make Scene 2 type 30% faster'..." style="flex:1; background:#030712; border:1px solid #3b0764; border-radius:8px; color:#f8fafc; padding:10px 14px; font-size:13px; outline:none;" />
                     <button id="aiDirectorSubmitBtn" class="btn-icon btn-primary" style="background:#9333ea; border-color:#9333ea; padding:0 20px;">⚡ Apply Edit</button>
                 </div>
 
-                <div id="aiDirectorLogsBox" class="script-console" style="height: 160px; display:block; color:#c084fc; font-size:11px;">
-                    ✦ LangGraph Engine Ready. Awaiting director instructions...
+                <div id="aiDirectorLogsBox" class="script-console" style="height: 180px; display:block; color:#c084fc; font-size:11px; overflow-y:auto;">
+                    ✦ LangGraph AI Engine Ready. Awaiting director instructions...
                 </div>
             </div>
         </div>

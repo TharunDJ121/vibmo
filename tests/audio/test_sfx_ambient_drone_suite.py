@@ -57,3 +57,10 @@ class TestAmbientDroneSuite:
         audio = AmbientDroneSuite.ethereal_sub_pad(duration=duration, chord="minor9")
         check_audio_properties(audio, duration)
         check_looping_stability(audio)
+
+    def test_sci_fi_deep_space_drone(self):
+        duration = 10.0
+        audio = AmbientDroneSuite.sci_fi_deep_space_drone(duration=duration)
+        check_audio_properties(audio, duration)
+        check_looping_stability(audio)
+

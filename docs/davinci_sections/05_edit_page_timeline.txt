@@ -1,0 +1,1679 @@
+Chapter 40
+Using the Edit Page
+In this chapter, you’ll learn how to use and configure the Edit page user interface to 
+prepare for editing projects in DaVinci Resolve. 
+For more information on how to use the Edit page to import and conform projects edited in 
+other applications for color correction and finishing in DaVinci Resolve, jump to this section: 
+Conforming and Relinking Media.
+Contents
+The Edit Page User Interface ���������������������������������������������������������������������������������������������������������������������������������������������������������� 816
+The Interface Toolbar �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 816
+Navigating the Edit Page  �������������������������������������������������������������������������������������������������������������������������������������������������������������������  817
+Showing Which Panel Has Focus ��������������������������������������������������������������������������������������������������������������������������������������������������� 818
+The Media Pool ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 818
+Importing Media Into the Media Pool on the Edit Page ������������������������������������������������������������������������������������������������������  819
+Bins, Power Bins, and Smart Bins ������������������������������������������������������������������������������������������������������������������������������������������ ������� 820
+Showing Bins in Separate Windows  �������������������������������������������������������������������������������������������������������������������������������������������� 820
+Filtering Bins Using Color Tags  ������������������������������������������������������������������������������������������������������������������������������������������������������� 821
+Sorting the Bin List �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 821
+More About Timelines and Grading  ������������������������������������������������������������������������������������������������������������������������������������������� 822
+Timelines, Grades, and Versions  ��������������������������������������������������������������������������������������������������������������������������������������������������� 822
+Enabling the Use of a Master Timeline  �������������������������������������������������������������������������������������������������������������������������������������� 823
+Using the Effects Library  ������������������������������������������������������������������������������������������������������������������������������������������������������������������ 824
+The Toolbox ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 825
+OpenFX������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 825
+Audio FX ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 826
+Effects Library Favorites �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 826
+Index ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  827
+Edit Index �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 827
+Tracks ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 830
+Markers ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 831
+814Edit | Chapter 40 Using the Edit Page
+EDIT
+Source and Timeline Viewers  �������������������������������������������������������������������������������������������������������������������������������������������������������� 832
+How Each Clip’s Grade Looks in Each Viewer ������������������������������������������������������������������������������������������������������������������������ 832
+Timecode Toolbar on Edit Viewers ���������������������������������������������������������������������������������������������������������������������������������������������� 833
+Source and Timeline Viewers vs. Single Viewer Mode �����������������������������������������������������������������������������������������������������  833
+Previous and Next Clips or Timelines in Viewers  ����������������������������������������������������������������������������������������������������������������� 834
+Viewer Controls  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 835
+Simultaneous Audio Waveform Display in the Source Viewer  ��������������������������������������������������������������������������������������� 838
+Cinema Viewer Mode  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 839
+Viewer Indicators  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 839
+Other Viewer Options  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 840
+Fast Review in the Timeline Viewer ��������������������������������������������������������������������������������������������������������������������������������������������� 840
+Opening Clips in the Source Viewer ����������������������������������������������������������������������������������������������������������������������������������������� ��� 841
+Timeline Viewer Edit Overlays  �������������������������������������������������������������������������������������������������������������������������������������������������������� 841
+Copy and Paste Timecode in Viewer Timecode Fields  ����������������������������������������������������������������������������������������������������� 842
+Export The Current Frame from The Viewer ��������������������������������������������������������������������������������������������������������������������������� 842
+Metadata Editor ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 842
+Inspector ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 843
+Timeline ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 844
+Timeline Options  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 846
+Switching Among Multiple Timelines  ������������������������������������������������������������������������������������������������������������������������������������������ 848
+Toolbar ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 848
+Toolbar Audio Monitoring Controls  ����������������������������������������������������������������������������������������������������������������������������������������������� 851
+The Mixer and Meters ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 851
+Displaying Audio Meters  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 852
+Using Video Scopes  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 852
+Floating Timecode Window  ������������������������������������������������������������������������������������������������������������������������������������������������������������ 853
+Dual-Monitor Layout  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 853
+Customizing the Edit Page �������������������������������������������������������������������������������������������������������������������������������������������������������������� 855
+Undo and Redo in DaVinci Resolve �������������������������������������������������������������������������������������������������������������������������������������������� 856
+815Edit | Chapter 40 Using the Edit Page
+EDIT
+The Edit Page User Interface
+The Edit page has evolved into a source-record style NLE that contains nearly every editorial tool 
+you need for creative editing through finishing. The Edit page is divided into three main regions: the 
+browsers found at the left, the Viewers at the top, and the Timeline at the bottom, all of which work 
+together to let you import, edit, and trim timelines with a flexible variety of tools and methods.
+The Edit Page in its entirety
+The Interface Toolbar
+At the very top of the Edit page is a toolbar with buttons that let you show and hide different parts of 
+the user interface. These buttons are as follows, from left to right:
+The Interface toolbar
+Media Pool/Effects Library/Edit Index height button:  Lets you set the area used by the Media Pool, 
+Effects Library, and/or Edit Index to take up the full height of your display (you can display two at 
+a time), giving you more area for browsing at the expense of a narrower timeline. At half height, 
+the Media Pool/Effects Library/Edit Index are restricted to the top of the UI (you can only show one 
+at a time), and the timeline takes up the full width of your display. 
+Media Pool: Opens or hides a smaller version of the full Media Pool page, 
+allowing access to all the video clips, audio clips, and images used in the project.
+Effects Library:  Opens or hides the repository of all transitions, generators, 
+OpenFX, and audio filters available to use in the Edit page.
+Index: Opens or hides the Edit, Tracks, and Markers indexes.
+816Edit | Chapter 40 Using the Edit Page
+EDIT
+Sound Library: Opens or hides the libraries of sound effects and music registered  
+with DaVinci Resolve. 
+For more information on using the Sound Library, jump to this chapter:  
+Using the Fairlight Page.
+Keyframes: Opens the Keyframes and Curves Editor.
+Quick Export:  Opens the Quick Export Dialog to simply deliver an export of 
+your timeline.
+Mixer: Opens or hides the Audio Mixer, giving you graphical controls to 
+adjust your sound mix.
+Metadata: Shows or hides the Metadata Editor.
+Inspector: Shows or hides the Inspector, which shows you the transform and 
+compositing effects of selected clips, or the editable options of selected effects 
+such as transitions or generators.
+Navigating the Edit Page
+Each of the panels in the Edit page user interface can be given focus via the Workspace > Active Panel 
+Selection submenu. Additionally, the following keyboard shortcuts can be used to give focus to 
+select bins, clips, the Source and Timeline Viewers, the Timeline, the Effects Library, Edit Index, 
+and Inspector.
+Key Function
+Command-1 Media Folders
+Command-2 Media Clips
+Command-3 Source Viewer
+Command-4 Timeline
+Command-5 Timeline Viewer
+Command-6 Effects
+Command-7 Edit Index
+Command-8 n/a
+Command-9 Inspector
+Q Toggle between Source and Timeline Viewers
+817Edit | Chapter 40 Using the Edit Page
+EDIT
+Showing Which Panel Has Focus
+Each panel you use has “focus,” meaning that clicking an item or control within a particular panel 
+makes that panel the active panel, which serves to direct keyboard shortcuts that are shared among 
+many panels to the particular panel you’re using. If you want to see which panel is in focus, you can 
+turn on the “Show focus indicators in the User Interface” checkbox in the UI Settings panel of the 
+User Preferences. When on, a red line at the top of the active panel indicates that it has focus.
+The focus indicator shown at the top edge of the Media Pool, 
+shown next to a viewer that doesn’t have focus
+The Media Pool
+In the Edit page, the Media Pool contains all of the video, audio, and still image media you’ve imported 
+for editing into the project at hand, as well as all of the timelines that you’re going to be editing into. 
+The Media Pool is also mirrored on the Media, Cut, Fusion, Color, and Fairlight pages, so you can 
+access any audio or video clip, graphic, or timeline from any page where they can be used. 
+The Media Pool in Thumbnail mode
+The Bin list at the left shows a hierarchical list of bins used for organizing your media, which is also 
+used to organize your timelines. By default, the Media Pool consists of a single bin, named “Master,” 
+but you can add more bins as necessary to organize timelines and clips by right-clicking anywhere 
+818Edit | Chapter 40 Using the Edit Page
+EDIT
+in the empty area of the Media Pool and choosing Add Bin. You can rename any custom bin by 
+double-clicking on its name and typing a new one, or by right-clicking a bin’s name and choosing 
+Rename Bin. The Bin list can be hidden or shown via the button at the upper left-hand corner of the 
+Edit page toolbar.
+The browser area to the right shows the contents of the currently selected folder. Every timeline you 
+create, and every AAF, XML, or EDL file you import, appears here. You can create or import as many 
+timelines as you need within a single project.
+As in the Media page, the Media Pool can be displayed in either Metadata, Icon, or List view. In List 
+view, you can sort the contents by any one of a subset of the total metadata that’s available in the 
+Metadata Editor of the Media page. Of particular interest to editors are columns for Name, Reel Name, 
+different timecode streams, Description, Comments, Keyword, Shot, Scene, Take, Angle, Circled, Start 
+KeyKode, Flags, Usage, Resolution, and Frames Per Second.
+For more information on using the myriad features of the Media Pool, jump to this chapter: 
+Adding and Organizing Media with the Me dia Pool. 
+In the sections that follow, some key features of the Media Pool are summarized for your 
+convenience.
+Importing Media Into the Media Pool on the Edit Page
+While adding clips to the Media Pool in the Media page provides the most organizational flexibility and 
+features, if you find yourself in the Edit, Cut, Fusion, Color, or Fairlight page and you need to quickly 
+import a few clips for immediate use, you can do so in a couple of different ways.
+To add media by dragging one or more clips from the Finder to  
+the Edit page Media Pool (macOS only):
+1 Select one or more clips in the Finder.
+2 Drag those clips into the Media Pool of DaVinci Resolve or to a bin in the Bin list.
+Those clips are added to the Media Pool of your project.
+To use the Import Media command in the Edit page Media Pool:
+1 With the Edit page open, right-click anywhere in the Media Pool, and choose Import Media.
+2 Use the Import dialog to select one or more clips to import, and click Open.
+Those clips are added to the Media Pool of your project.
+For more information on using the myriad features of the Media Pool, jump to this chapter: 
+Adding and Organizing Media with the Me dia Pool. 
+Below, some key features of the Media Pool are summarized for your convenience.
+819Edit | Chapter 40 Using the Edit Page
+EDIT
+Bins, Power Bins, and Smart Bins
+There are actually three kinds of bins in the Media Pool, and each appears in its own section of the Bin 
+list. The Power Bin and Smart Bin areas of the Bin list can be shown or hidden by selecting/deselecting 
+in the Media Pool option menu Show Smart Bins, and Show Power Bins. Here are the differences 
+between the different kinds of bins:
+  Bins: Simple, manually populated bins. Drag and drop anything you like into a bin, and that’s 
+where it lives, until you decide to move it to another bin. Bins may be hierarchically organized, so 
+you can create a Russian dolls nest of bins if you like. Creating new bins is as easy as right-clicking 
+within the bin list and choosing Add Bin from the contextual menu.
+  Power Bins: Hidden by default. These are also manually populated bins, but these bins are 
+shared among all of the projects in your current project library, making them ideal for shared title 
+generators, graphics movies and stills, sound effects library files, music files, and other media that 
+you want to be able to quickly and easily access from any project. To create a new Power Bin, 
+show the Power Bins area of the Bin list, then right-click within it and choose Add Bin.
+  Smart Bins: These are procedurally populated bins, meaning that custom rules employing 
+metadata are used to dynamically filter the contents of the Media Pool whenever you select a 
+Smart Bin. This makes Smart Bins fast ways of organizing the contents of projects for which you 
+(or an assistant) has taken the time to add metadata to your clips using the Metadata Editor, adding 
+Scene, Shot, and Take information, keywords, comments and description text, and myriad other 
+pieces of information to make it faster to find what you’re looking for when you need it. To create 
+a new Smart Bin, show the Smart Bin area of the Bin list (if necessary), then right-click within it and 
+choose Add Smart Bin. A dialog appears in which you can edit the name of that bin and the rules it 
+uses to filter clips, and click Create Smart Bin.
+Showing Bins in Separate Windows
+If you right-click a bin in the Bin List, you can choose “Open As New Window” to open that bin into its 
+own window. Each window is its own Media Pool, complete with its own Bin List, Power Bins and Smart 
+Bins lists, and display controls. 
+Media Pool bins opened as new windows
+820Edit | Chapter 40 Using the Edit Page
+EDIT
+This is most useful when you have two displays connected to your workstation, as you can drag these 
+separate bins to the second display while DaVinci Resolve is in single screen mode. If you hide the 
+Bin list, not only do you get more room for clips, but you also prevent accidentally switching bins if 
+you really want to only view a particular bin’s contents in that window. You can as many additional 
+Bin windows open as you care to, in addition to the main Media Pool that’s docked in the primary 
+window interface.
+Filtering Bins Using Color Tags
+If you’re working on a project that has a lot of bins, you can apply color tags to identify particular bins 
+with one of eight colors. Tagging bins is as easy as right-clicking any bin and choosing the color you 
+want from the Color Tag submenu.
+For example, you can identify the bins that have clips you’re using most frequently with a red tag. 
+A bin’s color tag then appears as a colored background behind that bin’s name.
+Once you’ve tagged one or more Media Pool bins, you can use the Color Tag Filter drop -down menu 
+(the drop-down control to the right of the Bin List button) to filter out all but a single color of bin.
+To go back to seeing all available bins, choose Show All from the Color Tag Filter drop-down.
+Using Color Tags  
+to identify bins
+Using color tag filtering  
+to isolate the red bins
+Sorting the Bin List
+The Bin list (and Smart Bin list) of the Media Pool can be sorted by Bin Name, Date Created, or Date 
+Modified, in either ascending or descending order. Simply right-click anywhere within the Bin list and 
+choose the options you want from the Sort by submenu of the contextual menu.
+You can also choose User Sort from the same contextual menu, which lets you manually drag all 
+bins in the Bin list to be in whatever order you like. As you drag bins in this mode, a highlighted line 
+indicates the new position that bin will occupy when dropped.
+821Edit | Chapter 40 Using the Edit Page
+EDIT
+If you use User Sort in the Bin list to rearrange 
+your bins manually, you can switch back and forth 
+between any of the other sorting methods (Name, 
+Date Created, Date Modified) and User Sort and your 
+manual User Sort order will be remembered, making 
+it easy to use whatever method of bin sorting is most 
+useful at the time, without losing your customized 
+bin organization.
+Dragging a bin to a new position 
+in the Bin list in User Sort mode
+More About Timelines and Grading
+DaVinci Resolve projects contain one or more edited timelines (sometimes called a sequence in other 
+applications) which are also organized in the Media Pool, and displayed in the Timeline Editor (referred 
+to as “the Timeline”). Timelines contain clips, the source media of which is kept in the Media Pool, and 
+which also appear as edit events in the Edit Index that can be shown at the right of the Timeline.
+Timelines, Grades, and Versions
+Within any given timeline, grades are associated with the timecode of the source clip they’re 
+applied to. That means that as you alter the timeline, each clip’s grade moves along with it, making 
+it extremely easy to move back and forth between editing and grading as your needs require. By 
+default, each timeline in a project has independent sets of grades using local versions; this is true 
+even if your timelines are duplicates. That means each clip within every timeline has a completely 
+independent grade.
+However, if you switch the clips in one or more timelines to use Remote versions, a clip’s grades 
+are shared by every instance of that clip in all timelines with clips that also use Remote versions. 
+If you import a new timeline that rearranges clips into a different order and switch it to using Remote 
+versions, then grades will automatically follow the clips, so that the clips within each new timeline 
+inherits the grades applied to those same clips in other timelines.
+You can switch a timeline between using Local and Remote grades at any time. 
+For more information on using Local versus Remote versions, jump to this chapter: 
+Grade Management . You can also copy grades from one timeline to another using the 
+ColorTrace feature. 
+For more information on ColorTrace, jump to this chapter: Copying and Importing Grades 
+Using ColorTrace
+822Edit | Chapter 40 Using the Edit Page
+EDIT
+Enabling the Use of a Master Timeline
+Previous versions of DaVinci Resolve had a Master Timeline, which consisted of one long timeline 
+containing every clip in the Media Pool, arranged by default in ascending order by timecode. While 
+the Master Timeline was useful for a variety of tasks, architectural improvements have rendered it 
+unnecessary, and by default the Master Timeline does not appear in new projects created by DaVinci 
+Resolve version 10 or later.
+However, if you want a Master Timeline in order to have a single timeline that always contains all clips 
+currently in the Media Pool, there’s a way you can create one. You need to do it immediately upon 
+creating a new project, before adding any media to the Media Pool. Once you’ve added one or more 
+clips to the Media Pool, the option you need to do so will be disabled.
+To create a new Master Timeline:
+1 Create a new project, open the General Options panel of the Project Settings, and turn on the 
+“Automatically match master timeline with media pool” checkbox. If you also want all clips to use 
+Remote versions as you grade by default as in previous versions of DaVinci Resolve, you can turn 
+off the “Use local version for new clips in timeline.”
+The option to use a Master Timeline is in the Color section  
+of the General Options panel of the Project Settings
+2 Click Save to close the Project Settings window.
+3 Open the Edit page, and choose File > New Timeline (Command-N).
+4 When the New Timeline Properties window appears, turn the Empty Timeline checkbox off, 
+and click Create New Timeline.
+Now, in addition to the new timeline, a Master Timeline appears in the Timeline list.
+TIP: If you want to make sure that you always have a Master Timeline when you create 
+new projects, you can alter the Project Setting preset for your user account to reflect these 
+settings, or you can create a new Project Setting preset with these settings that you can 
+easily switch to. 
+823Edit | Chapter 40 Using the Edit Page
+EDIT
+The Master Timeline consists of one long sequence of every clip in the Media Pool, arranged in 
+ascending order by timecode. Each clip in the Master Timeline appears at its full duration, regardless 
+of the duration of corresponding clips in an EDL-, AAF-, or XML-imported timeline. Whenever you add 
+more clips to the Media Pool, they’re automatically added to the Master Timeline. 
+Creating a Master Timeline
+The Master Timeline is useful for organizing media for which no editing has yet been done, such as 
+when grading digital dailies. The Master Timeline is also useful for identifying a range of similar clips, 
+based on their similar ranges of timecode. For example, you could find all the talking head shots from 
+a particular section of tape clustered together in the Master Timeline.
+Using the Effects Library
+All effects that you can add to your edit, including filters, transitions, titles, and generators, are found in 
+the Effects Library, which is split into two parts. To the left is a bin list that shows a hierarchical list of all 
+of the different Transitions, Title Effects, Generators, and Filters that are available, sorted by category. 
+To the right is a browsing area in which you can see the contents of whichever bins are selected.
+Similar to the Media Pool, the Effects Library’s bin list can be opened or closed using a button at the 
+top left, while a menu just to the right of this button lets you sort the list into different categories.
+The Effects Library
+824Edit | Chapter 40 Using the Edit Page
+EDIT
+The Toolbox
+All of the video and audio transitions, titles, and generators that ship along with DaVinci Resolve 
+appear in the Toolbox category of the Effects Library.
+  Toolbox: Exposes all Transitions, Titles, Generators, and Effects at once.
+  Video Transitions: Contains all of the built-in transitions that are available from DaVinci Resolve. 
+You can drag any video transition to any edit point in the Timeline that has overlapping clip 
+handles to add it to your edit; you have the option to drag the transition so that it ends on, is 
+centered on, or starts on the edit point. 
+For more information, jump to this chapter: Using Transitions .
+  Audio Transitions: Contains audio transitions for creating crossfades.
+  Titles: Titles can be edited into the Timeline like any other clip. Once edited into the Timeline, you 
+can edit the title text and position directly in the Timeline Viewer, or you can access its controls in 
+the Inspector for further customization.
+  Generators: Generators can also be edited into the Timeline like any other clip. Selecting a 
+generator and opening the Inspector lets you access its controls for further customization. 
+You can also choose a standard duration for generators to appear with in the Editing panel of the 
+User Preferences.
+  Effects: Contains unique placeholder effects like Adjustment Clip, and Fusion Composition, that 
+can be customized to apply sophisticated effects to your programs.
+OpenFX
+DaVinci Resolve supports the use of third-party OpenFX filters, transitions, and generators in the 
+Edit page. Once you install these effects on your workstation, they appear in this section of the 
+Effects Library, organized by type and group depending on the metadata within each effect.
+  OpenFX: Exposes all Resolve FX and third-party OpenFX installed on your workstation at once.
+  Filters: Contains the Resolve FX filters that ship with DaVinci Resolve, as well as any third-party 
+OFX plugins you’ve installed on your workstation. Filters can be dragged onto video clips to apply 
+an effect to that clip. Once applied, filters can be edited and customized by opening the OpenFX 
+panel of the Inspector.
+  Transitions: Contains any third-party OFX transitions you have installed on your workstation. 
+OFX transitions can be used similarly to any other transition, but they also expose an OpenFX 
+panel next to the Transition panel in the Inspector, where you can customize settings that are 
+unique to that transition.
+  Generators: Contains any third-party OFX generators you have installed on your workstation. 
+Can be edited into the Timeline just like the native generators that ship with DaVinci Resolve, but 
+they also expose an OpenFX panel next to the Transition panel in the Inspector, where you can 
+customize settings that are unique to that transition.
+825Edit | Chapter 40 Using the Edit Page
+EDIT
+Audio FX
+On all platforms, DaVinci Resolve supports Fairlight FX, which are built-in audio plugins that come with 
+DaVinci Resolve. Additionally, DaVinci Resolve supports the use of third-party VST audio plugins on 
+macOS and Windows, and Audio Unit (AU) audio plugins on macOS. Once you install these effects on 
+your workstation, they appear in this panel of the Effects Library. Audio plugins let you apply effects 
+to audio clips or an entire track’s worth of audio to add creative qualities such as echo or reverb, or to 
+take care of mastering issues using noise reduction, compression, or EQ.
+Effects Library Favorites
+You can click on the far right of any transition, title, or generator to flag that effect with a star as a 
+favorite effect. When you do so, the favorited effects appear in a separate Favorites area at the bottom 
+of the Effects Library Bin list.
+Stars indicate a flagged favorite effect; all favorites are currently filtered.
+826Edit | Chapter 40 Using the Edit Page
+EDIT
+Index
+The index provides information about your timeline in a simplified spreadsheet format; it is used 
+for both reference and timeline navigation. The index is broken up into the Edit Index, Tracks, and 
+Markers tabs.
+Edit Index
+Clicking the Edit Index button opens the Edit Index. By default, this shows an EDL-style list view of 
+all the edit events in the current timeline. Whichever timeline is selected in the Timeline list displays 
+its events here. However, the contents of the Edit Index can be filtered using commands found in 
+the Option drop-down, described later in this section.
+Each clip and transition is shown as an individual event, each of which contains multiple columns of 
+information. If you re-edit a timeline, your changes are also reflected in this list. The Edit Index is useful 
+for creative editors that are looking for specific effects that are used in the current timeline, or for 
+finishing editors that need more information about a specific clip, or who might need to filter the entire 
+edit by specific criteria in order to troubleshoot various issues.
+Edit Index List shown open
+Navigating the Timeline Using the Edit Index
+Whenever you move the Timeline playhead to intersect a clip, the Edit Index updates to show only the 
+clips on the video track the intersecting clip is on, and that clip’s event is highlighted in the Edit Index. 
+This makes it easy to see the correspondence between a clip in the Timeline and its event, which is 
+helpful when troubleshooting problems. There are also commands available in the Option menu to 
+display only clips on enabled tracks, only video clips, and only audio clips.
+827Edit | Chapter 40 Using the Edit Page
+EDIT
+Edit Index Columns
+Each event populates several columns of information. These columns can be rearranged by dragging 
+them to the left or right, depending on what information is most important to you.
+The available columns of information are:
+  #: The event number (which corresponds to the clip number shown in the Thumbnail timeline of 
+the Color page).
+  Reel: The reel name of the corresponding clip.
+  Match: Flags clips that have clip conflicts, which display a question mark in this column. 
+Once the clip conflict has been resolved, this flag disappears.
+  V: Video event.
+  C: The event type (C for cut, D for dissolve or transition).
+  Dur: A number showing the duration of a transition in frames. 
+  Source In/Source Out: The Source In and Source Out timecode indicating the range of timecode 
+referenced by that clip; corresponds to the timecode locations of each clip’s In and Out point 
+relative to the source media it comes from.
+  Record Duration: The duration of the clip in the Timeline, determined by the 
+Record In/Out timecodes.
+  Record In/Record Out: Record In and Record Out timecode indicating that clip’s 
+position in the Timeline.
+  Name: The name of the clip.
+  Comments: Whatever comments were present in the EDL that was imported. For example, clip 
+names exported from the original NLE to be used as reel names in RED workflows using EDL import.
+  Source Start/ Source End: The very first and last frame of media available in the Source Media 
+for that clip.
+  Source Duration: The duration, in timecode, of the total source media available in that clip.
+  Codec: The codec of the corresponding clip.
+  Source FPS: The frame rate of the corresponding clip.
+  Resolution: The frame size of the corresponding clip.
+  Color: The color of flags or markers applied to that clip.
+  Notes: Notes entered inside of markers applied to clips or the Timeline.
+  EDL Clip Name: Shows the name of the imported EDL. Clicking in this column lets you edit the 
+Clip Name in the text field.
+  Marker Keywords: Lists all keywords found in a particular marker.
+The columns in the Edit Index can be customized to prioritize the information that’s important to you.
+Methods of customizing metadata columns in the Edit Index:
+To show or hide columns: Right-click at the top of any column in the Edit Index and select an 
+item in the contextual menu list to check or uncheck a particular column. Unchecked columns 
+cannot be seen.
+To rearrange column order: Drag any column header to the left or right to 
+rearrange the column order.
+To resize any column: Drag the border between any two columns to the right or left to 
+narrow or widen that column.
+828Edit | Chapter 40 Using the Edit Page
+EDIT
+You can also customize column layouts in the Edit Index. Once you’ve customized a column layout that 
+works for your particular purpose, you can save it for future recall. 
+Methods of saving and using custom column layout:
+To create a column layout: Show, hide, resize, and rearrange the columns you need for a 
+particular task, then right-click any column header in the Media Pool and choose Create 
+Column Layout. Enter a name in the Create Column Layout dialog, and click OK.
+To recall a column layout: Right-click any column header in the Media Pool and choose the 
+name of the column layout you want to use. All custom column layouts are at the top of the list.
+To delete a column layout: Right-click any column header in the Media Pool and choose the 
+name of the column layout you want to delete from the Delete Column Layout submenu.
+Filtering the Edit Index
+You can use options found in the Edit Index’s option menu to filter specific things that you want to 
+check out, whether to go through all of the marked clips to see if there are any notes you need to 
+address, or to isolate all offline clips, or to go through edits to see if there’s anything you need to fix. 
+You can filter the Edit Index in the following ways:
+  Show All: Shows all entries in the list. Choose this option after using any of the other options to go 
+back to seeing the entire timeline.
+  Show Active Track Items: Filters out all clips that appear on tracks above or below tracks 
+identified with a destination control. For example, if you have three video tracks and the 
+destination control is on track V2, then all clips on tracks V1 and V3 will be hidden from 
+the Edit Index.
+  Show Video Track Items: Filters out all audio clips so only video clips appear in the list.
+  Show Audio Track Items: Filters out all video clips so only audio clips appear in the list.
+  Show Flags: Isolates clips with flags in the list. A submenu lets you choose to show all clips with 
+flags or only clips with a particular color of flag.
+  Show Markers: Isolates all clips with markers in the list. A submenu lets you choose to show all 
+clips with markers or only clips with a particular color of marker.
+  Show Clip Colors: Isolates all clips that have been labelled with clip colors in the list. A submenu 
+lets you choose to show all clips that are labelled using any clip color or only clips labelled with a 
+particular color.
+  Show Through Edits: Filters only clips that have through edits, or cuts where continuous timecode 
+appears from the outgoing to the incoming half of the edit, that you may or may not want to 
+remove, depending on why they’re there.
+  Show Offline Clips:  Isolates all offline clips (clips that have become unlinked from the 
+corresponding source media on disk) in the Timeline, so you can quickly navigate to each one and 
+troubleshoot the issue.
+  Show Clip Conflicts:  Filters all clips with clip conflict warning badges (indicating there is reel, 
+name, and timecode metadata that overlap that of another clip) in the Timeline, so you can quickly 
+navigate to each one and check whether they’re using the correct clip.
+  Show Clips With Speed Effects: Filters all clips with linear or variable Speed Effects in the Timeline.
+  Show Clips With Composite Effects: Filters all clips with Composite mode or Opacity settings 
+other than the default (Normal, 100).
+  Show Clips With Transform Effects: Filters all clips with altered Transform settings.
+829Edit | Chapter 40 Using the Edit Page
+EDIT
+  Show Clips With Filters: Filters all clips with Resolve FX or OFX filters applied to them.
+  Show Stills and Freeze Frames: Filters all clips that are stills or that have freeze frame speed 
+effects applied to them.
+  Show Compound Clips and Nested Timelines:  Filters all compound clips and nested timelines in 
+the Timeline.
+  Show VFX Connect Clips: Filters all Fusion Connect Clips.
+Exporting the Edit Index
+If you’ve filtered a series of edits in the Edit Index that you’d like to share with someone else, this 
+is easy to do. For example, you might filter the Edit Index to show a list of all the offline clips in the 
+current timeline, and then export a list as either a .csv or .txt file to give to your assistant editor so they 
+can chase down the necessary media. Both types of files are widely compatible with spreadsheet and 
+database software in the event you want to import the data into another application.
+To export the Edit Index:
+1 Click on the Edit Index option menu, and choose Export Edit Index from the contextual menu.
+2 Use the Export Edit Index window to choose a location to save the exported file, and choose a 
+format from the drop-down menu at the bottom. You can export either a Comma Separated Values 
+(.csv) file, or a Tab Delimited Values (.txt) file.
+3 Click Save.
+Tracks
+Several of the most common track controls can be found together in the Track Index. The Track Index 
+is accessed by clicking on the Index Pane, and selecting the Tracks Tab. The index shows all the 
+current tracks in your timeline and their position and attributes. These are all modifiable right inside the 
+Track Index.
+The Tracks Index 
+Tracks Index Columns
+Each track reveals several columns of information. These columns can be rearranged by dragging the 
+column headers to the left or right, depending on what information is most important to you. Clicking 
+on a track row selects the track for modification.
+830Edit | Chapter 40 Using the Edit Page
+EDIT
+The available columns of information are:
+  Color: The current color of the track is shown. Right-click anywhere in the row and choose Change 
+Track Color to choose a new one.
+  #: Displays the current track order. You can rearrange the order of the tracks by dragging the 
+number in this column up or down in the track hierarchy and releasing the mouse button. Note that 
+the actual absolute track number (V1, A1, etc.) does not change, but the track that is assigned to 
+that number will have changed.
+  Name: The name of the Track. You can click in this field to rename the track.
+  Track Controls: The same track controls that are found in the Track Header in the Timeline can 
+also be accessed here: Lock/Unlock, Disable/Enable Video Track, Solo, and Mute.
+  Format (audio track only): Shows the current format of the audio track. You can change this format 
+to any other by right-clicking anywhere in the row of an audio track and choosing Change Track 
+Type to, and then selecting a new format from the contextual menu.
+  Monitor (audio track only): Selects which tracks can be selected in the monitor drop-down menu 
+in the upper right of the Edit Timeline or Fairlight page windows.
+  ADC (audio track only): Checking this box turns on Automatic Delay Compensation (ADC) 
+for the track.
+Right-clicking on a track or multiple tracks in the track index allows you to delete all selected 
+tracks by choosing Delete Tracks from the contextual menu.
+Clicking on the Tracks Index’s option menu lets you include or exclude track types (video, 
+audio, subtitle) from the tracks. 
+Markers
+You can use the Marker Index to easily view, edit, and organize all your timeline and clip markers in 
+one convenient location. The Marker Index can be found by clicking on the Index panel and selecting 
+the Markers tab.
+Methods of working with markers in the Marker Index:
+  To filter markers in the Marker Index: Click the Option menu of the Marker Index, and choose 
+Show All or Show Only to choose a specific color. Each clip with a matching marker appears in 
+a list, with columns corresponding to the color(s), information, and notes of each timeline and 
+clip marker. Columns can be sorted in ascending or descending order by clicking on the column 
+header. Individual columns can be turned on or off by right-clicking on the column header and 
+checking or unchecking the column name.
+  To move the playhead to the position of a marker in the Marker Index: Double-click that marker’s 
+entry in the list.
+  To edit marker information: You can change the values of a marker by clicking in the Name, 
+Notes, or Keyword fields and modifying the text field. Other values are not editable in the Marker 
+Index and should be changed in the timeline marker’s Edit dialog.
+  To search for a specific marker: Click on the Search icon (magnifying glass), and type in your 
+search terms. Currently the search only queries the Marker Name column; you cannot search by 
+notes and keywords.
+  To switch between Thumbnail and List view: Click on either the Thumbnail or List View icons in 
+the top bar of the Marker Index.
+831Edit | Chapter 40 Using the Edit Page
+EDIT
+The Marker Index in List View mode lets you edit  
+and organize all your timeline’s markers in one place.
+Source and Timeline Viewers
+By default, the Edit page presents a traditional source/record style editing experience. The Source 
+Viewer lets you view individual clips from the Media Pool to prepare them for editing. Meanwhile, the 
+Timeline Viewer lets you play through your program, showing you the frame at the position of the 
+playhead in the Timeline. 
+Source and Timeline Viewers
+You can select either viewer by clicking with the pointer, or by pressing Q (Source/Timeline Viewer), 
+and the name of the viewer that currently has focus appears in orange.
+How Each Clip’s Grade Looks in Each Viewer
+Because of DaVinci Resolve’s deep color and effects tools, the state of the image you see in each 
+viewer of the Edit page depends on a number of things.
+The Source Viewer
+The Source Viewer shows each clip as it looks at the source. If you have Resolve Color Management 
+(RCM) turned on or source LUTs applied, then the Source Viewer will show your clips as they’re being 
+processed by RCM and/or the source LUTs, since those are source-level color operations. However, 
+in the absence of RCM and source LUTs, the image in the Source Viewer looks exactly the same as it 
+does on disk. If you have log-encoded media that looks flat and low-contrast, then that’s how it’s going 
+to look in the Source Viewer.
+832Edit | Chapter 40 Using the Edit Page
+EDIT
+The Timeline Viewer
+The Timeline Viewer follows all of the same rules as the Source Viewer, with the addition that 
+the Timeline Viewer also shows you how each clip in the Timeline looks with Fusion page and/or 
+Color page operations applied, since the Timeline Viewer is actually showing you the output of the 
+Color page, so you can see every clip of your program in context of how the image is being affected 
+by the DaVinci Resolve image processing pipeline.
+NOTE: The Color Viewer Lookup Table options in the Color Management panel of the 
+Project Settings only affect the GUI Viewer in the Color page. They do not affect the viewers 
+in the Edit page.
+Turning Grades and/or Fusion Effects Off in the Timeline Viewer
+The Bypass Color Grades and Fusion Effects button/drop-down from the Color page is also available 
+on the Edit page either via the View > Bypass Color and Fusion drop-down, or via a toggle button/
+drop-down menu in the Timeline Viewer. If you choose Bypass All Grades or click the Viewer control, 
+you’ll turn off whatever is checked in the optional menu, which lets you choose whether or not you 
+want to bypass both Color and Fusion, or just one or the other.
+(Left) Menu commands for bypassing Color and Fusion, (Right) Edit page Timeline Viewer controls
+Turning off color grades and Fusion effects is an easy way to improve playback performance on low 
+power systems when you just need to make a quick set of edits, and it’s also a convenient way to 
+quickly evaluate the original source media.
+Timecode Toolbar on Edit Viewers
+You can enable the same Timecode toolbar from the Media page in the Edit page. In the Edit page 
+Source or Timeline Viewer, select the Option (3-dot) menu, and select Show Timecode Toolbar 
+from the drop-down. The Timecode Toolbar shows the In/Out point timecodes, as well as the total 
+duration set.
+The Timecode toolbar activated in the Source monitor
+Source and Timeline Viewers vs. Single Viewer Mode
+If you want to change the Edit page layout to hide the Source Viewer, you can choose Workspace > 
+Single Viewer Mode to instead use just a single viewer to contextually display either a selected Source 
+Clip or the current frame of the Timeline.
+833Edit | Chapter 40 Using the Edit Page
+EDIT
+In Single Viewer mode, whatever you select in the Media Pool or Timeline determines which controls 
+appear in the Viewer, which lets you do nearly everything you can do with two simultaneously 
+open viewers.
+Single Viewer mode turned on
+Previous and Next Clips or Timelines in Viewers
+In the Viewer’s Option (3-dot) menu in the Media. Edit and Color pages, you can navigate to the recent 
+next/previous clip or timeline directly from the submenu.
+  Edit page Source Viewer: Previous/Next Clip
+  Edit page Timeline Viewer:  Previous/Next Timeline
+Selecting the next clip from the Viewer Option menu
+834Edit | Chapter 40 Using the Edit Page
+EDIT
+Viewer Controls
+Both viewers share the following onscreen controls:
+  Zoom drop-down menu:  Choosing Fit fits the currently visible frame to the available size of the 
+Viewer. Choosing a percentage zooms the visible frame to that size. You can also use the scroll 
+wheel functionality of your mouse, trackpad, or tablet to zoom in and out of the Viewer..
+  Duration field: At the top left-hand side of the Source Viewer, this displays the total duration of the 
+clip, or the duration from the In to the Out point, if these have been placed. In the Timeline tab, this 
+displays the total duration of the currently selected timeline.
+  GPU Status Display: Every viewer in DaVinci Resolve exposes a GPU status indicator and a 
+frame-per-second (FPS) meter, which appears in the Viewer’s title bar, which shows you your 
+workstation’s performance whenever playback is initiated. Since DaVinci Resolve uses one or 
+more GPUs (graphics processing units) to handle all image processing and effects, the GPU status 
+display shows you how much processing power is being used by whichever clip is playing.
+  Clip Name: The clip name is displayed at the center of the Source Viewer title bar. 
+The Source Viewer: Displays a drop-down at the top of the Source Viewer, next to the name 
+of the currently open clip, which lets you open a menu containing a list of the last 10 clips you 
+opened in the Source Viewer. This list is first in, first out, with the most recently opened clips 
+appearing at the top. If you wish to clear the visual history in the menu, you can remove unwanted 
+entires and start a new queue by clicking on the Viewer’s option menu and selecting Clear 
+Recently Viewed Clips.
+The Timeline Viewer: Displays the timeline name and is also a drop-down menu that lets you 
+switch among other timelines in the current project. The clip/timeline name is highlighted orange 
+when either the Source or Timeline Viewer has focus.
+  Bypass Color Grades and Fusion Effects:  The Bypass Color Grades and Fusion Effects button/
+drop-down from the Color page is also available on the Edit page either via the View > Bypass 
+Color and Fusion drop-down, or via a toggle button/drop-down menu in the Timeline Viewer. 
+Turning off color grades and Fusion effects is an easy way to improve playback performance on 
+low power systems when you just need to make a quick set of edits, and it’s also a convenient way 
+to quickly evaluate the original source media.
+  Source/Timeline Timecode/Frame/Keykode Display:  At the top right-hand side of the Source 
+Viewer, this field shows the timecode of the current frame at the position of the playhead in the 
+Source Viewer’s jog bar, and can be switched between source timecode, source frame, and 
+keykode by right-clicking and choosing from the contextual menu. In the Timeline Viewer, this field 
+shows the record timecode of the current frame at the position of the playhead in the Timeline, 
+and can be switched between source and record timecode, source and record frames, and 
+keykode by right-clicking and choosing from the contextual menu. 
+  Source Viewer Option menu: Contains the following commands:
+Gang Viewers: With Gang Viewers enabled, the movement of the Source and Timeline Viewer 
+playheads is locked together, so that they move in unison. This is useful when you’re matching the 
+timing of part of a clip in the Source Viewer to match an event in the Timeline.
+Live Media Preview: Enabled by default, makes it possible for thumbnails that you’re skimming 
+in the Media Pool to show the skimmed frame in the Viewer. When skimming with Live Media 
+Preview enabled, the playhead that appears in the thumbnail is locked to the playhead displayed 
+in the Viewer’s jog bar.
+Show Timecode Toolbar: The Timecode toolbar shows the In/Out point timecodes, as well as the 
+total duration set.
+835Edit | Chapter 40 Using the Edit Page
+EDIT
+Show All Video Frames: When available processing power is insufficient to play the clip or 
+clips at the position of the playhead due to the grade, transforms, or effects that are applied 
+at that moment in the Timeline, you have the ability to choose exactly how performance in 
+DaVinci Resolve degrades. When off, DaVinci Resolve prioritizes audio playback at the expense of 
+dropping video frames when processing power is tight, resulting in a more conventional playback 
+experience. When on, audio quality is compromised while every frame of video plays in slower-
+than-real time to maintain playback.
+Show Zoomed Audio Waveform: When enabled, shows an audio waveform overlay at the 
+bottom of the Source Viewer with a zoomed in section of the audio surrounding the current 
+position of the playhead.
+Show Full Clip Audio Waveform: When enabled, shows an audio waveform overlay at the bottom 
+of the Source Viewer that displays the audio over the entire duration of the clip.
+Previous Clip: Goes to the previous clip in the Media Pool.
+Next Clip: Goes to the next clip in the Media Pool.
+Clear Recently Viewed Clips: Clears the memory of the recent clips in the Source Viewer. 
+Show Marker Overlays: Enabled by default, markers that intercept the playhead when playback is 
+paused appear superimposed in the Viewer.
+Markers submenu: When one or more markers are applied to the clip in the Source Viewer, they 
+appear in this list in chronological order, listed by Name and Note. Choosing a marker from this 
+menu jumps the playhead to that marker in the Source Viewer.
+  Timeline Viewer Option menu:  Contains the following commands:
+Gang Viewers: With Gang Viewers enabled, the movement of the Source and Timeline Viewer 
+playheads is locked together, so that they move in unison. This is useful when you’re matching the 
+timing of part of a clip in the Source Viewer to match an event in the Timeline.
+Show All Video Frames: When available processing power is insufficient to play the clip or 
+clips at the position of the playhead due to the grade, transforms, or effects that are applied 
+at that moment in the Timeline, you have the ability to choose exactly how performance in 
+DaVinci Resolve degrades. When off, DaVinci Resolve prioritizes audio playback at the expense of 
+dropping video frames when processing power is tight, resulting in a more conventional playback 
+experience. When on, audio quality is compromised while every frame of video plays in slower-
+than-real time to maintain playback.
+Show Timecode Toolbar: The Timecode toolbar shows the In/Out point timecodes, as well 
+as the total duration set.
+Timeline Sort Order:  These options allow you to set the sort order that timelines use in the 
+timeline selector in the top middle of the Viewer. Options are: Alphabetical, Creation Date, or 
+Recently Used (shows the last 10 actively used timelines).
+Previous Timeline: Goes to the previous timeline in the Media Pool.
+Next Timeline: Goes to the next timeline in the Media Pool.
+Show Marker Overlays: Enabled by default, markers that intercept the playhead when 
+playback is paused appear superimposed in the Viewer.
+Show Timecode Overlays: When enabled, shows the source timecode of the video and audio 
+clips under the position of the playhead when playback is paused.
+Show Overlays During Playback:  When enabled, shows timecode and marker overlays 
+on the Viewer constantly during playback. When disabled, overlays are only visible while 
+playback is paused.
+Markers submenu: When one or more markers are applied to a Timeline, they appear in this list 
+in chronological order, listed by Name and Note. Choosing a marker from this menu jumps the 
+playhead to that marker in the Timeline.
+836Edit | Chapter 40 Using the Edit Page
+EDIT
+  Source Viewer Mode drop-down (Source Viewer only):  This drop-down menu lets you set the 
+Source Viewer to display different views of the clips you’re working on, depending on what you 
+need to do.
+Source: Shows the video of the currently open clip in the Source Viewer.
+Offline Reference Movie button:  If you’ve assigned an offline reference movie to the currently 
+selected timeline, clicking the Offline Mode button lets you display the offline movie so you can 
+compare it with the currently open timeline. In this mode, Source and Timeline playback are 
+synced; an Offset field replaces the duration field, letting you re-sync the offline reference movie, 
+if necessary.
+Audio Track: Shows the audio waveforms corresponding to all channels of the currently open clip 
+in the Source Viewer. The top of this audio-only view shows the waveform for the entire duration 
+of the clip, while the main region of the viewer shows a zoomed in section of the audio waveform. 
+The level of zoom displayed is controlled by the zoom drop-down at the upper left-hand corner of 
+the Source Viewer.
+Multicam: Shows you the multi-angle Multicam Viewer that you can use to switch among different 
+angles of video and audio while multicam editing a clip in the Timeline. 
+For more information on multicam editing, jump to this chapter: Multicam Editing.
+Annotations: Allows you to draw directly onto the current frame to highlight areas for 
+further attention. 
+  Transform Mode drop-down (Timeline Viewer Only):  This functions as both a toggle switch and a 
+drop-down menu. Clicking the button control to the left enables or disables onscreen controls that 
+you can use to transform the clip right in the viewer. Clicking the drop-down control to the right 
+lets you switch between two modes of transforms:
+Transform: Exposes controls for Pan (X) and Tilt (Y), Scale X and Y, and Rotation.
+Crop: Exposes controls to crop from the top, bottom, left, and right.
+Dynamic Zoom: Shows controls to do quick pan and scan effects on the selected clip.
+OpenFX Overlay: Exposes the onscreen controls of an applied OpenFX filter.
+Fusion Overlay: Exposes the onscreen controls of an applied Fusion FX or Title filter.
+Annotations: Allows you to draw directly onto the current frame to highlight areas for further 
+attention. Right-clicking in the viewer will let you select a specific control from the dropdown list. 
+You can also Tab and Shift-Tab through the Fusion controls in the inspector to select a control.
+Smart Reframe: Exposes the onscreen controls of the Smart Reframe. 
+  Jog control: Clicking the Jog control and dragging left and right lets you move slowly through a 
+clip or the Timeline a frame at a time.
+  Transport controls: These controls include, from left to right, Jump to First Frame, Play Reverse, 
+Stop, Play Forward, Jump to Last Frame.
+  Loop Playback: Enables or disables looped playback. Looping is also controllable via the 
+Playback > Loop/Unloop command (Command-/). When enabled, each playback command loops 
+back to the beginning when the end of that command’s range is reached. In and Out points in 
+the Source or Timeline Viewers do not trigger looping. For example, when enabled, the Play 
+command will play through the entire clip or timeline, and then loop back to the beginning when 
+the end is reached and start playing automatically. The Play Around command, on the other hand, 
+will start at the beginning of pre-roll, play through the post-roll, and then immediately loop back 
+around to the beginning of pre-roll, continuing playback in this manner until you stop it.
+837Edit | Chapter 40 Using the Edit Page
+EDIT
+  Match Frame: In the Source Viewer, Match Frame attempts to move the playhead in the Timeline 
+to match the current frame of the clip in the Source Viewer. In the Record Viewer, Match Frame 
+opens the Media Pool clip corresponding to the clip at the current position of the playhead into 
+the Source Viewer, setting In and Out points and the playhead position to match those of the 
+clip in the Timeline.
+  In/Out buttons: Places In and Out points with which to define a range of the clip, or of the 
+Timeline, in preparation for making different kinds of edits.
+  Jog bar: In the Source Viewer, drag within the jog bar to reposition the Source playhead, 
+scrubbing through the clip. In the Timeline tab, drag to reposition the playhead throughout the 
+entire program.
+  Skim Playhead: You can skim footage in any viewer in the Media, Cut, Edit, Color, and Deliver 
+pages by holding down the C key, and scrubbing the pointer back and forth in the viewer.
+Transport Controls and Important Playback Controls
+While the operation of the main transport controls is probably obvious, there are additional 
+playback controls of interest to the editor that may not be so readily found. 
+For more information on transport controls,jump to this chapter: Preparing Clips for Editing and 
+Viewer Playback.
+Simultaneous Audio Waveform Display in the Source Viewer
+When the Source Viewer is set to Source, two options in the Option menu let you see a superimposed 
+audio waveform running along the bottom of the viewer, over the video of the currently selected clip.
+  Show Zoomed Audio Waveform: Shows a zoomed-in section of audio that scrolls as you play the 
+clip. Useful for seeing dialog and music cues as you play through a clip.
+  Show Full Clip Audio Waveform: Shows the audio waveform for the entire source media of 
+that clip. The section of audio from the In to Out points you’ve set in the Source Viewer are 
+highlighted. Useful for using the audio waveform to navigate throughout that clip using the 
+waveform as a reference.
+The Source Viewer with “Show Full Clip Audio Waveform” enabled
+838Edit | Chapter 40 Using the Edit Page
+EDIT
+Cinema Viewer Mode
+You can also put either the Source or Timeline Viewers into Cinema Viewer mode by choosing 
+Workspace > Viewer Mode > Cinema Viewer (P), causing whichever viewer is currently selected to fill 
+the entire screen, which is good for doing a test viewing of your edit without the distractions of the 
+DaVinci Resolve Edit Page UI. This command toggles Cinema Viewer mode on and off.
+Viewer Indicators
+Certain frames trigger visible indicators in either the Source or Timeline viewers. 
+For example, if the playhead is at the very first or last frame of media available to a particular 
+clip, indicators appear in the lower-left or right corner of the frame to let you know there’s no 
+more media in that direction.
+The first and last frame 
+clip indicators
+If the playhead in the Timeline is on the first frame of black immediately after the last video clip 
+in the Timeline, an end of sequence indicator appears in the Timeline Viewer to let you know 
+that you’re viewing the last frame of the current sequence of clips, even though the playhead 
+is actually on a frame of black. This makes it easy to see what you’re doing while you’re first 
+assembling clips together.
+The end-of-sequence indicator
+839Edit | Chapter 40 Using the Edit Page
+EDIT
+Other Viewer Options
+There are additional overlays and options you can use to customize how the viewer appears.
+  Safe Area and Guides: In the upper -right corner of the Timeline Viewer, you can turn on and 
+select one or multiple Safe Area guides to be overlayed on the Viewer. 
+This allows you to easily see if the important action in the frame still is composed adequately for 
+different delivery requirements.
+  Show Checkerboard, Black, Gray, or Alert Red Backgrounds in Viewers: Selecting Viewer 
+Background in the Timeline View options changes the empty area of the Viewer (if there is any) 
+to the selected option, making it easier to see which parts of the Viewer are black because of 
+blanking and which parts are simply empty because of the way the image is zoomed or panned.
+The Safe Area selector
+Fast Review in the Timeline Viewer
+Fast Review plays back your timeline at variable fast forward speeds where the speed of playback is 
+dependent on the length of each clip on the Timeline. Longer clips play back at faster speeds than 
+shorter ones. This feature is designed to allow you to quickly scan through a large amount of material 
+on a timeline.
+To use the Fast Review feature on your Edit page Timeline, select Playback > Fast Review. Pressing K 
+or the spacebar will return you to the normal JKL playback mode. If you use this feature often you can 
+bind Fast Review to a specific key in the Keyboard Customization window.
+NOTE: Fast Review does not work for clips in the Source Viewer, only for timelines in the 
+Timeline Viewer.
+840Edit | Chapter 40 Using the Edit Page
+EDIT
+Opening Clips in the Source Viewer
+There are two methods of opening clips into the Source Viewer. Which is enabled depends on the 
+“Live Media Preview” setting found in the Viewer options menu (the three-dots menu found at the 
+upper right-hand corner of the Viewer).
+  When Live Media Preview is enabled (by default), skimming a thumbnail in the Media Pool also 
+shows the skimmed frame in the Source Viewer, effectively opening each clip you skim in the 
+Media Pool into the Source Viewer. As you skim, the playhead that appears in the thumbnail is 
+locked to the playhead that’s displayed in the Viewer’s jog bar.
+  When Live Media Preview is disabled, you must either double-click a clip in the Media Pool to 
+open it into the Source Viewer, or you can select a clip in the Media Pool and press the Return key 
+to open it into the Source Viewer. 
+Which method is best is purely a matter of preference.
+Timeline Viewer Edit Overlays
+Dragging a clip from the Media Pool or Source Viewer onto the Timeline Viewer also exposes edit 
+overlays that let you choose what kind of edit you want to make by choosing which overlay to drop 
+the clip onto.
+The overlay that appears when you drag a clip onto the 
+Timeline Viewer lets you choose from a variety of edits
+This overlay exposes every type of edit that’s available in DaVinci Resolve, including the Insert, 
+Overwrite, Replace, Fit to Fill, Place On Top, Ripple Overwrite, and Append at End edits, all of which 
+are also available from the Edit menu. It’s a useful method of making three-point edits if you like drag 
+and drop editing, but it also provides a nice reminder of what types of edits are available, given all the 
+different options that are available.
+By default, the larger empty area to the left of these overlays defaults to the highlighted Overwrite 
+overlay, while all the smaller buttons let you perform each of the other edit types that are available. 
+However, the “Timeline overlay retains the last performed action” checkbox in the Editing panel of the 
+User Preferences can be turned on if you want DaVinci Resolve to always remember the last edit type 
+you used, and highlight it on this overlay whenever you drag another clip over the Timeline Viewer to 
+let you know that the last edit you performed is the new default edit if you drop clips to the left of the 
+overlay. For example, with this option enabled, if you perform a place on top edit, then the next time 
+you drop a clip into the empty area to the left of the overlays, the result will be another place on top 
+edit. This option is off by default.
+841Edit | Chapter 40 Using the Edit Page
+EDIT
+Copy and Paste Timecode in Viewer Timecode Fields
+You can right-click on most Viewer timecode fields in the Media, Edit, and Color pages to choose 
+Copy and Paste commands from a contextual menu for copying and pasting timecode values. You 
+can also click in the timecode fields and use the normal Copy (Command-C), and Paste (Command-V) 
+keyboard commands. This works even between pages. The timecode value you’re pasting must be 
+valid timecode, for example you can’t paste 0 hour timecode onto a 1 hour timeline.
+Right-clicking on a timecode field to  
+use the Copy Timecode command
+Export The Current Frame from The Viewer
+You can now export a still frame from the Viewer in the Media, Cut, and Edit pages. 
+To Export a Still Frame from the Viewer:
+1 Select either the Source or Timeline viewer for export. 
+2 Use the Viewer’s playback controls to navigate to the frame you want to export.
+3 Select File > Export > Current Frame as Still.
+4 Enter the name of the still frame in the File System viewer.
+5 Enter the desired format of the still frame in the File System viewer.
+6 Click on the Export button.
+Metadata Editor
+Both the Media and Edit pages have a Metadata Editor. In the Edit page, the Metadata Editor opens 
+in the same place as the Inspector, to the right of the Source and Timeline Viewers. When you select 
+a clip in the Media Pool or Timeline, its metadata is displayed within the Metadata Editor, and the title 
+bar indicates whether you’re evaluating a clip in the Timeline or Media Pool. If you select multiple clips, 
+only the last clip’s information appears. The Metadata Editor’s header contains uneditable information 
+about the selected clip, including the file name, directory, duration, frame rate, resolution, and codec.
+Because there are so very many metadata fields available, two drop-down menus at the top let you 
+change which set of metadata is displayed in the Metadata Editor.
+  Metadata Presets (to the left): If you’ve used the Metadata panel of the User Preferences to 
+create your own custom sets of metadata, you can use this drop-down to choose which one to 
+expose. Surprisingly enough, this is set to “Default” by default.
+  Metadata Groups (to the right): This drop-down menu lets you switch among the various groups 
+of metadata that are available, grouped for specific tasks or workflows.
+The heart of the Metadata Editor is a series of editable fields underneath the header that let you 
+review and edit the different metadata criteria that are available. 
+842Edit | Chapter 40 Using the Edit Page
+EDIT
+Clip Metadata Editor showing the 
+Clip Details panel for a clip in the Timeline
+For more information on editing clip metadata, and on creating custom metadata presets,  
+ jump to this chapter: Using Clip  Metadata.
+Inspector
+The Inspector can be opened to let you customize compositing, transform, and cropping parameters 
+for clips, as well as clip-specific retime and scaling options. Furthermore, the Inspector lets you 
+edit the parameters of transitions, titles, and generators used in the Timeline, in order to customize 
+their effect.
+The Inspector, opened and showing a clip’s parameters
+843Edit | Chapter 40 Using the Edit Page
+EDIT
+When the Inspector is open, the Source and Timeline viewers move to the left, to sit alongside the 
+Inspector showing the selected clip’s parameters. However, if your computer display’s resolution is not 
+high enough, opening the Inspector may result in the Source Viewer being hidden.
+Methods of showing parameters in the Inspector:
+  To open a video or audio clip’s transform settings when the Inspector is closed: Select that clip, 
+and then click the Inspector button at the far right of the Edit page toolbar.
+  If the Inspector is already open: You need only select a clip or effect to reveal its 
+controls in the Inspector. 
+  If the Inspector is closed: Double-clicking any transition will automatically open it. 
+The Inspector shows different buttons at the top that let you switch among different pages 
+of parameters. For example, when you select a clip with both audio and video components, 
+the Inspector shows Video and Audio buttons at the top that let you switch among each set 
+of controls.
+Timeline
+The Timeline shows whichever timeline you’ve double-clicked in the Timelines browser. It’s where 
+you either edit programs together from scratch, or import sequences from other applications. 
+For imported programs, the Timeline provides a visual representation of the edited program that’s 
+helpful for verifying that the project was imported correctly, checking the media corresponding to 
+each clip in the program, and performing whatever editorial tasks are necessary to prepare a project 
+for grading (such as replacing or adding clips, superimposing composites, and modifying composite 
+modes or transitions).
+An edited timeline
+  Timeline Ruler: The Timeline Ruler shows the program’s timecode, and the playhead indicates the 
+current frame of the current clip. Whichever clip intersects the playhead is the one that you’ll be 
+working on in the Color page. Dragging within the Timeline Ruler moves the playhead. When you 
+add markers to the timeline, these markers appear within the Timeline Ruler, as well.
+  Playhead: The playhead automatically syncs with the Timeline Viewer’s jog bar playhead, the 
+playheads in the Mini-Timeline and Thumbnail timeline of the Color page, Cut page, and the 
+playhead on the Deliver page. Furthermore, the Edit Index event that corresponds to the clip 
+intersecting the playhead is automatically highlighted.
+844Edit | Chapter 40 Using the Edit Page
+EDIT
+  Timecode field: Shows the current timecode value corresponding to the position of the playhead.
+  Video Tracks: DaVinci Resolve supports multiple video tracks. At the left of each track is a header 
+area that contains a number of controls.
+  Track Header: The Track Header contains different controls for selecting, locking/unlocking, 
+and enabling/disabling tracks. Each track header also lists how many clips appear on that track. 
+The Track Header contains the following five controls, from left to right:
+Track Header area showing the controls for 
+each track that are located within
+Track Color: Each track can be color-coded with one of 16 different colors. These color codes 
+correspond to the Edit page Mixer, and to the Fairlight page Mixer and Audio Meters. You can 
+choose a new color for any track by right-clicking the track header and choosing from the Change 
+Track Color submenu.
+Source Track Selector: Two rectangular icons in columns labeled V1, A1, A2 etc. The left side 
+column (in blue) represents the tracks found in source clips selected in the media pool or loaded in 
+the source viewer. The right side column (in red) represents the destination tracks on your timeline. 
+The Source Track Selector lets you choose which track of the source clip is edited into which track 
+on the timeline. Click any track’s number to select that track for different editing functions; the 
+selected track is highlighted in red or blue, while a deselected track has no highlight.
+Lock Track button: White when turned on, dark grey when turned off. When a track is locked, clips 
+can’t be replaced, moved, or otherwise edited, although clips on locked tracks can be graded. In the 
+timeline, the track has a grey mesh pattern overlayed onto it, letting you know it can’t be modified.
+Sync Lock: On by default, white when that track is selected, dark grey when that track is not 
+selected. This icon determines the behavior of the clips in that track during a ripple edit. When 
+enabled, it ripples with other tracks (for example, where an item is ripple deleted, and the rest of 
+the timeline slides left to fill in the gap), when disabled, ripple works as a solo on the track but 
+does not ripple with edit operations on other tracks.
+Solo (Audio Track Only): Clicking on this icon “S” will mute all other audio tracks, and only play the 
+selected track. You can have multiple Solo tracks selected, in order to hear just those selected tracks.
+Enable Track/Mute button: A small film icon is on by default (enabled), and slash through it and a 
+grey overlay on the track itself indicates when a track is disabled. This control lets you turn tracks 
+on and off. Clips on tracks that are turned off aren’t visible in the viewer, don’t show up in the Color 
+page, and aren’t available for rendering or output. For Audio tracks this is the Mute button (M).
+Audio Channel Type indicator: Audio tracks also show which channel configuration that track 
+uses, listing the number of channels for mono, stereo, 5.1, 7.1, and adaptive.
+Track Name: Each track has a name that defaults to the type of track and the track number, such 
+as Video 1, Audio 1. However, you can click any track’s name and edit it to be whatever you like. 
+For example, you can rename each audio track with the type of audio you’re editing onto it, such 
+as Production, Ambience, SFX, or Music. These track names are also used to identify each track’s 
+channel in the Edit page Mixer and in the Fairlight page Mixer.
+845Edit | Chapter 40 Using the Edit Page
+EDIT
+Number of clips: The number of clips on that particular track of the Timeline is listed, but only if 
+the track is tall enough to have room for them.
+  Vertical and horizontal scroll bars: If your project is longer than the current width of the Timeline, 
+or the number of video tracks is taller than the current height of the Timeline, these scroll bars let 
+you drag to navigate around your program.
+  Individual Timeline track resizing:  Any track in the Timeline can be individually resized by 
+dragging its top divider in the Track Header area.
+Resizing an individual timeline track by  
+dragging its top border in the Track Header
+Timeline Options
+Specific elements and behaviors within the Timeline can be customized in various ways.
+Fixed Playhead Mode in the Timeline
+You can select the fixed playhead mode from the Timeline View options in the Edit page. This view 
+option will keep the playhead static in the middle of the timeline, while the tracks on the timeline move 
+underneath it, similar to the Cut page.
+Selecting the Fixed Playhead mode in the Timeline View options
+Selection Follows Playhead
+As of DaVinci Resolve 17, the Clip selection no longer automatically moves along with the playhead. 
+Instead, a new set of commands lets you create and move a selection by holding down the Command 
+key and pressing the Up, Down, Left, and Right Arrow keys. This allows you to select clips above and 
+below the current track and to the left and right, independently of the playhead.
+846Edit | Chapter 40 Using the Edit Page
+EDIT
+You can return the Clip Selection mode back to its previous behavior of automatically 
+selecting the top clip it’s intersecting by choosing the option Timeline > Selection 
+Follows Playhead.
+Show Playhead Shadow
+Ordinarily, the playhead is shown in the Timeline as a single line that indicates the beginning of the 
+frame that you’re viewing in the Timeline Viewer. However, you can choose Show Playhead Shadow 
+from the User Preferences UI Settings to display an orange-ish background surrounding the playhead.
+This shadow can make it easier to see the playhead’s position, and it can also serve as a measuring 
+tool for projects where you have an interest in visualizing a specific offset, in frames, both before 
+and after the current position of the playhead. This offset can be adjusted by changing the Pre- and 
+Post-Playhead Shadow Length parameters in the Editing panel of the User Preferences, which let you 
+specify the number of frames to shadow both before and after the playhead. The default length of the 
+playhead shadow is 5 frames.
+(Left) The playhead’s default look, (Right) The playhead 
+showing the optional playhead shadow
+TIP: You can set the “Pre-playhead shadow length” to 0, and the “Post-playhead shadow 
+length” to 1 if you want to display a “Media Composer-style” playhead that shows the duration 
+of the current frame.
+847Edit | Chapter 40 Using the Edit Page
+EDIT
+Enabling and Disabling Audio Scrubbing
+Audio scrubbing is enabled by default, meaning that you’ll hear audio when dragging the playhead 
+with the mouse back and forth. While this can be useful when you’re searching for audio cues, it can 
+also be distracting if you’re just focused on the picture.
+To enable or disable audio scrubbing:
+Choose Timeline > Audio Scrubbing (Shift-S)
+Playback Post-Roll
+Enables the playhead to continue playing past the last clip in the Timeline for a duration equal to the 
+“Post-roll time” Project Setting in the Editing panel. This is good for editors that want to experience 
+a few moments of playback after cutting or fading to black after the last frame of audio and video in 
+the Timeline.
+To enable or disable playback post-roll:
+Choose Timeline > Playback post-roll
+Switching Among Multiple Timelines
+Timelines can be organized like any other clip in the Media Pool. To open or switch among timelines, 
+use the following procedures.
+To switch timelines, do one of the following:
+  Double-click a timeline in the Media Pool on any page.
+  Turn on Stacked Timelines in the Timeline View Options menu of the Edit page toolbar, so that all 
+timelines you open appear as tabs. Clicking different tabs switches to that timeline.
+  In the Edit page Timeline Viewer, choose a timeline from the Timelines drop-down menu at the top 
+of the viewer.
+  In the Color page, choose a timeline from the Timelines drop-down menu at the top of the Viewer.
+  In the Fairlight page, choose a timeline from the Timelines drop-down menu to the left of the 
+transport controls.
+Toolbar
+At the center of the toolbar that sits above the Timeline, several buttons let you choose different tools 
+and options for performing various editing functions.
+Buttons in the toolbar
+848Edit | Chapter 40 Using the Edit Page
+EDIT
+Selecting the Timeline View options
+Timeline View Options:  The controls let you customize the look of the clips on the 
+tracks (Filmstrip, Thumbnail, or Minimized), audio waveform displays, stacked timelines, 
+subtitles, and the adjustable height of the video and audio tracks.
+Keyframe Editor: Opens the Keyframe Editor in the timeline.
+Voiceover: Opens the Voiceover tools to record directly into the timeline.
+Selection Mode: The default mode in which you can move and resize clips in the 
+Timeline, roll edits, and do other basic editing tasks. In this mode, making specific 
+selections in the Timeline and using the nudge commands of Comma and Period 
+resizes, moves, or rolls the selection, as does absolute or relative timecode entry.
+Trim Edit Mode: In this mode, the Trim tool lets you make slip, slide, ripple, and roll 
+edits by dragging different parts of clips in the Timeline, by making specific selections 
+and using the “nudge” keyboard shortcuts of Comma and Period to move the selection 
+left or right, or by making specific selections and using timecode entry to make relative 
+or absolute adjustments.
+Dynamic Trim Mode: This mode works in conjunction with either the Selection or 
+Edit modes. With Dynamic Trim mode enabled, you can either resize and move clips 
+(in Selection mode), or ripple, slip, or slide them (in Trim mode) using the JKL keyboard 
+shortcuts that play forward and backward through the Timeline. While enabled, the 
+spacebar triggers the Play Around Current Selection command. The Toolbar button 
+for this mode also changes to show you whether you’re in slip or slide mode for 
+nudging, timecode-entry adjustment, or dynamic trim (set by pressing the S key).
+Blade Edit Mode: Lets you add cuts to clips at the playhead in the Timeline by clicking.
+Insert Clip: Performs an insert edit to the Timeline with whatever 
+clip is in the Source Viewer.
+849Edit | Chapter 40 Using the Edit Page
+EDIT
+Overwrite Clip: Performs an overwrite edit to the Timeline  
+with whatever clip is in the Source Viewer.
+Replace Clip: Performs a replace edit to the Timeline  
+with whatever clip is in the Source Viewer.
+Snapping: Enables or disables clip snapping. When turned on, clip In and Out points, 
+markers, and the playhead all snap to one another for reference while you’re editing.
+Linked Selection: Enables or disables audio/video linking. When turned on, clicking a 
+video clip in the Timeline automatically selects the corresponding audio clip if they’re 
+linked together. When turned off, clicking a video clip won’t select its audio. Clip linking 
+can be toggled while you work by pressing the Option key while clicking to make 
+selections in the Timeline.
+Position Lock: Prevents clips from being moved to the left or right, and it prevents all 
+ripple operations. Essentially ensures all the Timeline elements stay in sync and can’t 
+be adjusted accidentally. 
+Flag Clip/Flag Colors drop-down menu:  Flags identify clips, and indicate all clips 
+that correspond to the same item of media in the Media Pool. Clips can have multiple 
+flags. Clicking the Flag button automatically adds a flag to whichever clip is currently 
+selected in the Timeline. A drop-down menu to the right lets you choose differently 
+colored flags, and clear all flags from the currently selected clip.
+Add Marker/Marker Colors drop-down menu: Markers identify specific frames 
+of individual clips. Clicking the Add Marker button adds a marker of the currently 
+displayed color to the clip at the position of the playhead in the Timeline. A drop-down 
+menu to the right lets you choose differently colored markers, and clear all markers 
+from the currently selected clip.
+Full Extent Zoom: Dynamically adjusts the zoom level to encompass the whole 
+Timeline as you add or remove clips.
+Detail Zoom: Zooms the Timeline in on the Playhead to the frame level.
+Custom Zoom: Zooms the Timeline to the level selected by the Zoom slider 
+to its immediate right.
+Zoom Slider: Lets you zoom into or out of the clips in the Timeline. Use the scroll 
+wheel of your mouse to horizontally zoom into and out of the Timeline. Scrolling up 
+zooms in, while scrolling down zooms out. You can also use Command-Plus to zoom in, 
+and Command-Minus to zoom out, and Shift-Z to fit every clip in your program into the 
+available width of the Timeline.
+These functions are described in greater detail in the following sections of this chapter.
+850Edit | Chapter 40 Using the Edit Page
+EDIT
+Toolbar Audio Monitoring Controls
+At the far right of the toolbar, a set of three monitoring controls lets you quickly control the output 
+volume of your mix. An audio Enable/Disable button lets you turn audio playback on and off, while a 
+slider lets you change the volume, and a DIM button lets you temporarily duck the monitored volume 
+being output in order to have a quick chat with your client about sports or the state of the world while 
+keeping half an ear on the mix.
+The monitoring controls in the Edit page
+When there are multiple audio Mains defined for a project, an additional drop-down dialog appears 
+with the audio monitoring controls in the toolbar that lets you choose which Main you’re listening to.
+The Mixer and Meters
+The Audio Mixer provides a set of graphical controls you can use to set track levels, pan stereo audio, 
+and mute and solo tracks, all while you continue to edit.
+The Audio Mixer, with four channel strips 
+corresponding to the four tracks in the Timeline
+To open the Audio Mixer:
+Click the Mixer button on the Interface toolbar.
+The Audio Mixer exposes a set of channel 
+strips with controls that correspond to the 
+tracks in the Timeline, and each channel strip 
+displays a number of audio meters equal 
+to the number of channels within that track. 
+By default, a Main 1 channel strip appears all 
+the way to the right that lets you adjust the 
+overall level of the mix. However, if you add 
+subs and mains on the Fairlight page, those will 
+appear at the right of the mixer as well.
+For more information on the use of the Mixer 
+in the Edit page, jump to this chapter:  
+Working with Audio in the Edit Page .
+For more information on using the Mixer 
+in the Fairlight page, jump to this chapter:  
+Mixing in the Fairlight Page .
+851Edit | Chapter 40 Using the Edit Page
+EDIT
+Displaying Audio Meters
+If you just want to see your program’s levels, you can also switch to display the “Control Room” 
+audio meters instead of the Mixer. How many audio meters appear depends on the current speaker 
+configuration in the Video and Audio I/O panel of the System Preferences.
+To show the Audio Meters:
+Click the Mixer button on the Interface toolbar to display the audio panel, and then choose 
+Meters from the option menu at the upper right-hand corner.
+Using Video Scopes
+DaVinci Resolve has a set of four real-time video scopes that you can use to monitor the internal data 
+levels of clips in your project as you work. Each scope provides an unambiguous graphical analysis 
+of the various characteristics of the video signal, showing you the relative strength and range of 
+individual color components including luma, chroma, saturation, hue, and the red, green, and blue 
+channels that, together, comprise the color and contrast of the images in your program.
+To open video scopes from the Media, Cut, Edit, Color, or Deliver pages, do one of the following:
+  Choose Workspace > Video Scopes > On/Off (Command-Shift-W) to open video scopes into a 
+floating window.
+  Choose Workspace > Dual Screen > On to open video scopes as part of a dual screen layout.
+Video scopes in a floating window
+852Edit | Chapter 40 Using the Edit Page
+EDIT
+The video scopes aren’t just available in the Color page. They’re also available in the Media, 
+Cut, Edit, and Deliver pages for whenever you need to evaluate the video signal more 
+objectively, such as when you’re setting up to capture from tape or scan from film, or when 
+you’re setting up for output.
+For more information on using the video scopes, jump to this chapter: Using the C olor Page.
+Floating Timecode Window
+A Timecode Window is available from the Workspace menu on every page except Fusion. Choosing 
+this option displays a floating timecode window that shows the timecode of the Viewer or Timeline that 
+currently has focus. This window is resizable so you can make the timecode larger or smaller.
+The floating timecode window
+Dual-Monitor Layout
+The Edit page has a dual-monitor layout that provides maximum space for the Timeline and Viewers 
+on the primary monitor, and an enlarged Media Pool, simultaneously displayed Timelines browser, 
+Edit Index, Effects Library, and Metadata Editor on the secondary monitor. The second screen of a 
+dual-screen layout can be resized but not reorganized.
+If you have an single ultra-wide monitor, you can also use the dual-monitor layout, and DaVinci Resolve 
+will scale the interface as if you had two normal monitors side by side.
+To enter dual-screen mode:
+Choose Workspace > Dual Screen > On. 
+853Edit | Chapter 40 Using the Edit Page
+EDIT
+The Edit page in dual-screen mode
+To switch which UI elements appear on which monitors:
+Choose Workspace > Primary Display > (Monitor Name), which reverses the contents of both 
+monitors in dual screen mode.
+To view only the timeline in a monitor:
+Choose Workspace > Full Screen Timeline.
+854Edit | Chapter 40 Using the Edit Page
+EDIT
+Customizing the Edit Page
+The default layout is quite efficient for a number of tasks on most displays. You can always return 
+to the default layout by choosing Workspace > Reset UI Layout. However, the Edit page can be 
+customized to create more room for specific areas of the interface to accommodate different tasks.
+To resize any area of the Edit page:
+Drag the vertical or horizontal border between any two panels to enlarge one and shrink the other.
+To expand the width of the Timeline:
+Click the Media Pool/Effects Library/Edit Index height button to reduce the area used by the Media 
+Pool, Effects Library, and/or Edit Index to shrink to half height. At this size, the Media Pool/Effects 
+Library/Edit Index are restricted to the top of the UI (you can only show one at a time), and the Timeline 
+takes up the full width of your display.
+Hiding the Edit Index and the Effects Library causes the Timeline to expand to the full 
+width of your screen.
+To resize the height of individual video or audio tracks:
+Move the pointer to the top border of any video track header, or the bottom border of any audio track 
+header, and when it becomes a resize cursor, drag that border up or down to resize that track. Each 
+track can have an independent size when you do this.
+To enable a full-screen timeline in Dual Screen mode:
+Choose Workspace > Dual Screen > Full Screen Timeline, which causes the Timeline to fully occupy 
+the primary display, while the Browser, Viewers, Audio Mixer, Edit Index, and Effects Library appear on 
+the secondary display.
+To customize the columns in the Edit Index:
+To show or hide columns in the Edit Index: Right-click any column header, and choose the column 
+you want to show or hide from the contextual menu.
+Checked columns are shown, unchecked columns are hidden.
+To resize any column of the Edit Index: 
+Move your pointer over the divider between any two columns and drag when the horizontal resize 
+cursor appears.
+To sort the Edit Index by any column: 
+Click the Option button at the top right to display all active tracks, just the video, or just the 
+audio tracks.
+To rearrange Edit Index columns: 
+Drag the header of any column to the left and right to move that column.
+To show and hide the Audio Meters or Audio Mixer:
+Click the Mixer button in the UI toolbar.
+To switch between the Audio Meters and the Audio Mixer:
+Choose Meters or Mixer from the Option menu at the top right corner of the Mixer.
+855Edit | Chapter 40 Using the Edit Page
+EDIT
+Undo and Redo in DaVinci Resolve
+No matter where you are in DaVinci Resolve, Undo and Redo commands let you back out of steps 
+you’ve taken or commands you’ve executed and reapply them if you change your mind. DaVinci 
+Resolve is capable of undoing the entire history of things you’ve done since creating or opening a 
+particular project. When you close a project, its entire undo history is purged. The next time you begin 
+work on a project, its undo history starts anew.
+Because DaVinci Resolve integrates so much functionality in one application, there are three 
+separate sets of undo “stacks” to help you manage your work.
+• The Media, Edit and Fairlight pages share the same multiple-undo stack, which lets you 
+backtrack out of changes made in the Media Pool, the Timeline, the Metadata Editor, and 
+the Viewers.
+• Each clip in the Fusion page has its own undo stack so that you can undo changes you 
+make to the composition of each clip, independently.
+• Each clip in the Color page has its own undo stack so that you can undo changes you make 
+to grades in each clip, independently.
+In all cases, there is no practical limit to the number of steps that are undoable (although there 
+may be a limit to what you can remember). To take advantage of this, there are three ways you 
+can undo work to go to a previous state of your project, no matter what page you’re in.
+To simply undo or redo changes you’ve made one at a time:
+  Choose Edit > Undo (Command-Z) to undo the previous change.
+  Choose Edit > Redo (Shift-Command-Z) to redo to the next change.
+You can also undo several steps at a time using the History submenu and window. At the time of this 
+writing, this only works for multiple undo steps in the Media, Cut, Edit, and Fairlight pages.
+To undo and redo using the History submenu:
+1 Open the Edit > History submenu, which shows (up to) the last twenty things you’ve done.
+2 Choose an item on the list to undo back to that point. The most recent thing you’ve done appears 
+at the top of this list, and the change you’ve just made appears with a check next to it. Steps 
+that have been undone but that can still be redone remain in this menu, so you can see what’s 
+possible. However, if you’ve undone several changes at once and then you make a new change, 
+you cannot undo any more and those steps disappear from the menu.
+Once you’ve selected a step to undo to, the menu closes and the project updates to show you its 
+current state.
+856Edit | Chapter 40 Using the Edit Page
+EDIT
+The History submenu, which lets you undo several steps at once
+To undo and redo using the Undo window:
+1 Choose Edit > History > Open History Window.
+2 When the History dialog appears, click an item on the list to undo back to that point. Unlike 
+the menu, in this window the most recent thing you’ve done appears at the bottom of this list. 
+Selecting a change here grays out changes that can still be redone, as the project updates to 
+show you its current state.
+3 When you’re done, close the History window.
+The Undo history window that lets you browse the  
+entire available undo stack of the current page
+857Edit | Chapter 40 Using the Edit Page
+EDIT
+Chapter 41
+Creating and 
+Working with 
+Timelines
+In this chapter, you’ll learn how to create and modify the timelines into which you 
+edit clips to create the edited sequences that are your programs.
+Contents
+Creating and Duplicating Timelines  ������������������������������������������������������������������������������������������������������������������������������������������� 860
+Individual Timeline Settings for Format, Monitoring, Output, and Color ������������������������������������������������������������������� 860
+Creating Blank and Stringout Timelines  ������������������������������������������������������������������������������������������������������������������������������������� 861
+Creating Timelines by Drag and Drop  ���������������������������������������������������������������������������������������������������������������������������������������� 862
+Creating Timelines From Bins and Selections  ������������������������������������������������������������������������������������������������������������������������ 862
+Creating Timelines Using an IMF or DCP Composition Playlist (CPL)  ������������������������������������������������������������������������� 863
+Duplicating Timelines  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 864
+Disabling Timelines  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 864
+Adding Media Pool Timelines Directly to the Render Queue  ��������������������������������������������������������������������������������������� 865
+Import and Export DaVinci Resolve Timelines (.drt)  ����������������������������������������������������������������������������������������������������������� 865
+Backing Up and Restoring Timelines  ����������������������������������������������������������������������������������������������������������������������������������������� 866
+Restoring Deleted Timeline Backups ������������������������������������������������������������������������������������������������������������������������������������������ 868
+Compare Timelines with Timeline Backup Snapshots  ������������������������������������������������������������������������������������������������������� 868
+Timeline View Options  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 868
+Modifying Timeline Tracks  �������������������������������������������������������������������������������������������������������������������������������������������������������������� 870
+Naming Timeline Tracks �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 871
+Using the Tracks Index ����������������������������������������������������������������������������������������������������������������������������������������������������������������������� 871
+Tracks Index Columns������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 872
+858Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+Toggle Track Header Control States by Clicking and Dragging ����������������������������������������������������������������������������������  873
+Using Timeline Snapping and Zooming  ������������������������������������������������������������������������������������������������������������������������������������ 874
+Zoom Around Mouse Pointer ���������������������������������������������������������������������������������������������������������������������������������������������������������� 875
+Scrolling Through the Timeline ���������������������������������������������������������������������������������������������������������������������������������������������������� 875
+Scroll Wheel Controls on Timeline  ����������������������������������������������������������������������������������������������������������������������������������������������� 875
+Timecode Display can Show Frames, Subframes or Audio Samples ������������������������������������������������������������������������  876
+Move Playhead to Mouse Pointer Using the C key ������������������������������������������������������������������������������������������������������������� 876
+Resizing the Timeline’s Video and Audio Track Regions  ������������������������������������������������������������������������������������������������ 876
+Tabbed and Stacked Timelines �����������������������������������������������������������������������������������������������������������������������������������������������������  877
+Tabbed Timelines ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  877
+Stacked Timelines  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 878
+View and Edit Dual Timelines Using the Source Viewer  ������������������������������������������������������������������������������������������������� 879
+Duplicate Frame Detection ��������������������������������������������������������������������������������������������������������������������������������������������������������������  881
+Comparing Timelines  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 881
+The Timeline Comparison Window  ����������������������������������������������������������������������������������������������������������������������������������������������� 881
+859Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+Creating and Duplicating Timelines
+If you’re not importing a project that’s been edited elsewhere, you can create a new timeline to cut 
+together a new edit from scratch, to use to assemble clips for use in a Fusion composition, to grade 
+a set of dailies, or to put together an audio program within the Fairlight page. When you create a new 
+timeline, you can either create a timeline that contains all clips found in the Media Pool to quickly 
+create a big batch of offline dailies, or an empty timeline that’s ready for you to add specific clips to. 
+Timelines you create are stored in the currently selected Media Pool bin. 
+If you’d like an easy way to browse all the timelines in your project at once, regardless of their diverse 
+locations, you can enable the “Smart Bin for Timelines” option, which is in the Editing panel of the User 
+Preferences. This creates a Smart Bin in the Bin list of the Media Pool that filters all timelines in your 
+project, making it easy to see all your timelines without altering your original organization.
+Individual Timeline Settings for Format, 
+Monitoring, Output, and Color
+When you create a new timeline, there are a number of ways you can customize it, but by default it 
+will mirror the current project-wide timeline settings for resolution, frame rate, and other format and 
+monitoring parameters.
+The Create New Timeline dialog with standard customization settings
+However, you have the option of creating separate timelines with individual Format, 
+Monitoring, Output Sizing, and Color Management settings for situations where you need 
+to set up multiple timelines to create multiple deliverables with different resolutions, pixel 
+aspect ratios, frame rates, monitoring, or output scaling options, and color management than 
+the overall project, including “Mismatched Resolution Files” settings. To choose individual 
+settings, uncheck the Use Project Settings box in the New Timeline dialog, and additional 
+controls will appear.
+860Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+Clicking Use Custom Settings exposes additional  
+panels for individualized timeline settings
+Once you’ve created a timeline with individual settings, you can edit its settings by right-clicking 
+that timeline in the Media Pool, and choose Timelines > Timeline Settings from the contextual menu. 
+An Edit Timeline dialog appears, with separate panels for Format, Monitor, Output, and Color settings 
+that you can choose. You can also click Use Project Settings to have that timeline use the project-wide 
+timeline settings instead.
+It is also possible to change the starting timecode for multiple timelines at the same time using the 
+custom timeline settings.
+To change the start timecode for multiple timelines at once:
+1 Select the Timelines whose timecode you want to modify.
+2 Right-click on one of the selected Timelines and choose Timelines > Starting Timecode from the 
+contextual menu.
+3 Enter the new timecode in the Time Start field.
+4 Click on OK.
+Creating Blank and Stringout Timelines
+If you’re cutting a new video or audio program, you’ll usually want a blank timeline. However, the 
+same command can be used to create stringout timelines when putting together dailies by turning the 
+“Empty Timeline” checkbox off.
+To create a new blank timeline:
+1 (Optional) Select or create a folder in the Bin list in which to put the new timeline.
+2 Do one of the following:
+  Choose File > New Timeline (Command-N).
+  Right-click within the Media Pool, and choose Timelines > Create New Timeline.
+3 When the New Timeline Options window opens, set the following options:
+Start Timecode: You can change the Start Timecode if a specific start time is required.
+Timeline Name: Enter a name into the Timeline Name field.
+No. of Video Tracks: Enter how many video tracks you want to have. You can also drag within this 
+field to adjust the number of video tracks with a virtual slider.
+861Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+Use Fairlight Preset: If this box is checked, it creates a timeline with pre-assigned audio tracks 
+using a previously created Fairlight Configuration preset. A drop-down menu then appears, 
+allowing you to select the specific preset for the Timeline. The preset is used in lieu of the 
+No. Of Audio Tracks setting below. You can create Fairlight Configuration presets using the 
+Fairlight Presets Library, available from the Fairlight menu. 
+For more information, jump to this chapter: Setting Up Tracks, Busses, and Patching .  
+If you have no Fairlight Configuration presets saved, this option will not appear.
+No. of Audio Tracks: Enter how many audio tracks you want to have. You can also drag within this 
+field to adjust the number of audio tracks with a virtual slider.
+Audio Track Type: Choose the channel mapping you want the new audio tracks to use.
+Empty Timeline: Checked by default, this sets new timelines to be created empty. If you turn off 
+the Empty Timeline checkbox, the new Timeline that’s created will contain all media found in every 
+bin within the Media Pool, effectively creating a stringout of everything you’ve imported.
+Use Selected Mark In/Out: Only available when “Empty Timeline” is turned off. When you turn this 
+checkbox on, each clip’s duration in the new Timeline is defined by the In and Out points saved 
+within each clip. If there are no In/Out points in a clip, the clip’s entire duration is used.
+Use Custom Settings: Click this button if you want to expose the Format, Monitor, and Output tabs 
+that can expose unique settings for each timeline.
+4 Click Create New Timeline.
+A new timeline is created. If necessary, you can duplicate an existing timeline in order to alter an 
+edit or create an alternate grade.
+TIP: If you’re going to be creating several new timelines with a specific set of parameters, 
+you can open the User pane of the Preferences and edit the New Timeline Settings, found 
+in the Editing panel. This will define new presets that populate the New Timeline Options 
+window from that point forward.
+Creating Timelines by Drag and Drop
+When you first create a new project, no timeline inhabits the Timeline Editor, and you have an 
+opportunity to create a new timeline by drag and drop.
+To create a timeline by dragging and dropping a clip:
+Drag any clip into the empty Timeline Editor area underneath the Viewers on the Edit page, and a new 
+timeline will automatically be created.
+Creating Timelines From Bins and Selections
+The “Create Timeline Using Bin” and “Create Timeline Using Selected Clips” commands let you quickly 
+assemble a timeline using the contents of the Media Pool, using whatever In and Out points have been 
+added to each clip, and using the sort order of the enclosing bin to determine the order in which the 
+clips will be assembled.
+862Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+TIP: These commands are especially useful for putting together quick assembly edits if you 
+have metadata-rich media with scene, shot, and take information that you can use to sort clips 
+into the proper order, and In and Out points that you’ve already logged.
+To create a timeline using the full contents of a bin:
+1 (Optional) Put the Media Pool into List mode, set In and Out points for each clip in your Bin, 
+and sort the Media Pool by the column that will put all clips in the order you want them to 
+be assembled.
+2 Right-click the bin in the Bin list, and choose Create Timeline Using Bin.
+3 Type the name of the new timeline in the New Timeline Properties dialog. If you want to use 
+the In and Out points of each clip, make sure “Use Selected Mark In/Out” is checked, and click 
+Create New Timeline.
+To create a timeline using manually selected clips:
+1 (Optional) Put the Media Pool into List mode, set In and Out points for each clip in your 
+Bin, and sort the Media Pool by the column that will put all clips in the order you want 
+them to be assembled.
+2 Select one or more clips you want to assemble into a new timeline.
+3 Right-click one of the selected clips, and choose Create Timeline Using Selected Clips.
+4 Type the name of the new timeline in the New Timeline Properties dialog. If you want to use 
+the In and Out points of each clip, make sure “Use Selected Mark In/Out” is checked, and click 
+Create New Timeline. By default, Audio Track Type is set to “Based on selected media,” so the 
+timeline audio tracks reflect the track mapping of the clips you’ve selected, but you can manually 
+choose other specific mappings if you need to.
+Creating Timelines Using an IMF 
+or DCP Composition Playlist (CPL)
+You can create a timeline in DaVinci Resolve that exactly replicates the Composition Playlist (CPL) 
+of a DCP or IMF package. This is currently a DaVinci Resolve Studio only feature.
+To create a timeline using a Composition Playlist (CPL):
+1 Import an IMF or DCP package into the Media Pool, like any other piece of media.
+2 Right-click on the imported clip and choose “Create New Timeline Using Composition Playlist” 
+from the contextual menu.
+3 In the New Timeline dialog box, choose a specific CPL from the package in the 
+“Composition Playlist” drop-down menu.
+4 Make any other normal new Timeline adjustments you may need (such as Resolution, 
+Aspect Ratio, etc.), then click the “Create” button.
+863Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+Duplicating Timelines
+You can also duplicate existing timelines in preparation for saving a copy prior to making modifications, 
+or as a starting point for a different version of your content.
+To duplicate a Timeline, do one of the following:
+  Select a timeline in the Media Pool, and choose Edit > Duplicate Timeline. The duplicate timeline 
+appears with “copy” appended to the name.
+  Right-click a timeline in the Media Pool, and choose Duplicate Timeline from the contextual menu.
+Disabling Timelines
+You can disable/enable timelines in the Media Pool for both performance and organizational purposes. 
+This is particularly useful for editors who like to maintain a history of a program’s editing via an 
+ongoing series of periodically duplicated timelines. Since having a large number of timelines within 
+a single project file can affect performance, having the ability to disable timelines lets you maintain 
+these backup/alternate timelines without any penalty. 
+Disabled timelines are never loaded into RAM, have no effect on the speed at which a project opens, 
+saves, exports, or loads, and have no effect on program performance. A disabled timeline also hides 
+the timeline from the viewer drop-down menus throughout the program. Disabled timelines are 
+still visible in the Media Pool, but have a crossed out eye icon in the lower left to show the status. 
+A disabled timeline cannot be opened in any page of DaVinci Resolve.
+To disable a timeline:
+Select the Timeline, right-click on it and choose “Disable Timeline” from the drop-down menu.
+To enable a timeline: 
+Select the Timeline, right-click on it and choose “Enable Timeline” from the drop-down menu. 
+The crossed-out eye in the lower left of the 
+thumbnail indicates this Timeline is disabled.
+TIP: Enabled and Disabled timelines can be easily grouped and organized across the entire 
+project by creating a Smart Bin with the MediaPool Properties > Timeline fields, and choosing 
+“is Enabled/Disabled.”
+864Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+Adding Media Pool Timelines 
+Directly to the Render Queue
+You can add a timeline directly to the Deliver page’s Render Queue by right-clicking on the timeline 
+and hovering over the Add to Render Queue Using, and making a selection from the list of presets. 
+You can add your own presets to this list by saving a new custom preset in the Deliver page.
+You will then be prompted for the location to render the file. The timeline will be added to the Render 
+Queue in the Deliver page but will not start rendering until the Render All button is pressed.
+Select a Preset from the “Add to Render Queue Using” menu option to directly send the timeline to the Render Queue
+Import and Export 
+DaVinci Resolve Timelines (.drt)
+You can export and import individual timelines from one DaVinci Resolve project into another 
+previously existing DaVinci Resolve project, allowing you to pass timelines quickly between projects 
+and workstations, without creating additional imported project files. Just the timeline and its 
+associated clip information are exported; none of the actual media files are included.
+To export a timeline from the Media Pool:
+1 Select a timeline from the Media Pool.
+2 Choose File > Export > Export AAF, XML, DRT (Shift-Command-O).
+3 Choose “DaVinci Resolve Timeline Files (*.drt)” from the format options popup in the file 
+system dialog.
+4 Choose where to save the DaVinci Resolve Timeline file (.drt) in the file system dialog, and 
+click Save.
+865Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+To export multiple timelines from the Media Pool:
+1 Select multiple timelines from the Media Pool.
+2 Right-click on a timeline and choose Timelines > Export > DaVinci Resolve Timeline Files.
+3 Select the folder where you wish to save them from your file browser.
+Unlike exporting individual timelines, when exporting multiple timelines, you will not be 
+able to rename the .drt files on export. They will retain the timeline name they have in the 
+Media Pool.
+To import a timeline into the Media Pool:
+1 Choose a bin in the Media Pool in which you want the imported timeline to be saved.
+2 Do one of the following:
+  Choose File > Import Timeline > Import AAF, XML, DRT (Shift-Command-I), then Select a DaVinci 
+Resolve Timeline file (.drt) from the file system dialog, and click Open.
+  Double click the .drt file in your file system.
+The timeline will appear in the Media Pool, along with all of the clips associated with it, 
+including any media sync information. Any timelines imported this way will have the word 
+“import” appended to their name, to avoid duplicate names. The imported timeline will be 
+automatically conformed to corresponding media that’s already in the Media Pool. However, if 
+the timeline has been moved to another computer, you may have to reimport or relink missing 
+or offline media in to bring the imported timeline fully online.
+NOTE: Only a single timeline can be imported and exported at a time using this method. 
+To import or export multiple timelines, use the Import/Export Bin function instead.
+Backing Up and Restoring Timelines
+Turning on the Timeline Backups checkbox in the Project Save and Load panel of the User 
+Preferences enables DaVinci Resolve to save multiple backups of a timeline at periodic intervals, 
+using a method that’s analogous to a GFS (grandfather-father-son) backup scheme. This can be done 
+regardless of whether or not Live Save is turned on.
+If you want to revert to a previous backup of a timeline, simply right-click on the timeline in the Media 
+Pool, select Restore Timeline Backup from the contextual menu, and choose the backup from the list 
+of options. Backups are organized by date and time, making it easy to find the specific timeline you 
+want to restore.
+There are certain times in the editing process where it makes sense to manually create a backup point 
+before radically changing the remainder of your timeline. This can be done by duplicating the timeline 
+(which is generally the safest), or you can also manually set a backup point for recall with the rest of 
+your timeline backups.
+To manually create a backup point with a custom name for a timeline, either: 
+  Select File > Create Timeline Backup (Option-Command-S).
+  Right-click on your timeline in the Media Pool, and select Create Timeline Backup from the 
+context menu.
+866Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+Restoring a timeline backup does not overwrite your current timeline. Instead the selected backup will 
+be brought into the Media Pool as a new timeline, with the name “Backup” appended to it.
+Restoring a timeline backup in the Media Pool
+Timeline backups are only saved when changes have been made to a project. If DaVinci Resolve sits 
+idle for any period of time, such as when your smart watch tells you to go outside and walk around the 
+block, no additional project backups are saved, preventing DaVinci Resolve from overwriting useful 
+backups with unnecessary ones.
+Three fields let you specify how often to save a new backup, while the fourth lets you choose where 
+the backups will be saved. These settings apply to both Project and Timeline backups.
+  Perform backups every X minutes: The first field specifies how often to save a new backup within 
+the last hour you’ve worked. By default, a new backup is saved every 10 minutes, resulting in six 
+backups within the last hour. Once an hour of working has passed, an hourly backup is saved and 
+the per-minute backups begin to be discarded on a first in, first out basis. By default, this means 
+that you’ll only ever have six backups at a time that represent the last hour’s worth of work.
+  Hourly backups for the past X hours:  The second field specifies how many hourly project 
+backups you want to save. By default, two hourly backups will be saved for the current day. Past 
+that number, hourly backups will begin to be discarded on a first in, first out basis.
+  Daily backups for the past X days: The third field specifies for how many days you want to save 
+backups. The very last backup saved on any given day is preserved as the daily backup for that 
+day, and by default daily backups are only saved for two days. Past that number, daily backups 
+will begin to be discarded on a first in, first out basis. If you’re working on a project over a longer 
+stretch of time, you can always raise this number.
+  Project backup location:  Click the Browse button to choose a location for these backups to be 
+saved. By default they’re saved to a “Project Backup” directory on your scratch disk, although 
+you could change this to a volume that better fits into your data backup methodology. This folder 
+contains both Project and Timeline backups.
+867Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+Restoring Deleted Timeline Backups
+From the Media Pool Options menu, you can select Deleted Timeline Backups and examine deleted 
+timelines and available backup files for each timeline. You can select backups to be restored or 
+choose to permanently delete selected backups.
+Compare Timelines with Timeline Backup Snapshots
+To view the timeline changes you’ve made against other previously backed up timelines, right-click on 
+the timeline and select Compare with Timeline Backup  to open up the Compare Timeline  window.
+The Compare Timeline window shows the two timelines stacked together, highlighting their 
+differences. You can choose which backup to compare it to from the dropdown menu at the top of 
+the window.
+Comparing the current timeline against a previous timeline backup.
+Timeline View Options
+As you’re working on an edit, it can often be useful to modify the appearance of the Timeline, 
+changing the height of video or audio clips, choosing whether audio waveforms are drawn or not, and 
+so on. Using the Timeline View Options dropdown at the far left of the Timeline, you can make these 
+kinds of changes as you work.
+The Timeline View Options dropdown
+868Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+You have the following options:
+  Timeline View Options:  Three buttons let you choose to show or hide specific Timeline interface 
+elements, including the following:
+Display Stacked Timelines: This option lets you show stacked timelines for simultaneous display 
+of timelines one on top of another.
+Display Subtitle Tracks: Lets you display or hide the subtitle tracks region of the timeline. 
+Hiding subtitle tracks does not disable subtitle display; to do that you must disable the currently 
+displayed subtitle track.
+Display Audio Waveforms: Lets you turn Audio Waveform viewing off and on. 
+When Audio Waveform is turned off, audio tracks are minimized.
+  Thumbnail View Options: Three buttons let you choose the overall appearance of the video track. 
+From left to right:
+Filmstrip: Displays each clip as a series of frames along its length. The number of frames 
+displayed depends on the current zoom level of the clip in the timeline. 
+Thumbnail: Displays each clip as a solid color with a thumbnail image of the clip’s In point at the 
+beginning of the clip and a thumbnail image of the Out point at the end. The thumbnails displayed 
+depend on the current zoom level and track height of the clip in the timeline. If the clip does not 
+have enough room for both, only the In point thumbnail will appear.
+None: Displays each clip as a solid color along its length.
+  Viewer Background: Four options: Checkerboard, Black, Grey, or Alert Red let you determine 
+what color the transparent background will be in the Viewer.
+  Fixed Playhead: This option lets you toggle between a fixed playhead, keeping the playhead 
+static in the middle of the timeline, while the tracks on the timeline move underneath it, or 
+Free Playhead, where the playhead travels along the timeline as it is played back.
+When using the Fixed Playhead option, you can choose where to set the location of the 
+Fixed Playhead in the timeline, rather than just have it in the center. To do so, hover the pointer 
+over the top of the playhead in the Timeline Ruler and drag it to the new location you want to use. 
+Moving the Fixed Playhead can be useful in increasing the amount of timeline working area for 
+clips before or after the current position.
+  Audio View Options: Three buttons govern the look of audio waveforms in the Timeline, 
+when visible.
+Display Non-Rectified Waveform:  Lets you toggle between the waveform being drawn from the 
+bottom of the audio track up, or centered and mirrored about itself.
+Display Full Waveform: Hides the divider bar that keeps the waveform separate from the file name 
+area of each audio clip, so the waveform occupies the full space of each audio bar in the Timeline.
+Display Waveform Border: Draws a dark border around the edges of each waveform to make 
+them easier to see.
+  Video track height slider:  Lets you resize the size of all video tracks at once, independently of the 
+audio tracks.
+  Audio track height slider:  Lets you resize the size of all audio tracks at once, independently of the 
+video tracks.
+869Edit | Chapter 41 Creating and Working with Timelines
+EDIT
+In addition, any track in the Timeline can be individually resized by dragging its top divider in 
+the Track Header area. Track heights in the Edit page are independent of the Thumbnail and 
+Waveform view settings in the Timeline View options. Previously, specific Timeline viewing 
+options such as Filmstrip or Thumbnail view had minimum track height settings. Now you can 
+freely change track height no matter what options you’ve chosen, and resizing one or more 
+tracks below the minimum height for filmstrips or thumbnails automatically collapses those 
+tracks into Simple view to avoid clutter.
+Resizing an individual timeline track by  
+dragging its top border in the Track Header
+Modifying Timeline Tracks
+When you’re getting ready to edit clips into the Timeline, you need to make sure you’ve got enough 
+tracks to do the job. The following procedures cover the different methods available for adding, 
+removing, and rearranging tracks as you work. These commands are all available via the contextual 
+menu that appears when you right-click anywhere in the Timeline header area (the header of the 
+Timeline is the area to the left where each track’s various buttons and controls are located).
+Keyboard Shortcuts can be assigned for track header context menu actions to add, delete, move, 
+change color, and link tracks. Tracks can be selected in the Track index, or the Edit and Fairlight 
+timelines. For example, you can assign a keyboard shortcut to add a new Audio Track in the Edit page 
+by navigating to Commands > Edit Timeline > Track Controls > Add Track > Audio in the Keyboard 
+Customization window.
+Methods for adding, deleting, and rearranging tracks:
+  To add a track to the Timeline: Right-click on a Track Timeline header and choose Add Track. 
+A new video track will be created immediately above the track you right-clicked on. A new audio 
+track will be created immediately below the track you right-clicked on. If you add an audio track, 
+you can choose what type of channel mapping you want. 
+For more information about audio track channel mappings, jump to this chapter:  
+Working with Audio in the Edit Page .
+  To add multiple tracks to the Timeline at a specific position: Right-click anywhere in the Timeline 
+header and choose Add Tracks. When the Add Tracks dialog appears, choose the number of 
+video and audio tracks you want to add, choose the position you want to insert the tracks above 
+or below, and choose the Audio Track Type you want to add if you’re adding audio tracks. When 
+you’re done, click “Add Tracks.”
+870Edit | Chapter 41 Creating and Working with Timelines
+EDIT

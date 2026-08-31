@@ -1,0 +1,1263 @@
+Chapter 171
+Setting Up Tracks, 
+Busses, and Patching
+One of the first things you need to do when you’re setting up a new project for 
+mixing in the Fairlight page is to define the audio tracks and busses you’ll need to 
+route and combine the elements of your mix. 
+This chapter covers how to create audio tracks and how to use busses to manage your mixes in the 
+most efficient possible way. However, the Fairlight page gives you the flexibility to add or change 
+your set up at any time; you can also concentrate on being creative and deal with any required 
+housekeeping as your mix evolves.
+Fairlight’s FlexBus structure supports bus-to-bus, track-to-bus, or bus-to-track signal routing, 
+along with expanded Dolby Atmos capabilities, including import, export, and manipulation of 
+Atmos ADM files.
+Contents
+Audio Tracks ������������������������������������������������������������������ 3871
+What Is a Bus? �������������������������������������������������������������� 3872
+Surround Panning and Bussing  �������������������������� 3872
+Bus to Bus Routing and Mixing ����������������������������  3872
+Using Legacy Fixed Bussing  ��������������������������������� 3873
+Busses in Nested Timelines  ���������������������������������� 3874
+Exposing Bus Tracks in the Timeline  ����������������� 3874
+Controlling Signal Flow  ������������������������������������������� 3874
+Defining Audio Track Types ����������������������������������� 3874
+Rearranging Tracks ���������������������������������������������������� 3876
+Duplicating Tracks ������������������������������������������������������ 3876
+Deleting Tracks ������������������������������������������������������������ 3876
+Disabling Tracks ���������������������������������������������������������� 3877
+Changing Track Type ������������������������������������������������ 3878
+Link Grouping ��������������������������������������������������������������� 3878
+Working Separately with 
+Multichannel Audio File Elements  ��������������������� 3880
+Creating Busses ��������������������������������������������������������� 3880
+Assigning Busses  ������������������������������������������������������  3883
+Bus Assignment Using the Mixer  �����������������������  3883
+The Bus Assign Window �����������������������������������������  3883
+Setting Signal Paths  ������������������������������������������������� 3885
+Using the Patch Input/Output Window ������������  3885
+Using a Channel Strip’s Input Menu  ������������������ 3889
+Input Menu with Legacy Fixed Bussing �����������  3891
+The Fairlight Presets Library  �������������������������������� 3891
+Using the Presets Library  ��������������������������������������� 3892
+3870Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Audio Tracks
+Each audio track in a DaVinci Resolve timeline corresponds to a single channel strip on the Mixer’s 
+left side. Depending on how an audio track has been configured, each audio track is assigned a 
+specific audio format, such as mono, stereo, 5.1 or 7.1 surround, or Dolby Atmos. Track routing allows 
+multiple audio channels within the clips on a track to be correctly routed to the proper audio output for 
+monitoring and rendering via the lanes that can be seen within each track on the Fairlight timeline.
+Audio tracks in DaVinci Resolve often contain multiple channels from a given clip, but how those 
+individual audio channels are displayed depends on the page:
+  The Cut and Edit pages display a single clip “lane” per audio track in the Timeline, regardless 
+of how many channels the clips on that track are representing. The waveform displayed is a 
+composite, showing a mix of the various channels within the clip. 
+  This can make it easier to work with multichannel tracks without the distraction of viewing multiple 
+channel lanes, which could make things look a lot “busier.” However, the tradeoff is that detailed 
+activity on any of the various channels on that track are not seen.
+  The Fairlight page displays the same number of tracks as the Edit page, but each track on the 
+Fairlight page is divided into lanes, which shows each individual channel of a clip’s audio. This 
+additional visual information can help with editing and mixing.
+(Top) 6 channel and stereo audio in the Cut and Edit pages 
+represented by single composite tracks. (Bottom) The same audio 
+in the Fairlight page shows the six channel and stereo tracks 
+with multiple lanes that correspond to each of the file types. 
+3871Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Now that you understand how tracks work on the Fairlight page, the next important concept 
+you need to understand in order to unlock the power of the Fairlight page is FlexBus, which 
+lets you combine multiple audio tracks in different ways.
+What Is a Bus?
+A bus is simply a common signal connection point in an audio mixer. Busses can be mono, stereo, or 
+any larger format, like 5.1 or Dolby Atmos 9.1.6 (where 16 audio signals are used). Bussed connections 
+are mixed together into a single signal that can be controlled via a single bus channel strip. 
+For example, by default a single bus called “Bus 1” combines the levels of every clip edited onto every 
+track of a timeline into the mixed signal that is output to your speakers or headphones.
+You can use busses in creative ways to organize mixing of tracks in a timeline. For example, if you 
+have five audio tracks that have all of the edited dialogue audio clips for a particular program, you can 
+route the output of all five dialogue tracks to a dedicated submix bus. This allows the combined levels 
+from all the contributing dialogue tracks to be processed, adjusted, and mixed at once using a single 
+channel strip’s controls.
+You can use multiple busses to organize a mix, including routing submix busses into other “main 
+busses.” Individual tracks can be routed to submix busses, then multiple submixes can be routed to 
+one or more “main output” busses. For example, you could have four submix busses, one for German 
+dialogue, one for English dialogue, one for Music, and one for Effects. You could route the German, 
+Music, and Effects submix busses to a Main 1 bus to output the German version of the program, and 
+route the English, Music, and Effects submix busses to a Main 2 bus to output the English language 
+version of the program.
+Surround Panning and Bussing 
+When working on surround or immersive formats, audio tracks from the Timeline are routed to busses 
+via each channel strip’s multi-format surround panner, so busses can be configured to accommodate 
+specific audio formats, such as mono, stereo, LCRS, 5.1 surround, or 7.1 surround, and immersive formats, 
+such as Atmos. By using multiple bus routing, you can even output different formats simultaneously.
+Bus to Bus Routing and Mixing
+Fairlight’s FlexBus structure offers complete user flexibility for bus types and signal routing, allowing 
+completely user-definable bussing, and making it possible to patch outputs and/or sends in any way 
+you need, as dictated by your project. Each track can output to up to ten busses and sends with 
+additional level and pan controls to a further ten busses. Busses can be sent to other busses up to six 
+layers deep, facilitating complex stem building, processing, and allowing discrete deliverables.
+User-definable busses allow for bus-to-bus, bus-to-track, or track-to-bus routing, with each bus having 
+the ability to pass signals from mono to fully immersive formats, such as Dolby Atmos. As with any and 
+all of the track types in Fairlight, these bus types can be changed at any time if needed.
+The power of the FlexBus system is that it allows users to direct signals to many different places at one 
+time, achieving complex mixing scenarios. Perhaps you need to generate two mixes that are identical 
+in content but need to be of different output levels. You can designate two mix busses, one with an 
+output level of -2dB true peak and one with an output level of -10dB true peak. The final mix signal is 
+sent to one bus that is then broken into two more busses, one with a limiter set to -2dB and one set to 
+-10 dB, creating these two different mixes at one time. 
+3872Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+The FlexBus structure allows for many different bus 
+track types to be created or changed.
+Using Legacy Fixed Bussing
+If you want to work using the previous method of Fixed Bus mapping, you can do so for new projects by 
+opening the Fairlight panel of the Project Settings, and turning on the “Use fixed bus mapping” checkbox.
+If your project has Fixed Bussing enabled and you want to change to FlexBus, then uncheck the 
+“Use fixed bus mapping” checkbox. Note that once you have made the change it will not allow you to 
+change it back to legacy bussing. 
+For more information, jump to this chapter: Mixing in the Fairlight Page .
+Converting Older Fixed Bus Projects to FlexBus
+Older Fixed Bus projects can be converted to FlexBus by doing the following:
+• Open Project Settings > Fairlight. 
+• Under the Bussing heading, uncheck “Use fixed bus mapping.”
+• A dialog will appear allowing you to convert the project to FlexBus.
+3873Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Busses in Nested Timelines
+When you nest a timeline inside another timeline that has busses set up for mixing in the Fairlight 
+page, all bus routings continue to work as intended within the nested timeline, which exposes all 
+channels via the default main bus (Bus 1) in the enclosing timeline. In this sense, the audio of the 
+nested timeline can be considered to be a submix that outputs its resulting audio to the audio track it’s 
+edited onto. However, you can also decompose your nested timeline into its own bus structure within 
+the main timeline you’ve imported into, exposing all of the original tracks as they were. 
+This is a very powerful feature for combining work done at different times or by different 
+contributors. For more information, jump to this chapter: Mixing in the Fairlight Page .
+Exposing Bus Tracks in the Timeline
+You can expose any bus as a track in the Timeline. This makes it possible to view and edit automation 
+that is applied to parameters on that bus.
+To show a bus in the Timeline:
+1 Enable the Toggle Automation button on the Fairlight toolbar. All busses are visible by default.
+2 If you want to hide a bus, open the Index, and click the eye button for the bus you want to hide in 
+the Timeline.
+3 If you want to work with automaton on a bus, choose the desired automation curve you want to 
+view from the dropdown menu in the track header controls.
+Controlling Signal Flow
+A good process for setting up editing and mixing in the Fairlight page is: 
+  Organize and configure the tracks on your timeline as required.  For example, clips well organized 
+on tracks, set track types, color, grouping, etc.
+  Create the busses needed to organize the desired signal flow in the mix.
+  Route the audio tracks, or any submix busses to the desired bus destinations for the mix layout.
+Defining Audio Track Types
+If you decide to create a new audio track, you have to choose what kind of audio track it will be. 
+Right-clicking in the bottom audio portion of the Timeline track header reveals a contextual sub-menu 
+that lets you create different kinds of audio tracks.
+  Mono: Holds a single channel with only one lane.
+  Stereo: Holds stereo left and right channels, with two lanes.
+  3.0: Holds three channels, with three lanes in either LRC (Left, Right, Center) or 
+LCR (Left, Center, Right) format.
+  4.0: Holds four channels, with four lanes in either LRCS (Left, Right, Center, Surround), 
+LCRS (Left, Center, Right, Surround), or Quad format.
+3874Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+  5.x: 5.0 holds five channels corresponding to a 5.0 surround mix, for a total of five lanes. 
+For broadcast, SMPTE specifies Left, Right, Center, Surround Left, and Surround Right. 
+For cinema distribution (5.0 Film), these tracks are ordered Left, Center, Right, Left Surround, and 
+Right Surround.
+5.1 holds six channels corresponding to a 5.1 surround mix, for a total of six lanes. For broadcast, 
+SMPTE specifies Left, Right, Center, LFE, Surround Left, and Surround Right. For cinema 
+distribution (5.1 Film), these tracks are ordered Left, Center, Right, Left Surround, Right 
+Surround, and LFE.
+  7.x: 7.0 holds seven channels corresponding to a 7.0 surround mix, for a total of seven lanes. 
+For broadcast, SMPTE specifies Left, Right, Center, Left Surround, Right Surround, Back Left 
+Surround, and Back Right Surround. For cinema distribution (7.0 Film), these tracks are ordered 
+Left, Center, Right, Left Surround, Right Surround, Back Surround Left, and Back Surround Right.
+7.1 holds eight channels corresponding to a 7.1 surround mix, for a total of eight lanes. 
+For broadcast, SMPTE specifies Left, Right, Center, LFE, Left Surround, Right Surround, Back Left 
+Surround, and Back Right Surround. For cinema distribution (7.1 Film), these tracks are ordered Left, 
+Center, Right, Left Surround, Right Surround, Back Surround Left, Back Surround Right, and LFE.
+  Adaptive: Holds up to 24 audio channels, each with its own lane within the track. An adaptive 
+audio track can hold clips with different combinations of channels, up to the maximum number of 
+channels allowed within that track. The number of channels allowable on a particular Adaptive 
+track is user-definable (1–24) at the time that track is created. If you edit a clip with more channels 
+into an Adaptive track that was created to hold fewer channels, the extra clip channels are muted.
+  Dolby Atmos: There are several Dolby Atmos formats available: 5.1.2, 5.1.4, 7.1.2, 7.1.4, and 9.1.6. 
+The naming of the channel configurations in the Dolby Atmos format includes the height channels 
+in the nomenclature. Channel configurations are presented as three digits separated by periods, 
+such as 7.1.4. The first digit describes the number of main, or ear-height monitoring channels that 
+surround the listener. The second digit describes the number of subwoofer channels. The third 
+digit describes the number of height channels, which are speakers positioned on, or in the case of 
+a soundbar pointed to, the ceiling.
+NOTE: The Dolby Atmos bus formats of 9.1.4, 9.16, and 22.2 are only available in 
+DaVinci Resolve Studio and also require that Dolby Atmos be enabled in Preferences > 
+Video and Audio I/O > Immersive Audio. 
+Adding Tracks (Contextual Menu)
+There are two commands related to adding tracks in the right-click contextual menu on any audio 
+track’s header controls: 
+  Add Track: Adds a single audio track of the type you choose from a submenu. 
+  Add Tracks: Lets you insert as many tracks as you like, designating the track type and position in 
+relation to other tracks in the Timeline.
+3875Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Rearranging Tracks
+You can rearrange tracks by right-clicking in a track’s header area and choosing either Move Track 
+Up or Move Track Down in the contextual menu that appears. You can also move tracks in the Index 
+by grabbing them and moving them to the desired position. This method works when moving multiple 
+tracks at once.
+Duplicating Tracks
+Tracks can be duplicated by right-clicking a track header and choosing “Duplicate Track” from the 
+contextual menu.
+You can duplicate multiple tracks simultaneously by selecting them, right-clicking any track header in 
+the group, and choosing “Duplicate Tracks” from the contextual menu.
+The names of duplicate tracks will be appended with the word “copy.” 
+Timeline contextual menu - Duplicate Tracks  Duplicated tracks with appended names
+Deleting Tracks
+Right-click within a track’s Timeline header and choose Delete Track. If there are clips on a track you 
+remove, they are also deleted from the Timeline, but preserved in the Media Pool.
+You can delete a selection of tracks in the Fairlight timeline by right-clicking any selected track header 
+and selecting Delete Tracks from the contextual menu.
+You can remove all empty audio tracks in the Fairlight timeline by right-clicking any track header and 
+selecting Delete Empty Tracks from the contextual menu.
+3876Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Timeline contextual menu - Delete Tracks
+Disabling Tracks
+You can disable an audio track by right-clicking its track header and choosing Disable Track from the 
+contextual menu.
+To disable multiple tracks simultaneously, select them, right-click any track header in the group, and 
+choose Disable Tracks from the contextual menu. 
+Timeline contextual menu - Disable Tracks  Disabled tracks
+3877Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+To reenable your tracks, repeat one of the selection processes based on the number of 
+tracks, and choose Disable Track or Disable Tracks from the contextual menu.
+Changing Track Type
+If you had set up your timeline with one kind of audio track, but you discover you actually need a 
+different type, you can change it at any time. Just right-click anywhere in that audio track’s Timeline 
+header, and choose an option from the Change Track Type To submenu of the contextual menu.
+Link Grouping
+The Link Group function allows you to link mono tracks of material that are related and manipulate 
+them as a one entity controlled by a single fader on a single channel strip. Only mono tracks 
+can be used to create a link group; other track types such as stereo, 5.1, 7.1, Atmos, or Adaptive 
+cannot be used. 
+Unlike a multi-channel track with lanes, a link group of mono tracks functions as independent, editable 
+tracks in the Timeline. However, each track is mapped when choosing a track type, using one of the 
+standard multi-channel mappings (stereo, 5.1, 7.1, Adaptive).
+Link groups are extremely useful. For example, if you’ve been given independent “.L/.R” sides of a 
+stereo mix, or a set of six independent related audio files that need to be assembled as a single 5.1 
+surround mix, or when you have surround channels that need to be specifically re-edited on a channel 
+by channel basis.
+To create a Link Group from individual mono tracks:
+1 Create two or more Mono audio tracks that you want to group together. If you need to create 
+a link group with a specific channel mapping, such as 5.1, make sure you create enough tracks 
+(in this case, 6).
+2 Choose Fairlight > Link Group.
+3 When the Link Group dialog appears, mono audio tracks are represented by active buttons 
+(all other track types are disabled, since they can’t be linked). Click to enable the button of 
+every track you want to include in the link group you’re about to create. The available track type 
+mappings when creating your group depends on how many tracks you’ve selected.
+Selecting six tracks to use for creating a link group
+4 After you’ve selected all the tracks you need, click one of the available “Link as” buttons below. 
+In this example, six tracks have been selected, so you could click 5.1 Film or 5.1.
+When you select enough tracks, you can create  
+groups linked as specific surround mappings.
+3878Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Afterwards, the tracks you selected should turn into a single block, showing they’ve been linked.
+The Link Group window shows the link indicator line next to the track names.
+Depending on the number of mono channels selected, Fairlight will offer possible linking 
+options. For instance, when ten channels have been selected, both Atmos 7.1.2 and 5.1.4 are 
+option choices.
+The Link As option is dependent on the number of channels being linked.
+5 Close the Link Group window when you’re finished.
+Once you’ve created a link group, you’ll see a single bar on the left side of the headers, spanning 
+the group. If the tracks are tall enough, each will be labeled, indicating its assigned channel based 
+on the track mapping chosen in step 4. For example, with a 5.1 surround mapping, L, R, C, LFE, Ls, 
+Rs, and so on. You also have the freedom to edit additional or different contributing elements of a 
+surround mix into the appropriate track that represents that channel.
+Tracks in a Link Group are labeled 
+to identify which track corresponds 
+to which surround channel.
+3879Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Working Separately with Multichannel Audio File Elements
+If you’ve edited a multichannel audio clip onto a multichannel track, you can convert that track and its 
+contents into a Link Group of mono tracks, each of which contains a single clip for that track’s channel. 
+This can be useful if you need to fix a multi-channel surround audio clip with an incorrect track 
+mapping. You can convert it into a Link Group, at which point you can easily rearrange the channels.
+To create a Link Group from a single multichannel timeline:
+Right-click the track header of a multichannel audio track, and choose Convert to Linked Group from 
+the contextual menu. This automatically creates one new audio track for each channel, all of which are 
+linked together. For example, converting a 5.1 audio track results in six new tracks with six individual 
+audio clips (one for each channel), all of which are linked together.
+If necessary, you can also unlink a linked group to turn it back into independent mono tracks.
+To unlink a Link Group:
+1 Choose Fairlight > Link Group.
+2 When the Link Group dialog appears, select the link group you want to unlink.
+3 Click Unlink.
+4 Close the Link Group window when you’re finished.
+SMPTE and Film order Standards
+The variations of routing of the multichannel files are due to the path order of SMPTE or Film 
+standards. They are:
+  5.1 film order: L, C, R, Ls, Rs, LFE
+  5.1 SMPTE order: L, R, C, LFE, Ls, Rs
+  7.1 film order: L, C, R, Lss, Rss, Lsr, Rsr, LFE
+  7.1 SMPTE order: L, R, C, LFE, Lss, Rss, Lsr, Rsr
+Creating Busses
+Choosing Fairlight > Bus Format opens the Bus Format window, which lets you create the busses you 
+need (up to the limitations of your system) to organize the tracks and channels of your program.
+The Bus list lets you rename the bus, choose the format of each bus (a dropdown menu appears in the 
+Format column of each entry of the list), shows the number of channels associated with a bus, and lets 
+you color-code each bus (a Color dropdown lets you choose that bus’s color). Simply click any item on 
+the Bus list to select it, and choose different options from the Format and Color dropdown menus, or 
+click on the Name of any bus to select it, and type a custom name.
+At the bottom of the list are three buttons that let you Add Bus, Duplicate, or Remove selected busses. 
+When you’re done modifying the available busses, you can click OK to accept the changes and close 
+the Bus Format window, or Cancel to close the window without any changes (although all pre-existing 
+busses remain in place). The bottom button row also has a Used tally of what has been used and what 
+is available for your workstation.
+3880Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+The depth of options in the FlexBus system
+Immersive Formats (Studio Version Only)
+To turn on the immersive formats, go to Preferences > Video and Audio I/O > System Panel > 
+Immersive Audio, and choose from among the appropriate options. Once enabled, the various 
+immersive bus formats are available in the Bus Format panel’s Bus list.
+The legacy Bus Format window lets you add busses to the mixer.
+3881Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+The Video and Audio I/O panel lets you enable or disable Immersive Audio options.
+Legacy Fixed Bussing
+Working with the FlexBus topology is highly recommended for its flexibility. In addition, some newer 
+features are only available using FlexBus. At some point, however, you may need to work with legacy 
+Fixed Bussing in a new project. To use Fixed Bussing in a newly-created project, prior to adding any 
+timeline, open Project Settings > Fairlight, and under the Bussing heading, check “Use fixed bus 
+mapping.” Now all bussing is handled with the legacy Fixed Bus topology.
+Bus formatting with Fixed Bus
+The legacy Bus Format window has four buttons that let you create the various Fixed Bus types. 
+Creating a new bus, whether it’s a Main, Sub, Aux, or Multi Track, adds the new bus to the list that 
+appears beneath.
+The legacy Bus list works the same as the FlexBus list with choices for rename, format, color code, and 
+so on, and buttons that let you Duplicate or Remove selected busses.
+When you’re done modifying the available busses, you can click OK to accept the changes and close 
+the Bus Format window, or Cancel to close the window (although any busses you’ve made remain 
+in place). The bottom button row also has a Used tally of what has been used and what is available for 
+your workstation.
+3882Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Assigning Busses
+Once you’ve created one or more busses, you can assign different tracks to specific busses or 
+perhaps also busses to busses, busses to tracks, and the final Main bus destinations. 
+Bus Assignment Using the Mixer
+You can easily assign your track(s) to any available busses simply by using the plus (“+”) icon on a 
+Mixer channel strip:
+  Select a mixer channel, and click on the plus (“+”) icon in the Bus Output or Bus Sends section. 
+  In the dropdown menu, choose the desired destination. 
+  A rectangle appears with the name of the bus, and the bus is now assigned. 
+Bus routing dropdown  
+menu on a channel strip
+TIP: You can quickly assign a bus to any selected group of tracks, or to all tracks, by 
+holding down the Option key (Mac) or the Alt key (Windows) for all selected tracks or 
+Command-Option (Mac) or Control-Alt (Windows) for all mixer channel strips prior to 
+performing the operation. These shortcuts can save a lot of time in your workflow.
+The Bus Assign Window
+When you have a lot of busses or tracks to handle, the Bus Assign window lets you to easily manage 
+connecting to all of them at once. Choose Fairlight > Bus Assign to open the window. Multiple bus 
+assignments can be created within the dialog; these new assignments will be reflected in the Bus 
+Outputs section on the channel strips in the Mixer.
+The top shows the Send and the Out of each available bus, while the bottom shows a list of all 
+available tracks and busses to connect to. The Bus Assign window defaults to List view, in which 
+each bus and track is shown as a list, but by using the icon in the upper right of the window, it can be 
+switched to Icon view, in which Available Tracks are shown as buttons.
+3883Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Making Bus Assignments
+Assigning Using List View
+Click a button in the Busses section to select the Send or Out of that bus, and then click on any 
+destination in the tracks/busses list below, or drag over a group of tracks or busses to assign to all of 
+them. When assigned, the bus number will appear in the Bus Sends or Bus Outputs column.
+  To assign every track, Sub, and Aux to a bus: Click a button in the Busses section to select that 
+bus, and then click Assign All.
+  To clear all track assignments from a particular bus: Click a button in the Busses section to select 
+that bus, and then click Unassign All.
+When you’re done making bus assignments, click the Close button to close the dialog.
+Bus Assign window
+NOTE: While the dialog is open, you can undo any assignments you’ve made, one a time, or 
+redo them, using Command-Z and Command Shift-Z respectively.
+3884Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Assigning Using Icon View
+Click a button in the Busses section to select the Send or Out of that bus, and then either click on a 
+target track button or drag a bounding box over all of the buttons for available tracks that you want to 
+assign to that bus. 
+Once assigned, the Available Tracks buttons display which bus they’ve been assigned to. When 
+assigned, the Bus number will be followed by an “o” or an “s” to indicate if it’s the send or the out 
+of that bus.
+Assigning multiple tracks to a bus in Icon view by dragging a bounding box
+Setting Signal Paths
+While bus creation and assignment allows you to submix tracks or route from one bus to another, you 
+often need to route signals from individual, external sources to a track or bus. For example, if you need 
+to record audio to a track, you need to patch the audio input on your hardware to the track you want 
+to record to. Making this type of connection is called “patching” in Fairlight and is accomplished using 
+the Patch Input/Output window, which is available on the Fairlight, Edit and Deliver pages, providing 
+patching changes on any of these.
+Using the Patch Input/Output Window
+Choosing Fairlight > Patch Input/Output opens the Patch Input/Output window, which can be 
+displayed in either List (default) or Icon view. This window is split into two halves, with the left half 
+containing whichever Source controls you choose and the right half containing whichever Destinations 
+you choose.
+Creating a Patch
+By default, the Patch Input/Output window shows the available Audio Inputs as the Source and 
+the Track Inputs as the destination. This makes it easy to patch whatever audio source (such as a 
+microphone connected to a USB audio interface) to a specific audio track of the Timeline to prepare 
+for recording. Patching and unpatching a source to a destination is straightforward. In the following 
+screenshot, the Audio 1 Input from an audio interface is highlighted and is being patched to a track 
+named “Walla.”
+3885Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+ 
+The Patch Input/Output window showing Source Audio Inputs and Destination Track Inputs
+Patching a source to a destination:
+1 Choose a type of source from the Source dropdown menu at the upper left-hand side of the window.
+2 Click the item on the source list (or action button in Icon view) that you want to patch from on the 
+left side of the Patch Input/Output window.
+3 Choose a destination from the Destination dropdown menu at the upper right-hand side of 
+the window.
+4 Click the list item (or action button) of the destination you want to patch to on the right side.
+5 Click the Patch button at the bottom right of the window. The source and destination will both 
+display the connection they’re patched to.
+To unpatch a source and destination pair:
+1 Click a list item or action button corresponding to a source or destination you want to unpatch.
+2 Click Unpatch.
+Patching in Icon view
+3886Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Choosing Source and Destination Controls
+The Audio Source and Destination dropdown menus let you choose different categories of sources 
+and destinations to patch together.
+The following Source options are available:
+  Audio Inputs: The available physical audio inputs on your workstation, for example the Fairlight 
+SX-36 audio interface, MADI, third party interfaces (for example, USB or Thunderbolt), or system 
+audio. Useful when patching to record audio.
+  Bus Out: Any Busses.
+  Monitor Direct: Monitor system Direct Out, routed post fold up/down matrix, pre the Monitor 
+VolumeLevel/Dim/Mute.
+  Monitor Out: Monitor system output. Post fold up/down matrix and Monitor 
+VolumeLevel/Dim/Mute.
+  System Generator: Provides various utility sources, including beeps and timecode generation:
+OSC: Provides a test oscillator. The oscillator controls appear in a floating window accessed via 
+Fairlight > Test Tone Settings.
+Noise: Uses the Noise generator with choice of white or pink noise, which can be selected via 
+Fairlight > Test Tone Settings.
+Beeps: Refers to beeps generated by operations on the ADR panel, with controls found on 
+the ADR setup page. 
+Timecode generator: Generates timecode when enabled and the transport runs, with controls 
+provided in a floating window accessed via Fairlight > Remote Control Settings.
+  Track Direct: Track Direct Out, can be pre or post the track fader, with an offset.
+  Track Reproduction: This is the track playback signal, directly from disk, before any processing.
+  Dolby Atmos Renderer: The output from the Dolby Atmos Renderer in the currently selected 
+Atmos output monitoring format. There is also a parallel stereo binaural output to feed 
+headphones.
+The following Destination options are available:
+  Audio Outputs: For example, the Fairlight SX-36 audio interface, MADI, third party interfaces 
+(for example, USB or Thunderbolt), or system audio. Useful when patching to playback audio to 
+speakers or headphone systems.
+  Talk Back: The system for patching the General Purpose Input and General Purpose Output used 
+for talkback.
+  Track Input: The inputs to the available audio tracks in the current timeline, which are the inputs to 
+the Record and Thru path.
+  Dolby Atmos Send: You will need to patch this manually if you are creating original content. If you 
+import a Dolby Atmos master file, the Send patching for the bed and object tracks will be created 
+automatically. When an external Dolby RMU renderer is enabled, all sources patched to these 
+sends will be mirrored on the physical outputs to the external renderer, as defined by the base 
+audio outputs set in system preferences. 
+3887Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Legacy Fixed Bus Patching
+If you choose to use the legacy Fixed Bussing in the Project Settings, the options 
+appear a bit differently.
+The following Audio Source options are available:
+  Audio Inputs: The available physical audio inputs on your workstation, for example SX-36, MADI, 
+or system audio. Useful when patching to record audio.
+  Monitor Direct: Monitor system Direct Out. Post fold up/down matrix, pre the Monitor 
+VolumeLevel/Dim/Mute.
+  Monitor Out: Monitor system output. Post fold up/down matrix and Monitor 
+VolumeLevel/Dim/Mute.
+  Main Direct: Main Bus Direct Out; can be pre or post the Main bus master fader, with an offset.
+  Main Out: Main Bus Out; always post the Main bus master fader.
+  Main Send: Main bus master insert send.
+  System Generator: Provides various utility sources, including beeps and timecode generation:
+OSC: Provides a test oscillator. The oscillator controls appear in a floating window accessed via 
+Fairlight > Test Tone Settings.
+Noise: Uses the Noise generator with choice of white or pink noise, which can be selected via 
+Fairlight > Test Tone Settings.
+Beeps: Refers to beeps generated by operations on the ADR panel, with controls found on the 
+ADR setup page. 
+Timecode generator: Generates timecode when enabled and the transport runs, with controls 
+provided in a floating window accessed via Fairlight > Remote Control Settings.
+  Track Direct: Track Direct Out; can be pre or post the track fader, with an offset.
+  Track Reproduction: This is the signal from the track playback, before any processing.
+  Track Send: Track Insert send.
+The following Audio Destination options are available:
+  Audio Outputs: The available physical audio outputs on your workstation. For example, the 
+Fairlight SX-36 audio interface, MADI, third party interfaces (for example, USB or Thunderbolt), 
+or system audio. Useful when patching to play back audio to speakers or headphone systems.
+  Main Return: Main Bus master insert return.
+  Talk Back: The system for patching the General Purpose Input and General Purpose 
+Output for talkback. 
+  Track Input: The inputs to the available audio tracks in the current timeline, which are the inputs to 
+the Record and Thru path.
+  Track Return: Track insert return.
+  Dolby Atmos Send: You will need to patch this manually if you are creating original content. 
+If you import a Dolby Atmos master file, the Send patching for the bed and object tracks will be 
+created automatically. When an external Dolby RMU renderer is enabled, all sources patched to 
+these sends will be mirrored on the physical outputs to the external renderer, as defined by the 
+base audio outputs set in system preferences.
+3888Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Using a Channel Strip’s Input Menu
+The Input dropdown menu at the top of each track’s channel strip in the mixer provides some 
+shortcuts for patching different inputs and busses to the tracks of your mix. Each option in this 
+menu makes the Patch Input/Output window appear with various Source and Destination selections 
+automatically set up.
+Input
+The Patch Input/Output window appears set up to let you patch different inputs (such as the 
+system audio input) to the tracks of the timeline. This makes it fast for setting up audio inputs in 
+preparation for recording.
+Bus
+A shortcut to open the Patch Input/Output window (discussed previously in this chapter) that lets you 
+patch Bus Out or Bus Sends to Timeline track channels.
+Path Settings
+This opens the Path Settings window for the track, which contains controls for adjusting the input level 
+of audio signals coming from an input/output device.
+The Path Settings window showing audio inputs and track inputs
+These parameters are as follows:
+Mic/Inst
+Controls will only appear on this panel if you have connected channels 1 or 2 of a Fairlight SX36 audio 
+interface to your system. If connected, you can remotely control all of the options (including level) for 
+the mic/instrument inputs of the SX36 if they are assigned to the channel. If there is no connection to 
+an SX36, the area is empty. 
+Record Level
+  Record: This button is linked and identical to the Record Enable button on the channel strip; here 
+for convenience. If you hit one, it will enable the other.
+  Thru: Lets the input signal to pass into the mixer without enabling a record path. This is ideal when 
+you want a source signal to always be available and just want to monitor it. 
+TIP: The mixer channel in question can also be switched to Thru mode by Command-
+clicking the Track Arm button, in either the Mixer or Track Header. The button will turn 
+green and ’T’ will be displayed within it.
+3889Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+  Record Level: Allows you to apply a digital gain adjustment to the record path to disk, post the 
+output of your audio interface’s analog-to-digital converter. 
+Normally, this control should be left at 0.0 (no change, unity gain), as it affects the level you are 
+recording to disk. It is best practice to use the level controls on your audio interface to control the 
+input level into DaVinci Resolve in order to maximize audio fidelity. However, there might be a time 
+where you need a bit more level, or may not have access to an audio interface’s controls, and in 
+those cases you can adjust the input.
+Trim
+  Polarity: This button inverts the polarity of the signal coming into the channel strip (sometimes 
+referred to as “flipping the phase”). 
+For example, you may have an input signal, like an explosion, where the transient attack of the 
+signal produces with a massively positive-going waveform (where the waveform mostly appears 
+above the zero line). 
+If you invert the polarity, the signal will now be mainly negative-going and the waveform will be 
+concentrated beneath the zero line. Inverting polarity is sometimes used to more closely align 
+signals from multiple microphones and can be used creatively to affect frequency response of 
+such a signal.
+  Trim Level: The Trim knob lets you adjust the level of the signal coming “off of disk” during 
+playback to optimize the level feeding effects and the busses. This is helpful when you want to 
+slightly trim an otherwise perfect element up or down in your mix.
+Trim adjustments are applied post the recorded signal and Track FX (which processes directly “off 
+of disk”), and pre all other effects, and do not affect the recording level. 
+Direct Output
+Each audio channel strip can enable a direct output that can be used to feed any other input 
+destination. You can patch this source using the Track Direct choice in the Patch Input/Output dialog 
+via the Source dropdown. 
+  On/Off: Enables and disables the direct output.
+  Pre: Sets the direct output tap-off point to be pre (before) the channel fader. On by default.
+  Level Control: Sets the direct output level from minus infinity (fully off) to +10 dB. 
+Default is 0.0 (unity gain). 
+For more information, jump to this chapter: Setting Up Tracks, Busses, and Patching .
+Insert
+This button is linked and identical to the Effects In button on the channel strip; here for convenience. 
+Clicking this button in one location enables the other and switches all Fairlight FX, AU, or VST channel 
+effects in or out of the signal path. 
+3890Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Input Menu with Legacy Fixed Bussing
+When using the legacy Fixed Busing, the options there are a bit different. Here is how they look when 
+that is enabled.
+Input
+The Patch Input/Output window appears set up to let you patch different inputs (such as the system 
+audio input) to the tracks of the Timeline. This makes it fast for setting up audio inputs in preparation 
+for recording.
+Aux Bus
+A shortcut to open the Patch Input/Output window (discussed previously in this chapter), which 
+appears set up to let you patch different Aux busses to specific submix and Timeline track channels.
+Sub Bus
+A shortcut to open the Patch Input/Output window (discussed previously in this chapter), which 
+appears set up to let you patch different Sub (submix) bus channels to specific Timeline track channels.
+Main Bus
+A shortcut to open the Patch Input/Output window (discussed previously in this chapter), which 
+appears set up to let you patch different Main bus channels to specific Timeline track channels.
+Path Settings
+This option opens the Path Settings window, which contains controls for adjusting the input level of 
+audio signals coming from an input/output device.
+The Fairlight Presets Library
+The Fairlight page offers a powerful and flexible preset system that allows you to store and recall 
+presets for everything from the complete configuration of the audio page to individual presets for 
+plugins. To access the presets library, choose Fairlight > Presets Library.
+Fairlight Presets Library with stored presets on the  
+left panel and destination tracks on the right
+3891Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+A Filter By dropdown menu on the upper left lets you choose the type of preset you want 
+to work with.
+Filter By menu of preset types
+The choices are:
+  Equalizer Presets: Presets for the built-in channel EQ.
+  Dynamics Presets: Presets for the built-in Dynamics Processor.
+  Plugins Presets: Fairlight FX, AU, or VST.
+  Global Track Presets: All settings for a Mixer channel strip.
+  Global Bus Presets: All settings for a Mixer bus.
+  Fairlight Configuration Presets:  Many parameters of the Fairlight page are stored as a 
+preset including:
+  Track height.
+  What tracks are shown or hidden in the Tracks pane of the Index.
+  Split point in the Mixer.
+  Full Track vs. Small Track views in the Mixer.
+  Track Groups enable status.
+NOTE: Some items are not currently stored in Fairlight Configurations, such as which panels 
+are shown (for example, Media Pool or Index), Meter Panel show/hide, Fairlight video window 
+docking, and size if the video window is set to be floating. 
+Using the Presets Library
+Select the preset type you want to work with from the Filter By dropdown menu on the left. 
+The tracks list on the right (which appears for most preset types) acts as both a list of sources that 
+contain information you want to store and a list of destinations that you want to assign to when you 
+have presets defined. To store and recall and assign presets:
+3892Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+• If you’re storing a preset for the first time, select the source track in the tracks list on the 
+right of the window that you’ll be grabbing the preset type from (unless it’s a Fairlight 
+Configuration preset, which has no tracks to chose from, as it is global).
+• Click the Save New button to save your preset.
+• To load your preset onto another track, deselect any tracks currently selected in the track 
+list on the right, and select the track(s) you want to assign to. Click Apply and the preset 
+is loaded.
+• To save a new version of an existing preset or update your present version, first choose a 
+track in the track list that has your preset assigned to it. Then click the Save New button, and 
+a dialog appears that allows you to choose to update the current version of the preset or 
+save a new preset based on the current settings.
+• To Delete a preset, select it in the list, and click the Delete button. 
+Update or Create New preset dialog
+3893Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT
+Chapter 172
+Transport Controls, 
+Timeline Navigation, 
+and Markers
+The Fairlight page has unique transport control, zooming, and scrolling options 
+not found in the other pages of DaVinci Resolve that help you to work with audio 
+more efficiently. 
+This chapter covers how to navigate around the Fairlight version of the Timeline.
+Contents
+Transport Controls and JKL Navigation  �������������������������������������������������������������������������������������������������������������������������������� 3895
+Transport Controls  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3895
+Using JKL to Control Playback ����������������������������������������������������������������������������������������������������������������������������������������������������  3895
+Dragging the Playhead to Scrub ������������������������������������������������������������������������������������������������������������������������������������������������ 3896
+Looping Playback������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3896
+Loop Jog Scrubbing  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3897
+Moving the Playhead Using Timecode  �����������������������������������������������������������������������������������������������������������������������������������  3897
+Clip, Marker, and Track Navigation ������������������������������������������������������������������������������������������������������������������������������������������ 3898
+Selecting Tracks ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3898
+Moving the Clip Selection  �������������������������������������������������������������������������������������������������������������������������������������������������������������� 3899
+Moving the Track Selection  ���������������������������������������������������������������������������������������������������������������������������������������������������������� 3899
+Zooming and Scrolling  �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3899
+Setting the Zoom Level of the Timeline ���������������������������������������������������������������������������������������������������������������������������������� 3900
+Scrolling Through the Timeline  ��������������������������������������������������������������������������������������������������������������������������������������������������� 3900
+Go to Mouse Pointer Using the C Key ������������������������������������������������������������������������������������������������������������������������������������� 3900
+Using Flags �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3901
+Using Markers �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3901
+Adding Markers to Clips  ����������������������������������������������������������������������������������������������������������������������������������������������������������������� 3902
+Adding Markers to Timelines  ������������������������������������������������������������������������������������������������������������������������������������������������������� 3902
+3894Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Transport Controls and JKL Navigation
+Because of the Fairlight page’s audio-focused workflow, the transport and playback controls differ 
+from those found in the Media, Edit, Color, and Deliver pages.
+Transport Controls
+Fairlight page transport controls
+The Fairlight transport controls are also designed to mirror their counterparts on the Fairlight control 
+panels. They include the following functions:
+  Rewind and Fast Forward:  Initiates accelerated playback through the Timeline in either 
+direction. Pressing either of these buttons multiple times speeds up this motion, cycling through 
+8x, 24x, 60x, 150x, and 360x play speeds.
+  Play: Plays forward. Identical to pressing the Spacebar or L keys while playback is stopped.
+  Stop: Stops playback. Identical to pressing the Spacebar or K keys while playback is engaged.
+  Record: Initiates recording if you have an audio source patched to a track, and if that track is 
+enabled for recording. 
+For more information about recording, jump to this chapter: Recording .
+  Loop: Toggles looped playback off and on. While looped playback is on, playback will loop at the 
+end of the Timeline, and will also loop when you use the Play In to Out command, and will continue 
+to loop automatically until you stop playback.
+  Automation controls: This button exposes the automation toolbar. 
+For more information about recording automation, jump to this chapter: Mix Automation .
+Using JKL to Control Playback
+The JKL keyboard shortcuts are common to many editing applications, and experienced editors know 
+these to be some of the most useful controls for playback and editing there are. Here’s a list of the 
+many different ways you can use these three keyboard shortcuts to play through clips and timelines 
+as you work.
+J Plays 100% backward.
+K Stops playback.
+L Plays 100% forward.
+Press J repeatedly Increases backward play speed each time you press J,  
+for a range of fast-reverse speeds.
+3895Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Press L repeatedly Increases forward play speed each time you press L,  
+for a range of fast-forward speeds.
+Shift-J Plays in fast reverse.
+Shift-L Plays in fast forward.
+K+J Plays backward at slow motion (with slow motion audio playback).
+K+L Plays forward at slow motion  
+(with pitch-corrected audio playback on OS X).
+Pressing K while tapping J Moves the playhead back one frame.
+Pressing K while tapping L Moves the playhead forward one frame.
+If you’re using Fairlight with the keyboard, then this will probably become one of the main ways you 
+move the playhead around in DaVinci Resolve.
+NOTE: All of the keyboard commands listed in this document are based on the 
+DaVinci Resolve keyboard customization preset. There is great power in the remapping of 
+keyboard commands to systems that may be more familiar to you like Premiere Pro or Pro 
+Tools. However, if their keyboard command set does not offer the same commands as the 
+DaVinci Resolve keyboard commands, they won’t work the same. For instance, the Pro Tools 
+keyboard preset does not support J-K-L timeline navigation.
+Dragging the Playhead to Scrub
+You can also drag the playhead left and right to scrub through the visible area of the Timeline by 
+clicking and dragging anywhere within the Timeline ruler at the top of the Timeline, directly below the 
+toolbar. If you’re zoomed in at a reasonable level for editing, scrubbing the playhead using your pointer 
+will result in smooth, tape-like slow and fast audio playback, giving you a great deal of precision while 
+trimming audio.
+Looping Playback
+Two controls govern looping on the Fairlight page, similarly to how looping works on the Edit page.
+  Loop: Command-Forward Slash (/). Toggles looped playback off and on. While looped playback 
+is on, playback initiated with any of the following commands will loop automatically until 
+you stop playback.
+  Play In to Out: Option-Forward Slash (/). If you’ve marked a section of a clip or timeline with In and 
+Out points, this command lets you preview how it will play.
+3896Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Loop Jog Scrubbing
+Currently available only on the Fairlight page, choosing Timeline > Loop Jog enables a brief sample 
+preview to be heard while scrubbing the playhead through the Timeline. This can make it easier to 
+recognize bits of dialog or music as you’re quickly scrubbing through tracks, in situations where you’re 
+trying to locate specific lines or music cues. It also enables this brief sample preview to loop endlessly 
+when you hold the playhead on a frame, so you can pause while scrubbing and hear (by default) the 
+current 80 ms prior to the playhead as it loops.
+A pair of settings in the User Preferences let you customize this behavior. 
+  Loop Jog Alignment: Three options let you choose whether you loop audio Pre the position of the 
+playhead, Centered on the playhead, or Post the position of the playhead.
+  Loop Jog Width: A field lets you choose how many milliseconds of audio to loop when Loop Jog 
+is enabled. How many milliseconds of audio corresponds to one frame depends on the frame rate 
+of the video. For example, at a frame rate of 25 fps, there are 1000/25 = 40 ms per frame, so the 
+default value of 80 ms equals two frames of looping.
+Moving the Playhead Using Timecode
+You can use absolute or relative timecode entry to move the playhead in the Timeline. Timecode entry 
+lets you move the playhead very precisely or jump to specific timecode values really quickly.
+How to Enter Timecode Values
+When entering timecode, type each pair of hour, minute, second, and frame values from left to 
+right, with a period representing a pair of zeros for fast entry. The numbers you enter appear in the 
+Timecode field at the upper right-hand corner of the Viewer with focus. When you’re finished typing, 
+press the Enter key to execute the timecode command. The rules for timecode entry are as follows:
+  The right-most pair of timecode values (or period) you enter is always the frame number.
+  A period to the left or to the right of any number you type is considered to be a pair of zeroes. 
+  A single period between two numbers is considered to either be a single zero or ignored if it’s 
+between two pairs of numbers.
+  Any untyped pairs of values to the left of what you enter are assumed to be whatever those values 
+were prior to the timecode you entered; this makes it easy to type partial timecode values even 
+when the Timeline starts at hour one. 
+  It’s not necessary to enter colons or semicolons.
+IMPORTANT: With full length keyboards, you can use the number pad for implicit timecode 
+entry without invoking the Go To Timecode action (=). When using a multicam or printer light 
+operation, any already mapped number pad key will continue to invoke actions like switching 
+angles or incrementing color values.
+When using the number keys above the letters on a keyboard, you must first select 
+Go To Timecode (=), or click in the field you wish to change before entering a new value. 
+Absolute Timecode Entry
+Absolute timecode is entered simply by typing the timecode value you want to move the playhead to, 
+and when you press the Return key, the playhead will move to that timecode value.
+3897Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Here are some examples of absolute timecode entry using this method:
+Original TC Value User-Typed Value New TC Value
+01:10:10:10 15245218 15:24:52:18
+01:10:10:10 2.. 01:02:00:00
+01:10:10:10 15 01:10:10:15
+01:10:10:10 12 01:10:10:12
+01:10:10:10 1.2 01:10:01:02
+01:10:10:10 1115.. 11:15:00:00
+01:10:10:10 23... 23:00:00:00
+Relative Timecode Entry
+Relative timecode is entered by starting the timecode value with a plus (+) or minus (–). Adding a plus 
+results in the value you type being added to the current timecode value for purposes of offsetting the 
+playhead from its current position. Adding a minus will subtract the value you type from the current 
+timecode value. Here are three examples of relative timecode entry:
+User-Typed Value Result
++20. 00:00:20:00 is added to the current timecode value.
++3.. 00:03:00:00 is added to the current timecode value.
+–5 00:00:00:05 is subtracted from the current timecode value.
+Clip, Marker, and Track Navigation
+The Up and Down Arrow keys are used to move the playhead from one edit point to the next in the 
+Fairlight page Timeline, just as in the Edit page Timeline. 
+However, holding Command-Option down while using the Arrow keys gives you Fairlight page-
+specific behaviors that are used to navigate among clips, markers, and tracks in the Fairlight page in a 
+way that’s different than other pages of DaVinci Resolve but very useful to the way the Fairlight page 
+operates. This section covers the basics.
+Selecting Tracks
+Which tracks are selected determine the behavior of the Arrow keys.
+  In Pointer mode: You can select tracks by clicking or Command-clicking (to select multiple tracks) 
+anywhere in the background area or on the track number of the track headers. If you click and 
+drag in the track header, you can use a bounding box to select multiple tracks. Pointer mode will 
+not select in unused areas of the Timeline.
+  In Range or Focus mode: You can select tracks by clicking or Command-clicking anywhere either in 
+the background area or on the track number of the track header, or in any unused area of the track 
+itself in the Timeline. If you click and drag, you can use a bounding box to select multiple tracks.
+3898Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Moving the Clip Selection
+The Command-Option-Left and Command-Option-Right Arrow key shortcuts are used to move the 
+playhead left and right in the Timeline, navigating from clip to clip or from marker to marker. How these 
+keys function depends on whether or not one or more tracks is selected in the Timeline.
+  If no tracks are selected: The Left and Right Arrow keys will jump the playhead from Timeline 
+marker to Timeline marker. Clip markers will be ignored.
+  If one or more tracks are selected: The Left/Right Arrow keys will jump the playhead among clip 
+In points, clip Out points, and Timeline markers.
+Moving the Track Selection
+The Command-Option-Up and Command-Option-Down Arrow key shortcuts are used to move 
+the track selection up and down in the Timeline, changing which tracks are selected. By changing 
+which tracks are selected, you can alter which clip’s In and Out points are used to jump the playhead 
+around the Timeline.
+If no tracks are selected, then nothing happens.
+Zooming and Scrolling
+The Fairlight page has several methods of zooming into and out of the Timeline, and scrolling when 
+you’re zoomed to the point where your edited sequence of clips extends past the left and right edge 
+of the visible timeline.
+The Playhead
+Zooming is always centered on the position of the Playhead. By default the Playhead moves along the 
+Timeline as it plays. However, Fairlight offers the option of a Fixed Playhead where the Timeline moves 
+while the Playhead remains centered.
+The Playhead options are found  
+in the Timeline Scrolling panel.
+3899Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Setting the Zoom Level of the Timeline
+Depending on how you like to work, there are several methods of zooming into and out of 
+the Timeline.
+  Using the Vertical Zoom slider:  A pair of sliders at the right of the toolbar let you zoom vertically 
+and horizontally. The first one lets you scroll vertically in order to see more detail in the height of 
+your waveforms. If no tracks are selected, then zooming is centered on the top audio track in the 
+Timeline. If one or more tracks are selected, then zooming is centered on the topmost selected 
+audio track.
+  Using the Horizontal Zoom slider:  A pair of sliders at the right of the toolbar let you zoom 
+vertically and horizontally. The second one lets you zoom horizontally in order to see more detail 
+in the width of your waveforms.
+  Pressing Command-Equal (=) and Command-Minus (–):  Command-Equal (also referred to as 
+Command-Plus) and Command-Minus let you zoom horizontally into the Timeline. 
+  Use Shift-Z to Zoom to Fit: Command-Z lets you zoom horizontally to fit all clips in your program to 
+the available width of the Timeline.
+  Using scroll controls of your pointing device to scroll horizontally: Holding the Option key down 
+and using the scroll wheel (or scroll control) of your pointing device will zoom horizontally into 
+the Timeline. Holding the Command key down and using the scroll wheel will move the Timeline 
+earlier or later than its current time, without moving Playhead.
+  Using scroll controls of your pointing device to scroll vertically: Holding the Shift key down and 
+using the scroll wheel (or scroll control) lets you zoom vertically in the Timeline. In this case, if no 
+tracks are selected, then zooming is centered on the top audio track in the Timeline. If one or 
+more tracks are selected, then zooming is centered on the topmost selected audio track.
+  Using the Fairlight panel’s Jog/Edit wheel:  If you have a Fairlight panel, you can hold 
+the ZOOM button down while turning the Jog/Edit wheel to zoom into the Timeline at the 
+position of the playhead.
+Scrolling Through the Timeline
+However closely you’re zoomed into the Timeline, if you’re zoomed enough so that clips extend past 
+the visible area of the Timeline, scroll bars appear below. If the playhead is offscreen, a small orange 
+tic mark indicates its position relative to the entire timeline, which is represented by the total width of 
+the scroll bar’s background.
+If you drag the playhead, or otherwise use any of the transport controls or playback key shortcuts to 
+move through the Timeline, the contents of the Timeline refresh every time the playhead hits the left 
+or right edge of what’s visible.
+Go to Mouse Pointer Using the C Key
+Pressing the “C” key will instantly snap the playhead to wherever the pointer is in the Fairlight timeline. 
+This instant snapping makes navigating longer timelines easier and more efficient.
+3900Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Using Flags
+Flags are meant to mark an entire clip, and they also flag every other clip in the Timeline that shares 
+the same Media Pool source clip, making this a handy way of quickly identifying which clips in a given 
+timeline come from the same Media Pool source. Flags are visible in every page of DaVinci Resolve, 
+making them an excellent method of tracking media from page to page.
+The Flag and Marker  
+buttons and pop-ups.
+You can apply multiple flags to clips, with a variety of colors to choose from. In addition to flagging 
+specific media files, flags can be useful for sorting by column in the Media Pool, as well as a variety of 
+other operations. Whenever you enter text into a flag, it displays a small dot that indicates there’s more 
+information inside of it.
+Methods for flagging clips in the Fairlight page:
+  To flag a clip: Select one or more clips, and either click the Flag button to flag that clip with the 
+current color, or click the Flag pop-up in the toolbar to choose a different color and then click 
+the Flag button. In the Edit page, flags appear in the Timeline superimposed in the name bar of 
+each clip.
+  To remove all flags from a clip: Select one or more clips with flags you want to remove, 
+then click the Flag pop-up in the toolbar, and choose the top “Clear All” option. 
+  To change the Flag color or remove individually: Double-click the Flag icon on the clip 
+and a Marker dialog box appears to change the Flag color, remove the flag, or make a note 
+regarding the flag.
+Using Markers
+Markers are used to call attention to a particular frame within a specific clip. Markers can be 
+individually colored, and can have customized name and note text. Whenever you enter text 
+into a marker, that marker displays a small dot that indicates there’s more information inside of 
+it. Once placed, markers snap to In and Out points, edit points, the playhead, and other markers 
+whenever snapping is enabled, making it easy to use markers to “measure” edits and trims that 
+you make in the Timeline. Markers are visible in every page of DaVinci Resolve, making them an 
+excellent method of tracking frames in clips and specific moments in the Timeline from page to page.
+You can add markers to the Timeline (in the Timeline ruler) or to clips. The full procedures 
+for placing and editing markers in the Fairlight page’s onscreen interface are identical to those 
+for the Edit page, so for more information, jump to this chapter: Marking and Finding Clips in 
+the Timeline. For now, here’s a summary.
+3901Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Adding Markers to Clips
+The following procedures describe how to add markers to clips in the Timeline of the Media page.
+To mark a clip in the Timeline, do one of the following: 
+  Select one or more clips you want to mark, then move the playhead to the frame of a selected 
+clip in the Timeline, and click the Marker button in the toolbar (or press M) to place a marker 
+at that frame, using the current color (if multiple overlapping clips are selected, you’ll add a 
+marker to all clips). 
+  To place a marker during playback and immediately open the marker dialog to enter a name or 
+note within it, select one or more clips you want to mark, play through the selection until you want 
+to place a mark, then press Command-M. Playback pauses until you enter some text and close the 
+marker dialog again, at which point playback continues.
+  Select one or more clips you want to mark, and then click the Marker pop-up to choose a different 
+color, and click the Marker button.
+Adding Markers to Timelines
+You can also place markers of any color into the Timeline ruler to denote specific times for future 
+reference, or add notes about issues you want to keep track of. You should note that all markers 
+placed on clips or in the Timeline also appear within the Mini-Timeline of the Color page, making it 
+easy to place notes to reference particular audio cues that might be valuable when editing or grading.
+To mark the Timeline itself, make sure all clips are deselected,  
+and do one of the following: 
+  Click the Marker button (or press M) to place a marker of the currently selected color 
+in the Timeline ruler. 
+  To place a marker during playback and immediately open the marker dialog to enter a 
+name or note within it, select one or more clips you want to mark, then press Command-M. 
+Playback pauses until you enter some text and close the marker dialog again, at which point 
+playback continues.
+  Click the Marker pop-up to choose a different color, and click the Marker button. 
+  Right-click in the Timeline ruler and choose a marker color from the Add Marker submenu of the 
+contextual menu.
+3902Fairlight | Chapter 172 Transport Controls, Timeline Navigation, and Markers
+FAIRLIGHT
+Chapter 173
+Recording
+It’s possible to record to one or more tracks on the Fairlight page, accommodating 
+workflows as varied as editors recording scratch voiceover or temp sound effects, 
+recording engineers recording narration, ADR, or foley as part of the audio finishing 
+process, music studios recording orchestras for the music score, or garage bands 
+recording their latest magnum opus. 
+While DaVinci Resolve is a comprehensive post-production environment for cinema and video, the 
+Fairlight page can be used for any audio recording application you might have, from books on tape to 
+live music to feature films and television.
+Contents
+Setting Up to Record ����������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3904
+Patching Inputs  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3904
+Arming Tracks �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3906
+Record Name Prefix �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3906
+Choosing Where to Record Audio Clips To ��������������������������������������������������������������������������������������������������������������������������� 3907
+User-Selectable Input Monitoring Options  ��������������������������������������������������������������������������������������������������������������������������� 3907
+Recording Using the Onscreen Controls  ������������������������������������������������������������������������������������������������������������������������������ 3908
+Recording and Editing Multiple Takes Using Layering  �������������������������������������������������������������������������������������������������� 3908
+Recording VSTi Instruments  �������������������������������������������������������������������������������������������������������������������������������������������������������� 3909
+3903Fairlight | Chapter 173 Recording
+FAIRLIGHT
+Setting Up to Record
+Depending on how your workstation is set up, it’s possible to simultaneously record to multiple tracks 
+in the Fairlight page at once. How many tracks you can record to depend entirely on what hardware 
+you have available. This section describes the process of recording to tracks in the Fairlight page.
+Patching Inputs
+Before recording audio anything, you need to use the Patch Input/Output window to patch an available 
+audio input to a track. 
+DaVinci Resolve allows you to designate a full-time default input that is automatically patched to the 
+track input when the R (Record Arm) button is clicked or manually patching in an audio input before 
+record-arming it. 
+If you don’t have an audio interface connected, you can use your workstation’s inputs to 
+connect whatever audio device is set up as the default audio input on your system to the track 
+you want to record on. 
+Automatic Input Patching
+The steps in this section explain how you can configure DaVinci Resolve to automatically patch in a 
+designated default audio input whenever you click the R (Record-Arm) button in the track header or 
+mixer channel of a track you want to record on. 
+To set up Automatic Input Patching:
+1 Click the Fairlight menu > Patch Input/Output.
+2 When the Patch Input/Output panel opens, select Setup I/O Names in the Options menu in the 
+upper-right corner. This opens the I/O Setup panel. 
+The Patch Input/Output Options menu
+3 Place a checkmark in the Default column for the audio input you want to designate as the default 
+track input source, then close the I/O Setup panel.
+3904Fairlight | Chapter 173 Recording
+FAIRLIGHT
+Default audio input selection in the I/O Setup panel 
+This input is automatically patched in when you record-arm any audio track using the R button in the 
+Track header or Mixer channel. The audio input name will appear in the channel strip’s input section.
+Manual Input Patching
+You can follow the steps below to manually select an input source without affecting the default audio 
+input you may have already set up. 
+To manually patch in an auto input:
+1 Open the Patch Input/Output pane by clicking the Input button at the top of the Mixer channel 
+you want to record on and select Input. Alternatively, you can select Patch Input/Output from the 
+Fairlight menu. 
+Mixer channel strip Input button menu
+2 When the Patch Input/Output panel opens, select the audio input source and destination track 
+input. You can repeat this step until you’ve patched all the inputs you want to record from to all the 
+tracks you want to record to. You can patch as many inputs to as many tracks as your system can 
+accommodate. 
+3 Click the Patch button in the lower-right corner of the panel. 
+3905Fairlight | Chapter 173 Recording
+FAIRLIGHT
+The Patch Input/Output panel with an Audio Input and Track Input selected
+Arming Tracks
+When you’re ready to record on a track, click the R (Record Arm) button on either the Track header or 
+corresponding Mixer channel. 
+Audio tracks cannot be record-armed unless they’ve been patched using one of the methods 
+explained above. 
+(Left) The Record Arm button activated on a Track header;  
+(Right) the Record Arm button activated on a channel strip
+Record Name Prefix
+A right-click on the designated record track header has the option to set a recording name prefix to 
+the recordings for that track. This is a useful way to keep tabs of the various recordings required by 
+your project. For instance, if recording ADR you can add a prefix for each character’s recordings as in 
+the example below for a character named Pilot.
+3906Fairlight | Chapter 173 Recording
+FAIRLIGHT
+Right-clicking a track header reveals 
+the Set Track Record Name option
+Example of a recording name prefix 
+for a character called Pilot
+Choosing Where to Record Audio Clips To
+The process of recording in the Fairlight page creates new clips and generates additional media 
+on disk. You can specify the location on disk where you want to save these recordings by going to 
+File > Project Settings > Master Settings > Working Folders > Project media location.
+To choose where the new clips that are created are placed in the Media Pool, simply open the 
+Media Pool and select any bin in the Bin list, or create a new bin and select it if you want to put your 
+recordings in their own location.
+User-Selectable Input Monitoring Options
+The Fairlight > Input Monitor Style submenu presents five options governing how you want to monitor 
+inputs while recording.
+  Input: You only hear the live signal being input; you never hear the contents of tracks.
+  Auto: When one or more tracks are armed for recording, you hear the live input signal; on 
+playback you hear the contents of each track.
+  Record: You only hear the live input signal while actively recording, meaning the Record button 
+has been pressed while one or more tracks are armed for recording. You don’t hear the input 
+signal while tracks are merely armed.
+  Mute: You hear nothing.
+  Repro: While recording, you only hear what’s just been recorded, played from the track. In 
+other words, you’re not listening to the live input, but you’re reviewing what’s just been recorded 
+as it’s recording.
+3907Fairlight | Chapter 173 Recording
+FAIRLIGHT
+Recording Using the Onscreen Controls
+You can record anywhere you want on the currently armed track or tracks by placing the playhead 
+where you want recording to begin. In this way, you can record to specific areas of your program 
+as you record voiceover, sound effects, foley, or other timed performances that need to fit into a 
+particular region of the edit.
+To begin recording:
+1 Position the playhead where you want recording to begin.
+2 Click the Record button in the transport controls. Recording immediately begins, and the material 
+being recorded immediately begins drawing a waveform in real time, giving you immediate 
+feedback that the input you’re recording is properly connected or not, as well as where on the 
+currently armed track material is being recorded.
+To stop recording, do one of the following:
+  Click the Stop button in the transport controls.
+  Press the Spacebar.
+Recording and Editing Multiple 
+Takes Using Layering
+There are two ways you can record multiple takes. You can either record them one after the other, 
+sequentially, and then edit them later. However, you also have the ability to record multiple takes to the 
+same region of the timeline, one on top of another, while at the same time preserving every take using 
+track layering.
+In the following screenshot, multiple takes have been recorded over the same section of the timeline, 
+including some partial takes to correct specific phrases in the voiceover being recorded. When you 
+do this, the result looks like a series of cuts and overwritten clips, with the most recently recorded 
+segments being the ones that play back over the previously recorded segments.
+Overlapping recordings with Audio Track Layers turned off
+However, if you choose View > Audio Track Layers, you’ll see that all your recordings have actually 
+been preserved via a vertical stack of overlapping audio clips.
+3908Fairlight | Chapter 173 Recording
+FAIRLIGHT
+Overlapping recordings with Audio Track Layers turned on, showing layering within the same track
+The layering of audio clips in DaVinci Resolve means that the topmost superimposed clips in a layered 
+stack like this mutes the audio of overlapping clips that are lower in the stack.
+Using layering, it’s easy to edit the best segments of the best takes, while preserving all other takes, 
+simply by adding edits and rearranging clips in the stack so the best parts are on top.
+For more information about audio layering, jump to this chapter:  
+Editing Basics in the Fairlight Page .
+Recording VSTi Instruments
+DaVinci Resolve supports VSTi instruments working with connected MIDI controllers to trigger instrument 
+sounds that can be recorded live on audio tracks of the Timeline. DaVinci Resolve Studio includes the 
+Fairlight FX Foley Sampler. This can be loaded with foley sounds such as footsteps or human movements, 
+so you can perform these sounds in real time and record the result to another track as you watch 
+performers walking or punching in the edit, even if you lack a recording booth with foley pits and props.
+ 
+The Foley Sampler ready to be filled with sounds
+3909Fairlight | Chapter 173 Recording
+FAIRLIGHT
+For more information about the Foley Sampler, jump to this chapter: Fairlight FX .
+On the other hand, if you’re a musician, there’s nothing stopping you from loading VSTi musical 
+instruments of different kinds for playback, and using the Fairlight page as a multi-track recorder. 
+DaVinci Resolve doesn’t have MIDI sequencing functionality, but you can record live playback 
+straight to the Timeline, using layered audio to manage multiple takes for later re-editing. Bet you 
+never thought you’d be recording music in DaVinci Resolve...
+ 
+A VST Instrument (in this case Serato Sample) loaded into a track of the Timeline
+To enable a MIDI controller in macOS:
+1 If DaVinci Resolve is running, quit before connecting your MIDI controller and setting it up.
+2 On macOS you’ll use the Audio Midi Setup utility to choose output hardware and select a speaker 
+configuration to be made available on your system. In the Finder, use Spotlight and search for 
+Audio MIDI Setup to open it.
+3 In Audio MIDI Setup, choose Window > Show MIDI Studio. A window showing icons for all 
+connected MIDI controllers appears. Your controller should be showing an icon. If it’s not, you may 
+need to install drivers for it.
+4 Select the icon for your controller and turn on the “Enter test MIDI setup mode” button (it looks like 
+a little keyboard) to test if your keyboard is connecting with the computer. If it is, then turn this off.
+For more information on setting up MIDI on different systems, see the DaVinci Resolve 
+Configuration Guide, available on the web from the Blackmagic Design support page at  
+www.blackmagicdesign.com/support/family/davinci-resolve-an d-fusion. 
+3910Fairlight | Chapter 173 Recording
+FAIRLIGHT
+To set up the Fairlight page for VSTi instrument recording using a sampler:
+1 Open DaVinci Resolve.
+2 Make sure you have at least two available audio tracks in the Timeline, one for the instrument 
+you’ll be playing, and one to record into. This example will use tracks A4 and A5 for this.
+3 Open the Effects Library, find a VSTi sampler you have installed on your system, and drag it to the 
+track header of the track you want to use for playing, for example track A4. 
+Massively-featured sampler/synth combinations such as Native Instruments Kontakt and Steinberg 
+Halion are ubiquitous and useful when you want to specifically map a collection of sound effects to 
+specific keys or pads to create re-usable multi-purpose instruments. However, more streamlined 
+samplers that emphasize automatic audio clip slicing such as Serato Sample (Windows and 
+macOS) or Image Line Slicex (Windows only) can make short work of the more specialized task of 
+loading library sound effects recordings (or custom recordings you create) with multiple footsteps, 
+punches, keyboard presses, cloth rustles, or other foley activities, and quickly splitting them up 
+into individually playable samples you can trigger with pads or a keyboard.
+4 When the VSTi interface window appears, open the MIDI menu at the upper right-hand corner 
+of the VSTi window and choose the correct MIDI channel from your MIDI controller’s submenu. If 
+you’ve selected the correct MIDI channel, the instrument should start responding to the keys or 
+pads on your controller.
+ 
+Enabling MIDI control
+5 Next, configure the VSTi instrument you’re using to play the sound effects you want to use for 
+foley. In this example, the Serato Sample VSTi plugin is being used to automatically slice up a 
+recording of footsteps from one of Sound Ideas’ many sound effects libraries.
+Because the VSTi you added is patched to that track’s Insert (if you look at the Mixer you should 
+see that the I button is enabled on the channel strip the instrument is patched to), the Send is 
+PRE the Instrument. This means you need to patch that track’s Track Direct output to the input of 
+another track to record the instrument.
+3911Fairlight | Chapter 173 Recording
+FAIRLIGHT
+6 Choose Fairlight > Patch Input/Output to open the Patch Input/Output window, then set the Source 
+dropdown menu to Track Direct and the Destination dropdown menu to Track Input. Click Audio 
+4 to the left, and Audio 5 to the right, and click the Patch button; this sets you up to play the VSTi 
+plugin on track A4, and record its output on track A5.
+Be aware that after patching Track Direct from the track with the instrument to the track you’re 
+recording onto, you also need to turn “Direct Output” on for that track in the Path Settings of that 
+track’s channel strip in the Mixer. 
+7 Open the Mixer (if necessary), click the Input dropdown menu at the top of the channel strip 
+that shows the VSTi instrument you’re using, and choose Path Settings. When the Path Settings 
+window appears, click the ON button for Direct Output, then close the Path Settings window. 
+At this point, you’re ready to begin recording.
+To play and record a VSTi instrument:
+1. Click the Record Arming button of the track you’re recording to (in this example A5), move 
+the playhead to where you want to begin recording, and then click the Record button 
+to begin recording.
+2. As the video of your program plays, use your MIDI controller to trigger sound effects as 
+necessary. When you’re finished, click the Stop button. 
+If necessary, you can record multiple takes using track layering until you get the timing 
+right. When you’re finished, you can remove the instrument from the track it’s on since the 
+recorded audio is all you need.
+3912Fairlight | Chapter 173 Recording
+FAIRLIGHT
+Chapter 174
+ADR (Automated 
+Dialog Replacement)
+The Fairlight page of DaVinci Resolve has a sophisticated interface for doing ADR, 
+or automated dialog replacement, in a structured and straightforward manner. 
+Simple, yet powerful, the ADR panel incorporates Cue list management, industry-standard audio 
+beeps and visual cues, and sophisticated take management with star ratings and layered take 
+organization to create and manage the re-recording of dialog in any program. With this sophisticated 
+organization and layering, it’s easy to edit together the best parts of each take into your program.
+Contents
+ADR (Automated Dialog Replacement)  �������������������������������������������������������������������������������������������������������������������������������������� 3914
+The ADR Interface ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3914
+Setting up to Record an ADR Session �������������������������������������������������������������������������������������������������������������������������������������  3918
+Creating and Importing ADR Cue Lists  ����������������������������������������������������������������������������������������������������������������������������������� 3919
+AI Create ADR Cues (Studio Version Only) �����������������������������������������������������������������������������������������������������������������������������  3919
+Manually Creating an ADR Cue List  ������������������������������������������������������������������������������������������������������������������������������������������ 3920
+Importing Cues  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3921
+Recording ADR to the Timeline �������������������������������������������������������������������������������������������������������������������������������������������������� 3922
+3913Fairlight | Chapter 174 ADR (Automated Dialog Replacement)
+FAIRLIGHT
+ADR (Automated Dialog Replacement)
+Clicking the ADR button on the Interface toolbar opens the Fairlight ADR panel, which offers a 
+thoroughly professional automated dialog replacement workflow. Dialog replacement, for those who 
+don’t know, is the process whereby audio professionals bring in actors to re-record unusable dialog 
+recordings from the comfort of their recording studios, line by line and with a great deal of patience.
+The ADR panel on the Fairlight page
+The Fairlight page aims to help you make this a structured and straightforward process. Simple, but 
+powerful, Cue list management lets you efficiently assemble a re-recording plan.
+Industry-standard audio beeps and visual cues via your BMD video output device help the actors in 
+the booth nail their timings and their lines. Then, sophisticated take management with star ratings and 
+layered take organization in the Timeline help you manage the resulting recordings to pick and choose 
+the best parts of each take when you edit the results.
+The ADR Interface
+The ADR interface consists of three panels to the left of the Timeline: a List panel, a Record panel, and 
+a Setup panel. The controls of these panels are described in the order in which they’re used..
+The Setup Panel
+As its name implies, the Setup panel is where you configure your ADR session. 
+The Setup panel of the ADR interface
+3914Fairlight | Chapter 174 ADR (Automated Dialog Replacement)
+FAIRLIGHT
+This panel presents the following controls:
+  Pre Roll and Post Roll: Specifies how many seconds to play before and after each cue’s specified 
+In and Out points, giving actors a chance to listen to what comes before and after each cue in 
+order to prepare. If you enable the Beep options below, they’ll provide a countdown during the 
+specified pre-roll.
+  Record Source: This dropdown menu lets you choose the audio input you want to record from, 
+creating a patch to the Record Track. However, this menu is disabled until you select a track in the 
+Record Track dropdown menu.
+  Record Track: This menu lets you choose the track you want to record on. Making this selection 
+creates a patch from the Record Source to the Record Track and automatically toggles Record 
+Enable on.
+  Guide Track: This dropdown lets you choose the track containing the production audio you want 
+to re-record. The talent will use the audio playback from this track as a guide when recording their 
+replacement performance.
+  Record File Name: This text field lets you enter a filename for the recorded audio.
+  Character Setup: This is where you can add the character names you’ll be re-recording, which 
+helps with cue creation and management. Click the Add button to enter a new character name. 
+To delete a character from the list, click the character name and then the Remove button.
+  Beep to In Point: Enables a three-beep sequence, which the talent hears leading up to the 
+recording. For the beeps to be audible, the Beeps channel of the System Generator must be 
+patched to your audio outputs by going to Fairlight > Patch Input/Output.
+  Beep at In Point: Enables one last beep at the In point. For the beep to be audible, the 
+Beeps channel of the System Generator must be patched to your audio outputs by going to 
+Fairlight > Patch Input/Output.
+  Count In: Provides an onscreen counter that counts down to the start of the cue.
+  Video Streamer: A visual cue for the talent to watch during pre-roll to ready them for recording. 
+A pair of vertical lines superimposed over the program being output to video move towards one 
+another across your video output screen during the pre-roll to the cue. This gives the talent a 
+visual indication of the time remaining until they should begin talking. When the beeps play, these 
+lines get taller. Both lines come together at the Time In frame, at which point a cross shows that 
+recording is beginning.
+  On Screen Cue Text Style: Clicking this heading reveals a set of parameters for configuring the 
+look and placement of onscreen text cues. 
+  Smart Timeline: When turned on, this option automatically moves the playhead to each cue as it’s 
+selected in the Cue list, and zooms in to frame the duration of that cue in the Timeline.
+  Mixing Control: Enables automated switching of audio playback, to independently control 
+what the talent and the audio engineer hear at various stages of the ADR recording process. 
+For example, with this enabled, the Guide track is not routed to the Control room while the 
+engineer is reviewing a take.
+3915Fairlight | Chapter 174 ADR (Automated Dialog Replacement)
+FAIRLIGHT

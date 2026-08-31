@@ -1,0 +1,1511 @@
+RESOLVE FX
+Resolve FX 
+Overview
+CONTENTS
+154 Resolve FX  ������������������������������������������������������������������������������������������������������������������������������������������������  3595
+155 Resolve FX Blur ���������������������������������������������������������������������������������������������������������������������������������������  3598
+156 Resolve FX Color �������������������������������������������������������������������������������������������������������������������������������������  3610
+157 Resolve FX Film Emulation  �����������������������������������������������������������������������������������������������������������������  3623
+158 Resolve FX Generate  ����������������������������������������������������������������������������������������������������������������������������  3639
+159 Resolve FX Key �����������������������������������������������������������������������������������������������������������������������������������������  3641
+160 Resolve FX Light �������������������������������������������������������������������������������������������������������������������������������������  3654
+161 Resolve FX OpenColorIO  ��������������������������������������������������������������������������������������������������������������������  3670
+162 Resolve FX Refine  ����������������������������������������������������������������������������������������������������������������������������������  3673
+163 Resolve FX Revival  ��������������������������������������������������������������������������������������������������������������������������������  3704
+164 Resolve FX Sharpen �������������������������������������������������������������������������������������������������������������������������������  3724
+165 Resolve FX Stylize ����������������������������������������������������������������������������������������������������������������������������������  3728
+166 Resolve FX Temporal ����������������������������������������������������������������������������������������������������������������������������  3750
+167 Resolve FX Texture  ��������������������������������������������������������������������������������������������������������������������������������  3754
+168 Resolve FX Transform  ���������������������������������������������������������������������������������������������������������������������������  3764
+169 Resolve FX Warp  �����������������������������������������������������������������������������������������������������������������������������������  3805
+Chapter 154
+Resolve FX
+This section provides detailed explanations for each Resolve FX filter that’s 
+available on the Cut, Edit, Fusion, and Color pages. 
+For more information on how to apply and adjust Resolve FX on the Cut page,  
+jump to this chapter: Video and Audio Effects in the Cut Page .
+For more information on how to apply and adjust Resolve FX on the Edit page,  
+jump to this chapter: Editing, Adding, and Copying Effects and  Filters. 
+For more information on how to apply and adjust Resolve FX on the Fusion page,  
+jump to this chapter:Using Open FX, Resolve FX, and Fuse Plugins . 
+For more information on how to apply and adjust Resolve FX on the Color page,  
+jump to this chapter: Using Open FX and Re solve FX. 
+Contents
+Catalogue of Resolve FX Filters ������������������������������������������������������������������������������������������������������������������������������������������������ 3596
+Effects Search �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3597
+Show Legacy Resolve FX ��������������������������������������������������������������������������������������������������������������������������������������������������������������  3597
+3595Resolve FX Overview | Chapter 154 Resolve FX
+RESOLVE FX
+Catalogue of Resolve FX Filters
+DaVinci Resolve comes with a set of Resolve FX filters, many of which have been optimized for real 
+time playback. These are located within their own category in the Effects Library of the Cut, Edit, and 
+Fusion pages, and in the Open FX browser of the Color page. These effects (or filters) work just like 
+any other Open FX plugin. 
+Resolve FX are shown as icons depicting each specific filter. Hovering the mouse pointer 
+over the icon previews the filter in the Viewer, and moving the mouse pointer along the icon 
+previews the filter over the length of the clip.
+Icons showing categorized Resolve FX filters
+In addition to the different parameters built into each filter, every single Resolve FX filter has a Blend 
+parameter that mixes that filter’s effect against the original image. Each filter’s Blend parameter 
+appears at the bottom of that filter’s settings.
+The Blend slider found in the parameters of every Resolve FX filter
+3596Resolve FX Overview | Chapter 154 Resolve FX
+RESOLVE FX
+Effects Search
+Pressing Shift-Space will bring up the Effects Search dialog in the Cut, Edit, Color and Fairlight pages, 
+similar to how it always worked in the Fusion Page. If you have a node selected, clicking on the effect 
+in the search list will apply that effect to the selected node.
+Pressing Shift-Space will pop up the Effects Search Dialog. In this case, 
+typing “film” will pull up any effect with the word Film in the name.
+Show Legacy Resolve FX
+Over time some Resolve FX are depreciated for various reasons, such as their functionality being 
+absorbed into another effect or being re-written completely. However, for working on projects 
+that may have used these older effects extensively, or if you’re just feeling nostalgic, you still have 
+access to them.
+To show the Legacy Resolve FX:
+• Open the Effects tab and click on the Effects (3-dot) option menu. Then select 
+Show Legacy Resolve FX. 
+• You can remove these effects from the list again by unchecking this setting.
+3597Resolve FX Overview | Chapter 154 Resolve FX
+RESOLVE FX
+Chapter 155
+Resolve FX Blur
+The plugins in this category offer a wider variety of different blur methods than 
+those found in the Blur palette. 
+Contents
+Box Blur �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3599
+CineFocus (Studio Version Only) ������������������������������������������������������������������������������������������������������������������������������������������������ 3599
+Depth Mode ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3601
+Focus Mode ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3601
+Aperture Mode  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3602
+Result  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3602
+Directional Blur  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3605
+Gaussian Blur �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3606
+Lens Blur (Studio Version Only) ��������������������������������������������������������������������������������������������������������������������������������������������������� 3606
+Shape ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3606
+Speed�������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3607
+Controls �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3607
+Mosaic Blur ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3608
+Radial Blur ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3608
+Zoom Blur ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3609
+3598Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Box Blur
+A variable quality blur that ranges from very low quality to very soft. 
+  Horizontal and Vertical Strength:  These sliders let you adjust the width and height of blur.
+  Same Horizontal/Vertical:  This checkbox lets you adjust these parameters together or separately. 
+  Horizontal and Vertical Channel Adjustment:  These sliders let you adjust the per channel 
+settings of the blur.
+Red: Adjusts the blur of the Red channel relative to the overall blur.
+Green: Adjusts the blur of the Green channel relative to the overall blur. 
+Blue: Adjusts the blur of the Blue channel relative to the overall blur. 
+Alpha: Adjusts the blur of the Alpha channel relative to the overall blur. 
+  Number of Iterations: Controls how smooth the resulting blur is, with 1 being the lowest and most 
+“boxy” level of quality and 6 being the highest and smoothest level of quality. At low iteration 
+values, box blurs can appear somewhat similar to lens blurs.
+  Border Type: Lets you choose how the edges of the image are affected by this blur, options 
+include Black, Replicate, Reflect, and Wrap Around.
+  Blur Alpha: Check this box to blur the Alpha channel along with the image’s content.
+CineFocus (Studio Version Only)
+CineFocus lets you create your own custom virtual lens that emulates realistic defocus and bokeh 
+effects. It makes phone camera footage look like it was shot with a real cinematic lens, and adds 
+additional creative control in post-production to professionally shot footage from any camera.
+The comprehensive lens build toolset is coupled with an AI-generated Depth Map to create 
+a working depth model from a 2D image, and then wrapped around an easy-to-use graphical 
+interface on the viewer. 
+Using the Open FX overlay in the viewer presents a split-prism icon as your pointer. Assuming 
+your footage was shot in deep focus—where the foreground, mid-ground and background are 
+all in sharp focus—simply clicking a region in the viewer will “focus” the lens on that subject, 
+while the rest of the CineFocus parameters will determine what, where, and how the out-of-
+focus regions will be generated.
+3599Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+The original phone footage, with everything in sharp detail.
+The same image, with the focal point changed to the wall.
+The same image, with the focal point changed to the temple.
+The effect is set up to work from left to right using the four mode tabs at the top of the Inspector.
+3600Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Depth Mode
+Click this button to show the depth map view, and activate the Depth Map toolset. Brighter objects are 
+“closer” to the camera, grey areas are in the mid-field, and darker areas are in the distance. This view 
+shows what the AI thinks is closer or further away from the camera, and is modifiable with the Depth 
+Map controls below.
+The CineFocus Depth Map view. Brighter areas are “closer” in depth.
+Focus Mode
+Click this button to show the Focus Mode view and activate the focus controls. Colored areas are 
+in focus, while grayer areas will be defocused. With the OpenFX overlay on, you can click to focus 
+an area in the viewer. You can also click and drag the split prism icon to select a range of focus. 
+The CineFocus controls will then work on the defocused (gray) areas of the image.
+In CineFocus Focus view, grayed out areas will be out of focus. 
+The split prism icon lets you click on areas in the viewer to focus on.
+3601Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Aperture Mode
+Click this button to show Aperture mode. This view is a representation of the internal physics of the 
+virtual CineFocus lens, and lets you visually sculpt your lens properties as you adjust the sliders. 
+At the top of the diagram, you’ll see the light path spread from the foreground “in front” of the focal 
+point (on the left), through the focal point (the narrow middle), to the background “behind” the focal 
+point (on the right). Underneath the light path are bokeh “slices” from the range above that let you see 
+the shape and size of the bokeh for a fixed distance.
+The CineFocus Aperture view, which shows the virtual lens characteristics.
+Result 
+Click this button to see the final result of the CineFocus tool, and further adjust any parameter in 
+the effect.
+Focus
+This toolset lets you change the focus parameters of the virtual lens. Using Focus mode view above 
+can show you the results of these tools in greater detail.
+  Bokeh Quality: Using “Enhanced” adjusts quality by the source resolution and adds finer detail, 
+but can be slow at high aperture size. Alternatively, “Better” produces a softer bokeh at a quicker 
+rate, while “Faster” increases optimizations with frame resolution.
+  Aperture Size: Adjust this slider to change the virtual aperture. Higher values will add more blur to 
+the out-of-focus areas of the image.
+  Focus Distance: Adjust this to set the focal point of the virtual lens, based on the data from the 
+depth map. This virtual lens can’t focus in units of meters or feet—instead, it uses a percentage 
+value based on the Depth Map. You can keyframe and animate this value to “pull focus” from one 
+distance to another. 
+  Depth of Field: Depth of Field (“DoF” in photography) is a measure of the range of depths which 
+are considered in-focus. In CineFocus, this can be artificially extended to keep a subject perfectly 
+in focus without having to reduce the strength of the near/far defocus.
+  Track Focus to Point: Check this box to make focus follow a point that you can set in the FX 
+Overlay in the viewer. This point can be used by the FX Tracker to track focus throughout the clip.
+  No Foreground Blur: Check this box to remove the blur from the foreground, keeping it in focus. 
+This makes it easier to ensure that a foreground subject stays in focus when that’s the goal, and 
+this option can also increase performance.
+  Focus Peaking: Check this box to enable focus peaking lines that highlight areas in the frame that 
+are in focus. This mimics the same function found in real cameras.
+  Boost Highlights: Increase the brightness levels of the highlights. It controls the balance of dark 
+and bright regions when blurred together. This can be useful for brightening bokeh against dark 
+backgrounds, and can generally tune the result depending on your color management
+3602Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Depth Map
+This toolset lets you adjust the Depth Map, showing a simulated depth inside a 2D image. 
+Using the Depth mode view above can show you the results of these tools in greater detail. 
+  Source: Choose Internal to create a Depth Map inside the CineFocus tool, or from Alpha Input if 
+you’ve created a Depth Map in another node.
+  Quality: Choose whether to prioritize speed (Faster), or quality (Better).
+  Invert: Check this box to invert the Depth Map, reversing what is considered near or far in 
+the image.
+  Adjust Map Levels: Check this box to fine tune the Depth Map, and activate the toolset below.
+Far Limit: Adjusts the black levels of the Depth Map, determining the limit for how “far away” the 
+map will cover.
+Near Limit: Adjusts the white levels of the Depth Map, determining the limit for how “close up” the 
+map will cover.
+Gamma: Adjusts the gamma curve of the Depth Map, letting you decide the relative “distances” 
+between near and far objects.
+  Post Processing: Check this box to make adjustments to the black and white Depth Map, and 
+activate the toolset below.
+Post Filter: Adjust this slider to smooth the Depth Map along the image contours.
+Contract / Expand:  Adjust this slider to contract or expand the white foreground areas of the 
+Depth Map.
+Blur: Adjust this slider to soften the Depth Map. This can help if it contains jagged edges to be 
+smoothed over, but can cause artifacts at image object edges. This option is only recommended 
+for repair of a difficult depth map.
+  Separate Layers: Adjust this slider to improve the depth edges, where one object is in front of 
+the other. This can help separate distances with depth maps that are not completely sharp. When 
+using an external Depth Map, make sure this is set to 0.0.
+Lens Properties
+This toolset lets you modify the virtual lens to be less than perfect. This provides a more realistic 
+result, and makes it easier to match the characteristics of a real lens.
+  Chromatic Aberration: Check this box to simulate chromatic aberration, which causes different 
+frequencies of light to focus at different depths.
+Strength: Adjusts the strength of the color separation.
+Phase: Adjusts the relative bending of the different frequencies, depending on the lens optics.
+  Spherical Aberration:  Check this box to simulate spherical aberration, where light rays passing 
+through different areas of the lens focus at different depths, especially when using large apertures.
+Lens Model: Choose the lens construction type to simulate.
+Strength: Adjusts the light dispersion.
+3603Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Aperture
+This toolset lets you adjust the Aperture characteristics of the virtual lens. Using the Aperture mode 
+view above can show you the results of these tools in greater detail
+  Shaped Bokeh: Check this box to adjust the bokeh of the virtual lens and access the toolset 
+below. Unchecking this box will result in perfectly circular Bokeh.
+Number of Blades: Adjust the slider to set the number of blades in the aperture of the virtual lens. 
+Each blade will change the shape of the bokeh accordingly.
+Rotation: Adjust to rotate the aperture shape left or right.
+Curvature: Adjusts the curvature of the aperture blades.
+Pinwheel: Adjusts how much of the blade tips are visible. Pinwheel refers to a ratchet-like shape 
+in the bokeh (the out-of-focus highlights) that’s visible with some lenses at wide-aperture. Like its 
+name suggests, it resembles the shape of a pinwheel fan.
+  Anamorphic Lens: Check this box to set the bokeh to have an anamorphic shape.
+Anamorphism: Adjust this slider to set the amount of the anamorphic stretch.
+Lens Distortion
+This toolset lets you adjust the distortion characteristics of the virtual lens, replicating the way that 
+bokeh changes in shape and size at different distances from the lens center.
+  Curved Lens: Check this box to add artificial curvature to the lens, and activate the toolset below.
+Curvature: Adjusts the strength of the distortion around the edges of the frame.
+Lateral Aberration: Adjusts the color distortions in the blurring at the edges of the frame.
+Phase: Adjusts the relative spread of the different colors, depending on the lens optics.
+Foreground Edge Overlap
+This toolset lets you adjust how the foreground edge overlap is blended into the rest of the image. 
+If the foreground does not overlap, these tools will have no effect.
+In a real optical system, objects close to the lens get “blurred-out” and are transparent. For example, 
+if you hold a pen close to your eye, the pen becomes blurred as your eyes naturally shift focus to 
+the background. These physics don’t apply to 2D video, so these tools provide a workaround that 
+simulates that phenomenon. 
+  Overlap Preview: Check this box to see where the foreground edge overlaps the rest of 
+the image.
+  Overlap Boost: Adjust this slider to make the overlapping foreground denser to help hide the 
+transition edge. You can only use this tool if Automatic Edge Handling is deselected.
+  Automatic Edge Handling:  Check this box to automatically create nice defocused overlaps, at the 
+cost of some background detail in the overlapping regions. Using this tool disables Overlap Boost.
+Remove and Replace Grain
+In real footage, film grain and video noise are independent of depth of field, and are spread evenly 
+across the image. When the CineFocus tool applies defocus to a background that contains grain, that 
+grain is also blurred, which can produce an unnatural result. This toolset lets you remove grain before 
+processing, then restore it afterward, helping you to achieve a more accurate depth-of-field effect.
+  Remove Grain: Check this box to activate the Remove and Replace toolset.
+  Grain Detection: Choose the method that analyses and removes the grain: Enhanced Spatial, 
+or AI Ultra Noise Reduction.
+3604Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+  Estimate Best Thresholds:  If AI Ultra Noise Reduction is chosen above, you can click this button 
+to let the AI determine the grain vs detail threshold.
+  Split Luma Chroma Thresholds:  Check this box to set separate grain thresholds for Luma and 
+Chroma signals.
+  Threshold: Adjust this slider to set the threshold between what is grain and what is edge detail.
+  Preview Grain: Check this box to see a preview of just the grain in the viewer—making it easier to 
+see the effect of the parameters in this toolset.
+  Replace Grain After Defocus: Check this box to restore the grain you removed from the 
+defocused areas after processing.
+  Grain Replacement: Lets you determine just how much of the grain to add back in.
+Additional Grain
+This toolset lets you add a grain layer over the entire image.
+  Add Grain: Check this box to activate this toolset.
+  Strength: Adjust this slider to determine how much grain should be added to the image.
+  Size: Adjust this slider to determine the size of the grain particles.
+  Softness: Adjust this slider to determine how blurry or sharp the grain particles are.
+  Saturation: Adjust this slider to determine how colorful the grain particles are.
+Directional Blur
+A blur that’s constrained to a single angle. 
+  Blur Strength: How much blur you want.
+  Blur Angle: The direction of blur.
+  Blur Type: When Blur Type is set to Realistic, the blur effect emulates a photographic motion blur. 
+When set to Stylized, the blur effect is a simple and smooth digital blur.
+  Symmetric Blur: When the Symmetric checkbox is turned on, the blur effect appears to be created 
+from both directions, with the result being more of a double-image that’s blurring along the blur 
+angle, simulating motion blur in a camera. When off, the blur effect appears to be moving in a 
+single direction, from the original position out along the blur angle.
+  Channel Adjustment:  Allows you to now set the strength of a blur in a specific channel, relative 
+to the strength of the overall blur.
+Red: Adjusts the blur of the Red channel relative to the overall blur.
+Green: Adjusts the blur of the Green channel relative to the overall blur. 
+Blue: Adjusts the blur of the Blue channel relative to the overall blur. 
+Alpha: Adjusts the blur of the Alpha channel relative to the overall blur.
+  Border Type: Lets you choose how the edges of the image are affected by this blur; options 
+include Black, Replicate, Reflect, and Wrap Around.
+  Blur Alpha: Check this box to blur the alpha channel along with the image’s content.
+3605Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Gaussian Blur
+Provides a smooth blur that resembles looking at the image through semi-opaque glass, reducing 
+detail and noise. 
+  Horizontal and Vertical Strength:  Two sliders let you adjust the Horizontal and Vertical Strength 
+independently.
+  Same Horizontal/Vertical:  This checkbox lets you keep the Horizontal and Vertical Strength 
+values ganged together. 
+  Horizontal and Vertical Channel Adjustment:  These sliders let you adjust the per channel 
+settings of the blur.
+Red: Adjusts the blur of the Red channel relative to the overall blur.
+Green: Adjusts the blur of the Green channel relative to the overall blur. 
+Blue: Adjusts the blur of the Blue channel relative to the overall blur. 
+Alpha: Adjusts the blur of the Alpha channel relative to the overall blur.
+  Border Type: Lets you choose how the edges of the image are affected by this blur; options 
+include Black, Replicate, Reflect, and Wrap Around.
+  Blur Alpha: Check this box to blur the Alpha channel along with the image’s content.
+Lens Blur (Studio Version Only)
+A high-quality simulation of optical lens blurring. Adjustable parameters let you achieve different 
+kinds of “bokeh” effects, which are similar to those produced by different combinations of aperture 
+design and lens spherical aberration corrections that affect the “circle of confusion” that creates visible 
+shapes in areas of the picture with pinpoint highlights.
+Shape
+The Shape group lets you choose what shape of aperture to simulate and affects the shape of the 
+bokeh in this effect.
+A custom shape used in a color node tree to create 
+custom bokeh in the Lens Blur plugin
+  Shape Type: Lets you choose what type of apertures you want to use. There are three options:
+Real Apertures: Lets you choose a realistic option from the Aperture Shape pop-up menu below, 
+with which to influence the shape of the bokeh effect. Aperture Shape options include Triangle, 
+Square, Pentagon, Hexagon, Heptagon, or Octagon shaped aperture.
+3606Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Creative: Lets you choose a more fanciful option from the Aperture Shape pop-up menu below, 
+with which to influence the shape of the bokeh effect. These options simulate the kind of bokeh 
+you could realistically achieve by placing a blackout filter with a custom shaped hole in the center 
+in front of a lens. Aperture Shape options include Heart, Star, Starfish, Starburst, Petals, Lip, Eye, 
+Droplet, and Leaf.
+External Input:  Uses any arbitrary graphic with a (preferably small) white shape against a black 
+background to influence the shape of the bokeh effect. This shape must be a graphic or matte clip 
+that’s added to the Node Editor, then you can attach the image to the second RGB input of the 
+Lens Blur node.
+  Aperture Shape: Provides different options for aperture shapes that influence the shape of this 
+plugin’s simulated bokeh blur effect.
+  Preview Shape: This checkbox lets you see the actual shape you’ve selected to use.
+Speed
+The Speed Options group lets you adjust the quality/speed tradeoff of this plugin.
+  Quality: Three options, Full, Half (Faster), and Quarter (Fast), let you choose a suitable tradeoff 
+between image quality and plugin performance.
+  Blur Alpha: Check this box to blur the Alpha channel along with the image’s content.
+  Horizontal and Vertical Crop: Crops the External Input shape image being used to influence the 
+bokeh to a smaller size, in the event the large size of the graphic is slowing things down and you 
+can crop out extra black from the edges. You won’t notice a change to the result until you start 
+cropping into the white part of the shape.
+Controls
+The parameters available from the Controls group change depending on the Shape Type 
+you’ve selected.
+  Blur Size/Scale: Adjusts the overall amount of blur. At higher values, the shape of bokeh can be 
+more clearly seen. 
+  Blade Curvature: (Only available with Real and Creative Apertures) Lets you round off the edges 
+of the Aperture Shape you selected.
+  Rotation: Lets you adjust the angle the shape appears at. 
+  Anamorphism: Lets you adjust the aspect ratio of this effect in order to match the lens blur 
+created by anamorphic lenses. 
+  Chroma Shift: Lets you simulate chromatic aberration within the blur effect. 
+  Highlights: Lets you adjust how the highlights of the image affect the blur, dilating or eroding the 
+image more or less depending on how high Smooth Strength is.
+  Apodization: (Only available with Real and Creative Apertures) A slider that lets you adjust the 
+simulated “Airy disk” pattern in the defocused effect being generated. Dragging the slider to the 
+left toward negative values accentuate concentric rings around the bokeh pattern that simulate the 
+effects of optical diffraction and add a pattern to the result, while dragging this slider to the right 
+introduces positive values that gradually filter the edges of the simulated bokeh pattern, resulting 
+in a progressively smoother result.
+  Catadioptric: (Only available with Real and Creative Apertures) A slider that lets you simulate 
+the effect of a shaped mirror element in a Catadioptric telescope to “improve” focus within 
+the defocused bokeh effect this plugin produces. At higher and higher values, the underlying 
+image becomes progressively less blurry, while still being distorted by the bokeh shape being 
+used which results in soft image overlays, creating a very different kind of simulated optical 
+defocusing effect.
+3607Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Mosaic Blur
+A simple, pixelated blur suitable for hiding the face of anonymous witnesses. 
+  Pixel Frequency: Lets you adjust the size of each pixel, thus determining the density and 
+resolution of the resulting grid of pixels.
+  Cell Shape: Lets you adjust the base shape of the mosaic. The options are Square, Hexagon, 
+and Triangle.
+  Aliasing: Lets you adjust how tightly each cell samples the area underneath it.
+  X Offset: Shifts the grid left or right.
+  Y Offset: Shifts the grid up or down.
+  Aspect: Adjusts the aspect ratio of the cells.
+  Antialias Result: With this box checked the effect performs extra processing to get cleaner lines 
+between the cells.
+  Blur Alpha: Check this box to blur the Alpha channel along with the image’s content.
+  Whole Cells Only: Limits the showing of cells to those cells that are completely inside of a 
+window only.
+Radial Blur
+A blur effect that simulates the motion blur that would occur were the image spinning around its 
+center point. 
+  X and Y Position: Lets you move the center of the blur. 
+  Smooth Strength: Adjusts how much blurring is applied. 
+  Blur Type: When Blur Type is set to Realistic, the blur effect emulates a photographic motion blur. 
+When set to Stylized, the blur effect is a simple and smooth digital blur.
+  Blur Symmetry: Three options are available.
+Symmetric: The blur effect appears to be created in both directions, with the result being 
+more of a double-image that’s blurring in an arc around the X/Y Position, simulating 
+motion blur in a camera.
+Clockwise: The blur effect appears to be moving in a single, clockwise direction.
+Anti-Clockwise:  The blur effect appears to be moving in a single, counter-clockwise direction.
+  Channel Adjustment:  Allows you to now set the strength of a blur in a specific channel, relative to 
+the strength of the overall blur.
+Red: Adjusts the blur of the Red channel relative to the overall blur.
+Green: Adjusts the blur of the Green channel relative to the overall blur. 
+Blue: Adjusts the blur of the Blue channel relative to the overall blur. 
+Alpha: Adjusts the blur of the Alpha channel relative to the overall blur.
+  Border Type: Lets you choose how the edges of the image are affected by this blur; options 
+include Black, Replicate, Reflect, and Wrap Around.
+  Move with Sizing: Checking this box lets the blur center retain its relative position in the frame if 
+the Input and Editing sizing are changed.
+  Blur Alpha: Check this box to blur the Alpha channel along with the image’s content.
+3608Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Zoom Blur
+A blur effect that simulates the motion blur that would occur were a camera moving toward the image. 
+  Zoom Amount: When Blur Type is set to Realistic, this slider becomes bi-directional. The center 
+is 0, or no blur at all. Dragging to the right expands the blur effect outward from the position. 
+Dragging to the left shrinks the image towards the Position, blurring outward from there.
+  Blur Type: When Blur Type is set to Realistic, the blur effect emulates a photographic motion blur. 
+When set to Stylized, the blur effect is a simple and smooth digital blur.
+  Smooth Strength: When Blur Type is set to Stylized, this slider controls the strength of the effect. 
+The left is 0, or no blur at all. Dragging to the right expands the blur effect outward from the 
+position. Dragging to the left shrinks the image towards the Position, blurring outward from there.
+  Center Exclusion: Controls the distance from the XY position that the Zoom Blur begins.
+  Channel Adjustment:  Allows you to now set the strength of a blur in a specific channel, relative to 
+the strength of the overall blur.
+Red: Adjusts the blur of the Red channel relative to the overall blur.
+Green: Adjusts the blur of the Green channel relative to the overall blur. 
+Blue: Adjusts the blur of the Blue channel relative to the overall blur. 
+Alpha: Adjusts the blur of the Alpha channel relative to the overall blur.
+  Center Position: Lets you move the center of the blur.
+  Quality: Choose between Faster, Better, and Enhanced. Better and Enhanced modes are used to 
+improve sharp image content at low blur values. If this does not apply to your footage, Faster will 
+work just as well.
+  Border Type: Lets you choose how the edges of the image are affected by this blur; options 
+include Black, Replicate, Reflect, and Wrap Around.
+  Move with Sizing: Checking this box lets the blur center retain its relative position in the frame if 
+the Input and Editing sizing are changed.
+  Blur Alpha: Check this box to blur the Alpha channel along with the image’s content.
+3609Resolve FX Overview | Chapter 155 Resolve FX Blur
+RESOLVE FX
+Chapter 156
+Resolve FX Color
+These plugins provide color processing methods that aren’t available in any of the 
+Color Page palettes of the Color page and include several color management tools 
+that can be applied outside of Resolve Color Management (RCM). 
+Contents
+ACES Transform �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3611
+Chromatic Adaptation  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3611
+Color Compressor (Studio Version Only) ���������������������������������������������������������������������������������������������������������������������������������  3612
+Color Space Transform ��������������������������������������������������������������������������������������������������������������������������������������������������������������������  3613
+Color Space Transform ���������������������������������������������������������������������������������������������������������������������������������������������������������������������  3613
+Tone Mapping ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3613
+Gamut Mapping  �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3614
+Advanced ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3614
+Color Stabilizer (Studio Version Only) ���������������������������������������������������������������������������������������������������������������������������������������  3615
+Analysis Region  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3615
+Channels to Stabilize  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3616
+Captured Analysis Values  ���������������������������������������������������������������������������������������������������������������������������������������������������������������  3616
+Contrast Pop (Studio Version Only) ��������������������������������������������������������������������������������������������������������������������������������������������  3616
+DCTL (Studio Version Only) ������������������������������������������������������������������������������������������������������������������������������������������������������������� 3617
+Dehaze (Studio Version Only) ��������������������������������������������������������������������������������������������������������������������������������������������������������� 3617
+Despill  �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3618
+False Color (Studio Version Only) ������������������������������������������������������������������������������������������������������������������������������������������������  3619
+General ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3619
+Camera Model  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3620
+Color Bands ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3620
+Preprocessing �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3620
+Scale/Legend  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3620
+Gamut Limiter ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3621
+Gamut Mapping (Studio Version Only) �������������������������������������������������������������������������������������������������������������������������������������  3621
+Invert Color ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3622
+3610Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+ACES Transform
+Lets you perform the kind of color transforms that the ACES Input Device Transform and ACES Output 
+Device Transform parameters of the Color Management panel do, without the need to have ACEScc or 
+ACEScct enabled.
+  ACES Version: When you’ve chosen one of the ACES color science options, this pop-up becomes 
+available to let you choose which version of ACES you want to use.
+  Input Transform: This pop-up menu lets you choose which IDT (Input Device Transform) to use to 
+process the image. It presents the same options that are available in the Color Management panel 
+of the Project Settings.
+  Output Transform: This pop-up menu lets you choose an ODT (Output Device Transform) with 
+which to transform the image data for monitoring on your calibrated display and when exporting 
+a timeline in the Deliver page. It presents the same options that are available in the Color 
+Management panel of the Project Settings.
+  Gamut Compress Type: This lets you choose the type of ACES Gamut compression applied to the 
+node. Choosing either option can prevent monochromatic highly saturated light sources (LEDs, 
+neon signs, tail lights, etc.) from clipping the gamut. 
+For more information on the options available in these parameters, jump to this chapter:  
+Data Levels, Color Management, and ACES .
+NOTE: This plugin does ACES transforms correctly using the transforms specified by the 
+Academy, whereas the Color Transform plugin does transforms to the ACES color space 
+colormetrically, which is not actually correct for ACES workflows.
+Chromatic Adaptation
+A Color category plugin that lets you precisely transform an image that has been lit or processed 
+assuming one specific color temperature to another user-selectable color temperature. This 
+transformation alters the appearance of all colors in the image as perceived by the human vision 
+system in the same way that a new illuminant would, whether that illuminant is a light in the 
+environment being recorded or the color temperature of a display on which the image is shown. This 
+plugin is useful for performing specific color temperature transformations as part of color management 
+workflows or for setting up precise color temperature adjustments as part of a creative grade.
+  Method: The Method pop-up menu provides a variety of different transform methods to choose 
+from, defaulting to CAT02. Each option in the Method pop-up menu uses different measurement 
+datasets to create individual CAT matrixes to guide this transformation. As a result, each method 
+prioritizes different levels of accuracy for different sets of colors. For example:
+CAT02 has a non-linear component that compensates for the tendency of extremely saturated 
+blues to go purple, a typical weakness of other methods. It usually gives the best result for the 
+widest variety of measured data sets and works best for emissive sources (displays) and dim 
+viewing environments.
+Bradford Linear is also a commonly used method, albeit one in which extremely saturated blues 
+will go purple during the transform. It works well for both emissive sources in dim environments 
+and for reflective sources (theater screens) and dark environments.
+3611Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Von Kries is one of the oldest methods in common use, although it’s also one in which extremely 
+saturated blues will go purple during the transform. This, as well as all other methods, are available 
+if you need to match work done in another image processing application.
+  Source/Target Illuminant: You control this transformation by using pop-up menus to define the 
+Illuminant Type of the source (typically the color temperature the camera was set to), and that of 
+the target that you want to transform the image to. For both sets of controls, you can choose a 
+Standard Illuminant from a list, a Color Temperature via a slider, or CIE 1931 xy coordinate values. 
+This image transform is extremely precise because the image is first transformed from the 
+Timeline Color Space to XYZ, and then it’s transformed to match the LMS (long, medium, short) 
+color space that models the cone response of the human eye to colors lit by different illuminants.
+  Current Color Space and Gamma: This plugin also takes into account the current color space and 
+gamma of the clip, which default to those set for the current timeline. If you wish to change these 
+values, you can do so using the Color Space and Gamma menus.
+NOTE: Be aware that all methods listed will match neutral colors perfectly; the only 
+differences lie in how different ranges of saturated color are transformed.
+Color Compressor (Studio Version Only)
+This filter lets you compress a range of colors toward a single target color. It works best when applied 
+to similarly colored regions that have been isolated with a secondary qualifier or window. For example, 
+if you’re adjusting an irregularly lit product such as a soda can or a dress that must have a very specific 
+hue, you can isolate that item and use this filter to push the range of Hue, Saturation, and Luminance 
+closer to the target color that’s identified using the color picker.
+(Before/After) Using the Color Compressor plugin to compress original range 
+of hues of the jacket into a narrow “target” range within a secondary operation
+  Target Color: A color control that allows you to choose a specific color or sample a color from 
+the image using the eyedropper. These selected color values are what you want to push all other 
+colors toward.
+  Compress Hue, Compress Saturation, and Compress Luminance:  These sliders let you 
+individually compress the range of colors you’re adjusting in the image to more and more closely 
+match the image. At 0, no compression is applied, at 0.500 the original range of colors in the 
+image have been adjusted to be halfway between their original values and the values of the Target 
+Color, and at 1.000 the original range of colors has been set to be identical to the Target Color.
+3612Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Color Space Transform
+Lets you perform the kind of color transforms that LUTs do, but instead of using lookup tables, this 
+plugin uses the same math used by Resolve Color Management (RCM) in order to do extremely clean 
+color transforms without clipping.
+Color Space Transform
+Exposes four pop-up menus that let you set an Input Colorspace, Input Gamma, Output Colorspace, 
+and Output Gamma, in order to do controlled transforms from the Input settings to the Output settings, 
+right within a grade. Resolve Color Management does not have to be enabled for you to use this filter. 
+The Swap button lets you quickly reverse the color and gamma space conversion.
+Tone Mapping
+Tone Mapping Method lets you enable tone mapping to accommodate workflows where you need to 
+transform one color space into another with a dramatically larger or smaller dynamic range by automating 
+an expansion or contraction of image contrast in such a way as to give a pleasing result with no clipping. 
+  None: This setting disables Input DRT Tone Mapping. No tone mapping is applied to the Input to 
+Timeline Color Space conversion at all, resulting in a simple 1:1 mapping to the Timeline Color Space.
+  Clip: Hard clips all out-of-bounds values.
+  Simple: Uses a simple curve to perform this transformation, compressing or expanding the 
+highlights and/or shadows of the timeline dynamic range to better fit the output dynamic range. 
+Note that the “Simple” option maps between approximately 5500 nits and 100 nits, so if you’re 
+mapping from an HDR source with more than 5500 nits to an SDR destination there may still be 
+some clipping of the highlights above 5500 nits.
+  Luminance Mapping: Same as DaVinci, but more accurate when the Input Color Space of all your 
+media is in a single standards-based color space, such as Rec. 709 or Rec. 2020.
+  DaVinci: This option tone maps the transform with a smooth luminance roll-off in the shadows and 
+highlights, and controlled desaturation of image values in the very brightest and darkest parts of 
+the image. This setting is particularly useful for wide-gamut camera media and is a good setting to 
+use when mixing media from different cameras.
+  Saturation Preserving:  This option has a smooth luminance roll-off in the shadows and highlights, 
+but does so without desaturating dark shadows and bright highlights, so this is an effective option 
+for colorists who like to push color harder. However, because over-saturation in the highlights 
+of the image can look unnatural, two parameters are exposed to provide some user-adjustable 
+automated desaturation.
+Sat. Rolloff Start: Lets you set a threshold, in nits (cd/m 2), at which saturation will roll off along with 
+highlight luminance. Beginning of the rolloff.
+Sat. Rolloff Limit: Lets you set a threshold, in nits (cd/m 2), at which the image will be totally 
+desaturated. End of the rolloff.
+  Use Custom Max Input/Output:  Checking these boxes and adjusting the slider below allows 
+you to specify the minimum and maximum luminance of the input image in nits. Using these two 
+sliders together, you can set which value from the Input Gamma is mapped to which value of the 
+Output Gamma.
+  Adaptation: Used to compensate for large differences in the viewer’s state of visual adaptation 
+when viewing a bright image on an HDR display versus seeing that same image on an SDR 
+display. For most “average” images this setting works best set between 0–10. However, when 
+you’re converting very bright images (for example, a snow scene at noon), then using a higher 
+value will yield more image detail within the highlights.
+3613Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Gamut Mapping
+Gamut Mapping Method accommodates workflows where you need to transform one color space into 
+another with a dramatically larger or smaller gamut by helping to automate an expansion or contraction 
+of image saturation in such a way as to give a pleasing and naturalistic result with no clipping. 
+  Choosing None results in no Gamut mapping at all.
+  Choosing Saturation Mapping from this menu enables saturation mapping to fit the range of 
+saturation values from the Input Color Space and Gamma into the Output Color Space and 
+Gamma. It enables the Saturation Knee and Saturation Max. controls.
+The Saturation Knee slider sets the image level at which saturation mapping begins. Below this 
+level, no remapping is applied. All saturation values from this level on up are remapped according 
+to the Saturation Max. slider. A value of 1.0 is maximum saturation in the currently selected output 
+color space. 
+The Saturation Max slider sets the new maximum level to which you want to either raise or 
+lower all saturation values that are above the Saturation Knee setting. A value of 1.0 is maximum 
+saturation in the currently selected output color space.
+  Choosing “Clip” hard clips all out-of-gamut values.
+NOTE: While this plugin has ACES settings, it does transforms to the ACES color space 
+colormetrically, which is not actually correct for ACES workflows. For actual ACES workflows, 
+use the ACES Transform plugin, which uses transforms specified by the Academy.
+Advanced
+This drop-down menu exposes the advanced features of the Color Space Transform effect.
+  Apply Forward OOTF: Check this box to convert the image from scene referred to display referred 
+color management.
+  Apply Inverse OOTF: Check this box to convert the image from display referred to scene referred 
+color management.
+  Use white point adaptation:  Applies a chromatic adaptation transform to account for different 
+white points between color spaces. 
+Uncheck this box if you simply want to view the input color space’s white point unaltered in the 
+output color space. For example, wanting to use a P3-D60 mastered clip inside a P3-D65 timeline 
+for reference purposes. 
+Check this box to apply the chromatic adaptation transform to convert the input white point to 
+match the output color space’s white point. For example, wanting a P3-D60 mastered clip to cut in 
+with other clips mastered in a P3-D65 timeline.
+3614Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Color Stabilizer (Studio Version Only)
+Designed to deal with clips that have inconsistencies in exposure and color, caused by manual 
+changes to a lens’ aperture setting or by a camera’s auto exposure and white balance settings causing 
+unwanted changes to color and brightness in the middle of a shot. The Color Stabilizer plugin analyzes 
+a frame of the clip that represents the desired exposure and color, and automatically adjusts every 
+other frame of the current clip to match the analyzed levels.
+IMPORTANT: The Color Stabilizer gives you the best results with clips that don’t have 
+clipped highlights. When used in the Color page, it’s recommended to grade the image to 
+bring all the highlights you want somewhere at or under a value of 1023, and then apply the 
+Color Stabilizer to a node after this adjustment.
+You will want to use the Color Stabilizer before grading the image. Grading before using the 
+Color Stabilizer can give you unpredictable results.
+There are two ways of using the Color Stabilizer:
+  The easiest way is to choose Entire Frame from the Region of Analysis pop-up menu. Then, move 
+the playhead in the Viewer to the frame that represents the contrast and color you want the 
+entire clip to have, and click the Analyze Now button. Now, if you play through the clip, changes 
+in contrast and color should be gone. This method works best for clips where the inconsistency 
+you’re trying to eliminate affects the entire picture.
+  Another way is to choose Selected Area from the Region of Analysis pop-up menu. This causes 
+an onscreen rectangle to appear that you can resize and position over a specific region you want 
+to sample for the duration of the clip. If the selected feature you’re analyzing is moving, then 
+you can use the FX Tracker to track the subject so the selection box follows it (this is important 
+for a consistent result). Once this is set up, move the playhead in the Viewer to the frame that 
+represents the contrast and color you want the entire clip to have, and click the Analyze Now 
+button. Now, if you play through the clip, changes in contrast and color should be gone. This 
+allows you to stabilize the color of the shot, even if dark objects move through the frame or the 
+highlights change level. You can use the selection box to specifically analyze the part of the frame 
+that has the unwanted exposure change, while ignoring the desirable exposure change.
+Depending on what option you choose from the Region for Analysis pop-up menu, 
+different additional options appear.
+Analysis Region
+If you choose “Selected Area” from the Region of Analysis pop-up, a rectangle in the Viewer appears 
+and you can control its position, scale, and size by clicking and dragging on its corners in the Viewer. 
+These on-screen controls let you transform the selection box that defines which part of the image is 
+being analyzed.
+3615Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Channels to Stabilize
+Once you’ve analyzed the frame that represents the best contrast and color for that clip, the Channels 
+to Stabilize controls let you choose how to make the correction. The What to Stabilize pop-up menu 
+lets you choose between stabilizing White Balance and Brightness, or R, G, B Channels Separately.
+  If you choose White Balance and Brightness, two checkboxes let you choose whether or not you 
+want to include Stabilize White Balance and Stabilize Brightness independently from one another.
+  If you choose R, G, B channels separately, three checkboxes appear letting for Stabilize Red, 
+Green, and Blue Channel, so you can pick which particular channels you want to correct.
+The Stabilize drop-down menu lets you choose how to make the correction, with the options 
+Levels and Contrast, Offset, and Gain, each of which uses a different method to make the 
+necessary correction, so if one method doesn’t work for the particular problem your clip is 
+exhibiting, you can try the other methods to try and get a better result.
+Captured Analysis Values
+Once you’ve analyzed the frame, another set of parameters appear showing the captured analysis 
+values upon which the automated correction is based, so that you can make manual adjustments 
+if necessary to improve the result. The parameters that are shown depend on the option you chose 
+from the What to Stabilize pop-up menu.
+  If you chose White Balance and Brightness, then you’ll have a Normalized White Balance color 
+control, and Low Level and High Level sliders.
+  If you chose R, G, B Channels Separately, then you’ll have Red, Green, and Blue High and 
+Low Level sliders.
+Contrast Pop (Studio Version Only)
+A more extreme and selective version of the Midtone Detail control found in the Color Wheels palette, 
+designed to add either sharp high-contrast looks, or soft low-contrast looks to a selective portion of 
+the tonal range of the image.
+  Detail Amount: Lets you choose how much of this effect to apply. At 0, no effect is applied. 
+At positive values progressively sharper contrast is added, while at negative values progressively 
+softer low-contrast is applied. 
+  Detail size: Lets you choose which structures of the image are affected by this localized contrast 
+adjustment, from smaller to larger.
+  Low and High Threshold: These values let you define what range of image tonality is affected by 
+this filter, allowing you to omit either shadows or highlights from this operation. 
+  Softness: Lets you soften the transition between the affected and unaffected areas of the image.
+3616Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+DCTL (Studio Version Only)
+Lets you apply a DCTL wherever you can apply ResolveFX plugins. 
+For more information on DCTLs and where they’re installed, jump to this chapter:  
+Creating DCTL LUTs.
+  DCTL List: A pop-up that lets you choose from the available DCTLs installed on your 
+workstation location.
+On Mac OS X: Library/Application Support/Blackmagic Design/DaVinci Resolve/LUT/
+On Windows: C:\ProgramData\Blackmagic Design\DaVinci Resolve\Support\LUT
+On Linux: /home/resolve/LUT
+  Reload DCTL: Allows users to refresh the currently loaded DCTL file content. This lets the user 
+make changes in the DCTL using a text editor, then reload it to see the results. It does not refresh 
+the DCTL list; to do so, you must restart the DaVinci Resolve application.
+Dehaze (Studio Version Only)
+Designed to let you make adjustments to color and contrast to reduce the visible effects of Aerial 
+Perspective (i.e., smog, airlight, and haze) in an image. This filter automatically generates a simulated 
+depth map, which is used to apply more of this corrective color adjustment to faraway parts of the 
+image that would be more affected by haze effects and less color adjustment to closeup parts of the 
+image. It estimates haze and has options for guiding that estimate and controlling the processing.
+  Dehaze Strength: This slider applies a simultaneous color and contrast adjustment. Raising 
+Dehaze Strength subtly increases contrast (especially in the shadows) while rebalancing color 
+toward the complement of the currently selected Haze Color and selectively intensifying 
+saturation. Lowering Dehaze Strength decreases contrast and rebalances color toward the 
+selected Haze Color itself while selectively lowering saturation. 
+  Haze Color: A color control that lets you choose or sample the color of smog, airlight, or haze in an 
+image that you want to minimize.
+  Display Depth: Lets you view the simulated depth matte that’s being generated. Turn this on 
+before adjusting the Shadow and Highlight controls below.
+  Shadow: This slider raises or lowers darkest parts of the simulated depth map that defines the 
+parts of the image that are estimated to be farthest away.
+  Highlight: This slider lets you raise or lower the lightest parts of the simulated depth map that 
+defines the parts of the image that are estimated to be closest to us.
+3617Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Despill 
+Removes the color cast on a subject caused by the reflection of light off the green or blue screen. 
+This color cast can remain after the green screen has been keyed out. This Despill filter is useful for 
+reducing spill after keying, or with externally generated keys or masks. 
+  Key Color: Sets the color to be removed from the subject, either Red, Green, or Blue. 
+  Strength: The amount of Despill to apply. 1.000 is equal to despill “on” in the previous version 
+of the 3D Keyer checkbox. Variable strength comes in handy as you can preserve more of the 
+original color information if the context allows it. For example, less despill is appropriate if the new 
+composited background will also be green.
+The Despill FX removing a green color cast from the subject’s arms 
+and hair. Above is no despill and below is full despill.
+3618Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+False Color (Studio Version Only)
+False Color is designed to replicate exactly the false color readout of a Blackmagic Design camera 
+but can also be used as a creative effect that can be used for replicating camera HUDs, infrared 
+sensors, and custom posterization looks by remapping pixel brightness to customizable color bands 
+and gradients. The color set can either match the False Color setting in a specific Blackmagic Design 
+camera or be customized with a list of creative style presets provided for use or inspiration. 
+The presets can be modified by setting the number of colors used and defining the tonal range each 
+color represents. 
+Resolve FX False Color Camera preset and legend
+Resolve FX False Color thermal creative preset and legend
+General
+  Plugin Mode: This menu is used to switch between matching a specific Blackmagic Design 
+Camera’s False Color setting or accessing creative presets. When Specific Camera Model is 
+chosen, the Camera Model section is displayed for selecting the camera and settings you want to 
+use. When Creative is chosen, the Color bands section is displayed for choosing and customizing 
+the preset.
+3619Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Camera Model
+The Camera Model controls are displayed when Specific Camera Model is chosen from the Plugin 
+Model menu. These menus allow you to match the False Color from a camera configuration.
+  Camera: Selects the exact Blackmagic Design camera sensor. 
+  Camera Mode: Selects the dynamic range setting.
+  ISO Level: Sets the ISO or light sensitivity setting. 
+Color Bands
+These controls are displayed when Creative is chosen from the Plugin Model menu. The Color Bands 
+group of controls are used to select and modify the appearance of the False Color presets.
+  Creative Style: Selects one of the built-in style presets for the effect. 
+  Number of Bands: Lets you choose how many different colors are in the scale.
+  Show Sliders: Exposes the Top and Bottom controls letting you select the specific range of a color 
+in percentage values. For example, setting a Red color value between Bottom 45 and Top 55 
+will tint red anything in the image between 45 and 55% brightness on the waveform monitor.
+  Color: Provides either a color swatch or picker to choose the color for the band.
+Preprocessing
+This group of controls is used to apply tonal and blur processing to the image.
+  Blur: Applies a blur filter to the image before analysis. 
+  Black Level: Increases or decreases the shadow range assigned to colors that fall lower on the 
+False Color legend.
+  White Level: Increases or decreases the highlight range assigned to colors that fall higher on the 
+False Color legend.
+  Gamma: Shifts the mid-tone range towards colors that fall lower or higher on the False Color legend.
+Scale/Legend
+This section is used to control the visibility and appearance of the False Color legend shown at the left 
+of the frame. The Legend shows how dark to light inputs get mapped to new colors. It is burned in to 
+the image.
+  Show Scale: Shows or hides the Legend. 
+  Show Values: Shows or hides numeric values on the Legend. These numeric values represent 
+different scales based on the Value Style menu.
+  Show Labels: Shows or hides data point labels on the Legend. The labels identify important data 
+points along the tonal range, such as black clipping, white clipping, and middle gray.
+  Contrast: Increases or decreases the transparency of the Legend’s background underlay.
+  Value Detail: Increases or decreases the number of axis value labels displayed on the Legend.
+  Value Style: This menu includes three options for the scale used for the Legend’s numeric values.
+Percentage: Uses a percentage scale for the Legend, going from 0% at 
+the bottom to 100% at the top.
+Hundredths: Uses a Hundredths scale for the Legend, going from 0 at 
+the bottom to 100 at the top with no “%” symbol.
+Normalized: Uses a Normalized scale for the Legend, going from 0.0 at 
+the bottom to 1.0 at the top.
+3620Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Gamut Limiter
+Lets you limit the gamut to a specified standard. Useful in situations where the delivery color space is 
+a large gamut such as Rec. 2020, but the QC specification requires limiting to a smaller gamut such as 
+P3, in order to limit the amount of saturation allowable in the final output. This is a limiting operation, so 
+out of bounds values are hard clipped. This plugin can be used regardless of whether or not Resolve 
+Color Management is enabled. Because it’s a limiter, it should probably be one of the last operations in 
+any node tree to prevent useful image data from being clipped.
+  Current Gamut: Choose the timeline gamut currently being used by the image.
+  Current Gamma: Choose the timeline gamma currently being used by the image.
+  Limit Gamma to: Choose the gamut you want to restrict the image to here.
+These menus present the same options as the Resolve Color Management menus in the 
+Color Management panel. 
+For more information on the options available in these parameters, jump to this chapter:  
+Data Levels, Color Management, and ACES .
+Gamut Mapping (Studio Version Only)
+The Color Space Transform plugin provides Gamut Mapping controls to accommodate workflows 
+where you need to transform one color space into another that has a dramatically larger or smaller 
+gamut. These controls are identical to those found in the Color Space Transform plugin’s Gamut 
+Mapping group and are similar to those found in the Color Management panel of the Project Settings.
+  Gamma: A pop-up menu lets you specify what type of gamma the clip is supposed to have, so set 
+this to whatever matches that image (this may match the timeline color space, but it depends on 
+how you’re working).
+  Tone Mapping Method: Lets you enable tone mapping, to accommodate workflows where you 
+need to transform one color space into another with a dramatically larger or smaller dynamic range 
+by automating an expansion or contraction of image contrast in such a way as to give a pleasing 
+result with no clipping.
+None: This setting disables Input DRT Tone Mapping. No tone mapping is applied to the Input 
+to Timeline Color Space conversion at all, resulting in a simple 1:1 mapping to the Timeline 
+Color Space.
+Clip: Hard clips all out-of-bounds values.
+Simple: Uses a simple curve to perform this transformation, compressing or expanding the 
+highlights and/or shadows of the timeline dynamic range to better fit the output dynamic range. 
+Note that the “Simple” option maps between approximately 5500 nits and 100 nits, so if you’re 
+mapping from an HDR source with more than 5500 nits to an SDR destination there may still be 
+some clipping of the highlights above 5500 nits.
+Luminance Mapping: Same as DaVinci, but more accurate when the Input Color Space of all your 
+media is in a single standards-based color space, such as Rec. 709 or Rec. 2020.
+DaVinci: This option tone maps the transform with a smooth luminance roll-off in the shadows and 
+highlights, and controlled desaturation of image values in the very brightest and darkest parts of 
+the image. This setting is particularly useful for wide-gamut camera media and is a good setting to 
+use when mixing media from different cameras.
+3621Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Saturation Preserving:  This option has a smooth luminance roll-off in the shadows and highlights, 
+but does so without desaturating dark shadows and bright highlights, so this is an effective option 
+for colorists who like to push color harder. However, because over-saturation in the highlights 
+of the image can look unnatural, two parameters are exposed to provide some user-adjustable 
+automated desaturation.
+  Sat. Rolloff Start: Lets you set a threshold, in nits (cd/m2), at which saturation will roll off along 
+with highlight luminance. Beginning of the rolloff.
+  Sat. Rolloff Limit: Lets you set a threshold, in nits (cd/m2), at which the image will be totally 
+desaturated. End of the rolloff.
+Max Input/Output Luminance:  Checking these boxes and adjusting the slider below allows 
+you to specify the minimum and maximum luminance of the input image in nits. Using these two 
+sliders together, you can set which value from the Input Gamma is mapped to which value of the 
+Output Gamma.
+Avg. Input Luminance: Used to compensate for large differences in the viewer’s state of visual 
+adaptation when viewing a bright image on an HDR display versus seeing that same image on an 
+SDR display. For most “average” images this setting works best set between 0–10. However, when 
+you’re converting very bright images (for example, a snow scene at noon), then using a higher 
+value will yield more image detail within the highlights.
+  Gamut Mapping Method:  Accommodates workflows where you need to transform one color 
+space into another with a dramatically larger or smaller gamut by helping to automate an 
+expansion or contraction of image saturation in such a way as to give a pleasing and naturalistic 
+result with no clipping. Choosing Saturation Mapping lets you remap the saturation values of the 
+image. It enables the Saturation Knee and Saturation Max. controls.
+The Saturation Knee slider sets the image level at which saturation mapping begins. Below this 
+level, no remapping is applied. All saturation values from this level on up are remapped according 
+to the Saturation Max. slider. A value of 1.0 is maximum saturation in the currently selected output 
+color space. 
+The Saturation Max slider sets the new maximum level to which you want to either raise or 
+lower all saturation values that are above the Saturation Knee setting. A value of 1.0 is maximum 
+saturation in the currently selected output color space.
+  Apply Forward OOTF: Check this box to convert the image from scene referred to display referred 
+color management.
+  Apply Inverse OOTF: Check this box to convert the image from display referred to scene referred 
+color management.
+Invert Color
+A Color category plugin that lets you invert any color channel, including the Alpha channel just by 
+checking the appropriate box. This little plugin has 101 uses in advanced workflows, especially when 
+you need to invert Alpha or Key channels to do something specific. This is not a “film negative” plugin; 
+this is a simple inversion.
+3622Resolve FX Overview | Chapter 156 Resolve FX Color
+RESOLVE FX
+Chapter 157
+Resolve FX 
+Film Emulation
+These plugins are designed to emulate motion picture film characteristics for 
+aesthetic and creative effects.
+Contents
+Camera Shake (Studio Version Only) ����������������  3624
+Main Controls  ���������������������������������������������������������������� 3624
+Shake Levels ����������������������������������������������������������������� 3624
+Shake Quality  ���������������������������������������������������������������� 3624
+Blanking Handling  ����������������������������������������������������� 3625
+ColorTone Diffuser ���������������������������������������������������� 3625
+Film Damage ����������������������������������������������������������������� 3627
+Blur and Shift Controls ��������������������������������������������  3628
+Add Vignetting  ������������������������������������������������������������ 3628
+Add Dirt ��������������������������������������������������������������������������� 3628
+Add Scratch ������������������������������������������������������������������ 3628
+Film Grain (Studio Version Only) �������������������������  3629
+Main Controls  ��������������������������������������������������������������� 3629
+Grain Params ���������������������������������������������������������������� 3629
+Advanced Controls ���������������������������������������������������  3629
+Film Look Creator (Studio Version Only) ���������  3630
+Main Controls  ����������������������������������������������������������������� 3631
+Color Space Overrides  ���������������������������������������������� 3631
+Film Look �������������������������������������������������������������������������� 3631
+Color Settings  �������������������������������������������������������������� 3632
+Split Tone �����������������������������������������������������������������������  3632
+Vignette �������������������������������������������������������������������������� 3632
+Halation ���������������������������������������������������������������������������� 3633
+Bloom �������������������������������������������������������������������������������� 3633
+Grain ���������������������������������������������������������������������������������� 3633
+Flicker ������������������������������������������������������������������������������� 3633
+Gate Weave�������������������������������������������������������������������� 3633
+Film Gate ������������������������������������������������������������������������� 3634
+Flicker Addition ����������������������������������������������������������� 3634
+Main Controls  ���������������������������������������������������������������� 3634
+Flicker Quality  ��������������������������������������������������������������� 3634
+Halation (Studio Version Only) �����������������������������  3635
+Processing Color Space �����������������������������������������  3635
+Isolation ��������������������������������������������������������������������������  3636
+Dye Layer Reflections  ����������������������������������������������  3636
+Secondary Glow  ��������������������������������������������������������� 3636
+Basic Grain �������������������������������������������������������������������� 3636
+Global Adjustments  ��������������������������������������������������� 3637
+Split Tone Effect ���������������������������������������������������������� 3637
+Vignette �������������������������������������������������������������������������� 3638
+3623Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Camera Shake (Studio Version Only)
+This effect replicates random camera motion for Horizontal and Vertical position, Rotation, and Zoom. 
+A variety of parameters are provided to let you customize the quality of motion, from slow meandering 
+drift to abrupt, jagged jerks and pops.
+Main Controls
+The primary controls governing how much camera shake is added.
+  Motion Scale and Speed Scale:  These sliders let you adjust the overall amplitude and speed of 
+camera shake that’s introduced to the image. 
+  Motion Blur: Lets you add simulated motion blur to the image being shaken, which can add a more 
+realistic look to the motion. Motion blur is more visible on fast-moving motion, as DaVinci Resolve 
+is simulating the effect of a motion picture camera’s shutter speed on exposed subjects in motion.
+Shake Levels
+These controls let you adjust the intensity of camera shake.
+  Pan Amplitude: Lets you set how much horizontal motion you want. 
+  Tilt Amplitude: This slider lets you choose how much vertical motion you want. These sliders are 
+completely independent of one another.
+  Rotation Amplitude: Lets you introduce rotational motion to the camera shake as well.
+  PTR Speed: This slider lets you choose how fast the Pan, Tilt, and Rotation camera shake is.
+  Zoom Amplitude: This slider lets you add zooming to the camera motion being created. 
+  Zoom Speed: This slider lets you choose how fast this random zooming should occur. 
+  Zoom Type: This pop-up menu lets you choose how to add zooming; you can choose 
+Outward Only, Inward Only, or Outward and Inward. If you choose Inward Only, you don’t have to 
+worry about blanking appearing around the edges of the frame.
+Shake Quality
+These controls let you customize the type of shaking you want.
+  Motion Method: This pop-up menu lets you choose from different ways of generating the motion 
+this plugin introduces. You can choose from SINE, Rectified SINE, Rectified SINE (Invert), and 
+Square Wave (good for popping or flickering motion).
+  Phase: This slider lets you set the starting point of the camera shake you’re creating, based on the 
+Motion Method and Amplitude settings you’ve chosen.
+  Randomness Scale: This slider lets you introduce irregularity to the Horizontal, Vertical, and 
+Rotational motion of the camera shake. The greater this value, the more irregularity will be introduced.
+  Randomness Speed: This slider lets you choose between smoothly erratic motion (at lower 
+values) or more jagged motion (at higher values). 
+  Pause Length: This slider lets you adjust the frequency of intermittent pauses that break up the 
+random motion added by this filter.
+  Pause Interval: This slider lets you adjust the duration of intermittent pauses that break up the 
+random motion added by this filter.
+  Pause Randomness: This lets you add a degree of randomness to the intervals that happen.
+  Random Seed: This slider lets you alter the value that sets what random values are being 
+produced. Identical values result in identical randomness.
+3624Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Blanking Handling
+These controls let you determine what to do when camera shake causes blanking past the edge of 
+the image.
+  Border Type: This pop-up menu lets you choose how you want to fill the empty spaces at the 
+edge that appear if the camera shake you create pushes the image out of the current frame size 
+of your project. Four options let you choose to Replicate, Reflect, or Wrap-Around the image to 
+fill the gap.
+  Zoom to Crop: This slider lets you zoom in on the image to crop out unwanted blanking being 
+introduced by the Camera Shake effect.
+ColorTone Diffuser
+The ColorTone Diffuser is an effect designed to mimic the use of a diffusion filter that is surrounded by 
+a rectangle of user controllable colored lights. Modifying the color and intensity of these lights scatters 
+the light off the diffusion elements embedded in the glass filter, that is directly in the image path of the 
+camera. This allows you to make specific artistic and creative looks difficult to achieve with post tools 
+alone, until now.
+The original image (Top), the image with the 
+ColorTone Diffuser “Teal Soft” preset (Bottom)
+  Presets: Presents a set of ColorTone presets to try on your footage as starting points. The default 
+is Clean Slate which makes no changes, and allows you to create your own custom look.
+  3D LUT Compatible: Disables all controls that can not be passed in a LUT.
+3625Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+  Color Space Overrides: These controls allow you to change the input gammas and color spaces 
+of the effect if you need to manually configure them for a display referred workflow. The default 
+is “Use timeline,” which will match the color spaces you’ve selected in the Color Management 
+section of the Project Settings.
+Input Color Space: Sets the input color space; choose one from the drop-down menu.
+Input Gamma: Sets the input gamma; choose one from the drop-down menu.
+  Diffusion: Spreads the bright areas out, diffusing into nearby parts of the frame.
+Resolution: Set the amount of blur applied to the image to replicate the slight resolution loss of 
+light coming through the filter.
+Diffusion: Check this box to turn Diffusion on or off.
+Amount: The strength of the diffusion effect.
+Radius: The size of the area of diffusing.
+  Shadow Soft Clip: Protects the shadows from being affected by the ColorTone Diffuser. Anything 
+under this level bypasses the filter.
+Shadow Clip: Check this box to turn on or off Shadow Clipping. 
+Threshold: Set the minimum black level for the ColorTone Diffuser to affect.
+Softness: How gently the black level gets stopped at the threshold.
+  Highlight Soft Clip: Protects the highlights from being affected by the ColorTone Diffuser. 
+Anything above this level bypasses the filter.
+Highlight Clip: Check this box to turn on or off Highlight Clipping. 
+Threshold: Set the maximum bright level for the ColorTone Diffuser to affect.
+Softness: How gently the bright level gets stopped at the threshold.
+  Tone Lights: These control the hue of the ring lights that is scattered off the diffusive elements in the filter.
+Intensity: Controls the overall level of the tone light applied to the frame.
+Bias Red / Green / Blue: The relative amount of a certain color in the Tone Light. These controls 
+are content dependent and more visible in shadows, so there may not be as noticeable an effect 
+in brighter footage.
+  Tone Light Falloff: Mimics the way that the light is dimmer at the edges of the filter, and 
+stronger in the middle. In reality it’s a vignette mask that determines the mapping of the effect.
+Apply Falloff Mask: Check this box to turn the Tone Light Falloff on or off.
+Preview Falloff Mask: Checking this box will bring up the vignette for the Falloff Mask in the 
+viewer. The darker areas will have less of the effect, white more of the effect.
+Size: Set the size of the center of the mask.
+Softness: Sets the softness of the mask as you move away from its center.
+Amount: How strongly the effects are affected by the mask.
+ 
+The preview of a Falloff Mask shows the effect 
+is stronger in the white areas of the mask
+3626Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+  Image Adjustments:  Gives you basic exposure, contrast, and saturation controls. This lets you 
+make these adjustments in the node so everything is included in the LUT, and you don’t have to 
+put an additional grade on top of the node.
+Enable Adjustments:  Check this box to enable the Image Adjustments.
+Show Advanced Clipping Options:  Checking this box will enable another set of shadow and 
+highlight softclip controls, that work the same as described above. These controls though are 
+applied at the end of the plugin, not before. This can prevent blow outs from being adjusted by the 
+original shadow and highlight softclip controls.
+Exposure: Adjusts the Brightness / Gain.
+Contrast: Adjusts the Contrast.
+Saturation: Adjusts the Saturation.
+Film Damage
+Found in the Resolve FX Texture category. After you’ve used the new Resolve FX Revival plugins to fix 
+damage in archival footage, you can turn around and use the Film Damage plugin to make brand new 
+digital clips look worn, dirty, and scratched instead. When used in conjunction with the Film Grain and 
+Flicker Addition plugins, you can convincingly recreate the feel of poorly kept vintage archival footage. 
+Original image (Top), and result with Film Damage (Bottom)
+3627Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Blur and Shift Controls
+The three parameters at the top let you alter the foundation of the image to begin creating the look of 
+an older film. 
+  Film Blur: Adds just a bit of targeted defocusing to knock the digital sharpness out of the image. 
+  Temp Shift: Defaults to warming the image just a bit to simulate the warmer bulb of a film projector, 
+although you can use it to cool or warm the image in varying amounts. 
+  Tint Shift: Defaults to yellowing the image to simulate damage to the film dyes, but you could move 
+the slider in the other direction to add a bit of magenta, simulating a different kind of dye failure.
+Add Vignetting
+These parameters simulate lens vignetting darkening the edges of the image.
+  Focal Factor: Adjusts how far the vignetting extends into the image. 
+  Geometry Factor:  Affects how dark the vignetting is and how pronounced the edges are. 
+  Tilt Amount: Affects how balanced the vignetting at the top of the image is versus the bottom of 
+the image.
+  Tilt Angle: Affects how balanced the vignetting left of the image is versus the right, but only when 
+Tilt Amount is set to something other than 0.
+Add Dirt
+These parameters let you simulate dirt particles (not dust) that have adhered to the film. 
+These are larger specks, although there’s several ways you can customize these.
+  Dirt Color: This control lets you choose what color you want the dirt particles to be (black 
+simulates dirt on a print, while white simulates dirt on a negative). 
+  Changing Dirt: This checkbox lets you alternate between simulating temporally unstable dirt on 
+the film (checkbox on) and dirt on the lens that doesn’t move (checkbox off). 
+  Dirt Density:  Lets you choose more or fewer dirt particles appearing over time. 
+  Dirt Size: Lets you choose the average size of dirt particles to appear. 
+  Dirt Blur: Lets you defocus the dirt, so it’s not so sharp. 
+  Dirt Seed: Changes the random distribution of dirt when you change this value, but for any given 
+value, the results for any given set of control adjustments remain consistent.
+Add Scratch
+Five sets of Add Scratch parameters let you add up to five scratches to the image, simulating 
+something scratching the emulsion while the film played.
+  Scratch Color: Lets you choose the color you want the scratch to be (scratches can be a variety 
+of colors depending on the depth of the scratch, type of film, and method of printing). 
+  Scratch Position: Lets you adjust the scratch’s horizontal position on the image. 
+  Scratch Width and Scratch Strength: Let you adjust the scratch’s severity.
+  Scratch Blur: Lets you defocus the scratch.
+  Moving Scratch: This checkbox lets you choose whether the scratch is jittering around or not. 
+  Moving Amplitude: Determines how far the scratch moves. 
+  Moving Speed: Determines how fast the scratch moves. 
+  Moving Randomness: Determines how the scratch meanders about.
+  Flickering Speed: Determines how much the scratch flickers lighter and darker in severity.
+3628Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Film Grain (Studio Version Only)
+Composites a procedurally generated layer of simulated “film grain” over the image. Individual 
+simulated grains with falloff are generated to match the resolution of the project.
+Main Controls
+These controls let you quickly choose and apply a film grain effect.
+  Film Grain Presets: This pop-up lets you quickly choose from among different 8mm, 
+16mm, and 35mm film grain effects. 
+  Composite Type: Lets you choose a composite mode with which to combine the image with the 
+grain simulated by this plugin.
+  Opacity: Lets you fade the Film Grain effect against the original image. 
+  Grain Only: This checkbox lets you see just the grain layer that you’re creating, so you 
+can evaluate its look prior to it being composited into the image. 
+  Freeze: Stops the motion of the grain animation, allowing you to use the effect for a still image or 
+freeze frame. 
+Grain Params
+The Grain Params group lets you adjust the quality of the grain.
+  Texture: Larger values create more separation between the grains generated by this plugin, 
+while smaller values bunch them up closer together to create denser grain patterns.
+  Grain Size: Larger values zoom into the individual simulated grains generated by this plugin, 
+while smaller values zoom out.
+  Grain Aspect Ratio:  Lets you adjust the aspect ratio of the grains.
+  Grain Strength: Adjusts the contrast of the simulated grain layer. Higher values produce more 
+contrast, lower values less.
+  Offset: Lightens or darkens the entire simulated grain layer. The practical effect is that lower 
+values emphasize lighter grains, while higher values emphasize darker grains.
+  Symmetry: An asymmetrical contrast adjustment. Lower values darken the lighter grains, 
+while higher values brighten the darker grains.
+  Softness: Lets you blur the grain layer to create even softer transitions from one grain to another.
+  Saturation: Lets you make the grain more or less colorful. At a value of 0, grain is monochrome.
+Advanced Controls
+In the Advanced Controls, the Red, Green, and Blue sliders control the color of the grain. The Shadow, 
+Midtone, and Highlight Gain controls let you adjust the amount of grain that’s composited into each 
+of these tonal regions of the image. When the Optimized Mode checkbox is turned on (the default), 
+performance should improve substantially. Turning on the Animate on Every Refresh checkbox will 
+animate the grain as you adjust the sliders, allowing you a better idea of how the grain pattern will look 
+in motion.
+3629Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Film Look Creator (Studio Version Only)
+The Film Look Creator gives you the ability to easily alter both the color and physical properties of 
+an image to mimic motion picture film stock in a single Resolve effect. This effect is not focused on 
+emulating a specific manufacturer’s film stock, rather it creates a base “Blackmagic” film look that can 
+be manipulated in a variety of creative ways. The Film Look Creator alters contrast, saturation, hue, 
+and exposure of an image. It also includes the tools you want to have for film emulation including 
+halation emulation, film gate, flicker, weave, vignetting, bloom, and more.
+The original video (Top), and the Film Look Creator 
+Bleach Bypass Super 16mm version (Bottom)
+Many of the components of the Film Look Creator have specific counterparts in the Resolve FX library. 
+However, the Film Look Creator combines these film look tools into a single Resolve effect with a 
+greatly simplified tool set. If you ever find you need more control over an aspect of the look, you can 
+always disable the effect’s module and use a dedicated Resolve Effect in the node tree instead.
+When this effect is applied, an underlying Blackmagic film look is automatically set first. This film 
+look is driven by over 60 parameters that you get with the plugin active (and all effects off). These 
+parameters are fine tuned and “baked in” to the Blackmagic film stock. But while these can’t be 
+adjusted, there are additional controls on the top area of the plugin that you can use to refine and 
+create unique looks.
+The Film Look Creator is designed for scene referred workflows and will work with any camera 
+source and output display. When using either Resolve Color Management or ACES, this happens 
+automatically because the plugin uses the timeline color space for input and output by default. The 
+3630Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+plugin works for manually display referred timelines (such as DaVinci YRGB) as well, but then the user 
+must manually choose the transform of the source footage and choose the display transform, which 
+you can do within the plugin in the Color Space Overrides section.
+NOTE: Film Look Creator works best with video that fills the entire frame. Effects like Halation 
+and Film Gate may give unexpected results with video that is smaller than the frame size. 
+If necessary, you can fill the frame using the Sizing controls, or in Project Settings > Image 
+Scaling > Input/Output Scaling select “Scale Full Frame with Crop” rather than the default 
+“Scale entire image to fit.”
+Main Controls
+These controls create the foundation of this effect. 
+  Presets: Automatically sets all controls for a desired preset look. “Clean Slate” does not apply the 
+underlying Blackmagic Film Look and gives a clean image to work with. “Default No Effects” turns 
+on the Blackmagic Film Look but disables all the additional effects below.
+  Color Blend: Allows mixing the underlying color look and any changes made to other color 
+settings and split tone controls.
+  Effects Blend:  The master control to adjust the strength of the spatial effects below. 0% is the 
+effects completely off, and 100% is the full output of the Film Look Creator.
+  3D LUT Compatible: Checking this box will remove spatial effect options which aren’t represented 
+in a 3D LUT. This allows you to export your custom film look to other programs and camera 
+hardware via a LUT. 
+Color Space Overrides
+These controls allow you to change the input and output gammas and color spaces of the effect if you 
+need to manually configure them for a display referred workflow. Please note that no tone mapping 
+is applied if you change these. The default is “Use timeline,” which will match the color spaces you’ve 
+selected in the Color Management section of the Project Settings.
+  Input Color Space: Sets the input color space; choose one from the drop-down menu.
+  Input Gamma: Sets the input gamma; choose one from the drop-down menu.
+  Output Color Space: Sets the output color space; choose one from the drop-down menu.
+  Output Gamma: Sets the output gamma; choose one from the drop-down menu.
+  Output White Point: Sets the display white point. For creative purposes, you can choose one from 
+the drop-down menu. D65 is the default white point. 
+Film Look
+These controls allow you to adjust the overall parameters of the base film look.
+  Film Look Blend: Adjusts the strength of the initial default base film look, 
+before other parameters are adjusted.
+  Skin Bias: Adjusts the skin tones of the film look. Negative values provide warm, darker, and more 
+saturated skin tones, while positive values provide brighter, rosier, and less saturated skin tones.
+3631Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Color Settings
+These controls allow you to change the color information for the film look. These effects will be passed 
+in a 3D LUT. 
+  Exposure: A photometric control that adjusts the exposure in stops (+/- 5).
+  Contrast: Adjusts the overall S-curve transfer function to add or remove contrast from the shot. 
+  Highlights: Adjusts the roll-off at the top of the S-curve, allowing you to reign in or expand the 
+brightest areas of the shot.
+  Fade: Adjusts the roll-off at the bottom of the S-curve, allowing you to reign in or expand the 
+darkest areas of the shot.
+  Fade Rolloff: Adjust this slider to determine how gently the black level gets stopped at the fade 
+threshold.
+  White Balance: This control uses chromatic adaptation to mimic what the source footage might 
+look like if it were shot under different lighting conditions. Adjusted in degrees Kelvin.
+  Tint: Lets you adjust the green/magenta balance of the clip for balancing footage shot under 
+limited spectrum lighting such as fluorescent, or sodium vapor streetlights.
+  Skin Bias: Lets you adjust the skin tones of the image. From -1 (warmer, darker, more saturated) 
+to +1 (rosy, brighter, and less saturated). This can also be useful if you may, for example, push tint in 
+one direction, and then use Skin Bias to balance out the image.
+  Subtractive Sat:  Allows adjusting overall image saturation in a way that more closely resembles a 
+subtractive method.
+  Richness: Affects already more saturated areas, applying subtractive saturation to just 
+those regions. Can be useful for adding depth and richness, or pulling back a bit on more 
+saturated areas.
+  Bleach Bypass: Simulates this well-known look by adding a desaturated, higher contrast version 
+of the image onto itself.
+Split Tone
+These controls add color to shadows and highlights using an opposing hue angle. For example, 
+adding orange to the highlights, and teal to the shadows to get a more modern cinematic look. These 
+effects will be passed in a 3D LUT.
+  Enable Split Tone: Turns this effect on or off.
+  Split Tone Mode: Choose between Strong and Natural settings.
+  Amount: The intensity of the split tone. This value must be greater than 0 to see an effect.
+  Hue Angle: This slider adjusts what complimentary hues are applied to the shadows and highlights.
+  Pivot: This control sets where the hue transition occurs in luma. Set to its extreme of 0.000 or 
+1.0000, the pivot lets you apply a single tint to the shadows or highlight.
+Vignette
+These controls are simplified window for adding a vignette to the shot. For more detailed control, 
+disable this setting and use the Vignette effect instead.
+  Enable Vignette: Turns the vignette on or off.
+  Amount: Sets the intensity of the darkened areas of the vignette.
+  Size: Sets how much the vignette reaches into the frame.
+3632Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Halation
+These controls are a simplified way of adding soft glows to the edges of the subjects in your frame, to 
+mimic this characteristic of motion picture film. If you want more control, you can disable this setting 
+and use the Halation effect instead. 
+  Enable Halation: Turns the Halation effect on or off.
+  Highlights Only:  Limits the Halation effect only to the edges of highlights.
+  Amount: Lets you set the intensity of the halation.
+  Radius: Lets you set the spread size of the glow from the edges.
+  Saturation: Lets you adjust the color intensity of the halation.
+  Hue: Lets you tint the glow a selected color.
+Bloom
+These controls lets you introduce a subtle glow around the edges of highlights.
+  Enable Bloom: Turns the Bloom effect on or off.
+  Amount: Lets you set the intensity of the bloom.
+  Radius: Lets you set the spread size of the bloom from the edges.
+Grain
+These controls are a simplified set of tools to emulate the grain patterns found on motion picture film. 
+For more detailed control, disable this setting and use the Film Grain effect instead.
+  Enable Grain: Turns the grain pattern on or off.
+  Preset: Provides some starting points for grain, based on film stock standards.
+  Amount: Determines the amount of grain in the image.
+  Size: Determines the size of the grain in the image.
+  Softness: Determines how crisp the individual grains are.
+  Saturation: Adds color to the grain. 0 is monochromatic.
+  Image Defocus: Affects the overall resolution of the image, defocusing more as you reduce the 
+control towards 0. At 1.000 the resolution is untouched. This control does not affect the grain.
+Flicker
+These controls add a gentle pulse to the image exposure, mimicking the flicker of motion picture 
+projection. For more detailed control, disable this setting and use the Flicker Addition effect instead.
+  Enable Flicker: Turns the Flicker effect on or off.
+  Amount: Sets how much flicker to add to the image. Low settings will be barely visible, 
+while high settings can be useful for more extreme looks like the Nostalgic preset. 
+  Rate: The rate at which the flicker pulses.
+Gate Weave
+These controls mimic the slight horizontal and vertical shift of the image as the film is 
+mechanically pulled through the camera’s gate.
+  Enable Gate Weave: Turns the Gate Weave on or off.
+  Amount: Determines the amount of motion to the weave.
+  Rate: The rate at which the weave moves.
+3633Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Film Gate
+These controls will add blanking to the edges of the image that mimic film projection or telecine 
+alignment controls.
+  Enable Film Gate: Turns the Film Gate on or off.
+  Preset: Select an aspect ratio from different common film standards.
+  Ratio H/V: You can set a custom ratio for the image here.
+  Enable Curvature: Turning this on slightly rounds the corners of the image to mimic how the shape 
+of an actual film frame is exposed.
+  Softness: Adjusts the blurriness of the edges of the film gate.
+  Padding: This will zoom the image in and out of the blanking, allowing you to see the entire 
+exposed “frame” of film if desired. Similar to a telecine control.
+NOTE: It is possible to get unexpected results using Film Gate with video that is not 
+scaled to fill the entire frame. If this is the case, use the sizing controls to fill the frame with 
+your image first.
+Flicker Addition
+Why remove flicker with the Resolve FX Flicker Removal plugin when you can add it instead? The 
+Flicker Addition plugin adds rapidly animated exposure changes to make the image appear to flicker, 
+creating animated effects that would be difficult to keyframe manually. When applied to an image in 
+different ways, this plugin can be used to simulate torchlight, firelight, light fixtures with old ballasts or 
+frayed wiring, or any temporally unstable light source. For example, you could key only the highlights 
+of a night-time image and use Flicker Addition to affect those isolated highlights.
+Two groups of controls let you control the quality of this flickering.
+Main Controls
+These controls let you choose how to apply the flicker and its overall speed and intensity.
+  Flicker Type: This pop-up menu lets you apply the flicker as a Lift, Gamma, Gain, Vignette, or 
+Alpha adjustment. 
+  Range slider: This lets you set how widely the flickering will vary. 
+  Speed: This lets you adjust how quickly the flickering is animated. 
+  Smoothness: This slider lets you adjust the temporal quality of the flickering, whether it changes 
+abruptly from one value to another (at lower settings) or whether it makes more continuous 
+transitions from one value to another (at higher settings). 
+  Flicker R, G, B Channels: Three checkboxes let you choose which color channels are affected by 
+this flickering.
+Flicker Quality
+These controls let you adjust the details of how the flickering animates.
+  Randomness Scale: This slider lets you introduce irregularity to the Horizontal, Vertical, 
+and Rotational motion of the camera shake. The greater this value, the more irregularity 
+will be introduced. 
+3634Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+  Pause Length: This slider lets you adjust the frequency of intermittent pauses that break up the 
+random motion added by this filter. 
+  Pause Interval: This slider lets you adjust the duration of intermittent pauses that break up the 
+random motion added by this filter. 
+  Pause Randomness: This lets you add a degree of randomness to the intervals that happen. 
+  Random Seed: This slider lets you alter the value that sets what random values are being 
+produced. Identical values result in identical randomness.
+Halation (Studio Version Only)
+An effect that mimics the subtile light scatters, reflections, and analog blooms of light reflecting back 
+through the dye layers of motion picture film. This usually presents itself as a fine red/orange tinted 
+glow around high contrast bright regions, like lights or reflections. Halation can also be caused by light 
+reflections within processing and development equipment, or in the camera itself. These minor flaws 
+can add a subtle organic and analog look to digital files.
+The Halation effect can add an organic and analog l 
+ook to your digital files. Original (L), Halation (R). 
+There are a variety of tools and controls to give you fine detail on exactly how the halation 
+will appear. 
+The shot before the Halation effect   The Halation effect on the same image; note the 
+halation in the water reflections and the woman in 
+the white t-shirt.
+Processing Color Space
+Lets you chose the color space for the Halation effect. The default is the same as the current timeline.
+3635Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Isolation
+The Isolation controls define which regions of your clips will form halation halos. 
+  Threshold: The level low clip level for the Halation effect.
+  Normalization: The high clip level for the Halation effect.
+  Film Saturation Level: The level above which all color is suppressed and saturated to white. Especially 
+useful in HDR workflows, so the resulting Halation effects are visible at HDR brightness levels.
+  View Isolated Regions: Shows only the regions isolated for generating the Halation effect. 
+The View Isolated Regions checkbox shows you  
+the areas that will be affected by the halation.
+Dye Layer Reflections
+The Dye Layer Reflections controls give you the ability to fine tune the physical characteristics of the 
+halation glow.
+  Strength: Controls the brightness of the reflection.
+  Gamma: Controls the how the glow spreads out.
+  Saturation: Controls the intensity of the color of the glow.
+  Spread: Defines the extent of the dye reflection.
+  Fine Tune Relative Spread: Checking this box allows you to manually adjust the red, green, 
+and blue reflection distances.
+Secondary Glow
+The Secondary Glow controls add additional halation characteristics.
+  Strength: Controls the brightness of the secondary glow.
+  Gamma: Controls how the glow spreads out.
+  Spread: Defines the extent of the glow around bright detail.
+  Filter: Limits the color of the glow in the selected color.
+Basic Grain
+These controls are a subset of the Film Grain effect for quick grain settings. If you prefer, you can add 
+an instance of the full Film Grain effect after the Halation effect on the same node for greater detail.
+  Append Gain internally:  Turns on the simplified grain control.
+  Strength: Adds grain to the halation layer.
+  Size: Controls the size of the grains in the halation layer.
+  Softness: Softens the grain texture.
+  Saturation: Applies saturation on the grain.
+3636Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Global Adjustments
+  View Glow Alone: This checkbox shows the Halation effect alone before it’s added to the frame. 
+This is a useful setting to turn on when modifying any of the above tools.
+The View Glow Alone checkbox shows you only the Halation 
+effect in isolation and not blended with the underlying image.
+  Reduce Highlights: Reduces the effect where it will brighten the scene without contributing to the 
+halo. This essentially confines the halo to the edges of a region without blowing out the region itself.
+  Aspect Ratio: Stretch or squeeze the glow and grain horizontally for anamorphic projects.
+  Detail Loss: Removes sharp detail that the film stock should not have captured by defocusing the 
+image under the effect.
+Split Tone Effect
+The Split Tone effect lets you add color to shadows and highlights using an opposing hue angle. 
+For example, adding orange to the highlights, and teal to the shadows to get a more modern 
+cinematic look.
+The original image  The Preview Influence checkbox shows you 
+which split color will be added and where
+The final split-toned image
+3637Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+  Split Tone Mode: Includes presets and a custom mode.
+Natural: Designed to mimic the effect of film.
+Strong: A more stylized intentional look.
+Custom: Allows you to complete control over any two colors for the Split Tone.
+  Preview Influence: Shows where the split occurs using true colors.
+  Shadows (custom only): Controls the shadow side of the split.
+Strength: The saturation for the dark regions of the image.
+Hue: The color of the dark regions of the image.
+  Highlights (custom only):  Controls the highlight side of the split.
+Strength: The saturation for the bright regions of the image.
+Hue: The color of the bright regions of the image.
+  Neutrals (custom only): Lets you protect your neutral (grey tone) regions of the image from the 
+Split Tone effect.
+Protect Neutrals: Check this box to toggle the Neutrals controls on or off.
+Minimum Saturation: Regions below this saturation are preserved as grey.
+Maximum Saturation: Regions above this saturation are affected by the Split Tone effect.
+  Strength: How much of the split tone colors you add to the original image.
+  Pivot: Set the point where highlights and shadows diverge, setting the point where the 
+color “splits”.
+  Hue Angle: The color of the split tone, measured by the angle on the vectorscope.
+  Color Space Overrides: These controls allow you to change the input and output gammas 
+and color spaces of the effect if you need to manually configure them for a display referred 
+workflow. The default is “Use timeline,” which will match the color spaces you’ve selected in the 
+Color Management section of the Project Settings.
+Input Color Space: Sets the input color space; choose one from the drop-down menu.
+Input Gamma: Sets the input gamma; choose one from the drop-down menu.
+Output Color Space: Sets the output color space; choose one from the drop-down menu.
+Output Gamma: Sets the output gamma; choose one from the drop-down menu.
+Output White Point: Sets the display white point. For creative purposes, you can choose one 
+from the drop-down menu. D65 is the default white point.
+Vignette
+A plugin with two modes for creating vignette effects of different kinds.
+  Basic mode gives you Size, Anamorphism, and Softness controls for quickly creating a traditional 
+lens vignetting effect to darken the edges of the frame. A Color control lets you tint the vignette.
+  Advanced mode adds Border Shape, Rotation, Center, Transparency, and Composite Type 
+controls for customizing this vignetting effect even more specifically.
+3638Resolve FX Overview | Chapter 157 Resolve FX Film Emulation
+RESOLVE FX
+Chapter 158
+Resolve FX 
+Generate
+These plugins generate imagery that can be used within grades 
+and composites in different ways. 
+Contents
+Color Generator ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3640
+Color Palette (Studio Version Only) ������������������������������������������������������������������������������������������������������������������������������������������� 3640
+Grid ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3640
+3639Resolve FX Overview | Chapter 158 Resolve FX Generate
+RESOLVE FX
+Color Generator
+Generates a single color using a color picker or eyedropper control. Useful in conjunction with a layer 
+node’s ability to mix a color with an image using different composite modes. 
+  Color picker: You can click the color picker and use the resulting color controls to choose a color 
+to be generated. 
+  Eyedropper: You can also click the eyedropper to sample a color from the image in the Viewer; 
+the eyedropper always samples the image from the input of the current node, regardless of how 
+the current image looks.
+Color Palette (Studio Version Only)
+More of an analysis tool than a creative effect, this plugin displays the dominant colors of each frame.
+  Display Mode: A pop-up that provides four different options.
+Color Palette: This displays the most dominant colors in the image as rectangular swatches along 
+the bottom (8 colors is the default), and the eight most dominant colors in each of the three main 
+zones of image tonality (shadow, midtone, highlight) are displayed as smaller rectangular patches 
+just above. This lets you see, at a glance, the color palette of any given shot, and this can be 
+output for intrepid art directors who find it useful. 
+Shadow Region, Midtone Region, or Highlight Region:  Displays a visual preview of which parts 
+of the image fall into which regions (as currently defined by the Shadow and Highlight Threshold 
+sliders). These previews are displayed with the current tonal region appearing saturated and all 
+other parts of the image appearing black.
+  Number of Colors: Defines the number of isolated colors. This can be set to display anywhere 
+from 8 to 24 patches. 
+  Shadow and Highlight Threshold:  The definition of where shadows, midtones, and highlights end 
+and begin is controlled by the Shadow and Highlight Threshold sliders.
+Grid
+As the name implies, this plugin generates a grid overlay on your image. Not a creative effect, but a 
+useful measuring tool for your images.
+  General: These controls let you adjust the overall density and orientation of the grid.
+Row Cells and Column Cells: These sliders let you choose how many cells to divide the grid into, 
+both vertically and horizontally.
+Major Line Spacing: Sets how many grid squares will make up a thicker major line on the grid. 
+A value of zero turns this function off.
+  Line Properties: These controls let you control the properties of the grid lines themselves.
+Line Color: This color picker control and accompanying eyedropper let you choose a color with 
+which to draw the grid. 
+Individual Hor. Line Width and Ver. Line Width: These sliders let you adjust the thickness 
+of all horizontal or all vertical lines. 
+Major Line Width: Lets you choose how thick to make the major lines.
+Pan, Tilt, Zoom, Rotate, Width, Height, ShearX, ShearY, Pitch, and Yaw: These controls let you 
+transform the grid to serve whatever purpose is necessary.
+3640Resolve FX Overview | Chapter 158 Resolve FX Generate
+RESOLVE FX

@@ -1,0 +1,920 @@
+Example
+The Original image has a cyclist with a green stripe on his helmet:
+The normal Green channel for the RGB Mixer
+Normally reducing the Green channel in the green output adds a magenta 
+cast to the entire image
+When Auto Normalize is active, the other two channels compensate for the 
+change in green. Showing the hue change mainly in the green helmet stripe 
+(now turned cyan), with minimal changes to the rest of the image.
+3240Color | Chapter 133 RGB Mixer
+COLOR
+Preserve Luminance
+With the “Preserve Luminance” checkbox turned on, any channel adjustment you make is prevented 
+from altering the luma of the image by automatically raising or lowering the other two channels to 
+compensate. In the following example, you can see that when “Preserve Luminance” is turned on, 
+lowering the Green control group’s Green slider results in the Red and Blue channels being raised by 
+the same amount (as seen in the Parade scope). Conversely, raising a color channel’s slider ends up 
+lowering the other two channels by the same amount to keep overall image luminosity the same.
+The result of an RGB Mixer adjustment with “With luminance level preserved” turned on. 
+You can see that lowering the green channel slider also raises red and blue.
+Resetting the RGB Mixer
+Clicking the Reset button at the top right-hand corner of the RGB Mixer resets each slider to its default 
+position, where Red = 1.00 for Red output, Green = 1.00 for Green output, Blue = 1.00 for Blue output, 
+and all other sliders = 0.
+Swap Channels Buttons
+A set of three buttons at the bottom of the RGB Mixer lets you easily swap two channels with one 
+another. This can be useful as part of a creative look, or corrective in instances where two channels 
+are accidentally reversed.
+  Swap Red and Green: Swaps these two color channels.
+  Swap Green and Blue: Swaps these two color channels.
+  Swap Red and Blue: Swaps these two color channels.
+3241Color | Chapter 133 RGB Mixer
+COLOR
+Using the RGB Mixer in Monochrome Mode
+When you turn on the Monochrome checkbox, two of the sliders within each Output group are 
+disabled. This leaves the Red > Red slider, the Green > Green slider, and the Blue > Blue slider as the 
+only available controls.
+Keeping in mind that each of the color channels that makes up an image is itself a grayscale channel, 
+the RGB sliders in Monochrome mode let you add different proportions of the Red, Green, and Blue 
+color channels together to create custom grayscale versions of a shot.
+Sliders at their default values when Monochrome mode is enabled
+To understand why this is useful, let’s consider the default values of the Red, Green, and Blue sliders. 
+To emulate the human eye’s sensitivity to the wavelengths of light, the Rec. 709 video standard 
+defines an isolated Luma (Y’) component as consisting of 0.2126 of the Red channel, 0.7152 of the 
+Green channel, and 0.0722 of the Blue channels added together. This can be seen in the default 
+values (rounded to the nearest integer percentage) of 21, 71, and 7.
+This is the standard method of deriving a black and white version of a color image, and in fact 
+produces identical results to those obtained by setting the Saturation parameter to 0. 
+However, there have traditionally been other ways of mixing the colors of life into different grayscale 
+interpretations. For example, photographers often use colored filters in conjunction with black & white 
+film stocks, such as a yellow/green filter to emphasize pleasing skin tone for lightly complexioned 
+people. A much older example is the use of black & white film stocks with different sensitivities 
+(old orthochromatic stocks were not sensitive to red wavelengths, recording only blue and green to 
+create an image).
+Using the RGB Mixer with Monochrome mode turned on gives you the ability to mix your own 
+custom blends of all three color channels to emphasize the creative characteristics you require. For 
+instance, increasing the mix of blue and decreasing red and green can give skin tones a darker, 
+metallic sheen. The following screenshots show multiple versions of the same image with different 
+monochrome mixes.
+3242Color | Chapter 133 RGB Mixer
+COLOR
+Three monochrome mixes of the same image.  
+The top image is the result of setting saturation to 0.
+Like the parameters in Color mode, you can use the RGB Mixer’s Monochrome mode to 
+subtract one color channel from the others, for even more creative effects.
+3243Color | Chapter 133 RGB Mixer
+COLOR
+Chapter 134
+Curves
+The Color page has a powerful curves interface that provides controls for adjusting 
+color and contrast with the Custom Curves, as well as a variety of “Hue” or “HSL ” 
+curves that let you make more targeted adjustments to hue, saturation, and 
+luminance in a variety of ways.
+Contents
+Introduction to Curves ��������������������������������������������������������������������������������������������������������������������������������������������������������������������  3245
+Adjusting Curves Using the Mouse  ������������������������������������������������������������������������������������������������������������������������������������������  3245
+Sampling Images to Place Control Points on Curves ��������������������������������������������������������������������������������������������������������  3247
+Showing Picker RGB Values  ���������������������������������������������������������������������������������������������������������������������������������������������������������� 3247
+Curves Histograms  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3247
+Custom Curves �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3249
+Editing the Top and Bottom Control Points of Curves �����������������������������������������������������������������������������������������������������  3250
+HDR Grading Using Curves  ����������������������������������������������������������������������������������������������������������������������������������������������������������� 3251
+Enabling Editable Splines in the Custom Curves  ���������������������������������������������������������������������������������������������������������������� 3251
+Adding Default Anchors to the Custom Curves  ������������������������������������������������������������������������������������������������������������������ 3252
+Ganging and Unganging Custom Curves  ������������������������������������������������������������������������������������������������������������������������������ 3252
+Copying Custom Curves From One Color Channel to Another  ���������������������������������������������������������������������������������� 3253
+Curve Intensity Sliders  �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3253
+YSFX Sliders ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3254
+Soft Clip �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3254
+Ganging and Unganging Soft Clip Controls  ������������������������������������������������������������������������������������������������������������������������� 3255
+Soft Clip Controls ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3255
+The HSL Curves ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3258
+Image Sampling for Hue and Sat Curves �������������������������������������������������������������������������������������������������������������������������������  3259
+Additional Controls in the Hue and Sat Curves ������������������������������������������������������������������������������������������������������������������  3260
+Hue vs. Hue ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3260
+Hue vs. Sat ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3261
+Hue vs. Lum �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3261
+Lum vs. Sat �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3262
+Sat vs. Sat ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3262
+Sat vs. Lum Curve ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3263
+3244Color | Chapter 134 Curves
+COLOR
+Introduction to Curves
+The Curves palette, selectable via one of the toolbar buttons above the Center Palette panel of the 
+Color page, has six modes that provide different curve-based methods of manipulating the color and 
+contrast of an image. Each curve lets you adjust a customizable region of the image based either on 
+image tonality (zones of lightness or darkness), hue (specific colors), or saturation (intensity of color). 
+All curves can be adjusted using either the pointer, or knobs on the DaVinci Resolve Mini or Advanced 
+control panel.
+The Curves palette is color-space-aware when you’re using Resolve Color Management (RCM) or 
+ACES. What this means is that the overall range of each curve better fits the overall data range of the 
+current clip no matter what Timeline Color Space you’re using, for both SDR and HDR mastering. This 
+makes curves adjustments easier, more specific, and a more consistent experience, no matter what 
+your workflow happens to be.
+TIP: All curves in DaVinci Resolve can be used to affect the overall image, or limited to 
+affect only a specific portion of the image as a part of a secondary operation using qualifiers, 
+windows, imported mattes, or any combination of the three.
+Adjusting Curves Using the Mouse
+All Color curves in DaVinci Resolve use the following controls for basic on-screen adjustment using 
+the pointer, controlled either with your mouse, pen, or other input device of choice.
+Methods of adjusting curves using the on-screen interface:
+  To add a control point: Click anywhere on a curve. A control point is added at the position of the mouse 
+where you clicked, and the curve is altered, if necessary, to match the new control point’s position.
+  To add a control point without altering the curve: Hold the Shift key down, and click anywhere on 
+or around a curve. A control point is added to the curve at the position of the pointer where you 
+clicked, but the curve is not altered.
+  To snap a control point to the neutral diagonal of the curve: (Custom curve only) Hold the Option 
+key down while dragging any control point on the curve. A diagonal line appears indicating the 
+neutral state of the image, and the control point will snap to it. When you release the Option key 
+and then press the Option key again after releasing, the diagonal guide line disappears.
+Snapping a curve’s control point back to its neutral position by holding down the Option key
+3245Color | Chapter 134 Curves
+COLOR
+  To remove a control point: Right-click any control point to make it disappear.
+  To reset a single color channel curve to a completely neutral setting: Click the reset button to 
+the right of that color channel’s intensity slider.
+  To reset all color channel curves: Click the Reset Custom Curve button at the upper right-hand 
+corner of the Curves palette.
+By default, a control point influences the portion of each curve that falls between its neighboring 
+two control points. 
+Control point adjustments affect the entire portion of a curve between adjacent control points.
+In the top screenshot, you can see that the control point at the position of the pointer is 
+affecting the larger part of the curve that falls between the lower left-hand control point 
+(which is there by default), and a user-created control point placed up within the highlights of 
+the curve.
+In the bottom screenshot, an additional control point to the left of the one being adjusted limits 
+the area of the curve that is adjusted. By careful placement of additional control points, you 
+can make extremely targeted adjustments to images using the Custom curves. 
+3246Color | Chapter 134 Curves
+COLOR
+This example highlights the importance of using control points to “lock off” portions of a curve 
+at a neutral or nearly neutral position to prevent changes to specific portions of an image, 
+even while using other control points to make changes. 
+NOTE: The HSL curves also have an optional adjustment mode using Bezier curves that will 
+be covered in those sections.
+Sampling Images to Place Control Points on Curves
+Another way you can add control points to curves is to move the pointer to the Viewer, and click 
+to sample a color value and place a control point at the position on the currently open curve that 
+corresponds to that value. This works with Custom, Hue, and HSL curves. 
+Clicking on a feature  
+of the image
+Creates a control point on  
+the currently open curve
+Showing Picker RGB Values
+While you’re dragging the pointer over the Viewer and looking for a feature to sample, you can enable 
+a tooltip that shows you the RGB Value of the pixel under the pointer by right-clicking the Viewer and 
+choosing Show Picker RGB Value to toggle this feature on and off. When you turn this feature on, the 
+Show RGB Picker Values In submenu in the Viewer’s option menu has options for displaying either 8- 
+or 10-bit tristimulus values.
+The color picker tooltip that appears when 
+you turn on Show RGB Picker Values
+Curves Histograms
+The Custom curves and HSL curves all show a histogram that represents the input of the currently 
+selected Correction node, which you can use to guide your adjustments. The Histograms submenu 
+of the Curves palette’s Option menu lets you choose to disable these histograms, or to switch 
+the histograms between showing the input or the output of the node. If you switch to Output, the 
+histograms will update to show you the result of your adjustments, at the expense of seeing the image 
+data that the curve is actually working upon.
+3247Color | Chapter 134 Curves
+COLOR
+The Custom curves show a YRGB histogram:
+The histogram appearing underneath the Custom Curves  
+shows a YRGB histogram analysis
+Each Hue or HSL curve shows a histogram analysis of the two color channels that 
+Curve acts upon: hue against saturation level, luminance against saturation level, or 
+saturation level against saturation level, to give three different examples. In the case of Hue 
+or HSL curves, these histograms make it easy to see which parts of the Curve controls will 
+actually affect image data.
+The histogram appearing underneath the Hue vs Sat  
+curve plots all saturation levels at each value of hue
+3248Color | Chapter 134 Curves
+COLOR
+Custom Curves
+DaVinci’s Custom curves provide smooth adjustment of each clip’s Y, R, G, and B channels. 
+The Custom curve mode of the Curves palette is divided into two areas, the Curve Editor to the left, 
+and the Curve controls to the right. The editor contains the actual Curve controls you use to adjust the 
+image. The controls at the right let you choose which curves you’re adjusting, and adjust their intensity.
+The Custom curves seen used to create a gentle “S” curve 
+adjustment with four additional control points added
+The Custom curves are useful for making more tonally specific, channel-by-channel adjustments to 
+an image than can be accomplished using the Color Balance controls. They’re also useful for making 
+strange and wonderful stylistic adjustments through unusual alterations to different combinations of 
+color channels.
+Although the ganged Custom curves appear to be a single curve control, the Custom curve editor 
+is actually presented as a series of overlaid curves, and the YRGB curves all appear within a single 
+editor. The default, neutral position of the Custom curves is a diagonal line that runs from the lower-left 
+black point of the image through the upper-right white point. 
+The neutral diagonal position of the curve at which no adjustment is made
+3249Color | Chapter 134 Curves
+COLOR
+The horizontal axis represents the range of image tonality in the original image, from black (at the 
+left) to white (at the right), while the vertical axis represents the range of alteration you can make. 
+By adding control points to the surface of the curve and raising or lowering it at different regions, you 
+are actually remapping the original horizontal “input” value of a color channel to an “output” value of 
+your choosing.
+Additional controls appear to the right of the curve editor itself. A top row of buttons let you 
+select the curve corresponding to an individual color channel for isolated adjustment, while a 
+vertical stack of four sliders let you adjust the intensity of each color channel’s curve.
+The channel-editing buttons and curve intensity  
+sliders appear to the right of the curve editor
+Editing the Top and Bottom Control Points of Curves
+You can also edit curves using the default two control points that the curve control starts out with in 
+the Curve Editor. The Black Point control (at the lower-left) and the White Point control (at the upper-
+right) let you expand and compress the video signal similarly to using the Lift and Gain Master Wheel 
+controls in the Color Wheels palette. 
+The Curve control at its original state The Black and White Point controls dragged 
+to the right and left to expand the signal
+You can use the Black and White Point controls in the following ways:
+• Using the Black Point control:  Dragging this control up makes a lift adjustment to raise the 
+black point of the signal. Dragging this control to the right makes a lift adjustment to lower 
+the black point of the signal.
+• Using the White Point control: Dragging this control down makes a gain adjustment to 
+lower the white point of the signal. Dragging this control to the left makes a gain adjustment 
+to raise the white point of the signal.
+3250Color | Chapter 134 Curves
+COLOR
+HDR Grading Using Curves
+When using various grading controls in the Color page to grade wide-latitude images for HDR output, 
+you may find it useful to enable the HDR mode of the node you’re working on by right-clicking 
+that node in the Node Editor and choosing HDR mode from the contextual menu (only available in 
+Resolve Studio). 
+Using a node’s contextual menu to  
+put that node into HDR mode
+This setting adapts that node’s controls to work within an expanded HDR range. Practically speaking, 
+this makes it easier to work with wide-latitude signals using controls that operate by letting you make 
+adjustments at different tonal ranges such as Lift/Gamma/Gain, Custom Curves, Soft Clip, and so on.
+Enabling Editable Splines in the Custom Curves
+When the Curve palette is in Custom mode, you can choose Editable Splines from the option menu to 
+expose Bezier spline handles on any selected control point, which let you make more precise curve 
+adjustments whenever necessary.
+Custom curve with editable splines enabled
+NOTE: Beware of making curve adjustments that are too sharp, or with control points that 
+are too close together, as they can introduce unwanted contouring within the image, causing 
+flattening or solarization in parts of the image that you may not want.
+3251Color | Chapter 134 Curves
+COLOR
+Adding Default Anchors to the Custom Curves
+You can also choose Default Anchors from the option menu of the Curve palette in Custom mode to 
+place three additional control points on the curve, dividing the curve into five segments that affect the 
+shadows, low midtones, medium midtones, high midtones, and highlights of the image.
+Custom curve with Default Anchors exposed
+Ganging and Unganging Custom Curves
+By default, the Custom curves are ganged, so that curve adjustments affect a clip’s YRGB channels all 
+together, resulting in an adjustment to image contrast that’s similar to using the Master Wheels in the 
+Color Wheels palette. When making this type of adjustment, increasing contrast also increases image 
+saturation, while reducing contrast also reduces image saturation. Since curves can be manipulated 
+with greater specificity than the three Master Wheels, you can make much finer contrast adjustments 
+using the YRGB curves than when using the Master Wheels only.
+Turning ganging off lets you use the full power of Custom curves to alter the image. Unlike the 
+Color Balance controls, each of which adjust all three color channels simultaneously, the Curve 
+controls let you adjust each channel individually when Gang Custom Curves is turned off. 
+To disable Custom curve ganging:
+Click the Curve Edit button that corresponds to the curve channel you want to edit. Clicking 
+any Curve Edit button highlights that curve to make it easy for editing when curves overlap 
+one another. Once one or more curves is offset from the others, you can freely edit any curve 
+by dragging its control points.
+Custom Curve Edit buttons 
+are to the left, the Gang 
+button is to the right
+3252Color | Chapter 134 Curves
+COLOR
+To re-enable Custom curve ganging:
+Click the Gang button to the left of the Curve Edit buttons.
+Editing color channels via individual curve adjustments lets you make smooth color-channel 
+specific corrections, or you can make radically individual adjustments to create a wide number 
+of creative effects.
+Turning off curve ganging lets you independently adjust each curve
+TIP: When curve ganging is disabled, the Luma curve allows you to adjust the Y channel 
+by itself, which is similar to using the Y-only Lift/Gamma/Gain knobs of the DaVinci Resolve 
+Micro, Mini, or Advanced Control Panels. When making this type of adjustment, increasing 
+luma contrast results in a perceptual decrease of image saturation.
+Copying Custom Curves From One Color Channel to Another
+Even if you’ve unganged the Custom curves, you can still mirror one curve’s adjustments to another by 
+copying it using the “Copy to Red/Green/Blue” commands in the Curve palette’s option menu. 
+Curve Intensity Sliders
+Four Curve Intensity sliders to the right of the Curve Editor, one for each channel, let you mix between 
+the current curve’s effect on the clip, and the original state of the image before you altered the curve. 
+The default Intensity of 100 results in that curve exerting its full effect on the image, while an intensity 
+of 0 results in that curve having no effect on the image. The Intensity sliders provide an easy way to 
+“split the difference” between a curve adjustment and the previous state of the image.
+Lowering the Curve Mix slider reduces the 
+effect of that curve’s adjustment on the image.
+3253Color | Chapter 134 Curves
+COLOR
+YSFX Sliders
+Each of the Custom curves (Y’, R, G, and B) has a vertical YSFX slider at the upper left-hand corner 
+of the Curve Editor that lets you invert any or all color channels by any amount you want, to create 
+different types of stylized effects.
+Image with the Luma channel modified using the vertical YSFX slider
+As with all other adjustments in the Color page, YSFX may be combined with Power Windows or 
+HSL qualification to limit channel inversions to specific portions of the image for creative purposes.
+Soft Clip
+The Soft Clip controls consist of four sliders underneath the Curve controls of the Custom curves, 
+and give you an interface for adjusting highlight and shadow soft clipping either overall, with Ganging 
+enabled, or on a per-channel basis. The Soft Clip controls are intended to provide clip-by-clip 
+adjustment, as opposed to the Generate Soft Clip LUT settings, which let you set one soft-clipping 
+setting for the entire program. 
+For more information on the Soft Clip LUT setting, jump to this chapter:  
+System and User Preferences.
+High and Low Soft Clip controls 
+within the Curves palette
+Soft clipping lets you apply a “knee” to any clipping that occurs at the upper or lower extremes of the 
+image, and can be used to quickly ease off any unpleasantly harsh loss of detail that occurs as a result 
+of blowing out the highlights or crushing the shadows too aggressively.
+In the following example, the screenshot at top has had the highlights deliberately blown out by 
+excessively boosting the highlight contrast. As you can see, the edges of the clipped area lack 
+detail. The screenshot at bottom shows the same image with soft clipping increased for all three 
+color channels. The result retrieves detail, compressing the highlights to bring the tops of each color 
+channel back within the allowable range.
+3254Color | Chapter 134 Curves
+COLOR
+Using High Soft Clip to pull highlight details into the viewable range
+Ganging and Unganging Soft Clip Controls
+Soft clipping can be simultaneously applied to all three color channels by enabling the Ganging control 
+(on by default), or you can disable Soft Clip ganging to individually adjust each channel. For example, 
+using soft clipping on individual channels can be useful for legalizing RGB out-of-gamut errors for 
+channels that over- or undershoot your QC standards.
+To disable Soft Clip ganging and edit soft clipping for individual color channels:
+  Click the channel control button corresponding to the color channel you want to edit, and then 
+drag the sliders to create the desired adjustment.
+To re-enable Soft Clip ganging:
+  Click the Ganging control to the left of the Soft Clip channel controls.
+TIP: Applying too much soft clipping to individual color channels may add an unwanted 
+color tint to the corresponding highlights or shadows of an image. To avoid this, use the soft 
+clipping parameters with ganging enabled to clip all three color channels equally.
+Soft Clip Controls
+Whether all channels are ganged or not, soft clipping is controlled via two sliders and two additional 
+parameters for each color channel.
+High
+The High Clipping Point slider lets you adjust the maximum signal level above which the signal is 
+clipped. Any pixels above the clipping level are made equal to the clipping level. 
+3255Color | Chapter 134 Curves
+COLOR
+The High Clipping Point defaults to a digital level of 1023 relative to the DaVinci Resolve internal 
+video scopes. Dragging this slider to the left causes the highlights of the image to clip at a lower 
+level, resulting in lower, dimmer maximum levels. 
+Selecting and adjusting  
+the high clip
+RGB Parade displays  
+the clipped image
+At the default position, no clipping occurs and image data that you push above 1023 on the 
+internal scopes is preserved and passed through the image processing pipeline to subsequent 
+nodes. For example, in the following two screenshots, the highlights in the screenshot at top 
+are blown out raising the gain dramatically in Node 1. In the screenshot at bottom, a subsequent 
+adjustment in Node 2 lowers the gain and retrieves all the previously clipped values.
+The image is clipped using the Gain control in Node 2
+3256Color | Chapter 134 Curves
+COLOR
+The image data that was clipped in Node 1 is retrieved in Node 3 by lowering the Gain 
+control. This illustrates the preservation of deliberately clipped data.
+However, if at any point in a node tree you drag the High Clip slider to the left, even by a single 
+digit, all image data above the new clipping threshold is discarded from that node forward. In 
+the following example, the High Clip slider in Node 1 is lowered. The result is that all clipped 
+image data is discarded. As a result, when Node 2 lowers the gain, there is no image detail left to 
+retrieve, and all three channels exhibit flattening.
+Lowering the High Clip slider in Node 1 forces all image data above the new High Clip threshold 
+to be irretrievably discarded. Clipped data cannot be brought back by subsequent nodes.
+High Soft
+The High Soft slider sets the threshold, below the clipping point, at which highlights begin to compress 
+before hard clipping. At unity, no soft clipping occurs. As you raise this value, more and more of 
+the clipped highlight values are compressed, rather than clipped, resulting in softer, more pleasant 
+“glowing” highlights.
+IMPORTANT: Image data that was clipped “in camera” is not necessarily retrievable using 
+the Soft Clip controls, although there may be some preserved overhead in the super-white 
+highlights of Y’CbCr-encoded video data.
+Low
+The Low Soft Clipping Point slider lets you adjust the minimum signal level at which the signal clips. 
+This defaults to a digital level of 0 relative to the DaVinci Resolve internal video scopes. Dragging this 
+slider to the right causes the shadows of the image to clip at a higher level, resulting in lighter minimum 
+levels, and a lower-contrast image with lighter (possibly milky) shadows.
+3257Color | Chapter 134 Curves
+COLOR
+Low Soft
+The Low Soft slider sets the threshold, above the minimum clipping point, at which shadows begin to 
+compress before hard clipping. At unity, no soft clipping occurs. As you drag this slider to the right, 
+more and more of the clipped shadow values are compressed, rather than clipped, resulting in a 
+softer, more pleasant rolloff in the shadows.
+The HSL Curves
+Three sets of Hue curves, and additional Lum vs. Sat, Sat vs. Sat, and Sat vs Lum curves, let you 
+make different types of curve-based alterations to the image. Whereas the Custom curves let you 
+make adjustments to the color channels of an image based on tonality (for example, boosting the Red 
+channel in the highlights while lowering it in the shadows), the Hue curves let you make adjustments to 
+the hue, saturation, or luma of elements in an image based on their hue.
+Curves controls including six-vector selection and bezier handle button
+For example, you could use the Hue vs. Sat curve to selectively lower the saturation of everything 
+that’s blue, while raising the saturation of everything that’s red.
+You can use these curves to make adjustments similar to those made using HSL qualification, but 
+with one critical difference. Curve adjustments are mathematically smoother than the matte-limited 
+adjustments of HSL qualifiers, so it can sometimes be easier to make specific alterations that blend 
+smoothly with the rest of the image, without the potential for artifacts at the edges of qualified keys 
+that can sometimes defeat a seamless result. 
+On the other hand, it is often easier to define more distinct boundaries between separate elements 
+using HSL qualification. Only time and experience will help you determine which tools are best for 
+which situations.
+3258Color | Chapter 134 Curves
+COLOR
+Right–Original image, Left–the image as altered by the Hue vs. Sat curve shown above
+Unlike the Custom curves, which default to a diagonal position where lower left represents the black 
+point and upper right represents the white point, Hue and Sat curves are flat. In the case of the Hue 
+vs. Hue/Sat/Lum curves, the horizontal range of the curve from left to right represents the overall 
+range of possible hues, from red through green through blue and then cycling back to red.
+Because the range of hues cycle smoothly from the left to the right edge, changes that affect the 
+curve near the left boundary of these curves loop smoothly around to the right boundary, and vice 
+versa, such that the left and right sides of the curve always move together (as you can see in the 
+above screenshot).
+IMPORTANT: When using Hue curves, the range of hue that you isolate with control points 
+is always relative to the RGB input connected to that node. That means if you change the 
+hue of a shirt from blue to red using Hue vs. Hue and you then want to raise the same shirt’s 
+saturation with the Hue vs. Sat curve within the same node, you need to add control points to 
+the same range of blue for both curves.
+Image Sampling for Hue and Sat Curves
+There’s an additional way to use Hue curves in DaVinci Resolve. Whenever one of the Hue vs. Hue, 
+Hue vs. Sat, Hue vs. Lum, Lum vs. Sat, or Sat vs. Sat curve tabs are open, clicking or clicking and 
+dragging over any range of pixels within the Viewer area samples the hues and/or image tonality of 
+that region of the picture, and automatically places three control points on the currently open curve 
+that correspond to the range of color and contrast you sampled. 
+3259Color | Chapter 134 Curves
+COLOR
+Additional Controls in the Hue and Sat Curves
+While the Hue vs. Hue, Hue vs. Sat, Hue vs. Lum, Lum vs. Sat, and Sat vs. Sat curves can be adjusted 
+similarly to the Custom curves, they have additional controls running underneath the curve graph.
+Enable Bezier button: Turning this button on forces a curve to use Bezier control handles, 
+rather than the default DaVinci Resolve Curve Control points, to manipulate each control point 
+on the curve. With Bezier handles enabled, click any control point to reveal its two Bezier 
+handles. Drag either handle to alter the shape of the curve at that control point.
+Six-Vector Color Patches: The Hue curves each have six buttons for automatically adding 
+control points to manipulate the red/yellow/green/cyan/blue/magenta ranges of hue. Clicking 
+any of these buttons adds three control points; two to define the outer range of hue to be 
+adjusted, and a middle control point that you use to make the adjustment.
+Input and Output (Hue Rotate/Saturation/Lum) fields: These two number fields correspond 
+to the horizontal and vertical adjustment values for the currently selected control point. 
+Click any control point on a curve to view or alter these values. The label of the second field 
+depends on the curve that’s selected.
+The following sections describe each available curve in more detail. Each type of curve is accessed by 
+selecting the appropriate icon in the upper right of the Curve Palette.
+Custom
+ Hue vs. Hue
+ Hue vs. Sat
+ Hue vs. Lum
+Lum vs. Sat
+ Sat vs. Sat
+ Sat vs. Lum
+Hue vs. Hue
+The Hue vs. Hue curve lets you change any hue to any other hue. In the following example, the image 
+on the left is the unadjusted original. The image on the right has had the orange jacket shifted to an 
+olive green via a set of three control points.
+Changing the hue of the woman’s jacket using the Hue vs. Hue 
+curve; Left–original image, Right–altered image
+One excellent use of the Hue vs. Hue curve is to quickly and subtly alter elements that require only 
+minor adjustments. For example, a sky that appears a bit too cyan can be made into a richer shade of 
+blue with a small adjustment. 
+3260Color | Chapter 134 Curves
+COLOR
+Hue vs. Hue is also useful for making more radical changes to elements that might be too noisy to key 
+successfully using the HSL qualifier controls. For example, red autumnal foliage blowing in the wind 
+might result in a chattery matte, but you can use the Hue vs. Hue curve to change reds to greens, 
+without having to worry about aliased matte edges giving your correction away.
+Hue vs. Sat
+The Hue vs. Sat curve lets you selectively alter the saturation of any hue within the image. This is a 
+terrific tool for creative effect, allowing you to quickly and easily boost the saturation of elements you 
+want to catch the viewer’s eye, while reducing the saturation of elements you’d prefer the audience 
+not dwell upon.
+This can be extremely useful for legalizing over-saturated overshoots or undershoots during 
+a QC pass. For example, desaturating reds that are off the charts while leaving everything else alone.
+Lowering the saturation of the woman’s jacket using the  
+Hue vs. Sat curve; Left–original image, Right–altered image
+The Hue vs. Sat curve can also be a powerful tool for increasing the color contrast of images that 
+seem lackluster and flat. By boosting the saturation of colorful elements that are distinct from the 
+dominant palette of a scene, you can add variety to an otherwise monochromatic image.
+Hue vs. Lum
+The Hue vs. Lum curve lets you increase or decrease the lightness of elements of specific colors.
+Darkening the woman’s jacket using the Hue vs.  
+Lum curve; Left–original image, Right–altered image
+This is a tricky curve to use with highly compressed footage, as it can quickly reveal artifacts in the 
+image if you aren’t careful. However, if you’re working with very high-quality footage, this can be a 
+great tool to darken specific hues to add richness and depth, or to lighten colorful elements to which 
+you want to draw attention.
+3261Color | Chapter 134 Curves
+COLOR
+Lum vs. Sat
+The Lum vs. Sat curve is similar to the Custom curves in that alterations to the saturation of an image 
+are based on user-definable ranges of image tonality, rather than hue. In the following example, 
+the Lum vs. Sat curve is being used to decrease selectively the saturation of everything falling 
+into the highlights and shadows of the image, while increasing the saturation of everything within 
+the midtones.
+In the following example, a vividly saturated treatment results in shadows that seem artificially colorful. 
+Using the Lum vs. Sat curve, it’s easy to gradually desaturate everything below a certain range, with a 
+nice smooth falloff.
+This is an outstanding curve to use for creative effect, for example, slightly boosting saturation within 
+the midtones while reducing saturation in the shadows to increase the depth of the darkest portions 
+of the image. It’s also a great curve to use to solve QC violations. For example, if you have illegal 
+saturation in the highlights of an image, you can use the Lum vs. Sat curve cleanly and smoothly to 
+lower the specific values that are causing problems.
+Selective desaturation in the shadows and highlights using the Lum vs. Sat curve;  
+Right–original image, Left–altered image
+Sat vs. Sat
+The Saturation vs. Saturation curve lets you selectively manipulate image saturation within specific 
+regions defined by the image’s original image saturation. Control points added to the left of this 
+curve affect areas of progressively lower saturation, effectively letting you increase or decrease the 
+saturation of lower-saturated features. Control points added to the right affect areas of progressively 
+higher saturation, letting you increase or decrease the most saturated features of an image.
+3262Color | Chapter 134 Curves
+COLOR
+Like all curves, this operation is extremely useful for stylizing the image. You can create custom 
+vibrance operations, where you selectively increase the saturation of low-saturated regions of the 
+image in different ways to give the picture more “pop.” It’s also an excellent tool for taking care of over-
+saturated areas of the picture when adhering to conservative QC requirements. You can specifically 
+desaturate only the most over-saturated parts of the picture, without affecting similar hues at lower 
+levels of saturation.
+In the following example, you can see that the portion of the image with the highest saturation has 
+been desaturated, while the rest of the image has been left alone.
+Desaturating only the highest saturated elements in the picture  
+by lower control points at the right of the Sat vs. Sat curve
+Sat vs. Lum Curve
+The inverse of the Lum vs. Sat curve, Sat vs. Lum lets you quickly adjust the luminance of pixels that 
+falls within a particular range of saturation. This is useful for cases where regions of the image you 
+want to make lighter or darker happen to coincide with an identifiably consistent range of saturation.
+To help guide your adjustment, the histogram drawn for this curve lets you see how many pixels there 
+are at each level of saturation found within the image, with the leftmost part of the curve representing 
+minimum saturation, and the rightmost part of the curve representing maximum saturation. Seeing 
+where the levels of saturation lie in the current image help you to quickly make targeted luminance 
+adjustments when you sample the region of the image you want to adjust to add points to this curve. 
+3263Color | Chapter 134 Curves
+COLOR
+The Sat vs. Lum curve
+In the following example, the right side of this curve is lowered so that the most saturated parts 
+of the image become darkened. You might want to make an adjustment like this to emulate one 
+of the properties of film, where highly saturated colors block more light from passing through the 
+emulsion than less saturated colors. Or, you may do this in an effort to desaturate bright colors in 
+highlights that might otherwise clip past maximum white. Or, you might do this to quickly darken highly 
+saturated skies.
+(Top Left) The original image, (Top Right) The highly saturated blue sky and sea reflections are 
+darkened to a more intense blue by lowering the right part of the Sat vs. Lum curve (Bottom).
+3264Color | Chapter 134 Curves
+COLOR
+Chapter 135
+ColorSlice
+This chapter focuses on using the ColorSlice tool, allowing you to make 
+targeted changes to specific color ranges that seamlessly integrate with the rest 
+of the image.
+Contents
+ColorSlice ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3266
+Vectorspace ColorSlice Controls  �����������������������������������������������������������������������������������������������������������������������������������������������  3267
+Global ColorSlice Controls  ������������������������������������������������������������������������������������������������������������������������������������������������������������ 3268
+Using Color Slice �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3268
+3265Color | Chapter 135 ColorSlice
+COLOR
+ColorSlice
+ColorSlice is a fixed vector grading tool that allows you to qualify a range or ranges of colors that all 
+blend smoothly together, making a more seamless image than using the HSL qualifier.
+The ColorSlice vector-based grading tool
+You can use ColorSlice to set overall density, saturation, and hue parameters to replicate different 
+CMY print processes and to change brightness and saturation for each vectorspace slice. To achieve 
+deep filmic colors and looks, brightness is controlled in a subtractive way when adjusting saturation, 
+so saturated colors are not unnaturally bright and do not need luminance adjustments.
+Increasing the Saturation (left) creates a brighter red,  
+while using the ColorSlice tool (right) creates a deeper red.
+3266Color | Chapter 135 ColorSlice
+COLOR
+Vectorspace ColorSlice Controls
+The ColorSlice tool is comprised of seven different vectorspace slices. Each vectorspace slice controls 
+a range of colors based on the conventional vectors on the Vectorscope: Red, Green, Blue, Cyan, 
+Magenta, and Yellow. In addition, a seventh vector has been added for skin tones. 
+The Red ColorSlice  
+vectorspace slice controls
+Each vectorspace slice is composed of the following controls:
+• Highlight: Click and holding on this icon will enable a highlight view as long as you hold the 
+button down, showing the areas of the image that will be modified by the control. You can 
+also switch between each vectorspace’s highlight permanently by activating a highlight view 
+in the Viewer first to make it easier to refine the parameters below.
+• Slice Color: A name that represents the color of the area controlled (Red, Green, Blue, etc.).
+• Reset: Resets the all the vectorspace slice controls back to the default levels.
+• Color Wheel: A visual representation of the vectorspace slice. All colors within the 
+brightened wedge are what will be adjusted by the controls.
+• Center: This is the only adjustable qualifying control. Sliding this bright line back and 
+forth will move the center of the color range, letting you slightly change which colors 
+are weighted more in the qualifier. You cannot move the center out of its range. Use this 
+tool in conjunction with the highlight view to make sure that the specific colors you want to 
+adjust are qualified.
+• Hue: Changes the hue of all the colors within the vectorspace slice. Adjusting this control 
+does not affect the qualification of the original color.
+• Density: Adjusts the density of the colors inside the vectorspace slice by adjusting the 
+luminance of more saturated colors to emulate a subtractive color film process.
+• Saturation: Adjusts the saturation of colors qualified by this slice using a subtractive color 
+model that prevents highly saturated colors from becoming unnaturally bright.
+3267Color | Chapter 135 ColorSlice
+COLOR
+Global ColorSlice Controls
+In addition to the individual vectorspace slice controls, there are a set of global controls along the top 
+of the tool. These will change the values of the entire image.
+The ColorSlice Global controls
+  Density: Adjusts the luminance of more saturated colors to emulate a subtractive 
+color film process.
+  Den.Depth: Controls the effect of density adjustments on brighter areas of the image.
+  Saturation: Adjusts saturation using a subtractive color model that prevents highly saturated 
+colors from becoming unnaturally bright.
+  Sat.Balance: Adjusts how saturation changes effect the luminance balance in colors with 
+medium saturation levels.
+  Sat.Depth: Controls the effect of saturation adjustments on brighter areas of the image.
+  Hue: Changes the hue of all the colors within the image.
+  Reset: Resets all ColorSlice adjustments.
+Using the Numeric Parameters
+In addition to the Global controls above, Each vectorspace slice has a set of four number fields that 
+display the values of the Center, Hue, Density, and Saturation controls. These fields can be edited like 
+any other parameter on the Color page.
+To edit values directly:
+  You can double-click on a field to edit its value numerically.
+  You can insert the text cursor next to a value in this field and use the Up and Down Arrow keys to 
+adjust the value one digit at a time.
+  You can cut, copy, and paste values among fields.
+  You can click on the field and drag left or right to adjust its value with a virtual slider. 
+Using Color Slice
+Each vectorspace slice has a center line, which is the color where most of the weight of the 
+adjustments will be made. By sliding the Center control back and forth, you can select which color 
+to qualify the most of. The Center control is the only control used to qualify colors; all the other tools 
+make adjustments to that qualification.
+The Cyan color slice center is 
+marked by a bright white line, 
+while its color range is bounded 
+by white lines on either side 
+clockwise and counterclockwise.
+As you adjust the Center control, you will want to take a look at the qualified colors, either by click and 
+holding on the highlight icon in the upper left of the vectorspace slice, or by turning on the highlight in 
+the Viewer.
+3268Color | Chapter 135 ColorSlice
+COLOR
+Once you have the range of colors selected, you simply adjust the Hue, Density, and Saturation 
+controls for the vectorspace slice until you get the results you’re looking for. Note that pulling a 
+perfectly clean matte is not necessary; you just want to make sure that the range of colors you want to 
+enhance is mostly selected.
+For this example, we will quickly qualify and adjust both the sky and ocean, as well as the 
+cycler’s skin tone all in the same node, at the same time using just the ColorSlice tool.
+This is the initial balanced image, and we want to make the sky and ocean more vibrant, as 
+well as accentuate the sunset light falling on the cyclist.
+The original balanced shot we want to enhance
+First, we open the ColorSlice tool and set our Viewer to B/W Highlight.
+Using the Cyan vectorspace slice, we first adjust the Center control until we have the maximum 
+amount of sky and ocean qualified (white). Next we will turn off our highlight and adjust the density and 
+saturation sliders to get a nice vibrant sky and ocean.
+Adjusting the Cyan center control to maximize  
+the amount of sky and ocean qualified (white)
+The center, density, and 
+saturation adjustments 
+for Cyan (sky and ocean)
+3269Color | Chapter 135 ColorSlice
+COLOR
+Next we will use the Skin vectorspace slice, and again turn on the highlight and adjust the center until 
+we have the maximum amount of the cyclist qualified. However, note we also end up qualifying quite 
+a bit of the hills behind him, which we don’t want. We then turn off the highlight and adjust the density 
+and saturation sliders until we have a rich warm glow falling on him (and the hills).
+Adjusting the Skin center control to maximize the amount of the cyclist 
+qualified (white). Note quite a bit of the hills behind him are qualified too.
+The center, density, and 
+saturation adjustments for 
+Skin, accentuating the late 
+afternoon sun on the cyclist
+Now we will go over to the next vectorspace slice, Yellow. Turning on the highlight, we will now adjust 
+the center control to maximize the amount of the hills behind him that are qualified. Note that his skin 
+tones are not qualified using this vectorspace slice, only the hills. Now we will turn off the highlight and 
+dial back the density and saturation of the hills again that we had qualified in the previous slice.
+Adjusting the Yellow center control to pick out just the hills (white).  
+Note his skin tones are not qualified.
+The center, density, and 
+saturation adjustments for 
+Yellow, desaturating just 
+the hills back to normal that 
+were inadvertently picked 
+up in the Skin vectorspace 
+slice previously.
+3270Color | Chapter 135 ColorSlice
+COLOR
+The final image and result from those three fast ColorSlice operations.
+The final ColorSlice image; three different operations in one node with one tool
+You may have noticed that the qualification mattes pulled by these operations were full of 
+small holes and expect to have to do a lot of tedious matte finesse operations to smooth them 
+out. With ColorSlice, all the qualifiers blend seamlessly into the others, so there is no matte 
+flickering or distracting speckles popping in and out as the video plays back. Of course, for 
+tricker shots you can still limit the ColorSlice effect using Power Windows, and even other 
+qualifiers, to direct the effect to just the areas of the frame you want it to apply to.
+3271Color | Chapter 135 ColorSlice
+COLOR
+Chapter 136
+Color Warper
+The Color Warper is a powerful toolset for making both highly specific 
+adjustments to particular things in the frame, and widely general adjustments 
+to create unique looks. 
+The two modes of the Color Warper each make it easy to change hues using the Chroma Warp, 
+or simultaneously modify two different color attributes, either saturation and hue, or lightness and 
+hue. This gives the Color Warper an advantage over curves, which only let you adjust one color 
+characteristic at a time.
+Contents
+Introduction to the Color Warper ����������������������� 3273
+Chroma Warp ���������������������������������������������������������������� 3273
+Using The Chroma Warp in Normal Mode  ������ 3274
+Using The Chroma Warp 
+in Point to Point Mode����������������������������������������������� 3275
+Pin Points ������������������������������������������������������������������������ 3276
+Chroma Warp Tools���������������������������������������������������� 3276
+Chroma Warp Stroke ������������������������������������������������� 3277
+Hue-Saturation / Chroma-Luma Mode ������������  3277
+The Color Warper Interface ����������������������������������� 3279
+Using the Grid Controls to Manipulate Color  3280
+Previewing Which Colors Are 
+Warped By Each Control Point ���������������������������� 3283
+Sampling to Warp Colors ���������������������������������������� 3283
+Resetting Grid Points  ����������������������������������������������� 3285
+Grid Resolution Affects The Specificity 
+and Quality of Adjustments  ���������������������������������� 3285
+You Can Warp Color in 
+Different Color Spaces ��������������������������������������������  3286
+Hue – Saturation Controls  ������������������������������������� 3287
+Tools ��������������������������������������������������������������������������������� 3288
+Modifiers ������������������������������������������������������������������������� 3288
+Range ������������������������������������������������������������������������������� 3289
+Auto Lock Controls ����������������������������������������������������  3289
+Smoothing Controls  �������������������������������������������������� 3289
+Chroma-Luma Controls  ������������������������������������������ 3289
+Axis Angle  ����������������������������������������������������������������������� 3291
+Tools ����������������������������������������������������������������������������������� 3291
+Modifiers �������������������������������������������������������������������������� 3292
+Range �������������������������������������������������������������������������������� 3292
+Auto Lock Controls ����������������������������������������������������� 3293
+Smoothing Controls  ��������������������������������������������������� 3293
+3272Color | Chapter 136 Color Warper
+COLOR
+Introduction to the Color Warper
+The Color Warper consists of different modes: Chroma Warp, and Hue-Saturation / Chroma-Luma. 
+Both modes are designed to warp one set of colors into another with a smooth falloff that might be 
+difficult to achieve with qualifiers alone. However for each node, you must choose between using the 
+Chroma Warp, or the Hue-Saturation / Chroma-Luma controls.
+Chroma Warp
+The Chroma Warp is a mode found in the Color Warper Palette. Like the Color Warper Hue-sat / 
+chroma-luma controls, its purpose is to make smooth and precise changes between color ranges. 
+The main difference is that the Chroma Warp uses strokes on a chromaticity diagram rather than 
+adjusting the points on a mesh to make its changes. Both will give you great results, but you can only 
+use one of these tools per node, either the traditional Color Warper or the Chroma Warp.
+The Chroma Warp chromaticity diagram on the left and toolset to the right
+The main interface of the Chroma Warp contains a chromaticity diagram with the range of the current 
+colors in the image overlayed on top in white (similar to a vectorscope representation), with the toolset 
+to the left. The chromaticity diagram is perceptionally uniform, meaning that the distances between 
+points on the diagram closely align to the visual differences seen in the image when using the 
+Chroma Warp. The Chroma Warp is exposure independent, meaning once you’ve set a Chroma Warp, 
+subsequent changes in luminance will not break your qualified selection.
+The first decision to make is whether you want to use the Chroma Warp in Normal or Point to 
+Point modes.
+3273Color | Chapter 136 Color Warper
+COLOR
+Using The Chroma Warp in Normal Mode
+Use this mode when you want to naturally transition from one color to another through the entire color 
+range that lies between them, for example changing the color of an entire sky to a deeper blue.
+Select the color range you want to modify by:
+  Clicking the original color using the qualifier eyedropper in the Viewer, then dragging towards the 
+direction of the new color in the chromaticity diagram. The Viewer will update as you drag through 
+the color ranges, allowing you to easily dial in the exact change you want.
+  Clicking on the color representation inside the chromaticity diagram itself, then dragging towards 
+the color you wish to change it to.
+In either case, the initial color selected will be represented by a blue dot on the chromaticity 
+diagram, and the final color will be represented by an orange dot. They will be connected by 
+an arrow showing the range of change. An orange outline around the vector shows the entire 
+range of colors modified.
+Dragging the points toward the white point (the small circle in the diagram) will desaturate the 
+color, while dragging it toward the edges will increase a color’s saturation.
+The Chroma Warp in Normal mode, changing both the tonal range of the 
+grass to more yellow and the sky range to deeper blue.
+3274Color | Chapter 136 Color Warper
+COLOR
+Using The Chroma Warp in Point to Point Mode
+Use this mode to isolate and change a specific color to another color entirely, for example changing 
+the color of a shirt from blue to yellow without going through green.
+Select the specific color you want to modify by:
+  Clicking the original color using the qualifier eyedropper in the Viewer, then dragging towards the 
+direction of the new color in the chromaticity diagram. The Viewer will update as you drag through 
+the colors, allowing you to easily dial in the exact destination color you want.
+  Clicking on the color representation inside the chromaticity diagram itself, then dragging towards 
+the color you wish to change it to.
+In either case, the initial color selected will be represented by a blue dot on the chromaticity 
+diagram, and the final color will be represented by an orange dot. They will be connected 
+by an arrow showing the range of change. An orange outline around both dots shows the 
+selection range of the original and final colors.
+Dragging the points toward the white point (the small circle in the diagram) will desaturate the 
+color, while dragging it toward the edges will increase a color’s saturation.
+ 
+The Chroma Warp in Point to Point mode, changing just the color of the shirt from blue to yellow.
+TIP: You can use multiple Normal and Point to Point selections concurrently for very 
+advanced color changes within the same node.
+3275Color | Chapter 136 Color Warper
+COLOR
+Pin Points
+This tool allows you to set a pin designating a color range to be excluded from the selected range. For 
+example, if you wanted to change the color of a sign from red to green, but it had yellow lettering that 
+fell into the range between, you could add a pin point to the yellow text to exclude it from the color 
+change. Another use case would be to put a pin point on the skin tones of an actor so that their skin 
+remained the same regardless of the color changes happening around it.
+You can set a pin point just like the selection above, either by using the qualifier on a color in the 
+image itself in the Viewer, or by clicking on the color in the chromaticity diagram.
+Placing a pin point around the white point, to keep neutral 
+tones from tinting during a Chroma Warp operation
+TIP: If using the tool is causing tinting issues, try placing a Pin Point on the white point 
+of the chromaticity diagram (the center circle). This will remove all neutral grays from the 
+color adjustment.
+The Chroma Warp tools
+Chroma Warp Tools
+The Chroma Warp toolset are where you access the main color selection parameters of the Warp.
+  Add Stroke (Normal): This puts the Chroma Warp in Normal mode to select a color range.
+  Add Stroke (Point to Point): This puts the Chroma Warp in Point to Point mode to select a 
+specific color.
+  Add Pin Point: This allows you to set a pin designating a color to be excluded from the 
+selected range.
+  Select: Lets you click on an existing range and drag it around the chromaticity diagram.
+  Delete Strokes or Points: This lets you delete specific strokes and points you have already set on 
+the Chroma Warp. Simply click on one of the points of a range, then click on the trashcan icon.
+3276Color | Chapter 136 Color Warper
+COLOR
+Chroma Warp Stroke
+The Chroma Warp stroke tools modify and refine any selection you’ve made.
+  Chroma Range: Adjust this slider to set the amount of adjacent colors included in the range. 
+Lower ranges make the color selection more specific, while higher ranges encompass more of the 
+adjacent colors. 
+  Exposure: Adjusting this slider darkens or brightens the selection in the ending circle only 
+(the orange dot). Negative values darken, while positive values brighten.
+  Tonal Range Low: Adjusting this slider lets you primarily affect the darker regions of the initially 
+selected color for change, leaving the brighter regions unchanged. This adjustment is global and 
+applies to all strokes in the chromaticity diagram.
+  Tonal Range High: Adjusting this slider lets you primarily affect the brighter regions of the initially 
+selected color for change, leaving the darker regions unchanged. This adjustment is global and 
+applies to all strokes in the chromaticity diagram.
+  Tonal Range Pivot: This slider lets you set the initial point between Tonal Range Low and Tonal 
+Range High that those tools diverge from.
+  Normal/Point to Point Toggle: Clicking on either of these icons changes a Normal selection to a 
+Point to Point or vice versa.
+Hue-Saturation / Chroma-Luma Mode
+The Color Warper Hue-Saturation / Chroma-Luma palettes are a mesh-based warping tool that, 
+instead of warping the spatial location of pixels, warps one set of colors into another. Better yet, unlike 
+the HSL curves, they let you simultaneously adjust two color parameters at the same time, within user-
+selectable regions of specific hues. These adjustments, made using a grid of draggable control points, 
+automatically have a smooth falloff from the colors you’re warping to other colors that are locked into 
+place. The smoothness of this falloff depends on the distance between the warp points that are being 
+adjusted and other warp points that are locked in place to prevent change. 
+The Color Warper, located in the center palette area
+There are two ways you can use this tool. You can drag the control points in the grid to make highly 
+specific image adjustments. More intuitively, you can click to sample the image, which selects the 
+closest grid point that affects that color, and then drag to make an adjustment with that control point.
+3277Color | Chapter 136 Color Warper
+COLOR
+Clicking and dragging to sample skin tone in the Viewer to adjust that 
+color’s control point on the Hue-Saturation warping grid
+You can use this tool to make extremely specific adjustments to colors in an image, similar to what 
+you might do with a Qualifier key or with the HSL curves. However, by warping the points using a grid, 
+you can manipulate two color characteristics at the same time, adjusting both hue and saturation, 
+or chroma and luma. In the following example, specific adjustments are being made to refine the 
+woman’s shirt, to adjust her skin tone, and to manipulate the greens of the foliage in the shot. All three 
+of these naturalistic adjustments are smooth and artifact-free by virtue of the Color Warper’s method 
+of cleanly remapping color.
+(Top) The original image, (Bottom) Manipulating the hue and saturation of the grass using the Chroma-Luma controls
+You can also use this tool to create wide-ranging stylistic looks for the overall image, bending the color 
+in creative ways that other controls don’t. In the following image, the less saturated and neutral colors 
+of the image are all warped towards a bluish-cyan, while the more saturated oranges are warped 
+towards a saturated orange-red, to quickly create a stylistic treatment of the image.
+3278Color | Chapter 136 Color Warper
+COLOR
+(Top) The original image, (Bottom) Stylizing the overall image using the Hue-Saturation controls
+The Color Warper Interface
+You can either use the Color Warper as it appears docked into the middle palette area, or you can 
+click the Expand button to open the Color Warper into a floating window that you can make as large 
+as you like, giving you more detailed control of dense grids of control points. For convenience, the 
+examples in this chapter show the Color Warper side-by-side with the Viewer, in a floating window. 
+While the Color Warper is open in its own window, clicking the Close button puts the palette back in 
+the palette area below.
+Clicking the Expand button opens the 
+Color Warper into a floating window, 
+clicking the Close button in the floating 
+window puts the palette back.
+There are two overall regions of the Color Warper palette. At the left, the grid area has 
+the actual warping grid with points you manipulate to make adjustments, while controls 
+underneath let you choose the resolution of the grid and the color space in which it works. 
+At the right, the control area provides all the tools, range controls, and feathering controls that 
+are available for manipulating the warping grid in a variety of highly specific ways.
+3279Color | Chapter 136 Color Warper
+COLOR
+Using the Grid Controls to Manipulate Color
+This palette has two modes; each lets you manipulate the colors of the image in different ways, and 
+each has a different style of grid used for warping the different color channels that are affected. 
+Learning how to manipulate the color warping points of each of these grids is central to understanding 
+how this palette works.
+(Left) The radial grid in Hue-Saturation mode,  
+(Right) The two rectangular grids in Chroma-Luma mode
+Dragging to Warp Colors
+Despite the different shapes, each of these grids are manipulated in similar ways. Dragging a control 
+point alters whatever color corresponds to that point, while the colors that surround this dragged point 
+are also adjusted proportionally according to their location between the point being dragged and 
+surrounding points that either (a) aren’t affected, or (b) are locked into place. Locked points prevent the 
+colors at those points from being changed. By locking some parts of a grid and dragging other parts, 
+you can create sophisticated hue-specific adjustments.
+The orange control point has been selected and dragged 
+to make an adjustment. Control points with black outlines 
+are locked in place and help prevent control points on the 
+opposite side from being moved. All other control points 
+between the selected and locked control points are stretched 
+or squished depending on the selected point’s adjustment.
+3280Color | Chapter 136 Color Warper
+COLOR

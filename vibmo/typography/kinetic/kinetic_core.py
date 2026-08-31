@@ -299,3 +299,79 @@ class KineticText(Node):
             base_pos = glyph.position.get()
             glyph.position.bind(_WaveBinding(base_pos.y, i, amplitude, speed, wave_length))
 
+    def scramble_decrypt(
+        self,
+        duration: float = 1.2,
+        delay: float = 0.0,
+        stagger: float = 0.03,
+        charset: str = "0123456789ABCDEF$#@!*&%<>",
+    ) -> List[AnimationAction]:
+        """
+        Matrix/Cyberpunk cryptographic character decryption animation.
+        Glyphs cycle rapidly through glyph ciphertext before locking into target text.
+        """
+        import random
+        actions: List[AnimationAction] = []
+        curr_delay = delay
+
+        for glyph in self.glyphs:
+            target_char = glyph.text.get()
+            if target_char == " ":
+                curr_delay += stagger * 0.5
+                continue
+
+            glyph.opacity.set(0.0)
+            actions.append(glyph.opacity.to(1.0, duration=0.1, delay=curr_delay))
+            
+            # Staggered pop-in
+            glyph.scale.set(Vector2D(0.5, 0.5))
+            actions.append(glyph.scale.to(Vector2D(1.0, 1.0), duration=duration * 0.5, ease=Ease.spring(stiffness=200, damping=14), delay=curr_delay))
+
+            # Dynamic scramble binding
+            class _ScrambleBinding:
+                def __init__(self, target: str, start_t: float, lock_t: float, chars: str):
+                    self.target = target
+                    self.start_t = start_t
+                    self.lock_t = lock_t
+                    self.chars = chars
+                    self.rnd = random.Random(hash(target) + int(start_t * 1000))
+
+                def __call__(self, t: float) -> str:
+                    if t < self.start_t:
+                        return self.chars[0]
+                    if t >= self.lock_t:
+                        return self.target
+                    # Scramble every 50ms
+                    step = int((t - self.start_t) * 24.0)
+                    return self.chars[(step + hash(self.target)) % len(self.chars)]
+
+            lock_time = curr_delay + duration * 0.75
+            glyph.text.bind(_ScrambleBinding(target_char, curr_delay, lock_time, charset))
+            curr_delay += stagger
+
+        return actions
+
+    def bounce_in(
+        self,
+        stagger: float = 0.03,
+        duration: float = 0.7,
+        delay: float = 0.0,
+    ) -> List[AnimationAction]:
+        """Bounces in each glyph with elastic squash and stretch."""
+        actions: List[AnimationAction] = []
+        curr_delay = delay
+        e = Ease.elastic_out
+
+        for glyph in self.glyphs:
+            if glyph.text.get() == " ":
+                curr_delay += stagger * 0.5
+                continue
+
+            glyph.opacity.set(0.0)
+            glyph.scale.set(Vector2D(0.0, 0.0))
+            actions.append(glyph.opacity.to(1.0, duration=0.15, delay=curr_delay))
+            actions.append(glyph.scale.to(Vector2D(1.0, 1.0), duration=duration, ease=e, delay=curr_delay))
+            curr_delay += stagger
+
+        return actions
+

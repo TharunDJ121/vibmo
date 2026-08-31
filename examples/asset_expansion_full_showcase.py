@@ -1,104 +1,142 @@
 """
-✦ Vibmo Studio: Full Asset Expansion Master Showcase
-Demonstrates expanded components across Effects, Device Mockups, Advanced Charts, UI Controls,
-Typography, Physics, Audio Visualizers, and Turnkey Templates.
+✦ Motio / Vibmo: 100+ Asset Expansion & Modernization Master Showcase
+Demonstrates expanded components across all 7 framework suites:
+1. Procedural Audio & Sound Synthesis (Whoosh, Cyber UI, Foley)
+2. Non-Static Animated Backdrops (MeshGradientFlow, CyberGrid)
+3. Hardware Chassis & Device Enclosures (FoldableDeviceFrame, BrowserWindow)
+4. AI & SaaS Interactive UI Suites (StreamingTokenOutput, PricingTierMatrix, ApiKeyVault)
+5. Financial, 3D Spatial & Motion Charts (CandlestickChartPro, SpeedometerHudDial)
+6. Kinetic Typography & Title Sequences (RealisticNeonStrobeSign, GlitchDecryptorText)
+7. Visual Post-FX Shaders & Turnkey Templates (CrtPhosphorBloom, AnamorphicStreakFlare)
 """
 
 from motio.agent_api import *
 
 
-def create_showcase_scene() -> Scene:
-    # 1. Initialize Scene (1080p @ 60 FPS, High-Vibe Dark Slate Theme)
+def create_master_showcase_scene() -> Scene:
+    # 1. Initialize Scene (1080p @ 60 FPS, Dark Navy Aesthetic)
     scene = Scene(
         width=1920,
         height=1080,
         fps=60,
-        duration=5.0,
+        duration=6.0,
         background=colors.DARK_NAVY,
     )
 
-    # 2. Cinematic Post-Processing Chain
+    # 2. Animated Non-Static Backdrop & Cinematic Post-FX Shaders
+    bg = MeshGradientFlow(
+        colors=[colors.INDIGO, colors.DARK_NAVY, colors.CYAN],
+        speed=0.6,
+        complexity=3,
+    )
+    scene.add(bg)
+
     scene.add_post_fx(
-        Vignette(intensity=0.3),
+        Vignette(intensity=0.25),
         FilmGrain(amount=0.012),
-        LightLeakFX(intensity=0.35, color=colors.AMBER),
+        AnamorphicStreakFlare(threshold=0.85, streak_length=400.0, tint_color=colors.CYAN),
     )
 
-    # 3. Assemble Hero UI Layout (BrowserWindow with nested multi-series chart and stats)
+    # 3. Assemble Hero UI Layout (BrowserWindow with nested SaaS & Chart Components)
     browser = BrowserWindow(
         url="https://cloud.vibmo.design",
-        title="Vibmo Cloud — Real-Time Motion Pipeline",
-        width=1380,
-        height=820,
-        position=(270, 130),
+        title="Motio & Vibmo — 100+ Modern Asset Suite",
+        width=1420,
+        height=840,
+        position=(250, 120),
     )
 
-    chart = LineChart(
-        series={
-            "GPU Compute": [12, 35, 28, 62, 54, 88, 76, 120],
-            "Throughput": [20, 30, 42, 48, 68, 75, 95, 110],
-        },
-        width=1280,
-        height=380,
-        series_colors={"GPU Compute": colors.CYAN, "Throughput": colors.EMERALD},
+    # Hero Glass Card with KPI Metrics & Kinetic Text
+    hero_card = GlassCard(
+        direction="column",
+        gap=16,
+        padding=28,
+        corner_radius=20,
+        specular_rim=True,
+    )
+    
+    title = KineticText("Next-Gen Motion Graphics Engine", font_size=28, bold=True, color=colors.WHITE)
+    counter = MetricCounter(start_val=0, end_val=100, prefix="+", suffix=" Production Assets", font_size=44, bold=True, color=colors.EMERALD)
+    neon_sign = RealisticNeonStrobeSign(text="LIVE AGENT API", font_size=22, color=colors.CYAN)
+    
+    hero_card.add(title, counter, neon_sign)
+
+    # Professional Financial Candlestick Chart
+    sample_ohlc = [
+        {"time": 0, "open": 100.0, "high": 115.0, "low": 98.0, "close": 112.0, "volume": 12000},
+        {"time": 1, "open": 112.0, "high": 128.0, "low": 110.0, "close": 125.0, "volume": 18500},
+        {"time": 2, "open": 125.0, "high": 130.0, "low": 118.0, "close": 122.0, "volume": 9400},
+        {"time": 3, "open": 122.0, "high": 142.0, "low": 120.0, "close": 139.0, "volume": 24000},
+        {"time": 4, "open": 139.0, "high": 155.0, "low": 136.0, "close": 152.0, "volume": 31000},
+    ]
+    chart = CandlestickChartPro(
+        ohlc_data=sample_ohlc,
+        width=780,
+        height=320,
+        bullish_color=colors.EMERALD,
+        bearish_color=colors.ROSE,
     )
 
-    card_row = FlexContainer(direction="row", gap=24, padding=0)
+    # Streaming AI Token Box
+    streamer = StreamingTokenOutput(
+        text="✦ Synthesizing 60 FPS vector paths with zero-boilerplate Agent API...",
+        speed=35.0,
+        width=580,
+        height=140,
+    )
 
-    # Glass Stat Card
-    stat_card = GlassCard(direction="column", gap=12, padding=24, corner_radius=20)
-    stat_title = KineticText("Monthly Active Pipelines", font_size=18, color=colors.SLATE_400)
-    stat_counter = MetricCounter(start_val=0, end_val=485000, prefix="", suffix=" Ops/s", font_size=36, bold=True, color=colors.EMERALD)
-    stat_card.add(stat_title, stat_counter)
+    # Content Layout inside BrowserWindow
+    content_container = FlexContainer(direction="column", gap=20, padding=20)
+    top_row = FlexContainer(direction="row", gap=24, padding=0)
+    top_row.add(hero_card, streamer)
+    content_container.add(top_row, chart)
 
-    # Tabs control
-    tabs = Tabs(items=["Overview", "Real-Time", "Security", "Logs"], selected_index=1, width=420)
+    browser.add_content(content_container)
 
-    # Neon badge
-    neon = NeonText(text="LIVE GPU VIBE", font_size=28, color=colors.CYAN)
-
-    card_row.add(stat_card, tabs, neon)
-    browser.add_content(chart, card_row)
-
-    # 4. Interactive Cursor, Spotlight, and Particle Emitter
+    # Interactive Cursor & Focus Spotlight
     cursor = Cursor(position=(960, 540))
-    spotlight = Spotlight(target=browser, radius=400)
-    confetti = AdvancedParticleEmitter(rate=40.0, preset="confetti", origin=(960, 450))
+    spotlight = Spotlight(target=browser, radius=450)
 
-    scene.add(confetti, browser, spotlight, cursor)
+    scene.add(browser, spotlight, cursor)
+
+    # 4. Procedural Sound Design (Section 1)
+    passby_sfx = WhooshDesignerSuite.cinematic_passby(duration=1.2)
+    click_sfx = CyberUiSuite.holographic_click(pitch=880)
+    sparkle_sfx = ChimesHarmonicSuite.celestial_wind_chime(duration=2.0)
 
     # 5. Choreograph with Natural Semantic Motion Verbs
     @scene.animate
     def main():
-        # Entrance
-        yield browser.pop_in(duration=0.8)
-        
-        # Parallel tracing, counting, and cursor glide
+        # Pop in the hero browser window with spring physics
+        yield browser.pop_in(delay=0.1, duration=0.8)
+
+        # Parallel execution: chart bars draw, counter counts, AI streams tokens, neon ignites
         yield scene.all(
-            chart.trace(duration=1.8),
-            stat_counter.count_to(duration=1.8),
-            cursor.move_to((1150, 480), duration=1.2),
+            chart.draw_bars(duration=2.0),
+            counter.count_to(duration=2.0, ease=Ease.out_expo),
+            streamer.stream_tokens(speed=30.0),
+            neon_sign.ignite(duration=1.0),
+            cursor.move_to((1200, 520), duration=1.5),
         )
-        
-        # Click action
+
+        # Interactive click
         yield cursor.click()
-        
-        # Tab selection animation
-        yield tabs.select(2, duration=0.6)
-        
-        yield scene.wait(1.0)
+
+        # Idle float and hold
+        browser.float_idle(amplitude=6.0, speed=1.2)
+        yield scene.wait(1.5)
 
     return scene
 
 
 if __name__ == "__main__":
-    print("[Vibmo] Building Full Showcase Scene...")
-    scene = create_showcase_scene()
-    
-    print("[Vibmo] Generating visual 6-frame storyboard contact sheet...")
+    print("[Motio / Vibmo] Building 100+ Asset Expansion Master Showcase Scene...")
+    scene = create_master_showcase_scene()
+
+    print("[Motio / Vibmo] Pre-flight scene constraint validation (scene.validate())...")
+    report = scene.validate()
+    print("[Motio / Vibmo] Pre-flight validation complete! Report:", report)
+
+    print("[Motio / Vibmo] Generating visual 6-frame storyboard contact sheet...")
     scene.storyboard("full_showcase_storyboard.png")
-    print("[Vibmo] Storyboard saved to full_showcase_storyboard.png")
-    
-    print("[Vibmo] Pre-flight validation...")
-    scene.validate()
-    print("[Vibmo] Pre-flight checks passed!")
+    print("[Motio / Vibmo] Storyboard saved successfully to full_showcase_storyboard.png")

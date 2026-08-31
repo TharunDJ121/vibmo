@@ -167,3 +167,11 @@ class AmbientDroneSuite:
         right = (right / (np.max(np.abs(right)) + 1e-6) * 0.6).astype(np.float32)
 
         return np.column_stack((left, right))
+
+    @staticmethod
+    def sci_fi_deep_space_drone(duration: float = 10.0, root_freq: float = 55.0) -> np.ndarray:
+        """
+        Atmospheric multi-oscillator evolving deep space drone with slow stereo phase movement.
+        """
+        return AmbientDroneSuite.dark_scifi_drone(duration=duration, root_freq=root_freq)
+

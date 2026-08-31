@@ -51,3 +51,8 @@ def test_frequency_modulation():
 
     # since frequency decays, first half should have more zero crossings
     assert crossings_first > crossings_second, "Frequency does not appear to decrease in arcade_laser_zap"
+
+def test_plasma_beam_fire():
+    audio = LaserPlasmaSuite.plasma_beam_fire()
+    check_valid_audio(audio, 0.32)
+

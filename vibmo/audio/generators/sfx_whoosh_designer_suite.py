@@ -133,3 +133,35 @@ class WhooshDesignerSuite:
         right = audio * 0.707
 
         return WhooshDesignerSuite._normalize_and_format(np.vstack((left, right)))
+
+    @staticmethod
+    def cinematic_passby(duration=1.2, speed=1.8, sub_impact=True):
+        """Cinematic whoosh pass-by sound with dynamic stereo pan and low-mid resonant sweep."""
+        sr = WhooshDesignerSuite.SAMPLE_RATE
+        n_samples = int(sr * duration)
+        if n_samples == 0:
+            return np.zeros((2, 0), dtype=np.float32)
+        t = np.linspace(0, duration, n_samples, endpoint=False)
+
+        # Broadband filtered noise pass-by sweep
+        noise = WhooshDesignerSuite._pink_noise(n_samples)
+
+        # Resonant bandpass filter
+        b, a = signal.butter(2, [150 / (sr / 2), 4000 / (sr / 2)], btype='bandpass')
+        filtered_noise = signal.lfilter(b, a, noise)
+
+        # Sub rumble underlay
+        sub_tone = np.sin(2 * np.pi * 50.0 * t) * np.exp(-((t - duration * 0.5) ** 2) / (2 * (duration * 0.2) ** 2))
+
+        # Overall envelope: smooth swell and decay
+        env = np.sin(np.pi * (t / duration)) ** 2
+
+        audio_mono = (filtered_noise * 0.8 + (sub_tone * 0.4 if sub_impact else 0.0)) * env
+
+        # Stereo panning sweep: Left -> Center -> Right
+        pan = np.clip((t - duration * 0.2) / max(1e-6, (duration * 0.6)), 0.0, 1.0)
+        left = audio_mono * np.cos(pan * np.pi / 2)
+        right = audio_mono * np.sin(pan * np.pi / 2)
+
+        return WhooshDesignerSuite._normalize_and_format(np.vstack((left, right)))
+

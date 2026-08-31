@@ -261,3 +261,70 @@ class HexagonalHoneyGridPulse(Node):
                 ctx.set_line_width(self.border_width)
                 ctx.stroke()
         ctx.restore()
+
+
+class GeometricTessellation(Node):
+    """
+    Unified geometric tessellation background dispatcher supporting multiple polygonal lattice types:
+    'hexagon' / 'honeycomb', 'voronoi', and 'penrose'.
+    """
+    def __init__(
+        self,
+        poly_type: str = "hexagon",
+        morph_speed: float = 1.0,
+        speed: Optional[float] = None,
+        width: float = 1920.0,
+        height: float = 1080.0,
+        **kwargs: Any
+    ):
+        super().__init__(**kwargs)
+        self.width = float(width)
+        self.height = float(height)
+        self.poly_type = poly_type.lower()
+        actual_speed = float(speed if speed is not None else morph_speed)
+        self.morph_speed = actual_speed
+
+        if self.poly_type in ("hexagon", "hex", "honeycomb"):
+            self._delegate = HexagonalHoneyGridPulse(
+                width=self.width,
+                height=self.height,
+                speed=actual_speed,
+                **kwargs
+            )
+        elif self.poly_type in ("voronoi", "cell", "cellular"):
+            self._delegate = VoronoiCellEvolution(
+                width=self.width,
+                height=self.height,
+                speed=actual_speed,
+                **kwargs
+            )
+        elif self.poly_type in ("penrose", "aperiodic", "triangle"):
+            self._delegate = PenroseTilingFlow(
+                width=self.width,
+                height=self.height,
+                speed=actual_speed,
+                **kwargs
+            )
+        else:
+            self._delegate = HexagonalHoneyGridPulse(
+                width=self.width,
+                height=self.height,
+                speed=actual_speed,
+                **kwargs
+            )
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        self._delegate.draw(ctx, time)
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        if hasattr(self._delegate, "local_bounds"):
+            return self._delegate.local_bounds(time)
+        return (0.0, 0.0, self.width, self.height)
+
+
+__all__ = [
+    "VoronoiCellEvolution",
+    "PenroseTilingFlow",
+    "HexagonalHoneyGridPulse",
+    "GeometricTessellation",
+]

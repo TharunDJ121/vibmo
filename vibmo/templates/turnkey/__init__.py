@@ -28,6 +28,24 @@ from vibmo.templates.turnkey.tmpl_ai_code_assistant_suite import (
     TmplAiCodeAssistantSuite,
     AiCodeAssistantTemplate,
 )
+from vibmo.templates.turnkey.tmpl_fintech_crypto_card_suite import (
+    TmplFintechCryptoCardSuite,
+    FintechCryptoCardTemplate,
+)
+from vibmo.templates.turnkey.tmpl_saas_yc_pitch_suite import (
+    TmplSaasYcPitchSuite,
+    SaasYcPitchTemplate,
+)
+from vibmo.templates.turnkey.tmpl_saas_product_demo_spine_suite import (
+    TmplSaasProductDemoSpineSuite,
+    ProductDemoSpine,
+)
+from vibmo.templates.turnkey.tmpl_changelog_release_suite import (
+    TmplChangelogReleaseSuite,
+)
+from vibmo.templates.turnkey.tmpl_cli_developer_launch_suite import (
+    TmplCliDeveloperLaunchSuite,
+)
 
 
 def create_saas_launch_scene(
@@ -71,7 +89,7 @@ def create_saas_launch_scene(
     # 2. 3D Browser Window Mockup
     browser = BrowserWindow(
         url=app_url,
-        title=f"{app_title} — Dashboard",
+        title=f"{app_title} - Dashboard",
         width=1400,
         height=820,
     ).align("center", (1920, 1080)).at(260, 160)
@@ -139,10 +157,18 @@ def create_saas_launch_scene(
 
 __all__ = [
     "create_saas_launch_scene",
-    "TmplSocialAudiogramSuite",
-    "SocialAudiogramTemplate",
-    "TmplDeveloperCliLaunchSuite",
-    "DeveloperCliLaunchTemplate",
     "TmplAiCodeAssistantSuite",
     "AiCodeAssistantTemplate",
+    "TmplFintechCryptoCardSuite",
+    "FintechCryptoCardTemplate",
+    "TmplDeveloperCliLaunchSuite",
+    "DeveloperCliLaunchTemplate",
+    "TmplSaasYcPitchSuite",
+    "SaasYcPitchTemplate",
+    "TmplSocialAudiogramSuite",
+    "SocialAudiogramTemplate",
+    "TmplSaasProductDemoSpineSuite",
+    "ProductDemoSpine",
+    "TmplChangelogReleaseSuite",
+    "TmplCliDeveloperLaunchSuite",
 ]

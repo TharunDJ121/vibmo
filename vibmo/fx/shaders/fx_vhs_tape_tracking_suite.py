@@ -1,6 +1,6 @@
 import numpy as np
 import moderngl
-from typing import Optional, Tuple
+from typing import Any, Optional, Tuple, Union
 import scipy.ndimage as ndimage
 
 def get_gl_context():
@@ -116,10 +116,19 @@ class VhsTapeTrackingShader(GpuFilterBase):
     """
     Realistic horizontal VHS tracking noise band rolling vertically across screen.
     """
-    def __init__(self, intensity: float = 1.0, speed: float = 0.5, band_height: float = 0.1, use_gpu: bool = True):
-        self.intensity = intensity
-        self.speed = speed
-        self.band_height = band_height
+    def __init__(
+        self,
+        intensity: float = 1.0,
+        speed: float = 0.5,
+        band_height: float = 0.1,
+        use_gpu: bool = True,
+        noise: Optional[float] = None,
+        tracking_error: Optional[float] = None,
+        **kwargs: Any
+    ):
+        self.intensity = float(noise if noise is not None else intensity)
+        self.speed = float(speed)
+        self.band_height = float(tracking_error if tracking_error is not None else band_height)
         super().__init__(use_gpu=use_gpu)
 
     def get_fragment_shader(self) -> str:

@@ -97,6 +97,26 @@ from vibmo.typography.kinetic.typo_terminal_typewriter_suite import (
     CommandPromptPrefix,
     TypingAudioSyncHook,
 )
+from vibmo.typography.kinetic.typo_blur_out_up_suite import (
+    BlurOutUpCharacterNode,
+    BlurOutUpText,
+)
+from vibmo.typography.kinetic.typo_matrix_decode_suite import (
+    MatrixGlyphScrambler,
+    MatrixDecodeText,
+)
+from vibmo.typography.kinetic.typo_rolling_odometer_suite import (
+    SingleDigitTumbler,
+    RollingNumberWheel,
+    SlotMachineRoller,
+)
+from vibmo.typography.kinetic.typo_inline_pill_takeover import (
+    InlinePillTakeoverText,
+    StrikethroughReplaceText,
+)
+from vibmo.typography.kinetic.typo_black_white_opener_suite import (
+    BlackWhiteTypingOpener,
+)
 
 __all__ = [
     "RichToken",
@@ -163,4 +183,14 @@ __all__ = [
     "BlinkingBlockCaret",
     "CommandPromptPrefix",
     "TypingAudioSyncHook",
+    "BlurOutUpCharacterNode",
+    "BlurOutUpText",
+    "MatrixGlyphScrambler",
+    "MatrixDecodeText",
+    "SingleDigitTumbler",
+    "RollingNumberWheel",
+    "SlotMachineRoller",
+    "InlinePillTakeoverText",
+    "StrikethroughReplaceText",
+    "BlackWhiteTypingOpener",
 ]

@@ -2,8 +2,10 @@ import numpy as np
 import pytest
 
 from vibmo.audio.generators.sfx_cyber_ui_suite import (
+    CyberUiSuite,
     CyberUISFXSuite,
     holo_chirp,
+    holographic_click,
     data_packet_burst,
     access_granted_tone,
     access_denied_klaxon,
@@ -82,6 +84,20 @@ def test_cyber_pip():
     verify_audio_array(audio_cls, duration)
     np.testing.assert_array_equal(audio, audio_cls)
 
+def test_holographic_click():
+    audio = CyberUiSuite.holographic_click(pitch=800)
+    verify_audio_array(audio, 0.05)
+
+    audio_fn = holographic_click(pitch=800)
+    verify_audio_array(audio_fn, 0.05)
+    np.testing.assert_array_equal(audio, audio_fn)
+
+def test_cyber_ui_suite_alias():
+    assert CyberUiSuite is CyberUISFXSuite
+    audio1 = CyberUiSuite.holo_chirp(duration=0.08)
+    audio2 = CyberUISFXSuite.holo_chirp(duration=0.08)
+    np.testing.assert_array_equal(audio1, audio2)
+
 def test_invalid_duration():
     # Should handle empty gracefully if possible, or raise expected error
     with pytest.raises(ValueError, match=".*") as excinfo:
@@ -89,3 +105,4 @@ def test_invalid_duration():
         audio = holo_chirp(duration=0.0)
         if len(audio) == 0:
              raise ValueError("Empty array")
+

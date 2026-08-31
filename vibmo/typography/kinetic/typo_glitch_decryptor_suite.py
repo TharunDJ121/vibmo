@@ -224,7 +224,12 @@ class GlitchDecryptorText(Node):
 
         self._last_locked_index = -1
 
-    def decrypt(self, duration: float = 2.0):
+    def decrypt(
+        self,
+        duration: float = 2.0,
+        delay: float = 0.0,
+        ease: Optional[Any] = None,
+    ) -> AnimationAction:
         """Starts the decryption animation from left to right."""
         # We also reset state if called multiple times
         self._last_locked_index = -1
@@ -232,8 +237,9 @@ class GlitchDecryptorText(Node):
             cycle.progress.set(0.0)
         for flash in self.flashes:
             flash.flash_progress.set(0.0)
-
-        yield self.decrypt_progress.to(1.0, duration=duration, ease=Ease.linear)
+        self.decrypt_progress.set(0.0)
+        e = ease or Ease.linear
+        return self.decrypt_progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         prog = self.decrypt_progress.get(time)

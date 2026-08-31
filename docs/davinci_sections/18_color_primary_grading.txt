@@ -1,0 +1,1470 @@
+Chapter 130
+Camera Raw Palette
+The Camera Raw palette lets you make clip-specific adjustments to the 
+parameters that are used to debayer a raw clip into an image that can be graded in 
+DaVinci Resolve.
+Contents
+Introduction to the Camera Raw Palette �������������������������������������������������������������������������������������������������������������������������������� 3190
+Copying, Versioning, and Protecting Camera Raw Settings ���������������������������������������������������������������������������������������  3190
+Making Changes to Clip Camera Raw Settings �������������������������������������������������������������������������������������������������������������������  3191
+Clip Decoder Settings �����������������������������������������������������������������������������������������������������������������������������������������������������������������������  3192
+Resetting Camera Raw Settings  �������������������������������������������������������������������������������������������������������������������������������������������������� 3193
+Updating Sidecar Settings for Blackmagic RAW (BRAW)  Clips ����������������������������������������������������������������������������������  3193
+3189Color | Chapter 130 Camera Raw Palette
+COLOR
+Introduction to the Camera Raw Palette
+When a timeline uses clips that are linked to camera raw source media recorded from cameras from 
+Blackmagic Design, RED, ARRI, Sony, and Vision Research, all clips in raw media formats are initially 
+debayered using the settings found in the Camera Raw panel of the Project Settings.
+However, if there are individual clips that you want to apply different raw settings to, for example 
+altering the ISO to pull more detail out of the highlights or shadows, then you can use the controls 
+found in the Camera Raw palette to individually alter the parameters found within.
+ 
+The Camera Raw palette showing the available parameters for Blackmagic RAW media.
+The Camera Raw palette is automatically set to the mode (seen within the Mode drop-down menu) 
+that is appropriate to the clip that’s currently selected. If the current clip is not in a raw format, then the 
+parameters within the Camera Raw palette are disabled.
+This section covers general use of the Camera Raw palette. For in-depth documentation 
+about specific camera raw parameters, jump to this chapter: Camera Raw  Settings.
+Copying, Versioning, and 
+Protecting Camera Raw Settings
+Ordinarily, a clip’s camera raw settings are copied along with its grade, or saved inside stills grabbed 
+from that clip, when you use the various grade management techniques covered in later Chapter, 
+Grade Management.
+When you create new versions, you copy the current Camera Raw settings to the new version, but 
+any changes you make are specific to that version, so each version can have individual Camera Raw 
+adjustments. For example, you could compare the results of two different camera raw adjustments on 
+the same clip.
+3190Color | Chapter 130 Camera Raw Palette
+COLOR
+Camera Raw master settings for BRAW media
+If you’re copying and rippling grades among multiple clips, you can also protect each clip’s camera raw 
+settings from being overwritten using the “Copy Grade: Preserve Camera Raw Settings” option found 
+in the contextual menu of the Gallery. 
+For more information on the Copy Grade settings, jump to this chapter: Grade M anagement.
+Making Changes to Clip 
+Camera Raw Settings
+If you want to make individual adjustments to a particular clip’s camera raw settings, choose “Clip” from 
+the Decode Using drop-down menu in the Camera Raw palette. This makes all the parameters in the 
+Camera Raw palette editable, and changes you make override the project-wide camera raw settings.
+Changes to the parameters in the Camera Raw palette can also be rippled across multiple 
+clips at once.
+To ripple camera raw adjustments across multiple clips:
+1 First, you must select a range of clips in the Color page timeline.
+2 Open the Camera Raw palette, and make whatever adjustments are necessary to the current clip. 
+The name of each parameter you adjust changes to amber, showing you which parameters have 
+been modified, and which have not.
+3 To ripple your changes, do one of the following:
+  Click the Use Changes button to ripple only the altered parameters (in amber) to the other clips 
+you’ve selected in the Timeline. This preserves differences between clips in the parameters you 
+haven’t adjusted (in gray).
+  Click the Use Settings button to ripple every parameter of the current clip to the other clips 
+you’ve selected, overwriting all the camera raw settings at once. 
+The Use Changes and Use Settings 
+buttons in the Camera Raw palette
+3191Color | Chapter 130 Camera Raw Palette
+COLOR
+Clip Decoder Settings
+There’s much more information on the various format-specific Master settings, as well as the 
+occasionally format-specific Clip Decoder settings, in Chapter 7, “Camera Raw Settings.” However, with 
+the exception of the RED Clip Decoder settings that appear for R3D clips, most other formats share a 
+set of DaVinci Resolve-specific controls that provide wide-latitude access to the raw image data for 
+purposes of making different kinds of adjustments. 
+Camera Raw Clip Decoder settings for BRAW media
+While specific raw formats have individual controls, the standard controls include:
+  Color Temp: Designed to alter the “warmth” of the image. Adjustable in degrees Kelvin. Lower 
+values correct for “warmer” lighting, while higher values correct for “cool” lighting. +6500 is unity. 
+The range is +2000 to +50,000.
+  Tint: Color balance correction for images with a green or magenta color cast, such as fluorescent 
+or sodium vapor bulbs. 0 is unity. The range is –150 to +150.
+  Exposure: Increases or lowers image lightness in units relative to ƒ-stops. If your intended 
+exposure adjustment lifts image data above the maximum white level, don’t worry; all image data 
+is preserved and can be retrieved in subsequent adjustments. 0 is unity. The range is –5 to +5.
+  Sharpness: A debayer-specific sharpness filter applied to provide the appearance of enhanced 
+image detail. 20 is unity. The range is 0 to 100.
+  Highlights: Makes it easy to selectively retrieve blown-out highlight detail in high-dynamic-range 
+media by lowering this parameter, and achieves a smooth blend between the retrieved highlights 
+and the unadjusted midtones for a naturalistic result. 0 is unity. The range is –100 through +100.
+  Shadows: Lets you selectively lighten or darken shadow detail. Raising this value retrieves 
+shadow detail recorded below 0 percent, while leaving the midtones alone. 0 is unity. The range is 
+–100 through +100.
+  Color Boost: A non-uniform saturation operation that affects regions of low saturation more 
+than regions of high saturation. This is sometimes referred to as a vibrance operation. 0 is unity, 
+showing the original color values. Raising color boost from 0-100 increases color intensity, but low-
+saturation parts of the image are raised more aggressively. Lowering Color Boost from 0 to -100 
+decreases color intensity, but low-saturation parts of the image are lowered more aggressively. 
+0 is unity, showing unaltered saturation. The range is –100 through +100.
+3192Color | Chapter 130 Camera Raw Palette
+COLOR
+  Saturation: A uniform saturation operation that raises (above 50) or lowers (below 50) the 
+color intensity of every color value within the image. 50 is unity, showing unaltered saturation. 
+The range is -100 (completely desaturated) through +100 (saturation is doubled).
+  Midtone Detail: When this parameter is raised, the contrast of regions of the image with high 
+edge detail is raised to increase the perception of image sharpness, sometimes referred to as 
+definition. When this parameter is lowered to a negative value, regions of the image with low 
+amounts of detail are softened while areas of high-detail are left alone. 0 is unity. The range is 
+–100 through +100.
+  Lift: Adjusts the black point of the media, raising it or lowering it while scaling all midtone values 
+between it and the white point. Regardless of how you adjust this control, all image data is 
+preserved and can be retrieved in subsequent adjustments. The range is –100 to +100. 
+  Gain: Adjusts the white point of the media, raising or lowering it while scaling all midtone values 
+between it and the black point. Regardless of how you adjust this control, all image data is 
+preserved and can be retrieved in subsequent adjustments. 0 is unity. The range is –100 to +100.
+  Contrast: Raising contrast reduces shadows and raises highlights, while leaving midtones at 
+50 percent unaffected. Regardless of how you adjust this control, all image data is preserved and 
+can be retrieved in subsequent adjustments. 0 is unity. The range is –100 to +100.
+Resetting Camera Raw Settings
+If you’ve made changes to the parameters of the Camera Raw palette and you decide you need to 
+reset them, there are two options, found in the Options menu.
+  Reset: Resets all parameters in the Camera Raw palette to their default settings.
+  Revert: Similar to the “Original Memory” command, Revert changes all camera raw parameters 
+back to the state they were at when you first selected the current clip.
+Updating Sidecar Settings for 
+Blackmagic RAW (BRAW) Clips
+Blackmagic RAW clips support both embedded look metadata within the .braw media clip and external 
+look metadata in .sidecar files. Ordinarily, these files travel in pairs whenever you manage BRAW 
+media, and whenever a .sidecar file is present, its settings override those of the embedded metadata 
+within the actual .braw clip. Since the .sidecar metadata is in human-readable JSON formatted text, it’s 
+easy to edit and accommodates a wide variety of onset to post-production workflows.
+The .braw and .sidecar files as seen in the file system
+If you like, you can make changes to the raw look metadata of a .braw clip and upgrade the .sidecar 
+metadata from within the Color page of DaVinci Resolve, so the media on disk reflects these changes 
+in any other BRAW compatible application.
+3193Color | Chapter 130 Camera Raw Palette
+COLOR
+To update the .sidecar raw look metadata:
+1 Open the Color page, select a .braw clip in the Thumbnail timeline, and open 
+the Camera Raw palette.
+2 Set Decode Using to Clip to enable the palette controls.
+3 Make whatever adjustments you want to make using the controls of the Camera Raw palette.
+4 When you’re done, click the Update Sidecar button.
+The Update Sidecar button in the 
+Camera Raw palette for .braw media
+3194Color | Chapter 130 Camera Raw Palette
+COLOR
+Chapter 131
+Primaries Palette
+This chapter focuses on the core color adjustments that you’ll be making to 
+create “primary” corrections that alter the overall color and contrast of the image 
+using both the Lift/Gamma/Gain adjustments in the Wheels and Bars modes of 
+the Primaries palette, and the Shadow/Midtone/Highlight/Offset controls in the 
+Log mode, both of which have traditionally formed the foundation of most grades.
+Contents
+Introduction to the Primaries Palette ���������������������������������������������������������������������������������������������������������������������������������������  3196
+HDR Grading With the Primaries Palette  ���������������������������������������������������������������������������������������������������������������������������������� 3197
+Which Do I Start With, the Primaries or HDR Palette? ��������������������������������������������������������������������������������������������������������  3197
+Shared Controls in the Primaries Palette �������������������������������������������������������������������������������������������������������������������������������  3198
+Switching Between Primaries Tools ������������������������������������������������������������������������������������������������������������������������������������������� 3198
+Color Balance Controls  �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3198
+Master Wheels  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3199
+Numeric Parameters  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3199
+Shared Adjustment Controls  �������������������������������������������������������������������������������������������������������������������������������������������������������� 3200
+Auto Correction  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3201
+Reset Controls ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3202
+Color Wheels and Bars  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3202
+3-Way Master Wheel Adjustments  �������������������������������������������������������������������������������������������������������������������������������������������� 3204
+Offset Color and Master Controls ���������������������������������������������������������������������������������������������������������������������������������������������� 3204
+Color Bars Mode  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3205
+Log Wheels Mode ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3206
+Using the Log Mode Controls to Grade Log-Encoded Media �������������������������������������������������������������������������������������  3207
+Using the Log Mode Controls to Stylize Normalized Media �����������������������������������������������������������������������������������������  3209
+Adjusting the Default Tone Ranges in Log Mode ���������������������������������������������������������������������������������������������������������������  3210
+Adjusting Contrast in Log Mode ��������������������������������������������������������������������������������������������������������������������������������������������������  3210
+Log Offset Color and Master Controls ���������������������������������������������������������������������������������������������������������������������������������������  3211
+Offset and Printer Points �����������������������������������������������������������������������������������������������������������������������������������������������������������������  3211
+Adjusting Printer Points in the Bars Mode ������������������������������������������������������������������������������������������������������������������������������  3212
+Adjusting Printer Points Via Keyboard Shortcuts ����������������������������������������������������������������������������������������������������������������  3212
+Printer Light Step Project Settings ���������������������������������������������������������������������������������������������������������������������������������������������  3213
+3195Color | Chapter 131 Primaries Palette
+COLOR
+Introduction to the Primaries Palette
+If you’ve had any exposure to color correction tools in any application, the Lift/Gamma/Gain controls 
+found within the Wheels mode of the Primaries palette should look familiar. These controls correspond 
+to the most traditional and basic color correction functionality available in DaVinci Resolve and are 
+designed to let users without control panels have easy access to color balance and YRGB contrast 
+manipulation using a mouse, tablet, or trackpad.
+Color Balance controls for primary grading, in Wheels mode
+As the name implies, the Primaries palette has been designed for the kind of overall “primary” 
+color adjustments to the image that typically serve as the foundation of any grade. “Secondary” 
+adjustments then refer to more specific adjustments made to isolated subjects within the image. 
+However, it’s a time-tested practice that you do everything you can to get the overall image right 
+using one or more primary corrections before moving on to more specific detail work built on top 
+of these initial adjustments. For one thing, it’s a more structured, organized way to work. However, 
+it’s also the most efficient way to make sure you’re tackling the image in a holistic way, that 
+maximizes improvements while minimizing stress on the video signal.
+The Primaries palette has three distinct modes of operation:
+• Wheels mode contains the traditional DaVinci YRGB Lift/Gamma/Gain controls that allow 
+tonally specific yet widely overlapping regions of adjustment. Wheels mode also provides 
+access to the RGB Offset/Printer Points color balance and master controls.
+• Bars mode gives access to the same YRGB Lift/Gamma/Gain and Offset controls as 
+the Primaries Wheels mode, but the Bars interface lets you make vertical slider-driven 
+adjustments to individual YRGB lift, YRGB gamma, and YRGB gain channels, as well as 
+providing a slider and button-driven interface for the RGB Offset/Printer Points controls.
+• Log mode is the home of the RGB Offset/Printer Points color balance and master controls 
+that adjust the overall signal in a linear, film-oriented way. Log mode provides Shadow/
+Midtone/Highlight/Offset controls that offer more restrictive yet customizable regions of 
+adjustment intended for making adjustments to log-encoded image data.
+Which mode you use depends entirely on how you like to work, and what kinds of adjustments 
+you need to make.
+3196Color | Chapter 131 Primaries Palette
+COLOR
+HDR Grading With the Primaries Palette
+Starting in DaVinci Resolve 17, some of the palettes of the Color page with which color adjustments 
+are made have been made “color space aware.” This means that the functionality of the palette will 
+be mostly the same no matter what Timeline Color Space you’re using, or whether you’re grading 
+to create SDR or HDR output. However, not every color palette has been made color space aware, 
+and so when using various grading controls in the Color page to grade wide-latitude images for HDR 
+output, if you find the controls aren’t working smoothly, you may find it useful to enable the HDR Mode 
+of the node you’re working on by right-clicking that node in the Node Editor and choosing HDR Mode 
+from the contextual menu (this is only available in Resolve Studio). 
+This setting forcibly adapts that node’s controls to work within an expanded HDR range. Practically 
+speaking, this makes it easier to work with wide-latitude signals using controls that operate by letting 
+you make adjustments at different tonal ranges such as Lift/Gamma/Gain or the Log controls.
+Which Do I Start With, the Primaries or HDR Palette?
+The HDR palette, introduced in DaVinci Resolve 17, has also been developed to work as a powerful 
+method of creating primary adjustments to serve as the foundation of your grade. While the Global 
+and Zones controls of the HDR palette operate from a different philosophy of signal adjustment, 
+they’re designed to let you tackle the same issues, so it’s a completely valid choice to start out using 
+the HDR palette instead of the Primaries palette. So, which to use?
+Ultimately, this is going to come down to your comfort with the HDR palette, and your experience with 
+the Primaries palette. If your muscle memory of working with the Primaries palette continues to make 
+it the fastest way for you to dial in your adjustments, there’s no reason to stop using it now. In fact, the 
+Offset/Printer Points controls in the HDR palette continue to be adjustments that are distinctly different 
+from the functionality found within the HDR palette.
+However, you should also give the HDR palette a try, because it has powerful primary grading 
+capabilities that aren’t possible with the Primaries palette modes. Even if the functionality is new to 
+you, if you give it a week you’ll find innumerable advantages to the HDR palette’s way of doing things, 
+even though it requires some new ways of looking at the process.
+The bottom line, however, is that you’ll probably continue using both palettes. If you do, keep in 
+mind that in each Corrector node’s order of image processing operations, the HDR palette controls 
+are processed before the Primaries palette controls, largely because the HDR palette’s more 
+“photographic” approach to grading has been intentionally designed to meet the needs of primary 
+color adjustment in our new world of wide-gamut HDR mastering and output, so it’s been fit into the 
+image processing pipeline as the new foundation of all adjustments.
+3197Color | Chapter 131 Primaries Palette
+COLOR
+Shared Controls in the Primaries Palette
+This section explains, in a generic way, how to use the common control interface conventions used by 
+the Wheels, Bars, and Log modes to make adjustments. It also describes the use of parameters that 
+are shared among all three modes.
+Switching Between Primaries Tools
+The icons in the upper right of the Primaries palette allow you to switch between the Primaries tools at 
+the click of a button.
+Primaries: Log Wheels
+ Primaries: Color Bars
+ Primaries: Log Wheels
+Color Balance Controls
+Whether you’re using the Wheels or Log controls, Color Balance controls provide a way to adjust 
+all three color channels of a particular range of the image simultaneously with a single move of the 
+pointer, according to the mode that’s currently selected. There are also a variety of keyboard modifiers 
+that let you make specific adjustments via the GUI. These controls also correspond to the trackballs 
+found on any of the DaVinci or third-party control panels, should you have one connected.
+Methods of making adjustments using the Color Balance controls:
+  Click and drag anywhere within the color ring: Moves the Color Balance indicator relative to its 
+previous position, and rebalances the three color channels in whatever range of image tonality is 
+governed by that control. You don’t need to drag the Color Balance indicator itself. This simulates 
+the kind of relative control you get when using a trackball to manipulate these parameters. As the 
+Color Balance indicator moves, the RGB parameters underneath change independently to reflect 
+the independent adjustments being made to each channel.
+  Shift-click and drag within the color ring: Jumps the Color Balance indicator to the absolute 
+position of the pointer, letting you make faster, more extreme adjustments to the color balance 
+governed by that control.
+  Double-click within the color ring:  Resets the color adjustment without resetting the 
+corresponding contrast adjustment for that control.
+  Command-click and drag within the color ring:  Adjusts YRGB contrast identically as if you were 
+dragging that control’s master ring.
+  Click the reset control at the upper-right of a color ring: Resets both the Color Balance control 
+and its corresponding master ring.
+3198Color | Chapter 131 Primaries Palette
+COLOR
+Master Wheels
+The Master Wheels, located below the Color Balance controls, let you adjust the YRGB channels for 
+a particular range of image tonality together. This has the practical effect of letting you adjust image 
+lightness and contrast.
+Lift, Gamma, and Gain or Shadow, Midtone, and Highlight, plus Offset master wheels to adjust contrast
+The Master Wheels correspond to the rings surrounding the trackballs on all of the DaVinci control 
+panels, which let you modify image contrast via YRGB adjustment (as opposed to modifying image 
+contrast via Y-only adjustment, discussed later in this chapter).
+To adjust a Master Wheel:
+Dragging a Master Wheel to the left makes the corresponding tonal region of the image 
+darker, and dragging it to the right makes that tonal region of the image lighter. The effect 
+will vary according to the mode you’re in. As you make an adjustment, the YRGB parameters 
+located underneath all change together to reflect the simultaneous adjustment you’re making 
+to all channels.
+Numeric Parameters
+Each Color Balance Control and Master Wheel pair of controls also have a set of four YRGB number 
+fields underneath that display the YRGB adjustment being made by both controls. These four values 
+encompass every color and master adjustment you can make with these controls, and they also 
+directly correspond to the Bars interface that mirrors the Wheels controls. 
+These fields can be edited like any other parameter on the Color page. Even though these values 
+display two decimal places of precision because of space restrictions in the interface, they really 
+contain three decimal places of precision since these are floating point operations; you just can’t see 
+the third decimal place.
+To edit YRGB values directly:
+  You can double-click on a field to edit its value numerically.
+  You can insert the text cursor next to a value in this field, and use the Up and Down Arrow keys to 
+adjust the value one digit at a time.
+  You can cut, copy, and paste values among fields.
+  You can click on the field and drag left or right to adjust its value with a virtual slider. 
+The number fields for each Color Balance 
+Control and Master Wheel are editable.
+3199Color | Chapter 131 Primaries Palette
+COLOR
+Shared Adjustment Controls
+The three modes of the Primaries palette also share two strips of controls for making more specific 
+adjustments to different aspects of the image, such as Contrast, Saturation, Hue, Highlight retrieval, 
+Color boost, and so on. 
+Like most parameters in DaVinci Resolve, clicking and dragging a parameter’s name or value to the left 
+or right lowers and raises that parameter with a virtual slider, while double-clicking that parameter’s 
+number lets you edit it numerically, and double-clicking that parameter’s name resets the parameter to 
+its default position.
+The top adjustment controls
+  Temp: A specifically constrained Gain color balance adjustment that lets you adjust the image 
+along a warm/orange to cool/blue axis corresponding to the naturalistic spectrum of color 
+temperatures used for lighting. Raising this parameter performs a Gain color balance adjustment 
+toward orange, while lowering this parameter to a negative value performs a Gain color balance 
+adjustment toward a blue/cyan split. 0 is unity. The range is –4000 to +4000.
+  Tint: A specifically constrained Gain color balance adjustment that lets you adjust the image along 
+a magenta to green axis corresponding to the unnatural spectrum of color temperatures found 
+in artificial lighting sources such as fluorescent and sodium vapor lighting fixtures. Raising this 
+parameter performs a Gain color balance adjustment toward magenta (sometimes referred to as 
+“minus green” to correct for fluorescent lighting), while lowering this parameter to a negative value 
+performs a Gain color balance adjustment toward green (“plus green” to correct for other kinds of 
+lighting). 0 is unity. The range is –100 to +100.
+  Contrast: The Contrast parameters let you quickly narrow or widen image contrast about a user-
+definable pivot point. Regardless of which mode you’re in, these parameters are identical. This 
+one parameter lets you increase or reduce the distance between the darkest and lightest values 
+of an image, raising or lowering image contrast. The effect is similar to using the Lift and Gain 
+master controls to make simultaneous opposing adjustments. Bright and dark parts of the image 
+are pushed apart or brought together about a center point defined by the Pivot parameter. The 
+“Use S-curve for contrast” setting in the General Options panel of the Project Settings (on by 
+default) sets the contrast control to apply an “S-curve” to the image, such that the shadows and 
+highlights of a signal will not be clipped when you increase the value. If you would prefer for these 
+contrast adjustments to be made linearly, and for the signal to be allowed to clip when you reach 
+the upper and lower boundaries of the video signal, you can turn this checkbox off.
+  Pivot: Changes the center of tonality about which dark and bright parts of the image are stretched 
+or narrowed during a contrast adjustment. Darker images may require a lower Pivot value to avoid 
+crushing the shadows too much when stretching image contrast, while lighter images may benefit 
+from a higher Pivot value to increase shadow density adequately.
+  Midtone Detail (MD): When this parameter is raised, the contrast of regions of the image with 
+high edge detail is raised to increase the perception of image sharpness, sometimes referred to 
+as definition. When this parameter is lowered to a negative value, regions of the image with low 
+amounts of detail are softened while areas of high-detail are left alone. 0 is unity. The range is 
+–100 through +100.
+The bottom adjustment controls
+3200Color | Chapter 131 Primaries Palette
+COLOR
+  Color Boost: A non-uniform saturation operation that affects regions of low saturation more 
+than regions of high saturation. This is sometimes referred to as a vibrance operation. 0 is unity, 
+showing the original color values. Raising color boost from 0-100 increases color intensity, 
+but low-saturation parts of the image are raised more aggressively. Lowering color boost from 
+0 to -100 decreases color intensity, but low-saturation parts of the image are lowered more 
+aggressively. 0 is unity, showing unaltered saturation. The range is –100 through +100.
+  Shadows: Lets you selectively lighten or darken shadow detail. Raising this value retrieves 
+shadow detail recorded below 0 percent, while leaving the midtones alone. 0 is unity. The range is 
+–100 through +100.
+  Highlights: Makes it easy to selectively retrieve blown-out highlight detail in high-dynamic-range 
+media by lowering this parameter, and achieves a smooth blend between the retrieved highlights 
+and the unadjusted midtones for a naturalistic result. 0 is unity. The range is –100 through +100.
+  Saturation: A uniform saturation operation that raises (above 50) or lowers (below 50) the 
+color intensity of every color value within the image. 50 is unity, showing unaltered saturation. 
+The range is 0 (completely desaturated) through +100 (saturation is doubled).
+  Hue: Rotates all hues of the image around the full perimeter of the color wheel. The default setting 
+of 50 shows the original distribution of hues. Raising or lowering this value rotates all hues forward 
+or backward along the hue distribution as seen on a color wheel.
+  Lum Mix: Lets you control the balance between YRGB contrast adjustments you’ve made using 
+the Master Wheels or ganged Custom curves, and Y-only adjustments to contrast made using the 
+Y channel Lift/Gamma/Gain controls of the Primaries palette or the unganged Luma curve. At the 
+default of 100, YRGB and Y-only adjustments to contrast contribute equally. Reducing this value 
+diminishes the effect of Y-only contrast adjustments until, at 0, Y-only contrast adjustments are 
+turned off. 
+Additionally, you’ll notice that at the default Lum Mix setting of 100, individual adjustments to 
+R, G, or B using the RGB sliders or unganged Custom curves result in automatic adjustments being 
+made to the other two color channels in order to maintain constant Luma levels. At a Lum Mix 
+setting of 0, individual color channel adjustments have no effect on the other color channels.
+Auto Correction
+The Auto Color command provides a quick way to automatically balance the blacks and whites of a 
+clip based on the current frame at the position of the playhead. As of DaVinci Resolve 16, the A button 
+in the Primaries palette and the Shot Match command that is available from the Thumbnail Timeline 
+contextual menu both now use advanced algorithms, based on the DaVinci Neural Engine, to provide 
+superior results when automatically adjusting color balance and contrast. These controls have been 
+developed to provide optimal results when working in the Rec. 709 color space, and at a gamma 
+of 2.4, so they work well in conjunction with using Resolve Color Management (RCM) to normalize 
+media first.
+For more information on using these, jump to this chapter: Automated Grading Commands and 
+Imported Grades.
+3201Color | Chapter 131 Primaries Palette
+COLOR
+Reset Controls
+The Reset control, found at the upper right-hand corner of the Primaries palette, lets you reset every 
+single setting in the entire palette. However, there are a variety of parameter-specific reset controls 
+available to make more targeted resets.
+  Each pair of Color Balance and Master Wheel controls have a reset control that resets both.
+  Each numeric parameter can be individually reset by double-clicking the name of the parameter.
+  The numeric parameters underneath each Color Balance and Master Wheel control pair can be 
+reset by double-clicking the color label that appears underneath them.
+Color Wheels and Bars
+The Color Wheel palette’s Primaries Wheels mode lets you rebalance color and adjust contrast via 
+the traditional DaVinci controls, which govern three overlapping tonal ranges referred to as Lift, 
+Gamma, and Gain. The Lift/Gamma/Gain color balance and Master Wheel controls are tied to the 
+YRGB Lift/Gamma/Gain sliders found in the Primaries palette; adjustments made to one set of controls 
+are mirrored in the other.
+Color Wheel palette
+Though they may look different, the Wheels and Bars controls both 
+actually adjust the same components, but in different ways.
+3202Color | Chapter 131 Primaries Palette
+COLOR
+These tonal ranges are defined by image lightness, on a scale where 0 is absolute black and 
+1023 is absolute white. The following illustration shows an approximation of how the Lift, Gamma, 
+and Gain tonal zones broadly overlap, and how each zone’s influence falls off towards the 
+opposing extremes of image tonality.
+Lift Gamma Gain
+Graphic displays the relationship of the Lift, Gamma, and Gain controls 
+over the image brightness range that they control
+The Lift color balance control region of influence starts at black, and then falls off through the 
+middle grays to diminish to no influence at white. Meanwhile, the Gamma color balance control 
+has its greatest influence over the image in the middle grays, and its influence diminishes towards 
+black and white. Lastly, the Gain control is the inverse of Lift, having its greatest effect on the 
+image at white, with its influence falling off to diminish at black.
+Because these tonal ranges overlap so broadly, you can make very soft, subtle, naturalistic 
+adjustments using these controls. Furthermore, you can capitalize on their overlap by moving an 
+adjacent color balance control toward a color that’s complementary to an adjustment you’ve just 
+made to restrict further how much of the image is affected.
+The following image shows the interaction of extreme corrections made to a grayscale image 
+using all three Color Balance controls. Lift has been pushed toward green, Gamma has been 
+pushed toward blue, and Gain has been pushed toward red.
+Extreme adjustments showing the overlap of the  
+Lift, Gamma, and Gain color balance controls
+Notice how, even though these corrections are extreme, the colors blend smoothly. This is 
+the reason for the broad overlap among all three controls, and why Lift, Gamma, and Gain are 
+so effective in making corrections to the ambient color temperature of a scene to account for 
+inconsistencies in lighting or camera settings.
+3203Color | Chapter 131 Primaries Palette
+COLOR
+3-Way Master Wheel Adjustments
+The Master Wheels located below the Color Balance controls let you precisely modify image contrast 
+by YRGB adjustments, which individually alter the black point, the white point, and distribution of 
+midtones that fall in between. 
+Lift: Lets you adjust the perceived shadow density of the image by altering the black point 
+of the image. Dragging the Lift master wheel to the left makes the darkest values in the 
+image darker, increasing the distance between the black and white points of the image, 
+and stretching all the midtone values in-between. Dragging the Lift master wheel to the 
+right makes the darkest values in the image lighter, reducing contrast and squeezing all the 
+midtone values between the black and white points.
+Gamma: Lets you adjust the overall perceived lightness of the image by altering the 
+distribution of midtones that fall between the Lift and Gain master wheel settings. Dragging 
+the Gamma master wheel to the left darkens the overall image, while dragging it to the right 
+brightens it. Most Gamma contrast adjustments have a minimal effect on the black and white 
+point of the image, but large adjustments may push either boundary of image lightness 
+farther out. This interaction is described in more detail below.
+Gain: Lets you adjust the lightness of the highlights by altering the white point of the image. 
+Dragging the Gain master wheel to the left makes the lightest values of the image darker, 
+squeezing the midtones between the white and black points of the image. Dragging Gain to 
+the right makes the lightest values even lighter, eventually clipping at maximum white.
+Waveform display shows the clips contrast range
+These contrast adjustments are not limited by one another. For example, raising or lowering the 
+Gamma master wheel by a large amount may push the highlights of the image higher or the shadows 
+of the image lower, regardless of the current Lift or Gain contrast setting. 
+As a result, these controls are somewhat interactive, and you may find yourself going back and forth 
+between controls as you make your final contrast adjustments. This is one of the reasons a control 
+panel is valuable, as it allows you to adjust all three settings simultaneously.
+Offset Color and Master Controls
+The fourth set of Color Balance and Master Wheel controls is actually shared with the Log controls and 
+with the Offset sliders in the Primaries palette. These are the Offset controls, which let you make linear 
+adjustments to rebalance the entire tonal range of the RGB channels. There is no Y-only control for 
+Offset, only a Master RGB adjustment.
+3204Color | Chapter 131 Primaries Palette
+COLOR
+The Offset color balance control: Works as a simultaneous adjustment to all three Offset 
+sliders located in the Primaries palette; adjustments made to the Offset color balance control 
+also alter the Offset sliders. Used subtly, this makes it easy to neutralize color imbalances 
+in the darkest part of the image, while simultaneously rebalancing every other part of the 
+image. Used more dramatically, this control makes it easy to add a color wash throughout the 
+entire image.
+The Offset master wheel: Acts as a global adjustment to image lightness, an operation 
+sometimes referred to as setup, raising or lowering all RGB channels together.
+When using a DaVinci Micro or Mini control panel, the Offset color balance and master 
+controls are adjusted via either the third trackball and ring while in Offset mode, or the fourth 
+trackball and ring of the DaVinci Advanced Panel in Offset mode.
+Color Bars Mode
+The Bars mode contains the original set of DaVinci Resolve color adjustment sliders. These sliders 
+serve two uses. First, they’re highly visible indicators of the individual YRGB channel adjustments 
+that are made using the trackballs, rings, and knobs of a grading control panel. Second, they provide 
+control of individual YRGB Lift/Gamma/Gain parameters using a mouse, tablet, or trackpad.
+Primary grading controls
+The main controls of the Bars mode are the individual Luma (or Y), Red, Green, and Blue sliders, four 
+each for Lift, Gamma, and Gain. These sliders provide precise Lift/Gamma/Gain style control over each 
+of the YRGB channels of the image. When used in conjunction with a Parade Scope video analysis of 
+the image, these controls can enable you to fix irregular color imbalances in specific channels quickly.
+Additionally, the Luma (Y) Lift/Gamma/Gain sliders allow easy Y-only adjustments to contrast, where an 
+increase in contrast results in perceptually diminished color saturation. These correspond to the three 
+knobs arranged vertically to the left of the Trackball panel of the DaVinci Advanced control panel, or 
+the three left-most knobs of the DaVinci Micro or Mini control panels.
+Making Y-only adjustments to contrast is a great way to increase contrast when you’re going for muted 
+saturation or a gritty look. This kind of adjustment is also useful in situations where you’re trying to 
+increase shadow density without increasing image colorfulness.
+3205Color | Chapter 131 Primaries Palette
+COLOR
+Log Wheels Mode
+The Shadow/Midtone/Highlight color balance and Master Wheel controls operate independently of the 
+Lift/Gamma/Gain color balance and Master Wheel controls found in the Primaries mode. While the Log 
+mode uses the same types of controls as the Primaries mode, the way each control affects the image 
+is very different. 
+To switch between the Primaries and Log modes of the Wheels:
+  Choose an option from the mode drop-down, click the right mode button, or press Option-Z.
+Log color balance controls, with behavior that is very different from the Wheels mode color balance controls
+There are two ways of using the Log mode controls. The first takes advantage of the way these 
+controls work to make fast, filmic adjustments to log-encoded media prior to it being normalized 
+or “de-logged” by operations that are performed using nodes appearing after it in the image 
+processing pipeline of your node tree. Normalizing or de-logging the image can be done via Color 
+Space Transform operations, LUTs, and manual adjustments if you’re grading using DaVinci YRGB 
+color science. If you’re using color management, they can be done via the Output Color Space 
+setting of Resolve Color Management (RCM), or via the ACES Output Device Transform (ODT).
+The other way of using the Log controls is to take advantage of the more restrictive, but adjustable 
+tonal range of the Shadow/Midtone/Highlight controls to stylize normalized clips by tinting or 
+adjusting the contrast of tonally-specific regions of the image.
+Whether or Not to Use Legacy Log Grading Ranges and Curve
+DaVinci Resolve 12.5 introduced a modification to the Log grading controls that provides 
+smoother, more pleasing results using the same controls. To maintain backward compatibility 
+with older projects, a “Use legacy Log grading ranges and curve” checkbox in the General 
+Options panel of the Project Settings lets you switch your project between the older Log 
+control behavior and the newer one. Older projects that are opened in DaVinci Resolve have 
+this checkbox turned on by default, while new projects have this turned off by default.
+3206Color | Chapter 131 Primaries Palette
+COLOR
+Using the Log Mode Controls to Grade Log-Encoded Media
+The Log controls are so named because they’re designed to work specifically with media with Log-C 
+or similar gamma and color encoding, derived from the Cineon Log gamma curve, developed by 
+Kodak to digitally store flat-contrast, wide-gamut image data that preserves image detail with a wide 
+latitude for adjustment. 
+An example of a log-encoded clip (left), and the same clip after being normalized (right)
+You can debayer most raw formats to a log-encoded image in order to derive the maximum amount of 
+image data and adjustable latitude from that source. 
+For more information, jump to this chapter: Camera Raw Settings . 
+However, the resulting image needs to be normalized to occupy the final range of color and contrast 
+that you intend for the final result. 
+You can do this one of two ways:
+  You can make a very careful curves adjustment in a second node to stretch the log-encoded 
+image out to fit the contrast profile you want. By making this adjustment in Node 2, you make room 
+for a customizing adjustment made using the Log controls in Node 1, prior to the normalization 
+adjustment. This is key.
+  You can also apply a 1D Output or 3D LUT to the first node of a clip to normalize the image. This is 
+a faster, if less flexible operation, but a smooth tonal range may be easier to obtain. Since a LUT 
+applied within a node is always the last adjustment within that node’s order of operations, you can 
+also use Node 1’s Log controls to customize the look of the footage.
+In either case, it’s important that the normalizing adjustment happens after your Log control 
+adjustments, for the Log control adjustments to work as they should. With your node tree set up 
+in this way, you’ll be monitoring an ordinary-looking image, but taking advantage of the Log mode 
+controls’ unique tonal ranges to manipulate the log-encoded image data with great specificity. 
+TIP: Within corrector nodes, LUTs are applied after Log control adjustments, so if you want to 
+keep the number of nodes in your node tree to a minimum, you can apply a normalizing (or 
+de-logging) LUT to the same node with which you’re making Log adjustments, knowing that 
+the LUT will be properly applied after log adjustments. 
+For more information, jump to this chapter: Image Processing Order of O perations.
+3207Color | Chapter 131 Primaries Palette
+COLOR
+When using the Log mode controls, here’s a workflow to consider as you learn how they work:
+  First, use the Offset master wheel to set the black point, and use the Contrast and Pivot 
+parameters to stretch or compress contrast as necessary to achieve the tonal range you require.
+  Second, use the Offset color balance control to adjust the overall color balance of the 
+image to your liking.
+  Third, use the Shadow/Midtone/Highlight color balance and Master Wheel controls to make 
+specific, targeted adjustments to the color and contrast of the image in tonal ranges that match 
+where that data is in the log-encoded image.
+Working in this way, you’ll find that adjustments made with the Offset color balance and Master 
+Wheel controls and Contrast controls control the log-encoded image very nicely to create an 
+overall adjustment, while the Shadow, Midtone, and Highlight controls allow you to fix specific 
+issues, such as shadow balance and density, after your main adjustment has been set.
+The following illustration shows an approximation of how the default ranges of the Shadow, 
+Midtone, and Highlight controls divide the tonal range of a log-encoded image. 
+This graphic shows the tonal range of each of the Log 
+controls when used with a log-encoded image
+As you can see, when used with a log-encoded image the color interactions between each 
+adjustment overlap very softly, while still allowing more specific adjustments than those made by the 
+Lift/Gamma/Gain controls.
+Furthermore, the boundaries of the Shadows, Midtones, and Highlights Log controls can be 
+customized using the Low and High Range parameters. This gives you added flexibility to apply more 
+specific contrast and color adjustments.
+Once you’ve made an adjustment using Log mode controls along with a normalizing LUT or curve 
+adjustment, you can always apply additional nodes and use the Wheels mode of the Primaries palette 
+to make further alterations to the now normalized image, working as you normally would with any of 
+the other tools in DaVinci Resolve.
+TIP: Internal to each node’s image processing order of operations, the Lift/Gamma/Gain 
+adjustments of the Wheels mode are applied prior to the Shadow/Midtone/Highlight/Offset 
+adjustments of the Log mode, so if you want to apply Log mode controls before Wheels mode 
+controls, then you need to use Wheels controls in a subsequently added node. 
+For more information, jump to this chapter: Image Processing Order of O perations.
+3208Color | Chapter 131 Primaries Palette
+COLOR
+Using the Log Mode Controls to Stylize Normalized Media
+You can also use the Log mode controls on already normalized images. Although the results you 
+get will be somewhat different, this can be a fast way to create interesting stylizations. Whereas the 
+broadly overlapping tonal ranges of the Lift, Gamma, and Gain color balance controls allow subtle 
+adjustments to be made very easily, the Log palette’s color balance controls affect much more 
+restrictive tonal zones that overlap much less when used on normalized images.
+The following illustration shows an approximation of how the Shadows, Midtones, and Highlights, by 
+default, divide the tonal range of the image into non-overlapping thirds. As you saw in the previous 
+section, these divisions were originally intended to map to log-encoded media. However, with 
+normalized media these divisions provide a different, and potentially useful, set of ranges from the 
+Primaries mode controls.
+Shadows Midtones Highlights
+High RangeLow Range
+This graphic shows an approximation of the tonal range of each of the Log controls 
+with the additional low and high range to expand or contract the range.
+With normalized media, the Shadows really do only affect the darkest shadows, falling off at 
+approximately the bottom third of image tonality. The Midtones affect only the middle third of grays, 
+and the Highlights affect the brightest top third of image values. However, these default ranges of 
+image tonality can be adjusted using the Low Range and High Range controls, which are described in 
+more detail later.
+The following image shows the default interaction of extreme corrections made to a grayscale image 
+using the Log mode controls. The Shadows have been pushed toward green, the Midtones have been 
+pushed toward blue, and the Highlights have been pushed toward red.
+Extreme adjustments showing the overlap of the Shadow,  
+Midtone, and Highlight color balance controls
+3209Color | Chapter 131 Primaries Palette
+COLOR
+As you can see, with normalized media the color interaction between each adjustment is very subtle. 
+The darkest shadows end up bright green, the midtone values are vivid blue, and the highlights are 
+almost pure red. This restrictiveness is useful when you want to limit a correction to a specific tonal 
+range within the image without needing to use a Luma qualifier. It’s also quite useful for making bold, 
+stylistic color adjustments when creating a non-naturalistic look.
+TIP: The Highlights adjustment of the Log controls can also be extremely useful for boosting 
+or otherwise controlling the highlights of HDR grades. However, the multiple highlight zones 
+of the HDR palette afford a much higher degree of control over this kind of adjustment, using 
+similar control panel-friendly controls.
+Adjusting the Default Tone Ranges in Log Mode
+When in Log mode, two additional parameters appear in the top shared controls bar that let you 
+modify the range of Shadows and Highlights image tonality that each Color Balance control affects, 
+in turn narrowing and widening the range of Midtones. Keep in mind that while the ranges can be 
+customized, the amount of overlap between each range cannot.
+Low Range: Moves the border where the Shadows and Midtones meet. Lowering this 
+parameter widens the range affected by the Midffectetones, and narrows the range affected 
+by the Shadows. Raising this parameter narrows the Midtones and widens the Shadows.
+High Range: Moves the border where the Midtones and Highlights meet. Lowering the High 
+Range parameter narrows the range ad by the Midtones, and widens the range affected by 
+the Highlights. Raising this parameter narrows the Highlights and widens the Midtones.
+There are also Saturation and Hue parameters which mimic these settings found within other 
+palettes and modes.
+Adjusting Contrast in Log Mode
+When using the Log mode controls, your primary tools for adjusting image contrast will usually be the 
+Offset master wheel and Contrast and Pivot parameters. Using these three controls, you can set a 
+black point and adjust the overall contrast very quickly.
+The Shadow, Midtone, and Highlight master wheels let you adjust image lightness within the same 
+restrictive ranges of image tonality that are defined by the Low Range, High Range, and Pivot 
+parameters. These adjustments should appear smooth, if somewhat narrower then the Lift/Gamma/
+Gain controls, when used with log-encoded media. However, when used with normalized images, 
+severe adjustments made with one master wheel may not always make a smooth transition to the next 
+adjacent range of image lightness.
+NOTE: Because these controls are so restrictive when used with normalized images, it’s 
+easy to create solarization effects by raising the shadows to be higher than the Midtones, or 
+lowering the Highlights to fall below the Midtones, to give two examples.
+3210Color | Chapter 131 Primaries Palette
+COLOR
+Log Offset Color and Master Controls
+The Log controls share the same Offset color balance and Master Wheel controls that appear in the 
+Lift/Gamma/Gain mode of the Wheels and Bars controls. The Offset controls are in fact processed 
+as part of the Log controls, but for convenience they’re presented with the Wheels controls because 
+they’re so useful.
+The Offset color balance control: Works as a simultaneous adjustment to all three Offset 
+sliders located in the Primaries palette; adjustments made to the Offset color balance control 
+also alter the Offset sliders. Used subtly, this makes it easy to neutralize color imbalances 
+in the darkest part of the image, while simultaneously rebalancing every other part of the 
+image. Used more dramatically, this control makes it easy to add a color wash throughout the 
+entire image.
+The Offset wheel: Acts as a global adjustment to image lightness, an operation sometimes 
+referred to as setup, raising or lowering all YRGB channels together.
+Offset and Printer Points
+In Bars mode, the Offset controls are represented by three vertical sliders, which mirror the settings of 
+the Offset color balance controls in the Color Wheel palette, except that they provide individual control 
+over the Red, Green, and Blue color channels. In fact, this interface also happens to be the epicenter 
+of the Printer Points functionality offered by DaVinci Resolve.
+When you drag one of the Offset sliders up or down, you raise or lower that color channel in its 
+entirety. This can be useful for adjusting color channels that are particularly problematic, but it’s also 
+the way you impose the kinds of traditional linear color adjustments that color timers of film have 
+employed for decades. In fact, many colorists consider the simplicity of these controls a virtue, and 
+embrace the slight shadow or highlight contamination that can result from color balancing in this linear 
+way as a creative hallmark of traditional cinema color adjustment.
+Offset RGB and 
+master controls
+NOTE: Unlike the other Color Balance control adjustments described in this chapter, the 
+Offset controls do not use the Lum Mix parameter to control whether individual adjustments 
+to the R, G, or B channels result in automatic adjustments being made to the other two color 
+channels in order to maintain constant Luma levels. All Offset and printer points adjustments 
+made to a specific color channel affect only that color channel.
+3211Color | Chapter 131 Primaries Palette
+COLOR
+Adjusting Printer Points in the Bars Mode
+Each Offset slider also has a pair of arrow buttons, one at the top and one at the bottom. These 
+buttons provide “Printer Point” adjustment of these values, which let you adjust each Offset channel in 
+discrete increments. Printer Points can be useful for projects that have tight integration with a film lab, 
+and are designed to emulate color adjustments made using optical printers.
+The “plus” and “minus” red, green, and blue buttons 
+for making printer point adjustments
+The Offset wheel control underneath the Offset sliders lets you adjust all three sliders at once, 
+performing a master or setup adjustment. The Offset sliders, Printer Point buttons, and Offset wheel 
+can be adjusted using keyboard shortcuts.
+NOTE: The DaVinci Resolve Advanced and Mini color grading panels each have support for 
+adjusting printer points using rotary controls for the Red, Green, and Blue channels, as well as 
+All channels together.
+Adjusting Printer Points Via Keyboard Shortcuts
+One of the best ways of using printer points if you don’t have a color control panel that supports them 
+is to enable the numeric keypad to use dedicated keyboard shortcuts just for printer points.
+To use the Printer Lights Hotkeys:
+  Choose Color > Printer Light Hotkeys, or press Option-Command-Grave Accent (`)
+When you enable Printer Light Hotkeys, there are two sets of shortcuts you can use to manipulate 
+printer points. First, if you want to directly manipulate RGB in whole increments, there’s one 
+set for that.
+Red Green Blue
+7 - Plus Red 8 - Plus Green 9 - Plus Blue
+4 - Minus Red 5 - Minus Green 6 - Minus Blue
+However, if you want to work in the classic way by manipulating cyan, magenta, and yellow in whole 
+increments, there’s another set of shortcuts for that, using the remaining keys on the numeric keypad.
+Cyan Magenta Yellow
+1 - Plus Cyan 2 - Plus Magenta 3 - Plus Yellow
+Minus (–) - Minus Cyan 0 - Minus Magenta Period (.) - Minus Yellow
+3212Color | Chapter 131 Primaries Palette
+COLOR
+There are also a pair of keyboard modifiers that gives you finer control over printer points adjustments 
+made with these special keyboard shortcuts, while retaining the coarser default adjustments that let 
+you make bigger changes more quickly:
+  Hold down Command while using these key shortcuts to adjust printer points in 
+quarter-increments.
+  You can use half-increments as well, but you will need to assign the keyboard shortcuts 
+for these manually.
+Printer Light Step Project Settings
+The increments used by the Printer Point buttons are defined by the Printer Light Step Calibration 
+parameters, found in the Color panel of the User Preferences. The default settings are designed to 
+emulate traditional film printer adjustments, but these settings can be customized to align DaVinci 
+Resolve’s printer points adjustments with those of a particular film lab’s equipment. However, 
+if you’re not working with a lab, you can change the Step and Density settings to alter how much of an 
+adjustment each printer point makes according to your own preferences. 
+For more information, jump to this chapter: System and User Pr eferences.
+Controls in the Color panel of the User Preferences  
+to adjust Printer Point functionality
+TIP: If you’re feeling left out because all the cool kids are using printer points and you’re 
+unfamiliar with them, making the Parade scope visible is a great way to learn how these 
+adjustments work while seeing their specific effects on the red, green, and blue channels of 
+the video signal.
+3213Color | Chapter 131 Primaries Palette
+COLOR
+Chapter 132
+HDR Palette
+This chapter focuses on the global and zone-based adjustments found in the 
+HDR palette, which is DaVinci’s newest primary grading tool. Despite its name, 
+this palette can be used, as you might the Lift/Gamma/Gain mode of the Primaries 
+palette, to create the foundational adjustment for any SDR or HDR grade. 
+However, its zone-based nature gives it the power and specificity of curve-based adjustments, 
+making the HDR palette suitable for a multitude of creative and corrective tasks. Furthermore, 
+this palette’s color space awareness, as well as the perceptually uniform color space in which it’s 
+adjustments are made, make this palette uniquely suited for controlling the saturation and highlights of 
+HDR mastered images.
+Contents
+Introduction to the HDR Palette �������������������������������������������������������������������������������������������������������������������������������������������������  3215
+What Makes the HDR Palette Special?  ������������������������������������������������������������������������������������������������������������������������������������ 3216
+The HDR Palette Interface �������������������������������������������������������������������������������������������������������������������������������������������������������������  3218
+Navigating Multiple Zones in the Controls Panel  ���������������������������������������������������������������������������������������������������������������� 3218
+Making Global Adjustments  �������������������������������������������������������������������������������������������������������������������������������������������������������� 3220
+Black Offset Explained  �������������������������������������������������������������������������������������������������������������������������������������������������������������������  3224
+Making Zone-Based Adjustments  �������������������������������������������������������������������������������������������������������������������������������������������� 3225
+Zone-Based Color Adjustments  ������������������������������������������������������������������������������������������������������������������������������������������������� 3226
+Zone-Based Exposure Adjustments  ����������������������������������������������������������������������������������������������������������������������������������������� 3229
+An Example of Zone-Based Exposure Adjustment �����������������������������������������������������������������������������������������������������������  3230
+Zone Controls �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3232
+Customizing Zones Using the Zone Panel  ��������������������������������������������������������������������������������������������������������������������������� 3234
+The Zone Sidebar ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3234
+Zones Graph ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3235
+Customizing and Saving Presets  ������������������������������������������������������������������������������������������������������������������������������������������������� 3237
+Resetting Color and Zone Adjustments ���������������������������������������������������������������������������������������������������������������������������������  3237
+3214Color | Chapter 132 HDR Palette
+COLOR
+Introduction to the HDR Palette
+The HDR palette is specifically designed to enable fast and flexible primary grading of wide-latitude 
+media for either SDR or HDR output. It’s “color space aware” in that it works with Resolve Color 
+Management to fit the known mapping of source image data within the HDR palette’s own perceptually 
+uniform operational color space. Using advanced color processing algorithms, this enables more 
+efficient color and contrast adjustments, and perceptually uniform controls that make it easier to adjust 
+all colors equally across the spectrum, while maintaining careful control of image saturation. 
+The HDR palette
+A set of global controls, at the right of the palette, let you make foundational adjustments to the overall 
+image, along with a set of Hue, Midtone Detail, Contrast/Pivot, and Black Offset controls at the bottom. 
+Additionally, a set of overlapping zone-specific controls let you make color and contrast adjustments 
+to specific ranges of image tonality. Altogether, the HDR palette lets you make primary grading 
+adjustments that are both photographically naturalistic and as tonally broad or specific as you require, 
+while minimizing unwanted artifacts.
+Despite its sophistication, the HDR palette uses color balance and slider controls that should be 
+familiar to any colorist or editor familiar with the more conventional Lift/Gamma/Gain controls. Whether 
+you’re a grading professional or just getting started with color, the HDR palette will enable great 
+results with less hassle once you learn how to harness its power.
+The controls panel of the HDR palette
+TIP: Due to the increasing ubiquity of HDR-capable media and HDR streaming distribution 
+workflows, the node HDR mode and HDR palette are both available without restriction in the 
+free downloadable version of DaVinci Resolve.
+3215Color | Chapter 132 HDR Palette
+COLOR
+What Makes the HDR Palette Special?
+Before diving into the detailed use of the HDR palette’s controls, it’s important to understand a 
+bit more about how the HDR palette processes image data, so you can better understand what 
+advantages this tool presents.
+Using the HDR Palette Without Color Management
+While the HDR palette has been designed to work hand in hand with color management, you can use 
+it in non-color managed workflows so long as you set it up correctly. The HDR palette option menu 
+has Color Space and Gamma submenus that let you specify how you want to work. By default, both 
+submenus are set to “Timeline” to reflect the color space you’re choosing to work within in display-
+referred workflows.
+Color Space Aware Controls When Using Color Management
+The HDR palette really shines when you enable Resolve Color Management or ACES, because it’s a 
+color space aware palette that uses color management to full advantage. Being color space aware 
+means that the color and contrast controls of the HDR palette conform themselves to the range of 
+each clip’s image data as mapped from the Input Color Space assigned to the source clip to the 
+Timeline Color Space your program is working within. Practically, this provides two benefits:
+  The controls of the HDR palette work and feel virtually identical no matter what type of source clip 
+you’re adjusting, and no matter which timeline color space you’re choosing to work within.
+  HDR palette adjustments made to one type of media will have a similar result when copied to 
+other types of media. This makes makes matching shots and copying looks from one type of 
+media to another easier than with previous tools.
+NOTE: Because the HDR palette is color space aware, it’s not necessary to enable the HDR 
+setting on nodes for controls to work intuitively while working within a wide gamut Timeline 
+Color Space, or delivering to an HDR format like ST.2084. The HDR palette takes care of this 
+for you, automatically.
+Perceptually Uniform Adjustments
+Furthermore, the image data of each clip is converted from the Timeline Color Space to an operational 
+color space used by the HDR palette, where the image is adjusted and then converted back to the 
+Timeline Color Space again, ready for the next operation. The operational color space that’s used by 
+the HDR palette is perceptually uniform, which means that the range of values corresponding to each 
+visible hue are distributed evenly throughout this color space.
+While the HDR palette works well grading standard dynamic range (SDR) material, the underlying color 
+science used by this palette also addresses issues that have inconvenienced colorists grading high 
+dynamic range programs using traditional controls. These benefits include:
+  Since the controls of this palette calculate all color transformations within a perceptually uniform 
+color space, you will experience finer control over color adjustments in a more photographically 
+intuitive way. For example, you may find that yellow hues are easier to grade within this palette, 
+since there’s a more even distribution of hues around the circumference of the color wheels.
+  The HDR palette lets you make contrast adjustments without altering image saturation, meaning 
+that unlike when you use the master wheels of the Lift, Gamma, and Gain panel, the HDR palette 
+lets you raise image contrast without increasing image saturation, and lower image contrast 
+without decreasing image saturation. You’ll find this is particularly useful while boosting highlights 
+3216Color | Chapter 132 HDR Palette
+COLOR
+in HDR grades, since you can now do so without causing extreme saturation increases in 
+your highlights. In fact, all adjustments you make to contrast with these controls will adjust the 
+image while keeping saturation unerringly constant (that is to say, perceptually speaking; you 
+will in fact notice small saturation changes in the Vectorscope). This, of course, excludes the 
+saturation controls.
+  The HDR palette’s deep integration with Resolve Color Management also makes matching shots 
+and copying looks from one type of media to another easier than with previous tools. Whether 
+you’re a professional, or just getting started with color, the HDR palette will enable better results 
+with less hassle.
+Superior Temp and Tint Controls
+Because the HDR palette is color space aware, the Temperature and Tint adjustments in this palette 
+are themselves made using the same kind of XYZ to LMS color space transform used by the Chromatic 
+Adaptation Resolve FX plugin. The result is that Temp adjustments are photometrically accurate and 
+create visual results similar to how the human vision system perceives changes to a scene due to a 
+change in the color temperature of lighting.
+Customizable Zones
+Another unique aspect of the HDR palette is how it can be customized to suit a wide variety of working 
+styles, specific tasks, and colorist preferences. Switching to the Zones panel reveals an interface for 
+adjusting the Range and Falloff of each currently defined zone, using graphical controls overlaid onto a 
+histogram of the current image, while a curve shows the user how the contrast and color adjustments 
+they’ve made mathematically affect the RGB channels of the image within each zone. While the default 
+zones preset provides an efficient starting point for many kinds of scenes, the varying tonal range of 
+image data in different scenes, whether daytime, nighttime, interior, or exterior, will often require you 
+to customize these zones to get the best results from adjustments using these controls.
+The Zones panel lets you customize the tonal ranges that each set of zone controls affect.
+Additionally, the sidebar at the left provides controls for adding and removing zones, so users can 
+customize this palette to work exactly the way they want. Any customized preset can be saved for 
+easy recall. This way, users have the freedom to work in whatever way suits them.
+The Option menu provides fast access to additional ways of customizing this palette’s operation, 
+including the selection and management of presets, a choice of methods for numerically editing Color 
+Balance adjustments, and a setting that determines whether or not the Global controls are always 
+exposed, or should be banked to like the other zone controls.
+3217Color | Chapter 132 HDR Palette
+COLOR
+The HDR Palette Interface
+The HDR palette is divided into two panels. The first, containing Color Balance controls and custom 
+sliders, is for making color and contrast adjustments. The second, containing the Zones sidebar and 
+Zones graph, is for customizing the range and falloff of each of the zones that corresponds to each 
+set of controls found on the controls panel. It’s these zones that are used for making detailed image 
+adjustments to tonally-specific areas of the picture.
+By default, both panels appear within the same palette area, and you can switch between 
+them using buttons at the top right of the palette. This is useful when you have limited screen 
+real estate, or you’re making simple adjustments. Alternately, you can click a button to expose 
+both panels side-by-side, occupying both the left and middle palette areas of the Color page.
+From left to right, the Side-by-side view button, the Controls panel, 
+the Zones panel, the Reset control, and the Option menu
+This Side-by-side mode makes it easy to see and customize how each zone is mapped to the source 
+image data, while making adjustments at the same time.
+The HDR palette in Side-by-side mode; at left, the Color/Exposure/
+Saturation controls; at right, the Zone Customization controls
+An Option menu at the far right of the title bar (shown as three dots) reveals the preset manager for this 
+palette, as well as different GUI options for customizing how you want to use this palette. 
+Navigating Multiple Zones in the Controls Panel
+A row of buttons just under the HDR palette’s title bar show you, of all available zones, which ones 
+are currently adjustable using the visible controls below. While the default HDR palette preset has 
+six zone-specific Zone controls, plus the Global controls, most users will only have room in the GUI 
+for four sets of controls to be visible at any time. Meanwhile, grading control panel users will be 
+constrained by how many trackballs their particular control panel has. 
+3218Color | Chapter 132 HDR Palette
+COLOR
+The Zone bank controls
+Since you’ll almost always have more zones available than you have room to adjust them, 
+this interface lets you see which zones you’re currently using, which zones are mapped to 
+a control panel, and which other zones are available for you to switch to. By default, there 
+are three active zones shown at the top, corresponding to the three sets of Zone controls to 
+the left of the Global controls. Zones that are available, but hidden, are shown in gray to the 
+left and/or right of the currently visible zones, which appear in color. This way, you can bank 
+back and forth among three zones at a time, while always having the Global controls available 
+for adjustment.
+There’s also a setting in the HDR palette’s Option menu, “Bank Global With Color Wheels,” that 
+lets you use all four GUI control clusters in this palette to show Zones controls, making it faster 
+to jump among tonally-specific adjustments. In this mode, there are four active zones shown at 
+the top, corresponding to the four sets of Zone controls being shown. However, in this mode 
+you must page all the way to the right to expose the Global controls, which are banked along 
+with all the other zones.
+The Zone bank controls set to show four zones when the Global controls are 
+banked with all the other zones
+Using these controls, you can switch your visible control among all available zones similarly to 
+how audio mixers switch among banks of tracks with a fader panel. 
+Methods of switching among different Zone controls:
+  Click any gray zone button to the left of the currently visible zones to move all zones so that the 
+leftmost visible zone appears at that one.
+  Click any gray zone button to the right of the currently visible zones to move all zones so that the 
+rightmost visible zone appears at that one.
+  Click the Left or Right Arrow buttons to either size of the zones indicators to move all zones one to 
+the left or one to the right.
+3219Color | Chapter 132 HDR Palette
+COLOR
+Making Global Adjustments
+Generally speaking, if you’re using the HDR palette to do primary grading, you’ll probably want to 
+begin with the Global controls. By default, these are found at the right of the Controls panel.
+The graphical Global control cluster 
+at the right of the HDR palette
+These controls let you take the initial step of making an overall adjustment to the image. To adjust 
+color, you have a color balance wheel, temp and tint sliders (to the left and right of the wheel, and also 
+numerically below), and saturation adjustments. To adjust image contrast, a Global Exposure control 
+lets you stretch overall image contrast up to brighten the image, or compress it down to darken it, 
+relative to the current Black Offset level, which pins pixels corresponding to minimum black in place. 
+A pair of Contrast/Pivot controls at the bottom of this palette let you manipulate overall color contrast 
+by stretching highlights and shadows out or in relative to the pivot point, expressed in stops.
+While Global color adjustments are somewhat similar to the offset, temp, and tint controls 
+found in the Color Wheels or Log Wheels controls, there are important differences, described 
+in detail below. The Global Exposure control, on the other hand, operates very differently 
+from Master Offset. 
+Detailed Explanation of Global controls:
+  Global Color Balance: A color balance control lets you simultaneously adjust the red, green, and 
+blue channels, somewhat linearly throughout the tonal range of the image, to freely rebalance 
+the color. However, RCMv2 automatically maintains a smooth saturation and exposure rolloff 
+in the maximum highlights and minimum shadows, so this effect becomes less pronounced in 
+the blackest blacks and the whitest whites of the image (this appears more pronounced in test 
+gradients than real world images). While adjustments made with this control won’t lower the 
+value of the darkest pixels in the image below the Black Offset level, individual color channels 
+may dip below this level in order to preserve colorfulness in darker shadows. The resulting color 
+adjustments made with this control are similar to how optical color filters placed over a lens would 
+affect an image.
+3220Color | Chapter 132 HDR Palette
+COLOR
+ 
+(Top) The original image, (Bottom) A Global Color Balance adjustment affecting the overall image, 
+with a rolloff seen in the shadows and highlights of the superimposed ramp gradient
+  Global Exposure: Brightens or darkens the entire image. Dragging to the right stretches image 
+contrast by raising the highlights while keeping the shadows pinned relative to the Black Offset 
+value. Dragging to the left lowers image contrast by lowering the highlights while keeping 
+shadows pinned relative to the Black Offset value. For more information about the function of 
+Black Offset, see the following section.
+Keep in mind that all contrast adjustments in the HDR palette keep saturation constant as contrast 
+increases or decreases. This means that, when making large contrast adjustments to HDR images, 
+image saturation will remain perceptually the same.
+ 
+ 
+(Top) The original image, (Bottom) Raising Global Exposure
+3221Color | Chapter 132 HDR Palette
+COLOR
+  Global Saturation: Raises or lowers the intensity of color throughout the image. Since contrast 
+adjustments don’t affect saturation, you must exercise manual control over any desired changes to 
+image saturation.
+  Global Color Balance Value Fields:  Two numeric values represent how the color balance controls 
+center handle position is represented. There are two ways of numerically showing this: as X and 
+Y, or as Angle and Strength. You can choose either method from the HDR palette’s Option menu; 
+whichever method you choose determines how the center handle of all color balance controls is 
+manipulated if you adjust these values directly.
+At the bottom of the HDR palette, additional Global Temp and Tint, Hue, Midtone Detail, and Contrast/
+Pivot controls let you make other kinds of global adjustments to image color, detail, and contrast, 
+in ways that are very similar to the identically named controls in the Color Wheels or Log Wheels 
+controls. Additionally, there’s a Black Offset control that lets you set the minimum allowable black level 
+in the current shot. 
+Global controls found at the bottom of the HDR palette
+Detailed explanation of additional Global controls:
+  Temp: This global temp adjustment lets you warm or cool the image with a range from -4000 to 
++4000 based on a kelvin scale. Adjustment follows the spectral locus line in the CIE graph: the 
+intensity of adjustment is naturalistic. To minimize visual artifacts, this control is capable of warming 
+the image more aggressively than cooling it. 
+  Tint: This global tint adjustment lets you add “plus green” or “minus green” adjustments with a 
+range from -100 to +100 on an arbitrary scale.
+  Hue: Rotates all hues of the image around the full perimeter of the color wheel. The default setting 
+of 50 shows the original distribution of hues. Raising or lowering this value rotates all hues forward 
+or backward along the hue distribution as seen on a color wheel. 
+  Midtone Detail: When this parameter is raised, the contrast of regions of the image with high edge 
+detail is raised to increase the perception of image sharpness. The effect is sometimes referred 
+to as definition. When this parameter is lowered to a negative value, regions of the image with low 
+amounts of detail are softened, while areas of high detail are left alone. 0 is unity. The range is 
+–100 through +100. 
+  Contrast: This one parameter lets you increase or reduce the distance between the darkest 
+and lightest values of an image, raising or lowering image contrast. The effect is similar to using 
+the Lift and Gain master controls to make simultaneous opposing adjustments. Bright and dark 
+parts of the image are pushed apart or brought together about a center point defined by the 
+Pivot parameter. Unlike the Contrast control in the Primaries palette, the Contrast control in the 
+HDR palette ignores the “Use S-curve for contrast” setting in the General Options panel of the 
+Project Settings. 
+Keep in mind that all contrast adjustments in the HDR palette keep saturation constant as contrast 
+increases or decreases. This means that, even when making large contrast adjustments to HDR 
+images, image saturation will remain perceptually the same to your eye, with small changes made 
+to the actual saturation of the image in order to maintain this perception. Be aware that the tone 
+mapping settings in RCMv2 will have an effect on how much saturation is maintained in the top 
+highlights and bottom shadows of the image, versus being automatically rolled off at the outer 
+boundaries of the signal.
+3222Color | Chapter 132 HDR Palette
+COLOR
+(Left) The original image, (Right) Raising Contrast, saturation is kept perceptually 
+constant, except at the outer boundaries of the signal in the top highlights and bottom 
+shadows (depending on how you have your tone mapping set in RCM).
+  Pivot: Changes the center of tonality about which dark and bright parts of the image are stretched 
+or narrowed during a contrast adjustment. This lets you change how contrast is distributed 
+among the shadows and highlights. The default value of 0 pushes highlights above 50% gray 
+higher, and shadows below 50% gray lower, in equal proportion to one another. Changing the 
+pivot point changes the percentage of image tonality about which contrast is either expanded 
+or compressed. 
+Darker images may require a lower Pivot value to push more levels up and avoid crushing the 
+shadows too much when stretching image contrast, while lighter images may benefit from a higher 
+Pivot value to push levels down and increase shadow density. 
+ 
+(Top) Altering contrast by raising Pivot, which redistributes most of the contrast 
+expansion down towards shadows, (Bottom) Altering contrast by lowering Pivot, which 
+redistributes most of the contrast expansion up towards the highlights
+  Black Offset:  Defines the darkest allowable part of the image. No adjustment by any other control 
+in the HDR palette will ever go below this level, except for the occasional color channel if the 
+shadows become extremely saturated. For more detailed information on this important control, 
+see the very next section.
+3223Color | Chapter 132 HDR Palette
+COLOR
+Black Offset Explained
+Of all the Global controls, the Black Offset control is one of the most deceptively important. Black 
+Offset lets you define the darkest pixels of the image. Adjustments made to Black Offset do not offset 
+the entire signal, they only affect the very darkest portion of the signal, letting you raise or lower the 
+black point of the image while smoothly blending the resulting adjustment into the unadjusted portion 
+of the image. The result is that you can compress or expand the bottom of your signal.
+If you raise Black Offset, you can add “flaring” to the image, similarly to how light flaring within a lens 
+might lighten the darkest part of the image. 
+(Left) The original image, (Right) Raising Black Offset in order to add flaring to the darkest pixels of the image
+Alternately, you can lower Black Offset to lower the very darkest pixels in the image. If the source 
+image is dark enough, this control can lower the darkest pixels below 0, however this image detail is 
+preserved in the color image processing pipeline
+The most important thing to understand about this control is that level to which you set Black Offset 
+becomes the new level at which Global exposure adjustments are made. In the following example, the 
+first image shows the original color of a clip that was exposed to be dark. In the second image, Black 
+Offset is adjusted to raise the darkest parts of the image, compressing them relative to the midtones 
+and introducing a pleasing flaring effect to the shadows.
+(Left) The original image; (Right) The image with Black Offset raised
+In the following image, Global Exposure is raised, and you can see in the Waveform scope that the 
+exposure change stretches the contrast of the image up, with the darkest pixels “locked” to the Black 
+Offset you set.
+(Left) Before, (Right) After raising Global Exposure to stretch image contrast out from the Black Offset level; 
+notice that the bottom of the signal continues “touching” the same level after global exposure is raised.
+3224Color | Chapter 132 HDR Palette
+COLOR
+The Black Offset level you set also becomes the minimum picture level when you lower exposure, 
+either using the Global Exposure changes, or when you use any of the “darkening” zone controls 
+such as Shadow, Dark, and Black. The following image shows the result of lowering Global Exposure; 
+the shadows of the image are compressed more heavily than the highlights as exposure is lowered, 
+with the result that the minimum value of the image remains at the Black Offset level you set. With 
+shadow detail impressively preserved, this compression rolls off smoothly and nonlinearly through the 
+midtones so that the image continues to look as natural as possible.
+(Left) Before, (Right) After lowering Global Exposure to compress image contrast down to the 
+Black Offset level; notice the signal never goes lower than the Black Offset level
+This is also true when using other darkening zone exposure controls, such as the Shadow control, 
+which selectively pushes the exposure of the darker part of the image down, while leaving the 
+highlights alone. While reducing Shadow exposure, the darkest pixels still compress so that nothing 
+goes beneath the Black Offset level you set.
+Bottom line, you can adjust Black Offset at any time, either before or after any other Global or Zone 
+adjustments, to fine tune the image as necessary.
+Making Zone-Based Adjustments
+After you’ve made whatever initial global adjustments you want, you can optionally make more 
+tonally-specific adjustments to the image via the Zone-based color and contrast controls to the left. 
+These divide the image into multiple overlapping “zones,” which are somewhat similar in principal 
+to Ansel Adams’ zone system, which divides images into tonally-specific regions based on image 
+luminance, from pure black, through progressively lighter shadows, to 18% gray as the middle value 
+centering the midtones of most images, and then up through progressively lighter highlights on the 
+way to the last zone of pure white. 
+Simplified illustration of Ansel Adams’ zone system
+While Adams’ zone system was meant to teach people how to think about using the available range 
+of the photographic medium when exposing images, the zones of the HDR palette let you put this 
+concept into practice by allowing you to make tonally-specific Color Balance, Saturation, and Exposure 
+adjustments that only affect the range of shadows or highlights that fall within that zone. 
+3225Color | Chapter 132 HDR Palette
+COLOR
+Using the default preset, the shadows of your image are divided into overlapping Shadow, Dark, and 
+Black zones, while the highlights of your image are divided into separate overlapping zones for Light, 
+Highlight, and Specular ranges. The chart below illustrates the relationship of these zones to one another.
+Approximation of the overlapping zones in the HDR palette that can be individually adjusted
+NOTE: All of the examples in this section have Timeline to Output Tone Mapping set to None, 
+to keep the ramp gradient linear for purposes of this explanation.
+Zone-Based Color Adjustments
+Understanding how adjustments made using these overlapping zones interact with one another is key 
+to knowing what you can do using the HDR palette. Keep in mind that every zone is customizable, but 
+here’s how the default zone definitions work to let you make detailed image adjustments. For clarity, 
+Zone adjustments are shown made to a linear ramp gradient image, to demonstrate exactly what tonal 
+portion of each image is affected by each control.
+  The Light and Shadow zones are the most broadly defined zones. Together, they cover the entire 
+tonal range of your image. They softly overlap one another by two stops at the center of the 
+tonal range (50% gray or 18% exposure); this is where adjustments made to Light mix together 
+with adjustments made to Shadow, resulting in both adjustments softly blending together. 
+Making exposure adjustments to these two zones lets you manipulate overall image contrast 
+by selectively compressing/expanding contrast in the shadows and/or highlights relative to one 
+another. Using the color controls lets you make broad color adjustments to the upper (highlights) 
+and/or lower (shadows) range of image tonality.
+Color adjustments to a ramp gradient show the Light  
+(tinted green) and Shadow (tinted orange) zones
+3226Color | Chapter 132 HDR Palette
+COLOR
+  The Dark and Black zones overlap two progressively lower luminance ranges of the Shadow zone. 
+Dark is useful for adjusting the color or contrast of the deeper shadows, while Black is useful as 
+a trim that lets you manipulate the very darkest parts of an image. All adjustments you make to 
+Dark are mixed with any adjustments made to Shadow, and all adjustments made to Black are 
+mixed with the adjustments made to Dark and Shadow. In this way, all color adjustments you make 
+to overlapping Shadow zones mix smoothly together to produce the final result, as seen in the 
+following ramp gradient.
+Color adjustments to a ramp gradient show the Dark  
+(tinted blue) overlapping the Shadow (tinted orange) zone
+  The Highlight and Specular zones overlap two progressively brighter luminance ranges of the 
+Light zone. Highlight lets you adjust the color and/or contrast of the brightest highlights, while 
+Specular is useful as a trim that lets you manipulate the very brightest highlights of an image. 
+All adjustments you make to Highlight are mixed with any adjustments made to Light, and all 
+adjustments made to Specular are mixed with the adjustments made to Highlight and Light. In 
+this way, all color adjustments you make to overlapping Highlight zones mix smoothly together to 
+produce the final result, as seen in the following ramp gradient.
+Color adjustments to a ramp gradient show the Highlight  
+(tinted yellow) overlapping the Light (tinted green) zone.
+As you can see, each one of these zones allow the specific adjustment of whichever parts of the 
+image fall within the luminance range of that zone (as defined on the Zones panel), while providing 
+control over how smoothly one adjustment fades into the next, to prevent unwanted contouring. 
+As you make adjustments to the Range and Falloff of each zone using the different sets of zone 
+controls, they work together to smoothly manipulate the contrast and color of the image, similarly 
+to if you were using a more precise and constrained version of the Custom Curves. In fact, you can 
+see the actual adjustment you’re making by exposing the Zone graph.
+3227Color | Chapter 132 HDR Palette
+COLOR
+(Left) Raising the Range of the Light zone to expand the Shadow zone’s range of 
+influence, (Right) The same adjustment seen in the Zone graph
+Working this way allows a tremendous specificity of adjustment, without the need to use curves or 
+qualifiers. For example, zone-specific Color Balance controls allow you to grade the highlights and 
+shadows separately using the Shadow and Light zone controls to quickly create a warm/cool split 
+lighting effect. This makes the creation of dynamic grades more efficient and more creative.
+(Left) The original image, (Right) Using the HDR palette to warm the 
+highlights and cool the shadows (exaggerated for print)
+In this next example, the Dark zone’s Color Balance control is used to add a splash of green to the 
+darker shadows of the image, while the Black control is used to neutralize this green in the very 
+blackest shadows.
+(Left) The original image, (Right) Using the HDR palette 
+to add green to a narrow range of shadows
+3228Color | Chapter 132 HDR Palette
+COLOR
+Zone-Based Exposure Adjustments
+Each zone has its own Exposure control that allows you to stretch image contrast from that zone’s Min 
+or Max range boundary either down towards the shadows, or up towards the highlights. As seen on 
+the Zone graph (found on the Zone panel), exposure adjustments are made on a scale measured in 
+stops, to provide a more photographic experience when grading wide dynamic range material.
+The scale of the Zone graph shows you the shadow and highlight ranges, 
+in stops, relative to 0 representing 18 percent photographic gray
+On this scale, 0 stops corresponds to photographic 18% gray, at the center of each image’s tonal 
+range. Shadows then fall to the left over -8 stops, while highlights fall to the right over +8 stops, 
+where each stop represents either twice the amount of light (stopping up) or half the amount of light 
+(stopping down). 
+In conjunction with Resolve Color Management, this range is designed to accommodate any SDR or 
+HDR range you’ll be mastering to. All HDR palette controls are designed to accommodate up to 16 
+stops of exposure. By comparison, most modern digital cinema cameras claim to be able to capture 
+somewhere between 13-19 stops of dynamic range, while a white paper from the ASC states that 
+modern film negatives are capable of capturing 14 stops of dynamic range.
+Unlike the Lift/Gamma/Gain or Log master level controls, the Exposure adjustment of each zone 
+starts at a specific boundary of image tonality, and stretches all the way out through the highlights 
+or shadows, through the maximum or minimum signal level allowable. Since Shadow and Light are 
+the two zones that are centered on the midtones of the image, they’re the best zones for seeing how 
+this works. Because of this, these are also probably the first two zones you’ll want to adjust if you’re 
+making more specific exposure changes to the image.
+Using the default preset, Shadow exposure adjustments affects everything in the image from stop 1 
+down through absolute black. 
+(Left) The original image, (Right) Darkening all shadows by lowering the Shadow exposure adjustment
+3229Color | Chapter 132 HDR Palette
+COLOR
+Meanwhile, Light exposure adjustments affect everything in the image from -1 stops all the way 
+through maximum white. 
+(Left) The original image, (Right) Lightening all highlights by raising the Light exposure adjustment
+This ability to make open-ended adjustments to image contrast in different overlapping ranges of 
+shadow and highlight tonality makes these controls uniquely suitable for HDR grading, while also 
+being completely suitable when grading at SDR levels. Also, keep in mind that all contrast adjustments 
+in the HDR palette keep saturation constant as contrast increases or decreases. 
+This is particularly useful when making large contrast adjustments to HDR images, for which a 300 
+nit expansion of highlight contrast using the Lift/Gamma/Gain or Log controls would create a huge 
+saturation increase. Using the HDR palette to expand highlight contrast keeps image saturation 
+perceptually the same, while offering zone-specific saturation controls that let you choose whether to 
+increase or decrease the saturation falling within that zone.
+Exposure adjustments to zones that overlap other zones are smoothly combined to allow targeted 
+contrast adjustments, while making it relatively easy to avoid unwanted artifacts, like contouring or 
+solarizing due to overzealous inversion of the curves caused by these operations. 
+An Example of Zone-Based Exposure Adjustment
+To see this in action, let’s see what happens when we make some overlapping adjustments to the 
+Light, Highlight, and Specular zones in order to grade some HDR highlights, focusing our attention 
+on the Waveform scope, since it’s difficult to see HDR grades in print. Keep in mind that you won’t 
+usually be making Zone-based Exposure adjustments by themselves. This example image has had 
+a Contrast/Pivot adjustment to push the midtones and shadows down, to give the shadows greater 
+definition. Then, Black Offset is raised to lift the darkest shadows up just a little bit, so they can 
+breathe. This leaves us with an image that’s mostly under 200 nits to begin with. A perfect starting 
+point for us to begin sculpting those highlights.
+(Left) The original image; (Right) After changing Contrast/Pivot and raising Black Offset
+Using the default preset, making an exposure adjustment to the Light zone smoothly raises everything 
+in the source image above -1 stops on the Zone graph. Practically, it’s stretching up all levels above 10 
+nits on the HDR scope. This smoothly boosts the brighter part of the image, while leaving the shadows 
+down where we put them.
+3230Color | Chapter 132 HDR Palette
+COLOR
+(Left) The previous adjustment; (Right) After raising Light Exposure
+At this point, making an exposure adjustment to the Highlight zone boosts all levels above 1.5 stops on 
+the Zone graph. Again, practically speaking, all levels above 100 nits are being boosted, brightening 
+the top highlights. In the image, you can see that we’re creating a greater differentiation between 
+dimmer and brighter highlights in the image, creating highlight contrast with greater detail where once 
+there were simply flat pools of light.
+ 
+(Left) The previous adjustment; (Right) After raising Highlight Exposure
+Now, this might be a fine place to stop, but since we’re interested in turning the HDR in this image up 
+to 11, we can put the highlights over the top by making one more Exposure adjustment, to the Specular 
+zone. The Specular zone starts at 4 stops and is designed to let you boost or attenuate only the very 
+brightest, hardest highlights, likely corresponding to specular details such as chrome reflections, eye 
+glints, and directly photographed light sources. You won’t always use this control, but it’s useful to 
+know about.
+In this example, the default Specular Zone Min Range control is outside of the available image data 
+in the image (seen as the right edge of the histogram in the Zone graph), so making adjustments with 
+this control won’t do anything. However, dragging the Min Range control to intersect the end of the 
+histogram will allow these controls to affect the very brightest pixels in the image.
+ 
+(Left) The original distribution of zones in the Zone Graph; (Right) Dragging the Specular Min Range handle to intersect 
+the brightest highlights in the image histogram, to allow the Specular controls to affect that part of the image
+3231Color | Chapter 132 HDR Palette
+COLOR
+Now, the Specular Exposure control lets us push the very brightest pixels of our image up, 
+further differentiating them from the other highlights, and widening the audience’s sensation of 
+highlight contrast.
+ 
+(Left) The previous adjustment; (Right) After raising Specular Exposure to bring the very brightest highlights to 1000 nits
+Now, having selectively boosted the Highlight and Specular zones, you might decide that you like 
+the differentiation that’s been created among different brightnesses of highlights, but the overall 
+highlights are too bright. This is easily fixed by lowering the Light zone’s Exposure adjustment. As a 
+result of this one adjustment, all of the highlights are scaled down, while the adjustments you’ve made 
+to the Highlight and Specular zones maintain a relative influence on the parts of the image they’re 
+brightening. The Shadow, Dark, and Black controls work similarly, but for the shadows.
+ 
+(Left) The previous adjustment; (Right) After lowering Light Exposure, all levels smoothly scale down to reduce the 
+brightness of the highlights while keeping the differentiation you’ve created with the Highlight and Specular controls.
+Now that you’ve seen how all overlapping Zone adjustments work together to create a 
+seamless adjustment, it’s time to look at the Zone controls in more detail.
+Zone Controls
+Each individual zone also has controls for Color Balance and Saturation, which let you make focused 
+adjustments that fall within specific ranges of image tonality, all without needing to use a qualifier. 
+Using all of these zones together, you can make fast, precise, and smooth adjustments to the image 
+that feel incredibly natural. Despite the name of the palette, this allows careful adjustment of SDR 
+images, as well as creative adjustment of the spectacular range of highlights that HDR enables. There 
+are also Range and Falloff controls to the left and right of each cluster of controls that let you redefine 
+each zone’s area of influence, even if the Zone graph is hidden.
+3232Color | Chapter 132 HDR Palette
+COLOR
+The Shadow and Light zone controls next to one another; you 
+can see the Min and Max indicators, along with the Range 
+value (in stops) at the upper left of each group of controls.
+  Range indicator: An icon and value at the upper-right-hand corner of each zone control cluster 
+shows that zone’s range. A numeric value shows the range value, which is the Luminance level 
+of image tonality at which that zone’s adjustment begins. This value is expressed in stops, while 
+an icon shows you whether it’s a maximum range (affecting shadows) or a minimum range 
+(affecting highlights).
+Clicking the icon shows a temporary preview in the Viewer of which parts of the image will 
+be affected by the controls of that zone. Affected areas appear in full color, while unaffected 
+areas appear black.
+  Zone-specific Color Balance:  A color balance control lets you readjust the relative strength of the 
+red, green, and blue channels within the current zone of image tonality.
+  Zone-specific Exposure:  Zone-specific Exposure controls work in conjunction with an 
+adjustable pivot that defines the Luminance level that each exposure adjustment starts from. 
+To accommodate both shadow and highlight adjustments, there are two kinds of pivots, labeled 
+Maximum and Minimum range, and indicated using an icon. Max Range controls, such as the 
+Shadow control, start at a maximum value with exposure adjustments stretching image contrast 
+downward towards the shadows. Min Range controls, such as Light, start at a minimum value with 
+exposure adjustments stretching contrast upwards towards the highlights. Each zone also has a 
+falloff that specifies how much of that zone overlaps neighboring zones (starting at the pivot level) 
+in order to blend overlapping adjustments softly enough to prevent contouring.
+  Zone-specific Saturation:  Adjusts the intensity of color within the current zone of image tonality.
+  Min/Max Range: Defines the level of image tonality at which that zone’s adjustment starts. 
+This value is expressed in stops. Identical to the Min or Max Range slider in the Zone panel. 
+Useful for tweaking Range while the Zones graph is hidden.
+  Zone Falloff: Defines how softly this zone fades into all overlapping zones. Identical to the 
+Falloff slider in the Zone panel, the value is visible in the virtual slider below. Useful for tweaking 
+Falloff while the Zones graph is hidden.
+  Zone-specific Color Balance Values:  Two values expose the current color balance operation 
+numerically. The option menu lets you choose between representing these as X and Y, 
+or as Angle and Strength.
+3233Color | Chapter 132 HDR Palette
+COLOR
+Customizing Zones Using the Zone Panel
+Similarly to the controls of the Log palette, how these zones overlap can be adjusted in order to 
+make each zone’s controls work best for the tonal distribution of the images in any given scene. 
+Zone overlap is governed by individual pairs of Range and Falloff controls, so you can make precise 
+adjustments no matter what the distribution of tonality is in the image you’re grading. All zones are 
+organized and customized using the Zone panel, which is divided into the Zones sidebar to the left, 
+and the Zone graph to the right.
+The Zone panel of the HDR palette
+The Zone Sidebar
+The Zone sidebar show a list of all the zones in the current preset. This list is sorted by range values, 
+with minimum range zones (affecting shadows) appearing at top and maximum range zones (affecting 
+highlights) appearing below. Clicking any zone in the list selects that zone, which also selects that 
+zone’s boundary handle in the Zone graph at the right.
+Zone sidebar controls:
+  Enable Zone toggle: Toggles let you turn each zone on and off. Disabled zones will not 
+be rendered.
+  Max/Min button:  Defines whether the adjustment of a particular zone affects the image from the 
+current range value and below (Max) or the current range value and higher (Min). This setting is 
+typically used when creating your own custom preset, to define which zones stretch down toward 
+the shadows and which zones stretch up toward the highlights.
+  Show/Hide Zone button: This button lets you hide sets of zone controls you don’t want to adjust 
+any further, leaving more room in the UI and on your control surface for the zones you do want to 
+adjust. For example, if you decide you don’t need to use the default Black and Specular zones, 
+you can hide them so that only the Dark, Shadow, Light, and Highlight zones are available to 
+switch among. Zone controls with adjustments made to them continue to affect the image even if 
+the controls are hidden.
+  Delete Zone button: Deletes that zone. This is primarily useful when you’re creating your own 
+zone preset. At the time of this writing, you cannot delete any of the default zones found in the 
+default Zone preset.
+Additionally, you have the option of adding zones, and saving zone presets to create your own 
+custom ways of adjusting the image.
+3234Color | Chapter 132 HDR Palette
+COLOR
+To create a new zone:
+1 Open the Zones panel.
+2 Click Create Zone, at the bottom of the Zones sidebar.
+3 When the Create Zone dialog appears, choose the Zone type you want that zone to have 
+(Dark/Min Zone or Light/Max Zone), enter a Name, and define the Range and Falloff values. 
+Range, Falloff, and Zone type are editable later, so don’t worry if you don’t set them up 
+perfectly the first time.
+4 Click Create. That zone appears added to the list, which is sorted in the order in which Range is 
+defined, with Dark Zones appearing at the top, and Light Zones appearing at the bottom.
+The Create Zone dialog
+Zones Graph
+The Zone graph is a key component of the HDR palette’s use. Along the bottom, a scale in stops 
+shows the range over which the HDR palette operates. At the top, handles let you adjust the editable 
+range boundaries that define the tonal range of each zone’s operation, superimposed over a 
+histogram showing the current image as input into the current node. Running through the middle of the 
+Zone graph, a curve shows you all the Global and Tonal color and contrast adjustments being made 
+by the HDR palette in the current grade.
+The relationship of the range boundaries with the source image histogram in this graph is extremely 
+important. The range boundary for a particular zone must intersect with the part of the source 
+histogram you want to adjust for the controls of that zone to have any effect. If any zone boundaries 
+lie outside of the histogram, that zone’s controls will do nothing. In the screenshot above, the zone’s 
+range boundaries all lie inside of the visible histogram, so each zone’s controls will make a predictable 
+adjustment to the image data in that part of the histogram.
+The Zone graph
+3235Color | Chapter 132 HDR Palette
+COLOR
+In the following screenshot, the Zone graph shows that the Specular zone boundary lies 
+outside of the source histogram for the image, so adjustments made using the Specular 
+controls will have no effect. For this reason, it’s a good idea to check that the zone boundaries 
+intersect the parts of the image you want to adjust prior to manipulating the controls, but if 
+you notice that a particular zone’s controls aren’t having as much of an effect on the image as 
+you’d like, you can always move the zone boundary after the fact to expand the range of the 
+image that’s affected by that zone.
+.
+The Specular zone boundary lies outside of the source histogram, excluding the Specular 
+controls from affecting the image.
+Customizing zone boundaries in this way is one of the most powerful aspects of the HDR 
+palette, but don’t worry that you’ll be constantly dragging zone boundaries back and forth 
+for every shot you grade. Generally speaking, most well-photographed scenes have similar 
+ranges of image tonality in each shot, so zone boundaries that have been customized for one 
+shot from that scene will likely be good for most clips in that scene. That said, adjusting zone 
+boundaries is another powerful way of tailoring a grade specifically for a clip with a unique 
+range of contrast.
+Zone Controls
+  (Min/Max) Range: Defines the level of image tonality at which that zone’s adjustment starts. 
+This value is expressed in stops.
+  Falloff: Adjusts how softly the adjustment in that zone will blend into the image. A value of 0 
+results in an immediate transition to the adjustment created in the current zone, with the color 
+adjustment being a sharper effect. Higher values will blend the current zone’s adjustment into the 
+image more softly, resulting in a more gentle and seamless transition into the effect.
+3236Color | Chapter 132 HDR Palette
+COLOR
+Customizing and Saving Presets
+If you’ve customized the Zone graph in a way that’s potentially useful for other grading situations, 
+you can save a preset of the Zone settings for future use. Saving, recalling, and managing these 
+presets is simple.
+Methods of managing presets:
+  To save a preset: Customize the Zone graph to suit your needs, then choose Save As New Preset 
+from the HDR palette Option menu.
+  To load a preset: Choose Presets > Name of Preset > Load Preset from the HDR palette 
+Option menu. A new preset will be saved.
+  To update a preset: Load a preset, make any changes you need to from the Zone graph, 
+and then choose Presets > Name of Preset > Update Preset from the HDR palette Option menu.
+  To delete a preset: Choose Presets > Name of Preset > Delete Preset from the HDR palette 
+Option menu.
+  To select the default preset: Choose Default Preset > Name of Preset from the HDR palette 
+Option menu. This preset will now be the one loaded initially into the HDR palette on startup.
+Resetting Color and Zone Adjustments
+In the HDR palette’s Option menu, there’s a Reset submenu with three commands, Reset All, Reset 
+Color Adjustments, and Reset Zone Definitions, which are self-explanatory. These are important 
+because, during the course of developing a grade, there will be many times when you’ll want to reset 
+your color adjustments without changing how you’ve customized the Zone graph, or vice versa.
+Additionally, each of the visible reset buttons in the GUI can be used with keyboard modifiers 
+to specifically target what to reset. The master reset button in the HDR palette’s title bar 
+resets the entire palette when clicked (similar to the Reset All command). However, using 
+keyboard modifiers while clicking this button changes what’s reset.
+• Hold down Command+Shift while clicking the master reset button to reset only the Zone 
+graph’s Range and Falloff controls, without resetting your color adjustments.
+• Hold down Command+Option while clicking the master reset button to reset only the color 
+adjustments, while leaving the zones alone.
+Both of these modifiers also work with the zone-specific reset controls found in the 
+Wheels panel, letting you reset only the Zone controls or only the Color controls of each 
+specific zone.
+3237Color | Chapter 132 HDR Palette
+COLOR
+Chapter 133
+RGB Mixer
+This chapter focuses on the more esoteric adjustments you can make, mixing 
+colors between channels using the RGB Mixer.
+Contents
+Introduction to the RGB Mixer Palette �����������������������������������������������������������������������������������������������������������������������������������  3239
+Preserve Luminance �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3241
+Resetting the RGB Mixer  ����������������������������������������������������������������������������������������������������������������������������������������������������������������� 3241
+Swap Channels Buttons  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3241
+Using the RGB Mixer in Monochrome Mode ����������������������������������������������������������������������������������������������������������������������  3242
+3238Color | Chapter 133 RGB Mixer
+COLOR
+Introduction to the RGB Mixer Palette
+The RGB Mixer palette lets you remix different amounts of image data from one channel to another, 
+and has a wide variety of creative and utilitarian uses. Furthermore, the RGB Mixer can be used 
+either to remix the color channels, or to add different proportions of each color channel into a 
+monochrome image.
+RGB Mixer palette
+By default, the RGB Mixer palette is set to mix any amount of the Red, Green, and Blue color channels 
+into any of the other channels. Each color channel has a dedicated control group of Red, Green, 
+and Blue sliders that you use to do the mixing, and the default values of these can be seen in the 
+screenshot above.
+Each slider has an overall range of –2.00 to +2.00. This means that you also have the option of 
+subtracting any combination of color channel values from a particular channel. For example, you can 
+lower the Red control group’s Green slider to –.24 to subtract 24 percent of the Green channel from 
+the Red channel.
+The Auto Normalize control on  
+the Red cµhannel of the RGB Mixer
+The RGB Mixer has an additional Auto Normalize control for each channel. These per-channel 
+normalize controls allow for users to adjust channel mixes without affecting overall luminance. 
+When you adjust one color channel, the others will automatically compensate for the change.
+3239Color | Chapter 133 RGB Mixer
+COLOR
+Example
+The Original image has a cyclist with a green stripe on his helmet:
+The normal Green channel for the RGB Mixer
+Normally reducing the Green channel in the green output adds a magenta 
+cast to the entire image
+When Auto Normalize is active, the other two channels compensate for the 
+change in green. Showing the hue change mainly in the green helmet stripe 
+(now turned cyan), with minimal changes to the rest of the image.
+3240Color | Chapter 133 RGB Mixer
+COLOR

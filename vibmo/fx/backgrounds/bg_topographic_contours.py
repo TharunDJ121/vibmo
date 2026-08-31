@@ -39,16 +39,28 @@ class AnimatedTopographicContours(Node):
     """
     Smooth vector isolines derived from multi-octave 2D noise slowly shifting and breathing over time.
     """
-    def __init__(self, width: float = 1920.0, height: float = 1080.0, name: str = "AnimatedTopographicContours", **kwargs: Any) -> None:
+    def __init__(
+        self,
+        width: float = 1920.0,
+        height: float = 1080.0,
+        line_spacing: Optional[float] = None,
+        speed: float = 1.0,
+        name: str = "AnimatedTopographicContours",
+        **kwargs: Any
+    ) -> None:
         super().__init__(name=name)
         self.width = width
         self.height = height
         self.line_color = Color.from_any(kwargs.get('line_color', colors.WHITE))
         self.line_width = kwargs.get('line_width', 2.0)
-        self.levels = kwargs.get('levels', 10)
+        self.line_spacing = line_spacing
+        if line_spacing is not None:
+            self.levels = max(3, int(self.height / line_spacing))
+        else:
+            self.levels = kwargs.get('levels', 10)
         self.octaves = kwargs.get('octaves', 3)
-        self.scale = kwargs.get('scale', 100.0)
-        self.speed = kwargs.get('speed', 1.0)
+        self.noise_scale = kwargs.get('scale', 100.0)
+        self.speed = speed
         self.grid_resolution = kwargs.get('grid_resolution', 20) # step size for Marching Squares
         
     def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
@@ -61,7 +73,7 @@ class AnimatedTopographicContours(Node):
         accum = np.zeros((h, w), dtype=np.float32)
         total_amp = 0.0
         amp = 1.0
-        freq = max(4.0, min(w, h) * (10.0 / self.scale))
+        freq = max(4.0, min(w, h) * (10.0 / self.noise_scale))
         
         base_seed = hash(self.name) % 10000
         
@@ -127,7 +139,7 @@ class BathymetricMapBackdrop(Node):
         self.shallow_color = Color.from_any(kwargs.get('shallow_color', Color.from_hex('#64b5f6')))
         
         self.octaves = kwargs.get('octaves', 3)
-        self.scale = kwargs.get('scale', 120.0)
+        self.noise_scale = kwargs.get('scale', 120.0)
         self.speed = kwargs.get('speed', 0.8)
         self.grid_resolution = kwargs.get('grid_resolution', 20)
         self.glow_width = kwargs.get('glow_width', 4.0)
@@ -142,7 +154,7 @@ class BathymetricMapBackdrop(Node):
         accum = np.zeros((h, w), dtype=np.float32)
         total_amp = 0.0
         amp = 1.0
-        freq = max(4.0, min(w, h) * (10.0 / self.scale))
+        freq = max(4.0, min(w, h) * (10.0 / self.noise_scale))
         
         base_seed = hash(self.name) % 10000
         
@@ -229,7 +241,7 @@ class RadarElevationSweep(Node):
         self.rpm = kwargs.get('rpm', 15.0) # revolutions per minute
         
         self.octaves = kwargs.get('octaves', 3)
-        self.scale = kwargs.get('scale', 150.0)
+        self.noise_scale = kwargs.get('scale', 150.0)
         self.speed = kwargs.get('speed', 0.5)
         self.grid_resolution = kwargs.get('grid_resolution', 20)
         
@@ -246,7 +258,7 @@ class RadarElevationSweep(Node):
         accum = np.zeros((h, w), dtype=np.float32)
         total_amp = 0.0
         amp = 1.0
-        freq = max(4.0, min(w, h) * (10.0 / self.scale))
+        freq = max(4.0, min(w, h) * (10.0 / self.noise_scale))
         
         base_seed = hash(self.name) % 10000
         
@@ -361,3 +373,14 @@ class RadarElevationSweep(Node):
         ctx.stroke()
         
         ctx.restore()
+
+
+# Semantic Alias
+TopographicContours = AnimatedTopographicContours
+
+__all__ = [
+    "AnimatedTopographicContours",
+    "TopographicContours",
+    "BathymetricMapBackdrop",
+    "RadarElevationSweep",
+]

@@ -137,3 +137,34 @@ class ChimesHarmonicSuite:
             audio /= max_val
 
         return audio.astype(np.float32)
+
+    @staticmethod
+    def celestial_wind_chime(duration: float = 1.2) -> np.ndarray:
+        """Gentle polyphonic celestial wind chime cluster with harmonic shimmer."""
+        t = np.linspace(0, duration, int(ChimesHarmonicSuite.SAMPLE_RATE * duration), endpoint=False)
+        audio = np.zeros_like(t)
+
+        chimes = [
+            {"freq": 1046.50, "time": 0.00, "amp": 0.8},
+            {"freq": 1318.51, "time": 0.08, "amp": 0.7},
+            {"freq": 1567.98, "time": 0.16, "amp": 0.6},
+            {"freq": 2093.00, "time": 0.28, "amp": 0.75},
+            {"freq": 2637.02, "time": 0.40, "amp": 0.5},
+        ]
+
+        for ch in chimes:
+            start_idx = int(ch["time"] * ChimesHarmonicSuite.SAMPLE_RATE)
+            if start_idx >= len(t):
+                continue
+            t_sub = t[start_idx:] - ch["time"]
+            env = np.exp(-t_sub * 4.5)
+            chime_wave = np.sin(2 * np.pi * ch["freq"] * t_sub)
+            chime_wave += 0.3 * np.sin(2 * np.pi * ch["freq"] * 2.76 * t_sub)
+            audio[start_idx:] += chime_wave * env * ch["amp"]
+
+        max_val = np.max(np.abs(audio))
+        if max_val > 0:
+            audio /= max_val
+
+        return audio.astype(np.float32)
+

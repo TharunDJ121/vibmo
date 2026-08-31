@@ -224,10 +224,25 @@ class CubicBezier:
         return self._sample_curve_y(self._solve_curve_x(t))
 
 
+def in_sine(t: float) -> float:
+    return 1.0 - math.cos((t * math.pi) / 2.0)
+
+
+def out_sine(t: float) -> float:
+    return math.sin((t * math.pi) / 2.0)
+
+
+def in_out_sine(t: float) -> float:
+    return -0.5 * (math.cos(math.pi * t) - 1.0)
+
+
 class Ease:
     """Convenient registry and builder for motion graphics easing curves."""
 
     linear = staticmethod(linear)
+    in_sine = staticmethod(in_sine)
+    out_sine = staticmethod(out_sine)
+    in_out_sine = staticmethod(in_out_sine)
     in_quad = staticmethod(in_quad)
     out_quad = staticmethod(out_quad)
     in_out_quad = staticmethod(in_out_quad)

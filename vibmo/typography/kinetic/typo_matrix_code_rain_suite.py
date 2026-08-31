@@ -1,28 +1,38 @@
 import cairo
 import random
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Any
 from vibmo.scene.node import Node
 from vibmo.core.color import colors, Color
 from vibmo.core.vector import Vector2D
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
 
 class MatrixRainTypography(Node):
     """
     Cascading green digital code rain drops that freeze and solidify into high-contrast bold title letters.
     """
-    def __init__(self, target_text: str, font_size: float = 36.0, drop_speed: float = 100.0, **kwargs):
+    def __init__(self, target_text: str = "", font_size: float = 36.0, drop_speed: float = 100.0, text: Optional[str] = None, **kwargs):
         super().__init__(**kwargs)
-        self.target_text = target_text
+        self.target_text = text if text is not None else target_text
         self.font_size = font_size
         self.drop_speed = drop_speed
         
         self.color = Signal(colors.GREEN_500)
         self.final_color = Signal(colors.WHITE)
         self.consolidated = Signal(0.0) # 0 to 1 progress of consolidation
-        
-        # Internal state needed for tests but not strictly used in current derived drawing
         self.drops: List[Tuple[float, float, str, float, bool]] = []
         self._init_drops()
+
+    def consolidate(
+        self,
+        duration: float = 2.0,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+    ) -> AnimationAction:
+        """Freezes code rain drops and solidifies them into bold title letters."""
+        self.consolidated.set(0.0)
+        e = ease or Ease.out_expo
+        return self.consolidated.to(1.0, duration=duration, ease=e, delay=delay)
         
     def _init_drops(self):
         rng = random.Random(hash(self.target_text))
@@ -157,6 +167,16 @@ class HeadlineConsolidation(Node):
         self.text = text
         self.font_size = font_size
         self.progress = Signal(0.0) # 0 to 1
+
+    def consolidate(
+        self,
+        duration: float = 1.5,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None,
+    ) -> AnimationAction:
+        self.progress.set(0.0)
+        e = ease or Ease.out_expo
+        return self.progress.to(1.0, duration=duration, ease=e, delay=delay)
         
     def draw(self, ctx: cairo.Context, time: float) -> None:
         prog = self.progress.get(time)

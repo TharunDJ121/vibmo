@@ -56,3 +56,12 @@ def test_typewriter_bell():
 
     max_idx = np.argmax(np.abs(audio))
     assert max_idx < len(audio) * 0.1
+
+def test_mechanical_keystroke():
+    sr = 48000
+    for sw in ["blue", "brown", "red", "space", "typewriter"]:
+        audio = KeyboardFoleySuite.mechanical_keystroke(switch=sw)
+        assert audio.dtype == np.float32
+        assert len(audio) > 0
+        assert np.max(np.abs(audio)) > 0.0
+

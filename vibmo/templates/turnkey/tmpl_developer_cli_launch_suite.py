@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any
+from typing import Any, Optional
 from vibmo.scene.scene import Scene
 from vibmo.core.color import Color, colors
 from vibmo.core.easing import Ease
@@ -14,7 +14,14 @@ from vibmo.physics.particles import ParticleEmitter
 
 class DeveloperCliLaunchTemplate:
     @classmethod
-    def create_scene(cls, pkg_name: str, install_cmd: str, stars: int, duration: float = 5.0) -> Scene:
+    def create_scene(
+        cls,
+        pkg_name: str = "vibmo",
+        install_cmd: str = "npm install -g vibmo",
+        stars: int = 10000,
+        duration: float = 5.0,
+        **kwargs: Any,
+    ) -> Scene:
         scene = Scene(width=1920, height=1080, fps=60, duration=duration, background=Color.hex("#09090b"))
 
         # Stage 1: Terminal entrance with glowing ASCII art banner
@@ -76,12 +83,22 @@ class DeveloperCliLaunchTemplate:
 
 class TmplDeveloperCliLaunchSuite(DeveloperCliLaunchTemplate):
     @classmethod
-    def build_scene(cls, **kwargs):
+    def build_scene(
+        cls,
+        command: Optional[str] = None,
+        package: Optional[str] = None,
+        stars: int = 10000,
+        duration: float = 5.0,
+        **kwargs: Any,
+    ) -> Scene:
+        install_cmd = command if command is not None else kwargs.pop("install_cmd", "npm install -g vibmo")
+        pkg_name = package if package is not None else kwargs.pop("name", kwargs.pop("pkg_name", "vibmo"))
         return cls.create_scene(
-            pkg_name=kwargs.get("package", kwargs.get("name", "vibmo")),
-            install_cmd=kwargs.get("command", "npm install -g vibmo"),
-            stars=kwargs.get("stars", 10000),
-            duration=kwargs.get("duration", 5.0),
+            pkg_name=pkg_name,
+            install_cmd=install_cmd,
+            stars=stars,
+            duration=duration,
+            **kwargs,
         )
 
 

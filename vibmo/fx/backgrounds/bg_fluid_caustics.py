@@ -1,7 +1,7 @@
 from __future__ import annotations
 import math
 import numpy as np
-from typing import Any, Union
+from typing import Any, Optional, Tuple, Union
 import cairo
 from PIL import Image
 from scipy.ndimage import zoom
@@ -10,19 +10,29 @@ from vibmo.core.color import Color, colors
 from vibmo.scene.node import Node
 
 class FluidWaterCaustics(Node):
-    def __init__(self, width: float = 1920.0, height: float = 1080.0, speed: float = 1.0, scale: float = 1.0, color: Union[Color, str] = colors.CYAN, **kwargs: Any):
+    def __init__(
+        self,
+        width: float = 1920.0,
+        height: float = 1080.0,
+        speed: float = 1.0,
+        scale: float = 1.0,
+        refraction: Optional[float] = None,
+        color: Union[Color, str] = colors.CYAN,
+        **kwargs: Any
+    ):
         super().__init__(**kwargs)
         self.w = float(width)
         self.h = float(height)
         self.speed = float(speed)
-        self.scale = float(scale)
+        self.refraction = float(refraction) if refraction is not None else 1.0
+        self.caustic_scale = float(refraction) if refraction is not None else float(scale)
         self.base_color = Color.from_any(color) if isinstance(color, (str, Color)) else colors.CYAN
 
     def local_bounds(self, time: float = 0.0) -> tuple[float, float, float, float]:
         return (0.0, 0.0, self.w, self.h)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
-        grid_w, grid_h = max(32, int(self.w / 10 / self.scale)), max(32, int(self.h / 10 / self.scale))
+        grid_w, grid_h = max(32, int(self.w / 10 / self.caustic_scale)), max(32, int(self.h / 10 / self.caustic_scale))
         
         # Smooth animated Voronoi approximation via multiple shifting cellular sine waves
         y, x = np.ogrid[0:grid_h, 0:grid_w]
@@ -120,13 +130,13 @@ class PrismaticIridescentWaves(Node):
         self.w = float(width)
         self.h = float(height)
         self.speed = float(speed)
-        self.scale = float(scale)
+        self.wave_scale = float(scale)
 
     def local_bounds(self, time: float = 0.0) -> tuple[float, float, float, float]:
         return (0.0, 0.0, self.w, self.h)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
-        grid_w, grid_h = max(16, int(self.w / 20 / self.scale)), max(16, int(self.h / 20 / self.scale))
+        grid_w, grid_h = max(16, int(self.w / 20 / self.wave_scale)), max(16, int(self.h / 20 / self.wave_scale))
         y, x = np.ogrid[0:grid_h, 0:grid_w]
         
         x = x.astype(float) / grid_w
@@ -159,3 +169,14 @@ class PrismaticIridescentWaves(Node):
         ctx.set_source_surface(surface, 0, 0)
         ctx.paint()
         ctx.restore()
+
+
+# Semantic Alias
+FluidCaustics = FluidWaterCaustics
+
+__all__ = [
+    "FluidWaterCaustics",
+    "FluidCaustics",
+    "UnderwaterLightRays",
+    "PrismaticIridescentWaves",
+]

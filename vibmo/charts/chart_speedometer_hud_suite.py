@@ -2,10 +2,10 @@ import math
 from typing import Any, Optional, Tuple
 
 from vibmo.scene.node import Node
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.color import Color, colors
 from vibmo.core.vector import Vector2D
-from vibmo.core.easing import Ease
+from vibmo.core.easing import Ease, EasingFunc
 
 class SpeedometerNeedleGauge(Node):
     """
@@ -32,6 +32,12 @@ class SpeedometerNeedleGauge(Node):
         self.value.set(target)
         # Animate the visual display value
         return self.display_value.to(target, duration=duration, delay=delay, ease=Ease.spring(stiffness=120, damping=12))
+
+    def needle_to(self, target: float, duration: float = 1.0, delay: float = 0.0, ease: Optional[EasingFunc] = None) -> AnimationAction:
+        """Animates the needle to the target value with spring physics."""
+        self.value.set(target)
+        e = ease or Ease.spring(stiffness=120, damping=12)
+        return self.display_value.to(target, duration=duration, delay=delay, ease=e)
 
     def _val_to_angle(self, val: float) -> float:
         clamped = max(self.min_val, min(self.max_val, val))
@@ -224,3 +230,7 @@ class TurboBoostBar(Node):
         ctx.stroke()
 
         super().draw(ctx, time)
+
+
+SpeedometerHudDial = SpeedometerNeedleGauge
+KpiMetricGauge = SpeedometerNeedleGauge

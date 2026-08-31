@@ -1,0 +1,4511 @@
+{
+  "1. Fusion Node Compositing & Visual DAG": [
+    {
+      "title": "The Fusion Page",
+      "page": 35,
+      "level": 2
+    },
+    {
+      "title": "Node Editor",
+      "page": 37,
+      "level": 3
+    },
+    {
+      "title": "Node Editor",
+      "page": 43,
+      "level": 3
+    },
+    {
+      "title": "Fusion",
+      "page": 165,
+      "level": 2
+    },
+    {
+      "title": "Controlling Fusion Output Caching",
+      "page": 210,
+      "level": 3
+    },
+    {
+      "title": "Resolve Color Management and the Fusion Page",
+      "page": 250,
+      "level": 3
+    },
+    {
+      "title": "Fusion Effects and Resolution",
+      "page": 298,
+      "level": 3
+    },
+    {
+      "title": "Adding Media to the Cut, Edit, Fusion, and Fairlight Pages",
+      "page": 384,
+      "level": 2
+    },
+    {
+      "title": "Using Photo Albums with the Fusion Page",
+      "page": 613,
+      "level": 3
+    },
+    {
+      "title": "Bypass Color Grades and Fusion",
+      "page": 621,
+      "level": 3
+    },
+    {
+      "title": "Open FX and Fusion Overlays",
+      "page": 626,
+      "level": 3
+    },
+    {
+      "title": "Bypass Color Grades and Fusion",
+      "page": 661,
+      "level": 3
+    },
+    {
+      "title": "Interactive Resolve FX and Fusion Effect Overlays in the Viewer",
+      "page": 785,
+      "level": 3
+    },
+    {
+      "title": "Converting Fusion Compositions to Edit Effects",
+      "page": 1181,
+      "level": 2
+    },
+    {
+      "title": "Fusion Effect Templates Cache",
+      "page": 1189,
+      "level": 2
+    },
+    {
+      "title": "Changing Transitions to Fusion Compositions",
+      "page": 1201,
+      "level": 2
+    },
+    {
+      "title": "Fusion Transitions",
+      "page": 1207,
+      "level": 3
+    },
+    {
+      "title": "Fusion Titles and Fusion Templates",
+      "page": 1226,
+      "level": 3
+    },
+    {
+      "title": "Fusion Generators",
+      "page": 1231,
+      "level": 3
+    },
+    {
+      "title": "Subtitle Tracks Using Fusion Templates for Styling",
+      "page": 1281,
+      "level": 3
+    },
+    {
+      "title": "Keyframe Fusion Effects, Generators and Text Tools in the Keyframe Editor",
+      "page": 1309,
+      "level": 2
+    },
+    {
+      "title": "Creating Multiple Versions of Fusion Clips",
+      "page": 1314,
+      "level": 3
+    },
+    {
+      "title": "Creating Multiple Versions of Fusion Clips on Another Machine",
+      "page": 1316,
+      "level": 3
+    },
+    {
+      "title": "Fusion Fundamentals",
+      "page": 1317,
+      "level": 0
+    },
+    {
+      "title": "Introduction to Compositing in Fusion",
+      "page": 1318,
+      "level": 1
+    },
+    {
+      "title": "What Is Fusion?",
+      "page": 1319,
+      "level": 2
+    },
+    {
+      "title": "The Fusion Page within DaVinci Resolve",
+      "page": 1319,
+      "level": 3
+    },
+    {
+      "title": "The Fusion Studio Stand-Alone Application",
+      "page": 1321,
+      "level": 3
+    },
+    {
+      "title": "What Kinds of Effects Does Fusion Offer?",
+      "page": 1321,
+      "level": 3
+    },
+    {
+      "title": "Exploring the Fusion Interface",
+      "page": 1324,
+      "level": 1
+    },
+    {
+      "title": "The Fusion User Interface",
+      "page": 1326,
+      "level": 2
+    },
+    {
+      "title": "Time Ruler Controls in the Fusion Page",
+      "page": 1333,
+      "level": 3
+    },
+    {
+      "title": "Time Ruler Controls in Fusion Studio",
+      "page": 1334,
+      "level": 3
+    },
+    {
+      "title": "Transport Controls in the Fusion Page",
+      "page": 1335,
+      "level": 3
+    },
+    {
+      "title": "Transport Controls in Fusion Studio",
+      "page": 1339,
+      "level": 3
+    },
+    {
+      "title": "The Fusion RAM Cache for Playback",
+      "page": 1343,
+      "level": 3
+    },
+    {
+      "title": "Node Editor",
+      "page": 1347,
+      "level": 2
+    },
+    {
+      "title": "Navigating the Node Editor",
+      "page": 1350,
+      "level": 3
+    },
+    {
+      "title": "Vertical Node Editor Layouts",
+      "page": 1351,
+      "level": 3
+    },
+    {
+      "title": "Spline Editor",
+      "page": 1358,
+      "level": 2
+    },
+    {
+      "title": "Spline Editor Control Summary",
+      "page": 1359,
+      "level": 3
+    },
+    {
+      "title": "Essential Spline Editing",
+      "page": 1359,
+      "level": 3
+    },
+    {
+      "title": "Essential Spline Editing Tools and Modes",
+      "page": 1360,
+      "level": 3
+    },
+    {
+      "title": "Thumbnail Timeline in the Fusion Page",
+      "page": 1361,
+      "level": 2
+    },
+    {
+      "title": "The Media Pool in the Fusion Page",
+      "page": 1362,
+      "level": 2
+    },
+    {
+      "title": "Importing Media Into the Media Pool on the Fusion Page",
+      "page": 1363,
+      "level": 3
+    },
+    {
+      "title": "Bins in Fusion Studio",
+      "page": 1364,
+      "level": 2
+    },
+    {
+      "title": "Customizing Fusion",
+      "page": 1368,
+      "level": 2
+    },
+    {
+      "title": "The Fusion Settings Window",
+      "page": 1368,
+      "level": 3
+    },
+    {
+      "title": "Fusion Studio Floating Frame",
+      "page": 1369,
+      "level": 3
+    },
+    {
+      "title": "Fusion Keyboard Remapping",
+      "page": 1370,
+      "level": 2
+    },
+    {
+      "title": "Fusion Studio Keyboard Remapping",
+      "page": 1370,
+      "level": 2
+    },
+    {
+      "title": "Getting Clips into Fusion",
+      "page": 1372,
+      "level": 1
+    },
+    {
+      "title": "Preparing Compositions in the Fusion Page",
+      "page": 1373,
+      "level": 2
+    },
+    {
+      "title": "Working on Single Clips in the Fusion Page",
+      "page": 1373,
+      "level": 3
+    },
+    {
+      "title": "Turning One or More Clips into Fusion Clips",
+      "page": 1374,
+      "level": 3
+    },
+    {
+      "title": "Referenced Fusion Compositions",
+      "page": 1376,
+      "level": 3
+    },
+    {
+      "title": "Adding Fusion Composition Generators",
+      "page": 1379,
+      "level": 3
+    },
+    {
+      "title": "Creating a Fusion Composition Clip in a Bin",
+      "page": 1380,
+      "level": 3
+    },
+    {
+      "title": "Resetting a Fusion Clip",
+      "page": 1380,
+      "level": 3
+    },
+    {
+      "title": "Using Fusion Transitions",
+      "page": 1380,
+      "level": 3
+    },
+    {
+      "title": "Finding Clips in the Media Pool from the Node Editor",
+      "page": 1382,
+      "level": 3
+    },
+    {
+      "title": "Using Loader and Saver Nodes in the Fusion Page",
+      "page": 1386,
+      "level": 2
+    },
+    {
+      "title": "Preparing Compositions in Fusion Studio",
+      "page": 1388,
+      "level": 2
+    },
+    {
+      "title": "Reading Clips into Fusion Studio",
+      "page": 1392,
+      "level": 3
+    },
+    {
+      "title": "Aligning Clips in a Fusion Studio Composition",
+      "page": 1393,
+      "level": 3
+    },
+    {
+      "title": "Loading Audio WAV Files in Fusion Studio",
+      "page": 1399,
+      "level": 3
+    },
+    {
+      "title": "Rendering in the Fusion Page",
+      "page": 1401,
+      "level": 3
+    },
+    {
+      "title": "Rendering in Fusion Studio",
+      "page": 1401,
+      "level": 3
+    },
+    {
+      "title": "Setting Up Network Rendering in Fusion Studio",
+      "page": 1406,
+      "level": 2
+    },
+    {
+      "title": "Using Third-Party Render Managers with Fusion Studio",
+      "page": 1414,
+      "level": 3
+    },
+    {
+      "title": "Relaunching Render Nodes with Fusion Server",
+      "page": 1419,
+      "level": 3
+    },
+    {
+      "title": "Working in the Node Editor",
+      "page": 1423,
+      "level": 1
+    },
+    {
+      "title": "Learning to Use the Node Editor",
+      "page": 1425,
+      "level": 2
+    },
+    {
+      "title": "Navigating within the Node Editor",
+      "page": 1426,
+      "level": 2
+    },
+    {
+      "title": "Automatic Node Editor Navigation",
+      "page": 1426,
+      "level": 3
+    },
+    {
+      "title": "Viewed Nodes When You First Open Fusion",
+      "page": 1438,
+      "level": 3
+    },
+    {
+      "title": "Connecting Merge Nodes",
+      "page": 1449,
+      "level": 2
+    },
+    {
+      "title": "Automatically Creating a Merge Node When Adding Nodes",
+      "page": 1450,
+      "level": 3
+    },
+    {
+      "title": "Automatically Creating a Merge Node by Connecting Two Outputs",
+      "page": 1450,
+      "level": 3
+    },
+    {
+      "title": "Cut, Copy, and Paste in the Node Editor",
+      "page": 1455,
+      "level": 3
+    },
+    {
+      "title": "Node Editor Options",
+      "page": 1471,
+      "level": 2
+    },
+    {
+      "title": "Node Groups, Macros, and Fusion Templates",
+      "page": 1473,
+      "level": 1
+    },
+    {
+      "title": "Macros",
+      "page": 1476,
+      "level": 2
+    },
+    {
+      "title": "Using the Macro Editor",
+      "page": 1476,
+      "level": 3
+    },
+    {
+      "title": "Using Macros",
+      "page": 1479,
+      "level": 3
+    },
+    {
+      "title": "Re-Editing Macros",
+      "page": 1480,
+      "level": 3
+    },
+    {
+      "title": "Other Macro Examples",
+      "page": 1480,
+      "level": 3
+    },
+    {
+      "title": "Creating Fusion Templates",
+      "page": 1480,
+      "level": 2
+    },
+    {
+      "title": "Getting Started with a Fusion Title Template",
+      "page": 1480,
+      "level": 3
+    },
+    {
+      "title": "Saving a Title Macro",
+      "page": 1481,
+      "level": 3
+    },
+    {
+      "title": "Getting Started with a Fusion Transition Template",
+      "page": 1485,
+      "level": 3
+    },
+    {
+      "title": "Creating a Fusion Transition Template",
+      "page": 1485,
+      "level": 3
+    },
+    {
+      "title": "Getting Started with a Fusion Generator Template",
+      "page": 1488,
+      "level": 3
+    },
+    {
+      "title": "Creating a Fusion Generator Template",
+      "page": 1489,
+      "level": 3
+    },
+    {
+      "title": "Creating a Fusion Effect Template",
+      "page": 1491,
+      "level": 3
+    },
+    {
+      "title": "Using Fusion Template Bundles",
+      "page": 1495,
+      "level": 3
+    },
+    {
+      "title": "Floating Viewers in Fusion Studio",
+      "page": 1499,
+      "level": 3
+    },
+    {
+      "title": "Custom Guides in Fusion Viewers",
+      "page": 1502,
+      "level": 2
+    },
+    {
+      "title": "How Lookup Tables Work in Fusion",
+      "page": 1528,
+      "level": 3
+    },
+    {
+      "title": "Fusion Slider Controls",
+      "page": 1551,
+      "level": 3
+    },
+    {
+      "title": "Animating in Fusion’s Keyframes Editor",
+      "page": 1565,
+      "level": 1
+    },
+    {
+      "title": "Duplicating Spline Keyframes",
+      "page": 1572,
+      "level": 3
+    },
+    {
+      "title": "Animating in Fusion’s Spline Editor",
+      "page": 1582,
+      "level": 1
+    },
+    {
+      "title": "Spline Editor Overview",
+      "page": 1583,
+      "level": 2
+    },
+    {
+      "title": "Spline Editor Interface ",
+      "page": 1583,
+      "level": 2
+    },
+    {
+      "title": "Renaming Splines",
+      "page": 1585,
+      "level": 3
+    },
+    {
+      "title": "Changing Spline Colors",
+      "page": 1585,
+      "level": 3
+    },
+    {
+      "title": "Navigating Around the Spline Editor ",
+      "page": 1586,
+      "level": 3
+    },
+    {
+      "title": "Creating Animation Splines ",
+      "page": 1590,
+      "level": 2
+    },
+    {
+      "title": "Animating with Different Spline Types",
+      "page": 1590,
+      "level": 3
+    },
+    {
+      "title": "Working with Keyframes and Splines",
+      "page": 1592,
+      "level": 2
+    },
+    {
+      "title": "Modifying Spline Handles",
+      "page": 1599,
+      "level": 3
+    },
+    {
+      "title": "Filtering the Spline Editor",
+      "page": 1600,
+      "level": 2
+    },
+    {
+      "title": "Changing a Spline’s Status ",
+      "page": 1602,
+      "level": 3
+    },
+    {
+      "title": "Reshaping Splines Using the Toolbar",
+      "page": 1604,
+      "level": 2
+    },
+    {
+      "title": "Reversing Splines ",
+      "page": 1605,
+      "level": 3
+    },
+    {
+      "title": "Looping Splines ",
+      "page": 1605,
+      "level": 3
+    },
+    {
+      "title": "Importing and Exporting Splines ",
+      "page": 1610,
+      "level": 2
+    },
+    {
+      "title": "FusionScript",
+      "page": 1640,
+      "level": 2
+    },
+    {
+      "title": "Spline Editor",
+      "page": 1669,
+      "level": 3
+    },
+    {
+      "title": "Splines",
+      "page": 1670,
+      "level": 3
+    },
+    {
+      "title": "Fusion’s Place in the DaVinci Resolve Image-Processing Pipeline",
+      "page": 1690,
+      "level": 2
+    },
+    {
+      "title": "Source Media into the Fusion Page",
+      "page": 1690,
+      "level": 3
+    },
+    {
+      "title": "Forcing Effects into the Fusion Page",
+      "page": 1691,
+      "level": 3
+    },
+    {
+      "title": "Output from the Fusion Page to the Color Page",
+      "page": 1691,
+      "level": 3
+    },
+    {
+      "title": "Managing Resolution In Fusion",
+      "page": 1692,
+      "level": 2
+    },
+    {
+      "title": "Setting Color Depth in Fusion Studio",
+      "page": 1696,
+      "level": 3
+    },
+    {
+      "title": "Introducing Color Management in Fusion",
+      "page": 1702,
+      "level": 2
+    },
+    {
+      "title": "Using OCIO for ACES Color Management in Fusion",
+      "page": 1710,
+      "level": 2
+    },
+    {
+      "title": "Channels in Fusion",
+      "page": 1715,
+      "level": 2
+    },
+    {
+      "title": "Types of Channels Supported by Fusion",
+      "page": 1715,
+      "level": 3
+    },
+    {
+      "title": "Fusion Node Connections Carry Multiple Channels",
+      "page": 1716,
+      "level": 3
+    },
+    {
+      "title": "Creating Auxiliary Channels in Fusion",
+      "page": 1749,
+      "level": 3
+    },
+    {
+      "title": "Compositing Layers in Fusion",
+      "page": 1750,
+      "level": 1
+    },
+    {
+      "title": "Adjusting Fusion Sliders",
+      "page": 1753,
+      "level": 3
+    },
+    {
+      "title": "Automatically Creating Merge Nodes",
+      "page": 1755,
+      "level": 3
+    },
+    {
+      "title": "Using Composite Modes in the Merge Node",
+      "page": 1757,
+      "level": 3
+    },
+    {
+      "title": "Using Transform Controls in the Merge Node",
+      "page": 1764,
+      "level": 3
+    },
+    {
+      "title": "Mapping Timeline Layers to Nodes in Fusion",
+      "page": 1765,
+      "level": 3
+    },
+    {
+      "title": "Viewing Tracking Data in the Spline Editor",
+      "page": 1832,
+      "level": 2
+    },
+    {
+      "title": "DaVinci Resolve OFX Renderer for Fusion Studio",
+      "page": 1870,
+      "level": 2
+    },
+    {
+      "title": "The Merge3D Node",
+      "page": 1879,
+      "level": 3
+    },
+    {
+      "title": "Loading 3D Nodes into the Viewer",
+      "page": 1885,
+      "level": 2
+    },
+    {
+      "title": "Setting Up Stereo in the Node Editor",
+      "page": 1963,
+      "level": 2
+    },
+    {
+      "title": "Fusion Page Effects",
+      "page": 1969,
+      "level": 0
+    },
+    {
+      "title": "3D Nodes",
+      "page": 1970,
+      "level": 1
+    },
+    {
+      "title": "Merge 3D [3Mg]",
+      "page": 2016,
+      "level": 2
+    },
+    {
+      "title": "Material Merge 3D [3MM]",
+      "page": 2118,
+      "level": 2
+    },
+    {
+      "title": "Merge [Mrg]",
+      "page": 2264,
+      "level": 2
+    },
+    {
+      "title": "MultiMerge [MMrg]",
+      "page": 2273,
+      "level": 2
+    },
+    {
+      "title": "dMerge [dMg]",
+      "page": 2299,
+      "level": 2
+    },
+    {
+      "title": "Macro",
+      "page": 2404,
+      "level": 2
+    },
+    {
+      "title": "Macro Introduction",
+      "page": 2404,
+      "level": 3
+    },
+    {
+      "title": "Macro Editor",
+      "page": 2404,
+      "level": 3
+    },
+    {
+      "title": "The Final Macro",
+      "page": 2405,
+      "level": 3
+    },
+    {
+      "title": "B-Spline Mask [BSp]",
+      "page": 2517,
+      "level": 2
+    },
+    {
+      "title": "pMerge [pMg]",
+      "page": 2726,
+      "level": 2
+    },
+    {
+      "title": "sBSpline [sBSp]",
+      "page": 2782,
+      "level": 2
+    },
+    {
+      "title": "sMerge",
+      "page": 2796,
+      "level": 2
+    },
+    {
+      "title": "uMerge [uMg]",
+      "page": 2955,
+      "level": 2
+    },
+    {
+      "title": "Fusion VR 180 Support (Studio Version Only)",
+      "page": 2999,
+      "level": 2
+    },
+    {
+      "title": "Bézier Spline",
+      "page": 3045,
+      "level": 2
+    },
+    {
+      "title": "B-Spline",
+      "page": 3047,
+      "level": 2
+    },
+    {
+      "title": "Cubic Spline",
+      "page": 3051,
+      "level": 2
+    },
+    {
+      "title": "Natural Cubic Spline",
+      "page": 3066,
+      "level": 2
+    },
+    {
+      "title": "Node Editor",
+      "page": 3105,
+      "level": 3
+    },
+    {
+      "title": "Bypass Color Grades and Fusion",
+      "page": 3124,
+      "level": 3
+    },
+    {
+      "title": "Enabling Editable Splines in the Custom Curves",
+      "page": 3251,
+      "level": 3
+    },
+    {
+      "title": "Adding a Secondary Operation to the Node Editor",
+      "page": 3295,
+      "level": 3
+    },
+    {
+      "title": "Node Editor Basics",
+      "page": 3447,
+      "level": 2
+    },
+    {
+      "title": "The Node Editor Interface",
+      "page": 3450,
+      "level": 3
+    },
+    {
+      "title": "Turning Grades and/or Fusion Effects Off",
+      "page": 3455,
+      "level": 2
+    },
+    {
+      "title": "Using Mattes From the Fusion Page",
+      "page": 3493,
+      "level": 2
+    },
+    {
+      "title": "Favorite LUTs Submenu in Node Editor",
+      "page": 3552,
+      "level": 3
+    },
+    {
+      "title": "Using VR in Fusion",
+      "page": 4358,
+      "level": 2
+    },
+    {
+      "title": "Fusion",
+      "page": 4439,
+      "level": 1
+    }
+  ],
+  "2. Color Page, Scopes & Grade Nodes": [
+    {
+      "title": "The Color Page",
+      "page": 41,
+      "level": 2
+    },
+    {
+      "title": "Color Space Aware Grading Tools",
+      "page": 249,
+      "level": 3
+    },
+    {
+      "title": "HDR Setup and Grading",
+      "page": 259,
+      "level": 1
+    },
+    {
+      "title": "High Dynamic Range (HDR) Grading in DaVinci Resolve",
+      "page": 261,
+      "level": 2
+    },
+    {
+      "title": "Analyzing HDR Signals Using Video Scopes",
+      "page": 263,
+      "level": 3
+    },
+    {
+      "title": "Setting Up Resolve Color Management for Grading HDR",
+      "page": 278,
+      "level": 3
+    },
+    {
+      "title": "DaVinci Resolve Grading Workflow For Dolby Vision",
+      "page": 279,
+      "level": 3
+    },
+    {
+      "title": "Monitoring and Grading to ST.2084 in DaVinci Resolve",
+      "page": 283,
+      "level": 3
+    },
+    {
+      "title": "Monitoring and Grading to ST.2084 for HDR10+",
+      "page": 284,
+      "level": 3
+    },
+    {
+      "title": "HDR10+ Grading Workflow",
+      "page": 285,
+      "level": 3
+    },
+    {
+      "title": "Monitoring and Grading to ST.2084 for HDR Vivid",
+      "page": 287,
+      "level": 3
+    },
+    {
+      "title": "HDR Vivid Grading Workflow",
+      "page": 287,
+      "level": 3
+    },
+    {
+      "title": "Grading Hybrid Log­‑Gamma in DaVinci Resolve",
+      "page": 290,
+      "level": 3
+    },
+    {
+      "title": "Input Sizing on the Color Page",
+      "page": 305,
+      "level": 3
+    },
+    {
+      "title": "Node Sizing on the Color Page",
+      "page": 305,
+      "level": 3
+    },
+    {
+      "title": "Output Sizing on the Color Page",
+      "page": 305,
+      "level": 3
+    },
+    {
+      "title": "Grading Live",
+      "page": 316,
+      "level": 2
+    },
+    {
+      "title": "Organizing and Grading Stereo 3D Dailies",
+      "page": 329,
+      "level": 2
+    },
+    {
+      "title": "Step 2 – Edit the New Stereo Clips Into One or More Timelines for Grading",
+      "page": 329,
+      "level": 3
+    },
+    {
+      "title": "Step 4 – Grading Stereo Media",
+      "page": 329,
+      "level": 3
+    },
+    {
+      "title": "Grading Mastered Stereoscopic Media From Tape",
+      "page": 332,
+      "level": 3
+    },
+    {
+      "title": "Step 3–Do Whatever Grading is Necessary",
+      "page": 517,
+      "level": 3
+    },
+    {
+      "title": "Step 4–Continue Editing, Grading, and Finishing the Project",
+      "page": 535,
+      "level": 3
+    },
+    {
+      "title": "Using Photo Albums with the Color Page",
+      "page": 612,
+      "level": 3
+    },
+    {
+      "title": "Scopes",
+      "page": 627,
+      "level": 3
+    },
+    {
+      "title": "Scopes",
+      "page": 646,
+      "level": 3
+    },
+    {
+      "title": "More About Timelines and Grading",
+      "page": 822,
+      "level": 2
+    },
+    {
+      "title": "Using Video Scopes",
+      "page": 852,
+      "level": 2
+    },
+    {
+      "title": "Grading Multicam Clips",
+      "page": 1072,
+      "level": 2
+    },
+    {
+      "title": "Compositing and Grading Take Selectors",
+      "page": 1076,
+      "level": 3
+    },
+    {
+      "title": "Compositing With and Grading Compound Clips",
+      "page": 1081,
+      "level": 3
+    },
+    {
+      "title": "Compositing and Grading Nested Timelines",
+      "page": 1084,
+      "level": 3
+    },
+    {
+      "title": "Using Retime Curves",
+      "page": 1261,
+      "level": 2
+    },
+    {
+      "title": "Keyframe and Add Curves for Multiple Selected Clips",
+      "page": 1308,
+      "level": 3
+    },
+    {
+      "title": "Output from the Fusion Page to the Color Page",
+      "page": 1691,
+      "level": 3
+    },
+    {
+      "title": "Color Curves [CCv]",
+      "page": 2221,
+      "level": 3
+    },
+    {
+      "title": "Hue Curves [HCv]",
+      "page": 2241,
+      "level": 3
+    },
+    {
+      "title": "Anim Curves",
+      "page": 3043,
+      "level": 2
+    },
+    {
+      "title": "Introduction to Color Grading",
+      "page": 3085,
+      "level": 1
+    },
+    {
+      "title": "Using the Color Page",
+      "page": 3097,
+      "level": 1
+    },
+    {
+      "title": "The Color Page Interface",
+      "page": 3098,
+      "level": 2
+    },
+    {
+      "title": "Customizing the Color Page",
+      "page": 3113,
+      "level": 2
+    },
+    {
+      "title": "Viewers, Monitoring, and Video Scopes",
+      "page": 3115,
+      "level": 1
+    },
+    {
+      "title": "Fast Review on the Color Page",
+      "page": 3130,
+      "level": 3
+    },
+    {
+      "title": "Timeline Marker List Available in Color Page Viewer Option Menu",
+      "page": 3143,
+      "level": 3
+    },
+    {
+      "title": "Using Video Scopes",
+      "page": 3144,
+      "level": 2
+    },
+    {
+      "title": "Display Qualifier Focus in Video Scope Graphs",
+      "page": 3150,
+      "level": 3
+    },
+    {
+      "title": "Panning and Zooming the Video Scopes",
+      "page": 3154,
+      "level": 2
+    },
+    {
+      "title": "Customizing the Video Scopes",
+      "page": 3154,
+      "level": 2
+    },
+    {
+      "title": "Color Page Timeline and Lightbox",
+      "page": 3159,
+      "level": 1
+    },
+    {
+      "title": "Navigating Using the Color Page Timeline",
+      "page": 3160,
+      "level": 2
+    },
+    {
+      "title": "Automated Grading Commands and Imported Grades",
+      "page": 3175,
+      "level": 1
+    },
+    {
+      "title": "HDR Grading With the Primaries Palette",
+      "page": 3197,
+      "level": 3
+    },
+    {
+      "title": "Curves",
+      "page": 3244,
+      "level": 1
+    },
+    {
+      "title": "Introduction to Curves",
+      "page": 3245,
+      "level": 2
+    },
+    {
+      "title": "Adjusting Curves Using the Mouse",
+      "page": 3245,
+      "level": 3
+    },
+    {
+      "title": "Sampling Images to Place Control Points on Curves",
+      "page": 3247,
+      "level": 3
+    },
+    {
+      "title": "Curves Histograms",
+      "page": 3247,
+      "level": 3
+    },
+    {
+      "title": "Custom Curves",
+      "page": 3249,
+      "level": 2
+    },
+    {
+      "title": "Editing the Top and Bottom Control Points of Curves",
+      "page": 3250,
+      "level": 3
+    },
+    {
+      "title": "HDR Grading Using Curves",
+      "page": 3251,
+      "level": 3
+    },
+    {
+      "title": "Enabling Editable Splines in the Custom Curves",
+      "page": 3251,
+      "level": 3
+    },
+    {
+      "title": "Adding Default Anchors to the Custom Curves",
+      "page": 3252,
+      "level": 3
+    },
+    {
+      "title": "Ganging and Unganging Custom Curves",
+      "page": 3252,
+      "level": 3
+    },
+    {
+      "title": "Copying Custom Curves From One Color Channel to Another",
+      "page": 3253,
+      "level": 3
+    },
+    {
+      "title": "The HSL Curves",
+      "page": 3258,
+      "level": 2
+    },
+    {
+      "title": "Image Sampling for Hue and Sat Curves",
+      "page": 3259,
+      "level": 3
+    },
+    {
+      "title": "Additional Controls in the Hue and Sat Curves",
+      "page": 3260,
+      "level": 3
+    },
+    {
+      "title": "Secondary Qualifiers",
+      "page": 3294,
+      "level": 1
+    },
+    {
+      "title": "Secondary Qualifiers",
+      "page": 3295,
+      "level": 2
+    },
+    {
+      "title": "The Qualifier Interfaces",
+      "page": 3296,
+      "level": 3
+    },
+    {
+      "title": "Which Qualifier Do I Use?",
+      "page": 3297,
+      "level": 3
+    },
+    {
+      "title": "Set the Default Qualifier Mode",
+      "page": 3298,
+      "level": 2
+    },
+    {
+      "title": "Basic Qualification Using the 3D Qualifier",
+      "page": 3299,
+      "level": 2
+    },
+    {
+      "title": "Basic Qualification Using the HSL Qualifier",
+      "page": 3303,
+      "level": 2
+    },
+    {
+      "title": "HSL Qualifier Presets",
+      "page": 3306,
+      "level": 2
+    },
+    {
+      "title": "Qualifier Parameters",
+      "page": 3309,
+      "level": 2
+    },
+    {
+      "title": "3D Qualifier Controls",
+      "page": 3312,
+      "level": 3
+    },
+    {
+      "title": "Combining Qualifiers and Windows",
+      "page": 3320,
+      "level": 2
+    },
+    {
+      "title": "Power Windows",
+      "page": 3323,
+      "level": 2
+    },
+    {
+      "title": "Drawing Curves",
+      "page": 3331,
+      "level": 2
+    },
+    {
+      "title": "Converting Linear, Circular, and Polygon Windows into Bezier Curves",
+      "page": 3332,
+      "level": 3
+    },
+    {
+      "title": "Combining Power Windows with the Mask Control",
+      "page": 3333,
+      "level": 2
+    },
+    {
+      "title": "Using Windows and Qualifiers Together",
+      "page": 3336,
+      "level": 2
+    },
+    {
+      "title": "Paste Attributes on the Color Page",
+      "page": 3429,
+      "level": 3
+    },
+    {
+      "title": "Grading Compound Nodes",
+      "page": 3466,
+      "level": 3
+    },
+    {
+      "title": "Clip vs. Timeline Grading",
+      "page": 3467,
+      "level": 2
+    },
+    {
+      "title": "Using a Qualifier Key to Create Transparency",
+      "page": 3512,
+      "level": 2
+    },
+    {
+      "title": "Keyframing in the Color Page",
+      "page": 3519,
+      "level": 1
+    },
+    {
+      "title": "Using the Color Page LUT Browser",
+      "page": 3549,
+      "level": 2
+    },
+    {
+      "title": "Color Page Effects",
+      "page": 3554,
+      "level": 0
+    },
+    {
+      "title": "Using Resolve FX and Open FX in the Color Page",
+      "page": 3559,
+      "level": 2
+    },
+    {
+      "title": "The Five Color Page Sizing Modes",
+      "page": 3568,
+      "level": 2
+    },
+    {
+      "title": "Sizing Order of Processing on the Color Page",
+      "page": 3568,
+      "level": 3
+    },
+    {
+      "title": "Skin Grading",
+      "page": 3690,
+      "level": 3
+    },
+    {
+      "title": "Warp Mode Curves",
+      "page": 3808,
+      "level": 3
+    },
+    {
+      "title": "Editing Mix Automation Curves",
+      "page": 4054,
+      "level": 2
+    },
+    {
+      "title": "Upgrading a Cloud Project Library",
+      "page": 4258,
+      "level": 3
+    },
+    {
+      "title": "Upgrading a Local Project Library",
+      "page": 4313,
+      "level": 3
+    },
+    {
+      "title": "Upgrading Project Libraries",
+      "page": 4321,
+      "level": 3
+    },
+    {
+      "title": "Remote Grading and Remote Monitor",
+      "page": 4343,
+      "level": 1
+    },
+    {
+      "title": "Introduction to Remote Grading",
+      "page": 4344,
+      "level": 2
+    },
+    {
+      "title": "Requirements for Remote Grading",
+      "page": 4344,
+      "level": 2
+    },
+    {
+      "title": "Setting Up for Remote Grading",
+      "page": 4344,
+      "level": 2
+    },
+    {
+      "title": "Remote Grading Restrictions",
+      "page": 4345,
+      "level": 2
+    },
+    {
+      "title": "Color Grading",
+      "page": 4380,
+      "level": 2
+    },
+    {
+      "title": "Primary Grading",
+      "page": 4381,
+      "level": 3
+    },
+    {
+      "title": "CST Grading Monitor Mapping",
+      "page": 4385,
+      "level": 3
+    }
+  ],
+  "3. Fairlight Audio Engine, DSP & Foley": [
+    {
+      "title": "The Fairlight Page",
+      "page": 46,
+      "level": 2
+    },
+    {
+      "title": "Dedicated Channel Strip Controls",
+      "page": 48,
+      "level": 3
+    },
+    {
+      "title": "Adjusting Parameters",
+      "page": 66,
+      "level": 3
+    },
+    {
+      "title": "Fairlight",
+      "page": 122,
+      "level": 3
+    },
+    {
+      "title": "Dynamics Profile",
+      "page": 161,
+      "level": 3
+    },
+    {
+      "title": "Fairlight",
+      "page": 166,
+      "level": 2
+    },
+    {
+      "title": "Adding Media to the Cut, Edit, Fusion, and Fairlight Pages",
+      "page": 384,
+      "level": 2
+    },
+    {
+      "title": "Using Photo Albums with Cut, Edit, and Fairlight Pages",
+      "page": 613,
+      "level": 2
+    },
+    {
+      "title": "Export Parameters",
+      "page": 649,
+      "level": 3
+    },
+    {
+      "title": "The Mixer and Meters",
+      "page": 851,
+      "level": 2
+    },
+    {
+      "title": "Displaying Audio Meters",
+      "page": 852,
+      "level": 3
+    },
+    {
+      "title": "Audio in the Edit vs. Fairlight Pages",
+      "page": 1122,
+      "level": 2
+    },
+    {
+      "title": "Displaying Audio Meters",
+      "page": 1157,
+      "level": 3
+    },
+    {
+      "title": "The Fairlight Page",
+      "page": 1167,
+      "level": 2
+    },
+    {
+      "title": "Shared Title Generator Parameters",
+      "page": 1221,
+      "level": 3
+    },
+    {
+      "title": "Title Generator Settings Parameters",
+      "page": 1222,
+      "level": 3
+    },
+    {
+      "title": "Choosing Which Parameters to Show",
+      "page": 1359,
+      "level": 3
+    },
+    {
+      "title": "De-Instancing and Re-Instancing Specific Parameters",
+      "page": 1461,
+      "level": 3
+    },
+    {
+      "title": "Editing Parameters in the Inspector",
+      "page": 1539,
+      "level": 1
+    },
+    {
+      "title": "Animating Parameters in the Inspector",
+      "page": 1558,
+      "level": 2
+    },
+    {
+      "title": "Connecting Parameters",
+      "page": 1559,
+      "level": 2
+    },
+    {
+      "title": "Connecting Parameters by Publishing",
+      "page": 1559,
+      "level": 3
+    },
+    {
+      "title": "Connecting Parameters by Pick Whipping",
+      "page": 1559,
+      "level": 3
+    },
+    {
+      "title": "Customizing Node Parameters with User Controls",
+      "page": 1562,
+      "level": 2
+    },
+    {
+      "title": "The Contextual Menu for Parameters in the Inspector",
+      "page": 1630,
+      "level": 2
+    },
+    {
+      "title": "Adding Modifiers to Individual Parameters",
+      "page": 1630,
+      "level": 3
+    },
+    {
+      "title": "Connecting Multiple Parameters to One Modifier",
+      "page": 1632,
+      "level": 3
+    },
+    {
+      "title": "Editing Parameters in the Inspector",
+      "page": 1752,
+      "level": 3
+    },
+    {
+      "title": "Common Visibility Parameters",
+      "page": 1916,
+      "level": 3
+    },
+    {
+      "title": "Fairlight Animator",
+      "page": 3060,
+      "level": 2
+    },
+    {
+      "title": "Numeric Parameters",
+      "page": 3199,
+      "level": 3
+    },
+    {
+      "title": "Qualifier Parameters",
+      "page": 3309,
+      "level": 2
+    },
+    {
+      "title": "Copy and Paste Specific Parameters Using Paste Value",
+      "page": 3423,
+      "level": 3
+    },
+    {
+      "title": "Dynamic Keyframes (Dynamics)",
+      "page": 3524,
+      "level": 3
+    },
+    {
+      "title": "Deband Parameters",
+      "page": 3710,
+      "level": 3
+    },
+    {
+      "title": "Main Parameters",
+      "page": 3711,
+      "level": 3
+    },
+    {
+      "title": "Fairlight",
+      "page": 3814,
+      "level": 0
+    },
+    {
+      "title": "Using the Fairlight Page",
+      "page": 3815,
+      "level": 1
+    },
+    {
+      "title": "The Fairlight Page User Interface",
+      "page": 3817,
+      "level": 2
+    },
+    {
+      "title": "Importing Media Into the Media Pool on the Fairlight Page",
+      "page": 3843,
+      "level": 3
+    },
+    {
+      "title": "Filtering Clips With Audio in the Fairlight Page",
+      "page": 3846,
+      "level": 3
+    },
+    {
+      "title": "Customizing the Fairlight Page",
+      "page": 3866,
+      "level": 2
+    },
+    {
+      "title": "Fairlight Configuration Presets",
+      "page": 3867,
+      "level": 3
+    },
+    {
+      "title": "Setting Up Tracks, Busses, and Patching",
+      "page": 3870,
+      "level": 1
+    },
+    {
+      "title": "Audio Tracks",
+      "page": 3871,
+      "level": 2
+    },
+    {
+      "title": "Busses in Nested Timelines",
+      "page": 3874,
+      "level": 3
+    },
+    {
+      "title": "Creating Busses",
+      "page": 3880,
+      "level": 2
+    },
+    {
+      "title": "Assigning Busses",
+      "page": 3883,
+      "level": 2
+    },
+    {
+      "title": "Using a Channel Strip’s Input Menu",
+      "page": 3889,
+      "level": 3
+    },
+    {
+      "title": "The Fairlight Presets Library",
+      "page": 3891,
+      "level": 2
+    },
+    {
+      "title": "Editing Basics in the Fairlight Page",
+      "page": 3923,
+      "level": 1
+    },
+    {
+      "title": "Fairlight Edit Mode Remains Between Application Restarts",
+      "page": 3931,
+      "level": 3
+    },
+    {
+      "title": "Locking Audio Tracks",
+      "page": 3942,
+      "level": 2
+    },
+    {
+      "title": "Linked Clips in the Fairlight Page",
+      "page": 3947,
+      "level": 3
+    },
+    {
+      "title": "Batch Fade and Crossfade Editor in the Fairlight Page",
+      "page": 3964,
+      "level": 3
+    },
+    {
+      "title": "The Fairlight Inspector",
+      "page": 3979,
+      "level": 1
+    },
+    {
+      "title": "Mixing in the Fairlight Page",
+      "page": 3999,
+      "level": 1
+    },
+    {
+      "title": "Tracks and Busses",
+      "page": 4001,
+      "level": 3
+    },
+    {
+      "title": "Selecting Channel Strips and Tracks",
+      "page": 4006,
+      "level": 2
+    },
+    {
+      "title": "Managing Channel Strips Using the Index",
+      "page": 4009,
+      "level": 2
+    },
+    {
+      "title": "Fairlight Mixer Signal Path",
+      "page": 4011,
+      "level": 2
+    },
+    {
+      "title": "Dynamics",
+      "page": 4017,
+      "level": 2
+    },
+    {
+      "title": "The Dynamics Graph",
+      "page": 4017,
+      "level": 3
+    },
+    {
+      "title": "Master Dynamics Controls",
+      "page": 4018,
+      "level": 3
+    },
+    {
+      "title": "Channel Strip Pan Controls",
+      "page": 4027,
+      "level": 3
+    },
+    {
+      "title": "Fairlight > Automation Controls",
+      "page": 4068,
+      "level": 2
+    },
+    {
+      "title": "Fairlight FX",
+      "page": 4081,
+      "level": 3
+    },
+    {
+      "title": "Editing Plugin Parameters",
+      "page": 4085,
+      "level": 3
+    },
+    {
+      "title": "Applying Audio Plugins to Busses",
+      "page": 4087,
+      "level": 2
+    },
+    {
+      "title": "Fairlight FX",
+      "page": 4089,
+      "level": 1
+    },
+    {
+      "title": "Common Controls For All Fairlight FX",
+      "page": 4090,
+      "level": 2
+    },
+    {
+      "title": "EQ ‑ Fairlight EQ",
+      "page": 4108,
+      "level": 3
+    },
+    {
+      "title": "Foley Sampler",
+      "page": 4111,
+      "level": 3
+    },
+    {
+      "title": "Audio Meters and Audio Monitoring",
+      "page": 4129,
+      "level": 1
+    },
+    {
+      "title": "Track Meters and Monitoring Controls",
+      "page": 4131,
+      "level": 2
+    },
+    {
+      "title": "Bus Meters",
+      "page": 4132,
+      "level": 2
+    },
+    {
+      "title": "Compound Meters and Output Bus Selection Menu",
+      "page": 4133,
+      "level": 2
+    },
+    {
+      "title": "Control Room Meters",
+      "page": 4134,
+      "level": 3
+    },
+    {
+      "title": "Loudness Meters",
+      "page": 4134,
+      "level": 3
+    },
+    {
+      "title": "Cinema Viewer on Fairlight Page",
+      "page": 4141,
+      "level": 3
+    },
+    {
+      "title": "Surround Buses in Fairlight (Studio Version Only)",
+      "page": 4159,
+      "level": 3
+    },
+    {
+      "title": "Native DCP Encoding Parameters",
+      "page": 4221,
+      "level": 3
+    },
+    {
+      "title": "Mixer and Track Header Meters ",
+      "page": 4403,
+      "level": 3
+    },
+    {
+      "title": "Fairlight",
+      "page": 4441,
+      "level": 1
+    }
+  ],
+  "4. Edit Page NLE, Trimming & Timeline": [
+    {
+      "title": "The Timeline",
+      "page": 27,
+      "level": 3
+    },
+    {
+      "title": "The Edit Page",
+      "page": 28,
+      "level": 2
+    },
+    {
+      "title": "Source/Offline and Timeline Viewers",
+      "page": 31,
+      "level": 3
+    },
+    {
+      "title": "Timeline",
+      "page": 32,
+      "level": 3
+    },
+    {
+      "title": "Thumbnail Timeline",
+      "page": 39,
+      "level": 3
+    },
+    {
+      "title": "Timeline",
+      "page": 43,
+      "level": 3
+    },
+    {
+      "title": "The Audio Timeline",
+      "page": 46,
+      "level": 3
+    },
+    {
+      "title": "The Deliver Page Timeline",
+      "page": 52,
+      "level": 3
+    },
+    {
+      "title": "Using the Full Screen Timeline Option in the Edit Page",
+      "page": 61,
+      "level": 3
+    },
+    {
+      "title": "Timeline Scroll Behavior",
+      "page": 69,
+      "level": 3
+    },
+    {
+      "title": "Timeline Backups",
+      "page": 92,
+      "level": 2
+    },
+    {
+      "title": "Compare Timelines with Timeline Backup Snapshots",
+      "page": 93,
+      "level": 3
+    },
+    {
+      "title": "Timeline Format",
+      "page": 144,
+      "level": 3
+    },
+    {
+      "title": "Color Space and Transforms",
+      "page": 153,
+      "level": 3
+    },
+    {
+      "title": "Prioritizing Audio or Video Playback in the Edit Page",
+      "page": 199,
+      "level": 2
+    },
+    {
+      "title": "Timeline Proxy Mode Improves Effects Performance",
+      "page": 200,
+      "level": 2
+    },
+    {
+      "title": "Controlling Edit Page Filter Caching",
+      "page": 211,
+      "level": 3
+    },
+    {
+      "title": "The Input, Timeline, and Output Color Space",
+      "page": 233,
+      "level": 3
+    },
+    {
+      "title": "Choosing a Timeline Color Space",
+      "page": 242,
+      "level": 3
+    },
+    {
+      "title": "Timeline Working Luminance",
+      "page": 244,
+      "level": 3
+    },
+    {
+      "title": "The Timeline Color Space in ACES Workflows is Fixed",
+      "page": 258,
+      "level": 3
+    },
+    {
+      "title": "Organizing Your Timeline for Dolby Vision Mastering",
+      "page": 268,
+      "level": 3
+    },
+    {
+      "title": "Previewing and Trimming At Different Levels",
+      "page": 277,
+      "level": 3
+    },
+    {
+      "title": "Timeline Resolution",
+      "page": 294,
+      "level": 2
+    },
+    {
+      "title": "Changing the Timeline Resolution",
+      "page": 294,
+      "level": 3
+    },
+    {
+      "title": "You Can Use Separate Timelines to Output Different Resolutions",
+      "page": 295,
+      "level": 3
+    },
+    {
+      "title": "You Don’t Need Separate Timelines to Output Different Resolutions",
+      "page": 295,
+      "level": 3
+    },
+    {
+      "title": "Edit Sizing in the Cut and Edit pages",
+      "page": 303,
+      "level": 3
+    },
+    {
+      "title": "Monitoring Stereoscopic 3D in the Edit Page",
+      "page": 327,
+      "level": 2
+    },
+    {
+      "title": "Converting Mono Clips or an Entire Timeline to Stereo",
+      "page": 328,
+      "level": 3
+    },
+    {
+      "title": "Step 2 – Edit the New Stereo Clips Into One or More Timelines for Grading",
+      "page": 329,
+      "level": 3
+    },
+    {
+      "title": "Deleted Timeline Backups",
+      "page": 364,
+      "level": 2
+    },
+    {
+      "title": "Import and Export DaVinci Resolve Timelines (.drt)",
+      "page": 391,
+      "level": 2
+    },
+    {
+      "title": "Duplicating Timelines",
+      "page": 399,
+      "level": 3
+    },
+    {
+      "title": "Finding Clips, Timelines, and Media",
+      "page": 407,
+      "level": 2
+    },
+    {
+      "title": "Finding Clips and/or Timelines Within the Media Pool",
+      "page": 407,
+      "level": 3
+    },
+    {
+      "title": "Finding Timeline Clips in the Media Pool",
+      "page": 408,
+      "level": 3
+    },
+    {
+      "title": "Finding Timelines in the Media Pool",
+      "page": 408,
+      "level": 3
+    },
+    {
+      "title": "Displaying Synced Audio File Names on the Timeline",
+      "page": 460,
+      "level": 2
+    },
+    {
+      "title": "Importing and Conforming Timelines",
+      "page": 476,
+      "level": 1
+    },
+    {
+      "title": "About Supported Transitions",
+      "page": 483,
+      "level": 3
+    },
+    {
+      "title": "About Speed Effects",
+      "page": 485,
+      "level": 3
+    },
+    {
+      "title": "Verifying Imported Timelines Using Offline References",
+      "page": 488,
+      "level": 2
+    },
+    {
+      "title": "Assigning a Clip or Timeline for Offline Comparison",
+      "page": 489,
+      "level": 3
+    },
+    {
+      "title": "Setting Up an Offline Reference/Timeline Comparison",
+      "page": 490,
+      "level": 3
+    },
+    {
+      "title": "Conforming and Relinking Existing Timelines and Clips",
+      "page": 492,
+      "level": 2
+    },
+    {
+      "title": "Conform Multiple Selected Timelines",
+      "page": 496,
+      "level": 2
+    },
+    {
+      "title": "Re-editing Media Directly to the Timeline",
+      "page": 514,
+      "level": 2
+    },
+    {
+      "title": "How Grades Are Linked to Multiple Timelines",
+      "page": 515,
+      "level": 2
+    },
+    {
+      "title": "Supported AAF Timeline Features",
+      "page": 531,
+      "level": 3
+    },
+    {
+      "title": "Import AAF to Current Timeline",
+      "page": 538,
+      "level": 3
+    },
+    {
+      "title": "Scene Cut Detection on the Timeline (Studio Version Only)",
+      "page": 550,
+      "level": 2
+    },
+    {
+      "title": "Timeline Resolution Quick Menu",
+      "page": 656,
+      "level": 3
+    },
+    {
+      "title": "Playing Clips and Navigating the Timeline",
+      "page": 659,
+      "level": 3
+    },
+    {
+      "title": "The Timeline",
+      "page": 662,
+      "level": 2
+    },
+    {
+      "title": "Upper Timeline",
+      "page": 662,
+      "level": 3
+    },
+    {
+      "title": "Lower Timeline",
+      "page": 663,
+      "level": 3
+    },
+    {
+      "title": "Timeline Controls",
+      "page": 667,
+      "level": 3
+    },
+    {
+      "title": "Import and Export Individual DaVinci Resolve Timelines ",
+      "page": 676,
+      "level": 3
+    },
+    {
+      "title": "Finding Timeline Clips in the Media Pool",
+      "page": 686,
+      "level": 3
+    },
+    {
+      "title": "Creating and Modifying Timelines",
+      "page": 697,
+      "level": 2
+    },
+    {
+      "title": "Creating New Timelines",
+      "page": 697,
+      "level": 3
+    },
+    {
+      "title": "Opening Timelines",
+      "page": 697,
+      "level": 3
+    },
+    {
+      "title": "About Tracks in the Cut Page Timeline",
+      "page": 697,
+      "level": 3
+    },
+    {
+      "title": "Navigating Clips in the Viewer and Timeline",
+      "page": 699,
+      "level": 2
+    },
+    {
+      "title": "Custom Guides and Snapping in the Timeline Viewer",
+      "page": 702,
+      "level": 3
+    },
+    {
+      "title": "Playing Clips and Navigating the Timeline in the Viewer",
+      "page": 707,
+      "level": 3
+    },
+    {
+      "title": "Scrolling Through the Timeline",
+      "page": 708,
+      "level": 3
+    },
+    {
+      "title": "Display Clip Names and Status in the Timeline",
+      "page": 709,
+      "level": 3
+    },
+    {
+      "title": "Scene Cut Detection in the Cut Timeline (Studio Version Only)",
+      "page": 709,
+      "level": 3
+    },
+    {
+      "title": "Copy, Paste and Remove Attributes from Timeline Clips",
+      "page": 722,
+      "level": 2
+    },
+    {
+      "title": "Subtitles in the Cut Timeline",
+      "page": 722,
+      "level": 3
+    },
+    {
+      "title": "Trimming in the Cut Page",
+      "page": 735,
+      "level": 1
+    },
+    {
+      "title": "Tools That Help You Work in the Timeline",
+      "page": 736,
+      "level": 2
+    },
+    {
+      "title": "Timeline Markers",
+      "page": 738,
+      "level": 3
+    },
+    {
+      "title": "Moving Clips in the Timeline",
+      "page": 741,
+      "level": 2
+    },
+    {
+      "title": "Ripple Trimming on Secondary Tracks",
+      "page": 742,
+      "level": 2
+    },
+    {
+      "title": "Trimming Clips",
+      "page": 747,
+      "level": 2
+    },
+    {
+      "title": "Resize Clips While Rippling the Timeline",
+      "page": 747,
+      "level": 3
+    },
+    {
+      "title": "Trimming Edits in the Viewer",
+      "page": 750,
+      "level": 3
+    },
+    {
+      "title": "Trimming Transitions in the Viewer",
+      "page": 751,
+      "level": 3
+    },
+    {
+      "title": "Dynamic Trimming Using JKL Controls",
+      "page": 751,
+      "level": 2
+    },
+    {
+      "title": "Adding Transitions",
+      "page": 777,
+      "level": 2
+    },
+    {
+      "title": "Adding Other Kinds of Transitions",
+      "page": 778,
+      "level": 3
+    },
+    {
+      "title": "Favorited Transitions",
+      "page": 779,
+      "level": 3
+    },
+    {
+      "title": "Editing and Removing Transitions",
+      "page": 780,
+      "level": 3
+    },
+    {
+      "title": "Using the Edit Page",
+      "page": 814,
+      "level": 1
+    },
+    {
+      "title": "The Edit Page User Interface",
+      "page": 816,
+      "level": 2
+    },
+    {
+      "title": "Navigating the Edit Page",
+      "page": 817,
+      "level": 2
+    },
+    {
+      "title": "Importing Media Into the Media Pool on the Edit Page",
+      "page": 819,
+      "level": 3
+    },
+    {
+      "title": "More About Timelines and Grading",
+      "page": 822,
+      "level": 2
+    },
+    {
+      "title": "Timelines, Grades, and Versions",
+      "page": 822,
+      "level": 3
+    },
+    {
+      "title": "Enabling the Use of a Master Timeline",
+      "page": 823,
+      "level": 3
+    },
+    {
+      "title": "Source and Timeline Viewers",
+      "page": 832,
+      "level": 2
+    },
+    {
+      "title": "Source and Timeline Viewers vs. Single Viewer Mode",
+      "page": 833,
+      "level": 3
+    },
+    {
+      "title": "Previous and Next Clips or Timelines in Viewers",
+      "page": 834,
+      "level": 3
+    },
+    {
+      "title": "Fast Review in the Timeline Viewer",
+      "page": 840,
+      "level": 3
+    },
+    {
+      "title": "Timeline Viewer Edit Overlays",
+      "page": 841,
+      "level": 3
+    },
+    {
+      "title": "Timeline",
+      "page": 844,
+      "level": 2
+    },
+    {
+      "title": "Timeline Options",
+      "page": 846,
+      "level": 3
+    },
+    {
+      "title": "Switching Among Multiple Timelines",
+      "page": 848,
+      "level": 3
+    },
+    {
+      "title": "Customizing the Edit Page",
+      "page": 855,
+      "level": 2
+    },
+    {
+      "title": "Creating and Working with Timelines",
+      "page": 858,
+      "level": 1
+    },
+    {
+      "title": "Creating and Duplicating Timelines",
+      "page": 860,
+      "level": 2
+    },
+    {
+      "title": "Individual Timeline Settings for Format, Monitoring, Output, and Color",
+      "page": 860,
+      "level": 3
+    },
+    {
+      "title": "Creating Blank and Stringout Timelines",
+      "page": 861,
+      "level": 3
+    },
+    {
+      "title": "Creating Timelines by Drag and Drop",
+      "page": 862,
+      "level": 3
+    },
+    {
+      "title": "Creating Timelines From Bins and Selections",
+      "page": 862,
+      "level": 3
+    },
+    {
+      "title": "Creating Timelines Using an IMF or DCP Composition Playlist (CPL)",
+      "page": 863,
+      "level": 3
+    },
+    {
+      "title": "Duplicating Timelines",
+      "page": 864,
+      "level": 3
+    },
+    {
+      "title": "Disabling Timelines",
+      "page": 864,
+      "level": 3
+    },
+    {
+      "title": "Adding Media Pool Timelines Directly to the Render Queue",
+      "page": 865,
+      "level": 2
+    },
+    {
+      "title": "Import and Export DaVinci Resolve Timelines (.drt)",
+      "page": 865,
+      "level": 2
+    },
+    {
+      "title": "Backing Up and Restoring Timelines",
+      "page": 866,
+      "level": 2
+    },
+    {
+      "title": "Restoring Deleted Timeline Backups",
+      "page": 868,
+      "level": 3
+    },
+    {
+      "title": "Compare Timelines with Timeline Backup Snapshots",
+      "page": 868,
+      "level": 3
+    },
+    {
+      "title": "Timeline View Options",
+      "page": 868,
+      "level": 2
+    },
+    {
+      "title": "Modifying Timeline Tracks",
+      "page": 870,
+      "level": 2
+    },
+    {
+      "title": "Naming Timeline Tracks",
+      "page": 871,
+      "level": 2
+    },
+    {
+      "title": "Using Timeline Snapping and Zooming",
+      "page": 874,
+      "level": 2
+    },
+    {
+      "title": "Scrolling Through the Timeline ",
+      "page": 875,
+      "level": 2
+    },
+    {
+      "title": "Scroll Wheel Controls on Timeline",
+      "page": 875,
+      "level": 3
+    },
+    {
+      "title": "Resizing the Timeline’s Video and Audio Track Regions",
+      "page": 876,
+      "level": 2
+    },
+    {
+      "title": "Tabbed and Stacked Timelines",
+      "page": 877,
+      "level": 2
+    },
+    {
+      "title": "Tabbed Timelines",
+      "page": 877,
+      "level": 3
+    },
+    {
+      "title": "Stacked Timelines",
+      "page": 878,
+      "level": 3
+    },
+    {
+      "title": "View and Edit Dual Timelines Using the Source Viewer",
+      "page": 879,
+      "level": 2
+    },
+    {
+      "title": "Comparing Timelines",
+      "page": 881,
+      "level": 2
+    },
+    {
+      "title": "The Timeline Comparison Window",
+      "page": 881,
+      "level": 3
+    },
+    {
+      "title": "Source and Timeline Viewers vs. Single Viewer Mode",
+      "page": 889,
+      "level": 3
+    },
+    {
+      "title": "Custom Guides and Snapping in the Timeline Viewer",
+      "page": 894,
+      "level": 3
+    },
+    {
+      "title": "Source Tape in the Edit Page Source Viewer",
+      "page": 898,
+      "level": 2
+    },
+    {
+      "title": "Create a Timeline Subclip from In / Out Range",
+      "page": 909,
+      "level": 2
+    },
+    {
+      "title": "Drag and Drop Editing of Individual Clips Into the Timeline",
+      "page": 913,
+      "level": 3
+    },
+    {
+      "title": "Drag and Drop Editing of Several Clips Into the Timeline At Once",
+      "page": 914,
+      "level": 3
+    },
+    {
+      "title": "Dragging Clips From the File System Into the Timeline",
+      "page": 917,
+      "level": 3
+    },
+    {
+      "title": "Inserting Multiple Clips into the Timeline From the Media Pool",
+      "page": 918,
+      "level": 2
+    },
+    {
+      "title": "Insert Selected Clips to Timeline Using Timecode",
+      "page": 918,
+      "level": 3
+    },
+    {
+      "title": "Insert Selected Clips to Timeline With Handles",
+      "page": 918,
+      "level": 3
+    },
+    {
+      "title": "Not Creating New Tracks when Adding Clips to a Timeline",
+      "page": 919,
+      "level": 3
+    },
+    {
+      "title": "Example: Assembling Clips Into the Timeline From the Source Viewer",
+      "page": 919,
+      "level": 3
+    },
+    {
+      "title": "Example: Assembling Clips Into the Timeline From the Media Pool",
+      "page": 921,
+      "level": 3
+    },
+    {
+      "title": "Making Selections in the Timeline",
+      "page": 922,
+      "level": 2
+    },
+    {
+      "title": "Manually Selecting Clips in the Timeline",
+      "page": 922,
+      "level": 3
+    },
+    {
+      "title": "Selecting Edits in the Timeline",
+      "page": 924,
+      "level": 3
+    },
+    {
+      "title": "Disabling and Re-Enabling Clips in the Timeline",
+      "page": 932,
+      "level": 2
+    },
+    {
+      "title": "Deleting Clips From the Timeline",
+      "page": 933,
+      "level": 2
+    },
+    {
+      "title": "Gaps in the Timeline",
+      "page": 934,
+      "level": 2
+    },
+    {
+      "title": "Deleting Multiple Timeline Gaps at Once",
+      "page": 935,
+      "level": 3
+    },
+    {
+      "title": "Linking Multiple Clips in the Timeline",
+      "page": 939,
+      "level": 3
+    },
+    {
+      "title": "Using the Inspector in the Edit Page",
+      "page": 941,
+      "level": 1
+    },
+    {
+      "title": "Modifying Clips in the Timeline",
+      "page": 962,
+      "level": 1
+    },
+    {
+      "title": "Trimming Gaps",
+      "page": 967,
+      "level": 2
+    },
+    {
+      "title": "Resizing or Trimming Clips in the Source Viewer",
+      "page": 968,
+      "level": 2
+    },
+    {
+      "title": "Copying and Pasting Clips in the Timeline",
+      "page": 974,
+      "level": 2
+    },
+    {
+      "title": "Duplicating Clips and Transitions in the Timeline",
+      "page": 978,
+      "level": 2
+    },
+    {
+      "title": "Split Photoshop PSD Layers into Individual Timeline Tracks",
+      "page": 979,
+      "level": 2
+    },
+    {
+      "title": "Scene Cut Detection on the Timeline ",
+      "page": 986,
+      "level": 2
+    },
+    {
+      "title": "Setting In and Out Points in the Timeline",
+      "page": 992,
+      "level": 2
+    },
+    {
+      "title": "Editing a Specific Range of the Source Clip Into the Timeline",
+      "page": 999,
+      "level": 3
+    },
+    {
+      "title": "Editing Part of a Source Clip to Fit Into a Specific Range of the Timeline",
+      "page": 1001,
+      "level": 3
+    },
+    {
+      "title": "Backtiming a Source Clip When Editing Into the Timeline",
+      "page": 1002,
+      "level": 3
+    },
+    {
+      "title": "Switch Focus to Timeline After Edit",
+      "page": 1003,
+      "level": 2
+    },
+    {
+      "title": "Insert Selected Clips to Timeline Using Timecode",
+      "page": 1014,
+      "level": 3
+    },
+    {
+      "title": "Insert Selected Clips to Timeline With Handles",
+      "page": 1015,
+      "level": 3
+    },
+    {
+      "title": "Example: Assembling Clips Into the Timeline From the Media Pool",
+      "page": 1016,
+      "level": 3
+    },
+    {
+      "title": "IntelliScript for Creating Timelines from Scripts (Studio Version Only)",
+      "page": 1027,
+      "level": 2
+    },
+    {
+      "title": "Edit Timelines Based on Source Clip Transcription",
+      "page": 1030,
+      "level": 3
+    },
+    {
+      "title": "Marking and Finding Clips in the Timeline",
+      "page": 1034,
+      "level": 1
+    },
+    {
+      "title": "Adding Markers to Timelines",
+      "page": 1038,
+      "level": 3
+    },
+    {
+      "title": "Copy and Paste Multiple Markers in the Viewers and Timeline",
+      "page": 1043,
+      "level": 3
+    },
+    {
+      "title": "Using Timeline Markers for Chapters",
+      "page": 1046,
+      "level": 2
+    },
+    {
+      "title": "Renaming Clips in the Timeline",
+      "page": 1050,
+      "level": 2
+    },
+    {
+      "title": "Color Labeling Clips in the Timeline",
+      "page": 1051,
+      "level": 2
+    },
+    {
+      "title": "Finding Clips, Media, Markers, Gaps, and Timelines",
+      "page": 1054,
+      "level": 2
+    },
+    {
+      "title": "Finding Clips in the Timeline",
+      "page": 1054,
+      "level": 3
+    },
+    {
+      "title": "Finding Offline Clips in the Timeline",
+      "page": 1054,
+      "level": 3
+    },
+    {
+      "title": "Finding Edit Index Events Using Clips in the Timeline",
+      "page": 1054,
+      "level": 3
+    },
+    {
+      "title": "Finding the Currently Open Timeline in the Media Pool",
+      "page": 1056,
+      "level": 3
+    },
+    {
+      "title": "Matching From the Timeline",
+      "page": 1056,
+      "level": 3
+    },
+    {
+      "title": "Finding a Clip in the Media Pool Using a Timeline Clip",
+      "page": 1058,
+      "level": 2
+    },
+    {
+      "title": "Using a Clip in the Timeline to Find a Media Pool Clip",
+      "page": 1058,
+      "level": 3
+    },
+    {
+      "title": "Converting Compound Clips or Timelines to Multicam Clips",
+      "page": 1064,
+      "level": 3
+    },
+    {
+      "title": "Setting up a Timeline for Multicam Editing",
+      "page": 1065,
+      "level": 2
+    },
+    {
+      "title": "Editing Multicam Clips in the Timeline",
+      "page": 1069,
+      "level": 2
+    },
+    {
+      "title": "Take Selectors, Compound Clips, and Nested Timelines",
+      "page": 1074,
+      "level": 1
+    },
+    {
+      "title": "Nested Timelines",
+      "page": 1081,
+      "level": 2
+    },
+    {
+      "title": "Re-Editing a Nested Timeline",
+      "page": 1082,
+      "level": 3
+    },
+    {
+      "title": "Swapping the Contents of the Source Viewer and Timeline",
+      "page": 1082,
+      "level": 3
+    },
+    {
+      "title": "Editing Source Media From a Timeline or Compound Clip",
+      "page": 1083,
+      "level": 3
+    },
+    {
+      "title": "Decomposing Nested Timelines",
+      "page": 1083,
+      "level": 3
+    },
+    {
+      "title": "Compositing and Grading Nested Timelines",
+      "page": 1084,
+      "level": 3
+    },
+    {
+      "title": "Audio Buses in Nested Timelines",
+      "page": 1084,
+      "level": 3
+    },
+    {
+      "title": "Match Frame for Nested Timelines and Compound Clips",
+      "page": 1085,
+      "level": 2
+    },
+    {
+      "title": "Converting Compound Clips or Timelines to Multicam Clips",
+      "page": 1085,
+      "level": 2
+    },
+    {
+      "title": "Trimming",
+      "page": 1086,
+      "level": 1
+    },
+    {
+      "title": "Selection-Based Trimming Using the Trim Tool",
+      "page": 1087,
+      "level": 2
+    },
+    {
+      "title": "Trimming Edits in the Timeline Viewer",
+      "page": 1094,
+      "level": 3
+    },
+    {
+      "title": "Important Trimming Keyboard Shortcuts",
+      "page": 1095,
+      "level": 3
+    },
+    {
+      "title": "Trimming Using Timecode Entry",
+      "page": 1097,
+      "level": 2
+    },
+    {
+      "title": "Trimming Clips in the Source Viewer",
+      "page": 1099,
+      "level": 2
+    },
+    {
+      "title": "Using the Source Track Selector to Control Trimming",
+      "page": 1103,
+      "level": 2
+    },
+    {
+      "title": "Trimming Multiple Edits or Clips at Once",
+      "page": 1107,
+      "level": 2
+    },
+    {
+      "title": "Asymmetric Trimming",
+      "page": 1109,
+      "level": 3
+    },
+    {
+      "title": "Keyboard Trimming During Looped Playback",
+      "page": 1112,
+      "level": 2
+    },
+    {
+      "title": "Dynamic JKL Trimming",
+      "page": 1112,
+      "level": 2
+    },
+    {
+      "title": "Quick Trimming",
+      "page": 1113,
+      "level": 3
+    },
+    {
+      "title": "Dynamic Trimming (or “JKL Trimming”)",
+      "page": 1114,
+      "level": 3
+    },
+    {
+      "title": "Working with Audio in the Edit Page",
+      "page": 1120,
+      "level": 1
+    },
+    {
+      "title": "Editing Audio Into the Timeline",
+      "page": 1127,
+      "level": 2
+    },
+    {
+      "title": "Using Multi-Channel Timeline Tracks",
+      "page": 1129,
+      "level": 3
+    },
+    {
+      "title": "Creating Timelines With Audio Mixer Presets",
+      "page": 1130,
+      "level": 3
+    },
+    {
+      "title": "Editing Audio Clips Into the Timeline",
+      "page": 1131,
+      "level": 3
+    },
+    {
+      "title": "Displaying Waveforms in the Timeline",
+      "page": 1132,
+      "level": 3
+    },
+    {
+      "title": "Switch Mono Audio Channels of a Clip on the Timeline",
+      "page": 1133,
+      "level": 2
+    },
+    {
+      "title": "Switch Audio Channels for Multiple Selected Clips on the Timeline",
+      "page": 1134,
+      "level": 3
+    },
+    {
+      "title": "Editing Audio In the Timeline Using In and Out Points",
+      "page": 1134,
+      "level": 2
+    },
+    {
+      "title": "Adjusting Audio in the Timeline",
+      "page": 1139,
+      "level": 3
+    },
+    {
+      "title": "Media Management of Timelines Creates .drt Files",
+      "page": 1169,
+      "level": 2
+    },
+    {
+      "title": "Editing Effects and Transitions",
+      "page": 1176,
+      "level": 0
+    },
+    {
+      "title": "Seeing Effects in the Timeline",
+      "page": 1182,
+      "level": 2
+    },
+    {
+      "title": "Option to Ripple the Timeline for Pasting Speed Effects",
+      "page": 1192,
+      "level": 3
+    },
+    {
+      "title": "Using Transitions",
+      "page": 1193,
+      "level": 1
+    },
+    {
+      "title": "Working With Transitions",
+      "page": 1194,
+      "level": 2
+    },
+    {
+      "title": "Previewing Transitions",
+      "page": 1194,
+      "level": 2
+    },
+    {
+      "title": "Adding and Editing Transitions",
+      "page": 1195,
+      "level": 2
+    },
+    {
+      "title": "Adding Transitions When There’s Not Enough Handles",
+      "page": 1197,
+      "level": 2
+    },
+    {
+      "title": "Adding Transitions By Dragging to Create Overlap",
+      "page": 1197,
+      "level": 2
+    },
+    {
+      "title": "Favorite Transitions",
+      "page": 1199,
+      "level": 2
+    },
+    {
+      "title": "Changing Transitions to Fusion Compositions",
+      "page": 1201,
+      "level": 2
+    },
+    {
+      "title": "Video Transitions",
+      "page": 1202,
+      "level": 2
+    },
+    {
+      "title": "User Transitions",
+      "page": 1207,
+      "level": 3
+    },
+    {
+      "title": "Fusion Transitions",
+      "page": 1207,
+      "level": 3
+    },
+    {
+      "title": "Resolve FX Transitions",
+      "page": 1209,
+      "level": 2
+    },
+    {
+      "title": "Audio Transitions",
+      "page": 1211,
+      "level": 2
+    },
+    {
+      "title": "OpenFX Transitions",
+      "page": 1211,
+      "level": 2
+    },
+    {
+      "title": "Editing Titles Within the Timeline Viewer",
+      "page": 1219,
+      "level": 3
+    },
+    {
+      "title": "Compositing and Transforms in the Timeline",
+      "page": 1236,
+      "level": 1
+    },
+    {
+      "title": "Keying in the Timeline Using Resolve FX",
+      "page": 1244,
+      "level": 2
+    },
+    {
+      "title": "Setting Up a Green Screen (Chroma Key) on the Timeline",
+      "page": 1244,
+      "level": 3
+    },
+    {
+      "title": "Retime and Scaling",
+      "page": 1249,
+      "level": 3
+    },
+    {
+      "title": "Speed Effects",
+      "page": 1253,
+      "level": 1
+    },
+    {
+      "title": "Speed Effects and Retiming",
+      "page": 1254,
+      "level": 2
+    },
+    {
+      "title": "Rippling or Overwriting the Timeline When Using Retime",
+      "page": 1258,
+      "level": 3
+    },
+    {
+      "title": "Creating Variable Speed Effects Using the Retime Controls",
+      "page": 1258,
+      "level": 3
+    },
+    {
+      "title": "Closing Retime Controls",
+      "page": 1261,
+      "level": 3
+    },
+    {
+      "title": "Using Retime Curves",
+      "page": 1261,
+      "level": 2
+    },
+    {
+      "title": "Optical Flow Quality Settings Affecting Speed Effects",
+      "page": 1266,
+      "level": 3
+    },
+    {
+      "title": "Using Subtitles in Nested Timelines",
+      "page": 1283,
+      "level": 3
+    },
+    {
+      "title": "Keyframing Motion Paths in the Timeline Viewer",
+      "page": 1292,
+      "level": 2
+    },
+    {
+      "title": "Keyframing in the Edit Timeline and Curve Editor",
+      "page": 1294,
+      "level": 2
+    },
+    {
+      "title": "Keyframe Directly in the Timeline During Playback",
+      "page": 1294,
+      "level": 3
+    },
+    {
+      "title": "Retime Keyframing Controls",
+      "page": 1305,
+      "level": 3
+    },
+    {
+      "title": "Thumbnail Timeline in the Fusion Page",
+      "page": 1361,
+      "level": 2
+    },
+    {
+      "title": "Using Fusion Transitions",
+      "page": 1380,
+      "level": 3
+    },
+    {
+      "title": "The Timeline Header",
+      "page": 1568,
+      "level": 3
+    },
+    {
+      "title": "Scaling and Panning the Timeline",
+      "page": 1569,
+      "level": 2
+    },
+    {
+      "title": "Working with Segments in the Timeline",
+      "page": 1570,
+      "level": 2
+    },
+    {
+      "title": "Moving Segments in the Timeline",
+      "page": 1570,
+      "level": 3
+    },
+    {
+      "title": "Trimming Segments",
+      "page": 1570,
+      "level": 3
+    },
+    {
+      "title": "Working with Keyframes in the Timeline",
+      "page": 1571,
+      "level": 2
+    },
+    {
+      "title": "Timeline Filters",
+      "page": 1573,
+      "level": 2
+    },
+    {
+      "title": "Sorting in the Timeline",
+      "page": 1575,
+      "level": 2
+    },
+    {
+      "title": "Timeline",
+      "page": 1671,
+      "level": 3
+    },
+    {
+      "title": "Downscale Clip Compositions to Timeline Resolution",
+      "page": 1694,
+      "level": 3
+    },
+    {
+      "title": "Mapping Timeline Layers to Nodes in Fusion",
+      "page": 1765,
+      "level": 3
+    },
+    {
+      "title": "Unalign the 3D Scene Transforms",
+      "page": 1943,
+      "level": 3
+    },
+    {
+      "title": "Timeline",
+      "page": 3105,
+      "level": 3
+    },
+    {
+      "title": "Timeline Resolution ",
+      "page": 3123,
+      "level": 3
+    },
+    {
+      "title": "Saving and Wiping Stills in the Gallery and Timeline",
+      "page": 3136,
+      "level": 3
+    },
+    {
+      "title": "Wiping Between Clips in the Timeline",
+      "page": 3139,
+      "level": 3
+    },
+    {
+      "title": "Timeline Marker List Available in Color Page Viewer Option Menu",
+      "page": 3143,
+      "level": 3
+    },
+    {
+      "title": "Color Page Timeline and Lightbox",
+      "page": 3159,
+      "level": 1
+    },
+    {
+      "title": "Navigating Using the Color Page Timeline",
+      "page": 3160,
+      "level": 2
+    },
+    {
+      "title": "Thumbnail Timeline",
+      "page": 3160,
+      "level": 3
+    },
+    {
+      "title": "Mini-Timeline",
+      "page": 3160,
+      "level": 3
+    },
+    {
+      "title": "Using Multiple Timeline Playheads",
+      "page": 3162,
+      "level": 3
+    },
+    {
+      "title": "Sorting and Filtering Clips in the Thumbnail Timeline",
+      "page": 3165,
+      "level": 2
+    },
+    {
+      "title": "Changing Timelines",
+      "page": 3165,
+      "level": 3
+    },
+    {
+      "title": "Timeline Filtering",
+      "page": 3168,
+      "level": 3
+    },
+    {
+      "title": "Tracking Windows Across Transitions",
+      "page": 3369,
+      "level": 3
+    },
+    {
+      "title": "Timeline Wipes",
+      "page": 3397,
+      "level": 2
+    },
+    {
+      "title": "Gang Timeline Wipe With Current Clip",
+      "page": 3397,
+      "level": 3
+    },
+    {
+      "title": "Change a Timeline Wipe Using the Timelines Album of the Gallery",
+      "page": 3397,
+      "level": 3
+    },
+    {
+      "title": "Browse all Grades from the Current Timeline",
+      "page": 3403,
+      "level": 2
+    },
+    {
+      "title": "Browse and Import Timeline Grades From Other Projects",
+      "page": 3405,
+      "level": 3
+    },
+    {
+      "title": "Creating a Master Timeline",
+      "page": 3414,
+      "level": 3
+    },
+    {
+      "title": "Clip vs. Timeline Grading",
+      "page": 3467,
+      "level": 2
+    },
+    {
+      "title": "The Audio Timeline",
+      "page": 3818,
+      "level": 2
+    },
+    {
+      "title": "Controls in the Audio Timeline",
+      "page": 3819,
+      "level": 3
+    },
+    {
+      "title": "Switching Among Multiple Timelines",
+      "page": 3826,
+      "level": 3
+    },
+    {
+      "title": "Timeline View Options",
+      "page": 3828,
+      "level": 3
+    },
+    {
+      "title": "Customizing Clip Display in the Timeline",
+      "page": 3833,
+      "level": 2
+    },
+    {
+      "title": "Customizing the Timeline’s Display",
+      "page": 3834,
+      "level": 2
+    },
+    {
+      "title": "Busses in Nested Timelines",
+      "page": 3874,
+      "level": 3
+    },
+    {
+      "title": "Exposing Bus Tracks in the Timeline",
+      "page": 3874,
+      "level": 3
+    },
+    {
+      "title": "Transport Controls, Timeline Navigation, and Markers",
+      "page": 3894,
+      "level": 1
+    },
+    {
+      "title": "Setting the Zoom Level of the Timeline",
+      "page": 3900,
+      "level": 3
+    },
+    {
+      "title": "Scrolling Through the Timeline",
+      "page": 3900,
+      "level": 3
+    },
+    {
+      "title": "Adding Markers to Timelines",
+      "page": 3902,
+      "level": 2
+    },
+    {
+      "title": "Recording ADR to the Timeline",
+      "page": 3922,
+      "level": 2
+    },
+    {
+      "title": "Editing Audio Clips Into the Timeline",
+      "page": 3925,
+      "level": 2
+    },
+    {
+      "title": "Dragging Audio Clips Into the Timeline",
+      "page": 3927,
+      "level": 3
+    },
+    {
+      "title": "Regenerating Timeline Clip Waveforms",
+      "page": 3930,
+      "level": 2
+    },
+    {
+      "title": "Making Audio Clip Selections in the Timeline",
+      "page": 3931,
+      "level": 2
+    },
+    {
+      "title": "Trimming Clips Without Rippling the Timeline",
+      "page": 3947,
+      "level": 2
+    },
+    {
+      "title": "Disabling and Re-Enabling Clips in the Timeline",
+      "page": 3952,
+      "level": 2
+    },
+    {
+      "title": "Using Crossfades From the Edit Page",
+      "page": 3968,
+      "level": 3
+    },
+    {
+      "title": "Changing Clip Color in the Timeline",
+      "page": 3968,
+      "level": 2
+    },
+    {
+      "title": "Setting Clip Volume in the Timeline",
+      "page": 3995,
+      "level": 2
+    },
+    {
+      "title": "Nested Audio Timelines",
+      "page": 4035,
+      "level": 2
+    },
+    {
+      "title": "Trimming Automation from Unity in the Mixer",
+      "page": 4056,
+      "level": 3
+    },
+    {
+      "title": "Viewing Automation in the Timeline",
+      "page": 4064,
+      "level": 2
+    },
+    {
+      "title": "More About Rendering Speed Effects",
+      "page": 4173,
+      "level": 3
+    },
+    {
+      "title": "Determining the Rendered Output Resolution of Clips in Mixed Timelines",
+      "page": 4173,
+      "level": 3
+    },
+    {
+      "title": "Rendering Mixed Frame Rate Timelines",
+      "page": 4174,
+      "level": 3
+    },
+    {
+      "title": "The Deliver Page Timeline",
+      "page": 4181,
+      "level": 2
+    },
+    {
+      "title": "Filtering the Thumbnail Timeline",
+      "page": 4181,
+      "level": 3
+    },
+    {
+      "title": "Importing a DCP or IMF Into a Timeline",
+      "page": 4224,
+      "level": 3
+    },
+    {
+      "title": "Editing the Resulting Timeline",
+      "page": 4225,
+      "level": 3
+    },
+    {
+      "title": "Outputting a Program From the Timeline",
+      "page": 4238,
+      "level": 3
+    },
+    {
+      "title": "Exporting Timelines to Other Applications",
+      "page": 4241,
+      "level": 1
+    },
+    {
+      "title": "Exporting Timelines from DaVinci Resolve",
+      "page": 4242,
+      "level": 2
+    },
+    {
+      "title": "Exporting Timeline Markers to EDL",
+      "page": 4245,
+      "level": 2
+    },
+    {
+      "title": "Exporting Timeline Markers to EDL",
+      "page": 4250,
+      "level": 2
+    },
+    {
+      "title": "Sending a Timeline to Presentations",
+      "page": 4285,
+      "level": 3
+    },
+    {
+      "title": "Automatic Bin and Timeline Locking",
+      "page": 4333,
+      "level": 3
+    },
+    {
+      "title": "Manually Locking and Unlocking Timelines",
+      "page": 4335,
+      "level": 3
+    },
+    {
+      "title": "Transitions",
+      "page": 4373,
+      "level": 3
+    },
+    {
+      "title": "CST Timeline Mapping",
+      "page": 4384,
+      "level": 3
+    },
+    {
+      "title": "Bypassing Transitions",
+      "page": 4407,
+      "level": 2
+    },
+    {
+      "title": "Dropbox Replay Comments Sync with Timeline Markers",
+      "page": 4416,
+      "level": 3
+    },
+    {
+      "title": "Timeline",
+      "page": 4434,
+      "level": 1
+    }
+  ],
+  "5. Media Management & Media Pool": [
+    {
+      "title": "The Media Page",
+      "page": 21,
+      "level": 2
+    },
+    {
+      "title": "Media Pool",
+      "page": 23,
+      "level": 3
+    },
+    {
+      "title": "Metadata Editor",
+      "page": 24,
+      "level": 3
+    },
+    {
+      "title": "The Media Pool",
+      "page": 25,
+      "level": 3
+    },
+    {
+      "title": "The Media Pool",
+      "page": 29,
+      "level": 3
+    },
+    {
+      "title": "Media Pool",
+      "page": 39,
+      "level": 2
+    },
+    {
+      "title": "Metadata",
+      "page": 125,
+      "level": 3
+    },
+    {
+      "title": "Use Camera Metadata",
+      "page": 174,
+      "level": 3
+    },
+    {
+      "title": "BRAW Sidecar Metadata Files",
+      "page": 175,
+      "level": 3
+    },
+    {
+      "title": "Use Camera Metadata",
+      "page": 178,
+      "level": 3
+    },
+    {
+      "title": "Use Camera Metadata",
+      "page": 180,
+      "level": 3
+    },
+    {
+      "title": "Use Camera Metadata",
+      "page": 182,
+      "level": 3
+    },
+    {
+      "title": "Use Camera Metadata",
+      "page": 185,
+      "level": 3
+    },
+    {
+      "title": "Use Camera Metadata",
+      "page": 192,
+      "level": 3
+    },
+    {
+      "title": "Use Camera Metadata",
+      "page": 194,
+      "level": 3
+    },
+    {
+      "title": "Assigning Clip Levels in the Media Pool",
+      "page": 228,
+      "level": 3
+    },
+    {
+      "title": "Managing Dolby Vision™ Metadata",
+      "page": 277,
+      "level": 3
+    },
+    {
+      "title": "Conforming Projects to Stereo 3D Media",
+      "page": 332,
+      "level": 2
+    },
+    {
+      "title": "Using Metadata Variables",
+      "page": 345,
+      "level": 2
+    },
+    {
+      "title": "How to Edit Metadata Variables",
+      "page": 345,
+      "level": 3
+    },
+    {
+      "title": "Current Date and Time Metadata Variables",
+      "page": 346,
+      "level": 3
+    },
+    {
+      "title": "Using the Media Page",
+      "page": 352,
+      "level": 1
+    },
+    {
+      "title": "Understanding the Media Page User Interface",
+      "page": 353,
+      "level": 2
+    },
+    {
+      "title": "Media Pool",
+      "page": 360,
+      "level": 2
+    },
+    {
+      "title": "Bins, Power Bins, and Smart Bins",
+      "page": 362,
+      "level": 3
+    },
+    {
+      "title": "Thumbnail, List, and Metadata Views in the Media Pool",
+      "page": 363,
+      "level": 3
+    },
+    {
+      "title": "Display Audio Clip Waveforms in Media Pool and Media Storage",
+      "page": 364,
+      "level": 3
+    },
+    {
+      "title": "Metadata Editor",
+      "page": 365,
+      "level": 2
+    },
+    {
+      "title": "Customizing the Media Page",
+      "page": 368,
+      "level": 2
+    },
+    {
+      "title": "Adding Media to the Media Pool",
+      "page": 375,
+      "level": 2
+    },
+    {
+      "title": "Basic Methods for Adding Media in the Media Page",
+      "page": 375,
+      "level": 3
+    },
+    {
+      "title": "Import Clips With Metadata Via Final Cut Pro 7 XML",
+      "page": 379,
+      "level": 3
+    },
+    {
+      "title": "Import Blackmagic Cloud Shared Folders to Media Pool",
+      "page": 380,
+      "level": 2
+    },
+    {
+      "title": "Sync Media Pool Bins with File System Folders",
+      "page": 381,
+      "level": 2
+    },
+    {
+      "title": "Manually Organizing the Media Pool",
+      "page": 389,
+      "level": 2
+    },
+    {
+      "title": "To Select Clips in the Media Pool",
+      "page": 389,
+      "level": 3
+    },
+    {
+      "title": "Automated Organization Using Smart Bins",
+      "page": 393,
+      "level": 2
+    },
+    {
+      "title": "Smart Bins Are Only As Good As Your Metadata",
+      "page": 393,
+      "level": 3
+    },
+    {
+      "title": "Smart Bins Update Their Contents Dynamically",
+      "page": 394,
+      "level": 3
+    },
+    {
+      "title": "Organizing Smart Bins",
+      "page": 398,
+      "level": 3
+    },
+    {
+      "title": "Duplicating Clips in the Media Pool",
+      "page": 398,
+      "level": 2
+    },
+    {
+      "title": "Using the Media Pool in Thumbnail View",
+      "page": 400,
+      "level": 3
+    },
+    {
+      "title": "Custom Sort of Clip Thumbnails in the Media Pool",
+      "page": 400,
+      "level": 3
+    },
+    {
+      "title": "Using Metadata View in the Media Pool",
+      "page": 403,
+      "level": 3
+    },
+    {
+      "title": "Media Pool Tabs",
+      "page": 405,
+      "level": 3
+    },
+    {
+      "title": "Thumbnail, List and Metadata Views Can Be Set Per Bin",
+      "page": 406,
+      "level": 3
+    },
+    {
+      "title": "Finding Clips and/or Timelines Within the Media Pool",
+      "page": 407,
+      "level": 3
+    },
+    {
+      "title": "Finding Timeline Clips in the Media Pool",
+      "page": 408,
+      "level": 3
+    },
+    {
+      "title": "Finding Timelines in the Media Pool",
+      "page": 408,
+      "level": 3
+    },
+    {
+      "title": "Reveal Media Pool Bin from Multi-Bin or Search Displays",
+      "page": 408,
+      "level": 3
+    },
+    {
+      "title": "Using Clip Metadata",
+      "page": 417,
+      "level": 1
+    },
+    {
+      "title": "Editing Clip Metadata",
+      "page": 418,
+      "level": 2
+    },
+    {
+      "title": "Automatically Imported Metadata",
+      "page": 418,
+      "level": 3
+    },
+    {
+      "title": "Using the Metadata Editor",
+      "page": 419,
+      "level": 2
+    },
+    {
+      "title": "Adding and Populating Custom Metadata Fields",
+      "page": 421,
+      "level": 3
+    },
+    {
+      "title": "Editing Metadata Using the File Inspector",
+      "page": 424,
+      "level": 2
+    },
+    {
+      "title": "Creating Custom Metadata Groups",
+      "page": 433,
+      "level": 2
+    },
+    {
+      "title": "Importing and Exporting Media Pool Metadata",
+      "page": 434,
+      "level": 2
+    },
+    {
+      "title": "Different Ways of Using Clip Metadata",
+      "page": 436,
+      "level": 2
+    },
+    {
+      "title": "Using Metadata to Define Clip Names",
+      "page": 437,
+      "level": 3
+    },
+    {
+      "title": "Using the Inspector in the Media Page",
+      "page": 439,
+      "level": 1
+    },
+    {
+      "title": "Adjusting Media Pool Clips in the Inspector",
+      "page": 440,
+      "level": 2
+    },
+    {
+      "title": "Retaining Video Metadata and \nEmbedded Audio when Syncing Audio Manually",
+      "page": 458,
+      "level": 3
+    },
+    {
+      "title": "Adjusting Media Pool Clips in the Inspector",
+      "page": 462,
+      "level": 2
+    },
+    {
+      "title": "Changing Clip Thumbnails in the Media Pool",
+      "page": 473,
+      "level": 2
+    },
+    {
+      "title": "Importing and Conforming Timelines",
+      "page": 476,
+      "level": 1
+    },
+    {
+      "title": "Importing Effects when Conforming Edits",
+      "page": 482,
+      "level": 2
+    },
+    {
+      "title": "Conforming and Relinking Media",
+      "page": 492,
+      "level": 2
+    },
+    {
+      "title": "Conforming and Relinking During Project Import",
+      "page": 492,
+      "level": 3
+    },
+    {
+      "title": "Conforming and Relinking Existing Timelines and Clips",
+      "page": 492,
+      "level": 2
+    },
+    {
+      "title": "Summary of Methods for Conforming and Relinking",
+      "page": 494,
+      "level": 2
+    },
+    {
+      "title": "Conforming Clips During XML and AAF Import",
+      "page": 496,
+      "level": 2
+    },
+    {
+      "title": "Essential Clip Metadata for Easy Conforming and Relinking",
+      "page": 498,
+      "level": 3
+    },
+    {
+      "title": "Defining Clip Metadata When Adding Media to the Media Pool",
+      "page": 499,
+      "level": 3
+    },
+    {
+      "title": "Step 1–Ingest Media and Add/Edit Metadata",
+      "page": 515,
+      "level": 3
+    },
+    {
+      "title": "Conforming XML Files",
+      "page": 521,
+      "level": 2
+    },
+    {
+      "title": "Conforming AAF Files",
+      "page": 525,
+      "level": 2
+    },
+    {
+      "title": "Step 3–Conforming Your AAF in DaVinci Resolve",
+      "page": 533,
+      "level": 3
+    },
+    {
+      "title": "Conforming EDL Files",
+      "page": 538,
+      "level": 2
+    },
+    {
+      "title": "Conforming EDLs to Individual Media Files",
+      "page": 540,
+      "level": 2
+    },
+    {
+      "title": "Preconforming “Flat” Media Files to EDLs",
+      "page": 541,
+      "level": 2
+    },
+    {
+      "title": "Conforming “Flat” Media Files Using Split and Add",
+      "page": 542,
+      "level": 2
+    },
+    {
+      "title": "Conforming OTIO Files",
+      "page": 544,
+      "level": 2
+    },
+    {
+      "title": "Conforming ADL Files",
+      "page": 548,
+      "level": 2
+    },
+    {
+      "title": "Scene Detection in the Media Page",
+      "page": 551,
+      "level": 2
+    },
+    {
+      "title": "The Media Pool",
+      "page": 592,
+      "level": 2
+    },
+    {
+      "title": "Metadata",
+      "page": 595,
+      "level": 2
+    },
+    {
+      "title": "The Media Pool",
+      "page": 601,
+      "level": 2
+    },
+    {
+      "title": "The Media Pool Toolbar",
+      "page": 601,
+      "level": 2
+    },
+    {
+      "title": "Searching the Media Pool",
+      "page": 605,
+      "level": 2
+    },
+    {
+      "title": "Metadata",
+      "page": 605,
+      "level": 2
+    },
+    {
+      "title": "The Media Pool",
+      "page": 657,
+      "level": 2
+    },
+    {
+      "title": "Sync Media Pool Bins with File System Folders",
+      "page": 677,
+      "level": 2
+    },
+    {
+      "title": "Import Blackmagic Cloud Shared Folders to Media Pool",
+      "page": 679,
+      "level": 2
+    },
+    {
+      "title": "Media Pool Views",
+      "page": 680,
+      "level": 2
+    },
+    {
+      "title": "Metadata View",
+      "page": 680,
+      "level": 3
+    },
+    {
+      "title": "Metadata Display Palette",
+      "page": 684,
+      "level": 3
+    },
+    {
+      "title": "Finding Timeline Clips in the Media Pool",
+      "page": 686,
+      "level": 3
+    },
+    {
+      "title": "Metadata Entry Using the File Inspector",
+      "page": 723,
+      "level": 3
+    },
+    {
+      "title": "The Media Pool",
+      "page": 818,
+      "level": 2
+    },
+    {
+      "title": "Importing Media Into the Media Pool on the Edit Page",
+      "page": 819,
+      "level": 3
+    },
+    {
+      "title": "Bins, Power Bins, and Smart Bins",
+      "page": 820,
+      "level": 3
+    },
+    {
+      "title": "Metadata Editor",
+      "page": 842,
+      "level": 2
+    },
+    {
+      "title": "Adding Media Pool Timelines Directly to the Render Queue",
+      "page": 865,
+      "level": 2
+    },
+    {
+      "title": "Browsing Clips in the Media Pool",
+      "page": 886,
+      "level": 2
+    },
+    {
+      "title": "Selecting Clips in the Media Pool to Edit",
+      "page": 887,
+      "level": 2
+    },
+    {
+      "title": "Duplicating Clips in the Media Pool",
+      "page": 888,
+      "level": 2
+    },
+    {
+      "title": "Setting Clip In and Out Points in the Media Pool",
+      "page": 903,
+      "level": 3
+    },
+    {
+      "title": "Inserting Multiple Clips into the Timeline From the Media Pool",
+      "page": 918,
+      "level": 2
+    },
+    {
+      "title": "Example: Assembling Clips Into the Timeline From the Media Pool",
+      "page": 921,
+      "level": 3
+    },
+    {
+      "title": "Three-Point Editing From the Media Pool",
+      "page": 1016,
+      "level": 2
+    },
+    {
+      "title": "Example: Assembling Clips Into the Timeline From the Media Pool",
+      "page": 1016,
+      "level": 3
+    },
+    {
+      "title": "Using Markers in the Media Pool",
+      "page": 1048,
+      "level": 2
+    },
+    {
+      "title": "Finding the Currently Open Timeline in the Media Pool",
+      "page": 1056,
+      "level": 3
+    },
+    {
+      "title": "Finding a Clip in the Media Pool Using a Timeline Clip",
+      "page": 1058,
+      "level": 2
+    },
+    {
+      "title": "Using a Clip in the Source Viewer to Find a Media Pool Clip",
+      "page": 1058,
+      "level": 3
+    },
+    {
+      "title": "Using a Clip in the Timeline to Find a Media Pool Clip",
+      "page": 1058,
+      "level": 3
+    },
+    {
+      "title": "Assigning Audio Channels in the Media Pool",
+      "page": 1122,
+      "level": 2
+    },
+    {
+      "title": "Saving Titles in the Media Pool for Future Use",
+      "page": 1229,
+      "level": 2
+    },
+    {
+      "title": "The Media Pool in the Fusion Page",
+      "page": 1362,
+      "level": 2
+    },
+    {
+      "title": "Importing Media Into the Media Pool on the Fusion Page",
+      "page": 1363,
+      "level": 3
+    },
+    {
+      "title": "Adding Clips from the Media Pool",
+      "page": 1381,
+      "level": 3
+    },
+    {
+      "title": "Finding Clips in the Media Pool from the Node Editor",
+      "page": 1382,
+      "level": 3
+    },
+    {
+      "title": "Metadata Nodes",
+      "page": 2620,
+      "level": 1
+    },
+    {
+      "title": "Copy Metadata [Meta]",
+      "page": 2621,
+      "level": 2
+    },
+    {
+      "title": "Set Metadata [SMeta]",
+      "page": 2622,
+      "level": 2
+    },
+    {
+      "title": "Media Pool",
+      "page": 3104,
+      "level": 3
+    },
+    {
+      "title": "The Media Pool",
+      "page": 3842,
+      "level": 2
+    },
+    {
+      "title": "Importing Media Into the Media Pool on the Fairlight Page",
+      "page": 3843,
+      "level": 3
+    },
+    {
+      "title": "Media Pool Preview Player",
+      "page": 3843,
+      "level": 3
+    },
+    {
+      "title": "Bins, Power Bins, and Smart Bins",
+      "page": 3844,
+      "level": 3
+    },
+    {
+      "title": "Choosing Parts of Clips to Edit in the Media Pool",
+      "page": 3926,
+      "level": 3
+    },
+    {
+      "title": "Finding Clips in the Media Pool",
+      "page": 3968,
+      "level": 2
+    },
+    {
+      "title": "Metadata",
+      "page": 3988,
+      "level": 3
+    },
+    {
+      "title": "Dolby Vision Metadata",
+      "page": 4226,
+      "level": 3
+    },
+    {
+      "title": "Validating in the Media Pool",
+      "page": 4227,
+      "level": 3
+    },
+    {
+      "title": "Exporting and Importing Media Pool Metadata",
+      "page": 4250,
+      "level": 2
+    },
+    {
+      "title": "Import Blackmagic Cloud Shared Folders to the Media Pool",
+      "page": 4274,
+      "level": 2
+    }
+  ],
+  "6. Deliver Engine & Render Pipeline": [
+    {
+      "title": "The Deliver Page",
+      "page": 51,
+      "level": 2
+    },
+    {
+      "title": "The Deliver Page Timeline",
+      "page": 52,
+      "level": 3
+    },
+    {
+      "title": "The Render Queue",
+      "page": 54,
+      "level": 3
+    },
+    {
+      "title": "Saving User Preference Presets",
+      "page": 112,
+      "level": 3
+    },
+    {
+      "title": "Choosing Keyboard Shortcut Emulation Presets",
+      "page": 126,
+      "level": 3
+    },
+    {
+      "title": "Presets",
+      "page": 142,
+      "level": 2
+    },
+    {
+      "title": "Using Cached Media When Rendering in the Deliver Page",
+      "page": 211,
+      "level": 3
+    },
+    {
+      "title": "Output Data Level Settings in the Deliver Page",
+      "page": 230,
+      "level": 3
+    },
+    {
+      "title": "Resolve Color Management Presets",
+      "page": 237,
+      "level": 3
+    },
+    {
+      "title": "Saving and Loading Burn-In Presets",
+      "page": 311,
+      "level": 3
+    },
+    {
+      "title": "Outputting Stereo 3D Media in the Deliver Page",
+      "page": 341,
+      "level": 2
+    },
+    {
+      "title": "Mixed Frame Sizes and Mixed Codecs",
+      "page": 479,
+      "level": 3
+    },
+    {
+      "title": "Exporting Images from the Deliver Page",
+      "page": 650,
+      "level": 2
+    },
+    {
+      "title": "Assign Icons to User Presets",
+      "page": 812,
+      "level": 3
+    },
+    {
+      "title": "Creating Timelines Using an IMF or DCP Composition Playlist (CPL)",
+      "page": 863,
+      "level": 3
+    },
+    {
+      "title": "Adding Media Pool Timelines Directly to the Render Queue",
+      "page": 865,
+      "level": 2
+    },
+    {
+      "title": "Creating Timelines With Audio Mixer Presets",
+      "page": 1130,
+      "level": 3
+    },
+    {
+      "title": "Creating Transition Presets",
+      "page": 1201,
+      "level": 2
+    },
+    {
+      "title": "Customizing and Saving Presets",
+      "page": 3237,
+      "level": 3
+    },
+    {
+      "title": "HSL Qualifier Presets",
+      "page": 3306,
+      "level": 2
+    },
+    {
+      "title": "Saving Window Presets",
+      "page": 3335,
+      "level": 2
+    },
+    {
+      "title": "Input and Output Sizing Presets",
+      "page": 3570,
+      "level": 3
+    },
+    {
+      "title": "Presets",
+      "page": 3666,
+      "level": 3
+    },
+    {
+      "title": "Fairlight Configuration Presets",
+      "page": 3867,
+      "level": 3
+    },
+    {
+      "title": "The Fairlight Presets Library",
+      "page": 3891,
+      "level": 2
+    },
+    {
+      "title": "Using the Presets Library",
+      "page": 3892,
+      "level": 3
+    },
+    {
+      "title": "Using the Deliver Page",
+      "page": 4176,
+      "level": 1
+    },
+    {
+      "title": "Assign Icons to User Presets",
+      "page": 4178,
+      "level": 3
+    },
+    {
+      "title": "The Deliver Page",
+      "page": 4179,
+      "level": 2
+    },
+    {
+      "title": "The Deliver Page Timeline",
+      "page": 4181,
+      "level": 2
+    },
+    {
+      "title": "The Render Queue",
+      "page": 4183,
+      "level": 2
+    },
+    {
+      "title": "Drag to Reorder Jobs in the Render Queue",
+      "page": 4184,
+      "level": 3
+    },
+    {
+      "title": "Rendering Media",
+      "page": 4185,
+      "level": 1
+    },
+    {
+      "title": "Using Presets for Fast Rendering",
+      "page": 4186,
+      "level": 2
+    },
+    {
+      "title": "Social Media Presets",
+      "page": 4187,
+      "level": 3
+    },
+    {
+      "title": "Creating and Using Your Own Presets",
+      "page": 4193,
+      "level": 3
+    },
+    {
+      "title": "Import and Export Custom Presets",
+      "page": 4194,
+      "level": 2
+    },
+    {
+      "title": "Using the Render Queue",
+      "page": 4212,
+      "level": 2
+    },
+    {
+      "title": "Delivering DCP and IMF",
+      "page": 4218,
+      "level": 1
+    },
+    {
+      "title": "Native Unencrypted DCP Encoding and Decoding (Studio Version Only)",
+      "page": 4221,
+      "level": 2
+    },
+    {
+      "title": "Native DCP Encoding Parameters",
+      "page": 4221,
+      "level": 3
+    },
+    {
+      "title": "Rendering IMF Segments and DCP Reels",
+      "page": 4223,
+      "level": 2
+    },
+    {
+      "title": "Creating DCP/IMF Supplemental Packages",
+      "page": 4224,
+      "level": 2
+    },
+    {
+      "title": "Importing a DCP or IMF Into a Timeline",
+      "page": 4224,
+      "level": 3
+    },
+    {
+      "title": "Using and Licensing EasyDCP",
+      "page": 4229,
+      "level": 2
+    },
+    {
+      "title": "Switching Between Native DCP and EasyDCP Encoding",
+      "page": 4230,
+      "level": 2
+    },
+    {
+      "title": "EasyDCP Color Management",
+      "page": 4230,
+      "level": 2
+    },
+    {
+      "title": "EasyDCP Output in the Deliver Page",
+      "page": 4231,
+      "level": 2
+    }
+  ],
+  "7. Automation, Python Scripting & DCTL": [
+    {
+      "title": "DCTL Transition",
+      "page": 1210,
+      "level": 3
+    },
+    {
+      "title": "Reshaping Splines Using the Toolbar",
+      "page": 1604,
+      "level": 2
+    },
+    {
+      "title": "DCTL (Studio Version Only)",
+      "page": 3617,
+      "level": 2
+    },
+    {
+      "title": "Workflow Integrations",
+      "page": 4410,
+      "level": 1
+    },
+    {
+      "title": "Workflow Integrations in DaVinci Resolve (Studio Version Only)",
+      "page": 4418,
+      "level": 2
+    },
+    {
+      "title": "Creating DCTL LUTs",
+      "page": 4421,
+      "level": 1
+    },
+    {
+      "title": "About DCTL",
+      "page": 4422,
+      "level": 2
+    },
+    {
+      "title": "DCTL Syntax",
+      "page": 4422,
+      "level": 2
+    },
+    {
+      "title": "TCP Protocol for DaVinci Resolve Transport Control",
+      "page": 4426,
+      "level": 1
+    },
+    {
+      "title": "About the TCP Protocol Version 1.2",
+      "page": 4427,
+      "level": 2
+    },
+    {
+      "title": "TCP Protocol Stream ",
+      "page": 4428,
+      "level": 2
+    }
+  ]
+}

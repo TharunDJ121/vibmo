@@ -1,0 +1,1411 @@
+OTHER
+Advanced 
+Workflows
+CONTENTS
+201 Workflow Integrations  ���������������������������������������������������������������������������������������������������������������������������  4410
+202 Creating DCTL LUTs  �������������������������������������������������������������������������������������������������������������������������������  4421
+203 TCP Protocol for DaVinci Resolve Transport Control ���������������������������������������������������������������  4426
+Chapter 201
+Workflow 
+Integrations
+This chapter describes third party Workflow Integration and Codec plugins for 
+DaVinci Resolve.
+Contents
+DaVinci Resolve Renderer Plugin for OFX VFX Applications (Studio Version Only) ����������������������������������������  4411
+Dropbox Replay �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  4414
+Enabling Dropbox Replay Integration in Preferences  ������������������������������������������������������������������������������������������������������� 4414
+Deliver and Upload to Dropbox Replay  ����������������������������������������������������������������������������������������������������������������������������������� 4414
+Upload New Versions to Dropbox Replay ������������������������������������������������������������������������������������������������������������������������������  4416
+Dropbox Replay Comments Sync with Timeline Markers  ����������������������������������������������������������������������������������������������� 4416
+Working With Dropbox Markers  ��������������������������������������������������������������������������������������������������������������������������������������������������� 4417
+Workflow Integrations in DaVinci Resolve (Studio Version Only) ������������������������������������������������������������������������������  4418
+Creating Workflow Integration Plugins  ����������������������������������������������������������������������������������������������������������������������������������� 4418
+Workflow Integration Plugins �������������������������������������������������������������������������������������������������������������������������������������������������������  4418
+EditShare �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  4418
+Studio Network Solutions (SNS)  �������������������������������������������������������������������������������������������������������������������������������������������������� 4419
+Codec Plugins (Studio Version Only) ����������������������������������������������������������������������������������������������������������������������������������������  4420
+MainConcept ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4420
+4410Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+DaVinci Resolve Renderer Plugin for 
+OFX VFX Applications (Studio Version Only)
+The Open FX plugin DaVinci Resolve Renderer allows third-party applications to open and apply 
+DaVinci Resolve’s color changes using exported DRX stills. Essentially this turns an installation of 
+DaVinci Resolve Studio into one large OFX plugin. This can be very useful when round tripping 
+with various VFX authoring applications where you may want to maintain the exact look created in 
+DaVinci Resolve.
+Exporting a DRX still contains much more information about the grade than a simple LUT. DRX files 
+can include data like all the native color and sizing palettes and other items you stored in a Gallery still. 
+This ensures that the grade the colorist created can be exactly replicated in the VFX software.
+As of this writing, the following attributes WILL transfer 
+via the DaVinci Resolve OFX Renderer Plugin:
+• All native color palettes (Primaries, HDR, Curves etc.).
+• All native sizing palettes (Input, Output, Node etc.).
+• Most Resolve FX.
+• Most third-party Open FX.
+As of this writing, the following attributes WILL NOT 
+transfer via the DaVinci Resolve OFX Renderer Plugin:
+• Resolve and Open FX that are temporal based.
+• Magic Mask.
+To set up the DaVinci Resolve OFX Renderer Plugin:
+1 When installing DaVinci Resolve Studio, select Custom Install and then check the plugin option in 
+the program installer. 
+Select Custom Install, then check DaVinci Resolve  
+Open FX Renderer to install the plugin
+4411Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+2 Create your grade for a clip in the Color page, then save a still to the Gallery. From the Gallery, 
+export a .DRX file.
+3 In the third-party application, apply the DaVinci Resolve Renderer plugin where appropriate for 
+your composition.
+Inserting the DaVinci Resolve Renderer OFX into a Nuke node tree
+4 In the DaVinci Resolve Renderer plugin in your application, choose the .DRX file you exported 
+from the file browser.
+Select the .DRX file you exported from DaVinci Resolve in the plugin.
+The Color Grade Plugin should work with most Open FX-capable VFX software, such as Autodesk 
+Flame and The Foundry’s Nuke.
+4412Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+The DaVinci Resolve Renderer OFX Plugin in Nuke (below), showing a balanced grade with 
+green and orange Power Windows from multiple nodes in DaVinci Resolve (above).
+IMPORTANT: Use of the plugin requires a DaVinci Resolve Studio license on the system that 
+is running the third party application.
+4413Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+Dropbox Replay
+DaVinci Resolve can integrate directly with Dropbox Replay, allowing you to edit and collaborate on 
+your projects using the widely-used Dropbox service.
+Enabling Dropbox Replay Integration in Preferences
+You can sign in to your Dropbox account via the Internet Accounts panel in DaVinci Resolve > 
+Preferences > System tab. You’ll need to enter your login name and password to enable Dropbox 
+integration the first time, after which you’ll be signed in automatically whenever you open 
+DaVinci Resolve. 
+The Dropbox Login window in the Internet Accounts panel of the 
+System tab of the DaVinci Resolve Preferences window
+Deliver and Upload to Dropbox Replay
+A Dropbox Replay preset at the top of the Deliver page’s Render Settings panel lets you render and 
+upload a program for review. All options in the Render Settings panel update to present suitable 
+controls for this process.
+NOTE: The Dropbox Replay Render settings are separate from the normal Dropbox Render 
+settings, and you need to use this specific set of presets to integrate with Dropbox Replay.
+4414Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+The Dropbox Replay Render settings (highlighted). 
+Note they are different from the normal 
+Dropbox Render settings to the left.
+When you export to Dropbox Replay, the available choices in the Resolution, Format, Video Codec, 
+and Audio pop-up menus are limited to those that are most suitable for Dropbox Replay. Choose your 
+preferred export options, then click the Add to Render Queue button to add this job to the Render 
+Queue, as you would with any other export. When that job is rendered, it automatically proceeds to 
+upload to Dropbox Replay, and an upload percentage indicator appears in the job listing with your 
+upload progress. Once it’s finished, the job displays the text “Upload completed.”
+The job in the Render Queue shows your file upload 
+progress and lets you know when it’s completed.
+This upload is done in the background, so you can continue working on other things in 
+DaVinci Resolve in the meantime. To check how long the upload will take on any other page, 
+go to Workspace > Background Activity to see the Background Activity window.
+Unlinking a Timeline from Dropbox Replay
+To remove a specific timeline from using Dropbox Relay integration, simply right-click on the Timeline 
+and select Unlink from Dropbox Media from the contextual menu.
+4415Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+Upload New Versions to Dropbox Replay
+DaVinci Resolve supports the versioning functions found in Dropbox Replay. This lets the Replay user 
+easily comment and switch between different versions of the same clip. 
+Once the original timeline has been rendered and uploaded to Dropbox using the Replay preset in the 
+Deliver page, an additional checkbox appears in the preset, called “Upload as new version.” With this 
+box checked, any subsequent renders of this timeline will automatically be added to the version stack 
+of the clip in Dropbox Replay. The latest version will always be the default for the clip in the Replay 
+interface.
+Dropbox Replay Comments Sync with Timeline Markers
+When you render a timeline directly to Dropbox Replay, that timeline is automatically linked to the 
+movie that’s been uploaded to Dropbox Replay. At the same time, all comments and graphical 
+annotations (drawings and arrows) from reviewers that are added online via the Dropbox Replay 
+interface are automatically synced to Dropbox markers on your timeline—so long as your computer 
+has an active Internet connection. Dropbox markers are distinct from all other markers and can 
+be independently shown and hidden or deleted. Drawings and arrows from Dropbox Replay are 
+converted into their equivalent DaVinci Resolve annotation graphics for visibility in DaVinci Resolve.
+Comments and graphical annotations from Dropbox Replay appear as markers 
+with their corresponding overlays in your DaVinci Resolve timeline.
+4416Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+Working With Dropbox Markers
+Double-clicking any Dropbox marker in the Timeline opens a dialog that lets you send replies to 
+comments that appear on Dropbox Replay, enabling editors to respond directly to commenters.
+The Dropbox Replay comment dialog that 
+appears when you open a Dropbox marker
+You can also place Dropbox markers on the Timeline to have them automatically sync back to 
+Dropbox Replay, giving you the ability to send your own comments back to commenters (be kind).
+If you delete one or more Dropbox markers on the DaVinci Resolve timeline, those markers 
+will also be deleted in Dropbox Replay. This includes the Mark > Delete All Markers > 
+Dropbox command. This cannot be undone. 
+Dropbox Marker Navigation
+You can specifically navigate only the markers created in Dropbox Replay while in the comment dialog 
+of a Dropbox marker, using the Previous Marker (Shift-UpArrow) and Next Marker (Shift-DownArrow) 
+commands. This allows you to skip directly from comment to comment in Dropbox Replay without 
+having to either navigate all markers in-between, or double-click each Dropbox marker individually 
+to respond.
+4417Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+Workflow Integrations in DaVinci Resolve 
+(Studio Version Only)
+DaVinci Resolve allows third parties to create their own custom interface plugins using scripting 
+languages. This makes possible a direct integration between DaVinci Resolve and other software 
+programs, for a variety of uses. More than one Integration plugin can be active at the same time.
+After installation, plugins can be enabled in DaVinci Resolve by going to Workspace > Workflow 
+Integrations, and selecting your plugin from the dropdown menu.
+Creating Workflow Integration Plugins
+Users can write their own Workflow Integration Plugin (an Electron app), using Resolve Javascript’s 
+API, and Python or Lua scripts. For more information on how to create a Workflow Integration Plugin 
+go to Help > Documentation > Developer, and open up the Workflow Integrations folder for technical 
+details and sample code.
+Workflow Integration Plugins
+There are several Media Asset Management (MAM) systems that can now directly be accessed 
+through DaVinci Resolve using the Workflow Integration Plugins.
+EditShare
+EditShare has created a workflow integration plugin that allows DaVinci Resolve to interface directly 
+with their FLOW media management system. This plugin allows you to comment, search, and preview 
+media in FLOW without leaving DaVinci Resolve. You can also upload revisions, manage proxy media, 
+and maintain full metadata support throughout the process. 
+EditShare’s FLOW Integration Plugin
+For more information on this plugin and how FLOW works with DaVinci Resolve go to: 
+editshare.com/say-hello-to-flow-and-davinci-resol ve-studio/
+4418Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+Studio Network Solutions (SNS)
+Studio Network Solutions (SNS) created the ShareBrowser Integration Plugin to interface between 
+DaVinci Resolve and their ShareBrowser media asset management software, included with 
+SNS EVO media servers. This plugin allows your team to search, tag, preview, comment, organize, and 
+import media without leaving the DaVinci Resolve interface. Your team can directly import the media 
+into a DaVinci Resolve project and the metadata you entered carries over along with the media. 
+SNS ShareBrowser Integration Plugin
+For more information on this plugin and how SNS’s high-speed server or cloud solutions work 
+with DaVinci Resolve, go to: www.studionetworksolu tions.com.
+4419Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+Codec Plugins (Studio Version Only)
+Codec plugins allow third parties to install new codecs for encoding in the Deliver page that are not 
+currently supported in the main DaVinci Resolve software. This opens the door for extremely specific 
+deliverables that would normally require passes through multiple programs to deliver.
+MainConcept
+The MainConcept Codec Plugin allows you to render your DaVinci Resolve Studio timelines in a variety 
+of new codecs: 
+• AS-11 UK SD, AS-11 UK HD along with an included XML metadata file to create AS-11 UK DPP 
+compliant content.
+• MainConcept’s software HEVC Main and Main 10 profiles, allowing H.265 files in 8-bit/10-bit 
+4:2:0/4:2:2 at up to 8K resolution.
+• MainConcept MXF and MP4, allowing encoding into the native camera formats used by 
+Sony XAVC/XDCAM and Panasonic P2 AVC based cameras.
+More information on the MainConcept Codec Plugin for DaVinci Resolve can be found here: 
+www.mainconcept.com/blackmag ic-plugins
+The MainConcept Codec Plugin for DaVinci Resolve 
+options in the Deliver page
+4420Advanced Workflows | Chapter 201 Workflow Integrations
+OTHER
+Chapter 202
+Creating DCTL LUTs
+This chapter describes how to create DCTL LUTs to perform your own custom 
+mathematical transformations in DaVinci Resolve.
+Contents
+About DCTL ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 4422
+DCTL Syntax ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4422
+A Simple DCT LUT Example ���������������������������������������������������������������������������������������������������������������������������������������������������������  4424
+A Matrix DCT LUT Example ���������������������������������������������������������������������������������������������������������������������������������������������������������� 4424
+A More Complex DCT LUT Example ���������������������������������������������������������������������������������������������������������������������������������������� 4425
+4421Advanced Workflows | Chapter 202 Creating DCTL LUTs
+OTHER
+About DCTL
+DCTL files are actually color transformation scripts that DaVinci Resolve sees and applies just like 
+any other LUT. Unlike other LUTs, which are 1D or 3D lookup tables of values that approximate image 
+transformations using interpolation, DCTL files are actually comprised of computer code that directly 
+transforms images using combinations of math functions that you devise. Additionally, DCTL files run 
+natively on the GPU of your workstation, so they can be fast.
+Anyone with the mathematical know-how can make and install a DCTL. Simply enter your 
+transformation code, using a syntax that’s similar to C (described in more detail below), into any text 
+editor capable of saving a plain ASCII text file, and make sure its name ends with the “.dctl” (DaVinci 
+Color Transform Language) file extension. Once that’s done, move the file to the LUT directory of your 
+workstation. Where that is depends on which OS you’re using:
+  On Mac OS X: Library/Application Support/Blackmagic Design/DaVinci Resolve/LUT/
+  On Windows: C:\ProgramData\Blackmagic Design\DaVinci Resolve\Support\LUT
+  On Linux: /home/resolve/LUT
+When DaVinci Resolve starts up, assuming the syntax of your .dctl is correct, they appear in the 
+Color page Node contextual menu within the DaVinci CTL submenu.
+DCTL Syntax
+Users need to put __ DEVICE__ in front of each function they write. For example:
+__DEVICE__ float2 DoSomething()
+The main entry function (transform) should come after all other functions, with the following 
+format argument:
+__DEVICE__ float3 transform(float p_R, float p_G, float p_B)
+The main entry function must also have a float3 return value.
+For the following floating point math functions, please use the described syntax:
+float _fabs(float) // Absolute Value
+float _powf(float x, float y // Compute x to the power of y 
+float _logf(float) // Natural logarithm
+float _log2f(float) // Base 2 logarithm
+float _log10f(float) // Base 10 logarithm
+float _exp2f(float) // Exponential base 2
+float _expf(float) // Exponential base E
+float _copysignf(float x, float y) // Return x with sign changed to sign y
+float _fmaxf(float x, float y) // Return y if x < y
+float _fminf(float x, float y) // Return y if x > y
+float _saturatef(float x, float 
+minVal, float maxVal)
+// Return min(max(x, minVal), maxVal)
+float _sqrtf(float) // Square root
+int _ceil(float // Round to integer toward + infinity
+4422Advanced Workflows | Chapter 202 Creating DCTL LUTs
+OTHER
+int _floor(float) // Round to integer toward - infinity
+float _fmod(float x, float y) // Modulus. Returns x – y * trunc(x / y)
+float _fremainder(float x, float y) // Floating point remainder
+int _round(float x) // Integral value nearest to x rounding
+float _hypotf(float x, float y) // Square root of (x^2 + y^2)
+float _atan2f(float x) // Arc tangent of (y / x)
+float _sinf(float x) // Sine
+float _cosf(float x) // Cosine
+float _acosf(float x) // Arc cosine
+float _asinf(float x) // Arc sine
+float _fdivide(float x, float y) // Return (x / y)
+float _frecip(float x) // Return (1 / x)
+The following functions support integer type:
+min, max, abs, rotate
+Other supported C Math functions include:
+acosh, acospi, asinh, asinpi, atan, atanh, atanpi, atan2pi, cbrt, cosh, cospi, 
+exp10, expm1, trunc, fdim, fma, lgamma, log1p, logb, rint, round, rsqrt, 
+sincos, sinh, sinpi, tan, tanh, tanpi, tgamma
+Vector types float2, float3, and float4 are supported. The data fields are:
+float x
+float y
+float z
+float w
+To generate a vector value, use make_floatN() where N = 2, 3, or 4.
+Users can define their own structure using “typedef struct.” For example:
+typedef struct
+ {
+ float c00, c01, c02;
+ float c10, c11, c12;
+ } Matrix;
+4423Advanced Workflows | Chapter 202 Creating DCTL LUTs
+OTHER
+To declare constant memory, use __CONSTANT__. For example:
+__CONSTANT__ float NORM[] = {1.0f / 3.0f, 1.0f / 3.0f, 1.0f / 3.0f};
+To pass the constant memory as a function argument, use the __ CONSTANTREF__ qualifier, e.g.:
+__DEVICE__ float DoSomething(__CONSTANTREF__ float* p_Params)
+A float value must have the ‘f’ character at the end (e.g. 1.2f).
+A Simple DCT LUT Example
+The following code shows an example of how to create a simple color gain transformation using the 
+DCT LUT syntax.
+// Example to demonstrate simple color gain transformation
+__DEVICE__ float3 transform(float p_R, float p_G, float p_B)
+{
+ const float r = p_R * 1.2f;
+ const float g = p_G * 1.1f;
+ const float b = p_B * 1.2f;
+ return make_float3(r, g, b);
+}
+A Matrix DCT LUT Example
+The following code shows an example of creating a matrix transform using the DCT LUT syntax.
+// Example to demonstrate the usage of user defined matrix type to transform RGB to YUV in Rec. 709
+__CONSTANT__ float RGBToYUVMat[9] = { 0.2126f , 0.7152f , 0.0722f,
+ -0.09991f, -0.33609f, 0.436f,
+ 0.615f , -0.55861f, -0.05639f };
+__DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, 
+float p_R, float p_G, float p_B)
+{
+ float3 result;
+ result.x = RGBToYUVMat[0] * p_R + RGBToYUVMat[1] * p_G + RGBToYUVMat[2] * 
+p_B;
+ result.y = RGBToYUVMat[3] * p_R + RGBToYUVMat[4] * p_G + RGBToYUVMat[5] * 
+p_B;
+ result.z = RGBToYUVMat[6] * p_R + RGBToYUVMat[7] * p_G + RGBToYUVMat[8] * 
+p_B;
+ return result;
+}
+4424Advanced Workflows | Chapter 202 Creating DCTL LUTs
+OTHER
+A More Complex DCT LUT Example
+The following code shows an example of creating a mirror effect, illustrating how you can access 
+pixels spatially.
+// Example of spatial access for mirror effect
+__DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, __
+TEXTURE__ p_TexR, __TEXTURE__ p_TexG, __TEXTURE__ p_TexB)
+{
+ const bool isMirror = (p_X < (p_Width / 2));
+ const float r = (isMirror) ? _tex2D(p_TexR, p_X, p_Y) : _tex2D(p_TexR, p_
+Width - 1 - p_X, p_Y);
+ const float g = (isMirror) ? _tex2D(p_TexG, p_X, p_Y) : _tex2D(p_TexG, p_
+Width - 1 - p_X, p_Y);
+ const float b = (isMirror) ? _tex2D(p_TexB, p_X, p_Y) : _tex2D(p_TexB, p_
+Width - 1 - p_X, p_Y);
+ return make_float3(r, g, b);
+}
+4425Advanced Workflows | Chapter 202 Creating DCTL LUTs
+OTHER
+Chapter 203
+TCP Protocol for 
+DaVinci Resolve 
+Transport Control
+This chapter describes how to create third-party utilities that 
+use Transport Control with DaVinci Resolve.
+Contents
+About the TCP Protocol Version 1.2 ����������������������������������������������������������������������������������������������������������������������������������������� 4427
+Data Types  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4427
+Command Format  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 4427
+Response Format  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4427
+Communication Delays  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4427
+Status Response Values  ����������������������������������������������������������������������������������������������������������������������������������������������������������������  4428
+TCP Protocol Stream  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������  4428
+connect  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4428
+goto ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  4428
+play  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4428
+gettc  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4428
+getframerate  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  4428
+4426Advanced Workflows | Chapter 203 TCP Protocol for DaVinci Resolve Transport Control
+OTHER
+About the TCP Protocol Version 1.2
+This protocol defines the communication standard between third-party applications (“Client”) and 
+DaVinci Resolve (“Server”) using the TCP protocol. 
+Port number 9060 will be used by the server. SSL will not be used in this protocol. Communication 
+takes the form of request-response messages, where the Client initiates a command, and the Server 
+responds appropriately. 
+To use this protocol, you must first type the following string into the Advanced panel of the 
+DaVinci Resolve System Preferences:
+System.Remote.Control = 1
+Data Types 
+The following data types are used in this protocol: 
+• float (f): A 4-byte IEEE 754 single precision float 
+• int (i): A 4-bytes signed int
+• unsigned char (uc): A 1-byte unsigned char (0–255) 
+• string (s): A UTF-8 encoded string. No terminator is specified. The string is a composite 
+type, transmitted as a single int (i) specifying the number of characters in the string (N), 
+followed by N unsigned chars (uc) containing the letters of the string. 
+NOTE: The bytes of the float and int types are transmitted in little endian order. 
+Command Format 
+Commands are transmitted as a single string (using characters a–z (0x61 – 0x7A) only), followed by any 
+additional payload required by the command in the definition. 
+Response Format 
+The response to any command is composed of a status byte (unsigned char), followed by any 
+additional payload required by the response. 
+Communication Delays 
+Once the first byte of the command string is sent, the rest of the command string and the payload data 
+must follow without delay. At the end of COMMAND, the server must respond immediately. If there is a 
+delay of more than 5 seconds during this process, the party waiting for data may drop the connection 
+assuming that the peer has become unresponsive. 
+There is currently no limit on the delay between two consecutive commands. 
+4427Advanced Workflows | Chapter 203 TCP Protocol for DaVinci Resolve Transport Control
+OTHER
+NOTE: Alternatively, a maximum allowable delay may be defined, in which case, the client 
+may issue periodic ‘connect’ commands to keep the connection alive.
+Status Response Values 
+The meaning of the status values are as follows:
+0x00: Command was executed successfully. Any additional payload is sent as expected. 
+0xFF: Command could not be executed successfully. No additional payload will follow. 
+TCP Protocol Stream 
+The following commands can be sent over the protocol stream.
+connect 
+The client initiates the stream by sending a connect command string. There is no payload. The server 
+responds with a status value of 0x00. 
+goto 
+The client sends a goto command string followed by four unsigned chars representing the hour, 
+minute, second, and frame of the timecode. 
+The server responds with an appropriate status byte based on the execution of the command. 
+play 
+The client sends a play command string followed by a floating point value. Play in real-time is 1.0, stop 
+is 0.0, reverse is -1.0, 2x is 2.0, etc. 
+The server responds with an appropriate status byte based on the execution of the command. 
+gettc 
+The client sends a gettc command string. 
+The server responds with an appropriate status byte (status byte may be 0xFF if no timeline exists, for 
+instance). If the status byte is 0x00, it is followed by four unsigned chars representing the hour, minute, 
+second, and frame of the timecode.
+getframerate 
+The client sends a getframerate command string. 
+The server responds with an appropriate status byte. If the status byte is 0x00, it is followed by a 
+floating point value for the frame rate.
+4428Advanced Workflows | Chapter 203 TCP Protocol for DaVinci Resolve Transport Control
+OTHER
+CONTENTS
+DaVinci Resolve  ������������������������������������������  4430
+File ���������������������������������������������������������������������  4431
+Edit ��������������������������������������������������������������������  4432
+Trim �������������������������������������������������������������������  4433
+Timeline  ����������������������������������������������������������  4434
+Clip ��������������������������������������������������������������������  4435
+Mark �����������������������������������������������������������������  4436
+View ������������������������������������������������������������������  4437
+Playback  ���������������������������������������������������������  4438
+Fusion ��������������������������������������������������������������  4439
+Color ����������������������������������������������������������������  4440
+Fairlight  ������������������������������������������������������������  4441
+Workspace  �����������������������������������������������������  4442
+Help ������������������������������������������������������������������  4443
+ MENU
+Menu  
+Descriptions
+Menu Description
+DaVinci Resolve 
+Menu
+For ease of use navigating this manual, each menu item is listed here, and by 
+clicking on the name of the menu function, you will be taken to the appropriate 
+part of the manual that describes that function.
+DaVinci Resolve
+About DaVinci Resolve
+Opens the splash screen showing the installed version of DaVinci Resolve.
+Preferences  – Page 98
+Opens the System and User  
+Preferences window.
+Keyboard Customization  – Page 125
+Opens the Keyboard  
+Customization Window.
+Check for Updates
+Checks to see if a newer version of DaVinci Resolve is available.
+Extras Download Manager  – Page 131
+Opens an interface for downloading additional AI model packages. 
+Quit DaVinci Resolve
+Exits the program.
+4430
+DaVinci Resolve 21 | Menu Description DaVinci Resolve
+MENU
+File
+New Project  – Page 199
+Creates a new project.
+Open Recent Project  – Page 88
+Open a recent project from a list.
+New Bin  – Page 674
+Creates a new Bin.
+New Smart Bin  – Page 373
+Creates a new Smart Bin.
+New Timeline  – Page 823
+Creates a new timeline. 
+Close Current Timeline
+Closes the active timeline.
+Close Photo Album  – Page 607
+Closes the active photo album.
+Close Project  – Page 94
+Closes the active project.
+Save Project  – Page 89
+Saves the current project.
+Save Project As  – Page 89
+Rename and create a copy of the 
+current project before you save it.
+Create Timeline Backup  – Page 92
+Saves the current project.
+Revert to Last Save Version  – Page 76
+Opens the last saved version of the current project, 
+discarding any changes made after that.
+Import
+Tools for the importation of files and 
+media into DaVinci Resolve.
+• Bin  – Page 390
+• Media  – Page 390
+• Media from File  – Page 379
+• Lightroom Catalog  – Page 604
+• Timeline  – Page 391
+• Fusion Composition  – Page 1390
+• Subtitles  – Page 1270
+• Pre-conformed EDL  – Page 542
+• Batch List From EDL  – Page 371 
+Import Project  – Page 78
+Imports a DaVinci Resolve Project file (.drp).
+Import Metadata To  – Page 435
+Imports Metadata from a 
+.csv file into DaVinci Resolve.
+Export
+Tools for the exportation of files and 
+media from DaVinci Resolve.
+• Bin  – Page 390
+• Timeline  – Page 391
+• Subtitles  – Page 1270
+• Fusion Composition  – Page 1390
+• Current Frame as Still  – Page 359
+Export Project  – Page 76
+Exports a DaVinci Resolve  
+Project File (.drp).
+Export Metadata From  – Page 434
+Exports Metadata from  
+DaVinci Resolve to a .csv file.
+Quick Export  – Page 811
+Opens the Quick Export Window.
+Project Manager  – Page 76
+Opens the Project Manager Window.
+Project Settings  – Page 139
+Opens the Project Settings Window.
+Project Notes  – Page 94
+Opens the Project Notes editor.
+Single User Project  – Page 4309 
+Disables the Project Collaboration features.
+Multiple User Collaboration  – Page 4329 
+Enables Project Collaboration with 
+other DaVinci Resolve workstations.
+Media Management  – Page 1168
+Opens the Media Management Window.
+Reconform from Bins  – Page 496
+Reconforms a timeline using  
+media in a selected bin.
+Reconform from Media Storage  – Page 496
+Reconforms a timeline using media 
+in a specific file system folder.
+easyDCP  – Page 4230
+Exposes the easyDCP toolset.
+Dolby Vision®  – Page 261
+Loads the license and configuration 
+files to enable Dolby Vision 
+advanced trim controls.
+Blackmagic Cloud Account  – Page 4278
+Log in and switch  
+Blackmagic Cloud accounts.
+4431
+DaVinci Resolve 21 | Menu Description File
+MENU
+Edit
+Undo  – Page 72
+Undos the previous change.
+Redo  – Page 72
+Redo the previous change.
+History  – Page 72
+Opens the Undo History submenu.
+Cut  – Page 974
+Performs a cut operation on the current selection.
+Ripple Cut  – Page 974
+Performs a ripple cut operation on the 
+current selection.
+Cut Head  – Page 3956
+Cuts the clip from the playhead 
+backwards in the Fairlight page.
+Cut Tail  – Page 3956
+Cuts the clip from the playhead 
+forwards in the Fairlight page.
+Copy  – Page 974
+Performs a copy operation on the current selection.
+Copy Head  – Page 3956
+Copies the clip from the playhead backwards 
+in the Fairlight page.
+Copy Tail  – Page 3956
+Copies the clip from the playhead forwards 
+in the Fairlight page.
+Paste  – Page 974
+Pastes the previously copied/cut selection.
+Paste Insert  – Page 974
+Pastes a clip as an insert edit.
+Paste Attributes  – Page 1191
+Pastes video and audio attributes.
+Paste Value  – Page 3423
+Pastes a the value of a specific 
+parameter between Color nodes.
+Remove Attributes  – Page 1192
+Removes audio and video attributes.
+Dolby Vision®  – Page 261
+Copy and Paste Trim metadata for Dolby Vision.
+Duplicate Clip or Current Timeline 
+ – Page 398
+Makes a copy of the current clip or timeline.
+Duplicate Selection  – Page 3951
+Duplicates one or more selected clips in Fairlight.
+Delete Selected
+Performs a delete function on all selected items.
+Ripple Delete  – Page 933
+Performs a ripple delete on the selected clip.
+Delete Gaps  – Page 935
+Deletes gaps in the active timeline.
+Select All
+Performs a Select All function on the active panel.
+Deselect All
+Clears any selections in the active panel.
+Select  – Page 912
+Opens up a submenu for selecting  
+adjacent clips in a timeline.
+Insert  – Page 1005
+Performs an Insert Edit using the selected clip.
+Overwrite  – Page 1004
+Performs an Overwrite Edit using the selected clip.
+Replace  – Page 1006
+Performs a Replace Edit using the selected clip.
+Place on Top  – Page 719
+Performs a Place on Top Edit using the selected clip.
+Ripple Overwrite  – Page 718
+Performs a Ripple Overwrite Edit  
+using the selected clip.
+Fit to Fill  – Page 989
+Performs a Fit to Fill Edit using the selected clip.
+Append to End of Timeline  – Page 1014
+Adds the selected clip to the end of the timeline.
+Multicam  – Page 1061
+Exposes the Multicam editing controls.
+Insert Gap  – Page 934
+Exposes the Multicam editing controls. 
+Swap Clips Towards Left  – Page 969
+Swaps the selected clips with  
+the clip to the left of the selection.
+Swap Clips Towards Right  – Page 969
+Swaps the selected clips with  
+the clip to the right of the selection.
+Edit Options
+• Switch to Timeline After Edit  – Page 989
+Automatically switches focus to the timeline  
+after an edit, rather than the Source Viewer.
+• Decompose Compound Clips on Edit 
+ – Page 1080
+Automatically decomposes nested  
+on timelines for easier editing. 
+• Automatically Create Tracks on Edit 
+ – Page 919
+Automatically creates new tracks if your  
+source has more tracks than the timeline. 
+4432
+DaVinci Resolve 21 | Menu Description Edit
+MENU
+Trim
+Normal Edit Mode  – Page 964
+Puts the timeline in Selection Mode.
+Trim Mode  – Page 1087
+Puts the timeline in Trim Mode.
+Range Selection Mode  – Page 3925
+Selects Range Mode in Fairlight.
+Focus Mode  – Page 3827
+Puts the timeline in focus Mode in Fairlight. 
+Dynamic Trim mode  – Page 1117
+Puts the timeline in Dynamic Trim Mode.
+Toggle Slip/Slide Mode  – Page 1117
+Toggles between slip and slide trim modes.
+Blade Edit Mode  – Page 971
+Switches the timeline to blade mode.
+Trim Editor  – Page 1093
+Enables the Precision Trim Editor.
+Select Nearest  – Page 1098
+Selects a variety of edit points  
+closest to the playhead.
+Select All Clips Under Playhead  – Page 922
+Selects all clips on all tracks under the playhead.
+Edit Point Type
+Toggles the currently selected edit point among the 
+outgoing, centered, or incoming part of the edit 
+Toggle V+A/V/A
+Toggles the Edit Point type above between video, 
+audio, or video and audio combined selections.
+Select Nearest Edit To  – Page 1098
+Selects the nearest edit point to a variety 
+of clip parameters.
+Select Nearest Clip To  – Page 1099
+Selects the nearest clip to a 
+variety of clip parameters.
+Nudge
+Opens a menu to move the selected clips  
+one frame, or multiple frames left or right.
+Trim Start  – Page 1115
+Cuts all clips intersecting the playhead from 
+that point backwards.
+Trim End  – Page 1115
+Cuts all clips intersecting the playhead 
+from that point forwards.
+Trim to Selection  – Page 3949
+Trims the heads and tails of the clips to the 
+selected range in the Fairlight page.
+Extend Edit  – Page 1117
+Resizes one or more selected edit points or clips.
+Extend Edit Selection To  – Page 1118
+Opens a menu to select previous and next tracks 
+and edits for the Extend Edit function.
+Move Edit Selection To  – Page 1118
+Opens a menu to move to previous and next  
+tracks and edits for the Extend Edit function.
+Resize  – Page 1087
+Changes the clip in/out points based 
+on the playhead position.
+Ripple  – Page 1087
+Changes the clip in/out points based on 
+the playhead position, using a Ripple operation.
+Roll  – Page 1087
+Changes the clip in/out points based on the 
+playhead position, using a Roll operation.
+Slip Playhead To  – Page 1117
+Slips the clip from the current position of the 
+playhead to the in or out point of the clip.
+Fade In to Playhead  – Page 1243
+Creates a fade in from the beginning of the 
+clip to the playhead position.
+Fade Out to Playhead  – Page 1243
+Creates a fade out from the playhead 
+position to the end of the clip.
+Crossfade Selection
+Creates a crossfade for the selected range 
+in the Fairlight page.
+Slip Audio  – Page 940
+Opens a menu to slip audio forwards and 
+backwards at a frame or subframe level. 
+Slip Eye  – Page 459
+Slips the opposite eye left or right one frame 
+in the Color Page’s Stereo 3D palette.
+4433
+DaVinci Resolve 21 | Menu Description Trim
+MENU
+Timeline
+Add Transition  – Page 1196
+Adds the default transition to the selected edit point.
+Add Video Only Transition  – Page 1196
+Adds the default transition to the 
+selected Video edit point only.
+Add Audio Only Transition  – Page 1145
+Adds the default transition to the 
+selected Audio edit point only.
+Select Clips
+Lets you select a range of clips.
+• Forward  – Page 923
+Selects all clips forward from the playhead  
+on either a single track, or all tracks.
+• Backward  – Page 923
+Selects all clips backward from the playhead  
+on either a single track, or all tracks.
+• By Flag Color  – Page 924
+Selects all clips previously  
+flagged with a specific color.
+• By Marker Color  – Page 924
+Selects all clips having markers with a 
+specific color.
+• By Clip Color  – Page 924
+Selects all clips with a specific color.
+Razor  – Page 971
+Activates the Razor (Blade) tool.
+Split Clip  – Page 963
+Splits a clip at the playhead position.
+Join Clip  – Page 963
+Joins two clips that are separated by a through edit.
+Detect Scene Cuts  – Page 550
+Activates Scene Cut Detection on 
+the current selection.
+AI Tools
+• Audio Assistant  – Page 4045
+Automatically mix your timeline audio.
+• Create Subtitles from Audio  – Page 1274 
+Automatically creates subtitles  
+based off speech in audio tracks.
+• Speech Generator  – Page 807 
+Opens the Speech Generator tool.
+Record Voiceover  – Page 1137
+Opens the Record Voiceover tool.
+Audio
+• Bounce Selected Tracks in Place  – Page 4044
+Bounces the selected tracks to a new 
+layer in the Fairlight page.
+• Bounce Mix to Track  – Page 4044
+Bounces the selected mix to a new track  
+in the Fairlight page.
+• Flatten Audio Track Layers  – Page 3825
+Flattens out Track Layers in the Fairlight Page.
+• Trim Audio Edits to Frame Boundaries 
+ – Page 1137
+Eliminates any sub-frame audio adjustments.
+• Mute Selected Track  – Page 1157
+Mutes the selected audio track  
+in the Fairlight Page.
+• Clear Mutes  – Page 4041
+Un-mutes all the tracks in the Fairlight Page
+• Solo Selected Tracks  – Page 1122
+Solos the selected audio track in the Fairlight Page.
+• Clear Solo  – Page 4041
+Un-solos all tracks in the Fairlight Page. 
+• Layered Audio Editing  – Page 3960
+Turns on Audio Layering in the Fairlight Page.
+• Audio Scrubbing  – Page 848
+Toggles audio scrubbing on or off.
+• Loop Jog  – Page 3897
+Toggles Loop Jog in the Fairlight Page.
+Video
+• Clean Up Video Tracks  – Page 987
+Opens a toolset to improve the  
+organization of a timeline’s video tracks.
+• Switch to Camera Originals  – Page 694
+Toggles between Camera Masters  
+and ISO’s in ATEM projects.
+• Linked Move Across Tracks  – Page 937
+Toggles linked clips moving tracks together.
+• Selection Follows Playhead  – Page 847
+Toggles the automatic selection  
+of the clip under the playhead. 
+• Ripple Timeline Markers  – Page 1042
+Timeline markers will reflow with ripple operations.
+Match Frame  – Page 1056
+Performs a Match Frame operation on the clip.
+Snapping
+Turns playhead snapping on and off.
+Linked Selection  – Page 936
+Toggles linked selection of clips.
+Source Track Selector  – Page 990
+Chooses specific tracks for editing operations.
+Auto Select  – Page 1056
+Automatically select tracks for editing operations.
+Track Lock
+Prevents further changes to the selected track.
+4434
+DaVinci Resolve 21 | Menu Description Timeline
+MENU
+Continued
+Sync Lock  – Page 1101
+Automatically select tracks  
+for editing operations.
+Video Track Enable  – Page 3161
+Shows or hides specific  
+video tracks.
+Output Blanking  – Page 305
+Sets letterboxing options.
+Load Current Timeline into Source Viewer 
+ – Page 879
+Loads the selected timeline into the 
+source viewer for tabbed editing.
+Find Current Timeline in Media Pool 
+ – Page 408
+Opens the bin in the media pool with the 
+selected timeline, and highlights it.
+Clip
+New Compound Clip  – Page 1076
+Makes a compound clip out of the selected clips.
+New Fusion Clip  – Page 1374
+Makes a Fusion composition out of the selected clips.
+New VFX Connect Clip  – Page 1311
+Links the current selection to the stand alone version 
+of Fusion.
+Open in Timeline  – Page 1082
+Opens a nested timeline temporarily into its 
+component pieces for editing.
+Decompose in Place  – Page 1080
+Breaks a nested timeline into its original 
+component pieces.
+Split Layers in Place  – Page 981
+Breaks a multilayer image file into its 
+original component layers.
+Enable/Disable Clip  – Page 912
+Toggles a clip’s visibility on or off.
+Link Clips  – Page 939
+Toggles Link or Unlink for the selected clips.
+Change Clip Duration  – Page 713
+Opens the Change Clip Duration tools.
+Clip Speed  – Page 1258
+Opens the simple speed retiming controls.
+Fusion Referenced Compositions  – Page 1376
+Various selection tools for  
+Fusion Reference Compositions.
+Auto Align Clips  – Page 976
+Aligns clips on a timeline based on  
+timecode or audio waveform.
+AI Tools 
+• Dialogue Matcher  – Page 3959
+Automatically match dialog 
+sound between two clips.
+• Voice Convert  – Page 3972
+Converts one voice to another using AI.
+Audio Operations 
+• Trim Audio Levels  – Page 3997
+Presents options to increase or  
+decrease the level of a clip by 1 or 3dB.
+• Ripple Delete Silence 
+Will find and cut out silences and ripple 
+delete them
+• EQ Matcher  – Page 3923
+Automatically matches EQ sound  
+between two clips.
+• Level Matcher  – Page 3959
+Automatically matches levels  
+between two clips.
+Take Selector  – Page 1075
+Creates a Take Selector  
+from the selected clips.
+Finalize Take  – Page 816
+Removes a Take Selector  
+and uses the starred take.
+Multicam Cut  – Page 1069
+Cuts to another angle in a Multicam Clip.
+Multicam Switch  – Page 1069
+Changes to another angle  
+in a Multicam Clip without cutting.
+Render Cache  – Page 203
+Toggles the options for caching  
+Fusion compositions in a timeline.
+Conform Lock Enabled  – Page 503
+Locks clip references to a specific  
+media file, preventing accidental changes.
+Conform Lock with Media Pool Clip 
+ – Page 504
+Forces a clip to reference a specific  
+media file selected in the Media Pool.
+Find Clip in Media Pool  – Page 1058
+Locates the selected clip in the Media Pool.
+Match Frame to Source Clip  – Page 1056
+Performs a Match Frame operation  
+on the selected clip in the timeline.
+4435
+DaVinci Resolve 21 | Menu Description Clip
+MENU
+Mark
+Mark In  – Page 903
+Sets the In Point on a clip or timeline.
+Mark Out  – Page 903
+Sets the Out Point on a clip or timeline.
+Mark Video In  – Page 904
+Creates an in point for the video track of a split edit.
+Mark Video Out  – Page 904
+Creates an out point for the video track of a split edit.
+Mark Audio In  – Page 904
+Creates an in point for the audio tracks of a split edit.
+Mark Audio Out  – Page 904
+Creates an out point for the audio tracks of a split edit.
+Convert In and Out to Duration Marker 
+ – Page 885
+Turns the in and out points into a duration marker.
+Set In and Out from Duration Marker 
+ – Page 906
+Turns a duration marker into In and Out Points.
+Clear In  – Page 904
+Removes the In Point on a clip or timeline.
+Clear Out  – Page 904
+Removes the Out Point on a clip or timeline.
+Clear In and Out  – Page 904
+Removes both the In and 
+Out Points on a clip or timeline.
+Clear Video In and Out  – Page 904
+Clears the In and Out Points  
+on the Video track for a split edit.
+Clear Audio In and Out  – Page 749
+Clears the In and Out Points  
+on the Audio tracks for a split edit.
+Mark Clip  – Page 994
+Automatically sets In and Out Points 
+based on a clip duration.
+Mark Selection  – Page 994
+Automatically sets In and Out Points  
+based on total duration of multiple clips.
+Create SubClip  – Page 474
+Creates a subclip based on the In and Out  
+points of a clip.
+Keyframe Timeline Mode  – Page 3424
+Choose which keyframe types  
+to copy between Color grades.
+Add Keyframe  – Page 1294
+Adds a Dynamic Keyframe at the playhead position.
+Add Static Keyframe  – Page 3525
+Adds a Static Keyframe at the playhead position.
+Delete Keyframe
+Removes a keyframe at the playhead position.
+Delete All Keyframes
+Removes all keyframes from a selected parameter.
+Move Selected Keyframes Left
+Moves all selected keyframes left by 1 frame.
+Move Selected Keyframes Right
+Moves all selected keyframes right by 1 frame.
+Move Selected Keyframes Up
+Moves all selected keyframes up by 1 unit.
+Move Selected Keyframes Down
+Moves all selected keyframes down by 1 unit.
+Add Marker  – Page 1036
+Adds a marker to a clip or timeline by color.
+Add and Modify Marker  – Page 1038
+Adds a marker to a clip or timeline,  
+and opens the Marker properties dialog.
+Modify Marker  – Page 1046
+Opens the Marker properties dialog for the 
+selected marker. 
+Delete Marker  – Page 1042
+Deletes the selected Marker
+Delete All Markers  – Page 1042
+Deletes all markers on a clip or  
+timeline, or by specific marker color.
+Favorite Keywords  – Page 350
+Apply a favorite keyword to a clip from your list.
+Add Flag  – Page 1036
+Adds a flag to a clip by color.
+Clear Flags  – Page 885
+Removes all flags from a selected clip.
+Delete All Flags  – Page 1036
+Removes all flags from all clips by color.
+Set Clip Color  – Page 1051
+Changes a clip’s color in the timeline.
+4436
+DaVinci Resolve 21 | Menu Description Mark
+MENU
+View
+Bypass Color and Fusion  – Page 833
+Turns on or off Color and/or  
+Fusion operations in a timeline.
+Display Broadcast Safe Exceptions 
+ – Page 3086
+Turns on the Broadcast Safe overlay.
+Source/Timeline Viewer  – Page 989
+Toggles between making the Source or 
+Timeline viewer active in the Edit page.
+Source Clip/Source Tape  – Page 755
+Toggles between Source Clip and 
+Source Tape in the Cut page viewer.
+Toggle Source Timeline  – Page 912
+Toggles the Source Timeline on or off.
+Zoom
+Zoom options for the viewer.
+Zoom Around Mouse Pointer  – Page 875
+Centers the timeline zoom on the pointer 
+rather than the playhead in the Edit page. 
+Zoom Audio Waveform  – Page 4049
+Sets waveform zooming parameters 
+in the Fairlight page.
+Safe Area  – Page 702
+Toggles and selects the safe area 
+overlays for the Edit and Color pages.
+Rulers  – Page 894
+Turn on and create rulers
+Guides  – Page 895
+Turn on and create guides
+Show Spelling Errors on Viewer  – Page 1219 
+Turn on and create guides
+Switch Eye To  – Page 333
+Chose the current eye for Stereoscopic workflows.
+Viewer Overlay  – Page 1250
+Sets the Viewer On Screen controls in the Edit Page.
+Show Duplicate Frames  – Page 881
+Duplicate clips are marked in the Edit page timeline.
+Show File Names  – Page 437
+Toggles between displaying Clip 
+names or File names in the Edit page.
+Overlay Synced Audio File Names 
+ – Page 460
+Shows the names of the original 
+audio files in the Edit page.
+Show Audio Track Layers  – Page 3814
+Reveals track layers in the Fairlight page.
+Show Subtitle Regions  – Page 1267 
+Shows or Hides regions in the subtitle tracks.
+Timeline Thumbnail Mode  – Page 3166
+Toggles clip order between A or C 
+mode in the Color page.
+Timeline Thumbnail Info  – Page 3163
+Choose what clip info is shown on 
+the thumbnail in the Color page.
+Timeline Thumbnail Size  – Page 3160
+Chooses the size of the thumbnails  
+in the Color page.
+Show Current Clip With Handles  – Page 3163
+Shows the handles of a clip in the Color page.
+Show Markers  – Page 1048
+Shows or Hides markers based on color.
+Show Flags  – Page 1036
+Shows or Hides flags based on color.
+Timeline Scrolling  – Page 3829
+Sets the timeline scrolling method in the 
+Fairlight page.
+Show Preview Marks  – Page 996
+Toggles Preview Marks on or off  
+in the Edit page.
+Enable Multiview Edit Preview  – Page 1093
+Enables or disables the multi-frame 
+displays in the Edit page.
+4437
+DaVinci Resolve 21 | Menu Description View
+MENU
+Playback
+Use Optimized Media if Available  – Page 202
+Toggles the use of Optimized Media or riginal media.
+Proxy Handling  – Page 139
+Exposes a submenu to control how 
+proxy media playback is handled.
+Timeline Proxy Resolution  – Page 201
+Options for Timeline Proxy Mode playback.
+Photo Album Preview Resolution  – Page 621 
+Select a preview working resolution for still images.
+Render Cache  – Page 203
+Options for using the Render Cache.
+Delete Render Cache  – Page 211
+Options for Deleting the Render Cache.
+Manage Render Cache  – Page 212
+Opens the Cache Manager.
+Fusion Memory Cache  – Page 1344
+Options for using the Fusion Cache.
+Play Reverse  – Page 891
+Plays 100% backward.
+Stop  – Page 1021
+Stops playback.
+Play Forward  – Page 891
+Plays 100% forward.
+Pause/Start Playback  – Page 891
+Stops and Starts playback.
+Play Again  – Page 891
+Restarts playback from the original position.
+Playback Post-Roll  – Page 848
+The playhead will continue playing  
+past the last clip in the timeline.
+Stop and Go to Last Position  – Page 897
+Playhead returns to original position on stop.
+Record  – Page 3895
+Initiates recording in the Fairlight Page.
+Fast Reverse  – Page 3819
+Plays in Fast Reverse.
+Fast Forward  – Page 3819
+Plays in Fast Forward.
+Play Slow  – Page 892
+Plays forward in Slow Motion.
+Fast Review  – Page 840
+Initiates the Fast Review function.
+Loop/Unloop  – Page 893
+Toggles Looping playback on or off.
+Play Around/To  – Page 893
+Options for choosing the Play Around/To mode.
+Timecode  – Page 707
+Options to increment or decrement timecode.
+Go To  – Page 904
+Options to move the playhead  
+directly to a certain location.
+Step One  – Page 963
+Move forward or backward one frame or one second.
+Previous
+Moves playhead to the previous Clip, 
+Keyframe, Marker or Gap.
+Next
+Moves playhead to the next Clip, Keyframe, 
+Marker or Gap.
+Jump Left  – Page 3899
+Moves clip selection left in the Fairlight page.
+Jump Right  – Page 3899
+Moves clip selection right in the Fairlight page.
+Cintel Scanner  – Page 566
+Transport controls for the Cintel Scanner.
+4438
+DaVinci Resolve 21 | Menu Description Playback
+MENU
+Fusion
+Show Toolbar  – Page 1345
+Toggles the Fusion toolbar on or off.
+Fusion Settings  – Page 1368
+Opens the Fusion Settings window.
+Reset Composition
+Resets a Fusion composition to its initial state.
+Macro Editor  – Page 1476
+Opens the Macro Editor.
+Import
+Specific file format import for Fusion.
+• Alembic Scene  – Page 1971
+• FBX Scene  – Page 1917
+• PSD  – Page 1397
+• Shapes  – Page 2485
+• SVG  – Page 1393
+• Tracks  – Page 1392
+Render All Savers  – Page 1404
+Renders OpenEXR files.
+4439
+DaVinci Resolve 21 | Menu Description Fusion
+MENU
+Color
+Nodes  – Page 3457
+Opens a menu for various node operations.
+Reset  – Page 3456
+Options for resetting a Node.
+Grade Version  – Page 3411
+Opens a menu for clip Version operations.
+Stills
+Opens a menu for manipulating stills in the Gallery
+• Grab Still  – Page 3393
+• Play Still  – Page 3137
+• Previous Still  – Page 3396
+• Next Still  – Page 3396
+Apply Grade  – Page 3425
+Applies a grade to the selected clips.
+Apply Active Layer  – Page 3463 
+Applies the current Node Stack Layer to the grade.
+Append Node Graph  – Page 3427
+Appends a node graph to the end of the 
+current node tree.
+Step Timeline Wipe  – Page 3397
+Moves the selected wipe timeline 
+clip forward one frame.
+Preview Memory  – Page 3456
+Preview a saved grade on the current clip.
+Original Memory  – Page 3456
+Reverts to a grade’s original state.
+Memories  – Page 3407
+Load and Save Memories.
+Apply Grade From One Clip Prior  – Page 3425
+Copies a grade from one clip back.
+Apply Grade From Two Clips Prior 
+ – Page 3425
+Copies a grade from two clips back.
+Presets  – Page 3306
+Accesses HSL Qualifier color presets.
+Ripple Node Changes to Selected Clips 
+ – Page 3433
+Copies changes made in a node to a selected clips.
+Ripple Node Changes to Current Group 
+ – Page 3434
+Copies changes made in a node to a group.
+Append Node to Selected Clips  – Page 3434
+Appends the selected node to multiple clips.
+Auto Color  – Page 3182
+Performs an Auto Color operation.
+Active Playhead  – Page 3162
+Choses the Active Playhead.
+Tracker  – Page 3367
+Basic Tracker controls.
+Resolve Live  – Page 313
+Opens the Resolve Live interface.
+Printer Light Hotkeys  – Page 3212
+Activates Printer Light controls on the 
+numerical keypad.
+Full Printer Light  – Page 3160
+Adjust printer lights in Full increments.
+Half Printer Light  – Page 3213
+Adjust printer lights in Half increments.
+Quarter Printer Light  – Page 3213
+Adjust printer lights in Quarter increments.
+MultiMaster Trim Manager  – Page 265
+Opens the MultiMaster Trim Manager.
+Dolby Vision®  – Page 261
+Performs an automatic Dolby Vision trim analysis.
+HDR10+™  – Page 284
+Performs an automatic HDR10+ trim analysis.
+HDR Vivid  – Page 286 
+Performs an automatic HDR Vivid trim analysis.
+Automatically Link AMF for  – Page 256
+Choose Selected or All shots 
+to link an ACES AMF file to.
+4440
+DaVinci Resolve 21 | Menu Description Color
+MENU
+Fairlight
+Bus Format  – Page 3880
+Opens the Bus Format window where you can create 
+mono to multi-channel Atmos buses.
+Bus Assign  – Page 3883
+Opens the Bus Assign window where you can patch 
+buses to tracks, tracks to buses and buses to buses.
+Presets Library  – Page 816
+Opens the Presets Library allowing you to 
+choose saved Preset Configurations for EQ, 
+Dynamics, Plugins, Global Track, Global Bus 
+and Fairlight Configurations.
+Link Group  – Page 3878
+Opens the Link Group window allowing you 
+to link groups of tracks.
+VCA Assign  – Page 4038
+Opens the VCA Assign window allowing you 
+to assign VCA groups to specific tracks.
+Patch Input/Output  – Page 4001
+Opens the Patch Input/Output window allowing you 
+to patch Source to Destination routings.
+Test Tones Settings  – Page 3862
+Opens the Test Tones Settings window with the 
+Oscillator for creating various signal tones.
+Synchronization Settings  – Page 3863
+Opens the synchronization timecode  
+settings in the Fairlight page.
+Input Monitor Style  – Page 3907
+Allows you to choose how to monitor an input. 
+Monitoring  – Page 3999
+Allows you to change the Global 
+monitoring between Mute, Dim, and Mono.
+Exclusive Solo  – Page 4041
+When selected takes all other 
+soloed tracks out of solo mode.
+Immersive Audio
+Exposes the following immersive audio tools.
+• B-Chain Control  – Page 4164
+• Space View Scope  – Page 4168 
+• Import Master - import ADM files  – Page 4148
+• Export Master - export ADM files  – Page 4148
+• Renderer Settings  – Page 4001
+Automation  – Page 4049
+Lists the Fairlight automation options.
+Batch Fade Settings  – Page 3964
+Opens the Batch Fade Settings window 
+to set fade types and durations.
+Apply Batch Fades  – Page 3964
+Applies the fades set in the Batch Fade 
+Settings window.
+View Clip Info Display  – Page 3833
+Opens the Clip Info Display window.
+Show Clip Gain Line  – Page 3995
+Shows or hides the Clip Gain Line in clips on 
+the timeline.
+4441
+DaVinci Resolve 21 | Menu Description Fairlight
+MENU
+Workspace
+Switch to Page  – Page 20
+Switches to the selected page.
+Show Page  – Page 15
+Shows or hides specific pages.
+Show Page Navigation  – Page 21
+Disables page navigation icons in the GUI.
+Show Panel in Workspace  – Page 58
+Shows or hides specific panels.
+Active Panel Selection  – Page 56
+Switches to the selected panel.
+Media Pool Windows  – Page 373
+Presents a list of open Bin windows.
+Dual Screen  – Page 60
+Puts the DaVinci Resolve interface in 
+Dual Screen Layout.
+Primary Display  – Page 61
+Lets you choose the monitor for the primary 
+DaVinci Resolve display.
+Video Clean Feed  – Page 62
+Shows the final video output on the selected screen.
+Viewer Mode  – Page 3131
+Chooses the Viewer Mode.
+Fairlight Viewer  – Page 3841
+Choses the Fairlight Viewer mode.
+Single Viewer Mode  – Page 833
+Toggles Single Viewer mode in the Edit Page.
+Stream to visionOS  – Page 4407
+Saves and Loads custom screen layouts.
+Layout Presets  – Page 62
+Saves and Loads custom screen layouts.
+Reset UI Layout  – Page 62
+Resets the UI Layout to the default settings.
+Data Burn-In  – Page 308
+Opens the Data Burn-In window.
+Gallery  – Page 3393
+Opens up the Gallery Window in the Color Page.
+Keyword Manager  – Page 350
+Opens up the Keyword Dictionary.
+Manage Faces  – Page 411 
+Opens up the Mange Faces Tool for face detection.
+Scene Cut Detector  – Page 418
+Opens the legacy Scene Detector in the Media page. 
+Timecode Window  – Page 853
+Opens the floating timecode window.
+Video Scopes  – Page 3144
+Opens the Scopes window.
+Remote Grading  – Page 4344
+Connects to a Remote Grading client in the 
+Color page.
+Remote Monitoring  – Page 4345
+Activates the viewer output  
+to be monitored remotely.
+Remote Rendering  – Page 4215
+Sets the computer to be  
+a rendering workstation.
+Monitor Calibration  – Page 3134
+Opens the Monitor Calibration tools.
+Console  – Page 1642
+Displays the Console Window  
+for diagnostics and Fusion Scripts.
+Scripts
+See the Workspace > Documentation menu 
+for scripting information.
+Workflow Integrations  – Page 4410
+Chooses an installed Workflow Integration Plugin.
+4442
+DaVinci Resolve 21 | Menu Description Workspace
+MENU
+Help
+DaVinci Resolve Reference Manual
+Opens this manual.
+DaVinci Resolve Training
+Links to Blackmagic Design’s Training portal.
+DaVinci Control Panels Setup
+Launches the DaVinci Control Panels Setup utility.
+Welcome to DaVinci Resolve
+Opens the initial installer screen.
+Documentation
+Links to Technical Developer documentation.
+Create Diagnostics Log on Desktop
+Creates a Diagnostics Log for troubleshooting.
+Deactivate License
+Deactivates the DaVinci Resolve Studio 
+license on this computer. 
+4443
+DaVinci Resolve 21 | Menu Description Help
+MENU
+blackmagicdesign.com

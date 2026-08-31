@@ -1,0 +1,1794 @@
+It’s a good idea to start with a single stroke, then track the stroke through the duration of the clip 
+(described later in this section). Over the entire clip, you’ll see which parts of the mask may exhibit 
+problems. This will guide where you put additional strokes, in order to more clearly identify the person 
+versus the background, in order to clean up the resulting mask. As you add additional strokes, track 
+those as well and see how things go.
+If you notice parts of the background that are erroneously added to the mask, you can add a negative 
+stroke (red) to clarify that those parts of the image should not be isolated. Short strokes, longer 
+strokes, and zig zags are good for backgrounds. Since strokes just help the analysis update the mask, 
+you can try different types of strokes to see what works best, and delete any stroke that doesn’t give 
+good results. As with positive strokes, don’t use more strokes than are absolutely necessary to get the 
+result you want.
+(Left) The microphone incorrectly identified as part of the woman being interviewed, (Right) Drawing negative 
+strokes to identify the microphone as background, using a zig-zag pattern to tag the entire microphone
+Similarly, if you’re isolating features such as a face, and you find other features, such as hair, getting in 
+the way, you can draw a negative stroke on the hair to identify it as not part of the face.
+If there’s a “hole” in the resulting mask that’s actually part of the background and not the subject, you 
+can try drawing a stroke connecting that hole to the rest of the background.
+Drawing strokes to connect the background with itself,  
+to remove part of the mask that’s not part of the person
+3360Color | Chapter 139 Magic Mask
+COLOR
+If there’s an “island” in the mask that’s actually part of the subject and not the background, you 
+can try drawing a stroke across the island that connects one solid part of the mask to itself.
+Drawing strokes to fill an island  
+in the subject being isolated
+Of course, extracting a mask using strokes is only the first part of creating a useful mask. The 
+Quality, Consistency, and Smart Refine controls let you refine the stroke analysis of the image 
+to create the best tradeoff between performance and quality for the type of mask you need. 
+These controls work hand in hand with the strokes you draw to extract a mask. A set of Mask 
+Finesse controls then let you adjust the resulting mask to manipulate and soften it, to better 
+suit whatever adjustment you’re trying to make. All of these controls are described earlier in 
+this section.
+Managing Strokes in the Stroke List
+When you draw a stroke, it appears in the Stroke list. By default, all strokes last for the duration of the 
+clip to which they’re applied, so if you draw a stroke to identify a figure that’s not moving, there’s no 
+requirement to motion track the stroke. Strokes in Person mode appear in one long list, while strokes 
+in Features mode appear hierarchically, with the strokes for each feature separated by the title of each 
+feature. Once a stroke appears in this list, it has the following controls.
+Enable/disable feature: In Features mode, once you draw at least one stroke to identify that 
+feature, the title of that feature appears, underneath which is organized all the strokes for that 
+feature. A toggle next to the feature name lets you turn that feature’s contribution to the overall 
+mask on and off.
+Enable/disable stroke: Each individual stroke in this list has a blue dot that lets you turn that 
+stroke’s contribution to the overall mask on or off.
+Stroke Timeline Area with Stroke Tracks: The stroke track for each stroke lets you keep track 
+of and manipulate the animation of strokes to follow camera and subject motion. Blue or red 
+frames in this track let you see at a glance how much of each stroke has been motion tracked; 
+blue frames for positive strokes, red frames for negative strokes. You can also use these 
+tracks to identify frames where you’d like to mute that stroke’s contribution to the final mask 
+and to keep track of which frames have been muted. You can draw a bounding box within the 
+stroke track around however many frames of however many strokes for which you want to 
+delete motion tracking.
+3361Color | Chapter 139 Magic Mask
+COLOR
+Stroke Duration
+When you first draw a stroke, that stroke has a duration of one frame, located at the timecode position 
+of the playhead when you drew it. If you move the playhead to the left or right, you’ll see the stroke 
+disappear. If you want one or more strokes to continue analyzing the subject for the duration of that 
+shot, you need to use the Motion Tracking controls to track the stroke to follow along with the motion 
+of whatever it’s drawn on top of. As a stroke is tracked, its duration increases to cover the entire range 
+of tracked frames. If at any point a stroke outlasts its usefulness, such as when a person walks off 
+frame, you can stop tracking that stroke when it’s no longer necessary and it will stop contributing to 
+the analysis.
+This is useful, because often you’ll want to place strokes to deal with analysis issues that only last for 
+a few frames, to fix a hole in the mask that only appears briefly. Just be aware, you can’t simply draw 
+a stroke and move on to the next shot; you must track at least one stroke to last for the duration of a 
+subject’s time on screen for that subject to be continuously masked.
+Tracking Strokes to Follow Subject Motion 
+You can think of each stroke you’ve drawn as a persistent eyedropper that samples the image that 
+overlaps it. The mask that results from all strokes’ collective analysis of the image is generated live 
+over each frame of the clip. This means that if the camera or the subject moves, you need to motion 
+track or otherwise adjust the position of each stroke to follow along with the motion, so the subject 
+continues to be correctly identified. You also need to make sure that each stroke is able to analyze 
+what it’s supposed to, and turn off strokes that can’t for whatever reason. 
+TIP: Magic Mask is a processor-intensive operation, so to accommodate users of less 
+powerful workstations, there is a Use Fast Tracking option available in the Magic Mask 
+palette’s Option menu, which speeds up the process of tracking at the expense of potentially 
+less accurate tracking for fast or erratically moving subjects.
+Methods of Moving Strokes to Follow Subject Motion
+For these reasons and more, there are multiple methods of manipulating strokes to refine the 
+final analysis.
+  Motion Tracking: A set of tracking controls at the top of the Magic Mask palette let you motion 
+track one or more strokes to follow the camera and subject motion in a clip. Every frame that’s 
+motion tracked effectively has a motion-tracked reference frame placed on it that moves the 
+stroke to a new position.
+  Reference Frame: Any time you drag a stroke from its original position in the Timeline, you create 
+a static reference frame at that frame that instantly moves the stroke from its previous position to 
+the new position at that frame. Because these are similar to static keyframes, there’s no motion 
+interpolation from one “keyframe” to the next in order to create animation. Instead, a reference 
+frame in the Magic Mask palette is a simple frame-by-frame operation. Every time you move a 
+stroke at a new frame, you change the stroke’s position at that frame from that point forward, 
+without changing stroke position on any other frame that’s been previously tracked.
+If this seems simplistic, keep in mind that the goal is not to create beautiful stroke animation with 
+this tool. You only need to move each stroke to follow along with whichever subject or background 
+feature it’s supposed to be sampling in each frame. The only important thing is that, in every frame, 
+the stroke overlaps a suitable part of the feature you’re isolating to create the appropriate mask. 
+3362Color | Chapter 139 Magic Mask
+COLOR
+If the stroke itself jumps around abruptly, that doesn’t matter so long as the mask that’s generated 
+is good. This means that even if you’re stuck doing a limited amount of frame-by-frame animation 
+to make a stroke follow along with a troublesome feature (such as a veil flapping in the wind), 
+it’ll go pretty fast, because in each frame you’re just dragging the stroke to overlap the feature 
+wherever it happens to have moved. This repositioning doesn’t have to be smooth, just accurate.
+  Combining Tracking and Reference Frames: Since each frame that’s motion tracked is effectively 
+keyframed, manually dragging a stroke on a frame that’s already been tracked overrides the 
+tracking data at that frame with a reference frame that records the new position of the stroke at 
+that frame. If there’s no more tracking data, either before or after that reference frame, then the 
+stroke disappears until you do more tracking. If there’s tracking data immediately after a reference 
+frame, then the stroke jumps to the position dictated by that tracking data.
+  Deleting Stroke Tracking at Specific Frames: To accommodate cases where a subject you’re 
+isolating moves behind something and becomes hidden for a range of frames, you have the ability 
+to delete stroke tracking for one or more frames. This lets you eliminate the stroke for however 
+many frames the subject you’re tracking is obscured and cannot be sampled. This makes it easy 
+to deal with features that come and go over the duration of a clip, since you can delete stroke 
+tracking over however many ranges of frames the feature disappears. If you’ve muted frames by 
+mistake, you can either undo or re-track the stroke over those frames.
+To delete tracking frames, draw a bounding box on the stroke tracks over the range you want to 
+delete, and then choose Clear Selected Track Data from the Magic Mask option menu.
+Option Menu Commands for Removing Strokes and Tracking
+The Option menu of the Magic Mask palette presents a number of commands for clearing either 
+strokes or stroke tracking data.
+  Clear All Strokes: Deletes every stroke in the Stoke list, along with tracking.
+  Clear All Strokes of Current Frame: Deletes the tracking data at the current position of the 
+playhead on all strokes in the list.
+  Clear All Strokes from In to Out: If you use the I and O keys to set In and Out points in the Stroke 
+Timeline, this command deletes all tracking data on all strokes within that range.
+  Clear Selected Stroke from In to Out: If you select a stroke in the Stroke list, and then use the I 
+and O keys to set In and Out points in the Stroke Timeline, this command deletes the tracking data 
+of selected strokes within that range.
+  Clear Selected Track Data: If you drag a bounding box around tracking data for one or more 
+strokes, this command deletes all tracking data within the box.
+An Example Stroke Tracking Workflow
+By combining motion tracking, manual reference frames, and stroke muting, you’ll be able to make 
+short work of isolating most moving subjects. The following procedure illustrates how you might 
+use these techniques together to make the strokes you’ve drawn follow along with the features 
+you’re isolating.
+3363Color | Chapter 139 Magic Mask
+COLOR
+To track one or more strokes to follow a subject:
+1 If necessary, move the playhead to the frame where you want to begin isolating the subject you 
+want to mask. For example, if you’re isolating a person walking into the room through a door, you 
+probably want to begin your work on a frame where the person is already in the room, and work 
+your way backward and forward from that frame. If your subject is already fully visible at the first 
+frame of the shot, you can start there.
+2 Draw at least one stroke identifying the subject or feature you want to isolate. You cannot track a 
+stroke to follow the features unless there’s at least one stroke.
+3 Choose whether you want to track all strokes or only selected strokes. By default, all existing 
+strokes with at least one frame in the Stroke Timeline at the position of the playhead will be 
+tracked. However, you can choose to track only selected strokes in the Stroke list by choosing 
+Track Selected Stroke Only in the Magic Mask palette’s Option menu.
+4 Click the Track Forwards to End or Track Backwards to Beginning buttons if you want to motion 
+track the strokes over the remaining duration of the clip.
+By default, each stroke is tracked to follow whatever image detail immediately surrounds it; 
+you don’t have to define a tracking region, this is done automatically. As tracking proceeds, the 
+tracking bar for each stroke will fill up showing you which frames have been tracked, and which 
+have yet to be tracked. Meanwhile, each stroke being tracked will transform to follow along with 
+simple position and rotation changes in the subject. However, things that obscure the subject, as 
+well as more extreme movements, may cause problems.
+Strokes that are tracking a feature that moves off screen are automatically excluded from tracking 
+at the frame where the feature is completely off screen, even if that feature returns onscreen in a 
+later frame.
+5 (Optional) If a problem occurs during the track, such as the subject being occluded behind 
+something else in the frame (for example, a person’s face moves behind a tree as they walk), 
+click the Pause Track button. You can deal with problems in the track in the following ways:
+a) If a stroke has completely moved off of the subject: For example, you’re tracking a stroke 
+to follow a person and they turn around 180 degrees, so the stroke moves off onto the 
+background. To fix this, pause the track, move the playhead to the first frame where the 
+stroke hasn’t followed the subject properly, then use the pointer to drag the stroke onto 
+another part of the subject that’s clearly visible. On each frame where you drag the stroke 
+to a new position, a new reference frame will be automatically added. Continue this process 
+until the subject’s motion is consistent enough to be trackable again, and you can then 
+resume tracking.
+b) If a stroke has moved onto something that’s partially obscuring the subject: Pause the track, 
+drag a bounding box over the frames where the track is having a problem, and choose Delete 
+Selected Tracking from the Magic Mask Option menu to clear the bad tracking data. Then, 
+move the playhead to the first frame of the deleted tracking data, and use the pointer to drag 
+the stroke onto any part of the subject that’s visible to either side of the occlusion. Move the 
+playhead to each successive frame, and drag the stroke onto whichever part of the subject 
+is visible from behind the occlusion, until the subject moves past the occlusion. At that point, 
+you can use the Track Forwards to End or Track Backwards to Beginning buttons to continue 
+tracking as usual.
+c) If the subject becomes completely hidden: Clips where the subject appears and disappears 
+over the duration of a clip can be resolved by deleting the stroke or strokes on that subject 
+over all frames where the subject is obscured, so that strokes only sample the image when the 
+subject is visible and thus able to be isolated. You can delete one or more strokes by dragging 
+a bounding box over a range of frames, and then choosing Clear Selected Track Data from the 
+Magic Mask Option menu.
+3364Color | Chapter 139 Magic Mask
+COLOR
+d) If a stroke is having trouble following the subject: If the subject you’re tracking is moving too 
+fast, too irregularly, or is changing shape too greatly for the tracker to give a good result (for 
+example, someone lifts their arm towards the camera), you can track through the problem area 
+of the clip one frame by frame using the Track Forward 1 Frame or Track Backward 1 Frame 
+buttons, and then use the pointer to manually drag the stroke to follow along with the subject 
+as you go. Once the problem motion stops and the motion of the subject becomes more 
+regular, you can use the Track Forwards to End or Track Backwards to Beginning buttons to 
+continue tracking as usual.
+e) If the subject is moving off the frame: If you’ve drawn a stroke in the middle of someone’s 
+face, and their face is moving off screen, you can manually reposition the stroke on the last 
+few frames before the subject completely exits so that stroke continues to identify what parts 
+of the face are still visible even though the part of the face it was originally following becomes 
+hidden. Once the face completely exits the frame, you can mute the stroke for the rest 
+of the shot.
+6 (Optional) If you only tracked the stroke’s movement over part of a shot, you can click the Jump to 
+Start or Jump to End buttons to move the playhead to the first or last tracked frame, in preparation 
+for tracking from that frame onward.
+3365Color | Chapter 139 Magic Mask
+COLOR
+Chapter 140
+Motion Tracking 
+Windows
+While Power Windows can be manually keyframed to follow a moving subject 
+you want to isolate, this chapter shows how you can use the powerful cloud 
+and point-based motion tracking controls in DaVinci Resolve to make Power 
+Windows follow along with the motion of subjects and the camera in the fastest, 
+easiest way possible. 
+Then, numerous techniques are presented for dealing with complicated tracking scenarios and 
+common problems that arise for subjects that are difficult to track.
+Contents
+Motion Tracking Windows ������������������������������������� 3367
+Simple Tracking Using the Tracker Menu  ������ 3368
+Tracking Windows Across Transitions  �������������  3369
+Tracking Windows When You’ll 
+Be Exporting Media With Handles  �������������������� 3369
+Simple Ways of Working 
+With Existing Tracking Data ����������������������������������  3369
+Tips for Better Tracking ������������������������������������������� 3369
+Tracking One Frame at a Time ����������������������������� 3370
+Copying and Pasting Tracking  ������������������������������ 3370
+Tracker Palette Controls in More Detail ���������  3370
+Controls in the Window Tracker Palette ����������  3370
+IntelliTrack AI Point Tracker 
+(Studio Version Only) ������������������������������������������������� 3375
+Cloud Tracker Workflows ��������������������������������������� 3376
+Using Interactive Mode to Manually 
+Choose Tracking Features  ������������������������������������� 3376
+Dealing With Occlusions When Tracking �������� 3379
+Point Tracker Workflows ���������������������������������������� 3382
+Tracking a Window Using  
+the Point Tracker �������������������������������������������������������� 3382
+Removing Trackers ����������������������������������������������������� 3384
+Using Frame Mode to Offset Track �������������������� 3384
+Rotoscoping Window 
+Shapes After Tracking ��������������������������������������������  3386
+Rotoscoping Controls  ����������������������������������������������� 3387
+Keyframing in Frame Mode  ����������������������������������� 3388
+A Rotoscoping Workflow  ���������������������������������������� 3388
+Viewing a Window’s Motion Path ������������������������� 3391
+3366Color | Chapter 140 Motion Tracking Windows
+COLOR
+Motion Tracking Windows
+The Tracker palette has three modes, available from the Palette menu. 
+  In Window mode, the tracking controls let you match the motion of a window to that of a moving 
+feature in the frame. 
+  In Stabilizer mode, the same underlying technology is used to smooth or stabilize the motion 
+within the entire frame.
+  In FX mode a Point Tracker can be used to animate ResolveFX or OFX plugins with 
+positioning controls. 
+For more information on the FX and Stabilizer modes, jump to this chapter: Sizing and Image 
+Stabilization.
+DaVinci Resolve has an incredibly simple, yet powerful, 3D cloud tracker that allows you to track 
+quickly and accurately any Power Window (Circular, Linear, Polygonal, Curve, or Gradient) to 
+follow any moving feature. This avoids the need to use dynamic keyframes to manually animate a 
+window’s position. 
+In particular, you can use the tracker to match a window’s position, size, rotation, and its pitch and yaw 
+in 3D space to either foreground or background elements that move within the frame.
+A Power Window tracking a woman’s face
+3367Color | Chapter 140 Motion Tracking Windows
+COLOR
+Simple Tracking Using the Tracker Menu
+The simplest way to track a feature using a Power Window is to use the commands found in the 
+Color > Tracker menu. These commands include:
+  Track Forward (Command-T): Tracks a window to a feature from the current position of the 
+playhead forward, ending at the last frame of a clip.
+  Track Reverse (Option-T): Tracks a window to a feature from the current position of the playhead 
+backward, ending at the first frame of a clip.
+  Track Stop (Command-Option-T):  Interrupts any track. This is useful for letting you cancel a long 
+track that goes wrong (the Stop button of a control panel stops tracking as well).
+  One Frame Forward (Option-Right Arrow):  Tracks a window to a feature one frame forward from 
+the current position.
+  One Frame Reverse (Option-Left Arrow): Tracks a window to a feature one frame backward from 
+the current position.
+Most window tracks are easy to accomplish using these three commands.
+To track any Power Window to match a moving feature within the frame:
+1 Move the playhead to the frame of the current shot where you want to begin (you don’t have to 
+start tracking at the first frame of a shot).
+2 Turn on any window, and adjust it to surround the feature you want to track.
+Typically, you’ll have done this anyway, for example, framing someone’s moving face with a 
+Circular window to lighten their highlights.
+3 To initiate tracking, do one of the following:
+  Choose Color > Tracker > Track Forward (press Command-T). 
+  Choose Color > Tracker > Track Reverse (Option-T).
+DaVinci Resolve automatically opens the Viewer page, places a series of tracking points within the 
+window you’ve created, and performs the track from the current frame; forward to the last frame or 
+backward to the first frame.
+DaVinci Resolve analyzes a cloud of tracking points that follow the vectors of every trackable 
+group of pixels within the window you’ve created, and the results are fast and accurate. After 
+tracking, the window you’ve placed automatically moves, resizes, rotates, and skews to match the 
+motion of the feature you’re tracking.
+Once a clip has tracking data applied to one of its windows, a small tracking icon appears 
+within that clip’s icon in the Thumbnail timeline.
+Object tracking in progress. Tracking points are automatically 
+placed over trackable features of the image
+A tracking icon in the top 
+left corner of the Thumbnail 
+timeline shows that clip 
+has been tracked
+3368Color | Chapter 140 Motion Tracking Windows
+COLOR
+If the track you’ve performed is unsuitable, you can reposition the window to cover a different 
+area of the subject you’re trying to track, and initiate tracking again. New tracking data 
+overwrites any previous tracking data applied to that window.
+Once you’re satisfied with your track, you can continue to resize, reposition, or reshape the 
+window being tracked. Tracking data is separate from the window transform parameters 
+(which can be keyframed), so changes you make to a window offset it from the originally 
+tracked path.
+Tracking Windows Across Transitions
+When you track a window that crosses a transition boundary (for example, a dissolve from one clip 
+to another), DaVinci Resolve will automatically continue the track for the full extent of the video 
+under the transition.
+Tracking Windows When You’ll 
+Be Exporting Media With Handles
+When you track windows to match moving features in a clip, the windows are only transformed on 
+frames with tracking data. In Round Trip workflows where you add handles to the graded clips you 
+render for editorial flexibility in the footage you deliver, you need to make sure that you track all 
+windows from the beginning to the end of these handles to make sure that, if an editor actually trims 
+any of the clips you give them to use the handles, all windows are doing what they should. 
+An easy way to do this is to choose View > Show Current Clips With Handles to display each clip 
+you select in the Timeline with handles defined by the “Default handles length” setting in the Editing 
+panel of the User Preferences. Make sure that the “Default handles length” is equal to the handles 
+you export using the “Add X Frame handles” option in the Render Settings list of the Deliver page. 
+With each clip’s handles made visible in this way, you can easily track windows along every frame 
+you’ll be rendering.
+Simple Ways of Working With Existing Tracking Data
+If there’s a portion of a shot that you haven’t tracked (for example, you started tracking at a later frame, 
+or you ended tracking before the end of the shot), then the window you’re tracking remains wherever it 
+was at the first or last frame that was tracked. If you want to fill in these gaps, you can always move the 
+playhead to the first or last frame that was tracked, and then use the Track Backward or Track Forward 
+command to track the rest of the frames in that shot.
+Tips for Better Tracking
+In situations where a feature changes shape in such a way as to confuse the tracker, you can try 
+tracking a smaller part of the feature by using a smaller window. Once you’ve achieved a successful 
+track, you can resize the window as necessary, and it will have no effect on the track that’s already 
+been made.
+Also, if you’re tracking a feature that moves behind something onscreen and disappears for the rest of 
+the shot, there’s an easy way to avoid having an awkward window sitting in the middle of the scene. 
+You can use dynamic keyframes to animate the Key Output Gain parameter (in the Key tab of the Color 
+page) to fade from the correction’s full strength of 1.0 down to 0, the value at which the correction 
+disappears, along with the window itself.
+3369Color | Chapter 140 Motion Tracking Windows
+COLOR
+Tracking One Frame at a Time
+You can click the “track one frame forward” or “track one frame backward” buttons in the Tracker 
+palette to track a moving feature one frame at a time, making it easier to make adjustments to follow a 
+difficult track when you’ve set tracking to Frame mode (by clicking the Frame button). 
+In Frame mode, you can keyframe window transformations to more faithfully conform to troublesome 
+motion as you’re moving one frame at a time through the track; manual changes to a window’s 
+position will be keyframed to create frame-specific transformations, rather than used to offset the 
+entire tracked motion path as in Clip mode. When you add multiple keyframes in the Tracker graph, 
+animation will be automatically interpolated from keyframe to keyframe.
+Copying and Pasting Tracking
+There will be plenty of times you’ll apply multiple windows to a single moving subject, such as a car, 
+when you can use a single motion track for all the windows. Commands in the Option menu let you 
+copy and paste track data from one window to another within the same node, saving time when you 
+want several windows tracking together as one.
+To copy track data from one window to another:
+1 Open the Window palette, then select a window that has tracking applied to it (indicated 
+by a tracking badge in the corner of the shape icon), and choose Copy Track Data from the 
+Option pop-up. 
+2 Select another window, and choose Paste Track Data from the Option pop-up. Once you’ve 
+copied track data from one window, you can paste it to as many other windows as you like.
+You can also copy tracking from the FX mode of the Tracker palette and paste it to a window, in 
+case you want to use the same tracking data for both an effect and a window.
+Pasting tracking data between windows will retain the window’s original shape.
+To copy track data from an FX track to a window:
+1 Open the Tracker palette, choose the FX mode that contains the tracking data you want to copy, 
+and choose Copy Track Data from the Option pop-up. 
+2 Open the Window palette, select a window, and choose Paste Track Data from the Option pop -up. 
+Once you’ve copied track data from one window, you can paste it to as many other windows 
+as you like.
+Tracker Palette Controls in More Detail
+You can easily combine object tracking and keyframing to animate windows. For example, you’ll 
+typically use object tracking to make a window follow the position and orientation of a moving feature, 
+but you can add dynamic marks to the window track of the correction in the Color page with which to 
+alter its size and shape to better conform to a feature’s changing form.
+Controls in the Window Tracker Palette
+Occasionally, you’ll run into a shot that doesn’t quite track well enough using the Tracker menu’s 
+simple controls. In these cases, the Viewer page provides the complete set of object tracking controls 
+that can be used to modify tracking operations in different situations.
+3370Color | Chapter 140 Motion Tracking Windows
+COLOR
+The Tracker palette
+The object tracking controls are divided into seven groups.
+Tracker Palette Modes
+The Tracker palette’s Option drop-down menu lets you choose between Window mode (for 
+matching a window to the motion of a feature in the frame), Stabilizer mode (for subduing unwanted 
+camera motion
+For more information on Stabilizer mode, jump to this chapter: Sizing and Image Stabilization , 
+and FX mode (for tracking position to be used with Resolve FX or Open FX plugins) jump to 
+this chapter: Using Open FX, Resolve FX, and Fus e Plugins.
+Types of Tracking
+A pop-up menu below the Tracker graph lets you choose whether to use the Cloud Tracker or the 
+Point Tracker. 
+The tracker type pop-up
+There are three options:
+  The Cloud Tracker: Automatically analyzes all parts of the image for trackable points, and uses 
+these to automatically figure out the motion in the shot that you want to use to move a Power 
+Window or stabilize a shot. This tracker type is great for quickly tracking a window to match the 
+movement of almost any feature, with a minimum of work.
+  The Point Tracker: Lets you create one or more tracker crosshairs that you can manually position 
+in order to track specific features in the shot. The more crosshairs you create and position, the 
+more accurate the track can be. The Point Tracker is incredibly useful in situations where you need 
+to follow the motion of a very specific feature in the frame. It can also be useful in cases where you 
+want to stabilize a shot that has many subjects moving in different directions, and it’s difficult to 
+obtain a good result with the Cloud Tracker.
+3371Color | Chapter 140 Motion Tracking Windows
+COLOR
+  IntelliTrack: Is a AI tool that doesn’t use predetermined rulesets or heuristics. Instead, it is 
+trained on real world examples. This makes it less likely to fail in scenarios like tracking a subject 
+behind brief occlusions. For most cases it will be more precise and more robust than the normal 
+Point Tracker.
+Object Tracking
+The object tracking controls provide the most basic tracking functions, some of which are mirrored 
+within the Color > Tracker menu.
+Choose which type of transform you want to track before tracking
+A series of five checkboxes let you turn on and off which transforms you’d like motion tracking to apply 
+automatically to the window. These checkboxes must be selected before you perform a track in order 
+to restrict the transforms that are used. 
+  Pan and Tilt: Enables tracking of horizontal and vertical position, when you want to transform a 
+window to follow the location of a tracked subject.
+  Zoom: Enables tracking of size, when you want to transform a window to resize to follow a 
+tracked subject.
+  Rotate: Enables tracking of orientation, when you want to transform a window to rotate with a 
+tracked subject.
+  Perspective 3D: Enables tracking of pitch and yaw in 3D space, when you want a window to skew 
+to follow the orientation of a tracked subject within the scene. Good when you want the window to 
+“stick” to a surface.
+NOTE: Once tracking or stabilization has been done, disabling these checkboxes does 
+nothing to alter the result. To make changes, you need to enable or disable the necessary 
+checkboxes first, and then reanalyze the clip.
+After you’ve defined the transforms you want to use for the track, the analyze controls let you proceed 
+with the analysis of the subject being tracked.
+  Track One Frame Reverse button: Motion tracks a single frame in reverse. Useful for slow tracking 
+of difficult subjects that may require frequent correction.
+  Track Reverse button: Initiates tracking from the current frame backward, ending at the first frame 
+of the clip. Good for tracking backward when your best starting point is somewhere within the 
+middle of the shot.
+  Pause button: Stops tracking (if you’re fast enough to click this button before tracking is finished).
+  Track Forward button: Initiates tracking from the current frame forward, ending at the last frame of 
+the clip. 
+  Track Forward and Back button: Initiates tracking from the current frame forward, then when 
+finished, tracks backward from the original selected frame. This allows you a one button process 
+when tracking from the middle of a shot.
+  Track One Frame Forward button: Motion tracks a single frame forward. Useful for slow tracking 
+of difficult subjects that may require frequent correction.
+3372Color | Chapter 140 Motion Tracking Windows
+COLOR
+Clip/Frame Controls
+Two buttons let you set how manual adjustments to the position of tracked windows affect the 
+overall track.
+Selecting clip or frame to apply adjustments
+  Clip: The default mode, in which changes you make to the position of a window are globally 
+applied to the entire track. For example, if you track a feature, and then move the window, the 
+window moves along a motion path that’s consistently offset from the original track for the duration 
+of the clip. Use this mode if you’re happy with the track, but you want to modify the window’s 
+overall shape and position relative to the motion path it’s following.
+  Frame: In this mode, changes you make to the position or shape of a window create a keyframe at 
+the frame at the position of the playhead. Multiple keyframes are interpolated to create animation 
+with which you can manually transform a window to solve a variety of problems. This mode is 
+useful for rotoscoping the shape and position of windows to match a subject that’s tough to 
+automatically track. Frame mode is also useful for making corrections to individual frames that 
+were badly tracked, for animating windows to go all the way out of frame along with a subject, or 
+for making manual, frame-by-frame adjustments to window position to cover untrackable≈sections.
+The Tracker Graph
+The Tracker graph provides a visual display of the tracking data that’s being analyzed. Each of the 
+transform controls that can be tracked has an individual curve, which lets you evaluate each tracked 
+parameter on its own, and each curve is color-coded to match the corresponding label of the tracking 
+transforms listed above.
+A vertical slider to the right of the Tracker graph lets you scale the height of the curve data within to 
+make it easier to see it all within the graph. A horizontal slider at the bottom of the graph allows you to 
+zoom in and out of the tracker curves, allowing you to see finer detail of the tracking paths. Above the 
+Tracker graph, a Timeline ruler contains a playhead that’s locked to the playheads in the Viewer and 
+Keyframe Editor.
+The Tracker graph showing a curve for each transform control
+You can draw a bounding box in the Tracker graph with which to select a portion of one or more 
+curves to delete sections of low-quality tracking data using the Clear Selected Keyframes command 
+found in the Tracker Options menu. To eliminate the current bounding box from the Tracker graph, 
+click once anywhere within the graph.
+3373Color | Chapter 140 Motion Tracking Windows
+COLOR
+Interactive Mode Controls
+The Interactive controls, at the bottom-left of the Tracker palette, let you make manual changes 
+to the automatically generated tracking point cloud that DaVinci Resolve creates when you’re 
+tracking with the Cloud Tracker, so you can try different ways of obtaining better tracking results in 
+challenging situations.
+Interactive mode controls
+  Interactive Mode checkbox:  Turns the Interactive tracking mode on and off. When you enter 
+Interactive mode, you can manually alter the point cloud that DaVinci Resolve uses to track the 
+feature within the current window. You’ll then make your track while in Interactive mode.
+  Insert: Lets you add tracking points to whatever trackable features exist within a bounding box 
+that you’ve drawn in the Viewer. Inserted tracking points are automatically placed based on 
+trackable pixels in the image.
+  Set Point: Lets you use the cursor (using the DaVinci Resolve Advanced control panel), to 
+manually place individual tracking points, one by one, with which to track a feature. If there is no 
+trackable pixel group at the coordinates where you placed the cursor, a tracking point will be 
+placed at the nearest trackable pixel group.
+You must place at least two tracking points at different pixel groups to track rotation, and at least 
+three to track zoom.
+  Delete: Eliminates all tracking points within a bounding box that you’ve drawn in the Viewer.
+Point Tracker Controls
+If you’re using the Point Tracker, then the Interactive Mode controls disappear, replaced by the two 
+controls of the Point Tracker.
+Point Tracker controls
+  Add Tracker: Click to create a new tracker that’s automatically positioned in the center of the 
+frame. Once created, you can drag it using the pointer to line up with the feature you want to track. 
+You can create as many trackers as you like. Multiple trackers are all tracked at once.
+  Delete Tracker: Select any tracker (selected trackers are red, deselected trackers are blue), and 
+click this button to remove it.
+3374Color | Chapter 140 Motion Tracking Windows
+COLOR
+Additional Commands in the Tracker Options Menu
+There are some additional commands located in the Tracker Options pop-up menu.
+  Reset Track Data on Active Window: Lets you delete the tracking data corresponding to the 
+currently selected window.
+  Clear Selected Track Data: When you drag a bounding box over parts of one or more curves in 
+the Tracker graph, this command lets you delete that part of the graph. This is useful when you 
+want to eliminate sections of low-quality track data. Portions of curves that are cleared in this 
+way have linear interpolation automatically applied to them, similar to if you used the Keyframes 
+Interpolation controls.
+  Delete Keyframe: Deletes tracker graph keyframes at the current position of the playhead.
+  Clear All Tracking Points: Clears the tracking points in the Power Window at the frame you are on.
+  Show Track: Turn this checkbox on to show the motion path produced by the tracking 
+you’ve done.
+  Copy Track Data: Lets you copy track data from the currently selected window. Windows can be 
+selected directly in the Viewer while the Tracker palette is open.
+  Paste Track Data: Pastes copied track data to the currently selected window. Windows can be 
+selected directly in the Viewer while the Tracker palette is open.
+IntelliTrack AI Point Tracker (Studio Version Only)
+The DaVinci Neural Engine powered IntelliTrack point tracker is now available in the Color tracker, 
+Fusion point tracker, and the FX tracker in DaVinci Resolve Studio. The IntelliTrack setting can be used 
+for general tracking and stabilization tasks.
+IntelliTrack, like other AI tools, doesn’t use predetermined rulesets or heuristics. Instead, it is trained 
+on real world examples. This makes it less likely to fail in scenarios like tracking a subject behind brief 
+occlusions. For most cases it will be more precise and more robust than the normal Point Tracker.
+  Using IntelliTrack: All the IntelliTrack analysis happens behind the scenes, and there is no 
+additional user input required other than to choose the IntelliTrack setting, set the tracking 
+crosshairs over high contrast areas on the same moving subject, and then press one of the tracker 
+direction controls.
+Setting the IntelliTrack mode for  
+the Color page window tracker
+3375Color | Chapter 140 Motion Tracking Windows
+COLOR
+Cloud Tracker Workflows
+The next few examples illustrate how to use the Tracker palette’s controls in practical situations. In 
+many circumstances, objects passing in front of a tracked subject, known as “occlusions,” can cause 
+problems. While the tracker in DaVinci Resolve is highly occlusion-resistant, the following sections 
+show a variety of techniques you can use when an occlusion prevents you from getting a useful track.
+Using Interactive Mode to Manually Choose Tracking Features
+Interactive mode lets you manually remove or add tracking points to improve tracking performance in 
+situations where the automatic image analysis in DaVinci Resolve provides unsatisfactory results.
+For example, you can delete tracking points within a window that correspond to overlapping features 
+you don’t want to track. Suppose a car that you’re tracking drives by a sign that partially obscures the 
+car. Without intervention, the PowerCurve that’s isolating the car will deform improperly when the car 
+moves along and then away from the sign.
+Using Interactive mode, you can delete the tracking points that will overlap the sign you don’t want to 
+track, improving the result.
+To eliminate specific, unwanted tracking points from a track:
+1 Open the Tracker palette.
+2 Turn on the Interactive Mode checkbox.
+Selecting Interactive Mode 
+3 In the Viewer, drag a box around the tracking points you want to eliminate within the window.
+Dragging a box around tracking  
+points that need to be deleted 
+3376Color | Chapter 140 Motion Tracking Windows
+COLOR
+4 Click the Delete button.
+Deleting tracking points 
+The points within the selection area are deleted.
+Remaining tracking points ready to be used
+5 While Interactive mode is still on, click Track Forward or Track Reverse to track the subject using 
+the remaining tracking points.
+6 When you’re finished tracking, turn off the Interactive Mode checkbox.
+DaVinci Resolve goes back to using automatically placed tracking points.
+In another interactive tracking example, you may sometimes run into situations where you 
+want to eliminate all automatically placed tracking points altogether, placing your own in 
+specific regions of the image.
+To eliminate automatic tracking points, adding your own instead:
+1 Open the Tracker palette.
+2 Turn on the Interactive Mode checkbox.
+Selecting Interactive mode
+3377Color | Chapter 140 Motion Tracking Windows
+COLOR
+3 In the Viewer, drag a box around all the tracking points in the window, and click the 
+Delete button to eliminate all tracking points from the image.
+Selection box surrounding all tracking points
+4 Click the Delete button to eliminate all tracking points from the image. 
+Deleting tracking points 
+5 Drag a box around the specific area where you’d like to add new tracking points. In this case, 
+you only want to track the top half of the woman’s face, since the bottom half is cut off by the 
+fence posts.
+Placing the selection box over the top of the window 
+6 Now, click the Insert Track Points button.
+The Insert button of Interactive mode automatically  
+adds tracking points within the current bounding box.
+3378Color | Chapter 140 Motion Tracking Windows
+COLOR
+New tracking points are automatically added to whichever features are  
+appropriate for tracking within the box you’ve drawn.
+Tracking with the remaining tracking points
+NOTE: If no appropriate tracking features can be found, no points will be added.
+Dealing With Occlusions When Tracking
+Sometimes you’ll find that you need to deal with a gap in the useful tracking data. For example, 
+objects in the frame that pass in front of the feature you’re trying to track cause gaps in the tracking 
+information for a clip.
+In situations where a subject being tracked becomes totally occluded by another object in the 
+frame, there’s an easy method of interpolating to cover holes in the available tracking data. In the 
+following example, the woman walks behind another fence post, this time one that’s taller than she is. 
+The window tracking her face will become completely lost at this point, but interpolation will help to 
+salvage this shot.
+Original clip
+Interpolating between two sets of tracking data to track past an occlusion:
+1 Move the playhead to the first trackable frame of the moving feature you’re correcting, 
+and create a Power Window that surrounds it.
+3379Color | Chapter 140 Motion Tracking Windows
+COLOR
+Adding the Power Window 
+2 Use Track Forward to track the feature as far as you can before it becomes obscured behind 
+something else in the frame.
+3 When the Power Window stops tracking the feature reliably, stop the track.
+The Power Window is obscured by the post 
+4 Open the Tracker palette.
+5 Click the Frame button to put the Tracker controls into frame-by-frame adjustment mode. This is an 
+important step.
+Selecting Frame mode 
+6 Move the playhead to the frame where the feature you’re tracking reappears from behind the 
+occlusion, then drag the window so that it again overlaps the feature.
+Moving the playhead and position the window 
+3380Color | Chapter 140 Motion Tracking Windows
+COLOR
+7 Use Track Forward to continue tracking the feature until the end of the clip. Alternately, you 
+could have started from the end of the clip and used Track Reverse to track the feature as far as 
+possible, if that’s easier. Now that you’ve identified the gap in reliable tracking data for this clip, it’s 
+time to set up the interpolation. 
+Notice the gap in the tracking data where  
+the window was behind the post
+8 Drag a bounding box over the portion of the curves in the Tracker graph that fall between the 
+good tracking data at the beginning and end of the shot.
+9 Click the Tracker palette option pop-up menu, and choose Clear Selected Track Data.
+The portions of curves that you selected are deleted, and have linear interpolation 
+automatically applied to them so that there’s no hole in the track data or the motion of the 
+window, which now moves smoothly from the last outgoing frame of reliable tracking data to 
+the first incoming frame of new reliable tracking data.
+3381Color | Chapter 140 Motion Tracking Windows
+COLOR
+Point Tracker Workflows
+As advanced as the Cloud Tracking that is the default in DaVinci Resolve is, there are times when 
+it may be simpler to track using good old-fashioned crosshairs. The Point Tracker makes it easy to 
+track very specific features of a subject with motion you need to follow. Unlike the Cloud Tracker, 
+which automatically looks for all trackable points within a region of the image that you identify using 
+a window, the Point Tracker lets you create one or more crosshairs that you must manually position 
+to overlap with whatever high-contrast features you want to track. This section covers the three main 
+workflows you need to know to use the Point Tracker.
+Tracking a Window Using the Point Tracker
+The following procedure describes, in a general way, how to use the Point Tracker to track a moving 
+subject and apply that motion to a Power Window.
+1 Move the playhead to the frame of the current shot where you want to begin (you don’t have to 
+start tracking at the first frame of a shot, since you can always track backward).
+2 Turn on any window, and adjust it to surround the feature you want to track. Typically, you’ll have 
+done this anyway, for example, framing someone’s moving face with a Circular window to lighten 
+their highlights. You want to make sure that the window you want to apply the tracked motion to is 
+selected before you begin tracking. In this example, we’ll be tracking a Circular window to follow 
+the woman’s face.
+Setting up to track a window over a woman’s face
+3 Open the Tracker palette, and choose Point Tracker from the bottom right pop-up. 
+Choosing the Point Tracker
+4 Before you start tracking, choose what types of motion you want to track and apply to the window 
+you’re working on. You can choose from among Pan, Tilt, Zoom, Rotate or Perspective 3D. 
+Which methods of transformation can be applied depend on how many points you add to track.
+Choosing what type of motion to analyze
+3382Color | Chapter 140 Motion Tracking Windows
+COLOR
+5 Click the Add Tracker Point icon. A new tracker crosshairs appears in the Viewer in the center of 
+the frame.
+Clicking the  
+Add Tracker Point icon
+6 Move the pointer directly over the tracker crosshairs, and when it turns into the move cursor, click 
+and drag to move the crosshairs to line up on top of the feature you want to track. For the best 
+results, this should be a high-contrast detail such as a corner, the end of a line, a small shape like 
+a pebble, or a jagged detail. Unlike other point trackers, there is no inside or outside region to 
+separately adjust, there’s only the one crosshairs that you need to align. In this example, this first 
+crosshairs is placed at the inside of her stage left eyebrow (the corner of her eye would introduce 
+too much jitter as the tracker will pick up her blinks).
+Lining up the tracker crosshairs with the feature you need to track
+7 If you want to improve the accuracy of your track, you can create more tracker crosshairs and 
+position them on top of other details within the subject you’re tracking. For the best results, make 
+sure that all crosshairs are placed onto details that are in the same plane of motion. In other words, 
+don’t put some crosshairs on a person’s face in the foreground, and other crosshairs on a tree 
+that’s far in the background, since both these features will have very different vectors of motion. 
+In this example, trackers are placed at her inside eyebrows and at the corner of her lips.
+Setting up four trackers to follow the 
+corners of her eyebrows and mouth
+3383Color | Chapter 140 Motion Tracking Windows
+COLOR
+The final track, accomplished with four point  
+ trackers, with the track path turned on
+8 When you’re done placing crosshairs, click the Track Forward or Track Backward buttons to 
+initiate tracking. The clip will be analyzed, and the Tracker graph will update with the tracking 
+data, and the window you had selected automatically moves to match the motion of the feature 
+you’re tracking.
+Removing Trackers
+If you find that a particular tracker is causing problems, you can remove it by selecting it in the Viewer, 
+and clicking the Delete Tracker icon, before retracking the subject.
+Clicking the Delete Tracker icon
+Using Frame Mode to Offset Track
+A common issue when point tracking is how to deal with occlusions and times when the tracked 
+feature moves off screen. In DaVinci Resolve, the solution is to use the Tracker palette’s Frame mode 
+to move the tracker crosshairs onto another feature to track, while offsetting the resulting motion so 
+that it continues to follow the original motion path.
+1 In this example, a point tracker crosshairs has been positioned at a corner of a window of a 
+building that’s being separately adjusted using a Power Window. The window is being used 
+because, as the woman turns to leave, she covers up most of the other trackable outer edges of 
+the building, which would ruin the track.
+Setting up to track a building moving off screen
+3384Color | Chapter 140 Motion Tracking Windows
+COLOR
+2 As the camera pans, the feature being tracked is about to go off frame, which is about to ruin the 
+track. As this happens, click the Stop Track button.
+Stopping the track on the last good frame  
+of the track, before the tracker goes off screen
+3 Move the playhead back to the last good frame of tracking, and then click the Frame button in the 
+Tracker palette to go into Frame mode.
+Turning on Frame mode, to prepare to offset the track
+4 In Frame mode, you can now drag the tracker to another feature of the building, this time the outer 
+edge of the roof, that will be better to follow as the building goes out of frame to the left, since the 
+Power Window will go out of frame before the rightmost corner of the building’s roof does.
+Dragging the tracker to another feature  
+that’s better to track
+5 Now, click the Track Forward button again, and the crosshairs will begin tracking the new feature, 
+but the motion will be offset, so the movement of the Power Window continues to follow the 
+original motion path.
+Tracking an offset feature lets the  
+window go all the way off screen
+3385Color | Chapter 140 Motion Tracking Windows
+COLOR
+6 If you turn on the track path (in the Tracker Option menu), and move the playhead to the frame 
+where you moved the tracker, you can see that the motion before you moved the tracker and 
+the motion after continues smoothly along the same path, with no sudden breaks. When you’re 
+finished, click the Clip button to get out of Frame mode.
+The tracker path before and after moving the tracker 
+crosshairs in Frame mode is smooth and continuous
+Rotoscoping Window Shapes After Tracking
+While the DaVinci Resolve trackers are pretty miraculous when it comes to making a window follow 
+moving subjects, or elements within a moving scene, there will be plenty of times when the final track 
+isn’t quite perfect. 
+For example, if you’re trying to isolate someone’s face with a very specific window, and the person 
+turns their head, then the resulting change of shape is almost certainly going to require you to make 
+animated adjustments to the window in order to continue making such a specific isolation.
+Before and after a window tracking a turning head, the window doesn’t quite 
+follow the edge of the woman’s face as her head turns
+Fortunately, the Tracker palette’s Frame mode makes it easy to animate shape changes 
+you make to windows in order to better follow a moving subject, a task often referred to as 
+rotoscoping. By following the motion of a moving subject, and making a series of automatically 
+keyframed adjustments to the window at every point the subject changes speed or direction, 
+you can make a window isolate a moving target with surprising precision.
+3386Color | Chapter 140 Motion Tracking Windows
+COLOR
+Using Frame mode to rotoscope the window to better  
+follow the edges of her face and the contours of the jaw
+Furthermore, you can also use Frame mode to repair imprecise tracks where the window is 
+veering off course because of quickly or irregularly moving features. In these cases, you have 
+the option of manually tracking the window in Frame mode to fit the trajectory of the feature, 
+frame by frame.
+Lastly, you don’t even have to have performed a track to use the Tracker graph in Frame mode 
+to keyframe animated changes to a window. In fact, using the Tracker graph in Frame mode 
+can sometimes be more convenient than using the Keyframe Editor in Auto Keyframe mode, 
+depending on what you’re doing.
+Rotoscoping Controls
+The Clip/Frame buttons determine whether or not you’re rotoscoping a shape.
+  In Clip mode: Any changes you make to a window transform it over the entire duration of that clip. 
+In other words, you can track a window to a moving feature, and in Clip mode any changes you 
+make to the size, rotation, position, or shape of the window occur equally from the beginning to 
+the end of that clip.
+  In Frame mode: Changes you make to a window automatically create a keyframe at the bottom of 
+the ruler in the Tracker graph. Making two or more changes to a window in Frame mode results in 
+automatically interpolated animation from one keyframed window transformation to the next.
+You can freely move back and forth between Clip to Frame modes to make changes to a 
+window. Even if you’ve keyframed a window to change shape, you can turn on Clip mode and 
+make an overall change to the window, enlarging it for example, that results in the window 
+being equally enlarged at every keyframe.
+3387Color | Chapter 140 Motion Tracking Windows
+COLOR
+Keyframing in Frame Mode
+Once you’ve added keyframes to the Tracker palette, there are a number of ways you can edit them.
+Methods of working with keyframes in the Tracker graph:
+  To add a keyframe: Click the Add Keyframe icon at the upper right-hand corner of the Tracker 
+graph. It looks similar to the Keyframe icons found in the Edit page Inspector. This is useful for 
+adding a keyframe to a frame where the window fits the subject well, prior to moving forward 
+a few frames and making an alteration to the window to follow the subject that will generate 
+another keyframe.
+  To move the playhead from one keyframe to another:  Click the Previous Keyframe and Next 
+Keyframe icons at the upper right-hand corner of the Tracker graph. These controls look similar to 
+those found in the Edit page Inspector.
+  To delete a keyframe: With the playhead on the same frame as the keyframe you want to delete, 
+open the Tracker option menu, and choose Delete Keyframe.
+The Previous Keyframe, 
+New Keyframe, and Next Keyframe 
+buttons in the Tracker graph
+A Rotoscoping Workflow
+The following procedure demonstrates how to use a window to rotoscope an onscreen feature that 
+you want to isolate. In the process, it shows how to set up a window for rotoscoping using the Tracker 
+palette, and discusses some best practices for rotoscoping efficiently.
+To rotoscope or manually track a window using automatic keyframing:
+1 Create a window to isolate the feature you’re wanting to adjust, and use the tracker to make 
+it follow the motion of the subject. If the window doesn’t follow the contours of the subject as 
+precisely as you require, then you can begin manually keyframing its shape on top of the tracking 
+you’ve done to rotoscope the subject.
+2 With the Tracker palette open, click Frame to change the tracking mode.
+Clicking the Frame button to  
+begin keyframing your shape
+The best way to use Frame mode for tracking is to either start at the last successfully tracked 
+frame and work your way forward, or start at the first successfully tracked frame and work your 
+way backward. This takes the best advantage of the automatic keyframing and interpolation 
+between keyframes to animate the window you’re transforming smoothly.
+3388Color | Chapter 140 Motion Tracking Windows
+COLOR
+3 With the playhead at either the first or last frame where the window fits the subject you’re 
+isolating, you can either click the Add Keyframe button at the upper right-hand corner of the 
+Tracker graph, or wiggle any control point by a pixel or two, to add a keyframe at that frame. 
+Clicking the Add Keyframe icon  
+in the Tracker graph
+Adding a keyframe at the last frame where the window follows the subject’s motion well means 
+that any future animated changes you make interpolate from this frame forward, rather than from 
+previous frames where there’s no need for alterations.
+Adjusting the window in Frame mode adds a keyframe
+While you’re in Frame mode, the changes you make to the window automatically generate a 
+keyframe in the Tracker palette, which appears at the bottom of the Tracker graph’s timeline.
+Keyframes appear in the 
+Tracker graph ruler
+It’s frequently essential to add a keyframe at the last frame where a window conforms well to 
+the subject you’re trying to isolate, in order to limit window animation from that frame to the next 
+keyframed transformation, rather than accidentally animating from the beginning of the clip, or 
+from the next or previous keyframe in the Tracker graph.
+4 Next, move the playhead to the next frame where the window requires adjustment to better fit the 
+moving subject, and adjust the position of the window, the control points of the window, or both to 
+isolate the subject as necessary.
+3389Color | Chapter 140 Motion Tracking Windows
+COLOR
+Readjusting the window in Frame mode  
+to follow the subject’s motion
+This results in a second keyframe being placed in the ruler of the Tracker graph.
+Two keyframes creating rotoscoped animation  
+in addition to any motion tracking that’s applied
+5 With your first two keyframes placed, scrub the playhead back and forth between them to 
+evaluate how well the window’s animation is automatically interpolating to fit the motion of the 
+subject you’re isolating. If the window doesn’t follow the motion of your subject well enough, 
+move the playhead to the frame where the window divergence is the most pronounced and make 
+another adjustment to correct the shape.
+This creates another keyframe.
+A frame between the two keyframes you’ve 
+rotoscoped that needs further adjustment
+After adjusting the  
+in-between frame
+6 When you’re finished making adjustments between your first two keyframes, move the playhead 
+farther along and add keyframes as necessary to make the window follow the motion of 
+your subject. 
+In general, look for the frames where your subject’s motion starts, stops, speeds up, slows down, 
+or changes direction. As you work, it’s good to try and add the fewest number of keyframes 
+3390Color | Chapter 140 Motion Tracking Windows
+COLOR
+you can to ensure smooth motion from one to another. Too many keyframed adjustments 
+made too close together for a smoothly moving subject risks adding jerky motion if you’re not 
+careful. On the other hand, if you have an erratically moving subject, you may have to add more 
+keyframes, possibly frame by frame, to achieve the desired result.
+TIP: If you’re isolating a subject with a complex shape that moves quite a lot, you might 
+consider using multiple simple overlapping shapes to track and rotoscope it, rather than a 
+single complicated one, to make the task easier.
+7 When you’re finished rotoscoping the window, be sure to click the Clip button to switch back 
+to Clip mode, so you can trim the window’s shape across every keyframe you’ve just created, 
+if necessary. This will also prevent you from accidentally adding more keyframes if you select 
+other shapes.
+This technique requires a bit more work then simply using the Tracker, but it’ll let you 
+quickly adjust the animation of a window to more tightly conform to a moving subject 
+when you need an adjustment to be specific to that subject alone. You can also use 
+this technique to reposition specific motion path points in the middle of an otherwise 
+successful track to make them fit better, or to add keyframes to the beginning or end of a 
+track when the subject moves offscreen but the window does not.
+Viewing a Window’s Motion Path
+You can turn on the motion path of the window you’re tracking by choosing Show Track from the 
+Tracker Option menu.
+3391Color | Chapter 140 Motion Tracking Windows
+COLOR
+Chapter 141
+Using the Gallery
+The Gallery provides a way to save, browse, and use saved still frames from 
+different clips in a program. Each project is saved with its own individual set of stills, 
+and each still you save consists of a DPX image of the saved frame, and the grade 
+metadata. You can use saved stills for reference when matching one clip to another, 
+or you can use them to copy grades to other clips, or other timelines. 
+There are two ways to work with the contents of the Gallery. The Color page has a small Gallery, to 
+the left of the Viewer, that provides quick access to saved stills and grades as you work. The Gallery 
+window, which can be opened via a button at the top right of the Gallery, provides a dedicated 
+interface for organizing your grades, copying grades and memories between projects, and for 
+accessing a dedicated collection of DaVinci Resolve looks.
+Contents
+Using the Gallery �������������������������������������������������������� 3393
+Saving Stills �������������������������������������������������������������������� 3393
+Selecting Stills  �������������������������������������������������������������� 3394
+Deleting Stills  ���������������������������������������������������������������� 3394
+Where are Stills Saved? ������������������������������������������ 3395
+Changing the PowerGrade Still Directory  ����� 3395
+Live Previews of Gallery Stills �����������������������������  3395
+Hover Scrub in the Gallery ������������������������������������  3395
+Playing Stills and Setting Up Image Wipes ��  3396
+Timeline Wipes ������������������������������������������������������������ 3397
+Gang Timeline Wipe With Current Clip  ������������ 3397
+Change a Timeline Wipe Using  
+the Timelines Album of the Gallery  �������������������� 3397
+Labeling and Searching 
+for Stills and Sources ������������������������������������������������ 3397
+Automatic Labeling  ��������������������������������������������������� 3398
+Manual Labeling  ��������������������������������������������������������� 3398
+Searching For Stills  ��������������������������������������������������� 3399
+Match Reference Wipe Frame �����������������������������  3399
+Gallery Options �����������������������������������������������������������  3399
+Organizing Stills Using Albums ���������������������������  3401
+PowerGrade Albums  ������������������������������������������������  3402
+Browse all Grades 
+from the Current Timeline  ������������������������������������� 3403
+The Gallery Management Window  ������������������� 3403
+What’s Available in the Stills Navigator  ����������� 3404
+Browse and Import Timeline 
+Grades From Other Projects  �������������������������������� 3405
+Importing and Exporting Stills  ���������������������������� 3406
+Using and Organizing Memories ������������������������ 3407
+3392Color | Chapter 141 Using the Gallery
+COLOR
+Using the Gallery
+The Gallery in the Color page and the expanded Gallery window environment share many of the same 
+commands for organizing stills. However, the commands for saving stills and customizing split-screen 
+views are restricted to the Color page.
+Color page Gallery
+Saving Stills
+One of the most common operations is to save a clip as a still (with that clip’s embedded grade) for 
+future reference and use.
+To save an individual still in the Color page, do one of the following:
+  Choose Color > Stills > Grab Still (Option-Command-G).
+  Right-click on the Viewer and choose Grab Still.
+  Press GRAB STILL on the Transport panel of any of the DaVinci Resolve control panels.
+It’s also possible to save stills automatically for every clip in the entire Timeline. This can be useful 
+if you’re planning to export a set of grades to hand off to another colorist, or if you need to apply a 
+series of grades manually from one project to another when ColorTrace™ won’t work.
+To save a still for every clip in the current timeline
+Right-click the Viewer, and choose one of the following:
+  Grab All Stills > From First Frame: The first frame of each clip is saved to the Gallery.
+  Grab All Stills > From Middle Frame: The middle frame of each clip is saved to the Gallery.
+  Grab Missing Stills > From First Frame: Only the first frame of clips with no stills in the Gallery are 
+saved to the Gallery.
+  Grab Missing Stills > From Middle Frame: Only the middle frame of clips with no stills in the 
+Gallery are saved to the Gallery.
+3393Color | Chapter 141 Using the Gallery
+COLOR
+You can cancel the Grab All Stills operation at any time by clicking on the Cancel button in the 
+“grabbing stills” dialog box. This is useful if you notice a clip needs to be altered after starting the tool, 
+and you don’t want to wait for the operation to finish grabbing stills from the entire timeline before 
+fixing it. Once you’ve made your correction, simply run Grab All Stills again.
+By default, when you save one or more stills, they’re named “TrackNumber.ShotNumber.
+VersionNumber” with dots separating each number. If you like, you can choose an option from the 
+General Options panel of the Project Settings to “Automatically label Gallery stills” in different ways. 
+This is covered in more detail later in this chapter.
+Selecting Stills
+To select a range of stills, do one of the following:
+  Click one still, then Shift-click another to select a contiguous range of stills.
+  Command-click any stills you like to make a noncontiguous selection.
+  Right-click any still, and choose one of the following commands;
+Select All: Selects every clip in the Gallery.
+Select Current to Last: Selects every still from the one you’ve clicked through the 
+last still in the Gallery.
+Select First to Current: Selects every still from the one you’ve clicked through the 
+first still in the Gallery.
+Deleting Stills
+If you need to remove one or more stills, this can only be done using the Gallery’s contextual menu.
+To delete one or more stills, do one of the following:
+1 Select one or more stills in the Gallery.
+2 Right-click one of the selected stills and choose Delete Selected.
+Each still is also saved with a variety of metadata that is used by DaVinci Resolve to manage 
+the contents of the Gallery in different ways. This metadata can also be used for searching and 
+sorting, and is viewable by opening the Still Properties window.
+To display a still’s properties:
+Right-click a still in the Gallery and choose Properties. 
+A floating translucent window appears displaying the date the still was created, what clip it 
+was grabbed from, when it was grabbed, and the source and record timecode values of the 
+frame it came from.
+Right-click on a still to choose Still Properties 
+3394Color | Chapter 141 Using the Gallery
+COLOR
+Where are Stills Saved?
+By default, all grades/stills you save are saved in the DPX format, and are placed in the directory 
+path defined in the “Gallery stills location” field in the Working Folders section of the Master Settings 
+panel of the Project Settings. This path defaults to a hidden “.gallery” directory that’s created at the 
+location of the first Media Storage Volume you specify in the Media Storage panel of the System 
+Preferences window.
+Changing the PowerGrade Still Directory
+Optionally, you can change the location where PowerGrade stills are saved by Opening the Gallery 
+Option menu and choosing Change PowerGrades Path. You’ll be prompted via a “Select PowerGrades 
+Folder” dialog to choose a directory where all PowerGrades will be saved.
+Live Previews of Gallery Stills
+The Live Preview option, found in the Gallery option menu, lets you preview how the current clip would 
+look with a particular Gallery Still grade applied to the currently selected clip simply by moving the 
+pointer over the still you want to preview.
+Enabling and Disabling the Gallery Live Preview:
+1 Open the Gallery option menu and choose Live Preview. 
+The Live Preview option for the Gallery browser lets  
+you hover over a saved grade to preview it on  
+the current clip in the Viewer
+2 Click a node in the Node Editor you want to preview applying the grade from a still to. The live 
+preview will display how the current clip will appear with the grade of the still you select applied to 
+the currently selected node of current grade, which will affect the result.
+3 Move the pointer over the still you want to preview. 
+The Viewer image updates to show how that clip would look with that still’s grade applied to the 
+currently selected node.
+Hover Scrub in the Gallery
+When Live Preview is enabled in the Gallery option menu, the Hover Scrub Preview submenu lets you 
+choose how you want Live Preview to be shown by a thumbnail in the Gallery and in the Viewer when 
+you hover the pointer over a still or LUT in the LUT Browser:
+  You can choose to scrub both the thumbnail you’re hovering over and the Viewer, letting 
+you preview the current still’s grade or a LUT over the duration of the current clip in both the 
+thumbnail and Viewer. 
+  You can choose to scrub just the thumbnail, leaving the Viewer to show just the grade or LUT over 
+the frame at the position of the playhead.
+3395Color | Chapter 141 Using the Gallery
+COLOR
+  You can disable scrubbing altogether, in which case both the thumbnail and the Viewer will only 
+show the grade or LUT over the frame at the position of the playhead.
+The Hover Scrub Preview options when Live Preview is enabled
+Playing Stills and Setting Up Image Wipes
+There are many ways to play a still in the Color page, making it visible as an image wipe in the Viewer 
+and on the external display connected to your video interface.
+To play a still, displaying it as an image wipe or full screen, do one of the following:
+  Double-click a still in the Gallery.
+  Select a still in the Gallery, and click the Image Wipe button on the top Viewer toolbar.
+  Click a still in the Gallery, then right-click in the Viewer and choose Show Reference Wipe.
+  From the Color > Stills menu, choose Next Still (Option-Command-N) or Previous Still (Option-
+Command-B) to select a still in the Gallery, and then choose Wipe On/Off (Command-W) to play it.
+  Press PREV STILL or NEXT STILL on the DaVinci Resolve Advanced Search Dial panel, or the 
+DaVinci Resolve Advanced control panel to select a still, then press PLAY STILL. Press PLAY STILL 
+again to dismiss the still.
+Whenever you play a still, the Viewer mode’s drop-down menu changes to Split mode.
+Once displayed, the wipe between the current clip and the still being referenced can be 
+moved and reoriented in different ways. If you want a full-screen view so you can flip back 
+and forth between the still and the current clip, simply adjust the split until the still fills the 
+entire Viewer.
+To adjust a wipe in the Viewer, do one of the following:
+  Drag the pointer within the Color page’s Viewer to move the wipe.
+  Push the T-bar lever up and down on the T-bar panel of the DaVinci Resolve 
+Advanced control panel.
+To customize the type of image wipe that’s displayed  
+in the Viewer, do one of the following: 
+  Click any of the controls at the top right of the Viewer toolbar to choose Horizontal, Vertical, 
+Mix, Alpha, Box, and Difference types of wipe.
+  Choose Gallery, Timeline, or Offline from the Reference Wipe Mode submenu in the 
+Viewer’s option menu.
+  Choose Horizontal, Vertical, Mix, Alpha, Difference, and Box from either the Wipe Style submenu 
+in the Viewer’s option menu, or the style icons at the top of the Viewer.
+  Choose Invert Wipe (Option-W) from the Viewer’s option menu.
+3396Color | Chapter 141 Using the Gallery
+COLOR
+Timeline Wipes
+A timeline wipe is when you use the Wipe Timeline Clip command in the Thumbnail timeline (it’s found 
+in the contextual menu when you right-click a clip other than the current clip) to wipe the current clip 
+against another clip in the Timeline, without needing to save a still first. When you turn a timeline wipe 
+on, the clip in the timeline that’s being wiped is outlined in blue.
+Gang Timeline Wipe With Current Clip
+A “Gang timeline wipe with current clip” option, available from the Viewer option menu, lets you 
+maintain the offset between the current clip and a timeline clip you’re wiping against when you move 
+the current clip selection to other clips. With this option enabled, the offset between the timeline 
+wiped clip and the current clip is maintained when you move the clip selection. When this option is 
+disabled, the timeline wiped clip stays where it is regardless of what clip you select.
+Change a Timeline Wipe Using  
+the Timelines Album of the Gallery
+While you’re using the Wipe Timeline Clip to show a wipe of the current clip against any other 
+clip in the Timeline, you can open the Timelines album of the Gallery and click different clips to 
+change which Timeline clip you’re wiping against (outlined in blue) without changing the current clip 
+(outlined in orange). Make sure you have selected the same timeline in both the Timeline album, 
+and the Color page.
+Labeling and Searching 
+for Stills and Sources
+By default, all stills are identified by a three-number code. The first number is the video track the clip is 
+on, the second number is the clip’s position number in the current Timeline, and the third number is the 
+version number of the grade.
+If you’ve saved many stills, it can help to label the important ones with whatever text you 
+find helpful. Once labeled, you can search for stills by label using the Search field, at 
+the upper right-hand corner of the Gallery.
+All stills are numbered  
+Track.Shot.Version
+3397Color | Chapter 141 Using the Gallery
+COLOR
+Automatic Labeling
+If you like, you can choose an option from the Color group in the General Options panel of the Project 
+Settings to “Automatically label Gallery stills” in different ways. There are many options:
+  Clip Name: Saves the Clip Name, which defaults to the File Name unless you’ve customized it.
+  Clip Version Name: Automatically saves the name of the current version.
+  Source timecode (HH.MM.SS.FF):  Saves the source timecode of the current frame.
+  Timeline timecode (HH.MM.SS.FF):  Saves the timecode for the playhead’s 
+position in the Timeline.
+  Timeline Name: Saves the name of the currently open Timeline.
+  Display LUT Name: Saves the name of the currently used Display LUT, if one is applied.
+  Custom label using tags: Choosing this option reveals a field you can use to either type custom 
+text into, or in which you can use metadata variables to save automatically updated information 
+relating to the currently selected clip and timeline. 
+For more information on using metadata variables, jump to this chapter:  
+Using Variables and Keywords.
+For all options, there’s also a checkbox you can toggle:
+• Append still number on export: Turning this checkbox on lets you choose how to include 
+the default still number when exporting stills with the “Use labels on export” option enabled, 
+either as a prefix or suffix.
+Manual Labeling
+Sometimes the easiest thing to do is to just give a particular still a custom name that’s representative 
+of what that still represents, such as “SeemedLikeAGoodIdea.” When naming stills manually, it’s best to 
+avoid using the forward slash character in case you find yourself exporting these stills with file names. 
+In fact, it’s a good idea to avoid using the forward slash character for just about any text that you add in 
+DaVinci Resolve.
+To manually label a still:
+1 Right-click a still in the Gallery and choose Change Label or double-click directly under the Still ID.
+2 Type a name into the Change Still Label dialog, and click OK.
+The new label appears underneath the still number.
+You can also label stills  
+for easier identification
+3398Color | Chapter 141 Using the Gallery
+COLOR
+Searching For Stills
+Once labeled, you can search for stills you need in the Gallery.
+To search for a still by label:
+• Click the Magnifying Glass button to open the Search field, click to place the cursor within, 
+and then type the name or description you are searching for.
+As soon as you start typing, DaVinci Resolve automatically begins to filter the results of the 
+currently selected album in the Gallery to match what’s been typed. 
+Match Reference Wipe Frame
+You can right-click any Gallery still and choose Match Reference Wipe Frame to automatically 
+move the playhead to the exact frame that corresponds to that still, and select that clip in the 
+Color page Timeline.
+Gallery Options
+In the upper right corner of the Gallery palette there are several options that let you adjust the view 
+and organization of your stills.
+  Still Size Slider: Dragging this slider to the left makes the still thumbnails smaller, dragging it to the 
+right makes them larger.
+  Sort Stills: Choosing an option from this submenu changes the sort order of all clips in the Gallery. 
+The options are: 
+Still ID: Sorts all stills by their assigned ID number (track, clip number, grade version).
+Label: Sorts all stills by their text label.
+Record Timecode: Sorts all stills by their position in the program.
+Source Timecode: Sorts all stills by the timecode of the source clip they came from.
+Grab Date: Sorts all stills by the date they were originally grabbed.
+Create Time: Sorts stills based on when you saved each still.
+  Thumbnail View: Pressing this icon puts the gallery in Thumbnail view; each still is represented 
+by an image.
+  List View: Pressing this icon puts the gallery in List view; each still is represented by 
+columns of text attributes.
+  Search: Opens up a search dialog box, to find stills based on their text label.
+  Gallery View: Opens up the full Gallery Management window.
+The Gallery options (L-R): Still Size Slider, Sort Stills, 
+Thumbnail, List, Search, Expand, Options
+3399Color | Chapter 141 Using the Gallery
+COLOR
+When you right-click the gray area of the Gallery, behind the Still icons, you can open a contextual 
+menu that provides a variety of additional options for controlling how many stills are saved, how 
+they’re displayed, and how they’re arranged in the Gallery. There are the following options:
+  Switch Wipe Mode: Switches the Reference mode between showing a “Gallery” still, a “Timeline” 
+clip, or an “Offline” reference movie.
+  Trace Timeline: When enabled, selecting a clip in the Timeline also automatically selects the first 
+still that was saved from that clip to the Gallery.
+  One Still Per Scene: When enabled, restricts the Gallery to save only a single still for each clip in 
+the Timeline. If multiple stills have already been saved before turning this option on, those stills 
+will remain in the Gallery until you save another still from the same clip, at which time all other stills 
+from that clip will disappear.
+  Apply Display LUT: If you have a Display LUT selected in the Lookup Tables panel of the Color 
+Management panel of the Project Settings, it’s applied to the video output via a connected video 
+interface, and also to the Viewer. Ordinarily, you don’t also want the Display LUT applied to stills 
+you’re saving since it’s meant to be temporary. Accordingly, stills are saved with a LUT-free image. 
+However, in instances where you may also want to save a reference to the currently used Display 
+LUT, turning on “Apply Display LUT” saves the Display LUT along with the still, and applies that LUT 
+when that still is used for split-screen reference. Keep in mind that the internally saved Display LUT 
+is only used when playing that still in the Viewer; the DPX image that’s saved remains unaffected.
+  Apply Grades Using:  This submenu contains three options for how to apply the keyframes that are 
+automatically saved within each saved grade.
+No Keyframes: No keyframes are copied. The state of the grade at the frame used to save the still 
+is what is applied to the target clip or clips.
+Keyframes Aligning Source Timecode:  Keyframes are copied aligning the source timecode of 
+the saved grade with the source timecode of the target clip. This is the ideal setting when you’re 
+copying a grade back to the clip it came from originally, or to a duplicate of that clip elsewhere in 
+the Timeline, and you want the keyframes to align with the same frames as before. If there is no 
+source timecode overlap, keyframes will be pasted aligning with the start frame of the edit, the 
+same as the third option (below).
+Keyframes Aligning Start Frames:  Keyframes are copied aligning the start frame of the clip 
+that still was saved from with the start frame of the target clip. This is the ideal setting when 
+you’re copying a grade with keyframes from one clip to a completely different clip, with 
+different timecode.
+  Use labels on still export: Lets you use labels that you’ve added to stills in the file name of 
+exported stills. 
+  Show All Stills: This command shows all available stills in the current album if any have been 
+hidden, for example by searching or by using the Show Current Timeline Only command.
+  Show Current Timeline Only:  Choosing this option restricts the Gallery to only showing the stills 
+that were saved from the currently selected Timeline. All other stills from other Timelines are 
+hidden until you switch to that Timeline.
+NOTE: There are a variety of other commands available in this contextual menu that are 
+covered elsewhere in this chapter.
+3400Color | Chapter 141 Using the Gallery
+COLOR
+Organizing Stills Using Albums
+All stills you save are always placed into the currently open album of the Gallery, which defaults for 
+new projects to “Stills 1.” However, you can create additional albums with which to organize your stills 
+into whatever categories you require. Albums can be shown, created, and removed using the Gallery 
+in either the Color page or Gallery windows.
+Use albums to organize your stills
+To show or hide the Albums list:
+Click the Album button, at the top left of the Gallery.
+If the Albums list was hidden, clicking the Album button will make the Albums list appear, to the left of 
+the Gallery, containing all albums that are currently available in the project that’s open, as well as the 
+PowerGrade album at the bottom. If the Albums list is already visible, then it becomes hidden, making 
+more room for still thumbnails in the Gallery.
+Once you’ve displayed the Albums list, there are a variety of ways you can quickly and easily work 
+with albums.
+Methods of working with albums:
+  To add a new album: Right-click the Albums list, and choose Add Still Album from the contextual 
+menu. A new album is created, numbered incrementally.
+  To add a new PowerGrade album: Right-click the Albums list, and choose Add PowerGrade 
+Album from the contextual menu. A new album is created, numbered incrementally.
+  To rename an album: Double-click any album in the list, and when it is selected, type a new name 
+and press Return.
+  To navigate albums: Click any album to make it the current album. Using the DaVinci Resolve 
+Advanced control panel, you can use the PREV PAGE/NEXT PAGE buttons to move up and 
+down the Album list.
+  To move clips from one album to another: Drag and drop a still from the Gallery to an album.
+  To remove an album: Right-click any album, choose Remove Current Album, and click Delete at 
+the prompt. All clips inside that album will be deleted along with the album, so use this carefully.
+3401Color | Chapter 141 Using the Gallery
+COLOR
+PowerGrade Albums
+PowerGrade albums are meant to be repositories for grades you want to reuse frequently, or for stills 
+that you need to reference from multiple projects, such as when grading a series that shares common 
+looks from episode to episode.
+PowerGrades are associated with your user login
+Unlike stills saved to the other albums in the list, which are ordinarily available only to the project 
+in which they were saved, stills saved to a PowerGrade album are shared among all projects 
+that have been stored within a particular project library. Each project library has its own unique 
+PowerGrade album.
+Creating a new project library creates a new PowerGrade album, which starts out as a clean slate. 
+However, you can always use the Gallery window to copy PowerGrade stills from other projects and 
+project libraries to the current one, and you can create as many PowerGrade albums as you need to 
+organize your grades. 
+For more information on project management and project libraries, jump to this chapter: 
+Managing Projects and Project Libraries .
+Functionally, PowerGrade albums are identical to any other album, and you can save, 
+organize, and use stills in PowerGrade albums as you would with other albums. Since 
+PowerGrade albums are special in that they’re maintained by DaVinci Resolve, the last 
+PowerGrade album cannot be deleted.
+3402Color | Chapter 141 Using the Gallery
+COLOR
+Browse all Grades 
+from the Current Timeline
+The Gallery has a Timelines album, available at the bottom of the Album list, that lets you browse all 
+the grades in the current timeline, or in other timelines of the current project (using a drop-down menu 
+that appears at the top of the Gallery browser area), making it easy to copy grades from earlier or later 
+in your timeline, or from other timelines that share the same media. 
+This is particularly useful for reality shows or documentaries where the same clips can appear multiple 
+times in different parts of a program. Being able to simply show all existing grades in the Gallery frees 
+you from having to save a still for every grade you think you might eventually reuse.
+The Timelines grade browser in the Gallery  
+automatically shows all grades in the current timeline
+The Gallery Management Window
+While you can do quite a lot of stills management using the Gallery as it appears in the Color page, the 
+Gallery window provides additional functionality for copying stills among different projects and project 
+libraries, for organizing your stills and memories, and for accessing the DaVinci Resolve looks that 
+accompany the application.
+To open the Gallery window:
+Click the Gallery View button at the upper right-hand corner of the Gallery or select 
+Workspace > Gallery.
+3403Color | Chapter 141 Using the Gallery
+COLOR
+Gallery window
+The Gallery opens into a floating window, divided into four areas:
+Stills navigator: Lets you navigate the contents of other projects and project libraries that 
+are available. Independent projects, as well as project library > user > project relationships, 
+appear in this hierarchical list. Click the disclosure triangle next to any item on this list to 
+reveal its contents. Click any project in the list to reveal its albums and stills in the Group 
+Stills browser.
+Group Stills browser: Displays the contents of the currently selected item in the Stills 
+navigator. One or more selected stills can be copied to the current project by selecting an 
+album in the Project Stills browser, and dragging and dropping the selected stills to the Project 
+Stills browsing area.
+Project Stills browser:  Contains the same Album list and Project Stills browser that’s visible in 
+the Color page Gallery.
+Project Memories: Provides a larger view of the project memories that are visible in the 
+Color page Gallery.
+To resize different areas of the Gallery window:
+  Move the pointer to the border between any areas of the Gallery. When the pointer changes to 
+the resize cursor, drag the border to resize the adjacent interface areas to whatever size you need. 
+Dragging all the way to the edge of the screen hides that interface area completely.
+What’s Available in the Stills Navigator
+The Stills Navigator accesses a variety of content via a hierarchical list. Disclosure triangles to the 
+left of each item in the Stills browser let you access the contents of each item, and many items have 
+several nested levels of content within, each accessed by its own disclosure triangle.
+3404Color | Chapter 141 Using the Gallery
+COLOR
+The Gallery Stills project library show all projects connected so you can import those stills
+DaVinci Resolve looks: A collection of predefined grades, categorized by type, that provides 
+excellent examples of different looks available in DaVinci Resolve. These grades are installed 
+with DaVinci Resolve and cannot be altered.
+Project Libraries: Each project library that’s available appears within this list. Each project 
+library has a nested series of users, projects, and timelines within, as well as one nested 
+PowerGrade item for each user, which provides access to the saved stills within.
+Orphans: Stills are saved to a separate directory which is defined in the Master Settings panel 
+of the Project Settings. Whenever you delete a project library, the stills that corresponded to 
+that project library become orphaned. All orphaned stills that lack a connection to any current 
+project library appear within the Orphan item in the Stills Navigator.
+Browse and Import Timeline Grades From Other Projects
+The Gallery window lets you see and import grades in the timelines of other projects, even if they 
+weren’t saved as stills first. When you open the Gallery Window and use the hierarchical disclosure 
+controls of the Stills panel to open up and select a specific Project Library > User > Project > Timeline, 
+you’ll see at least three browsable albums to the right: the Stills galleries that were created, the 
+Memories, and at the bottom an album called Timeline Media. The Timeline Media album lets you 
+browse the currently used grades for every clip in that timeline, making it easy to copy the ones you 
+need to the current project’s Stills album or Memories.
+This is particularly useful if you’re working on a series where and you find that you want to re-use 
+different grades, looks, adjustments, or fixes from previous episodes in the current one. Previously, 
+you’d have to remember to save every clip as a still to be able to browse the grades in this way. Now 
+you can simply browse the clips in the Timeline directly.
+3405Color | Chapter 141 Using the Gallery
+COLOR
+Browsing the timeline grades for another project in the project library
+Importing and Exporting Stills
+It’s possible to import still images in different graphics formats into the Gallery, which can be 
+particularly useful when a client provides reference images to which they’d like you to refer. It’s also 
+possible to export stills from the Gallery, which is good for sending a series of reference stills for 
+approval to a remote client. In both cases, you can choose whether to import or export images with an 
+accompanying LUT.
+For both import and export, DaVinci Resolve supports the following file formats:  
+DPX, CIN, TIFF, JPEG, PNG, PPM, BMP, and XPM.
+To import one or more still images:
+1 Right-click anywhere on the gray background of the Gallery.
+2 Choose one of the following commands:
+  Import: Imports image files, along with a matching DRX file, if one is present in 
+the selected directory.
+  Import With Output LUT: Imports an image and DRX file, along with a matching LUT file, 
+if one is present in the selected directory.
+3 When the Import Stills dialog appears, choose the type of files you want to import from the 
+“Files of type” drop-down menu, then navigate to the files you want to import, select them, 
+and click Import. 
+To export one or more still images:
+1 If you want to export Gallery stills with labels that have been added to them, right-click anywhere 
+in the background of the Gallery and choose “Use labels on still export” in the contextual menu so 
+it becomes checked.
+2 Select one or more stills in the Gallery.
+3406Color | Chapter 141 Using the Gallery
+COLOR
+3 Right-click one of the selected stills, and choose one of the following commands:
+  Export: Two files are saved for each still you selected. An image file in the format of your choice, 
+and a DRX (DaVinci Resolve eXchange) file that contains the grading metadata that was saved 
+with that Gallery still.
+  Export With Display LUT: If you have a Video Monitor Lookup Table specified for the current 
+project in the Color Management panel of the Project Settings, this command will output the 
+image as it is processed by the specified LUT. A DRX file is also output containing the grading 
+metadata that was saved with that Gallery still.
+4 When the Export Stills dialog appears, choose a file format to export to from the “Files of type” 
+drop-down menu, then choose a location, type a name into the Save As field, and click Save.
+Each of the selected stills is exported with all accompanying files. Each file uses as its prefix the 
+name you typed into the Export Stills dialog, followed by an underscore, the still ID number of the 
+selected still, and the three-letter file extension.
+To export the grade only (.DRX file) and no image:
+Normally when you export a still from the Gallery, it exports both an image file and a .drx 
+file that contains the grade for that image. If you wish to export only the (.drx) grades from 
+the Color Gallery, and not the associated images, you can now do this by right-clicking on 
+a a Gallery still or stills and selecting Export from the drop-down menu. In the resulting file 
+browser select .drx from the file format selector, and press export.
+Using and Organizing Memories
+Stills and memories contain identical information, and can be split screened, copied, appended, 
+exported, and can display their node graph just like any other still. However, stills that are assigned as 
+a memory make them easier to access via keyboard shortcuts.
+Memories are hidden by default, but you can reveal them by clicking the Memories button to the right 
+of the Gallery list button at the top-left of the Gallery.
+Place grades you will use often in Memories for faster recall
+The Memories thumbnail display makes it easy to keep track of which stills have been assigned 
+to which memories in situations where you’re using multiple memories to copy grades throughout 
+a program.
+3407Color | Chapter 141 Using the Gallery
+COLOR
+To copy stills and memories back and forth, do one of the following:
+  Drag a still onto a memory bank.
+  Drag a memory into the Gallery.
+TIP: In this way, memories can be used to copy stills from one album to another.
+To save the current clip’s grade to a memory for future use, do one of the following:
+  Choose Color > Memories > Save Memory A–H (Option-1 through 8).
+  Using the DaVinci Resolve Advanced control panel, press CRNT on the Search Dial panel, then 
+press the letter of the memory bank you want to save to. Use the SHIFT UP and SHIFT DOWN 
+buttons to save to another memory sharing the same button.
+  If you save a grade to a memory that already contains something, the previous memory 
+is overwritten.
+To apply a memory to the current clip in a timeline:
+  Right-click a memory and choose Apply Grade.
+To clear a memory:
+  Right-click a memory, then choose Clear.
+3408Color | Chapter 141 Using the Gallery
+COLOR
+Chapter 142
+Grade Management
+The Color page offers numerous ways of saving grades, copying grades, creating 
+and altering groups of clips to share grades, rippling grades and adjustments, and 
+managing multiple versions of grades.
+All of these procedures enable you to work faster by leveraging work you’ve already done to apply to 
+other clips that can benefit from the same adjustments, or by applying changes across multiple clips 
+all at once.
+Contents
+Using Versions to Manage Grades  ��������������������������������������������������������������������������������������������������������������������������������������������� 3411
+Choosing to Copy Grades Manually or Automatically Using Versions  ���������������������������������������������������������������������� 3411
+Using Local Versions by Default ��������������������������������������������������������������������������������������������������������������������������������������������������  3412
+Using Remote Versions to Enable Automatic Linking �������������������������������������������������������������������������������������������������������  3412
+Creating a Master Timeline  ������������������������������������������������������������������������������������������������������������������������������������������������������������� 3414
+Working with Versions  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3418
+The Importance of “Version 1” ����������������������������������������������������������������������������������������������������������������������������������������������������� 3420
+Deleting Unused Versions  ������������������������������������������������������������������������������������������������������������������������������������������������������������� 3420
+Rendering Versions ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3421
+Copying Grades  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3421
+Protecting Adjustments with the Copy Grade Options  ���������������������������������������������������������������������������������������������������� 3421
+Copy and Paste From One Clip to Another ���������������������������������������������������������������������������������������������������������������������������  3422
+Copy and Paste Specific Parameters Using Paste Value �����������������������������������������������������������������������������������������������  3423
+Applying Saved Grades From the Gallery  ����������������������������������������������������������������������������������������������������������������������������� 3423
+Preparing to Copy or Apply Grades  ������������������������������������������������������������������������������������������������������������������������������������������� 3424
+Copying Grades Using the Pointer ��������������������������������������������������������������������������������������������������������������������������������������������� 3424
+Copy Forward Commands �������������������������������������������������������������������������������������������������������������������������������������������������������������  3425
+Copying Using Memories ���������������������������������������������������������������������������������������������������������������������������������������������������������������  3425
+Copying Using Preview Memory  ������������������������������������������������������������������������������������������������������������������������������������������������  3426
+Copying from Stills in the Gallery �����������������������������������������������������������������������������������������������������������������������������������������������  3426
+Append Node Graph  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3427
+Aligning Keyframes to a Specific Frame While Copying Grades �������������������������������������������������������������������������������  3428
+3409Color | Chapter 142 Grade Management
+COLOR
+Copying Individual Nodes and Settings  �������������������������������������������������������������������������������������������������������������������������������� 3428
+Copying and Pasting All Settings From One Node to Another �����������������������������������������������������������������������������������  3428
+Paste Attributes on the Color Page  ������������������������������������������������������������������������������������������������������������������������������������������  3429
+Copying from the Node Graph of Other Clips or Gallery Stills ������������������������������������������������������������������������������������  3429
+Rippling Adjustments Among Multiple Clips  ���������������������������������������������������������������������������������������������������������������������� 3433
+Appending a Node to Multiple Clips ���������������������������������������������������������������������������������������������������������������������������������������  3434
+Using Shared Nodes  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3435
+What Are Shared Nodes Good For? �����������������������������������������������������������������������������������������������������������������������������������������  3435
+Creating Shared Nodes  ������������������������������������������������������������������������������������������������������������������������������������������������������������������  3436
+Locking Shared Nodes  �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3436
+Copying Shared Nodes  �������������������������������������������������������������������������������������������������������������������������������������������������������������������  3436
+Converting Shared Nodes Back to Corrector Nodes  ������������������������������������������������������������������������������������������������������� 3437
+Deleting Shared Nodes  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3437
+Using Adjustment Clips  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3437
+Using Groups ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3438
+Creating and Managing Groups  �������������������������������������������������������������������������������������������������������������������������������������������������  3439
+Using Group Modes to Control Which Grades Ripple and Which Don’t ����������������������������������������������������������������� 3440
+Collapse Group Grades  ������������������������������������������������������������������������������������������������������������������������������������������������������������������  3443
+Exporting Grades and LUTs  ��������������������������������������������������������������������������������������������������������������������������������������������������������� 3445
+3410Color | Chapter 142 Grade Management
+COLOR
+Using Versions to Manage Grades
+Working quickly requires a mastery of the numerous grade management features built into DaVinci 
+Resolve. These features are designed to help you copy and ripple grades to individual clips, among 
+manually defined groups of clips via the Node Editor’s Clip mode, or among automatically linked clips 
+that share the same source clip in the Media Pool (when using Remote versions). Multiple versions of 
+grades are supported for every clip, as are various options for previewing, overwriting, and appending 
+these versions.
+Choosing to Copy Grades Manually 
+or Automatically Using Versions
+Each grade you apply to a clip is a version. Each clip can have multiple versions, although only one 
+version can be applied at a time. By default, the first grade applied to every clip in a timeline is a 
+local version named “Version 1.” A clip’s version name and/or number appears underneath the clip 
+thumbnail, to the right. You can also see the version name, along with a list of all the other versions 
+that are currently available to that clip, by right-clicking a clip in the Timeline and looking for the 
+version names that appear underneath the Local Versions submenu.
+Selecting versions of grades from the Timeline thumbnails
+NOTE: Double-clicking the version name underneath a clip’s thumbnail in the Timeline cycles 
+the version names, the clip names, and the codec used by each clip.
+There are two different types of versions in DaVinci Resolve, each of which provides a 
+different method of grade management and linking among the clips and timelines of a project.
+Local versions: The default mode of grade management. Clips using local versions are 
+unlinked, so each clip has its own grade which is not shared with any other clips in any other 
+timelines. Changing the grade of a clip using a local version has no effect on any other clip in 
+that project. 
+Remote versions: An alternate mode of grade management that you can enable. All clips 
+using remote versions that share the same source clip in the Media Pool are automatically 
+linked, in all timelines, and share the same set of grades.
+3411Color | Chapter 142 Grade Management
+COLOR
+If you use local versions to grade all your clips, you don’t have to worry about one clip’s grade being 
+accidentally copied to other clips that happen to come from the same file in the Media Pool, which can 
+make it easier to work. On the other hand, you need to manually copy every grade that you want to 
+duplicate, even among clips that clearly come from the same take or angle. You can always create a 
+group to share a grade among clips using local versions, but that’s an extra step.
+Switching to use remote versions, instead, puts you into a mode where clips using remote versions 
+that share the same media file are automatically linked together. This gives you a convenient 
+shortcut for grading your program, since a grade that’s applied to one linked clip is automatically 
+copied to every other clip it’s linked to, which can be convenient when grading a series of headshots 
+appearing throughout a program that come from the same interview take. Another use of remote 
+versions is when you’re importing a new edit of an already graded timeline. Using remote versions, 
+you can set your project up so that new incoming timelines are automatically relinked to the previous 
+timeline’s grades.
+The only disadvantage to using remote versions is that when you find you need to make individual 
+adjustments to clips that are linked, it’s an extra step to either create another version, or switch that 
+clip to use a local version, in order to keep its adjustment separate. This will be discussed in more 
+detail later in this chapter.
+Mixing Versions
+Each clip is capable of having multiple local and remote versions at the same time; you get to choose 
+which to apply. Which type of versioning is best depends on the type of project you’re working on, 
+the way in which the media was shot, and how you like to work. The following sections explain the 
+differences in workflow.
+Using Local Versions by Default
+Since local versions are the default method of grading when you first create a new project (unless 
+you’ve edited your settings presets), you don’t need to do anything to enable this mode at first. As the 
+name implies, local versions are local to the Timeline in which they appear, so local versions are not 
+rippled to linked clips, and they’re not shared among different timelines. This makes it easy to avoid 
+accidentally having grades copied when you don’t want them to be, but you lose the conveniences 
+that automatic linking can provide.
+However, you can always switch the clips in a timeline to use remote versions if you change your mind, 
+either individually, or all together.
+Using Remote Versions to Enable Automatic Linking
+Remote versions let all clips from the same source media file in the Media Pool share their grades 
+automatically, either within a single timeline, or across multiple timelines in the same project. However, 
+to enable the convenience of remote grades, you need to put DaVinci Resolve into this mode of 
+working using the Settings window. 
+To enable remote grades to be used:
+  Open the Project Settings, open the General Options panel, and turn off “Use local version for 
+new clips in timeline” in the Color section.
+Turning this option off only affects clips that are added to Timelines from that point onward. 
+You can keep track of which clips use remote versions by the (R) that appears when you 
+double-click the area underneath the thumbnail to hide the codec name in the Thumbnail timeline.
+3412Color | Chapter 142 Grade Management
+COLOR
+Turning off “Use local version for new clips in timeline”  
+to enable remote grades to be used by default
+How Automatic Linking Works
+When clips using remote versions have been added to a timeline, any other clips in any 
+timeline that:
+a) Use remote versions also, and 
+b)  Refer to the same file in the Media Pool are linked. Selecting a clip using a remote 
+grade in the Color page that is automatically linked to one or more clips displays a small 
+“linked” badge at the right of that clip’s timecode in the Thumbnail timeline.
+The linking arrow shows this clip has 
+the same source as the one selected 
+on the Timeline
+TIP: The Timeline Filtering drop-down in the Color Page toolbar has an option named 
+“Common Media Pool Clips” that only shows clips in the Timeline that are linked to the 
+currently selected clip.
+Adjustments that you apply to a remote version of one linked clip are automatically rippled to every 
+other clip it’s linked to, which can save you an enormous amount of time when you’re getting started 
+with a new program. For example, if every reverse angle from the same take in a particular angle of 
+coverage is automatically linked using remote versions, then the grade you apply to one reverse angle 
+clip will ripple to every other reverse angle clip throughout the Timeline.
+3413Color | Chapter 142 Grade Management
+COLOR
+Timeline with three automatically linked clips shown, and codec names 
+hidden to reveal the (R) that shows these clips are using remote grades
+So long as remote versions are enabled, there are other ways that linked clip relationships are formed. 
+If, after conforming an AAF, XML, or EDL, you used the Split Clips button in the Color page to split one 
+conformed clip into many, each of the clips you split would be linked, since they too would share the 
+same source media in the Media Pool.
+Finally, automated linking also occurs for clips that appear in multiple timelines that also use 
+remote versions. As a result, the grade you apply to one linked clip is automatically rippled to 
+every other clip it’s linked to.
+NOTE: Media management or media consolidation operations that split large source media 
+files into many individual media files will defeat automatic linking within the same timeline, 
+since each clip will be conformed to its own individual media file. 
+Starting with Remote Versions, Then Switching to Local Versions
+It’s possible to combine the best aspects of remote and local versions into a single workflow, 
+taking advantage of your ability to freely switch from one to the other. Since remote versions 
+make it easy to copy grades among clips that are similar, you can switch to using remote 
+versions first, and then grade your way through the Timeline until you get to the point where 
+you need to start making much more specific changes to individual clips. Then, it’s easy to 
+either switch each linked clip that needs individual adjustment to use a local version, or to 
+use the Copy Remote Grades To Local command (described later) to copy the current remote 
+version of each and every clip to a local version, at which point you can make all the specific 
+tweaks you need to without worrying about changes being accidentally copied.
+Creating a Master Timeline
+DaVinci Resolve version 9 and earlier would automatically create a Master Timeline whenever you 
+added clips to the Media Pool. This changed in versions 10 and later, which by default have no Master 
+Timeline. However, if you want to create a Master Timeline in order to use it as you would have before, 
+this is easy to do.
+If you want a Master Timeline to have a single timeline that always contains all clips currently in the 
+Media Pool, there’s a way you can create one. However, you need to do it immediately upon creating a 
+new project, before adding any media to the Media Pool. Once you’ve added one or more clips to the 
+Media Pool, the option you need to do so will be disabled.
+3414Color | Chapter 142 Grade Management
+COLOR
+To create a new Master Timeline:
+1 Create a new project, open the General Options panel of the Project Settings, and turn on the 
+“Automatically match master timeline with media pool” checkbox in the Color section. If you also 
+want all clips to use Remote versions as you grade by default as in previous versions of DaVinci 
+Resolve, you can turn off the “Use local version for new clips in timeline” checkbox.
+2 Click Save.
+3 Open the Edit page, and choose File > New Timeline (Command-N).
+4 When the New Timeline Properties window appears, turn the Empty Timeline checkbox off, and 
+click Create New Timeline.
+Now, in addition to the new Timeline, a Master Timeline appears in the Timeline list.
+Once created, the Master Timeline contains every clip in the Media Pool of the current 
+project. If you color correct the clips in the Master Timeline, you’ll find there’s only one set 
+of versions available, found underneath the Local submenu of the Color Page timeline’s 
+contextual menu. It’s important to understand that local versions within the Master Timeline 
+are in fact the remote versions found in every other timeline of that project. 
+In fact, it would be fair to say that the remote versions found in other timelines are actually 
+the Master Timeline’s versions. When you grade a clip in the Master Timeline, those grades 
+ripple out to every other instance of that clip, in every other timeline within that project, via 
+remote versions.
+Sharing of remote versions among the Master Timeline and newly conformed timelines is why 
+you can grade a collection of clips that you import into DaVinci Resolve without any editorial 
+structure, grade and output offline media, and then reimport a project file that relinks to the 
+original clips along with their grades. It’s also why you can grade clips in one timeline, and 
+then import additional re-edited timelines via AAF, XML, or EDL, which automatically inherit all 
+remote versions of grades that were created in previous timelines.
+Differentiating Clips with Individual Versions
+If you’ve enabled DaVinci Resolve to add clips with remote versions, there are times when you may 
+want to suspend automatic linking. As convenient as automatic grade rippling among linked remote 
+versions is, there are many instances where you may need to stop it. For example, if the Media Pool 
+contains a source media file with the entire content of an interview, then every clip that has been 
+conformed to that source media will be linked, which is ordinarily good since you’d expect they’d all 
+share the same grade. However, if the DP fiddled with the exposure of the camera in the middle of 
+the interview, such that some clips are lighter and others are darker, you may find yourself needing to 
+make different adjustments to clips from different parts of the interview.
+One way of doing this, which can be useful in timelines where you only need to make a few of these 
+kinds of changes, is to create a new remote version for every clip to which you need to make an 
+individual adjustment. Since each version is its own grade, and differently named versions don’t link to 
+one another, this is a simple solution.
+To suspend linking by creating a new remote version:
+1 Move the playhead to the clip you need to alter individually.
+2 Do one of the following:
+  Choose Color > Grade Version > Add (Command-Y).
+  Right-click the thumbnail in the Timeline, and choose Remote Versions > Create New Version.
+3 Grade the new version that’s appeared.
+3415Color | Chapter 142 Grade Management
+COLOR
+While this method works well, keep in mind that multiple linked clips using the same version number 
+will always be linked with one another. In other words, suppose Clip 1, Clip 3, and Clip 5 are linked 
+using the default Version 1, which has a strong blue grade applied.
+Three clips automatically linked, sharing a blue grade
+Then, you set Clip 3 to use Version 2 with a different grade, tinted red. Clip 3 is now unlinked from 
+Clips 1 and 5.
+Setting the second of the three clips to use another version with a different remote grade sets it apart
+However, switching Clip 5 to also use the red-tinted Version 2 means that Clip 3 and Clip 5 are now 
+linked together, but Clip 1 is no longer linked.
+Setting the third of these clips to share the same remote version as the second 
+clip now links those two together, omitting the first clip
+Every new remote version you create, and every change you make, becomes available to all other 
+clips in all other timelines that comes from the same source Media Pool clip as the shot you’re working 
+on. However, any clip can use any version, and which version is used by a linked clip is not rippled. 
+For example, Timeline 1 contains a clip named Max CU, which has three remote versions. 
+Timeline 5 also contains Max CU, which is currently set to use Version 2. If you open Timeline 
+1 and add one more remote version to Max CU, that new version will also be available to Max 
+CU in Timeline 5, but it will still be set to use Version 2.
+3416Color | Chapter 142 Grade Management
+COLOR
+Switching Clips Between Local and Remote Versions
+You can also suspend remote version grade linking by switching individual clips to use local versions. 
+This makes it easy to create a situation where some clips are linked, and other clips are not. Keep 
+in mind that each clip has both local and remote versions, so you can switch from one to the other 
+without losing anything.
+To suspend linking by setting individual clips to use a local version:
+  Right-click a clip thumbnail, choose the submenu of the corresponding remote version you want 
+to copy, and choose Copy to Local. The remote version is copied to a local version, which now 
+appears as the current version that’s used.
+You can also set every clip in the entire timeline to use local versions. If you switch an entire 
+timeline to local versions, then no clip in that timeline will be linked to any other unless you create 
+a group (covered later in this chapter). This is the default state, but it’s useful even when you’ve 
+switched to using remote versions when you want to grade one timeline differently from the others 
+in a project, for example when doing a trim pass for another video or stereo 3D format, or when 
+grading another cut, such as a trailer, that uses the same media but requires a different look.
+To suspend linking by switching from remote versions to local versions:
+  Right-click any clip thumbnail, and choose one of the following commands;
+Use Local Grades: Switches all clips to their local versions. If there are already local versions 
+defined for each clip, those will appear. If there are no local versions yet defined, each 
+clip will be ungraded.
+Copy Remote Grades to Local: Copies the currently assigned remote version of each clip 
+to a local version.
+Because Undo is used only for individual clip operations, the Use Local Grades and Copy Remote 
+Grades To Local commands cannot be undone. However, switching a timeline from remote to local 
+versions is not a one-way trip. You can select Use Remote Grades to switch every clip in a timeline 
+back to the remote versions at any time.
+To switch a timeline back to using remote versions:
+  Right-click any clip thumbnail, and choose Use Remote Grades.
+Furthermore, you can also copy the local grades you made to be remote grades, for instances 
+where you started grading with local grades, and you want to switch to remote grading using your 
+local grades as a starting point. Be aware that when you do this in a timeline with many clips that 
+share the same source media, the grade of the very last shared clip in the Timeline will be the only 
+remote grade that’s used for those auto-linked clips.
+To copy each clip’s local grade to a remote grade for every clip in the current timeline:
+  Right-click any clip thumbnail, and choose Copy Local Grades to Remote.
+If you’re switching back and forth between local and remote versions, keep the following 
+rules in mind:
+• If you select Use Remote Grades, change your remote grades, and then Copy Remote 
+Grades To Local on that timeline again, you’ll overwrite all of your previously graded local 
+versions. This is a good workflow if you don’t like what you’ve done with your local versions, 
+and you want to start over by recopying the remote versions.
+• If you select Use Remote Grades, change your remote grades, and then select Use Local 
+Grades, you’ll return to your previously graded local versions, as they were before you 
+selected Use Remote Grades. This is a good workflow if you just want to switch back to your 
+remote versions in order to copy the remote versions of specific clips to local versions.
+3417Color | Chapter 142 Grade Management
+COLOR
+Working with Versions
+Each clip can have as many local and remote versions as you like. There are commands for creating, 
+renaming, and deleting the versions that are available to each clip when using the pointer or 
+keyboard shortcuts.
+Additionally, DaVinci Resolve 15 introduced the ability to batch create, rename, load, and delete 
+versions for multiple clips that are selected at the same time.
+To create a new local or remote version  
+quickly for one or more selected clips:
+  Choose Color > Grade Version > Add (Command-Y).
+A new version is created, identical to the type of version that was previously selected (remote 
+or local), named “Version x” where x is the number of the versions that have been created. All 
+keyframes and motion tracking are copied from the previously selected version to the new one.
+To create a new version for one or more selected clips,  
+with the option to set a name and whether to copy keyframes:
+1 Right-click one of the selected clip thumbnails, and choose one of the following:
+  Local Versions > Create New Version
+  Remote Versions > Create New Version
+2 Type a name for the version in the dialog that appears, and choose either “Copy all marks” or 
+“Copy the first mark only,” depending on whether or not you want to copy all the keyframes into 
+the new version. 
+NOTE: Motion tracking will be copied regardless of whether “Copy all marks” 
+is selected or not.
+3 Optionally, you can choose one of the preset version names from the drop-down list. These 
+names are defined in the Versions section of the General Options panel of the Project Settings.
+4 Click OK.
+To delete a specific version for one or more selected clips:
+  Right-click one of the selected clip thumbnails, choose the submenu of the remote version you 
+want to delete (it can’t be the currently selected version), and choose Delete.
+To delete all versions for one or more selected clips:
+  Right-click one of the selected clip thumbnails, and choose one of the following commands from 
+the contextual menu corresponding to the scope of the versions you want to delete;
+  Local Versions > Delete All Versions
+  Remote Versions > Delete All Versions
+  Delete All Versions
+All versions are deleted as specified, except for the currently selected version, which is now the 
+only one remaining.
+To load a particular remote or local version for one or more selected clips:
+  Right-click one of the selected clip thumbnails, choose the submenu of the corresponding remote 
+version you want to copy, and choose Load.
+3418Color | Chapter 142 Grade Management
+COLOR
+To rename the version of one or more selected clips:
+1 Right-click one of the selected clip thumbnails, choose the submenu of the corresponding remote 
+version you want to rename, and choose Rename.
+2 In the Version Name dialog, type a name into the text field. Optionally, you can choose one of the 
+preset version names from the drop-down list. These names are defined in the Versions section of 
+the General Options panel of the Project Settings.
+Selecting a Version name from the dropdown list, the names 
+on the list come from assignments made using the Versions 
+section of the General Options panel of the Project Settings
+3 Click OK.
+That name now appears underneath the clip thumbnail in the Timeline.
+If you’re going to use predefined names for versions, you need to define these in the Versions 
+group of the General Options panel of the Project Settings. Ten drop-down menus let you choose 
+from preset version names, or enter your own. These names will appear in the drop-down menu of 
+the Version Name dialog.
+The Versions section of the Project Settings
+3419Color | Chapter 142 Grade Management
+COLOR
+The Importance of “Version 1”
+There are specific operations in DaVinci Resolve where “Version 1,” otherwise known as “the default 
+version,” is the only version that’s used, regardless of how many other versions are available, or which 
+version was previously selected. The default version can be named anything you want, but whatever 
+its name, the default version is the first version in the list, and it’s important. Here are some examples:
+Importing additional timelines that use the same clips:  In this case, if you’re importing 
+timelines and ”Use local version for new clips in timeline” is disabled in the Color section 
+of the General Options panel of the Project Settings, then only the default version of each 
+clip is relinked. 
+Whenever you switch a timeline between local and remote versions: In this case, 
+every clip in the Timeline will be switched to the default version, regardless of what 
+you had selected previously.
+Consequently, if you plan to reconform your clips to a newer version of the edit that you’re 
+importing, or pursue other workflows that are off the beaten path, it’s a good idea to make 
+sure, no matter how many versions you end up creating, that the most important grade is 
+always copied back to the default version.
+To copy any version quickly to the default version:
+1 Choose Color > Memories > Save Memory A (Option-1). You can use any memory you want, but 
+Memory A is convenient for this example.
+2 Choose Color > Grade Version > Default (Command-U).
+3 Choose Color > Memories > Load Memory A (Command-1) to apply the saved memory to the 
+default version.
+To jump immediately to the default version, do one of the following:
+  Choose Color > Grade Version > Default (Command-U).
+  Press DEFAULT VERSION on the T-bar panel.
+Deleting Unused Versions
+In cases where you want to make absolutely sure there’s no alternative to the grade you want a clip to 
+have, there’s an easy way to delete all versions except for the version that’s currently in use, thereby 
+making it the default version.
+To eliminate either local or remote versions except for the current version:
+1 Choose the local or remote version you want a clip to use.
+2 Right-click the thumbnail of the clip you want to eliminate extra versions from, and choose Delete 
+Unused Versions from the contextual menu.
+If you selected a local version, all unused local versions will be deleted, but remote versions 
+will be left alone. Similarly, if you selected a remote version, all unused remote versions will be 
+deleted, but local versions will be left alone.
+3420Color | Chapter 142 Grade Management
+COLOR

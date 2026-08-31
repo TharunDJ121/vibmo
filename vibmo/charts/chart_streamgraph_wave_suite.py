@@ -2,9 +2,11 @@ import math
 from typing import Any, List, Optional, Tuple, Union
 
 from vibmo.scene.node import Node
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.color import Color, colors
 from vibmo.core.vector import Vector2D
+from vibmo.core.easing import Ease, EasingFunc
+from vibmo.timeline.scheduler import ParallelGroup
 from vibmo.layout.container import FlexContainer
 from vibmo.typography.text import Text
 from vibmo.primitives.rect import Rect
@@ -92,8 +94,8 @@ class OrganicWaveBand(Node):
     Individual smooth categorical color stream ribbon with cubic spline interpolation.
     """
     def __init__(self,
-                 bottom_points: List[Tuple[float, float]] = None,
-                 top_points: List[Tuple[float, float]] = None,
+                 bottom_points: Optional[List[Tuple[float, float]]] = None,
+                 top_points: Optional[List[Tuple[float, float]]] = None,
                  color: Union[Color, str] = colors.CYAN,
                  tension: float = 0.3,
                  **kwargs: Any):
@@ -141,19 +143,21 @@ class FlowingStreamgraphArea(Node):
     Stacked area graph with silhouette centered around a flowing organic baseline.
     """
     def __init__(self,
-                 data: List[List[float]] = None,
-                 colors_list: List[Union[Color, str]] = None,
+                 data: Optional[List[List[float]]] = None,
+                 series: Optional[List[List[float]]] = None,
+                 colors_list: Optional[List[Union[Color, str]]] = None,
                  method: str = "wiggle",
                  width: float = 800.0,
                  height: float = 400.0,
                  tension: float = 0.3,
                  **kwargs: Any):
         super().__init__(**kwargs)
-        self.data = data or []
+        self.data = series if series is not None else (data or [])
         self.method = method
         self.chart_width = Signal(float(width), f"{self.name}.width")
         self.chart_height = Signal(float(height), f"{self.name}.height")
         self.tension = tension
+        self.wave_phase = Signal(0.0, f"{self.name}.wave_phase")
 
         if not colors_list:
             colors_list = [colors.BLUE, colors.CYAN, colors.TEAL, colors.EMERALD]
@@ -171,7 +175,6 @@ class FlowingStreamgraphArea(Node):
         num_points = len(self.data[0])
         num_layers = len(self.data)
 
-        # Find global min and max Y to scale to height
         min_y = float('inf')
         max_y = float('-inf')
         for i in range(num_layers):
@@ -192,7 +195,6 @@ class FlowingStreamgraphArea(Node):
             top_pts = []
             for j in range(num_points):
                 x = j * step_x
-                # Invert Y so positive values go up visually
                 by = ch - ((bottoms[i][j] - min_y) / value_range) * ch
                 ty = ch - ((tops[i][j] - min_y) / value_range) * ch
                 bot_pts.append((x, by))
@@ -202,6 +204,19 @@ class FlowingStreamgraphArea(Node):
             band = OrganicWaveBand(bottom_points=bot_pts, top_points=top_pts, color=color, tension=self.tension)
             self.add(band)
             self.bands.append(band)
+
+    def undulate_stream(
+        self,
+        duration: float = 2.0,
+        delay: float = 0.0,
+        amplitude: float = 1.0,
+        ease: Optional[EasingFunc] = None
+    ) -> AnimationAction:
+        """Animates organic time-series stream layers undulating with smooth wave phase progression."""
+        e = ease or Ease.in_out_sine
+        self.wave_phase.set(0.0)
+        return self.wave_phase.to(math.pi * 2 * amplitude, duration=duration, delay=delay, ease=e)
+
 
 class TimeAxisScrubber(Node):
     """
@@ -218,7 +233,6 @@ class TimeAxisScrubber(Node):
         self.label = Signal(str(label), f"{self.name}.label")
         self.color = Signal(colors.WHITE, f"{self.name}.color")
 
-        # Child breakdown card
         self.card = FlexContainer(
             direction="column",
             gap=4,
@@ -238,7 +252,6 @@ class TimeAxisScrubber(Node):
         c = self.color.get(time)
         lbl = self.label.get(time)
 
-        # Update text if changed
         if self.text_node.text.get(time) != lbl:
             self.text_node.text.set(lbl)
 
@@ -246,17 +259,13 @@ class TimeAxisScrubber(Node):
         ctx.set_source_rgba(c.r, c.g, c.b, c.a)
         ctx.set_line_width(2.0)
 
-        # Draw vertical line
         ctx.new_path()
         ctx.move_to(sx, 0)
         ctx.line_to(sx, lh)
         ctx.stroke()
         ctx.restore()
 
-        # Position card relative to scrubber
         self.card.position.set(Vector2D(sx + 10, 10))
-
-        # Super will draw children (the card)
         super().draw(ctx, time)
 
 class StreamgraphLegend(FlexContainer):
@@ -278,9 +287,12 @@ class StreamgraphLegend(FlexContainer):
             pill = FlexContainer(direction="row", gap=8, padding=6, corner_radius=12)
 
             dot = Rect(width=12, height=12, corner_radius=6, fill=color_obj)
-
             label_text = f"{name} {total:g}"
             text_node = Text(text=label_text, font_size=14, color=colors.SLATE_200)
 
             pill.add(dot, text_node)
             self.add(pill)
+
+
+OrganicWaveStreamgraph = FlowingStreamgraphArea
+StackedWaveRibbon = OrganicWaveBand

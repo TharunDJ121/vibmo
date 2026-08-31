@@ -36,6 +36,9 @@ dependencies = [
     "uvicorn>=0.22.0",
     "websockets>=11.0",
     "pyyaml>=6.0",
+    "langgraph>=0.0.20",
+    "opencv-python>=4.8.0",
+    "freetype-py>=2.4.0",
 ]
 
 [project.optional-dependencies]

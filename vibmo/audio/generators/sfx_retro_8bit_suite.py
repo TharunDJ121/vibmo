@@ -6,6 +6,7 @@ class Retro8BitSuite:
     Simulates NES-style pulse (12.5%, 25%, 50% duty), triangle, and 1-bit LFSR noise channels.
     """
     SR = 48000
+    SAMPLE_RATE = 48000
 
     @staticmethod
     def _pulse_wave(freqs: np.ndarray, duty: float = 0.5) -> np.ndarray:
@@ -110,3 +111,12 @@ class Retro8BitSuite:
         fade_len = int(0.1 * Retro8BitSuite.SR)
         env[-fade_len:] = np.linspace(1.0, 0.0, fade_len)
         return (wave * env).astype(np.float32)
+
+    @staticmethod
+    def arcade_coin_jump(duration: float = 0.30) -> np.ndarray:
+        """Classic arcade coin pickup sound with ascending pulse arpeggio."""
+        return Retro8BitSuite.coin_pickup(duration=duration)
+
+# Canonical AGENTS.md alias
+Retro8bitSuite = Retro8BitSuite
+

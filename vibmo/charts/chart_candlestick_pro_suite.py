@@ -1,13 +1,29 @@
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Optional
 from vibmo.scene.node import Node
 from vibmo.core.color import Color, colors
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
 
 class ProCandlestickChart(Node):
-    def __init__(self, data: List[Dict[str, float]], width: float, height: float, **kwargs) -> None:
+    def __init__(
+        self,
+        data: Optional[List[Dict[str, float]]] = None,
+        ohlc_data: Optional[List[Dict[str, float]]] = None,
+        width: float = 800.0,
+        height: float = 400.0,
+        **kwargs: Any
+    ) -> None:
         super().__init__(**kwargs)
-        self.data = data
+        self.data = ohlc_data if ohlc_data is not None else (data or [])
         self.width = width
         self.height = height
+        self.progress = Signal(1.0, f"{self.name}.progress")
+
+    def draw_bars(self, duration: float = 1.5, delay: float = 0.0, ease: Optional[EasingFunc] = None) -> AnimationAction:
+        """Animates candlesticks revealing across the chart timeline."""
+        self.progress.set(0.0)
+        e = ease or Ease.out_expo
+        return self.progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         if not self.data:
@@ -15,6 +31,10 @@ class ProCandlestickChart(Node):
             return
 
         ctx.save()
+        prog = float(self.progress.get(time))
+        visible_count = max(1, int(len(self.data) * prog))
+        active_data = self.data[:visible_count]
+
         min_p = min(d['low'] for d in self.data)
         max_p = max(d['high'] for d in self.data)
         price_range = max_p - min_p if max_p != min_p else 1.0
@@ -23,7 +43,7 @@ class ProCandlestickChart(Node):
         candle_width = self.width / num_candles
         pad = candle_width * 0.2
 
-        for i, d in enumerate(self.data):
+        for i, d in enumerate(active_data):
             x = i * candle_width + candle_width / 2.0
 
             def map_y(p: float) -> float:
@@ -40,7 +60,7 @@ class ProCandlestickChart(Node):
             ctx.set_source_rgba(*color.to_cairo())
 
             # Draw wick
-            ctx.set_line_width(1.0)
+            ctx.set_line_width(1.5)
             ctx.move_to(x, y_high)
             ctx.line_to(x, y_low)
             ctx.stroke()
@@ -48,7 +68,7 @@ class ProCandlestickChart(Node):
             # Draw body
             body_top = min(y_open, y_close)
             body_bottom = max(y_open, y_close)
-            body_height = max(1.0, body_bottom - body_top)
+            body_height = max(2.0, body_bottom - body_top)
             ctx.rectangle(x - candle_width / 2.0 + pad, body_top, candle_width - 2 * pad, body_height)
             ctx.fill()
 
@@ -264,3 +284,7 @@ class CrosshairPriceTracker(Node):
 
         ctx.restore()
         super().draw(ctx, time)
+
+
+CandlestickChartPro = ProCandlestickChart
+VolumeBarSubplot = VolumeProfileOverlay

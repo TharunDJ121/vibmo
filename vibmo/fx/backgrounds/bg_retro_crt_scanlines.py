@@ -14,8 +14,10 @@ class CrtPhosphorScanlineBackdrop(Node):
         width: float = 1920,
         height: float = 1080,
         scanline_spacing: float = 4.0,
+        scanline_gap: Optional[float] = None,
         scanline_intensity: float = 0.4,
         roll_speed: float = 1.0,
+        speed: Optional[float] = None,
         retrace_bar_height: float = 150.0,
         base_color: Union[Color, str] = "#0a0f0a",
         scanline_color: Union[Color, str] = "#33ff33",
@@ -25,9 +27,9 @@ class CrtPhosphorScanlineBackdrop(Node):
         super().__init__(**kwargs)
         self.width = float(width)
         self.height = float(height)
-        self.scanline_spacing = float(scanline_spacing)
+        self.scanline_spacing = float(scanline_gap if scanline_gap is not None else scanline_spacing)
         self.scanline_intensity = float(scanline_intensity)
-        self.roll_speed = float(roll_speed)
+        self.roll_speed = float(speed if speed is not None else roll_speed)
         self.retrace_bar_height = float(retrace_bar_height)
         self.base_color = Color.from_any(base_color)
         self.scanline_color = Color.from_any(scanline_color)
@@ -281,3 +283,14 @@ class VcrBlueScreenGlitch(Node):
                 ctx.fill()
 
         ctx.restore()
+
+
+# Semantic Alias
+RetroCrtScanlines = CrtPhosphorScanlineBackdrop
+
+__all__ = [
+    "CrtPhosphorScanlineBackdrop",
+    "RetroCrtScanlines",
+    "TVSignalNoiseStatic",
+    "VcrBlueScreenGlitch",
+]

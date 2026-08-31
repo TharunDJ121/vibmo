@@ -1,0 +1,1461 @@
+FAIRLIGHT
+Fairlight
+CONTENTS
+170 Using the Fairlight Page  �����������������������������������������������������������������������������������������������������������������������  3815
+171 Setting Up Tracks, Busses, and Patching  ����������������������������������������������������������������������������������������������������� 3870
+172 Transport Controls, Timeline Navigation, and Markers  ����������������������������������������������������������  3894
+173 Recording  ��������������������������������������������������������������������������������������������������������������������������������������������������  3903
+174 ADR (Automated Dialog Replacement) �������������������������������������������������������������������������������������������  3913
+175 Editing Basics in the Fairlight Page �������������������������������������������������������������������������������������������������  3923
+176 The Fairlight Inspector  �������������������������������������������������������������������������������������������������������������������������  3979
+177 Mixing in the Fairlight Page ����������������������������������������������������������������������������������������������������������������  3999
+178 Mix Automation  ���������������������������������������������������������������������������������������������������������������������������������������  4048
+179 Track Groups  ��������������������������������������������������������������������������������������������������������������������������������������������  4072
+180 Audio Effects ��������������������������������������������������������������������������������������������������������������������������������������������  4077
+181 Fairlight FX  ������������������������������������������������������������������������������������������������������������������������������������������������  4089
+182 Audio Meters and Audio Monitoring ������������������������������������������������������������������������������������������������  4129
+183 Signal Flow Diagrams  ����������������������������������������������������������������������������������������������������������������������������  4142
+184 Immersive Audio Workflows  ���������������������������������������������������������������������������������������������������������������  4144
+Chapter 170
+Using the 
+Fairlight Page
+The completely redesigned Fairlight Audio Core engine allows for 
+simultaneous playback of up to 2,000 tracks. It also utilizes intelligent load 
+balancing for maximum plugin support.
+Fairlight’s increased track count meets the demanding needs of both clients and immersive formats, 
+such as Dolby Atmos. Major studio films and series television require high track counts to accommodate 
+complex mixes and the export of multiple deliverables. Immersive formats, such as Dolby Atmos, 
+multiply the necessary track counts with their demands for deliverables from 7.1 up to 22.2.
+This chapter covers the basic user interface controls found on the Fairlight page, where they are 
+and what they do, in order to give you an overall orientation of how to work with this integrated 
+audio environment.
+Contents
+The Fairlight Page User Interface  ����������������������������������������������������������������������������������������������������������������������������������������������  3817
+The Interface Toolbar ����������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3817
+The Audio Timeline ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3818
+Controls in the Audio Timeline  ����������������������������������������������������������������������������������������������������������������������������������������������������� 3819
+Zooming Audio Waveform Height  ��������������������������������������������������������������������������������������������������������������������������������������������� 3823
+Smart Zoom Track Height �������������������������������������������������������������������������������������������������������������������������������������������������������������� 3823
+Audio Editing Modes ������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3824
+Switching Among Multiple Timelines  ��������������������������������������������������������������������������������������������������������������������������������������� 3826
+Toolbar ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3826
+Timeline View Options  �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3828
+Grid View Options  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3831
+Setting the Tempo Grid Start ������������������������������������������������������������������������������������������������������������������������������������������������������� 3832
+Setting the Tempo Grid from a Range Selection  ���������������������������������������������������������������������������������������������������������������� 3833
+Customizing Clip Display in the Timeline  �����������������������������������������������������������������������������������������������������������������������������  3833
+Customizing the Timeline’s Display  ����������������������������������������������������������������������������������������������������������������������������������������� 3834
+Playhead Modes  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3834
+Visible Video Tracks  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3834
+3815Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Video and Audio Scrollers  ������������������������������������������������������������������������������������������������������������������������������������������������������������� 3835
+Mixer �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3836
+The Monitoring Panel  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3840
+Viewer�������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3841
+The Media Pool �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3842
+Importing Media Into the Media Pool on the Fairlight Page �����������������������������������������������������������������������������������������  3843
+Media Pool Preview Player  ������������������������������������������������������������������������������������������������������������������������������������������������������������ 3843
+Bins, Power Bins, and Smart Bins ������������������������������������������������������������������������������������������������������������������������������������������ ���� 3844
+Showing Bins in Separate Windows  ����������������������������������������������������������������������������������������������������������������������������������������� 3845
+Filtering Bins Using Color Tags  ��������������������������������������������������������������������������������������������������������������������������������������������������� 3845
+Sorting the Bin List ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3846
+Filtering Clips With Audio in the Fairlight Page �������������������������������������������������������������������������������������������������������������������  3846
+Effects Library  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3847
+Effects Library Favorites ����������������������������������������������������������������������������������������������������������������������������������������������������������������� 3848
+ADR ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3848
+The List Panel �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3848
+The Record Panel ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3849
+The Setup Panel ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3849
+Sound Library Browser  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3850
+Library Controls  �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3851
+Display Controls and the Search Field ������������������������������������������������������������������������������������������������������������������������������������  3852
+Preview and Audition Controls ���������������������������������������������������������������������������������������������������������������������������������������������������� 3854
+Sound Effect List ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3855
+Index ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3855
+Edit Index ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3855
+Tracks ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3856
+Markers ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3859
+Inspector ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3860
+The Audio Tab �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3861
+The Effects Tab ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3861
+The File Tab �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3861
+Clip Mode vs. Track Mode ��������������������������������������������������������������������������������������������������������������������������������������������������������������  3861
+Test Tone Settings for Generating Tone, Noise, and Beeps ��������������������������������������������������������������������������������������� 3862
+Working with Timecode  ����������������������������������������������������������������������������������������������������������������������������������������������������������������� 3863
+LTC and MTC Chase Sync �������������������������������������������������������������������������������������������������������������������������������������������������������������� 3863
+Generating Timecode  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3865
+Pro Tools AAF Import ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3865
+Dual-Monitor Layout  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3865
+Customizing the Fairlight Page  �������������������������������������������������������������������������������������������������������������������������������������������������� 3866
+Fairlight Configuration Presets  ���������������������������������������������������������������������������������������������������������������������������������������������������� 3867
+Undo and Redo in DaVinci Resolve ����������������������������������������������������������������������������������������������������������������������������������������� 3868
+3816Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Fairlight Page User Interface
+In single monitor mode, the Fairlight page offers an optimized environment for handling your audio 
+tracks, with an expanded mixer and custom monitoring controls that make it easy to edit and 
+manipulate your audio media and evaluate and adjust the levels of your program to create a smooth 
+and harmonious mix.
+The Fairlight page
+The Interface Toolbar
+At the top of the Fairlight page is a toolbar with buttons that let you show and hide different parts of 
+the user interface. These buttons are as follows, from left to right:
+The Interface toolbar
+Media Pool: Shows and hides the Media Pool, from which you can edit audio clips into 
+the Fairlight page Timeline.
+Effects: Opens the Audio FX panel of the Effects Library, from which you can apply 
+Fairlight FX, or AU or VST audio effects to clips or tracks in the Timeline.
+Index: Shows and hides the Index and its Edit Index, Tracks, and Markers panels.
+Edit Index: A list of all edit events in visible tracks of the Timeline. 
+Tracks: Lets you manage the tracks of the Timeline, showing and hiding which ones 
+you want to work with. 
+Markers: Lets you see every marker in the Timeline, along with associated data. 
+Browse through your markers all at once to quickly find the information you need.
+3817Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Groups: This button opens and closes the Groups list when you need to make 
+simultaneous mix adjustments to a group of tracks. This list remains open when you 
+close the Track Index or click one of the other Index tabs. 
+For more information on working with Track Groups, jump to chapter:  
+Track Groups.
+Sound Library: Shows and hides the Sound Library panel. There are search and filter 
+fields to locate desired sounds and a playback window to audition the sounds prior to 
+editing into the Timeline.
+ADR: Shows and hides the ADR panel, with tabbed controls for List, Record, and Setup, 
+which control the functions of the ADR panel.
+Mixer: Shows and hides the Mixer to the right of the Timeline, which lets you adjust the 
+effects and levels for each audio track to create your mix.
+Meters: Shows and hides the Monitoring audio meters and Fairlight viewer at the top 
+of the page.
+Metadata: Shows and hides the clip Metadata panel. 
+Inspector: Shows and hides the Inspector, where you can edit different clip attributes.
+The Audio Timeline
+The heart of the Fairlight page, the Audio Timeline, presents the audio channels and tracks of the 
+currently selected Timeline. Each audio track may contain multiple lanes depending on its Track Type, 
+or format. 
+The clips edited into the Timeline appear within each track, with any multichannel elements within 
+each clip occupying as many lanes as that track type has available (for example, 2 channel stereo, 
+or 6 channels for 5.1). At the left of each track is a header containing a number of controls. 
+These multi-lane audio tracks appear differently from the Edit page, which is optimized for 
+straightforward audio-for-video editing, and shows any multichannel files on single lane 
+tracks with composite waveforms.
+The Fairlight page Timeline cannot be closed.
+3818Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Audio page Timeline 
+Controls in the Audio Timeline
+The Audio Timeline has the following controls.
+  Timecode fields and Range buttons:  These fields display the current timecode value of 
+the Playhead position along the Timeline Ruler, the Range In and Range Out points, and the 
+Range duration.
+Clicking the Range In and Range Out buttons (to the left of their timecode fields) sets their 
+corresponding values and locations on the Timeline Ruler.
+Timecode fields and Range  
+buttons in the Fairlight page
+  Transport controls: Located at the top of the Timeline, this bar contains audio-specific transport 
+controls, which differ from those found on the Media, Edit, Color, and Deliver pages due to the 
+included recording capabilities. These controls include Fast Reverse, Fast Forward, Play Forward, 
+Stop, Record, Loop, and the Toggle Automation and Automation toolbar display icons.
+Fairlight page transport controls
+3819Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+  Toggle Automation button: Clicking this button activates automation recording and playback, and 
+adds an Automation Follows Edit button to the Toolbar, between the Flags and Markers buttons. 
+For more details on the Toolbar, please refer to “Toolbar,” found later in this chapter.
+  Automation toolbar: This button opens a secondary toolbar with all the controls you need for 
+recording mixer automation.
+For more details on Automation, jump to chapter: Mix Automation .
+Fairlight page automation toolbar
+  Monitoring controls: The three monitoring controls located at the far right of the transport controls 
+let you quickly adjust the output volume of your mix. 
+Clicking the Speaker icon mutes and unmutes the audio playback. The icon turns red when the 
+audio is muted.
+The horizontal slider lets you gradually increase or decrease the output volume. The 
+corresponding signal level is displayed in decibels as you move the slider.
+The DIM button lets you temporarily reduce the output volume, which is helpful if you want to have 
+a quick chat with your client about sports or the state of the world while keeping half an ear on the 
+mix. The slider turns yellow whenever you activate the DIM function.
+The monitoring controls
+  Timeline Ruler: The Timeline Ruler displays the program’s timecode and, in conjunction with the 
+playhead, indicates the current frame (or sample) where you’re working in the Timeline.
+Within the Timeline Ruler, you’ll find a handle at the top of the playhead. You can move the 
+playhead by clicking and dragging the handle.
+Markers added to the Timeline also appear in their corresponding locations within the 
+Timeline Ruler.
+  Playhead: Shows the current frame and sample of playback and provides a visual representation 
+of where you are while playing, shuttling, and jogging through the Timeline. At the same time, 
+the large timecode display in the upper left-hand corner of the Timeline also shows the current 
+playhead location.
+The playhead location is also a reference point for editing operations.
+  Audio tracks: The Fairlight page supports multiple audio tracks. Each track may contain multiple 
+lanes to accommodate the audio channels within multi-channel audio clips using track mappings 
+such as stereo, 5.1, 7.1, Dolby Atmos, Ambisonics, or Adaptive (1–24 channels). 
+Audio clips edited into the Timeline appear within the tracks, with the recorded channels 
+occupying as many lanes as that clip has available.
+A corresponding header area containing various controls is located to the left of each track.
+3820Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Fairlight timeline is divided into tracks and lanes; track A1 is a mono track and has 
+a single lane for mono audio. Track A2 is stereo and has two lanes for stereo audio.
+Track header 
+The controls in the track header let you lock/unlock, solo/mute, and record-arm the track.
+In addition to a level meter, the track header includes informational fields showing the track type, track 
+number and name, track volume, and the number of clips on the track.
+The track header controls  
+of the Fairlight page timeline
+  Track color: Each track can be color-coded with one of 16 colors, which will carry over to the 
+Fairlight and Edit page Mixers, Tracks Index, and Audio Meters.
+To apply a color to a track, right-click the track header and choose a color from the Change Track 
+Color submenu.
+You can apply the same color to multiple tracks by dragging over contiguous track headers or 
+Command-clicking multiple discontiguous track headers, then selecting a color from the Change 
+Track Color submenu.
+  Track number: Indicates the number of each track.
+  Track name: Each track has a name that defaults to the track number, such as Track 1, Track 2. 
+However, you can click any track’s name and edit it to be whatever you like. F
+or example, you can rename each track with the type of audio you’re editing onto it, such as 
+Production, Ambience, SFX, or Music. These track names are also used to identify each track’s 
+channel in the Mixer, in the middle of each channel strip (each channel strip’s track number is 
+simultaneously displayed at the top).
+  Audio channel type indicator:  Audio tracks also show which channel configuration that track uses, 
+listing the number of channels for mono, stereo, 5.1, 7.1, Atmos, adaptive, and others.
+  Fader value: A field displays the current fader setting at the position of the playhead, in dB. This 
+value corresponds to the track’s fader level on the Mixer panel. You can drag this value up or 
+down and the fader will follow.
+3821Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+  Lock Track button: When a track is locked, clips can’t be replaced, moved, or otherwise edited, 
+although clips on locked tracks can be graded when in the Color page. The lock shows closed 
+when track contents are locked and open when unlocked.
+  Arm button: This button arms recording onto that track.
+  Solo button: Disables all other tracks but the current one, enabling you to quickly hear a single 
+track in isolation. This affects rendering, so if one or more tracks are soloed, the muted tracks 
+won’t be output or rendered.
+  Mute button: Temporarily disables audio on that track so it’s not monitored or output. This affects 
+rendering, so if one or more tracks are muted, they won’t appear in the rendered output.
+  Audio meters: Each track has audio meters in the track header that let you see levels 
+during playback.
+  Toolbar editing tools: The toolbar contains both modal and command buttons to let you work on 
+your projects. More detail on these appears in the following section.
+  Vertical and horizontal scroll bars: If your project is longer than the current width of the Timeline, 
+or the number of audio tracks is taller than the current height of the Timeline, these scroll bars let 
+you drag to navigate around your program. When the view is scrolled horizontally, the playhead 
+moves along with the track waveforms, so it may temporarily move out of view. If you start 
+playback, the playhead jumps back into view. You can also scroll vertically using the scroll wheel 
+(or other scroll control) of your mouse or other pointing device and can scroll horizontally by 
+holding the Command key down while using your scroll control.
+  Individual Timeline track resizing:  Any track in the Timeline can be individually resized by right-
+clicking anywhere within that track’s header control area and choosing a track height from the 
+Lock Track Height To submenu of the contextual menu. You can choose a fixed size including 
+Micro, Mini, Medium, Large, Extra Large, and Custom. When you choose a fixed track height, 
+vertical zooming no longer affects that track until you change that track’s “Lock Track Height to” 
+option back to None. You can also highlight several or all tracks and set the track height to one 
+size. All highlighted tracks will change to that particular size unless changed again, either globally 
+or individually.
+Resizing an individual audio timeline track using contextual menu options
+3822Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Zooming Audio Waveform Height
+You can zoom into or out of the audio waveforms shown in each clip of one or more tracks, to make 
+them taller or shorter, or you can reset them to their default sizes. This doesn’t change the audio levels 
+of clips in affected tracks, it just lets you make the audio waveforms easier to see.
+To zoom audio waveform height using your scroll wheel:
+Hold down Command-Option, and roll the scroll wheel or control up or down to resize all waveforms in 
+all tracks.
+You can also use commands that are accessed in the top menu View > Zoom Audio Waveform for 
+any track on the Timeline. You can select one or multiple tracks to resize their waveforms all at once. 
+There are three sets of commands in the menu:
+  Reset
+  Zoom Increase Height
+  Zoom Decrease Height
+Right-clicking any clip in the Timeline allows you to access the Track Waveform Zoom 
+submenu with even more zoom options.
+Smart Zoom Track Height
+When you select a track in the Timeline or Mixer and press Command-Option-E, Smart Zoom 
+increases the track height and centers your selection to occupy the whole viewable area of the 
+Timeline. Once you’ve finished your edits, press Command-Option-E again to close Smart Zoom.
+As with other DaVinci Resolve key commands, you can re-map Smart Zoom in the Keyboard 
+Customization dialog. For more information on Keyboard Customization, jump to this chapter:  
+System and User Preferences.
+Standard Timeline view 
+3823Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Smart Zoom Timeline view
+Audio Editing Modes
+The Fairlight page has two audio editing modes: Overwrite Mode and Layered Audio Editing Mode.
+Overwrite Mode
+As the name suggests, if one portion of a clip overlaps another clip during an edit, the area that is 
+affected on the underlying clip is non-destructively deleted to accommodate the incoming clip. If the 
+overlapping clip is moved or deleted, the underlying clip remains truncated.
+Any area that is removed by this process is still present in the original clip and can be exposed by 
+trimming the start or end (depending on what you’ve affected). 
+Overwrite is the default mode and is best for most generalized editing.
+(Left) Overwrite edit showing original clips, (Right) Right hand clip dragged left 
+Resulting overlap
+3824Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Layered Audio Editing
+Layered Audio Editing is a special audio editing mode that lets you superimpose multiple audio clips 
+in the same track, with audio clips edited into the top layers muting overlapping sections of audio clips 
+appearing on lower layers. With layered audio editing enabled (Timeline > Layered Audio Editing), 
+superimposed audio clips are treated similarly to superimposed video clips that have opacity set to 
+100%, with clips on top obscuring (or muting) clips underneath. You can separately toggle this on and 
+off in the View menu > Show Audio Track Layers.
+This mode is very useful for any situation where you’re combining segments of multiple takes together 
+(“comping”) to create a single voiceover, audio vocal track, ADR, or dramatic performance, as you can 
+choose which segments to use via their superimposed position in the stack of clips appearing in that 
+track, while preserving the other takes underneath in case you might want them later. 
+However, it’s important to understand that if you delete any clip on a layer that is “above” another, the 
+lower layer will then “poke through.” This can involve extra housekeeping when editing and is one of 
+the reasons that Overwrite Editing mode is the default mode.
+TIP: Layered Audio Editing mode can be used on audio tracks on the Edit page as well. 
+Layered Audio Editing and Show Audio Track Layers enabled
+Layered Audio Editing with Show Audio Track Layers disabled. All layers are folded into a single view.
+Flatten Audio Layers
+After working with Layered Audio Editing, it can be useful to create a “comp” (composite) of a 
+performance in order to have a single element that reflects the final desired result. Timeline > Flatten 
+Audio Track Layers allows you to create a single edit without layers where the clip boundaries are 
+preserved. Choosing this command will cut across each layered clip at the in/out points and flatten 
+them into a single layer.
+3825Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+After choosing Flatten Audio Layers, audio layers showing (so blank space above)
+If you are exporting to an AAF, you’ll want to turn off layered audio editing, as only the first, 
+lowest layer is exported. If you had already been using layered audio editing, you can first use 
+Flatten Audio Layers, then perform your AAF export. Keep in mind that if you have created any 
+layered crossfades, only fades on the incoming clip are retained.
+Switching Among Multiple Timelines
+Timelines can be organized like any other clip in the Media Pool. To open or switch among timelines, 
+use the following procedures. Each Timeline retains the view settings last made within it, including 
+track heights, zoom settings, etc.
+To switch timelines, do one of the following:
+  In the Edit, Cut, or Fairlight page Media Pool, double-click a timeline.
+  In the Edit page Timeline Viewer, choose a timeline from the Timelines dropdown menu at the top 
+of the viewer.
+  In the Color page, choose a timeline from the Timelines drop-down menu at the top of the viewer.
+  In the Fairlight page, choose a timeline from the Timelines dropdown menu to the left of the 
+transport controls.
+Toolbar
+The Toolbar has buttons that let you choose modes of functionality and other buttons that let you 
+execute commands such as placing markers and flags.
+Icons in the Fairlight Page toolbar when the Automation button is highlighted in the transport bar
+Timeline View Options dropdown menu:  Contains a variety of controls that allow 
+you to customize the display of clips and set navigation and scrolling options in 
+the Timeline.
+Grid View Options dropdown menu: Contains controls to customize the timeline grid, 
+allowing you to view reference lines or align clips to timecode or musical beat locations.
+3826Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Pointer Mode: The default mode in which you can move and resize clips in the 
+Timeline, roll edits, and do other basic editing tasks. While this mode can be used 
+with the pointer, it’s designed for letting you make automatic selections of clips at the 
+position of the playhead in selected tracks, using keyboard shortcuts or the Fairlight 
+Editing console.
+Range Mode: An editing mode in which you can select partial regions of one or more 
+clips for partial editing. It’s designed for letting you make automatic selections using In 
+and Out points to define regions of selected tracks, using keyboard shortcuts or the 
+Fairlight Editing console.
+Focus Mode: In Focus mode you can access Multi Tool behavior depending on 
+cursor position:
+The Selection tool (I-beam): Appears when you move the cursor over the upper 
+area of the waveform track “lane,” and lets you make time range selections of clips or 
+automation keyframe data (depending on the track view).
+The Hand tool: Appears when you move the cursor over the lower area of the 
+waveform lane, and lets you select a clip or clips by clicking, move them by dragging, or 
+apply Cut, Copy, and Paste operations. This tool is available in the other modes as well.
+The Trim tool (Up/Down arrows): Appears when you move the cursor close to the clip 
+gain line, and lets you trim the automaton curve for clip gain or keyframe levels. When 
+trimming an automation parameter, a tooltip shows the level along with the delta to the 
+original value. Trim tool cursors for trimming clip boundaries to trim clip start or end, or 
+perform rolling trims are also available. This tool is available in the other modes as well.
+Pencil: A tool that lets you write automation data using the pointer as a pencil. 
+The Pencil tool appears when automation is enabled.
+Razor (Scissors): Click to add a cut to every clip on an unlocked track that intersects 
+the position of the playhead.
+Snapping: Enables or disables clip snapping. When turned on, clip In and Out points, 
+markers, and the playhead all snap to one another for reference while you’re editing.
+Linked Selection: When you select an edit point with both video and audio 
+components, and Linked Selection is enabled, both the video and audio edit points 
+are selected, so when you apply a video transition to an edit, a crossfade is added to 
+the audio. 
+Also lets you link together any otherwise unrelated audio clips to perform edit 
+operations (for example, trimming) to any linked clips at one time. 
+Automation Follows Edit:  Enables or disables mix automation that is unique to 
+a timeline to be embedded into the clips so that when cutting and pasting new 
+instances of them in the Timeline they retain their levels, panning, filter settings, 
+etc. This is extremely useful when using multiple instances of the same audio clips 
+throughout an edit. 
+The Automation Follow Edit button appears when automation is enabled, and is 
+enabled by default.
+3827Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Flag Clip/Flag Colors dropdown menu:  Flags identify clips, and indicate all clips that 
+correspond to the same item of media in the Media Pool. Clips can have multiple flags. 
+Clicking the Flag button automatically adds a flag to whichever clip is currently selected 
+in the Timeline. A dropdown menu lets you choose flag color, and has a choice to clear 
+all flags from the currently selected clip (if one is selected) or clear flags from the entire 
+timeline (if no clip is selected).
+Add Marker/Marker Colors dropdown menu: Markers identify specific frames of 
+individual clips or timelines. If a clip is selected in the timeline, clicking the Add Marker 
+button adds a marker to the clip at the position of the playhead in the Timeline. If no 
+clips are selected, clicking the Add Marker button adds a marker to the timeline ruler at 
+the position of the playhead. A dropdown menu lets you choose marker color, and has 
+a choice to clear all markers from the currently selected clip (if one is selected) or clear 
+markers from the entire timeline (if no clip is selected).
+Transient Detection: Enables transient detection for all clips on a given track. Once 
+enabled, a transient button appears on tracks to enable the transients on a track’s clips 
+to be easily identified and navigated. When the Jump to Transient button is enabled, 
+the Up and Down arrow keys navigate to transients within a clip.
+Vertical Slider: Lets you adjust the vertical zoom level of tracks.
+Horizontal Slider: Lets you adjust the horizontal zoom level of the Timeline.
+Timeline View Options
+Selecting the Audio Timeline View options
+3828Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Track Display Options
+Video Tracks: This button lets you display or hide the video tracks in the current 
+Timeline, for use as a reference while you work. 
+Full Waveforms: This button lets you toggle full waveforms on and off, optionally hiding 
+the divider bar that keeps the waveform separate from the file name area of each audio 
+clip, so the waveform occupies the full space of each audio bar in the Timeline.
+Waveform Borders: This button lets you toggle waveform outlines on and off, drawing 
+a dark border around the edges of each waveform to make them easier to see. 
+Gain Line: This button lets you toggle the clip gain indicator line on and off. Also 
+available in the Fairlight Menu > Show Clip Gain Line.
+Navigation Options
+Jump to Clip: When toggled this lets you jump from clip to clip using the Up 
+or Down Arrow keys.
+Jump to Fade: When toggled this lets you jump from fade to fade using the Up or 
+Down Arrow keys.
+Jump to Marker: When toggled this lets you jump from marker to marker using the 
+Up or Down Arrow keys.
+Jump to Transient: When toggled this lets you jump from transient to transient using 
+the Up or Down Arrow keys. Transient Detection must be turned on in the Timeline and 
+the track for this navigation.
+Timeline Scrolling
+Fixed Playhead: This button lets you set the playhead to be fixed so that during 
+playback the tracks scroll past the playhead as it remains in place, which is useful when 
+working with the Fairlight control surface.
+Page Scrolling: This button lets you set the playhead to scroll to the end of the current 
+Timeline view and then start a new page at the end of the Timeline play. The rate of the 
+page turn is dictated by zoom level of the Timeline.
+No Scrolling: This button sets fixes the Timeline in place so that it will not update with 
+the playhead. Depending on the zoom level, it is possible that the playhead will play 
+offscreen with no timeline updating
+NOTE: These options are also available in the View menu > Timeline Scrolling.
+3829Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Scroller
+Video: This button lets you see video tracks scrolling in the bottom of the Fairlight 
+timeline with the option of low, medium, or high viewing of the video media immediately 
+surrounding the playhead.
+Audio 1: An audio scroll bar and zoomed-in visual reference for the audio media 
+immediately surrounding the playhead. A dropdown menu allows for the choice of what 
+audio track will scroll.
+Audio 2: An additional audio scroll bar and zoomed-in visual reference for the audio 
+media immediately surrounding the playhead. A dropdown menu allows for the choice 
+of what audio track will scroll.
+Zoom Presets
+Presets 1-7: These buttons let you choose from one of seven zoom levels.
+Customizing Zoom Presets
+Fairlight lets you customize any Zoom preset using the options available in the Timeline View 
+dialog, which is opened by right-clicking a preset button. 
+Timeline View dialog
+You can enter a unique preset name, which appears as a tooltip when you hover over the 
+corresponding preset button with the mouse cursor.
+Filling in the checkbox labeled “Preset Updates Dynamically” tells Fairlight to update and 
+save the preset in real time as the view settings change, based on the checkboxes you have 
+selected in the Controls section.
+Any preset can be set as the default Zoom setting.
+3830Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Grid View Options
+Selecting the Grid View options; 
+Timecode Time Scale options shown
+Edit Grid Options
+Show Grid: When toggled, this shows or hides the grid line on tracks 
+under the Timeline.
+Snap to Grid: When selected, inserting, moving, or trimming clips on tracks snap 
+to the nearest grid line.
+Time Scale Options
+Timecode: When selected, the grid follows Timecode according to the 
+selected resolution.
+Tempo: When selected, the grid follows bars and beats, according to the 
+selected resolution.
+Timecode Grid Resolution
+When the Timecode Time Scale option is enabled, the Grid follows the selected Timecode 
+Grid Resolution. The Timecode Grid resolution options include: 1 second, 1 Frame, 1/2 Frame, 
+and 1/4 Frame. 
+3831Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Tempo Grid Options
+Selecting the Grid View options;  
+Tempo Time Scale options shown
+The following Tempo Grid options determine grid behavior when the Tempo option 
+is selected:
+• Resolution: Lets you select the desired Grid resolution according to bars and beats: 
+Bar, 1/2 Note, 1/4 Note, 1/8 Note, 1/16 Note.
+• Tempo: Lets you enter the tempo in BPM.
+• Time Signature: Lets you select one of the following as the time signature: 4/4, 3/4, 6/8.
+• Song Start: Lets you enter the Song Start Timecode location.
+Setting the Tempo Grid Start
+To set the Tempo Grid start location:
+  Right-click at the desired location on the Timeline ruler.
+  Choose Set Tempo Grid start.
+  The first bar and beat of the tempo grid moves to that location. 
+Setting the Tempo Grid start location
+3832Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Setting the Tempo Grid from a Range Selection
+To set the Tempo value for the Tempo Grid from a range selection:
+  Make a range selection in the Timeline.
+  Right-click anywhere in the Timeline ruler, and choose Set Tempo Grid BPM from the contextual menu. 
+  In the resulting Tempo Grid Setup window, enter the number of bars in the selection.
+  If desired, select Set Start from Playhead.
+  Click Set Tempo From Range.
+  Close the Tempo Grid Setup window. The tempo in the Tempo Grid Options settings 
+updates accordingly.
+Tempo Grid Setup window
+TIP: When setting the tempo based on a range selection, choose a section of the music 
+where it is easy to count out the bars/beats to set the range.
+Customizing Clip Display in the Timeline
+Choose Fairlight > View Clip Info Display to open a dialog where you can customize what information 
+is shown at the bottom of each clip in the Fairlight timeline. This dialog has options for viewing no clip 
+name, the file name, or the clip name, and for choosing from among a variety of metadata that you 
+might want available to view as you work with clips in the Timeline.
+Selecting the audio clip view options
+3833Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Customizing the Timeline’s Display
+There are a variety of ways you can customize the Timeline to better see what you’re working on.
+Playhead Modes
+There are options for Page Scrolling (“Page”) and No Scrolling (“Disabled”) as outlined in the Timeline 
+View Options section above. There is also the option for turning on the Fixed Playhead mode when 
+you are not using Focus mode. This is available in the Timeline View Options dropdown menu, or 
+choosing View > Timeline Scrolling > Fixed. 
+When enabled, the playhead remains fixed in place, and the Timeline scrolls underneath it as you use 
+the transport controls or JKL to play, shuttle, or scrub forward or back. 
+NOTE: Fixed playhead scrolling is not currently available when using Focus mode.
+Also, please keep in mind that when you have changed DaVinci Resolve > 
+Keyboard Customization from the default DaVinci Resolve mapping to a different mapping, 
+many default key commands are altered. For instance, the Pro Tools Keyboard Customization 
+does not offer JKL transport.
+Visible Video Tracks
+A checkbox in the Timeline View Options dropdown menu of the toolbar lets you display small height 
+video tracks in the Fairlight timeline for reference. This can be very useful as you can see which 
+audio clips correspond to which video clips. The video clips can also be used as snapping targets for 
+positioning audio.
+When the Video Tracks option is on:
+  The Track Index can be used to choose which video tracks are visible. 
+  The video track(s) can be edited, both placement and clip trimming. 
+  Editing an embedded clip that contains both video and audio will add a clip with both audio and 
+video in the appropriate corresponding tracks.
+If the Video Tracks option is disabled, adding a clip with both video and audio to the timeline will add 
+only audio to the corresponding tracks.
+Showing video tracks on the Fairlight page
+3834Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Video and Audio Scrollers
+Checkboxes in the Timeline View Options let you optionally show one Video Scroller and up to two 
+Audio Scrollers at the bottom of the Fairlight timeline. 
+Video and Audio Scrollers at the bottom of the Fairlight timeline
+At the default Low zoom level, the Video Scroller provides a scrollable frame-by-frame filmstrip view of 
+the video of your program, where one frame of the scroller equals one frame of your video. 
+Each of the two Audio Scrollers, on the other hand, let you focus on a continuous waveform view of a 
+particular audio track. Choose which track is visible in an Audio Scroller via the dropdown menu in the 
+Timeline header. 
+Audio Scrollers showing the dropdown menu 
+that selects which track they display
+What Are They Used For?
+The Audio Scrollers always provide a zoomed-in view of specific audio tracks that you’re focused on, 
+regardless of the zoom level of the Timeline tracks above. This means you can focus on subtle details 
+of the audio of one or two tracks that you’re working on, while the rest of the Timeline shows you the 
+overall stack of tracks with clips that are playing together at that moment.
+Meanwhile, the Video Scroller always shows the exact frame of video that corresponds to the current 
+moment in time, so it’s an aid to precision editing involving frame -specific adjustments.
+Additionally, both the filmstrip and waveform viewers scroll continuously during playback, giving you a 
+preview of what visual actions and audio cues are coming a few moments forward in time that you can 
+refer to while performing automation or recording foley.
+3835Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Repositioning the Scroller Playhead
+While the scrollers are visible, the Scroller playhead can be dragged to the left or right in the Timeline 
+to give you more or less preview room to the right.
+Zooming the Video Scroller
+Right clicking on the Video scroller lets you choose a Low, Medium, or High zoom level. At Low, you 
+get a frame-by-frame view of the program that feels like scrolling a strip of film on a Steenbeck flatbed 
+editor. At Medium and High, you get a progressively abbreviated film strip that scrolls more quickly.
+Scrolling the Fairlight Timeline Using the Scroller Tracks
+Dragging the scroller tracks to the left or right smoothly scrubs through the Timeline in greater detail, 
+regardless of the zoom level of the Timeline tracks above.
+Mixer
+The Audio Mixer provides a set of graphical controls you can use to assign track channels to output 
+channels, adjust EQ and Dynamics, add filters and Fairlight FX, set levels and record automation, pan 
+stereo, surround and immersive audio, and mute and solo tracks.
+The Audio Mixer exposes two sets of channel strips with controls that correspond to the tracks in the 
+Timeline. By default, the leftmost set of channel strips expose one set of controls for each track in the 
+Timeline, while the rightmost set of channel strips expose another set of controls for each bus you’ve 
+created to manage signal flow from the audio tracks to submixes and desired outputs.
+TIP: You can right-click on the number at the top of mixer channel strip to copy/paste settings, 
+and also copy/paste settings within the mini views of the channel dynamics and EQ as well. 
+Also, effects plugins (Fairlight FX, AUs and VSTs) have local 3 dot Options menus at their top 
+right that allow you to copy/paste settings. 
+The Audio Mixer, with channel strips corresponding to the tracks in the Timeline
+3836Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+  Track color: Each track can be differently color-coded using the right-click contextual menu on a 
+track in the Timeline or Tracks Index, to help you keep organized.
+  Track number: The number of the Timeline track corresponding to each channel strip appears here.
+  Input: A dropdown menu that lets you patch inputs, busses, utility signals, and configure the input 
+settings of audio signals routed through Blackmagic Design or other hardware interfaces.
+  Track FX: This channel strip section offers specialized built-in Fairlight FX plugins, routed directly 
+from disk and then onwards to other effects processing. The available Track FX are the Voice 
+Isolation, Dialogue Leveler, and the new Dialogue Separator, Music Remixer, and Ducker plugins.
+Voice Isolation is a DaVinci Neural Engine AI effect that is only available in DaVinci Resolve Studio. 
+For details on Track FX, jump to this chapter: Fairlight FX .
+  Order: A dropdown menu that lets you choose the order of processing per track of the EQ, 
+Dynamics, and Effects.
+  Effects: Fairlight FX, VST, and Audio Unit effects that you apply to tracks from the Effects Library 
+appear here, with controls for enabling/disabling each effect, opening an effect’s floating user 
+interface or Inspector controls, and deleting that effect.
+  Effects In: A button to globally mute or enable all insert effects on a track (Fairlight FX, AU or VST). 
+Track FX and the built-in channel dynamics and EQ are not affected by this control.
+  Dynamics: Double-clicking exposes a set of dynamics controls with three sets of controls 
+corresponding to an Expander or Gate, a Compressor, and a Limiter that can be used separately 
+or in concert to manage the dynamics of the audio on that track.
+The channel strip Dynamics control window
+  EQ: Double-clicking exposes a four-band parametric equalizer, with additional High and Low Pass 
+filters, that has both graphical and numeric controls for boosting or attenuating different ranges 
+of frequencies of audio on each track. You can select from among four types of EQ filtering from 
+the Equalizer Type dropdown menu, with options for Earth (the default), Air, Ice, and Fire. These 
+four equalizer types affect the Curves aspect and Q-factor of the transfer function. Each band has 
+controls for the filter type (Bell, Lo-Shelf, Hi-Shelf, Notch), Frequency, Gain, and Q-factor (sharpness 
+of the band), with the available controls for each band of EQ change depending on the filter type.
+3837Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The channel strip EQ window
+  Bus Sends: Click the + sign to add bus sends. Bus sends are only available if there are two or 
+more available busses. Creating a bus send requires at least one additional bus other than the 
+main output bus.
+  Pan: A pan control compatible with stereo and surround panning. You can drag within this control 
+to adjust pan, or you can double-click to expose a pan window. What controls are available in the 
+pan window depend on the mapping of the audio track, but both stereo and surround panning 
+controls are available, with corresponding numeric controls.
+The Pan control window
+Option-double-clicking on the Pan control of the Mixer opens an alternate 3D Audio Pan window. 
+Whereas the regular Pan window lets you do stereo and conventional 5.1 and 7.1 surround panning, 
+the 3D Audio Pan window lets you do the kind of spatial audio positioning enabled by advanced 
+surround formats, such as Dolby Atmos, Auro 3D, and NHK 22.2.
+3838Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The 3D Pan window
+  Bus Outputs: These buttons let you assign a track or bus to one or more of the output busses.
+  VCA: These buttons let you assign that track’s channels to VCAs 1-10, or assign from the larger 
+pool of 128 total available VCAs via a secondary dialog box.
+  Track name: This mirrors the track name found in the header controls of the Timeline. You can 
+customize a track’s name in the Mixer by double-clicking and typing in the name field.
+  Arm, Solo, and Mute buttons:  Identical to the controls found in the track header controls of each 
+timeline audio track. Arm enables recording for a track. Solo lets you mute all other tracks in order 
+to play that track in isolation (along with any other Soloed tracks). Mute disables audio playback 
+from that track. These controls are also available in the Tracks Index.
+  dB display: Shows you the volume level, in decibels, that track is currently set to.
+  Automation Arm: Arm automation control per track. When enabled, will record automation in Latch 
+mode when the transport runs. The control also shows red when a fader is moved. Automation 
+can also be set to “Safe” or “Off” by right-clicking on this control.
+  Level Meter: This is a real time indicator showing a track’s signal level from -60db to 0db. 
+The display and decay characteristics for audio metering can be set in Project Preferences > 
+Fairlight > Audio Metering.
+  Fader: Each track’s main vertical faders let you adjust the level of that track and perform 
+automation recording. Double-clicking the fader handle will reset it to the default level of 0. 
+Holding the Shift key when adjusting a fader allows fine control of level with .1 dB resolution.
+TIP: You can quickly assign bus routing, VCAs, plugins, or enable/disable automation safe 
+on or off for a selected group of channel strips, or to all channel strips by holding down 
+the Option key (Mac) or the Alt key (Windows) for all selected tracks or Command-Option 
+(Mac) or Control-Alt (Windows) for all mixer channel strips prior to performing the operation. 
+These shortcuts can save a lot of time in your workflow.
+3839Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Monitoring Panel
+The Monitoring panel that runs along the top of the Fairlight page shows all of the audio meters 
+corresponding to the tracks in the Timeline, as well as the Master Output meter, Control Room meters, 
+and a video viewer.
+The Monitoring panel
+At left, a row of audio meters corresponds to the channel strips of the Mixer, one meter for every audio 
+track in the Timeline. Each track meter displays the number of channels that corresponds to that track’s 
+audio format, with mono tracks having a single audio meter, stereo tracks having two, 5.1 tracks having 
+six, and so on. All of these track and bus meters (with the exception of the Loudness meters) display 
+both peak and RMS (root mean square) levels against a dB scale.
+To the right of the Track meters are the Bus meters, where all busses appear separated by type, each 
+displaying a meter with the number channels that corresponds to the bus’s audio format. This way you 
+can see the sum of all tracks that have been routed to a particular bus. 
+The last set of meters, to the right of all others, are the Loudness meters, which consist of two sets of 
+meters and a numerical readout section. The Control Room meter reflects that main output level from 
+the program and the Loudness meter measures the mix’s loudness according to the user’s chosen 
+scale. This lets you keep track of the “integrated loudness” of the overall mix, which is the standard 
+that all contemporary mixing specifications refer to when specifying client deliverables.
+The height of the monitoring panel can be adjusted by dragging the bottom of the panel.
+Absolute and Relative Measurement Scales
+While some users prefer to measure their levels to correspond to a relative scale of “0,” similar to 
+a VU meter where the needle rides above the “0,” others want to see the absolute measure of the 
+amplitude in LUFS and true peak. By default, the Loudness meter is set to relative scale, but you now 
+have the option to choose between relative scale and absolute scale in the Loudness meter. 
+The option in the Loudness panel reveals the various measure 
+types as well as the option for absolute scale.
+3840Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Relative scale in the Loudness menu is relative to the selected scale, so a loudness unit of 0 
+corresponds to the target of the chosen measure type. For instance, if EBU R128 is selected, whose 
+target measure is -23dB LUFS, the “0” LU (Loudness Unit) is equal to -23dB. If ATSC A/85 is chosen, 
+whose target is -24dB, then that becomes the corresponding equivalent of the relative LU of 0.
+When using the absolute scale, the Loudness meter displays the increments to reflect the chosen 
+measure type. In absolute scale the EBU R128 meter will display -23 instead of the relative scale’s 0.
+When working with large track counts, you can right-click on the panel and see a contextual menu that 
+offers options for single or dual rows, as well as narrow or wide meters. You can also double click on 
+the bus master meters on the right side to access a double row view for them. 
+The double row Monitoring panel
+Viewer
+A small viewer at the far right of the Monitoring panel allows you to view video playback; it always 
+shows the matching video frame at the position of the playhead. 
+  The viewer can be resized within the monitoring panel by dragging the left or lower edge of 
+its window. 
+  A button in the lower right-hand corner lets you expand the Viewer into its own floating window. 
+  The Fairlight page has Cinema Mode viewing (Command-F) or through the Workspace menu, 
+Workspace > Viewer Mode > Cinema Viewer. 
+  You can also use the Clean Feed mode view on a separate monitor by choosing Workspace > 
+Video Clean Feed and choosing the target monitor for dedicated video playback.
+  You can choose to turn the Viewer off entirely in the Workspace > Fairlight Viewer submenu.
+The Monitoring panel
+3841Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Media Pool
+In the Fairlight page, the Media Pool serves as the repository of all audio clips in your project, both 
+clips that appear within the Timeline, and clips that you’ve added to your project but have not yet used. 
+When you record audio into the Timeline, the resulting clips appear in the Media Pool as well, for future 
+use. The Media Pool appears on all DaVinci Resolve pages, and contains all of the video clips and 
+timelines within your project. 
+The Bin list at the left shows a hierarchical list of folders called bins used for organizing your media, 
+which can also be used to organize your timelines. By default, the Media Pool consists of a single 
+bin, named “Master,” but you can add more bins as necessary to organize timelines and clips by 
+right-clicking anywhere in the empty area of the Media Pool and choosing Add Bin. You can rename 
+any bin by double-clicking on its name and typing a new one, or by right-clicking a bin’s name and 
+choosing Rename Bin. The Bin list can be hidden or shown via the button at the upper left-hand corner 
+of the Fairlight page toolbar.
+The Media Pool in Thumbnail mode showing audio clips
+The browser area to the right shows the contents of the currently selected bin in the bin list. 
+Every clip you import, every timeline you create, and every AAF, XML, EDL and other file 
+types you can import appear here. You can create or import as many timelines as you need 
+within a single project.
+As elsewhere, the Media Pool can be displayed in either Metadata view, Thumbnail view, or 
+List view. In List view, you can sort the contents by any one of a subset of the total metadata 
+that’s available in the Metadata Editor of the Media page. Of particular interest to audio 
+editors are columns for Clip Name, Reel Name, different timecode streams, Audio Channels, 
+Format, Audio Codec, Date Added, Flags, and Duration.
+3842Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+For more information on using all of the features of the Media Pool, jump to this chapter: 
+Adding and Organizing Media with the Media Pool . In the following sections, some key 
+features of the Media Pool are summarized for your convenience.
+Importing Media Into the Media Pool on the Fairlight Page
+While adding clips to the Media Pool in the Media page provides the most organizational flexibility and 
+features, if you find yourself in the Fairlight (or other) pages and you need to quickly import a few clips 
+for immediate use, you can do so in a few different ways.
+Add media by dragging one or more clips from the 
+Finder to the Fairlight page Media Pool (macOS only):
+1 Select one or more clips in the Finder.
+2 Drag those clips into the Media Pool of DaVinci Resolve, or to a bin in the Bin list.
+Those clips are added to the Media Pool of your project.
+Use the File > Import > Media command:
+1 With the Fairlight page open, choose File > Import > Media.
+2 Use the Import dialog to select one or more clips to import, and click Open.
+Use the Import Media command in the Fairlight page Media Pool:
+1 With the Fairlight page open, right-click anywhere in the Media Pool, and choose Import Media.
+2 Use the Import dialog to select one or more clips to import, and click Open.
+Those clips are added to the Media Pool of your project.
+For more information on importing media using the myriad features of the Media page, jump to 
+this chapter: Adding and Organizing Media with the M edia Pool.
+Media Pool Preview Player
+The Media Pool has a preview player at the top that provides a place to open selected source clips in 
+the Media Pool, play them, add marks to log them, and set In and Out points in preparation for editing 
+them into the Timeline via drag and drop. The Media Pool Preview Player effectively acts as a Source 
+monitor for editing in the Fairlight page.
+The preview player in the Media Pool
+3843Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+  Various viewing controls populate the title bar at the top. A dropdown menu at the upper left lets 
+you choose a zoom level for the audio waveform that’s displayed. To the right of that, a Timecode 
+window shows you the duration of the clip or the duration that’s marked with In and Out points. 
+Next to the right, a real-time performance indicator shows you playback performance. In the 
+center, the title of the currently selected clip is shown, with a dropdown menu to the right that 
+shows you the most recent 10 clips you’ve browsed. To the far right, a Timecode field shows you 
+the current position of the playhead (right-clicking this opens a contextual menu with options to 
+change the timecode that’s displayed, and to copy and paste timecode).
+  The center of the Media Pool Preview Player shows you the waveforms in all channels of the 
+currently selected clip, at whatever zoom level is currently selected.
+  Transport controls at the bottom consist of a jog bar for scrubbing, Stop, Play, and Loop buttons, 
+and set In and Out buttons.
+Bins, Power Bins, and Smart Bins
+There are actually three kinds of bins in the Media Pool, and each appears in its own section of the 
+Bin list. The Power Bin and Smart Bin areas of the Bin list can be shown or hidden using commands in 
+the Media Pool Options menu (…): Show Smart Bins and Show Power Bins. Here are the differences 
+between the different kinds of bins:
+  Bins: Simple, manually populated bins. Drag and drop anything you like into a bin, and that’s 
+where it lives, until you decide to move it to another bin. Bins may be hierarchically organized, so 
+you can create nested bins, one inside of the other, if you like. Creating new bins is as easy as 
+right-clicking within the bin list and choosing Add Bin from the contextual menu.
+  Power Bins: Hidden by default. Power bins are shared among all of the projects in your current 
+project library, making them ideal for shared title generators, graphics movies and stills, sound 
+effects library files, music files, and other media that you want to be able to quickly and easily 
+access from any project. You put whatever materials you want into Power Bins; it’s a manual 
+process. To create a new Power Bin, show the Power Bins area of the Bin list, then right-click 
+within it and choose Add Bin.
+  Smart Bins: These bins build “custom collections” of media that use metadata or analysis to 
+automatically populate the bins dynamically, meaning that the contents will change depending on 
+what the Smart Bin is set to focus on. For example, a sound effects Smart Bin will show only sound 
+effects, and the bin’s contents will grow or shrink depending on the number of effects files that 
+have been identified in the project, which may change over time. Smart Bins can allow very fast 
+and efficient organizing of project contents. 
+There are several automatically created Smart Bin types available (see Preferences > 
+User> Editing > Automatic Smart Bins).
+You can choose to have Resolve’s Audio Classification analysis categorize your files (automatically 
+creating “Collections” smart bins). Or, you can manually add metadata to your clips using the 
+Metadata Editor, adding Scene, Shot, and Take information, keywords, comments and description 
+text, and more to make it faster to find what you’re looking for when you need it. 
+You can create your own criteria for a Smart Bin. To create a new custom Smart Bin, make sure 
+the Smart Bin area of the Bin list is showing, then right-click within it and choose Add Smart Bin. 
+A dialog appears in which you can edit the name of that bin and the rules it uses to filter clips, then 
+click Create Smart Bin.
+NOTE: To view Smart Bins other than Keywords and Collections, you must first enable 
+any additional Smart Bin choices in Smart Bin Preferences > User > Editing > Automatic 
+Smart Bins.
+3844Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Showing Bins in Separate Windows
+If you right-click a bin in the Bin list, you can choose “Open As New Window” to open that bin into its 
+own window. Each window is its own Media Pool, complete with its own Bin list, Power Bins and Smart 
+Bins lists, and display controls. 
+This is most useful when you have two displays connected to your workstation, as you can drag these 
+separate bins to the second display while DaVinci Resolve is in single screen mode. If you hide the 
+Bin list, not only do you get more room for clips, but you also prevent accidentally switching bins if you 
+really want to only view a particular bin’s contents in that window. You can have as many additional 
+Bin windows open as you care to, in addition to the main Media Pool that’s docked in the primary 
+window interface.
+Filtering Bins Using Color Tags
+If you’re working on a project that has a lot of bins, you can apply color tags to identify particular 
+bins with one of eight colors by right-clicking any bin and choosing the color you want from the 
+Color Tag submenu.
+For example, you can identify the bins that have clips you’re using most frequently with a 
+red tag. A bin’s color tag then appears as a colored background behind that bin’s name.
+Once you’ve tagged one or more Media Pool bins, you can use the Color Tag Filter dropdown 
+menu (the dropdown control to the right of the Bin List button) to filter out all but a single 
+color of bin.
+To go back to seeing all available bins, choose Show All from the Color Tag Filter dropdown.
+Using color tags to 
+ identify bins
+Using Color Tag filtering  
+to isolate the red bins
+3845Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Sorting the Bin List
+The Bin list (and Smart Bin list) of the Media Pool can be sorted by Bin Name, Date Created, Date 
+Modified, in either ascending or descending order. Simply right-click anywhere within the Bin list and 
+choose the options you want from the Sort by submenu of the contextual menu.
+You can also choose User Sort from the same contextual menu, which lets you manually drag all bins 
+in the Bin list to be in whatever order you like. As you drag bins in this mode, a red line indicates the 
+new position that bin will occupy when dropped.
+If you use User Sort in the Bin list to rearrange your bins manually, you can switch back and forth 
+between any of the other sorting methods (Name, Date Created, Date Modified) and User Sort. 
+Your manual User Sort order will be remembered, making it easy to use whatever method of bin 
+sorting is most useful at the time, without losing your customized bin organization.
+Dragging a bin to a new position in 
+the Bin list in User Sort mode
+Filtering Clips With Audio in the Fairlight Page
+The Media Pool on the Cut, Edit, Color, Fusion and Fairlight pages can show Audio Only clips using 
+the Collections smart bin labeled “Audio Only” found in the Collections are of Smart Bins. This makes 
+it easy for you to find audio clips that you’re looking for, which may be hidden along with lots of video 
+clips in the same bin.
+Sort mode 
+The Audio Only  
+Smart Bin
+The Media Pool filter  
+options in the option menu
+3846Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+If you’d like to work with some additional options, the Media Pool in the Fairlight page also has the 
+ability to filter out audio-only clips, or video clips with audio, in the currently selected bin. To use this 
+feature, click the Option menu of the Media Pool and choose Show All Clips, Show Audio Only Clips, 
+or Show Clips With Audio, Show Audio Waveforms, and Show Non-Rectified Audio Waveforms. 
+Effects Library
+The Effects Library on the Fairlight page displays both the built-in Fairlight FX audio plugins that 
+accompany DaVinci Resolve on macOS, Windows, and Linux, as well as whatever Audio FX are 
+available on your workstation. 
+  Fairlight FX are built-in audio processing effects that are fully cross-platform on all platforms 
+DaVinci Resolve supports. 
+  On macOS and Windows, DaVinci Resolve supports the use of third-party VST audio plugins. 
+  On macOS, DaVinci Resolve supports Audio Unit (AU) audio plugins.
+Once you install third-party effects on your workstation, they appear in this panel of the Effects 
+Library alongside the Fairlight FX that are always available. Audio plugins let you apply effects to 
+audio clips or as a real time process on an entire audio track (affecting all clips on that track), to 
+add basic dynamics or tonal processing compression, limiting or EQ, noise reduction, or creative 
+spatial effects like delay or reverb.
+The Effects Library 
+Similar to the Media Pool, the Effects Library’s Bin list can be opened or closed using a button 
+at the top left.
+3847Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Effects Library Favorites
+To save an effect as a Favorite:
+  Hover over the far right of any effect to see a star
+  Click on the star to add the effect to the Favorites effects list. 
+  Favorites appear in a separate area on the lower left next to the Effects Library Bin list.
+Stars indicate a flagged favorite effect, all favorites are currently filtered
+NOTE: Items that are set as Favorites in the Effects Library list will also appear at the top of 
+the Mixer’s Effects dropdown menu effects list.
+ADR
+The Fairlight page of DaVinci Resolve has a sophisticated, yet intuitive, interface for doing “ADR” 
+(Automated Dialog Replacement). Comprehensive cue list management, industry-standard audio 
+beeps and visual cues, sophisticated take management with star ratings and layered take organization 
+help you manage your work while getting the best parts of each performance.
+When open, the ADR interface consists of three panels to the left of the Timeline: a List panel, a 
+Record panel, and a Setup panel.
+The List Panel
+This is where you create a list of cues you need to re-record, either from within the Fairlight page, or 
+imported from a .csv file that someone provides you. It presents controls for adding, editing, importing, 
+and exporting cues that you want to record.
+The List panel of the ADR interface
+3848Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Record Panel
+This is where you actually run the ADR recording session you’ve set up, using the dialog cues you’ve 
+put into the Cue list. It presents controls for displaying and selecting which cues to record, previewing 
+and initiating recording, and adding metadata to rate the different takes you’ve recorded and to keep 
+track of which cues have been completed.
+The Record panel of the ADR Interface
+The Setup Panel
+The Setup panel is where you configure your ADR session. Choose your audio input, your record track 
+and what tracks to monitor. Then access beeps, video streamers and onscreen text that the actors will 
+see on the video output display to help them keep their performance in sync.
+The Setup panel of the ADR interface
+3849Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+For more information on using the ADR panel, jump to this chapter: ADR (Automated Dialog 
+Replacement).
+Sound Library Browser
+A Sound Library panel is available from the Interface toolbar for browsing sound effects libraries 
+that you have available to you, on your system or on network storage you may be connected to (for 
+example, a SAN). It includes the capability of scanning specified file paths to catalog available sound 
+files and their metadata, storing this data within the currently selected project library (or another 
+project library that you select) to use when searching for the perfect sound effect within your library. 
+Once you’ve cataloged your sound effects collection, it’s easy to search for sounds, preview what’s 
+been found in the list, and edit the one you like best into the Timeline.
+TIP: You can download the Fairlight sound library, a royalty-free collection of over 
+500 professionally recorded foley sounds that you can use in your own projects, which are 
+directly downloadable from the Sound Library panel. The Fairlight sound library features 
+everything from atmospheric ambient sounds to foley sounds such as foot steps, hits, effects, 
+and more. This free sound library is designed to work with the Fairlight FX Foley Sampler 
+plugin, which lets you use a MIDI keyboard to trigger sounds so they can be recorded at 
+precisely the right time in your program.
+The Sound Library panel
+3850Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Library Controls
+Clicking the Library button (to the right of the Search field) reveals a menu that lets you choose which 
+project library to use for searching (and cataloging) sound effects collections. Each network project 
+library can have a different catalog.
+NOTE: The Sound Library results pane will be empty until a search is made.
+The Sound Library is capable of using the Mapped Mount option in the Media Storage panel 
+of the Preferences, in order to access sound effects located on remote volumes using other 
+operating systems.
+Choosing a library to search
+To catalog all audio files within a given file path for searching using the Sound Library:
+1 Using the Project Manager, create an empty network project library to store the sound 
+effects catalog.
+2 Open a project, open the Edit or Fairlight pages, then open the Sound Library.
+3 (Optional) Click the Library button (to the right of the Search field), and select the project library 
+you created using the dropdown menu that appears. The current project library is selected by 
+default. If you’re working within a local project library instead, the top compatible project library in 
+the list will be the default.
+4 Do one of the following:
+a) If you’ve not yet connected a library of sound effects, an Add Library button appears in the 
+center of the Sound Library. Click this button, and from the file dialog that appears, select the 
+top-most directory of a file path that contains sound effects; if you’ve selected a directory with 
+subdirectories inside, each subdirectory will be examined for content.
+b) If you’re adding more sound effects to an existing library, then click the Option menu and 
+choose Add Library. From the file dialog that appears, select the top-most directory of a file 
+path that contains sound effects; if you’ve selected a directory with subdirectories inside, each 
+subdirectory will be examined for content.
+5 Click Open.
+A progress bar will show you how long the operation will take. When you’re finished, a dialog will 
+appear letting you know how many clips were added to the current library.
+3851Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Display Controls and the Search Field
+The Sound Library title bar has controls for sorting the sound effects list, showing it in List or Icon view, 
+and an Option menu with various other settings and commands.
+Display controls let you choose how the contents 
+of the Sound Effects list are viewed
+Underneath, a text field lets you enter search terms, while a dropdown menu to the right 
+lets you choose whether to search the current project library for sound effects by name, 
+description metadata, or all.
+The Search field and Filter By menu
+To search for a specific sound effect and edit it into the Timeline:
+  Type a search term into the Search field. The case of search terms is ignored, except for 
+boolean operators.
+To help you to eliminate false positives, the search field supports different kinds of searches, 
+such as literal searches, and/or/not boolean searches, wildcard searches, and ranges of 
+characters. 
+NOTE: If you want to perform Boolean searches, the Boolean operators must be typed in all 
+upper caps, such as “AND,” “OR” and “NOT.” If lower case is used, “and,” “or” and “not” will be 
+treated as search terms but as regular words.
+Or/And/Not Searches
+Simply typing words separated by a space is treated as a series of OR searches for each word 
+independently of one another, either literally or as part of another word. For example, if you type either 
+of the following:
+car door 
+car OR door
+both yield the same results. Every sound effect in your library containing either the letters “car” 
+or “door” (or both) will appear, whether these letters appear independently, or within other words. 
+Results will include files such as “CarExDoorClose,” “Doormouse_Squeak,” “Carburetor dropped 
+on cement,” and “Carpet Shake.”
+3852Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Using AND (it must be upper caps) lets you specify multiple criteria for a search, when each file 
+that’s returned should contain every word you type somewhere within, in any order. For example, 
+if you type:
+car AND door
+every sound effect in your library containing both the strings “car” and “door” will appear, 
+even if these words appear either singly, in combination, or within other words, such as 
+“NewCarDoorSlam” and “Carpet_Footsteps_Indoors,” and “GarageDoorHitsCar.”
+Using NOT lets you omit sound effects that have a particular word. For example, if you type:
+car NOT door
+only sound effects with “car” will appear, and all sound effects with “door” will be omitted.
+Literal Searches
+Using quotations specifies a literal search for only the specified term, separated from other text by a 
+space. For example, if you type:
+“cat”
+every sound effect in your library with the standalone word “cat” appears. Sound effects with 
+“cats” and “caterpillar” will be omitted. Results will include “Space cat drone” or “Cat meowing.”
+Wildcard and Range Searches
+The * (asterisk) specifies a wildcard search of any number of characters. Adding an * between two 
+search terms identifies any sound effect with the two search terms connected by any number or 
+combination of characters with no spaces (even no characters). For example, if you type:
+close*door
+results include “Door-Wood Cheap-Wooden-Closet-Door-Kick-In-Flimsy-Rattle,” 
+“ElevatorCabinCloseDoor,” and “LatchSwingCloseSqueakDoorSecur.” If you instead type:
+door*close
+results include “DoorHvyMetalCloseSlam,” “DoorLidWoodenChestCloseAntique,” and 
+“ElevatorDoorCloseSlam.” If instead you type:
+c*r
+results include “lectrohummin,” “KiaShumaEXTBootCloseTrunkaka,” and “Ambience with 
+Piana, Louder.”
+The ? (question mark) specifies wildcard search specifying only a single character. The number 
+of question marks you type specifies how many characters of wildcard searching you want to 
+perform. For example, if you type:
+door?close
+you may get no results at all, unless you have a sound effect named “door-close.” However, 
+if you type:
+door????close
+results include “DoorWoodClose” since the word wood is four letters, matching the number of 
+wildcard letters you’ve specified.
+TIP: Typing “***” will show all of the files in your Sound Library
+3853Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Preview and Audition Controls
+Selecting an item in the Sound Effect list loads it into the preview player where you can play it or 
+audition it in your timeline using the controls underneath the search field.
+  Clip name: The name of the current clip you’ve selected.
+  Next/Previous buttons:  Two buttons let you select the next or previous sound effect clip in the 
+Sound Effect list.
+  Duration display: Shows the duration of the current clip, or of the section of the clip marked with 
+In and Out points.
+  Playhead timecode display:  The playhead’s current position.
+  Waveform overview display: The waveform of the entire sound effect appears here, providing a 
+zoomed out view of the selected clip. All channels are summed together in this display.
+  Zoomed in waveform display: A zoomed-in section of the selected clip that lets you see more 
+waveform detail for setting In, Out, and Sync points.
+  Jog bar: Lets you navigate through or scrub around the clip.
+  Transport controls: Play, stop and loop buttons let you control playback, although you can also 
+use the space bar and JKL controls. Right-click the Stop button to switch it into “Stop and Go to 
+Last Position” mode.
+  Marking controls: The Sync Point button lets you mark a specific frame on the sound effect that 
+you want to sync to the Timeline’s current playhead position when you use the Audition controls. 
+The In and Out buttons let you mark which portions of the sound effect clip you want to edit into 
+the Timeline.
+  Audition controls: The Audition button puts you into Audition mode, where the currently selected 
+sound effect clip is automatically placed at the position of the playhead in the currently selected 
+Timeline track. You can then move over to the timeline and listen to the clip in your mix. Cancel 
+and Confirm buttons let you choose whether you want to remove the clip from the Timeline and try 
+again with another clip, or leave the sound effect clip in.
+To audition clips you’ve selected in the Sound Library in the Timeline:
+1 Select a sound effect clip you’ve found from the list that you want to audition in the Timeline.
+2 (Optional) In the Sound Library, use the scrubber bar to move the playhead to the part of the sound 
+effect that you want to sync to, and click the Sync Point button to place a sync mark on that clip. 
+For example, if you’re syncing the sound effect of a car door closing, you might sync the first frame 
+of the door fully closed to the peak of the “slam” sound effect, rather than any door squeaking 
+earlier in the sound effect.
+3 (Optional) Set In and Out points to define the range of the sound effect you want to potentially use.
+4 Select a track you want to preview the sound effect in by clicking its track header or Mixer 
+channel strip.
+5 Position the playhead at the place in the Timeline you want to place your clip.
+6 Click the Audition button in the Sound Library. That clip now appears, temporarily, in the Timeline, 
+and you can play through that section of the Timeline to see how you like the sound effect in 
+context with the rest of the mix.
+7 If you like the sound effect, click Confirm to keep it in the Timeline. If you don’t, click Cancel, and it 
+will disappear from the Timeline.
+NOTE: In order Use the Audition function, a track has to be selected first. 
+3854Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Additionally, if you select another sound effect after auditioning, without first confirming the prior 
+sound, the Audition process is cancelled, and the prior sound is removed from the timeline. 
+Sound Effect List
+All sound effect clips that match the current search criteria appear in this scrollable list. Double-clicking 
+anywhere on an item of this list plays that sound effect in its entirety.
+  Clip Name: The name of that sound effect file in the storage system.
+  Description: Any metadata that’s embedded within the files of professionally created sound effect 
+libraries appears here.
+  Duration: The duration of that sound effect file.
+  Audio Channel: The number of channels in that sound effect file.
+  Star Rating: A clickable control you can use to rate sound effects within DaVinci Resolve. 
+Star rating information is not saved outside of DaVinci Resolve.
+  Waveform: The overall waveform of the entire sound effect library is stretched or compressed 
+within the available width of the Sound Library, regardless of the actual duration of each clip.
+Index
+The Index provides a handy interface for listing all of the clips in the current edit, all the tracks in the 
+current Timeline, and all the markers in the current Timeline. Using these lists, multiple items can be 
+selected, tracks can be managed, and marker notes can be consulted with ease. Each of these three 
+categories of information is displayed in separate panels: the Edit Index, Tracks, and Markers.
+Edit Index
+Displays the Edit Index as seen in the Edit page. Each audio clip in the currently open Timeline 
+corresponds to a row in the Edit Index, with columns for video track, Source In and Out, Record In and 
+Out, Name, and other descriptive metadata. All selected clips (including clips that are automatically 
+selected because they intersect the playhead) are selected in the Edit Index. The Option menu lets 
+you filter the Edit Index by various criteria, for example showing only clips with a particular color of flag, 
+marker, or color, only clips with speed effects, only clips with audio filters, or compound audio clips.
+The Tracks panel shows a row of information for each of the tracks in the Timeline
+3855Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Tracks
+Every track in the currently open Timeline corresponds to a row of controls and information in this 
+panel. From left to right, each track has a color control, a visibility control, a number, a name, track 
+controls, a format, ADC, Tags, and, if a VCA is used, the number of that VCA group. These controls 
+can be used to hide or show tracks, color code them, rename them, turn track controls on singly or by 
+dragging over several at a time, change their format, add to (or remove them from) the audio monitor 
+list, and rearrange them (by dragging one or more rows up and down this list) and toggle the automatic 
+delay compensation (ADC) on/off (on by default).
+The Tracks panel shows a row of information for each of the tracks in the Timeline.
+NOTE: The ADC column (automatic delay compensation) has a check box allowing the 
+enabling of ADC on a track-by-track basis.
+Audio Monitor Checkbox
+A monitor checkbox appears for each bus or track in the Tracks list. When checked, that track or 
+bus will appear in the Audio Monitoring dropdown menu as a choice for monitoring. All busses are 
+checked on by default, and will appear in the list unless unchecked here.
+MPEG-H Options in the Tracks Panel
+If you have MPEG-H enabled for immersive audio authoring in the preference pane of Video and 
+Audio I/O, additional columns appear in this panel.
+These columns include:
+  Track Type: Allows definition of either a static component or a dynamic object. When dynamic is 
+selected, the dynamic track-level pan automation from that track is also exported. Only a track can 
+be set to dynamic. 
+  Kind: A content type label, such as Mixed content, Music, Dialogue, Effect, etc. When Kind is 
+defined for a bus (rather than the default state of Undefined), that bus is automatically bounced 
+during the export process. 
+3856Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+When MPEG-H is enabled, the Tracks panel shows additional columns of 
+metadata information for defining each track in the Timeline.
+  Language: The content-specific language for that track. 
+Switch Group: Allows the track to be assigned to a user-defined switch group. A switch group 
+allows the track to be grouped together with other tracks in the final content, forming a selectable 
+item when rendered. For example, a switch group of dialogue, containing an English and a 
+Chinese language track, could allow the user to select between these languages on playback. 
+In order to define a switch group, click that track’s cell in the Switch Group column, and 
+choose “Sw Groups…” to open the Switch Groups Manager window, which lets you create new 
+switch groups.
+ 
+The Switch Group Manager
+Once one or more groups has been created, they’re available for selection in the dropdown menu 
+of any cell in the SW Groups column. This lets you quickly make a variety of custom assignments.
+The dropdown in the SW Group column
+  Presets: Allows a track to be assigned to a user-defined preset. For example, a Bed Mix and 
+Language switch group could form one preset, while the same tracks and a spoken subtitle could 
+form another. In order to define a Preset, click that track’s cell in the Presets column, and choose 
+“Presets…” to open the Preset Manager window, which lets you create new Presets. 
+3857Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Preset Group Manager
+Once one or more presets has been created, they’re available for enabling in the dropdown menu 
+of any cell in the SW Groups column. Any track can be added to multiple presets, so the Presets 
+dropdown contains one checkbox per preset so you can make multiple assignments.
+The dropdown in the Presets column
+Once configured, the metadata from these presets form how the content is exported in the 
+final deliverable, so there will be a set of presets that contain all configured components and 
+switch groups.
+3858Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Markers
+The markers panel can be displayed in either thumbnail or list mode. In thumbnails mode, each marker 
+in your timeline corresponds to a thumbnail displaying the timecode of its location underneath it, and 
+the color of the marker to the left of the timecode location. In list view, each marker displays a row with 
+the following information; marker number, frame (showing a thumbnail), marker name, start timecode, 
+end timecode, duration, marker color, and notes.
+The Markers panel shows a row of information for each of the markers in the Timeline.
+3859Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Inspector
+The Inspector’s Audio, Effects, and File panels on the Fairlight page offer features for working with 
+selected tracks, buses, and clips on the Audio Timeline. 
+TIP: You can make “granular” adjustments to virtual sliders by holding down the Option or 
+Shift key while clicking in and dragging left or right within the numerical value field.
+Fairlight page - Inspector - Audio tab
+3860Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Audio Tab
+The Audio tab lets you adjust the volume level of a selected track and apply and adjust Track FX.
+When working with audio clips on the Audio Timeline or Media Pool, you can adjust the volume level 
+and pan setting of a selected clip, apply and adjust a selection of Fairlight FX and EQ, and raise or 
+lower the clip’s pitch.
+The Effects Tab
+Audio Effects added to a track or bus via the Effects section of its Mixer channel strip or to a Timeline 
+clip from the Effects Library will appear in this panel.
+The File Tab
+This panel lets you view and edit the metadata and configuration of selected Timeline or Media 
+Pool clips.
+For details on the Inspector for the Fairlight page, jump to this chapter: The Fairlight Inspector .
+Clip Mode vs. Track Mode
+The Inspector includes a Clip Mode and Track Mode button to eliminate confusion about whether your 
+parameter property changes in the Audio tab are applied to an audio clip or a track. 
+The Clip Mode button (circled)
+The Track Mode button (circled)
+  Selecting an audio clip in the Media Pool or on the Timeline activates the Clip Mode button, and 
+the clip name appears at the top of the Inspector, to the right of the Track Mode button.
+  Clicking the Track Mode button while a Timeline clip is selected causes subsequent changes 
+in the Audio tab to apply to the corresponding Mixer channel. The clip name at the top of the 
+Inspector will switch to the track name.
+For details on the Fairlight Page Inspector, jump to this chapter: The Fairlight Inspector .
+3861Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Test Tone Settings for Generating Tone, 
+Noise, and Beeps
+The Fairlight page has a general purpose oscillator, the settings of which you can customize by 
+choosing Fairlight > Test Tones Settings. This opens the Test Tones Settings window that you can 
+configure to generate tones, noise, or beeps using five sets of controls:
+  Enable/Disable Test Tones toggle: Lets you turn the Oscillator on or off system-wide.
+  Frequency control: Sets a custom frequency of oscillating tone, from 20 Hz to 15kHz. 
+Defaults to 1kHz.
+  Frequency buttons: Lets you quickly select 100, 440, 1K, or 2K preset tones, or a continuous rising 
+sweep of frequencies from 20 Hz to 15kHz.
+  Noise type buttons: Two buttons let you choose from White noise or Pink noise.
+  Level dial: Sets the output level for the tone or noise, from –50dB to +10dB. Defaults to –15 dB.
+You can set up the Oscillator to output whatever kind of tone or noise you require, and then 
+patch it to tracks for recording tones, or patch it to audio outputs for calibrating speakers. If 
+you use the beep options of the ADR panel, those are performed via the Oscillator.
+To play the Test Tone out of your speakers:
+1 Choose Fairlight > Patch Input/Output to open the Patch Input/Output window.
+2 Choose System Generator from the Source dropdown menu, and choose Audio Outputs from the 
+Destination dropdown menu.
+3 At the left, click the button of what you want to output, Osc (Oscillator) or Noise.
+4 At the right, click the connected audio outputs that you want to patch to, and click Patch. Tone or 
+noise should immediately start playing out of your configured speakers. Depending on any 
+particular track’s I/O settings, if you have patched the Osc through a track you may need to 
+either Arm the track by pressing the R (record) button, or in the channel’s Path Settings press the 
+Thru button, to have the signal pass through for output monitoring.
+5 To stop, select one of the patched buttons, and click Un-Patch.
+To record a tone or noise from the Oscillator to an audio track:
+1 Choose Fairlight > Patch Input/Output to open the Patch Input/Output window.
+2 Choose System Generator from the Source dropdown menu, and choose Track Input from the 
+Destination dropdown menu.
+3 At the left, click the button of what you want to output, Osc (Oscillator) or Noise.
+4 At the right, click the connected audio outputs that you want to patch to, and click Patch. Close the 
+Patch Input/Output window.
+5 Click the Arm Record (R) button in the track header of the track you patched the Oscillator to. 
+If your Main is properly patched to your outputs, you should hear the tone or noise, and that track’s 
+audio meter should reflect the level being output by the Oscillator.
+6 Click the Record button of the transport controls to initiate recording of that tone to the patched 
+track. Click the Stop button or press the Spacebar to halt recording when you’re done.
+3862Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Working with Timecode
+Fairlight includes synchronization options that let you configure DaVinci Resolve to either chase and 
+sync to an external device or another application or generate and transmit timecode as an audio signal 
+so an external device can follow your Timeline. 
+You can access these settings by clicking the Fairlight menu and choosing Synchronization Settings. 
+Fairlight Synchronization settings 
+LTC and MTC Chase Sync
+LTC Synchronization
+If, for example, you want to configure Fairlight to chase and sync to either an external device or 
+computer system:
+1 Enable External Sync.
+2 Choose the Timecode option from the Source dropdown.
+3 Select an appropriate audio input on your audio interface from the Timecode Audio 
+Input dropdown.
+4 If needed, set your SMPTE offset. Otherwise, leave it set to +00:00:00:00.
+5 Begin playback on the external device. Your mix in Fairlight will play back in sync with the 
+external device. 
+External Sync via LTC enabled 
+3863Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+MTC Synchronization
+To Configure Fairlight to chase and sync to either an app on your computer, such as a DAW, or an 
+external device that can transmit MIDI timecode:
+1 Enable External Sync.
+2 Choose the MIDI Timecode option from the Source dropdown.
+3 Select the appropriate MIDI port from the MIDI Timecode Port menu. For example, if you want to 
+sync DaVinci Resolve to a DAW on your computer, choose IAC Driver Bus 1.
+4 If needed, set your SMPTE offset. Otherwise, leave it set to +00:00:00:00. 
+5 Begin playback on the external device or DAW, and the audio from Fairlight will play back in time.
+External Sync via MTC enabled
+Status
+This section of the Synchronized Settings dialog provides real-time information about the current 
+synchronization status during playback. 
+  Incoming Timecode: During playback, this field continually updates with the current timecode 
+transmitted to DaVinci Resolve.
+  Transport Status: This indicator turns green to reflect stable synchronization during playback.
+  Timecode Freewheel: When this checkbox is filled in, Fairlight will generate its own timecode 
+for a short time in case of issues with the incoming timecode. This process maintains stable and 
+uninterrupted synchronization. 
+Sync Status pane
+3864Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Generating Timecode
+To generate and transmit timecode as an audio signal from your audio interface to an external device 
+or application:
+1 Switch on Generate Timecode.
+2 Select the audio interface output from the Interface Output dropdown you want to transmit the 
+timecode audio through.
+3 Begin playback of your mix in Fairlight. DaVinci Resolve will continue sending the timecode audio 
+signal to the destination until you click the Stop button. 
+Generate Timecode enabled
+TIP: If you’re using a Fairlight SX36 audio interface, the signal can be used to synchronize 
+another DaVinci Resolve system or any system that can use timecode audio as a reference. 
+Pro Tools AAF Import
+DaVinci Resolve can import AAF projects and media from Pro Tools, enabling you to move an audio 
+project from a Pro Tools workstation to a Fairlight workstation. AAF import supports the import of 
+embedded audio and track automation. 
+To do so choose File > Import Timeline > Import AAF/EDL/XML.
+Dual-Monitor Layout
+The Fairlight page has a dual-monitor layout that provides maximum space for the mixer and audio 
+meters on one screen and a full-screen timeline on the other. If you have an single ultra-wide monitor, 
+you can also use the dual-monitor layout, and DaVinci Resolve will scale the interface as if you had two 
+normal monitors side by side.
+To enter dual screen mode:  Choose Workspace > Dual Screen > On.
+3865Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+The Fairlight page in dual screen mode
+To switch which UI elements appear on which monitors: Choose Workspace > Primary Display 
+> Display 1 or Display 2, which reverses the contents of both monitors in dual screen mode.
+Customizing the Fairlight Page
+The default layout is quite efficient for a number of tasks on most displays. You can always return 
+to the default layout by choosing Workspace > Reset UI Layout. However, the Fairlight page can be 
+customized to create more room for specific areas of the interface to accommodate different tasks.
+3866Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+To resize any area of the Fairlight page:
+  Drag the vertical or horizontal border between any two panels to enlarge one and shrink the other.
+To resize the height of individual audio tracks:
+  Move the pointer to the bottom border of any audio track header, and when it becomes a resize 
+cursor, drag that border up or down to resize that track. Each track can have an independent size 
+when you do this. 
+To resize any column of the Index: 
+  Move your pointer over the divider between any two columns and drag when the horizontal resize 
+cursor appears.
+To rearrange Index columns: 
+  Drag the header of any column to the left and right to move that column.
+NOTE: if you want to retain the height view set for your tracks when a project is closed and 
+re-opened, right-click on the track header and choose “Lock Track Height to.” You can 
+choose “Custom” as the size for any track height you may want other than standard sizes. 
+TIP: You can also use the option key to adjust heights for all selected tracks or 
+Command-option to adjust all selected tracks.
+Fairlight Configuration Presets
+You can store and recall complete configuration presets for the Fairlight page, or individual areas of it, 
+using the Presets Library functions, found in Fairlight > Presets Library. 
+For more more information on using the Presets Library, jump to this chapter:  
+Setting Up Tracks, Busses, and Patching .
+3867Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Undo and Redo in DaVinci Resolve
+No matter where you are in DaVinci Resolve, Undo and Redo commands let you back out of steps 
+you’ve taken or commands you’ve executed, and reapply them if you change your mind. DaVinci 
+Resolve is capable of undoing the entire history of things you’ve done since creating or opening a 
+particular project. When you close a project, its entire undo history is purged. The next time you begin 
+work on a project, its undo history starts anew.
+Because DaVinci Resolve integrates so much functionality in one application, there are three separate 
+sets of undo “stacks” to help you manage your work.
+  The Media, Edit and Fairlight pages share the same multiple-undo stack, which lets you backtrack 
+out of changes made in the Media Pool, the Timeline, the Metadata Editor, and the Viewers.
+  Each clip in the Fusion page has its own undo stack so that you can undo changes you make to 
+the composition of each clip, independently.
+  Each clip in the Color page has its own undo stack so that you can undo changes you make to 
+grades in each clip, independently.
+In all cases, there is no practical limit to the number of steps that are undoable (although there 
+may be a limit to what you can remember). To take advantage of this, there are three ways 
+you can undo work to go to a previous state of your project, no matter what page you’re in.
+To simply undo or redo changes you’ve made one at a time:
+  Choose Edit > Undo (Command-Z) to undo the previous change.
+  Choose Edit > Redo (Shift-Command-Z) to redo to the next change.
+You can also undo several steps at a time using the History submenu and window.
+To undo and redo using the History submenu:
+1 Open the Edit > History submenu, which shows (up to) the last twenty things you’ve done.
+2 Choose an item on the list to undo back to that point. The most recent thing you’ve done appears 
+at the top of this list, and the change you’ve just made appears with a check next to it. Steps 
+that have been undone but that can still be redone remain in this menu, so you can see what’s 
+possible. However, if you’ve undone several changes at once and then you make a new change, 
+you cannot undo any more and those steps disappear from the menu.
+The History submenu, which lets you undo several steps at once
+3868Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Once you’ve selected a step to undo, the menu closes and the project updates to 
+show you its current state.
+To undo and redo using the Undo window:
+1 Choose Edit > History > Open History Window.
+2 When the History dialog appears, click an item on the list to undo back to that point. Unlike 
+the menu, in this window the most recent thing you’ve done appears at the bottom of this list. 
+Selecting a change here grays out changes that can still be redone, as the project updates to 
+show you its current state.
+The Undo history window that lets you browse the 
+entire available undo stack of the current page
+3 When you’re done, close the History window.
+3869Fairlight | Chapter 170 Using the Fairlight Page
+FAIRLIGHT
+Chapter 171
+Setting Up Tracks, 
+Busses, and Patching
+One of the first things you need to do when you’re setting up a new project for 
+mixing in the Fairlight page is to define the audio tracks and busses you’ll need to 
+route and combine the elements of your mix. 
+This chapter covers how to create audio tracks and how to use busses to manage your mixes in the 
+most efficient possible way. However, the Fairlight page gives you the flexibility to add or change 
+your set up at any time; you can also concentrate on being creative and deal with any required 
+housekeeping as your mix evolves.
+Fairlight’s FlexBus structure supports bus-to-bus, track-to-bus, or bus-to-track signal routing, 
+along with expanded Dolby Atmos capabilities, including import, export, and manipulation of 
+Atmos ADM files.
+Contents
+Audio Tracks ������������������������������������������������������������������ 3871
+What Is a Bus? �������������������������������������������������������������� 3872
+Surround Panning and Bussing  �������������������������� 3872
+Bus to Bus Routing and Mixing ����������������������������  3872
+Using Legacy Fixed Bussing  ��������������������������������� 3873
+Busses in Nested Timelines  ���������������������������������� 3874
+Exposing Bus Tracks in the Timeline  ����������������� 3874
+Controlling Signal Flow  ������������������������������������������� 3874
+Defining Audio Track Types ����������������������������������� 3874
+Rearranging Tracks ���������������������������������������������������� 3876
+Duplicating Tracks ������������������������������������������������������ 3876
+Deleting Tracks ������������������������������������������������������������ 3876
+Disabling Tracks ���������������������������������������������������������� 3877
+Changing Track Type ������������������������������������������������ 3878
+Link Grouping ��������������������������������������������������������������� 3878
+Working Separately with 
+Multichannel Audio File Elements  ��������������������� 3880
+Creating Busses ��������������������������������������������������������� 3880
+Assigning Busses  ������������������������������������������������������  3883
+Bus Assignment Using the Mixer  �����������������������  3883
+The Bus Assign Window �����������������������������������������  3883
+Setting Signal Paths  ������������������������������������������������� 3885
+Using the Patch Input/Output Window ������������  3885
+Using a Channel Strip’s Input Menu  ������������������ 3889
+Input Menu with Legacy Fixed Bussing �����������  3891
+The Fairlight Presets Library  �������������������������������� 3891
+Using the Presets Library  ��������������������������������������� 3892
+3870Fairlight | Chapter 171 Setting Up Tracks, Busses, and Patching
+FAIRLIGHT

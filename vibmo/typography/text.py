@@ -3,6 +3,7 @@ Text rendering, Multi-line layout, Font resolution, and Precise Cairo Text Exten
 """
 
 from __future__ import annotations
+import os
 from typing import Any, Optional, Tuple, Union
 import cairo
 from vibmo.core.vector import Vector2D
@@ -41,6 +42,14 @@ class Text(Node):
 
     def _setup_cairo_font(self, ctx: cairo.Context, font_size: float) -> None:
         font_path = FontManager.get_font_path(self.font_family, bold=self.bold, italic=self.italic)
+        if font_path and os.path.exists(font_path):
+            try:
+                import freetype
+                face = freetype.Face(font_path)
+            except Exception:
+                pass
+        
+        # Fallback to standard Cairo text selection
         slant = cairo.FONT_SLANT_ITALIC if self.italic else cairo.FONT_SLANT_NORMAL
         weight = cairo.FONT_WEIGHT_BOLD if self.bold else cairo.FONT_WEIGHT_NORMAL
         ctx.select_font_face(self.font_family, slant, weight)

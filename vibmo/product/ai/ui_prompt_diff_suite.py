@@ -1,336 +1,348 @@
 """
-UI Prompt Diff Suite
-Components: PromptDiffCard, InlineDiffHighlighter, PromptTokenCostBadge, MergePromptButton.
+Prompt Diff & Versioning UI Suite for Vibmo / Motio.
+Components:
+- PromptDiffViewer (PromptDiffCard)
+- SideBySideDiffPane
+- InlineDiffHighlighter
+- PromptTokenCostBadge
+- MergePromptButton
 """
 
 from __future__ import annotations
+import difflib
 import math
-import re
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 import cairo
 
-from vibmo.core.vector import Vector2D
 from vibmo.core.color import Color, colors
+from vibmo.core.vector import Vector2D
 from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.easing import Ease, EasingFunc
 from vibmo.scene.node import Node
 from vibmo.spatial.shadows import DropShadow
 
 
-class PromptDiffCard(Node):
-    """
-    Split card showing 'Version A (Original)' vs 'Version B (Optimized)'.
-    """
-
-    def __init__(
-        self,
-        width: float = 800.0,
-        height: float = 400.0,
-        corner_radius: float = 16.0,
-        bg_color: Union[Color, str] = "#0f172a", # SLATE_900
-        border_color: Union[Color, str] = "#334155", # SLATE_700
-        **kwargs: Any,
-    ) -> None:
-        super().__init__(**kwargs)
-        self.w = float(width)
-        self.h = float(height)
-        self.corner_radius = corner_radius
-        self.bg_color = Color.from_any(bg_color)
-        self.border_color = Color.from_any(border_color)
-        self.shadow = DropShadow.elevated(blur=24.0, offset=(0, 12), color=Color.hex("#000000").with_alpha(0.3))
-
-    def _rounded_rect(self, ctx: cairo.Context, x: float, y: float, w: float, h: float, r: float) -> None:
-        ctx.new_path()
-        ctx.arc(x + w - r, y + r, r, -math.pi / 2, 0)
-        ctx.arc(x + w - r, y + h - r, r, 0, math.pi / 2)
-        ctx.arc(x + r, y + h - r, r, math.pi / 2, math.pi)
-        ctx.arc(x + r, y + r, r, math.pi, 3 * math.pi / 2)
-        ctx.close_path()
-
-    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
-        return (0.0, 0.0, self.w, self.h)
-
-    def draw(self, ctx: Any, time: float = 0.0) -> None:
-        ctx.save()
-        
-        # Draw background
-        self._rounded_rect(ctx, 0, 0, self.w, self.h, self.corner_radius)
-        ctx.set_source_rgba(*self.bg_color.to_cairo())
-        ctx.fill_preserve()
-        ctx.set_line_width(2.0)
-        ctx.set_source_rgba(*self.border_color.to_cairo())
-        ctx.stroke()
-        
-        # Draw divider
-        ctx.move_to(self.w / 2, 0)
-        ctx.line_to(self.w / 2, self.h)
-        ctx.set_source_rgba(*self.border_color.to_cairo())
-        ctx.stroke()
-        
-        # Draw Titles
-        ctx.select_font_face("sans-serif", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-        ctx.set_font_size(18)
-        
-        # Title A
-        title_a = "Version A (Original)"
-        ctx.set_source_rgba(*Color.hex("#94a3b8").to_cairo()) # SLATE_400
-        extents_a = ctx.text_extents(title_a)
-        ctx.move_to((self.w / 4) - (extents_a.width / 2), 30)
-        ctx.show_text(title_a)
-        
-        # Title B
-        title_b = "Version B (Optimized)"
-        ctx.set_source_rgba(*Color.hex("#f8fafc").to_cairo()) # SLATE_50
-        extents_b = ctx.text_extents(title_b)
-        ctx.move_to((3 * self.w / 4) - (extents_b.width / 2), 30)
-        ctx.show_text(title_b)
-        
-        ctx.restore()
-        super().draw(ctx, time)
-
-
-class InlineDiffHighlighter(Node):
-    """
-    Text block with highlighted green additions (+) and strike-through red deletions (-).
-    """
-
-    def __init__(
-        self,
-        text: str,
-        font_size: float = 16.0,
-        line_height: float = 24.0,
-        width: float = 400.0,
-        font_family: str = "monospace",
-        **kwargs: Any,
-    ) -> None:
-        super().__init__(**kwargs)
-        self.text = text
-        self.font_size = font_size
-        self.line_height = line_height
-        self.w = float(width)
-        self.font_family = font_family
-        
-        self.text_color = Color.hex("#e2e8f0") # SLATE_200
-        self.add_color = Color.hex("#22c55e") # GREEN_500
-        self.add_bg = Color.hex("#22c55e").with_alpha(0.2)
-        self.del_color = Color.hex("#ef4444") # RED_500
-        self.del_bg = Color.hex("#ef4444").with_alpha(0.2)
-        
-        self.parsed_lines = self._parse_diff(text)
-        
-    def _parse_diff(self, text: str) -> List[Tuple[str, str]]:
-        # Returns list of (type, line) where type in ('normal', 'add', 'del')
-        lines = []
-        for line in text.split('\n'):
-            if line.startswith('+'):
-                lines.append(('add', line))
-            elif line.startswith('-'):
-                lines.append(('del', line))
-            else:
-                lines.append(('normal', line))
-        return lines
-
-    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
-        h = max(1, len(self.parsed_lines)) * self.line_height
-        return (0.0, 0.0, self.w, h)
-
-    def draw(self, ctx: Any, time: float = 0.0) -> None:
-        ctx.save()
-        ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-        ctx.set_font_size(self.font_size)
-        
-        y = 0.0
-        for ltype, line in self.parsed_lines:
-            # Draw bg if needed
-            if ltype == 'add':
-                ctx.rectangle(0, y, self.w, self.line_height)
-                ctx.set_source_rgba(*self.add_bg.to_cairo())
-                ctx.fill()
-                ctx.set_source_rgba(*self.add_color.to_cairo())
-            elif ltype == 'del':
-                ctx.rectangle(0, y, self.w, self.line_height)
-                ctx.set_source_rgba(*self.del_bg.to_cairo())
-                ctx.fill()
-                ctx.set_source_rgba(*self.del_color.to_cairo())
-            else:
-                ctx.set_source_rgba(*self.text_color.to_cairo())
-                
-            # Draw text
-            extents = ctx.text_extents(line)
-            text_y = y + (self.line_height + extents.height) / 2.0
-            ctx.move_to(8.0, text_y)
-            ctx.show_text(line)
-            
-            # Strike-through for del
-            if ltype == 'del':
-                strike_y = text_y - extents.height / 2.0 + 2.0
-                ctx.move_to(8.0, strike_y)
-                ctx.line_to(8.0 + extents.width, strike_y)
-                ctx.set_line_width(1.5)
-                ctx.stroke()
-            
-            y += self.line_height
-            
-        ctx.restore()
-        super().draw(ctx, time)
-
-
 class PromptTokenCostBadge(Node):
-    """
-    Comparative badge showing token count reduction and cost savings (-38% tokens).
-    """
+    """Badge calculating estimated prompt token count and API inference cost."""
 
-    def __init__(
-        self,
-        reduction_text: str = "-38% tokens",
-        cost_savings: str = "$0.04 saved",
-        width: float = 240.0,
-        height: float = 48.0,
-        **kwargs: Any,
-    ) -> None:
+    def __init__(self, token_count: int = 142, cost_usd: float = 0.0028, width: float = 180.0, height: float = 30.0, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.reduction_text = reduction_text
-        self.cost_savings = cost_savings
-        self.w = float(width)
-        self.h = float(height)
-        
-    def _rounded_rect(self, ctx: cairo.Context, x: float, y: float, w: float, h: float, r: float) -> None:
-        ctx.new_path()
-        ctx.arc(x + w - r, y + r, r, -math.pi / 2, 0)
-        ctx.arc(x + w - r, y + h - r, r, 0, math.pi / 2)
-        ctx.arc(x + r, y + h - r, r, math.pi / 2, math.pi)
-        ctx.arc(x + r, y + r, r, math.pi, 3 * math.pi / 2)
-        ctx.close_path()
-
-    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
-        return (0.0, 0.0, self.w, self.h)
+        self.token_count = Signal(float(token_count), f"{self.name}.token_count")
+        self.cost_usd = Signal(float(cost_usd), f"{self.name}.cost_usd")
+        self.width_val = float(width)
+        self.height_val = float(height)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
+        toks = int(self.token_count.get(time))
+        cost = self.cost_usd.get(time)
+
         ctx.save()
-        
-        self._rounded_rect(ctx, 0, 0, self.w, self.h, self.h / 2)
-        # Background gradient: slightly green
-        pat = cairo.LinearGradient(0, 0, self.w, 0)
-        pat.add_color_stop_rgba(0.0, *Color.hex("#064e3b").with_alpha(0.8).to_cairo())
-        pat.add_color_stop_rgba(1.0, *Color.hex("#0f766e").with_alpha(0.8).to_cairo())
-        ctx.set_source(pat)
+        r = 6.0
+        ctx.new_path()
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        ctx.close_path()
+
+        ctx.set_source_rgba(0.08, 0.12, 0.18, 0.9)
         ctx.fill_preserve()
-        
-        ctx.set_line_width(1.5)
-        ctx.set_source_rgba(*Color.hex("#10b981").with_alpha(0.5).to_cairo())
+        ctx.set_source_rgba(0.2, 0.3, 0.45, 0.6)
+        ctx.set_line_width(1.0)
         ctx.stroke()
-        
-        ctx.select_font_face("sans-serif", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-        ctx.set_font_size(14)
-        
-        # Draw reduction text
-        ctx.set_source_rgba(*Color.hex("#34d399").to_cairo())
-        r_extents = ctx.text_extents(self.reduction_text)
-        
-        # Draw cost savings text
-        ctx.set_source_rgba(*Color.hex("#a7f3d0").to_cairo())
-        c_extents = ctx.text_extents(self.cost_savings)
-        
-        total_w = r_extents.width + 12 + c_extents.width
-        start_x = (self.w - total_w) / 2
-        
-        text_y = (self.h + r_extents.height) / 2 - 2
-        
-        ctx.set_source_rgba(*Color.hex("#34d399").to_cairo())
-        ctx.move_to(start_x, text_y)
-        ctx.show_text(self.reduction_text)
-        
-        # Divider dot
-        ctx.arc(start_x + r_extents.width + 6, self.h / 2, 2.0, 0, 2 * math.pi)
-        ctx.set_source_rgba(*Color.hex("#10b981").to_cairo())
-        ctx.fill()
-        
-        ctx.set_source_rgba(*Color.hex("#a7f3d0").to_cairo())
-        ctx.move_to(start_x + r_extents.width + 12, text_y)
-        ctx.show_text(self.cost_savings)
-        
+
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(0.2, 0.85, 1.0, 0.95)
+        text = f"{toks} tokens (${cost:.4f})"
+        ext = ctx.text_extents(text)
+        ctx.move_to((w - ext.width) * 0.5, h * 0.5 + ext.height * 0.35)
+        ctx.show_text(text)
         ctx.restore()
-        super().draw(ctx, time)
 
 
 class MergePromptButton(Node):
+    """Button to accept and merge prompt improvements."""
+
+    def __init__(self, width: float = 140.0, height: float = 32.0, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+        self.width_val = float(width)
+        self.height_val = float(height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
+        ctx.save()
+        r = 6.0
+        ctx.new_path()
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        ctx.close_path()
+
+        ctx.set_source_rgba(0.12, 0.5, 0.25, 0.95)
+        ctx.fill()
+
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(1.0, 1.0, 1.0, 1.0)
+        text = "Accept Diff"
+        ext = ctx.text_extents(text)
+        ctx.move_to((w - ext.width) * 0.5, h * 0.5 + ext.height * 0.35)
+        ctx.show_text(text)
+        ctx.restore()
+
+
+class InlineDiffHighlighter(Node):
+    """Inline text block with highlighted added tokens (green) and removed tokens (red)."""
+
+    def __init__(
+        self,
+        diff_tokens: Optional[List[Tuple[str, str]]] = None,
+        width: float = 780.0,
+        height: float = 120.0,
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.diff_tokens = diff_tokens or [
+            ("equal", "You are an expert "),
+            ("delete", "fast "),
+            ("insert", "world-class aesthetic "),
+            ("equal", "motion graphics engineer in Python."),
+        ]
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.highlight_progress = Signal(1.0, f"{self.name}.highlight_progress")
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        prog = max(0.0, min(1.0, self.highlight_progress.get(time)))
+        ctx.save()
+        ctx.select_font_face("Consolas", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.set_font_size(12.5)
+
+        x = 16.0
+        y = 28.0
+        line_h = 24.0
+
+        for op, chunk in self.diff_tokens:
+            ext = ctx.text_extents(chunk)
+            if op == "insert":
+                ctx.set_source_rgba(0.08, 0.3, 0.15, 0.85 * prog)
+                ctx.rectangle(x - 2.0, y - ext.height - 3.0, ext.width + 4.0, ext.height + 6.0)
+                ctx.fill()
+                ctx.set_source_rgba(0.2, 0.95, 0.5, 0.95)
+            elif op == "delete":
+                ctx.set_source_rgba(0.35, 0.08, 0.1, 0.85 * prog)
+                ctx.rectangle(x - 2.0, y - ext.height - 3.0, ext.width + 4.0, ext.height + 6.0)
+                ctx.fill()
+                ctx.set_source_rgba(1.0, 0.3, 0.4, 0.95)
+            else:
+                ctx.set_source_rgba(0.85, 0.9, 0.95, 0.9)
+
+            ctx.move_to(x, y)
+            ctx.show_text(chunk)
+            x += ext.width
+
+        ctx.restore()
+
+
+class SideBySideDiffPane(Node):
+    """Split-pane view comparing Version A (Original) vs Version B (Refined)."""
+
+    def __init__(
+        self,
+        v1_text: str = "Generate landing page for SaaS",
+        v2_text: str = "Generate high-converting, aesthetic motion landing page for AI SaaS",
+        width: float = 780.0,
+        height: float = 320.0,
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.v1_text = v1_text
+        self.v2_text = v2_text
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.highlight_sig = Signal(1.0, f"{self.name}.highlight_sig")
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
+        pane_w = (w - 20.0) * 0.5
+        pane_h = h - 20.0
+        r = 10.0
+        hl = max(0.0, min(1.0, self.highlight_sig.get(time)))
+
+        ctx.save()
+        # Left Pane (v1)
+        ctx.new_path()
+        ctx.arc(pane_w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(pane_w - r, pane_h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, pane_h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        ctx.close_path()
+
+        ctx.set_source_rgba(0.03, 0.05, 0.09, 0.9)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.18, 0.24, 0.35, 0.6)
+        ctx.set_line_width(1.0)
+        ctx.stroke()
+
+        # Left Header
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(11.5)
+        ctx.set_source_rgba(0.6, 0.7, 0.8, 0.85)
+        ctx.move_to(16.0, 24.0)
+        ctx.show_text("Version 1 (Original)")
+
+        # Left Content
+        ctx.select_font_face("Consolas", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.set_font_size(11.5)
+        ctx.set_source_rgba(0.8, 0.85, 0.9, 0.9)
+        ctx.move_to(16.0, 56.0)
+        ctx.show_text(self.v1_text[:40])
+
+        # Right Pane (v2)
+        rx = pane_w + 20.0
+        ctx.new_path()
+        ctx.arc(rx + pane_w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(rx + pane_w - r, pane_h - r, r, 0, math.pi * 0.5)
+        ctx.arc(rx + r, pane_h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(rx + r, r, r, math.pi, math.pi * 1.5)
+        ctx.close_path()
+
+        if hl > 0.1:
+            ctx.set_source_rgba(0.04, 0.08, 0.14, 0.95)
+            ctx.fill_preserve()
+            ctx.set_source_rgba(0.15, 0.5, 0.8, 0.8 * hl)
+            ctx.set_line_width(1.5)
+            ctx.stroke()
+        else:
+            ctx.set_source_rgba(0.03, 0.05, 0.09, 0.9)
+            ctx.fill_preserve()
+            ctx.set_source_rgba(0.18, 0.24, 0.35, 0.6)
+            ctx.set_line_width(1.0)
+            ctx.stroke()
+
+        # Right Header
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(11.5)
+        ctx.set_source_rgba(0.2, 0.85, 1.0, 0.95)
+        ctx.move_to(rx + 16.0, 24.0)
+        ctx.show_text("Version 2 (Optimized Diff)")
+
+        # Right Content
+        ctx.select_font_face("Consolas", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.set_font_size(11.5)
+        ctx.set_source_rgba(0.2, 0.95, 0.5, 0.95)
+        ctx.move_to(rx + 16.0, 56.0)
+        ctx.show_text(self.v2_text[:40])
+
+        ctx.restore()
+
+
+class PromptDiffViewer(Node):
     """
-    High-converting gradient action button to accept changes.
+    Prompt Diff & Semantic Versioning UI Suite.
+    Renders side-by-side prompt comparisons, token delta highlighting,
+    inference cost estimation badges, and merge decision controls.
     """
 
     def __init__(
         self,
-        label: str = "Accept Optimization",
-        width: float = 280.0,
-        height: float = 56.0,
+        v1: str = "Analyze model weights and output predictions.",
+        v2: str = "Analyze multi-head model weights, apply KV cache optimizations, and stream real-time predictions.",
+        width: float = 840.0,
+        height: float = 480.0,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self.label = label
-        self.w = float(width)
-        self.h = float(height)
-        
-        # Gradient colors
-        self.color_start = Color.hex("#6366f1") # INDIGO_500
-        self.color_end = Color.hex("#a855f7") # PURPLE_500
-        
-        # Scale signal for interaction/pop in
-        self.scale_sig = Signal(1.0, f"{self.name}.scale")
-        
-        self.shadow = DropShadow.elevated(blur=16.0, offset=(0, 8), color=Color.hex("#6366f1").with_alpha(0.4))
+        self.v1 = v1
+        self.v2 = v2
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.shadow = DropShadow(color=Color(0.0, 0.0, 0.0, 0.5), blur=32.0, offset=(0.0, 16.0))
+
+        # Side-by-side pane
+        self.split_pane = SideBySideDiffPane(v1_text=v1, v2_text=v2, width=self.width_val - 48.0, height=260.0)
+        self.split_pane.position.set(Vector2D(24.0, 80.0))
+        self.add(self.split_pane)
+
+        # Inline Highlighter below
+        diff_tokens = self._compute_diff_tokens(v1, v2)
+        self.highlighter = InlineDiffHighlighter(diff_tokens=diff_tokens, width=self.width_val - 48.0, height=80.0)
+        self.highlighter.position.set(Vector2D(24.0, 360.0))
+        self.add(self.highlighter)
+
+        # Cost badge
+        self.cost_badge = PromptTokenCostBadge(token_count=184, cost_usd=0.0036)
+        self.cost_badge.position.set(Vector2D(self.width_val - 350.0, 24.0))
+        self.add(self.cost_badge)
+
+        # Merge button
+        self.merge_btn = MergePromptButton(width=120.0, height=30.0)
+        self.merge_btn.position.set(Vector2D(self.width_val - 150.0, 24.0))
+        self.add(self.merge_btn)
+
+    def _compute_diff_tokens(self, v1: str, v2: str) -> List[Tuple[str, str]]:
+        words1 = v1.split()
+        words2 = v2.split()
+        matcher = difflib.SequenceMatcher(None, words1, words2)
+        result = []
+        for tag, i1, i2, j1, j2 in matcher.get_opcodes():
+            if tag == "equal":
+                result.append(("equal", " ".join(words1[i1:i2]) + " "))
+            elif tag == "delete":
+                result.append(("delete", " ".join(words1[i1:i2]) + " "))
+            elif tag == "insert":
+                result.append(("insert", " ".join(words2[j1:j2]) + " "))
+            elif tag == "replace":
+                result.append(("delete", " ".join(words1[i1:i2]) + " "))
+                result.append(("insert", " ".join(words2[j1:j2]) + " "))
+        return result
+
+    def highlight_diffs(self, duration: float = 1.2, ease: EasingFunc = Ease.out_quad) -> List[AnimationAction]:
+        """
+        Fluent generator animation verb to illuminate prompt differences and update cost metrics.
+        """
+        self.highlighter.highlight_progress.set(0.0)
+        self.split_pane.highlight_sig.set(0.0)
+        return [
+            self.highlighter.highlight_progress.to(1.0, duration=duration, ease=ease),
+            self.split_pane.highlight_sig.to(1.0, duration=duration, ease=ease),
+            self.cost_badge.token_count.to(240.0, duration=duration, ease=ease),
+        ]
 
     def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
-        return (0.0, 0.0, self.w, self.h)
-        
-    def _rounded_rect(self, ctx: cairo.Context, x: float, y: float, w: float, h: float, r: float) -> None:
-        ctx.new_path()
-        ctx.arc(x + w - r, y + r, r, -math.pi / 2, 0)
-        ctx.arc(x + w - r, y + h - r, r, 0, math.pi / 2)
-        ctx.arc(x + r, y + h - r, r, math.pi / 2, math.pi)
-        ctx.arc(x + r, y + r, r, math.pi, 3 * math.pi / 2)
-        ctx.close_path()
+        return (0.0, 0.0, self.width_val, self.height_val)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
         ctx.save()
-        
-        scale = self.scale_sig.get(time)
-        if scale != 1.0:
-            ctx.translate(self.w / 2, self.h / 2)
-            ctx.scale(scale, scale)
-            ctx.translate(-self.w / 2, -self.h / 2)
-            
-        self._rounded_rect(ctx, 0, 0, self.w, self.h, self.h / 2)
-        
-        pat = cairo.LinearGradient(0, 0, self.w, 0)
-        pat.add_color_stop_rgba(0.0, *self.color_start.to_cairo())
-        pat.add_color_stop_rgba(1.0, *self.color_end.to_cairo())
-        ctx.set_source(pat)
-        ctx.fill()
-        
-        # Shine
-        ctx.save()
-        self._rounded_rect(ctx, 0, 0, self.w, self.h, self.h / 2)
-        ctx.clip()
-        shine_pat = cairo.LinearGradient(0, 0, 0, self.h / 2)
-        shine_pat.add_color_stop_rgba(0.0, 1.0, 1.0, 1.0, 0.2)
-        shine_pat.add_color_stop_rgba(1.0, 1.0, 1.0, 1.0, 0.0)
-        ctx.set_source(shine_pat)
-        ctx.rectangle(0, 0, self.w, self.h / 2)
-        ctx.fill()
-        ctx.restore()
-        
-        # Label text
-        ctx.select_font_face("sans-serif", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-        ctx.set_font_size(18)
-        ctx.set_source_rgba(1.0, 1.0, 1.0, 1.0)
-        
-        extents = ctx.text_extents(self.label)
-        text_x = (self.w - extents.width) / 2
-        text_y = (self.h + extents.height) / 2 - 2
-        
-        ctx.move_to(text_x, text_y)
-        ctx.show_text(self.label)
-        
-        ctx.restore()
-        super().draw(ctx, time)
 
+        # Canvas card
+        r = 16.0
+        ctx.new_path()
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        ctx.close_path()
+
+        ctx.set_source_rgba(0.04, 0.06, 0.1, 0.95)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.18, 0.25, 0.38, 0.8)
+        ctx.set_line_width(1.5)
+        ctx.stroke()
+
+        # Header Title
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(15.0)
+        ctx.set_source_rgba(0.95, 0.98, 1.0, 0.95)
+        ctx.move_to(24.0, 42.0)
+        ctx.show_text("Prompt Diff & Semantic Versioning")
+
+        super().draw(ctx, time)
+        ctx.restore()
+
+
+PromptDiffCard = PromptDiffViewer

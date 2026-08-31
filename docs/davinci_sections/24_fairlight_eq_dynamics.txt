@@ -1,0 +1,1275 @@
+To select a range using the I-beam cursor of the Focus mode:
+  Move the pointer to the top half of a clip until an I-beam cursor appears, and drag to select a 
+region of one or more clips. As you drag, the playhead follows the Out point.
+Dragging within the top half of a clip to select a region in Focus mode
+  Using the crosshairs, you can also Shift-click to expand or contract the selected region across 
+one or more clips.
+  Using the crosshairs, you can also double-click to select an entire clip.
+  Partial edit selections that contain a fade will copy with the fade intact.
+To select a single frame using the I-beam cursor of the Focus mode:
+  Move the pointer to the top half of a clip until the I-beam cursor appears, and click once to place a 
+point selection at the frame you clicked. The playhead also moves to this frame. 
+ 
+Clicking within the top half of a clip to make a single frame selection
+3940Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+  Using the I-beam cursor, you can also Command-click clips on higher and lower tracks to add 
+them to the single frame selection, aligned at the same frame. For example, you could do this to 
+split multiple clips at once. One frame selections can be on discontiguous tracks.
+Command-clicking within the top half of multiple clips on multiple 
+tracks to add single frame selections at the same frame
+To move a selection using the Hand tool of the Focus mode:
+Once you’ve made a selection of one or more clips or regions using the Hand or I-beam cursor of the 
+Focus mode, you can move the pointer to the bottom half of any selected clip and drag the selection 
+to another position on the Timeline.
+Commands For Editing and Extending the Selection
+Once you’ve made one or more selections in the Timeline, there are a series of commands you can 
+use to modify or expand the selection. These commands were designed to be used alongside the 
+Focus mode, but they can be used in any mode.
+Editing the Selection
+There are six commands for changing the current selection, which let you move it from one clip 
+or group of clips in the Timeline to another. These commands only move the selected range of 
+clips/frames; they do not move the clips themselves. These commands are located in the Timeline 
+contextual menu under Edit Operations when you right-click on a clip.
+  Move To Previous/Next Edit: Moves the current selection to the next clip/edit point to the left or 
+right in the Timeline.
+  Move To Previous/Next Track: Moves the current selection to the next track up or 
+down in the Timeline.
+  Move to Previous/Next Frame: Nudges the current selection to the left or right in the Timeline.
+Extend Edit Selection
+There are four commands for expanding the range of what’s selected in the Timeline, one clip or track 
+at a time. These commands are located in the Timeline contextual menu under Edit Operations when 
+you right-click on a clip.
+  To Previous Edit: Expands the selection to include the previous clip to the left in the Timeline.
+  To Next Edit: Expands the selection to include the next clip to the right in the Timeline.
+  To Previous Track: Expands the selection to include the clip in the next track up in the Timeline.
+  To Next Track: Expands the selection to include the clip in the next track down in the Timeline.
+3941Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Locking Audio Tracks
+Another step you can take to prepare before performing any kind of editorial operation is to lock 
+tracks with media that you don’t want to be affected by whatever it is you’re about to do. For example, 
+if you have a complex set of music edits on track A3 that you don’t want to be affected by operations 
+that will delete media that overlaps it, you can lock track A3 so those clips remain unaffected.
+Locking an audio track
+Clips on locked tracks cannot be moved, deleted, cut, or otherwise affected by editorial operations. 
+Furthermore, parameters of clips on locked tracks cannot be edited in the Inspector. However, clips on 
+locked tracks can be played back and mixed like any other audio clips.
+To toggle the lock or unlock state of audio tracks in the Fairlight page, do one of the following:
+  Click any track’s lock control to toggle lock on and off.
+  Click any track’s lock control and drag over the lock controls of other tracks in the Timeline to 
+quickly lock or unlock several adjacent clips.
+  Open the Index and click/drag one or more track lock controls to toggle lock on and off.
+Folder Tracks 
+A Folder Track lets you select a group of tracks then combine them into a single composite view. This 
+means the original tracks remain unchanged, but can now be viewed taking up just one track’s worth 
+of space on the timeline. 
+This lets you easily change the scale and context of your timeline even as it gets more complex. For 
+example, you can now add four separate gunfire sound effects tracks for a running action scene into a 
+single folder track, giving you a cleaner UI to work on the music score.
+The resulting folder track will still show all the individual track positions, just indented under the track 
+folder. You can then click on the disclosure triangle in the top left of the folder track to collapse it, 
+making a single track out of it. To reopen the folder track, click on the disclosure triangle again.
+The original clip’s positions are now portrayed in a minimized view and without any waveform data. 
+Any assigned track colors will still be visible, and you can rename the folder track by clicking on its 
+track name. Closed folder tracks don’t have level meters, but you can restore them by opening the 
+folder track again.
+Editing is supported on the composite view of the folder track, which can be very convenient and 
+powerful when working with many elements. Solo and Mute buttons are available at the folder level as 
+well, which is useful if you want to solo or mute an entire group of tracks at once.
+You can permanently restore the view of the original tracks by simply deleting the folder track.
+TIP: For even more granular track organization, you can create a folder track inside another 
+folder track. Folder tracks support a maximum of three levels of nesting.
+3942Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+The Fairlight timeline before adding tracks A13-A17 into a folder track.
+The folder track when open, showing the enclosed tracks.
+3943Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+The folder track when closed, using the disclosure triangle to the left of the track header. 
+To add Tracks to a Folder Track:
+1 Select two or more tracks on the Fairlight Page.
+2 Right-click on one of the selected tracks.
+3 Choose Add Tracks to New Folder.
+To delete a Folder Track and restore the original track positions:
+1 Right-click the folder track.
+2 Choose Delete Track from the context menu.
+Splitting Clips
+In addition to manually splitting timeline clips in either Pointer or Range mode, Fairlight offers two 
+additional methods of managing your timeline audio. These are Remove Silence and AI Checkerboard 
+to New Tracks, which, along with AI Create ADR Cues, comprise the Intellicut feature set. 
+For more information about AI Create ADR Cues, jump to this chapter: ADR (Automated Dialog 
+Replacement).
+3944Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Remove Silence (Studio Version Only)
+This feature identifies silent sections of a timeline clip and non-destructively removes them to increase 
+the efficiency of your workflow. 
+Audio clip with silence indicators
+Remove Silence Parameters 
+  Threshold: This determines the maximum signal level of your audio (in dB) that will be recognized 
+as silence. Audio signals below the threshold value will be treated as silence and removed. Higher 
+threshold values result in more audio being removed.
+  Pre Head: Sets the amount of silence or pre-roll before each audible section.
+  Minimum to Strip: This parameter determines the minimum amount of silence (in milliseconds) to 
+be stripped from selected timeline clips.
+  Higher values leave more silent sections in the audio. Lower values will result in more strips, but 
+you may find that some of the remaining audio sounds “chopped up” because it abruptly cuts off.
+  Fade Head and Tail: When this checkbox is filled, fades are applied to the beginning and end of 
+each remaining clip based on the Pre Head and Post Tail values.
+Remove Silence dialog
+To remove silences from a timeline clip:
+1 Select a clip or collection of clips on a track.
+2 Right-click the selection and choose Remove Silence in the contextual menu.
+3 The appearance of the selected audio will change to include vertical red stripes showing you 
+the position and duration of the resulting silences based on the parameter values in the Remove 
+Silence dialog.
+3945Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+AI Checkerboard to New Tracks (Studio Version Only)
+If, for example, multiple actors were recorded with a boom mic on a single track and you need them on 
+separate tracks, this feature will analyze and transcribe the original audio, then organize the resulting 
+audio clips on separate tracks for each speaker’s voice.
+To split speakers to new tracks:
+1 Right-click the timeline clip, or range of a clip, and choose AI Tools > Checkerboard to New Tracks 
+in the contextual menu. 
+AI Tools contextual menu
+2 When the Transcribing Audio dialog opens, Fairlight will use AI to analyze the audio and identify 
+each voice. 
+Transcribing Audio dialog
+3 A new track is created for each speaker, containing their new clips. The source timeline clip will be 
+muted and left intact. 
+New track timeline clips for each speaker
+NOTE: You may find it helpful to change the colors of the new timeline clips and tracks and 
+timeline clips. 
+For more information on changing the color of a timeline clip, jump to this chapter: Changing 
+Clip Color in the Timeline . To learn more about changing the track color, jump to this chapter: 
+Using the Fairlight Page.
+3946Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Manually Split Clips in Pointer or Range Mode
+To split one or more clips in either Pointer or Range mode:
+1 Select each track that has a clip you want to split.
+2 Move the playhead to intersect the clips you want to split at the frame where you want the split 
+to happen.
+3 Do one of the following:
+a) Choose Timeline > Split Clip or press Command-\ (backslash).
+b) Choose Timeline > Razor or press Command-B.
+When splitting a clip in the Edit page, a through edit appears to show that you currently have an edit 
+with continuous timecode running from the outgoing to the incoming half. This is called a through edit 
+and is displayed in the Edit page with a dotted line running along its edge so you know that it’s special. 
+The Fairlight page doesn’t display through edits as of the time of this writing.
+Linked Clips in the Fairlight Page
+Clips can be linked together in the Fairlight page. When multiple clips are linked, Fairlight editing 
+commands treat all linked clips as if they were a single clip. Anything you would do to a single clip is 
+done to all linked clips at once. Selecting one item of a linked clip selects all items. Editing the In point 
+of one item of a linked clip edits them all.
+To link two or more clips together:
+1 Select all clips you want to link together.
+2 Right-click one of the selected clips, and choose Link Clips from the contextual menu.
+A link indicator at the bottom left of every clip you’ve just linked shows their new linked status.
+Trimming Clips Without 
+Rippling the Timeline
+Most basic adjustments in the Fairlight page only affect the selected clip or region of the Timeline. 
+Clips to the right of the adjusted area of the Timeline are generally left alone so as not to inadvertently 
+change sync when you don’t expect it. This section covers the most basic parts of the Fairlight page’s 
+“seven-point editing” paradigm.
+Multi-Point Editing Overview
+Each clip in the Timeline has several draggable handles and click targets that let you perform different 
+editing tasks using the pointer.
+  In point: The left edge of the clip can be dragged to resize the beginning of the clip.
+  Out point: The right edge of the clip can be dragged to resize the end of the clip.
+  Fade In handle: A handle at the upper left-hand corner of the clip that only appears when the 
+mouse is positioned over that clip, used to fade the audio in by dragging it to the right, or as 
+part of a crossfade between two audio clips. Fades can be reset (eliminated) by double-clicking 
+the fade handle.
+3947Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+  Fade In curve: A handle at the center of the Fade In curve that only appears when the curve is 
+exposed, used to adjust the power of the fade in. This handle can be dragged vertically to change 
+the X-Level of the fade, and horizontally to change the X-Point of the fade. Fade curves can be 
+reset by double-clicking the curve handle.
+  Fade Out handle: A handle at the upper right-hand corner of the clip that only appears when 
+the mouse is positioned over that clip, used to fade the audio out by dragging it to the left, or as 
+part of a crossfade between two audio clips. Fades can be reset (eliminated) by double-clicking 
+the fade handle.
+  Fade Out curve: A handle at the center of the Fade Out curve that only appears when the curve 
+is exposed, used to adjust the power of the fade out. This handle can be dragged vertically to 
+change the X-Level of the fade, and horizontally to change the X-Point of the fade. Fade curves 
+can be reset by double-clicking the curve handle.
+  Level: Considered an editorial characteristic, the level of any given audio clip can be adjusted via 
+a level overlay running across each clip. The level of any clip can be reset to the default 0.0 dB by 
+double-clicking the level overlay.
+  Position: Clicking anywhere within the middle of a clip in Pointer or Range mode, or on the bottom 
+of Focus mode, lets you drag that clip either forward or backward in time, or to another track.
+Resizing the In and Out Points of a Clip
+Trimming the head or tail of a clip in the Fairlight page means to resize the In or Out point of that clip, 
+making it shorter or longer accordingly.
+To resize the beginning or end of a clip:
+  To shorten or lengthen clips: Move the pointer over the beginning or end of a clip, and when 
+it turns into the Resize cursor, drag the In or Out point to the left or right to change the clip’s 
+length. As you drag the In or Out point of an audio clip in the Fairlight page, an overlay appears 
+showing the waveform of all available media at the head (if you’re dragging the In point) or tail 
+(if you’re dragging the Out point) of the clip you are resizing.
+The overlay seen when resizing the In point of an audio clip in the Fairlight page
+To quickly resize the beginning or end of a clip to  
+the very beginning or end of available media:
+  Double-click the In point of the clip to move the In point to the very beginning of that clip’s media.
+  Double-click the Out point of the clip to move the Out point to the very end of that clip’s media.
+If you resize a clip’s In or Out point to overlap one or more neighboring clips in the Timeline, the 
+overlapping parts of the neighboring clips will be overwritten by the clip you’ve resized.
+Trim Start and Trim End
+The Trim > Trim Start (Shift-[) and Trim End (Shift-]) commands let you move the In or Out point of 
+all clips that intersect the playhead as either a ripple operation (in Trim mode) or a resize operation 
+(in Selection mode). You do not need to make a selection to use Trim Start and Trim End, making 
+3948Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+these commands fast to use in the right situation. A classic use of Trim End is when you have several 
+superimposed clips of different lengths that you want to either start or end at the same time.
+  Trim Start resizes or ripples (depending on what mode you’re in) all clips that intersect the 
+playhead, so that each clip’s In point is moved to the current playhead position. 
+  Trim End resizes or ripples intersecting clips so that each intersecting clip’s Out point is moved to 
+the current playhead position.
+Clips that don’t intersect the playhead are not affected. Furthermore, you can exclude clips on 
+specific tracks from this operation by locking those tracks.
+Trim to Selection
+The Trim > Trim to Selection (Shift-Command-T) command simultaneously trims the heads and tails 
+outside of a selection of one or more clips so that the selection is all that remains. This command is 
+found within the Timeline contextual menu when you right-click on a clip.
+(Left) A selection that includes parts of two clips, (Right) The result of using 
+Trim to Selection to eliminate the heads and tails outside of this selection.
+Moving and Overwriting Clips
+There are a number of ways to move clips in the Timeline. Clips can be nudged and moved within 
+a track, changing the timing of that clip’s position in the edit or they can be moved up or down to 
+other tracks.
+To move clips in the Timeline, do one of the following:
+  To move one or more selected clips in the Timeline: Drag any clip in the Timeline to any other 
+position. If you’re in Focus mode, you must drag using the bottom half of the selection. If you drag 
+a clip to overlap another clip, the clip you’re dragging overwrites the clip you’re moving it over. 
+  To nudge one or more selected clips in the Timeline by frame using the keyboard: Make a 
+selection, then press the Comma key (nudge 1 frame left) or Period key (nudge 1 frame right) to roll 
+the selected edit to the left or right. Shift-Comma and Shift-Period nudges by 5 frames.
+  To move one or more selected clips up or down to other tracks at the same time: Make a 
+selection, then hold the Shift key down while dragging one of the selected clips up or down in 
+the Timeline to lock their position in time while moving them to other tracks. Or, you can hold the 
+Option key down and press Up or Down Arrow.
+3949Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Sync Offset Indicator
+Audio clips in the Fairlight page display an “out-of-sync” or sync offset indicators when they’re 
+moved out of sync with the video items they’re linked to.
+Snap Head / Tail to Clip or Playhead
+While in Focus Mode, you can snap the head (beginning) or tail (end) of an audio clip to the playhead 
+location (destination). This is useful when you want to line up audio with an onscreen event, such as a 
+ball smashing into a window. 
+You can also snap the head or tail of an audio clip to another selected clip to help you line up the start 
+or end points of the clips together.
+Although “Automation follows edit” works with this function, there are some things to consider:
+  This function works even if the playhead is offscreen.
+  Clips can only be snapped individually and to a location on the same track.
+  A “snapped” clip overwrites existing audio at the destination, even if the affected audio is on the 
+top layer of a layered clip.
+  A group of clips on a single track selected in Range mode using the playhead position can also be 
+a destination. However, you would need to snap the clip to the side of the playhead that doesn’t 
+have pre-existing audio you want to keep. 
+For more information on Range Mode, jump to this chapter: Using R ange Mode.
+To snap the clip head to the playhead:
+1 Activate Focus Mode and move the playhead to the intended destination.
+2 Hold down Command-Option and click the clip you want to move.
+The Audio is now in the new location with the head of the clip snapped to the playhead. 
+To snap the clip tail to the playhead:
+1 With Focus Mode active, move the playhead to the intended destination.
+2 Hold down Command-Option-Control and click the clip you want to move.
+The Audio is in the new location with the tail of the clip snapped to the playhead.
+To snap to the clip head of another clip:
+1 Activate Focus Mode and select the clip you want to target.
+2 Hold down Command-Option and click on the other clip you want to snap to the head of the 
+selected clip.
+To snap to the clip tail of another clip:
+1 Activate Focus Mode and select the clip you want to target.
+2 Hold down Command-Option-Control and click on the other clip you want to snap to the tail of the 
+selected clip.
+3950Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Subframe Nudging
+In the Preferences/User/Editing panel under General Settings you can change the nudge amount by 
+either subframes or by milliseconds for the Fairlight page. These are completely user definable so that 
+you can type your desired nudge amount into the corresponding box.
+Be sure to fully investigate this settings panel, which includes pre-roll and post-roll settings and other 
+useful Fairlight adjustments.
+Slipping
+Formerly called re-syncing, slipping an audio clip keeps that clip in the same place in the Timeline 
+while changing the range of media that appears in that spot. Slip edits do not change the duration of 
+the overall Timeline, and they don’t move the clip’s position relative to the other clips in the Timeline. 
+Slipping simply changes the range of media that clip represents.
+NOTE: While available in previous versions of Fairlight, slipping is not available at the time of 
+this writing.
+Duplicating Clips
+The Duplicate Selection command duplicates one or more selected clips, placing the duplicates 
+immediately after the Out point of the selection. If you’re duplicating a region of a clip with tails, or a 
+clip that’s in between other clips, the duplicated selection will overwrite whatever is to the right of the 
+current selection, for the duration of the duplicate. 
+Using the Duplicate Selection command to duplicate a selected region
+3951Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+If you hold the Option key down while dragging a clip in the Timeline, you’ll place a duplicate clip 
+wherever you drop it.
+Option-dragging to duplicate a clip in the Timeline
+Disabling and Re-Enabling 
+Clips in the Timeline
+Sometimes there’s one or more audio clips in the Timeline that you don’t want to play along with 
+the rest of the edited sequence, but you don’t want to remove from the Timeline either, in case you 
+change your mind later. For this reason, it’s possible to disable clips, effectively turning them off 
+without removing them. Previous versions of Fairlight referred to this operation as Mute clip.
+Disabled clips appear dimmed in the Timeline. They don’t play back, they’re not rendered, and they’re 
+not output to video. However, their position is preserved in the Timeline, so you can always re-enable 
+them at a later time if you change your mind and decide you want to use them.
+Disabled clips appear in the Timeline in gray.
+To disable or re-enable one or more selected clips:
+• Right-click part of the selection and choose Enable Clip from the contextual menu.
+• Choose Clip > Enable Clip.
+• Press D.
+Deleting Audio Clips and Regions
+You can delete any clips or clip regions that are selected, in either Pointer or Range modes, 
+by pressing the Delete key, or by right-clicking a clip and choosing Delete Selected from the 
+contextual menu. 
+By default in the Fairlight page, deleting anything leaves a gap. Under the Edit Menu > 
+Ripple Delete you can ripple delete selected clips changing the placement of all of the clips 
+that follow.
+3952Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Cut, Copy, and Paste
+The Fairlight page has a unique copy and paste methodology that takes advantage of the “ghost” 
+overlays that are used for the waveforms of selected audio clips. This method makes it easy to copy 
+and paste clips using keyboard shortcuts and the JKL keys.
+Conventional Cut, Copy, and Paste
+The typical cut, copy, and paste commands expected of every software application are available in 
+the Fairlight page, but with a unique twist that’s particularly advantageous for users of the Fairlight 
+control surface, or for anyone who uses the JKL transport key shortcuts to move around the Timeline 
+for keyboard-driven editing. 
+To cut or copy and paste either all or part of a clip:
+1 If you’re cutting or copying a whole clip, then choose either the Selection (press A) or Range 
+Selection (press R) mode. If you’re cutting or copying part of a clip, then make sure you’re in 
+Range mode (press R).
+2 To use the playhead to make a clip selection, select the track that contains the clip you want to 
+copy or cut. If one or more tracks are already selected, you can use the Control-Option-Up or 
+Down Arrow key shortcuts to move the track selection state up or down to the tracks with the clip 
+you want to cut or copy.
+Selecting the track with a clip you need to cut
+3 Do one of the following:
+a) To cut or copy a whole clip, move the playhead so that it intersects the clip you want to cut or 
+copy. If the playhead intersects a clip on a selected track, that clip should become selected. 
+You should note that even if you use the mouse to select a clip without selecting a track first, 
+you should still move the playhead to intersect the clip you’re copying or pasting, as this sets 
+up an important reference point for the operation.
+b) To cut or copy a segment of a clip, move the playhead so that it intersects the clip you want 
+to cut or copy. If the playhead intersects a clip on a selected track, that clip should become 
+selected. Then, using JKL and the I (In) and O (Out) keys, mark a range in the Timeline 
+that includes the segment of the clip you want. That segment should appear highlighted 
+as a result.
+3953Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Cutting or copying a segment of a clip using In and Out points
+4 Making sure the playhead is over the section of the waveform that you want to use as the frame to 
+move the clip by, press Command-X to cut or Command-C to copy that clip (you can also right-
+click a clip and choose Copy or Cut). That clip will immediately become highlighted.
+Cutting or copying a clip at the position of the playhead
+5 At this point, there are two things you can do to position the cut or copied clip to the position in 
+the Timeline at which you want to paste it:
+a) Moving the playhead will now also move the clip you cut or copied, shown as a ghost clip with 
+waveform that’s “attached” to the playhead at the frame you chose. Whether you drag the 
+playhead with your mouse or use JKL to move the playhead through the Timeline, the cut or 
+copied clip will move along with it, so that moving the playhead repositions the cut or copied 
+clip on that track.
+b) If you want to move the cut or copied clip to another track, use the Control-Option-Up or 
+Down Arrow key shortcuts to change the selected track; the ghost clip will move along with 
+change in track selection.
+3954Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Positioning the cut or copied clip before you paste it
+This way, you can use the playhead to align the ghost waveform with other audio clips surrounding 
+it in preparation for pasting it.
+6 When the clip is positioned where you want it, press Command-V to paste the clip at the position 
+you’ve chosen (you can also right-click a track and choose Paste from the contextual menu). 
+The clip becomes solid, and you’re finished.
+The pasted clip
+Using this method of cutting and pasting makes it quick to cut or copy clips using only keyboard 
+commands, with the clip’s ghost overlay making it easy to precisely align the clip you’re pasting to 
+fit exactly where you need it to, perfectly in sync.
+3955Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Using the Cut/Copy Head and Tail Commands
+Four additional commands make it easy to cut or copy portions of one or more clips that intersect 
+the playhead, either from the In point to the current position of the playhead (the Head), or from the 
+current position of the playhead to the Out point (the Tail).
+To cut or copy the head or tail of a clip, and paste the result:
+1 Using these commands, there’s no need to make a partial selection, so you can use either the 
+Selection (press A) or Range Selection (press T) modes.
+2 Select the track that contains the clip you want to copy or cut. If one or more tracks are already 
+selected, you can use the Control-Option-Up or Down Arrow key shortcuts to move the track 
+selection state up or down to the tracks with the clip you want to cut or copy.
+3 Move the playhead so that it intersects the clip you want to cut or copy at the frame you want to 
+define, either the end of the head or the beginning of the tail. If the playhead intersects a clip on 
+a selected track, that clip should automatically become selected. You should note that even if you 
+use the mouse to select a clip without selecting a track first, you should still move the playhead 
+to intersect the clip you’re copying or pasting, as this sets up an important reference point for 
+the operation.
+4 Choose Edit > Cut/Copy Head/Tail to cut or copy the portion of the selected clip you want to 
+paste. That portion of the clip will immediately become highlighted.
+5 At this point, there are two things you can do to position the cut or copied head or tail of the clip to 
+the position in the Timeline at which you want to paste it:
+a) Moving the playhead will now also move the clip you cut or copied, shown as a ghost clip with 
+waveform that’s “attached” to the playhead at the frame you chose. Whether you drag the 
+playhead with your mouse or use JKL to move the playhead through the Timeline, the cut or 
+copied clip will move along with it so that moving the playhead repositions the cut or copied 
+clip on that track.
+b) If you want to move the cut or copied clip to another track, use the Control-Option-Up or 
+Down Arrow key shortcuts to change the selected track; the ghost clip will move along with 
+change in track selection.
+This way, you can use the playhead to align the ghost waveform with other audio clips surrounding 
+it in preparation for pasting it.
+6 When the clip is positioned where you want it, press Command-V to paste the clip at the position 
+you’ve chosen (you can also right-click a track and choose Paste from the contextual menu). 
+The clip becomes solid, and you’re finished.
+Paste and Remove Attributes
+The Fairlight page has Paste Attributes and Remove Attributes commands that allow for the copying 
+and resetting of audio parameters and effects, similar to the same commands on the Edit page.
+Clip Attributes Naming
+By double-clicking any clip in the Timeline, you can access the Clip Attributes window to rename the 
+clip. You can still access this window with a right-click, revealing the dropdown menu of options.
+3956Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Copying and Pasting Clip Attributes
+For clips, this works as simply as copying a clip, then selecting one or more audio clips and right-
+clicking another clip and choosing Paste Attributes from the contextual menu. A dialog appears letting 
+you choose which audio attributes you want to paste before clicking Apply.
+The Paste Attributes dialog in the Fairlight page
+Copying and Pasting Track Attributes
+For tracks, it works a little differently. Right-click on a track header and choose Copy Attributes to copy 
+all track settings and effects. Then, select one or more other track headers, right-click the selection, 
+and choose Paste Attributes. A dialog appears letting you choose which track attributes you want to 
+paste before clicking Apply.
+The Paste Attributes dialog in the Fairlight page, used 
+to copy attributes from one track to another
+Removing Attributes
+For either clips or tracks, you can right-click and choose Remove Attributes to open a dialog with 
+which to choose which attributes you want to reset to their default settings.
+NOTE: By choosing the Volume check box in Remove Attributes you will delete all of the 
+Clip Gain keyframes that have been added to a clip.
+3957Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+EQ, Level, and AI Dialogue Matching
+To help provide a solid foundation for a great mix, Fairlight offers three features for matching the 
+tonal characteristics (EQ profile), volume level, or sonic characteristics of disparate timeline clips as 
+described below.
+EQ Matcher
+EQ Matcher can be used in situations where, for example, you need to quickly apply the tonal 
+characteristic (EQ Profile) of on-location dialogue recorded with one type of microphone to newly 
+recorded dialogue recorded in post using a completely different microphone.
+To capture and apply an EQ Profile:
+1 Right-click the timeline clip you want to match and choose Clip Operations > EQ Matching > 
+Capture EQ Profile from the contextual menu.
+Timeline clip EQ Matcher contextual menu
+2 Apply the captured EQ Profile to another audio clip in one of the following ways:
+Apply to Clip EQ: This applies the same EQ setting to the Clip EQ plugin for each selected clip on 
+the destination track.
+Apply to Track EQ: Applies the EQ profile to the whole track. The applied EQ curve will appear in 
+the EQ section of the corresponding Mixer channel strip. 
+New EQ curve displayed 
+in a Mixer channel strip
+Apply to Automated Track EQ: This option is useful when you have multiple clips on a track, 
+each requiring its own unique EQ setting to maintain the correct tonal match during playback. 
+This selection lets you quickly write automation data, which adjusts the Track EQ curve for each 
+clip as required.
+3958Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+To apply the EQ profile to an automated track EQ:
+1 Right-click the timeline clip you want to match and choose Clip Operations > EQ Matching > 
+Capture EQ Profile from the contextual menu.
+2 Ensure the Toggle Automation button to the right of the transport control is active (red), then select 
+an EQ parameter from the Automation drop-down in the destination Track Header, for example, 
+EQ > Band 3 > Gain.
+3 Right-click the first clip you want to apply the EQ profile to and choose Clip Operations > EQ 
+Matching > Apply to Automated Track EQ. Repeat this step for subsequent clips on the track.
+  As you repeat the this step, you will notice the automation curve changing with each application 
+of the EQ Profile.
+  During playback, the EQ Curve display in the corresponding mixer channel strip will change 
+based on the automation data and Playhead position.
+Level Matcher
+Level Matcher lets you quickly and accurately match the volume of disparate timeline clips to 
+each other.
+To match your clip levels with the Level Matcher:
+1 Right-click on the timeline clip you want to match and choose Clip Operations > Level Matching > 
+Capture Level Profile. 
+Timeline clip Level Matcher contextual menu
+2 Right-click on a timeline clip you want to adjust and choose Clip Operations > Level Matching > 
+Apply Level Profile. Repeat this step for any other timeline clips you want to change.
+AI Dialogue Matcher
+AI Dialogue Matcher is helpful when you need to match the ambient quality of one timeline clip to 
+another. For example, in a dialogue replacement scenario, you may need to make the newly recorded 
+dialogue sound like it was recorded in the same room as the rest of the on-location dialog. 
+Timeline clip AI Dialog Matcher contextual menu
+3959Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+To apply AI Dialogue Matcher:
+1 Right-click the timeline clip you want to match and choose AI Tools > Dialogue Matcher > Capture 
+Dialogue Profile from the contextual menu.
+2 When the audio has been analyzed, right-click the timeline regions you want to apply the profile to 
+and choose AI Tools > Dialogue Matcher > Apply Dialogue Profile from the contextual menu.
+Once the dialogue profile is applied, you will see a checkmark next to the Enabled option in the 
+Dialogue Matcher contextual menu.
+  Clicking this checkmark toggles the dialogue profile on and off.
+  Selecting Remove Profile removes the profile from the clip entirely.
+In addition to the contextual menu options mentioned above, applying the dialogue profile adds a 
+corresponding instance of the AI Dialogue Matcher to the Effects Tab of the Inspector. This instance of 
+the Dialogue Matcher includes a control for adjusting the amount of Voice Isolation, along with a Dry/
+Wet control to help you match the ambient quality of the source material more accurately.
+Audio Clip Layering
+Audio layering is a special audio editing mode that lets you superimpose multiple audio clips in the 
+same track, with audio clips edited into the top layers muting overlapping sections of audio clips 
+appearing on lower layers. With audio layering enabled, superimposed audio clips are treated similarly 
+to superimposed video clips that have opacity set to 100%, with clips on top obscuring (or muting) 
+clips underneath. 
+An example of multiple audio performance editing using layers, where the top 
+layer mutes overlapping sections of audio clips in lower layers
+Audio layering is incredibly useful for any situation where you’re combining segments of multiple 
+takes together to create a single voiceover, audio vocal track, or dramatic performance, as you can 
+choose which segments to use via their superimposed position in the stack of clips appearing in that 
+track, while at the same time you’re preserving the other takes underneath in case you might want 
+them later.
+TIP: Track layering can be used on the Edit page as well.
+To enable audio layering:
+  Choose Timeline > Layered Audio Editing so that a check mark appears by the command. 
+All overlapping audio will be layered instead of overwritten from that point forward.
+3960Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+To view audio layering:
+1 Choose View > Show Audio Track Layers to reveal track layers for each audio track (and each lane 
+within a given audio track) in the Timeline. When layering is on, space appears at the top of each 
+track in the Timeline which provides a region into which you can edit layered audio clips.
+2 To edit an audio clip or segment as a layer within a particular audio track, drag it from elsewhere 
+in the Timeline or from the Media Pool, and drop it into the empty area above whatever audio is 
+already in that track.
+Dragging an audio clip to become layered above another clip
+3 Edit the different superimposed layers of audio such that the segments of each take that you 
+like are on top. Only the topmost clip segments will be audible. Audio segments that overlap 
+underneath are silent. To put another layer on top, drag it from its current position to the empty 
+area at the top of the track.
+Dragging a bottom audio layer to appear on top
+4 When you’re finished editing clips in track layers, choose View > Show Audio Track Layers again 
+to hide the individual layers, so that only the topmost clips appear as a flat sequence in each 
+track and lane.
+Hiding layers makes all audio layers appear on a single track, as if the top clips are 
+overwriting what’s underneath, except the muted material underneath is preserved
+3961Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Audio Compound Clips
+DaVinci Resolve supports audio compound clips, which are created just like any other compound 
+clip, by selecting multiple audio clips, right-clicking one of them, and choosing New Compound Clip. 
+Alternately, compound clips with video clips may now contain multiple audio items as well. 
+When compound clips containing audio are opened in the Edit or Fairlight pages by right-clicking 
+an audio compound clip and choosing Open in Timeline, breadcrumb controls appear beneath the 
+Timeline that let you exit the compound clip and get back to the master Timeline.
+Opening an audio compound clip; note the path control at the bottom left of the Timeline
+Audio Crossfades
+You can add Cross Fade transitions to any edit point between two audio clips that have enough 
+handles similarly to how you add video transitions, by dragging and dropping from the Effects Library, 
+by right-clicking an edit and choosing an option from the contextual menu, or by selecting an audio 
+edit point and choosing Timeline > Add Audio Only Transition (Shift-T). 
+Cross Fade transitions are a quick and easy way to fade the volume of the outgoing clip down while 
+simultaneously fading the volume of the incoming clip up, letting you create a smooth aural transition 
+between two audio clips.
+An audio Cross Fade transition applied between two clips
+You can double-click a Cross Fade transition to open it into the Inspector, revealing the 
+following parameters:
+  Duration: The duration of the transition, shown in both seconds and frames.
+  Alignment: A dropdown that lets you choose the transition’s position relative to the edit point it’s 
+applied to. Your choices are “End on Edit,” “Center on Edit,” and “Begin on Edit.”
+  Transition style: You can choose –3dB, 0dB, or +3dB to set both the Fade In and Fade Out levels 
+to the same value. For more information on what these levels mean, see the following parameter.
+  Fade In/Fade Out levels: There are three options that affect the incoming and outgoing halves of 
+the Cross Fade effect independently. 0dB applies a linear fade (this is the default). +3dB applies a 
+boosted curve; when applied to both Fade In and Fade Out, this can compensate for diminished 
+levels in the middle of a Cross Fade. –3dB applies an attenuating curve, which deliberately lowers 
+the level of the Cross Fade.
+3962Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+NOTE: Crossfades can be created and edited on both the Edit and Fairlight pages.
+Fades and Crossfades
+Part of audio editing in the Fairlight page is the use of fades and crossfades. This section shows you 
+how to create these effects for smoothly segueing from one audio clip to another.
+Basic fades can be created on Dolby Atmos master files placed on a timeline as a clip. However, 
+complex fades and batch fades are not supported.
+Using Fades
+Like the Edit page, each audio clip has fader handles that appear at the upper right and left corners of 
+a clip you’re hovering the pointer over.
+Fader handles appear when you 
+hover the pointer over a clip
+Pulling these handles out creates a fade effect with a duration equal to the length you 
+extended the handle.
+Creating a fade effect by pulling out 
+one of the fader handles
+Once you’ve created a fade effect, you can adjust the curve of the fade by dragging the handle that 
+appears right on top of the fader curve. Dragging the handle up and down affects the angle of the 
+curve, and dragging the handle left and right affects the shape of the curve. In this way, you can create 
+all manner of fade effects.
+Adjusting the curve of the fade
+3963Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Batch Fade and Crossfade Editor in the Fairlight Page
+Multiple fades are available to multiple clips with multiple tracks selected, significantly increasing 
+fade functionality. The Batch Fades window has fade shapes for Fade In, Cross Fade, and Fade Out. 
+The Fade Length is user definable by frame for each of these fade types, and there is an option to 
+overwrite existing fades on the highlighted clips.
+All of the settings in the Batch Fades window
+There are six options per Fade type for precise usage. When adding Fades between sources, it’s 
+important to determine the shape so that only the desired media is included in the fade. The curves 
+indicate the ramping slopes of the fade. 
+Each box has similar controls for affecting the individual Fade type.
+1 Next to the Fade type name is the on/off toggle
+2 There are six Fade curves to create the precise fade needed.
+3 A Length box determines how many frames the fade will extend,
+4 A click box to overwrite any previous fades, if needed.
+The Crossfade box has three additional controls.
+1 Equal Power maintains the signal level through the fade.
+2 Equal Gain is used when crossfading media that could phase when combined. For instance, 
+if a music cue is crossfaded at the mid-point of the fade, there could be a jump in level or added 
+phasing issues. Using this option maintains the gain across the fade for that type of media.
+3 Unlinked allows for a different curve type on either side of the crossfade.
+This window will retain the settings that were last made so once a series of Fade types have been 
+chosen, then Batch Fades can be made without opening this window and can be accessed via the 
+Fairlight menu with a single click across highlighted regions. The Apply Batch Fades in the Fairlight 
+menu are applied with the settings made in the Batch Fades window.
+3964Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Batch Fade options in  
+the Fairlight menu
+This graphic shows highlighted clips and tracks ready to have Batch Fades applied.
+Tracks and clips highlighted for Batch Fades
+3965Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+The graphic below shows how the Batch Fades are applied. Clips that are not connected have 
+Fade In and Fade Out applied. Clips that are connected have Crossfades applied. The Batch 
+Fades window determines each of the Fade parameters and then applies them to all of the 
+selected clips. In this example, the Overwrite box was unchecked. Compare the fades that 
+were already there and see that they retain their original Fade length and shape.
+All of the highlighted clips have been faded  
+according to the Batch Fades window.
+NOTE: If the media is too short, a dialog box will alert you that there are insufficient handles 
+and that the fade could not be created. You can then choose to trim clips, skip clips, or cancel 
+the Batch Fade. If you cancel, you can then alter the settings to better suit the media.
+Fade In and Out to Playhead
+A pair of commands in the Trim menu let you move the playhead over a clip, and use the playhead 
+position to “Fade In to Playhead” or “Fade Out to Playhead.” These commands work in both the Edit 
+and Fairlight pages.
+(Left) Placing the playhead where you want a fade in to end, (Right) Using Fade In to Playhead
+3966Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Creating Crossfades With Overlapping Fades
+While a fade gradually fades a single track of audio up or down, a crossfade fades two overlapping 
+clips at the same time, fading one clip up and another clip down, for the aural equivalent of a cross 
+dissolve. There are currently two ways of creating a crossfade in the Fairlight page. Both depend on 
+clip layering to allow you to have overlapping fades over overlapping clips.
+To create a crossfade by overlapping two clips together:
+1 Add a fade out to the end of one clip, and a fade in to the beginning of another clip. By default, all 
+fades you add in this way are linear, although you can adjust them to whatever gain you want.
+Adding fades to adjacent clips
+2 Drag the first clip to overlap the second clip by the length of the fade you’ve created.
+Dragging the clips to overlap, the overlapping  
+parts will be preserved via clip layering
+3 Drop the clip. The overlapping fades will both be preserved thanks to clip layering, and a 
+crossfade will appear in the Timeline.
+The resulting crossfade
+3967Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+To create a crossfade over two clips that are already layered:
+Drag a fader handle at the beginning or end of a clip that’s layered, and a crossfade will 
+automatically appear.
+Creating a crossfade by adjusting  
+the fader handle of a layered clip
+Using Crossfades From the Edit Page
+You can also add crossfades in the Edit page, but they appear in the Fairlight page as transitions in the 
+Edit page style.
+The resulting crossfade
+Finding Clips in the Media Pool
+You can right-click any clip in the Timeline and choose Find in Media Pool to automatically select that 
+clip in the Media Pool, for instances where you might want to edit another copy of that clip somewhere 
+else in the Timeline, or re-edit another segment from that clip into the same area.
+NOTE: Automation Follows Edit when clips with embedded automation are moved or pasted 
+from the Timeline. When clips with automation are instead pulled from the Media Pool, they 
+are in their default state with no automation attached.
+Changing Clip Color in the Timeline
+You can right-click one or more selected clips in the Timeline to change the clip color, to be more 
+organized. For example, you might set production audio clips containing dialog from different actors 
+to different colors, or you could set clips with dialog, music, and effects to different colors in order to 
+easily differentiate each clip’s purpose.
+3968Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Editing Audio Clips in External Editors
+While working in the Fairlight page, you have the ability to process an audio file using a third-party 
+application if necessary, in the event you need to use another application’s capabilities to create an 
+effect or solve an issue that can’t be accomplished in the Fairlight page itself. To do this, you must 
+first add one or more applications to the External Audio Process list in the Audio Plugins panel of the 
+System Preferences.
+The External Audio Process list configured to send audio to Adobe Audition
+To add an external audio process:
+1 Open the System tab of the DaVinci Preferences, and select the Audio Plugins panel.
+2 Click the Add button in the “Setup External Audio Processes” section.
+3 To give the audio process a different name, double click in the Name column and type a new name.
+4 Double-click in the empty Path column for the new process, and choose an application to assign 
+to that process from the dialog.
+5 Choose the type of process you want it to be from the dropdown menu in the Type column.
+Once you have one or more external audio applications configured in Preferences, you can use 
+them to process any audio clip in the Fairlight page by right-clicking an audio clip and choosing the 
+application you want to use from the External Audio Process submenu of the contextual menu.
+When you do this, a duplicate of the audio clip media is copied (bounced) to the directory location 
+specified by the “Save clips to” field of the Capture and Playback panel of the Project Settings. At that 
+point, the external application is either opened or launched as a command from the command line 
+(depending on how the external application has been configured in Preferences). 
+Once the bounced audio is opened in the external application, you can process it however you need 
+to and bake in any changes made by saving/rendering/outputting and overwriting the original copied 
+audio media file. DaVinci Resolve detects when changes have been made, and the altered result is 
+automatically reimported as an additional audio layer on top of the original clip in the Timeline.
+The way an audio application is configured in the DaVinci System Preferences dictates how the 
+bounced audio file is passed to the external program. There are three choices: 
+  Command Line: As a command line parameter, if your audio application is able to be 
+run from the Terminal.
+  Clipboard: By placing the path to the bounced file in the clipboard, so you can paste it into the 
+application which has been automatically launched, or import it via a File > Open dialog.
+  Reveal: By revealing the bounced copy in the file manager of your workstation, so you can drag 
+and drop it onto the application which has been automatically launched.
+3969Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Exporting Audio Clips to External Files
+For any workflow where you need to write clips from the Timeline to external files with extensive file 
+altering capabilities, you can use the Export Audio Files command. 
+To export clips to external files:
+1 Select one or more clips in the Timeline.
+2 Right-click the desired selected files and choose Export Audio Files from the contextual menu.
+3 When the Export Audio Files dialog appears, choose the following:
+a) Click Browse to choose a location to save the exported audio files.
+b) (Optional) Enter a tag and one of the various Name options.
+c) Choose a File Format, Sample Rate, and Bit Depth for the exported files.
+d) Choose a Channel Format of Multi-Mono or Interleaved for the exported files.
+e) Choose a Source of Individual Clips or Consolidated Clips; a dropdown menu further defines 
+the ranges of the complete timeline, a selected range, or just the selected clips.
+f) Checkboxes can further define using only the selected tracks, including hidden tracks and 
+padding to frame boundaries.
+g) When exporting you can choose to include the Clip Level, the Clip Fades, the Clip EQ and FX, 
+and the Clip iXML.
+h) The exported files can be normalized to predetermined target levels and target loudness 
+values with all of the standards offered throughout the Fairlight page. 
+The dialog that lets you choose options 
+for exporting clips to files
+4 Click Export.
+The selected audio files are written to the location you chose.
+3970Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Sample Editing
+You can zoom quite far into audio clips on the Fairlight page timeline, until you see the individual 
+samples that comprise the audio waveform of each clip. Samples are represented by control points 
+once you’ve zoomed in far enough. 
+When you zoom in far enough, you can see the individual samples of an audio clip as control points
+You can non-destructively edit these control points to eliminate clicks and pops, and to effect other 
+fixes to problem audio clips. 
+Methods of editing audio samples:
+  To see the editable audio samples: Zoom all the way into an audio clip until you see the sample 
+control points, using either Command-Plus or Command-Minus, the scroll wheel of your pointing 
+device, or by holding down the ZOOM button of your Fairlight editing panel and turning the 
+JOG/EDITING wheel.
+  To edit a single audio sample: Click and drag that audio sample up or down to change its height.
+  To edit a section of samples: Click and drag horizontally left or right across the samples you want 
+to edit to “redraw” the waveform any way you’d like.
+  To reset all edited samples to their original state:  Right-click an audio clip with edited samples, 
+and choose Reset Edited Samples from the contextual menu.
+Black points show the previous levels when samples have been edited in a clip
+Sample editing can be undone, just like any other editing procedure, as the edited sample points are 
+stored non-destructively within the DaVinci Resolve project.
+Waveform Zero Crossing Indicator
+Waveforms have a zero crossing indicator line. Since a waveform is an image representation of sound 
+continually moving positive to negative, the zero crossing point is the level at which that fluctuation 
+occurs. When zooming into a waveform at the sample level, the waveform will display the zero crossing 
+line to enable precise editing. 
+3971Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+The zero crossing is a useful feature when editing audio, since clean edits are made at 
+the zero crossing to avoid inducing clicks or pops. A crossfade between two audio clips 
+automatically brings both sides of the fade to the zero crossing.
+The center line in the waveform  
+indicator is the zero crossing.
+Voice Convert (Studio Version Only)
+DaVinci Resolve has an incredibly sophisticated AI-driven voice conversion tool, that allows you to 
+essentially swap one speaking voice for another. The use cases for this tool are wide reaching and 
+even somewhat controversial, however this Voice Convert toolset can be an invaluable resource in 
+a post production. It allows you to take a generated voice model that has been captured by DaVinci 
+Resolve and “drive” that voice model using another voice recording as its foundation.
+In simple cases, you can replace your own voiceover tracks with a voice that has more depth and 
+gravitas to it, or even switch the gender of your own voice if you feel it’s more appropriate for the 
+subject matter. Perhaps you recorded audio in a noisy environment and wanted to make a pristine 
+version instead by using your own voice as a model, to replace your original noisy tracks. In more 
+complicated scenarios you can train your own voice convert model on your actor’s voice patterns 
+and use that to change and replace their previous voiceover, without having to get them back into 
+the recording booth. Finally, it is even possible to change the voice of an actor completely to another 
+voice, all while staying perfectly in sync with the picture. The inflection, pitch variations, and emotion 
+of the original all remain; it just sounds like someone else.
+Needless to say, using this powerful tool requires a certain level of responsibility on the part of the 
+user. Privacy, copyright, and union laws and rules are all in flux at the moment around AI-generated 
+content, and it’s necessary to carefully navigate the ethics involved in its professional use. 
+NOTE: Using Voice Convert is very processor intensive and requires your system to have a 
+minimum of 8GB of video RAM before it will activate to avoid crashes and system instability. 
+Even with a strong system, creating a Voice Model will require prolonged intensive CPU and 
+GPU power, so multi-tasking while it’s working may be challenging.
+3972Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+The Voice Convert tool
+Using Voice Convert
+Like most of DaVinci Resolve’s AI tools, using Voice Convert is very simple, with all of the complex 
+processing involved handled by the voice model.
+To use Voice Convert to change one voice to another:
+1 Place the clip or clips you want to change the voice of in the timeline, and select them.
+2 Right-click on the clip and select Voice Convert from the context menu, or select Clip > AI Tools > 
+Voice Convert in the main menu.
+3 Select the track that you want the new audio to appear in (including overwriting the original).
+4 Select the file name you want the new audio to be named.
+5 Select the Voice Model you want to use for the new audio (you can make your own custom voice 
+models as explained below), and it’s parameters.
+6 Click Render to start the Voice Convert process.
+Voice Convert analyzing a clip
+At this point the Voice Convert dialog will appear showing you the progress of the conversion. 
+Depending on the length and number of clips selected, this can take some time. When the process is 
+done, the new audio will appear in the timeline in the exact same place as the original audio (or on the 
+same place in another track if that option was selected). The new audio clips will also appear in the 
+Media Pool. 
+Simply play back the timeline to audition the new voice. You can change the audio back to the original 
+by right-clicking on a clip and selecting Revert to Original Voice from the context menu.
+3973Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+TIP: While you can drive voices with different accents, Voice Convert generally can’t recreate 
+another accent. For example, if you have a voice model that is a speaker with a British accent 
+and drive that voice with an American accent, you get more of an American version of the 
+British accented speaker. But if you speak with a British accent when driving the British voice 
+model, it will work well.
+Voice Convert Settings
+Each voice conversion requires selecting set up parameters to drive the model.
+  Track: Select which track you want the new audio to be placed on. The default is Render in Place, 
+which will overwrite the original audio.
+  File Name: Set the file name for the new audio clip. You can enter a specific name, or use the 
+metadata variables to create a template for file naming. By default the name is ClipName-(Voice 
+Model Name).
+  Voice Model: Select which voice model you wish to use for the new audio. There are some 
+built-in options that come with DaVinci Resolve, and any custom options you create will also be 
+available here.
+  Tight Matching to Source: Check this box to tightly follow the pitch, intonation, and volume 
+variance of the source voice. Uncheck this box to have a looser interpretation using the Pitch 
+Variance tool.
+  Pitch Variance: When the Tight Matching to Source box is unchecked, this tool becomes 
+active. Lower values create a more monotone interpretation, while higher values have more 
+variance in pitch.
+  Pitch Change: Use this slider to create a deeper (negative values) or higher (positive values) voice 
+based on the model. The values are in semitones and can be adjusted in 100 cents (.1 semitone) 
+increments.
+Creating Your Own Voice Models
+It is possible to create your own voice models for use with Voice Convert. These can be of your own 
+voice or even someone else’s that you have the rights to. This section goes over some best practices 
+to get a clean and usable voice model.
+Preparing the Voice Model Assets
+You will get the best results using ten minutes or so of clean, high-quality recordings of the voice to 
+be modeled. The audio should be free of excessive ambiance and noise, with little to no dynamics 
+processing. You will want consistent material that sounds natural. It can be useful to have a variety of 
+emotions expressed as well, if you want to hear those results for the driven voice. Treat it like a voice 
+over audition; show your range.
+These voice assets do not necessarily need to be in one long clip, though if there are a lot of separate 
+files, it can be helpful to consolidate them all in a single bin for organization. The multiple clips should 
+be of consistent quality, without audio variations in the recorded sources.
+3974Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Creating the Voice Model
+To generate your own voice model, select one or more clips for analysis in the Media Pool, right-click 
+and choose AI Tools > DaVinci AI Tools Voice Training from the context menu. If this is the first time 
+you’ve run this tool, DaVinci Resolve will open up the Resolve Extras Download Manager to install the 
+required support files.
+Voice Model generation
+Initially, a warning splash screen appears to ensure you assume full responsibility for how you will 
+use this tool. Once you hit accept, The DaVinci AI Voice Training dialog appears, and there are two 
+options to set. 
+  Voice Model Name: Enter a descriptive name for your new model. 
+  Quality: Choose Faster or Better mode for analysis. Better takes about 3x the time as faster, 
+and 10 minutes or so of material can take a few hours to complete, depending on your 
+computer’s power.
+Initially creating a voice model launches a foreground process, then once the initial 
+analysis is complete, it will switch to a background process, allowing you to continue 
+to use DaVinci Resolve for other purposes or other apps while it finishes. 
+Voice Model Progress
+3975Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+You can see the progress of the model in the Voice Model Generation Progress 
+indicator in the bottom right corner, or by selecting Workspace > Voice Model Progress. 
+Voice Model Generation Progress indicator will slowly fill 
+blue as the voice model finished. Hover over the top to 
+get an ETA and progress finished tooltip. 
+You can also alternatively choose to pause or discard the in-progress model instead. 
+Quitting DaVinci Resolve will also pause the background process, and it will automatically 
+start up again the next time DaVinci Resolve is launched.
+Once the model is complete, the new voice preset will appear for use in the 
+Voice Convert dialog.
+Speech Generator (Studio Version Only)
+Speech Generator generates high quality spoken word output from written text, letting you create 
+your own natural sounding VO or narrations for your projects with different voices and performances 
+tailored to your edit. 
+Downloading the Speech Generator Model
+Before using Speech Generator, you’ll need to download the model. Go to DaVinci Resolve > 
+Extras Download Manager > AI Speech Generator and click the download icon.
+Using AI Speech Generator
+Launch the AI Speech Generator by going to Timeline > AI Tools > Speech Generator.
+Next, type in the text you want to generate in the Text Input field. Speech Generator does best with 
+shorter sentences or paragraphs. If your text input is too long, the generated voice can start to drift 
+into strange territory after awhile. So if you have a large amount of text, consider breaking it into 
+smaller chunks.
+Then choose the Voice Model you want to read your text. There are four built-in voices that are 
+licensed for use, or you can create your own custom voice as described below. You can also modulate 
+the voice by adjusting the parameters in the settings section.
+Finally, set a file name for your generated audio clip, then select an audio track to insert the clip into.
+When you press the Generate button, the Speech Generator will process and create a new audio clip 
+based on your input, and put it in your Media Pool. 
+3976Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+The Speech Generator tool
+  Speech Input: This section lets you input the text and decide which voice model you want it 
+to read in.
+  Text Input: Type in the text you want the Speech Generator to read. Shorter sentences and 
+paragraphs generally produce better results. Punctuation does affect the timing of the reading: 
+periods (full stops) create longer pauses, while commas create shorter pauses. Carriage returns 
+may also lengthen a pause when they follow a period.
+  Voice Model: Choose a voice model from the dropdown list to read your text. Selecting Custom 
+Voice will open a file requester to load an audio file with the voice you wish to use (see Creating a 
+Custom Voice below).
+  Settings: These settings control the modulation and performance of the voice.
+  Speed: Adjusts the speed of the reading.
+  Variation: Controls variation of the reading prosody (the rhythm and intonation of speech) and 
+emotion, with 0.0 being closest to prosody of the reference voice source.
+  Pitch: Controls how high or low the voice is. Positive values are higher pitched, and negative 
+values are lower.
+  Generation ID: You can think of this number like a performance or take. Each number represents 
+a different reading with varying prosody. Choosing the exact same number will give you the exact 
+same performance, which can be useful for trying out other variations while retaining the same 
+prosody, including emotional emphasis. 
+  Randomize: Check this box to use a random number for the Generation ID.
+3977Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+  File Name: The name of the new Speech Generator audio file. A default name is supplied and a 
+numerical suffix is automatically added. You can enter your own name instead for the start of the 
+string. Speech Generator audio files are stored in the DaVinci Resolve Media location you’ve set 
+under their project name.
+  Add to Timeline: Checking this box will automatically insert the reading at the playhead position in 
+your timeline.
+  Audio Track: Choose which audio track in your timeline the reading will be inserted into.
+Creating a Custom Voice for the Speech Generator
+To create a custom voice for use in Speech Generator, you’ll need an audio file of the person speaking 
+for about 20 seconds that’s been recorded with a clean and high fidelity signal. Then simply load that 
+file into the Speech Generator using the Custom setting in the Voice Model dropdown menu.
+Tips for getting the best voice sample: 
+• Keep the recording to 10-20 seconds long. In fact, longer recordings are truncated to the 
+first 20 seconds for Speech Generator analysis.
+• Make sure the voice recording is clean, with good levels and low noise.
+• Try to keep your spacing even, with no long gaps or extremes in volume and emotion. 
+• If you’re at a loss for what to record, try reading the “Harvard Sentences” aloud for 20 
+seconds or so. They’re designed to be phonetically balanced, reflecting the frequency of 
+sounds used in everyday conversational English.
+• Experiment to see what works.
+IMPORTANT: If you’re using a real person’s voice, ensure you get their permission and are 
+fairly compensating them!
+Speech Generator vs. Voice Convert
+While similar in overall effect, the input driving these two AI speech tools is very different. Speech 
+Generator creates a new audio file and performance from written text, whereas Voice Convert uses 
+an existing audio file and tries to match the tonality and performance of that exact clip, but in a 
+different voice.
+In addition, Speech Generator’s voices can be generated quickly using only a short snippet of audio, 
+while Voice Convert requires a longer source file and more time to analyze and build a voice model.
+3978Fairlight | Chapter 175 Editing Basics in the Fairlight Page
+FAIRLIGHT
+Chapter 176
+The Fairlight 
+Inspector
+Each Timeline and Media Pool clip and every audio track or bus have settings 
+and properties that can be adjusted, animated, and edited in the Fairlight Inspector. 
+This lets you easily perform tasks, such as matching the levels or EQ of several clips 
+while reserving the track level for your overall mix or adjusting levels or audio effect 
+parameters on tracks and busses. 
+It is important to note that clip-based effects differ from real-time track and bus effects in that 
+they only apply to individual clips on the Timeline or in the Media Pool, rather than all clips on 
+a track. 
+This chapter describes how to use these controls within the Fairlight Inspector.
+Contents
+Clip Mode vs. Track Mode ������������������������������������  3980
+Common Controls  ������������������������������������������������������ 3980
+The Audio Tab �������������������������������������������������������������� 3981
+Clip Mode ������������������������������������������������������������������������ 3981
+Track Mode ������������������������������������������������������������������� 3985
+The Effects Tab ����������������������������������������������������������� 3986
+The Transition Tab������������������������������������������������������ 3987
+The File Tab ������������������������������������������������������������������� 3987
+File Information  ������������������������������������������������������������ 3987
+Metadata ������������������������������������������������������������������������ 3988
+Auto Select Next Unsorted Clip  ������������������������  3988
+Audio Configuration  ������������������������������������������������� 3988
+Adjusting Multiple Clips in the File Tab  ����������� 3992
+Timecode  ���������������������������������������������������������������������� 3992
+Adjusting Multiple Clips Simultaneously  ������� 3993
+Animated Inspector Adjustments ���������������������  3994
+Paste and Remove Attributes �����������������������������  3995
+Setting Clip Volume in the Timeline  ����������������  3995
+Adjusting Volume ������������������������������������������������������� 3995
+Adding and Adjusting Volume Keyframes  ����� 3996
+Normalizing Audio Levels  ��������������������������������������� 3997
+Paste and Remove Attributes 
+for Clips and Tracks �������������������������������������������������� 3998
+3979Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+Clip Mode vs. Track Mode
+The Inspector includes a Clip Mode and Track Mode button to eliminate confusion about whether your 
+parameter property changes in the Audio tab are applied to an audio clip or a track. 
+(Left) the Clip mode (circled); (Right) the Track mode (circled)
+• Selecting an audio clip in the Media Pool or on the Timeline activates the Clip Mode button, 
+and the clip name appears at the top of the Inspector, to the right of the Track Mode button.
+When you select a Media Pool clip, the term “Media Pool “ appears before the clip name at 
+the top of the Inspector. Only the clip name will be displayed if you select a timeline clip.
+The term “Media Pool “ appears before the  
+clip name at the top of the Inspector
+• Clicking the Track Mode button while a Timeline clip is selected causes subsequent 
+changes in the Audio tab to apply to the corresponding Mixer channel. The clip name at the 
+top of the Inspector will switch to the track name.
+• Clicking a track header also activates track mode.
+In either instance, the clip name at the top of the Inspector will switch to the track name.
+Common Controls
+Selecting an audio clip, audio track, or bus channel strip in the Mixer exposes some common audio-
+specific parameters and controls in the Audio and Effects panels.
+Closed and open Inspector group  
+controls in the Fairlight page
+3980Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+These controls include:
+  Enable button: A toggle control to the left of the parameter group’s name lets you disable 
+and re-enable every parameter within that group at once. Orange means that track’s enabled. 
+Gray is disabled.
+  Parameter group title bar: Double-clicking the title bar of any group of parameters collapses or 
+opens them. Even more exciting than that, Option-double-clicking the title bar of one parameter 
+group collapses or opens all parameter groups at once.
+  Keyframe and Next/Previous Keyframe buttons: This button lets you add or remove keyframes at 
+the position of the playhead to or from every single parameter within the group. When the button 
+is highlighted orange, a keyframe is at the current position of the playhead. When it’s dark gray, 
+there is no keyframe. Left and right arrow buttons let you jump the playhead from keyframe to 
+keyframe for further adjustment.
+  Reset button: Lets you reset all parameters within that group to their default settings.
+TIP: You can make “granular” adjustments to virtual sliders by holding down the Option or 
+Shift key while clicking in and dragging left or right within the numerical value field.
+The Audio Tab
+Clip Mode
+When working with audio clips (Clip mode) on the Audio Timeline or Media Pool, the Audio tab offers 
+the controls and audio effects described below.
+NOTE: Parameters for audio clips on locked tracks cannot be edited in the Inspector.
+For more information on locking audio tracks, jump to thic chapter, Editing Basics in the 
+Fairlight Page.
+Volume
+The Volume control that lets you adjust the gain of that clip. 
+Volume control in the Inspector
+3981Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+Pan
+This control lets you pan a selected clip. While most professional mixes will restrict panning to the 
+more robust panner found in the Fairlight page Mixer, this simple clip-based Pan control is useful for 
+editors of visuals working in the Edit page to quickly create simple panning effects to aid in a craft edit. 
+Dragging the slider lets you pan audio left to right. This control is centered at 0 by default. 
+Pan control in the Inspector
+Voice Isolation (Studio Version Only)
+When activated, this control applies Voice Isolation. 
+Voice Isolation control in the Inspector
+For more information about Voice Isolation, jump to this chapter: Fai rlight FX.
+Dialogue Leveler
+Each audio clip in the Timeline or Media Pool has Dialogue Leveler controls that let you apply the 
+effect to the clip.
+Dialogue Leveler controls in the Inspector
+For more information about Dialogue Leveler, jump to this chapter: Fai rlight FX.
+3982Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+Pitch
+The Pitch control lets you alter the pitch of a clip without changing the speed. Two sliders let you 
+adjust clip pitch in Semi Tones (large adjustments, a twelfth of an octave) and Cents (fine adjustments, 
+100th of a semi tone).
+Pitch control in the Inspector
+Speed Change
+The Speed Change control lets you alter the speed of the clip. It has the option to have the clip’s pitch 
+follow the adjusted speed change or maintain the original speed’s pitch.
+Speed Change control in the Inspector
+The Speed Change window has the following overall controls:
+• Enable button: Turns the overall Speed Change effect off and on, 
+without resetting the controls.
+• Reset button: Resets all controls of the Speed Change window to their defaults.
+• Direction: The Right Arrow maintains the forward direction of the waveform, the Left Arrow 
+reverses the direction of the waveform, and the Snowflake icon creates a freeze frame.
+• Speed %: A flywheel control to adjust the speed by a percentage plus or minus 100%.
+• Frames Per Second: A flywheel control that syncs with the Speed % control showing the 
+FPS relative to the speed change.
+• Duration: Indicates the new timing of the clip.
+• Ripple Sequence: When checked this moves all the media after the action to ripple edit to 
+the new duration.
+• Pitch Correction: When checked this maintains the original pitch of the clips when 
+speed changed. When unchecked the audio will speed up or slow down with the speed 
+adjustment. The slower the speed change, the lower the pitch; the higher the speed 
+change, the higher the pitch.
+NOTE: When in the Speed Change controls, do not use the freeze frame option. This will 
+negatively affect the selected audio file.
+3983Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+Parametric Equalizer
+This four-band equalizer has both graphical and numeric controls for boosting or attenuating different 
+ranges of frequencies within that clip, before it even gets to the EQ built into the Mixer. Each band has 
+controls for the filter type (Bell, Lo-Shelf, Hi-Shelf, Notch), Frequency, Gain, and Q-factor (sharpness of 
+the band), with the available controls for each band of EQ changing depending on the filter type.
+When a channel strip’s EQ is enabled, the equalization curve that’s being applied is displayed in the 
+Mixer. A channel strip’s EQ settings affect all the clips on that track, so you must open the EQ window 
+to make those modifications.
+The channel strip’s EQ indicator
+Master EQ Controls
+The Equalizer window has the following overall controls located in the upper right and 
+left corners.
+• Enable button: Turns the overall EQ effect off and on, without resetting the controls.
+• Reset button: Resets all controls of the EQ window to their defaults.
+EQ Graph
+This graph displays the current EQ curve with handles that correspond to each enabled 
+EQ band listed below. You can drag any numbered handle to boost or attenuate the range 
+of frequencies governed by that band, using whatever type of equalization that band has 
+been set to.
+The EQ graph with user-draggable handles
+3984Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+Dragging the numbered handles on this graph in turn modifies the parameters of the 
+corresponding band, and changing each band’s parameters will also alter the EQ graph, 
+which serves the additional purpose of providing a graphical representation of the 
+equalization being applied to that track.
+Bands 1 and 4
+The outer two sets of band controls let you make high-pass and low-pass adjustments, 
+if necessary.
+• Band enable button: Turns each band of EQ on and off.
+• Band filter type: Bands 1 and 4 can be switched among six specific filtering options 
+for processing the lowest or highest frequencies in the signal. These include (from top 
+to bottom): Hi-Shelf, Hi-Pass, Bell, Notch, Lo-Pass, and Lo-Shelf. Bands 2 and 3 can be 
+switched among Lo-Shelf, Bell, Notch, and Hi-Shelf.
+• Freq: Adjusts the center frequency of the EQ adjustment.
+• Gain: Adjusts the amount by which the affected frequencies are impacted. Negative values 
+attenuate those frequencies, while positive values boost those frequencies.
+Bands 2 and 3
+The middle two sets of band controls let you make a wide variety of equalization adjustments.
+• Band enable button: Turns each band of EQ on and off.
+• Band filter type: Bands 2–5 can be switched among four different filtering options (from top 
+to bottom): Lo-Shelf, Bell, Notch, and Hi-Shelf.
+• Frequency: Adjusts the center frequency of the EQ adjustment.
+• Gain: Adjusts the amount by which the affected frequencies are affected. Negative values 
+attenuate those frequencies, while positive values boost those frequencies.
+• Q Factor: Adjusts the width of affected frequencies. Lower values include a wider range of 
+frequencies; higher values include a narrower range of frequencies.
+NOTE: This may seem obvious, but not all parameters are available for every curve type. 
+For instance, a Bell curve filter has Frequency, Gain, and Q adjustments, but a Lo-Pass or 
+Hi-Pass filter will only have Frequency available to adjust.
+Track Mode
+When working with audio tracks or busses (Track mode) the Audio tab lets you adjust the volume level 
+and enable and adjust Fairlight Track FX. 
+For more information on Fairlight Track FX, jump to this chapter: Fai rlight FX.
+3985Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+Audio tab - Track mode
+NOTE: Parameters for locked tracks cannot be edited in the Inspector. 
+For more information on locking audio tracks, jump to this chapter: Editing Basics in the 
+Fairlight Page.
+The Effects Tab
+Audio Effects added to a track or bus via the Effects section of its Mixer channel strip or to a timeline 
+clip from the Effects Library will appear in this tab.
+Fairlight FX Delay controls in the Effects tab
+For more information, jump to this chapter: Audio Effects .
+3986Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+The Transition Tab
+If you’ve applied any Transitions (Crossfade) between clips in either the Edit or Fairlight pages, you can 
+adjust them in the Transition tab, which can be opened by double-clicking a Crossfade transition. 
+Crossfade controls in the Transition tab of the Inspector
+The following properties can be edited:
+  Transition Type: The currently selected transition. You can change to any other installed transition 
+by selecting one in the dropdown menu. 
+  Duration: The duration of the transition, shown in both seconds and frames.
+  Alignment: A dropdown that lets you choose the transition’s position relative to the edit point it’s 
+applied to. Your choices are “Start on Edit,” “Center on Edit,” and “End on Edit.”
+  Fade In: This dropdown offers selection from -3dB to 3dB.
+  Fade Out: This dropdown offers selection from -3dB to 3dB.
+For more information on adjusting crossfades, jump to this chapter: Editing Basics in the 
+Fairlight Page.
+The File Tab
+The File tab includes different sections where you can view or edit the properties and configuration of 
+audio clips on the Timeline and in the Media Pool.
+File Information
+In addition to the name of the audio clip, this section of the File tab provides additional details about 
+the file, as shown in the screenshot below. 
+File tab - File Information section
+3987Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+Metadata
+Except for the embedded Timecode field, every text field can be edited with information of 
+your choice.
+File tab - File Metadata section
+Auto Select Next Unsorted Clip 
+When this box is checked, pressing the Return key after filling in a metadata field selects the next 
+Media Pool clip with the cursor in the same field.
+This allows rapid sequential metadata entry without clicking the Next Clip button or manually clicking 
+the next Media Pool clip. 
+Auto Select Next Unsorted Clip checkbox and Next Clip button
+Whenever a Media Pool clip is selected, the name displayed to the right of the Clip and Track 
+and Mode buttons will begin with “Media Pool – “. 
+File tab - Media Pool clip selected
+Audio Configuration
+This section of the File tab includes features and controls that let you intuitively change an audio clip’s 
+channel properties. These changes determine the number of active channels in the clip and their 
+individual source and volume levels when inserted into the Timeline.
+3988Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+The appearance of the Audio Configuration pane will vary depending on the format of the clip 
+you’re trimming. For example, the screenshots below depict a 6-channel clip in the Media Pool 
+in two different channel formats.
+6-channel adaptive - Media Pool clip   6-channel mono - Media Pool clip
+  Format: When an audio clip is selected in the Media Pool, the Format dropdown displays its 
+current channel format, standard channel configurations, and a Custom option. You can apply 
+these channel configurations to the clip without having to use the Clip Attributes to customize 
+the clip. 
+Format dropdown menu - for a 6-channel adaptive clip
+When a timeline clip is selected, the Format dropdown displays its current channel format and the 
+Custom option. However, the timeline clip is comprised of two mono channels; it is possible to 
+change the audio sources for each channel.
+Choosing the Custom option opens the Audio tab of the Clip Attributes dialog. 
+For more information on using the Clip Attributes dialog, jump to this chapter:  
+Modifying Clips and Clip Attributes .
+3989Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT
+  Waveforms: When working with a Media Pool clip, the first waveform beneath the Format 
+dropdown displays a composite of all channels within the audio file. The remaining waveforms 
+represent the audio content of each channel within the clip.
+The composite waveform is not available when working with timeline clips.
+You can listen to the audio by skimming it with your mouse cursor, clicking the Play button in the 
+transport control below the last waveform, or pressing the spacebar.
+If you click anywhere within any waveform, playback will continue playing the audio from that 
+point. This concept is explained in more detail in the Transport Controls section below.
+  Channel Controls: When working with source clips in the Media Pool, each clip channel has its 
+own Enable/Disable checkbox and Mute button.
+Active/Inactive:  Filling in the checkbox enables the channel, making it active and available for 
+editing operations. Conversely, when the checkbox is empty, the channel is unaffected by editing 
+operations, as if it were removed from the clip.
+Using the example of a 6-channel mono clip in the Media Pool, if you deactivate channel 2, only 
+five tracks (1, 3, 4, 5, and 6) will be included when it’s dragged from the Media Pool to the Timeline. 
+6 mono channel Media Pool clip
+  Mute: Clicking this button mutes the channel while leaving it in place within the clip. So, in the case 
+of the six-channel Media Pool clip, if you filled in the checkbox for channel two and then activated 
+the Mute button, all six channels will be included when the clip is dragged onto the Timeline, but 
+only channels 1, 3, 4, 5, and 6 will be audible.
+TIP: Option-clicking a Mute button or Active/Inactive checkbox toggles all others to the 
+opposite state, effectively soloing the channel you are interacting with.
+  Channel Source: When working with multichannel clips comprised of all mono channels, the Audio 
+Configuration pane will include a dropdown displaying the name of the current audio source of 
+each waveform. Clicking the dropdown lets you choose from a list of mono audio sources.
+3990Fairlight | Chapter 176 The Fairlight Inspector
+FAIRLIGHT

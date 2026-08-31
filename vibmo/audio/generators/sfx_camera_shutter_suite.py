@@ -4,6 +4,7 @@ class CameraShutterSuite:
     """Procedural Camera Shutter & Mechanical Foley generator suite."""
 
     SR = 48000
+    SAMPLE_RATE = 48000
 
     @staticmethod
     def _generate_noise(length):
@@ -119,3 +120,27 @@ class CameraShutterSuite:
         audio = CameraShutterSuite._apply_envelope(audio, 0.1, 0.2, 0.7, 0.2)
 
         return np.clip(audio, -1.0, 1.0).astype(np.float32)
+
+    @staticmethod
+    def dslr_rapid_burst(duration: float = 0.6, shots: int = 3) -> np.ndarray:
+        """Rapid DSLR continuous burst mode multi-shot shutter snap sequence."""
+        sr = CameraShutterSuite.SR
+        length = int(sr * duration)
+        master = np.zeros(length, dtype=np.float32)
+
+        shot_interval = duration / max(1, shots)
+        for i in range(shots):
+            start_time = i * shot_interval
+            start_idx = int(start_time * sr)
+            shot_audio = CameraShutterSuite.dslr_mirror_slap(duration=min(0.16, shot_interval))
+            end_idx = min(start_idx + len(shot_audio), length)
+            act_len = end_idx - start_idx
+            if act_len > 0:
+                master[start_idx:end_idx] += shot_audio[:act_len]
+
+        max_val = np.max(np.abs(master))
+        if max_val > 0:
+            master = master / max_val
+
+        return master.astype(np.float32)
+

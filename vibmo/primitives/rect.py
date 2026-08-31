@@ -24,6 +24,7 @@ class Rect(Node):
         stroke_width: float = 1.0,
         shadow: Optional[Dict[str, Any]] = None,
         glow: Optional[Dict[str, Any]] = None,
+        color: Optional[Union[Color, LinearGradient, RadialGradient, str]] = None,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
@@ -32,7 +33,8 @@ class Rect(Node):
         self.corner_radius = Signal(corner_radius, f"{self.name}.corner_radius")
         
         # Color & Style signals
-        resolved_fill = Color.from_any(fill) if isinstance(fill, (str, Color)) else fill
+        actual_fill = color if color is not None else fill
+        resolved_fill = Color.from_any(actual_fill) if isinstance(actual_fill, (str, Color)) else actual_fill
         self.fill = Signal(resolved_fill, f"{self.name}.fill")
         
         resolved_stroke = Color.from_any(stroke) if isinstance(stroke, (str, Color)) else stroke

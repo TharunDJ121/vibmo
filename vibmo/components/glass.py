@@ -100,30 +100,48 @@ class GlassCard(FlexContainer):
             from PIL import Image, ImageFilter
 
             surf = ctx.get_target()
+            surf.flush()
             w, h = surf.get_width(), surf.get_height()
 
-            buf = surf.get_data()
-            arr = np.ndarray(shape=(h, w, 4), dtype=np.uint8, buffer=buf)
-            img = Image.fromarray(arr, "RGBA")
-            
-            scale_fac = 0.25
-            sw, sh = max(1, int(w * scale_fac)), max(1, int(h * scale_fac))
-            img_small = img.resize((sw, sh), Image.Resampling.BILINEAR)
-            blurred_small = img_small.filter(ImageFilter.GaussianBlur(self.backdrop_blur * scale_fac))
-            blurred = blurred_small.resize((w, h), Image.Resampling.BILINEAR)
-            
-            blurred_arr = np.array(blurred)
-            blurred_surf = cairo.ImageSurface.create_for_data(blurred_arr, cairo.FORMAT_ARGB32, w, h)
-            pattern = cairo.SurfacePattern(blurred_surf)
-            inv_matrix = ctx.get_matrix()
-            inv_matrix.invert()
-            pattern.set_matrix(inv_matrix)
+            if w > 4 and h > 4:
+                buf = surf.get_data()
+                arr = np.ndarray(shape=(h, w, 4), dtype=np.uint8, buffer=buf)
+                
+                # Cairo ARGB32 in memory is BGRA on little-endian platforms; convert to RGBA
+                rgba_temp = np.zeros_like(arr)
+                rgba_temp[:, :, 0] = arr[:, :, 2]  # R
+                rgba_temp[:, :, 1] = arr[:, :, 1]  # G
+                rgba_temp[:, :, 2] = arr[:, :, 0]  # B
+                rgba_temp[:, :, 3] = arr[:, :, 3]  # A
+                
+                img = Image.fromarray(rgba_temp, "RGBA")
+                
+                scale_fac = 0.25
+                sw, sh = max(1, int(w * scale_fac)), max(1, int(h * scale_fac))
+                img_small = img.resize((sw, sh), Image.Resampling.BILINEAR)
+                blurred_small = img_small.filter(ImageFilter.GaussianBlur(self.backdrop_blur * scale_fac))
+                blurred = blurred_small.resize((w, h), Image.Resampling.BILINEAR)
+                
+                blurred_rgba = np.array(blurred)
+                # Convert back to Cairo BGRA
+                blurred_bgra = np.zeros_like(blurred_rgba)
+                blurred_bgra[:, :, 0] = blurred_rgba[:, :, 2]  # B
+                blurred_bgra[:, :, 1] = blurred_rgba[:, :, 1]  # G
+                blurred_bgra[:, :, 2] = blurred_rgba[:, :, 0]  # R
+                blurred_bgra[:, :, 3] = blurred_rgba[:, :, 3]  # A
+                blurred_bgra = np.ascontiguousarray(blurred_bgra)
+                
+                blurred_surf = cairo.ImageSurface.create_for_data(blurred_bgra, cairo.FORMAT_ARGB32, w, h)
+                pattern = cairo.SurfacePattern(blurred_surf)
+                inv_matrix = ctx.get_matrix()
+                inv_matrix.invert()
+                pattern.set_matrix(inv_matrix)
 
-            ctx.save()
-            self._build_path(ctx, time)
-            ctx.set_source(pattern)
-            ctx.fill()
-            ctx.restore()
+                ctx.save()
+                self._build_path(ctx, time)
+                ctx.set_source(pattern)
+                ctx.fill()
+                ctx.restore()
 
         # 3. Base draw (Fill and directional stroke)
         super().draw(ctx, time)

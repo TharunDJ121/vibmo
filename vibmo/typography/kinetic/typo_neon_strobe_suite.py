@@ -1,6 +1,6 @@
 import math
 import random
-from typing import Any, List, Optional, Tuple
+from typing import Any, List, Optional, Tuple, Union
 
 import cairo
 
@@ -146,14 +146,16 @@ class RealisticNeonStrobeSign(Node):
         font_family: str = "Inter",
         neon_color: Color = colors.CYAN,
         off_color: Color = Color.hex("#222222"),
+        color: Optional[Union[Color, str]] = None,
         **kwargs
     ):
         super().__init__(**kwargs)
         self.text = text
         self.font_size = Signal(float(font_size), f"{self.name}.font_size")
         self.font_family = font_family
-        self.neon_color = Signal(neon_color, f"{self.name}.neon_color")
-        self.off_color = Signal(off_color, f"{self.name}.off_color")
+        active_color = Color.from_any(color) if color is not None else Color.from_any(neon_color)
+        self.neon_color = Signal(active_color, f"{self.name}.neon_color")
+        self.off_color = Signal(Color.from_any(off_color), f"{self.name}.off_color")
 
         # 0.0 is completely off, 1.0 is fully on
         self.intensity = Signal(0.0, f"{self.name}.intensity")

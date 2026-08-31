@@ -1,11 +1,13 @@
+from __future__ import annotations
 import math
 from typing import Any, Optional, Sequence, Tuple, Union
+
 import cairo
 
 from vibmo.scene.node import Node
-from vibmo.core.color import Color, colors
+from vibmo.core.color import Color
 from vibmo.layout.container import FlexContainer
-from vibmo.primitives.rect import Rect
+from vibmo.spatial.shadows import DropShadow
 
 
 class MonitorArmPivotingBase(Node):
@@ -41,6 +43,7 @@ class MonitorArmPivotingBase(Node):
         ctx.stroke()
         ctx.restore()
 
+
 class GamerBackGlowRgbLed(Node):
     """
     Rear ambient RGB bias lighting aura projecting against the back wall.
@@ -53,8 +56,8 @@ class GamerBackGlowRgbLed(Node):
         **kwargs: Any
     ) -> None:
         super().__init__(**kwargs)
-        self.width_val = width
-        self.height_val = height
+        self.width_val = float(width)
+        self.height_val = float(height)
         self.colors = [Color.from_any(c) if isinstance(c, (str, Color)) else Color.hex("#ff0055") for c in colors_rgb]
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
@@ -62,74 +65,102 @@ class GamerBackGlowRgbLed(Node):
         w = self.width_val
         h = self.height_val
 
-        # Animated breathing glow effect
         intensity = 0.6 + 0.4 * math.sin(time * 2.0)
 
-        # Simple radial gradient approximation for aura
-        glow = cairo.RadialGradient(w/2, h/2, 0, w/2, h/2, max(w, h)/1.5)
-        if len(self.colors) >= 2:
-            c1, c2 = self.colors[0], self.colors[-1]
-            # Mix colors in the center
-            glow.add_color_stop_rgba(0.0, c1.r, c1.g, c1.b, 0.8 * intensity)
-            glow.add_color_stop_rgba(0.5, c2.r, c2.g, c2.b, 0.4 * intensity)
-            glow.add_color_stop_rgba(1.0, 0.0, 0.0, 0.0, 0.0)
-        else:
-            c = self.colors[0] if self.colors else Color.WHITE
-            glow.add_color_stop_rgba(0.0, c.r, c.g, c.b, 0.8 * intensity)
-            glow.add_color_stop_rgba(1.0, 0.0, 0.0, 0.0, 0.0)
+        if hasattr(cairo, "RadialGradient") and hasattr(ctx, "set_source"):
+            try:
+                glow = cairo.RadialGradient(w / 2, h / 2, 0, w / 2, h / 2, max(w, h) / 1.5)
+                if len(self.colors) >= 2:
+                    c1, c2 = self.colors[0], self.colors[-1]
+                    glow.add_color_stop_rgba(0.0, c1.r, c1.g, c1.b, 0.8 * intensity)
+                    glow.add_color_stop_rgba(0.5, c2.r, c2.g, c2.b, 0.4 * intensity)
+                    glow.add_color_stop_rgba(1.0, 0.0, 0.0, 0.0, 0.0)
+                else:
+                    c = self.colors[0] if self.colors else Color.WHITE
+                    glow.add_color_stop_rgba(0.0, c.r, c.g, c.b, 0.8 * intensity)
+                    glow.add_color_stop_rgba(1.0, 0.0, 0.0, 0.0, 0.0)
 
-        ctx.set_source(glow)
-        # Expand drawing area to cover glow
+                ctx.set_source(glow)
+            except Exception:
+                ctx.set_source_rgba(0.2, 0.4, 1.0, 0.3)
+        else:
+            ctx.set_source_rgba(0.2, 0.4, 1.0, 0.3)
+
         ctx.rectangle(-w * 0.5, -h * 0.5, w * 2, h * 2)
         ctx.fill()
         ctx.restore()
 
 
-class Curved49InchUltrawide(Node):
+class SuperUltrawideMonitorFrame(Node):
     """
-    32:9 aspect curved gaming/productivity monitor with subtle 1000R panoramic curvature and slim bezels.
+    32:9 aspect curved gaming/productivity monitor with subtle 1000R panoramic curvature,
+    slim bezels, and auto-clipped screen viewport.
     """
     def __init__(
         self,
-        height: float = 360.0,
-        bezel_color: Union[Color, str] = Color.hex("#111111"),
+        width: Optional[float] = None,
+        height: Optional[float] = None,
+        curve_depth: Optional[float] = None,
+        bezel_color: Optional[Union[Color, str]] = None,
+        shadow: Optional[Union[DropShadow, bool]] = True,
         **kwargs: Any
     ) -> None:
         super().__init__(**kwargs)
-        # 32:9 Aspect Ratio
-        self.height_val = height
-        self.width_val = height * (32.0 / 9.0)
-        self.bezel_color = Color.from_any(bezel_color) if isinstance(bezel_color, (str, Color)) else Color.hex("#111111")
 
-        # Curvature simulation offset
-        self.curve_depth = self.height_val * 0.05
+        if width is not None and height is not None:
+            self.width_val = float(width)
+            self.height_val = float(height)
+        elif width is not None:
+            self.width_val = float(width)
+            self.height_val = self.width_val * (9.0 / 32.0)
+        elif height is not None:
+            self.height_val = float(height)
+            self.width_val = self.height_val * (32.0 / 9.0)
+        else:
+            self.width_val = 1280.0
+            self.height_val = 360.0
+
+        self.bezel_color = Color.from_any(bezel_color) if bezel_color else Color.hex("#111111")
+        self.curve_depth = float(curve_depth) if curve_depth is not None else self.height_val * 0.12
         self.corner_radius = 12.0
 
-        # Screen content container
+        if shadow is True:
+            self.shadow = DropShadow.elevated(blur=40.0, offset=(0, 20), color=Color.BLACK.with_alpha(0.50))
+        elif isinstance(shadow, DropShadow):
+            self.shadow = shadow
+        else:
+            self.shadow = None
+
         self.screen = FlexContainer(
-            width=self.width_val - 4.0, # Slight bezel inset
-            height=self.height_val - 4.0 - self.curve_depth,
+            width=self.width_val - 8.0,
+            height=self.height_val - 8.0 - self.curve_depth,
             direction="row",
             justify_content="center",
-            align_items="center"
+            align_items="center",
+            fill=Color.hex("#080808"),
+            stroke=Color.TRANSPARENT,
+            corner_radius=8.0,
         )
-        # Positioned relative to monitor center
-        self.screen.position.set((2.0, 2.0 + self.curve_depth / 2))
+        self.screen.position.set((4.0, 4.0 + self.curve_depth / 2))
 
-        # 3-column split layout slots
-        col_width = (self.screen.width() - 32) / 3 # Gap approximation
+        col_width = (self.screen.width() - 32) / 3
         self.col_1 = FlexContainer(width=col_width, height=self.screen.height(), direction="column", fill=None)
         self.col_2 = FlexContainer(width=col_width, height=self.screen.height(), direction="column", fill=None)
         self.col_3 = FlexContainer(width=col_width, height=self.screen.height(), direction="column", fill=None)
 
-        # We don't add them automatically to allow arbitrary content,
-        # but they are available if needed for the 3-column split layout slots requirement.
-
         self.add(self.screen)
 
-    def add_screen_content(self, *nodes: Node) -> 'Curved49InchUltrawide':
+    def add_screen(self, *nodes: Node) -> SuperUltrawideMonitorFrame:
+        """Add child nodes to the 32:9 screen container."""
         self.screen.add(*nodes)
         return self
+
+    def add_screen_content(self, *nodes: Node) -> SuperUltrawideMonitorFrame:
+        """Alias for add_screen."""
+        return self.add_screen(*nodes)
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        return (0.0, 0.0, self.width_val, self.height_val)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         w = self.width_val
@@ -139,23 +170,20 @@ class Curved49InchUltrawide(Node):
 
         ctx.save()
 
+        # Shadow (only when real surface is available)
+        if self.shadow is not None and hasattr(ctx, "set_source_surface"):
+            self.shadow.render_shadow(ctx, (0, 0, w, h), cr)
+
         # Draw curved monitor body
-        ctx.set_source_rgba(self.bezel_color.r, self.bezel_color.g, self.bezel_color.b, 1.0)
+        ctx.set_source_rgba(self.bezel_color.r, self.bezel_color.g, self.bezel_color.b, self.bezel_color.a)
 
         ctx.new_path()
-        # Top-left corner
         ctx.arc(cr, cr + cd, cr, math.pi, math.pi * 1.5)
-        # Top curved edge
         ctx.curve_to(w * 0.33, cd * 0.5, w * 0.66, cd * 0.5, w - cr, cr + cd)
-        # Top-right corner
         ctx.arc(w - cr, cr + cd, cr, -math.pi * 0.5, 0)
-        # Right edge
         ctx.line_to(w, h - cr)
-        # Bottom-right corner
         ctx.arc(w - cr, h - cr, cr, 0, math.pi * 0.5)
-        # Bottom curved edge
         ctx.curve_to(w * 0.66, h - cd * 0.5, w * 0.33, h - cd * 0.5, cr, h - cr)
-        # Bottom-left corner
         ctx.arc(cr, h - cr, cr, math.pi * 0.5, math.pi)
         ctx.close_path()
 
@@ -166,7 +194,7 @@ class Curved49InchUltrawide(Node):
         ctx.set_line_width(2.0)
         ctx.stroke()
 
-        # Screen Masking to fit curvature (simplified as rect for child nodes but we mask slightly)
+        # Screen Masking to fit curvature
         ctx.new_path()
         inset = 2.0
         ctx.arc(cr + inset, cr + cd + inset, cr, math.pi, math.pi * 1.5)
@@ -181,8 +209,31 @@ class Curved49InchUltrawide(Node):
 
         # Draw dark screen background
         ctx.set_source_rgba(0.05, 0.05, 0.05, 1.0)
-        ctx.paint()
+        if hasattr(ctx, "paint"):
+            ctx.paint()
+        else:
+            ctx.rectangle(0, 0, w, h)
+            ctx.fill()
 
         ctx.restore()
 
-        # Note: the children (screen container) are drawn by the Node base class after this method
+
+# Semantic alias
+Curved49InchUltrawide = SuperUltrawideMonitorFrame
+
+
+class SuperUltrawideSuite:
+    """
+    Suite factory for ultrawide 32:9 monitors, monitor arms, and ambient back glow.
+    """
+    @staticmethod
+    def monitor(width: float = 1600.0, curve_depth: float = 45.0, **kwargs: Any) -> SuperUltrawideMonitorFrame:
+        return SuperUltrawideMonitorFrame(width=width, curve_depth=curve_depth, **kwargs)
+
+    @staticmethod
+    def monitor_arm(**kwargs: Any) -> MonitorArmPivotingBase:
+        return MonitorArmPivotingBase(**kwargs)
+
+    @staticmethod
+    def rgb_glow(width: float = 1200.0, height: float = 300.0, **kwargs: Any) -> GamerBackGlowRgbLed:
+        return GamerBackGlowRgbLed(width=width, height=height, **kwargs)

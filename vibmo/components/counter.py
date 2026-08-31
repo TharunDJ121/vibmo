@@ -3,7 +3,7 @@ Animated Metric and Number Counter with formatting and exponential deceleration.
 """
 
 from __future__ import annotations
-from typing import Any, Optional, Union
+from typing import Any, Optional, Union, Tuple
 from vibmo.core.color import Color, colors
 from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.easing import Ease, EasingFunc

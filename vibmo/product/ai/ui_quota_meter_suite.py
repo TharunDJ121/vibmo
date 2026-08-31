@@ -1,241 +1,277 @@
+"""
+Token Quota & Usage Ring UI Suite for Vibmo / Motio.
+Components:
+- TokenQuotaMeter
+- UsageRingGauge (CircularTokenQuotaRing)
+- OverLimitWarningBanner
+- UsageThresholdPill
+- UpgradeCtaButton
+"""
+
 from __future__ import annotations
 import math
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 import cairo
-from typing import Any, Tuple, Union, Optional
 
-from vibmo.core.vector import Vector2D
 from vibmo.core.color import Color, colors
-from vibmo.core.signal import Signal
-from vibmo.core.easing import Ease
+from vibmo.core.vector import Vector2D
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
 from vibmo.scene.node import Node
-from vibmo.typography.text import Text
+from vibmo.spatial.shadows import DropShadow
 
 
-def _format_k_m(num: float) -> str:
+def _format_tokens(num: float) -> str:
     if num >= 1_000_000:
-        return f"{num / 1_000_000:.1f}M"
-    elif num >= 1000:
-        return f"{num / 1000:.0f}k"
+        return f"{num / 1_000_000:.2f}M"
+    elif num >= 1_000:
+        return f"{num / 1_000:.0f}k"
     return str(int(num))
 
 
-class CircularTokenQuotaRing(Node):
-    """
-    Thick circular progress ring showing tokens used vs total quota.
-    """
+class UsageRingGauge(Node):
+    """Circular radial token gauge ring displaying consumption percentage and token count."""
+
     def __init__(
         self,
-        used: float = 842000,
-        total: float = 1000000,
-        radius: float = 120.0,
-        thickness: float = 24.0,
-        track_color: Union[Color, str] = colors.SLATE_800,
-        fill_color: Union[Color, str] = colors.BLUE,
-        **kwargs: Any
+        used: float = 750000.0,
+        total: float = 1000000.0,
+        radius: float = 85.0,
+        thickness: float = 16.0,
+        **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self.used = Signal(float(used), f"{self.name}.used")
+        self.radius = float(radius)
+        self.thickness = float(thickness)
         self.total = Signal(float(total), f"{self.name}.total")
-        self.radius = Signal(float(radius), f"{self.name}.radius")
-        self.thickness = Signal(float(thickness), f"{self.name}.thickness")
-        self.track_color = Color.from_any(track_color)
-        self.fill_color = Color.from_any(fill_color)
-        
-        # We will add text dynamically during draw to reflect current signal values
-        self._text_node = Text("", font_size=24, align="center")
-        self.children.append(self._text_node)
+        self.used = Signal(float(used), f"{self.name}.used")
 
-    def draw(self, ctx: cairo.Context, time: float = 0.0) -> None:
-        used_val = self.used.get(time)
-        total_val = self.total.get(time)
-        r = self.radius.get(time)
-        t = self.thickness.get(time)
-        
-        ratio = max(0.0, min(1.0, used_val / total_val)) if total_val > 0 else 0.0
-        
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        u = self.used.get(time)
+        tot = max(1.0, self.total.get(time))
+        ratio = max(0.0, min(1.0, u / tot))
+        r = self.radius
+        sw = self.thickness
+
         ctx.save()
-        
-        # Track
-        ctx.set_line_width(t)
-        ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+        # Track circle
         ctx.arc(0, 0, r, 0, 2 * math.pi)
-        ctx.set_source_rgba(self.track_color.r, self.track_color.g, self.track_color.b, self.track_color.a)
+        ctx.set_source_rgba(0.12, 0.16, 0.24, 0.8)
+        ctx.set_line_width(sw)
         ctx.stroke()
-        
-        # Fill
-        if ratio > 0.001:
-            start_angle = -math.pi / 2
-            end_angle = start_angle + (ratio * 2 * math.pi)
-            ctx.arc(0, 0, r, start_angle, end_angle)
-            ctx.set_source_rgba(self.fill_color.r, self.fill_color.g, self.fill_color.b, self.fill_color.a)
-            ctx.stroke()
-            
+
+        # Gauge arc
+        start_angle = -math.pi * 0.5
+        end_angle = start_angle + ratio * (2.0 * math.pi)
+        ctx.arc(0, 0, r, start_angle, end_angle)
+
+        if ratio > 0.9:
+            ctx.set_source_rgba(0.95, 0.25, 0.35, 0.95)
+        elif ratio > 0.75:
+            ctx.set_source_rgba(0.95, 0.7, 0.15, 0.95)
+        else:
+            ctx.set_source_rgba(0.2, 0.75, 1.0, 0.95)
+
+        ctx.set_line_width(sw)
+        ctx.set_line_cap(1)
+        ctx.stroke()
+
+        # Center readout
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(24.0)
+        ctx.set_source_rgba(0.95, 0.98, 1.0, 0.95)
+        text = f"{int(ratio * 100)}%"
+        ext = ctx.text_extents(text)
+        ctx.move_to(-ext.width * 0.5, 4.0)
+        ctx.show_text(text)
+
+        # Tokens readout below
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(0.6, 0.7, 0.8, 0.8)
+        sub_text = f"{_format_tokens(u)} / {_format_tokens(tot)}"
+        sub_ext = ctx.text_extents(sub_text)
+        ctx.move_to(-sub_ext.width * 0.5, 24.0)
+        ctx.show_text(sub_text)
+
         ctx.restore()
-        
-        text_str = f"{_format_k_m(used_val)} / {_format_k_m(total_val)}"
-        self._text_node.text.set(text_str)
-        # We need to manually draw the child here if it's not being traversed or just let the scene graph do it.
-        # But wait, Scene Graph automatically traverses children after drawing this node. So we are good.
+
+
+CircularTokenQuotaRing = UsageRingGauge
 
 
 class OverLimitWarningBanner(Node):
-    """
-    Animated warning notification bar when quota exceeds 90%.
-    """
-    def __init__(
-        self,
-        ratio: float = 0.95,
-        width: float = 400.0,
-        height: float = 48.0,
-        color: Union[Color, str] = colors.RED,
-        **kwargs: Any
-    ) -> None:
-        super().__init__(**kwargs)
-        self.ratio = Signal(float(ratio), f"{self.name}.ratio")
-        self.width_val = Signal(float(width), f"{self.name}.width")
-        self.height_val = Signal(float(height), f"{self.name}.height")
-        self.color = Color.from_any(color)
-        
-        self._text_node = Text("Warning: Quota Exceeds 90%", font_size=16, align="center")
-        self.children.append(self._text_node)
+    """Banner alerting user when consumption passes 80% / 100% threshold."""
 
-    def draw(self, ctx: cairo.Context, time: float = 0.0) -> None:
-        ratio_val = self.ratio.get(time)
-        
-        if ratio_val <= 0.9:
-            self._text_node.opacity.set(0.0)
-            return
-            
-        self._text_node.opacity.set(1.0)
-        
-        w = self.width_val.get(time)
-        h = self.height_val.get(time)
-        
-        # Pulse animation if over 95%
-        opacity = 1.0
-        if ratio_val > 0.95:
-            opacity = 0.7 + 0.3 * math.sin(time * math.pi * 2.0)
-            
+    def __init__(self, message: str = "Quota Threshold: 80% consumed this billing cycle", width: float = 460.0, height: float = 36.0, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+        self.message = message
+        self.width_val = float(width)
+        self.height_val = float(height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
         ctx.save()
-        
-        # Background
-        corner_radius = 8.0
-        
-        # Center origin
-        x = -w / 2
-        y = -h / 2
-        
+        r = 8.0
         ctx.new_path()
-        ctx.arc(x + w - corner_radius, y + corner_radius, corner_radius, -math.pi/2, 0)
-        ctx.arc(x + w - corner_radius, y + h - corner_radius, corner_radius, 0, math.pi/2)
-        ctx.arc(x + corner_radius, y + h - corner_radius, corner_radius, math.pi/2, math.pi)
-        ctx.arc(x + corner_radius, y + corner_radius, corner_radius, math.pi, 3*math.pi/2)
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
         ctx.close_path()
-        
-        ctx.set_source_rgba(self.color.r, self.color.g, self.color.b, self.color.a * opacity)
-        ctx.fill()
-        
+
+        ctx.set_source_rgba(0.2, 0.14, 0.04, 0.85)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.95, 0.7, 0.15, 0.6)
+        ctx.set_line_width(1.0)
+        ctx.stroke()
+
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(1.0, 0.85, 0.3, 0.95)
+        ctx.move_to(14.0, 22.0)
+        ctx.show_text(f"⚠️ {self.message}")
         ctx.restore()
 
 
 class UsageThresholdPill(Node):
-    """
-    Small badge indicating remaining days in billing cycle.
-    """
-    def __init__(
-        self,
-        days_left: int = 14,
-        width: float = 80.0,
-        height: float = 24.0,
-        bg_color: Union[Color, str] = colors.SLATE_800,
-        **kwargs: Any
-    ) -> None:
-        super().__init__(**kwargs)
-        self.days_left = Signal(float(days_left), f"{self.name}.days_left")
-        self.width_val = Signal(float(width), f"{self.name}.width")
-        self.height_val = Signal(float(height), f"{self.name}.height")
-        self.bg_color = Color.from_any(bg_color)
-        
-        self._text_node = Text("", font_size=12, align="center")
-        self.children.append(self._text_node)
+    """Pill indicating tier quota limit."""
 
-    def draw(self, ctx: cairo.Context, time: float = 0.0) -> None:
-        w = self.width_val.get(time)
-        h = self.height_val.get(time)
-        days = int(self.days_left.get(time))
-        
-        self._text_node.text.set(f"{days}d left")
-        
+    def __init__(self, limit_str: str = "Pro Plan: 1,000,000 Tokens/mo", width: float = 240.0, height: float = 28.0, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+        self.limit_str = limit_str
+        self.width_val = float(width)
+        self.height_val = float(height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
         ctx.save()
-        
-        x = -w / 2
-        y = -h / 2
-        r = h / 2
-        
+        r = 6.0
         ctx.new_path()
-        ctx.arc(x + w - r, y + r, r, -math.pi/2, 0)
-        ctx.arc(x + w - r, y + h - r, r, 0, math.pi/2)
-        ctx.arc(x + r, y + h - r, r, math.pi/2, math.pi)
-        ctx.arc(x + r, y + r, r, math.pi, 3*math.pi/2)
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
         ctx.close_path()
-        
-        ctx.set_source_rgba(self.bg_color.r, self.bg_color.g, self.bg_color.b, self.bg_color.a)
-        ctx.fill()
-        
+
+        ctx.set_source_rgba(0.08, 0.12, 0.18, 0.8)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.2, 0.3, 0.45, 0.6)
+        ctx.set_line_width(1.0)
+        ctx.stroke()
+
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(0.8, 0.9, 1.0, 0.9)
+        ext = ctx.text_extents(self.limit_str)
+        ctx.move_to((w - ext.width) * 0.5, h * 0.5 + ext.height * 0.35)
+        ctx.show_text(self.limit_str)
         ctx.restore()
 
 
 class UpgradeCtaButton(Node):
+    """Button to add additional quota or upgrade tier."""
+
+    def __init__(self, width: float = 160.0, height: float = 36.0, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+        self.width_val = float(width)
+        self.height_val = float(height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
+        ctx.save()
+        r = 8.0
+        ctx.new_path()
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        ctx.close_path()
+
+        ctx.set_source_rgba(0.15, 0.5, 1.0, 0.95)
+        ctx.fill()
+
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(12.0)
+        ctx.set_source_rgba(1.0, 1.0, 1.0, 1.0)
+        text = "Add Tokens"
+        ext = ctx.text_extents(text)
+        ctx.move_to((w - ext.width) * 0.5, h * 0.5 + ext.height * 0.35)
+        ctx.show_text(text)
+        ctx.restore()
+
+
+class TokenQuotaMeter(Node):
     """
-    Gradient "Upgrade to Unlimited" button with spring hover bounce.
+    Token Quota Meter Suite.
+    Renders radial usage ring, warning banners, usage threshold breakdowns,
+    and quota consumption animation verbs.
     """
+
     def __init__(
         self,
-        width: float = 200.0,
-        height: float = 48.0,
-        color_start: Union[Color, str] = colors.INDIGO,
-        color_end: Union[Color, str] = colors.PURPLE,
-        **kwargs: Any
+        total: float = 1000000.0,
+        used: float = 500000.0,
+        width: float = 540.0,
+        height: float = 420.0,
+        **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self.width_val = Signal(float(width), f"{self.name}.width")
-        self.height_val = Signal(float(height), f"{self.name}.height")
-        self.color_start = Color.from_any(color_start)
-        self.color_end = Color.from_any(color_end)
-        self.hover_progress = Signal(0.0, f"{self.name}.hover")
-        
-        self._text_node = Text("Upgrade to Unlimited", font_size=16, align="center")
-        self.children.append(self._text_node)
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.shadow = DropShadow(color=Color(0.0, 0.0, 0.0, 0.5), blur=32.0, offset=(0.0, 16.0))
 
-    def draw(self, ctx: cairo.Context, time: float = 0.0) -> None:
-        w = self.width_val.get(time)
-        h = self.height_val.get(time)
-        hover = self.hover_progress.get(time)
-        
-        scale = 1.0 + (0.05 * hover) # Spring bounce effect based on hover progress
-        
+        # Ring Gauge in center
+        self.ring_gauge = UsageRingGauge(used=used, total=total, radius=80.0, thickness=15.0)
+        self.ring_gauge.position.set(Vector2D(self.width_val * 0.5, 175.0))
+        self.add(self.ring_gauge)
+
+        # Warning banner
+        self.warning_banner = OverLimitWarningBanner(width=self.width_val - 48.0)
+        self.warning_banner.position.set(Vector2D(24.0, 305.0))
+        self.add(self.warning_banner)
+
+        # Upgrade button
+        self.upgrade_btn = UpgradeCtaButton(width=150.0, height=36.0)
+        self.upgrade_btn.position.set(Vector2D((self.width_val - 150.0) * 0.5, 355.0))
+        self.add(self.upgrade_btn)
+
+    def consume(self, amount: float = 250000.0, duration: float = 1.2, ease: EasingFunc = Ease.out_quad) -> AnimationAction:
+        """
+        Fluent generator animation verb to consume quota tokens and advance the ring gauge.
+        """
+        curr = self.ring_gauge.used.get(0.0)
+        target = curr + float(amount)
+        return self.ring_gauge.used.to(target, duration=duration, ease=ease)
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        return (0.0, 0.0, self.width_val, self.height_val)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
         ctx.save()
-        ctx.scale(scale, scale)
-        
-        # Also need to scale the text
-        self._text_node.scale.set((scale, scale))
-        
-        x = -w / 2
-        y = -h / 2
-        r = 12.0
-        
+
+        # Card container
+        r = 16.0
         ctx.new_path()
-        ctx.arc(x + w - r, y + r, r, -math.pi/2, 0)
-        ctx.arc(x + w - r, y + h - r, r, 0, math.pi/2)
-        ctx.arc(x + r, y + h - r, r, math.pi/2, math.pi)
-        ctx.arc(x + r, y + r, r, math.pi, 3*math.pi/2)
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
         ctx.close_path()
-        
-        pat = cairo.LinearGradient(x, y, x + w, y + h)
-        pat.add_color_stop_rgba(0, self.color_start.r, self.color_start.g, self.color_start.b, self.color_start.a)
-        pat.add_color_stop_rgba(1, self.color_end.r, self.color_end.g, self.color_end.b, self.color_end.a)
-        
-        ctx.set_source(pat)
-        ctx.fill()
-        
+
+        ctx.set_source_rgba(0.04, 0.06, 0.1, 0.95)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.18, 0.25, 0.38, 0.8)
+        ctx.set_line_width(1.5)
+        ctx.stroke()
+
+        # Title
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(15.0)
+        ctx.set_source_rgba(0.95, 0.98, 1.0, 0.95)
+        ctx.move_to(24.0, 42.0)
+        ctx.show_text("Monthly LLM Token Quota")
+
+        super().draw(ctx, time)
         ctx.restore()

@@ -120,3 +120,15 @@ class VinylCrackleSuite:
         tape_hiss = np.tanh(tape_hiss * 1.5)
 
         return tape_hiss.astype(np.float32)
+
+    @staticmethod
+    def vintage_turntable_hiss(duration: float = 5.0, noise_floor: float = 0.08, pop_density: float = 12.0) -> np.ndarray:
+        """Warm vintage vinyl turntable surface hiss combined with micro dust pops."""
+        hiss = VinylCrackleSuite.vinyl_surface_hiss(duration=duration, noise_floor=noise_floor)
+        pops = VinylCrackleSuite.dust_pops(duration=duration, pop_density=pop_density)
+        mixed = hiss + pops * 0.4
+        max_val = np.max(np.abs(mixed))
+        if max_val > 1.0:
+            mixed = mixed / max_val
+        return mixed.astype(np.float32)
+

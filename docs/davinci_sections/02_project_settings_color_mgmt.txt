@@ -1,0 +1,1202 @@
+Chapter 6
+Project Settings
+This chapter covers the settings used for defining the properties of each individual 
+project. It’s a good idea to familiarize yourself with the information in this chapter 
+prior to setting up your first project. 
+Contents
+What Are the Project Settings? ������������������������������  140
+Opening and Editing Project Settings  ����������������� 140
+Searchable Preferences 
+and Project Settings  �������������������������������������������������� 141
+Presets ��������������������������������������������������������������������������������� 142
+Master Settings  �������������������������������������������������������������� 144
+Timeline Format  �������������������������������������������������������������� 144
+Video Monitoring  ����������������������������������������������������������� 145
+Optimized Media and Render Cache  �������������������� 147
+Working Folders  ������������������������������������������������������������� 148
+Frame Interpolation �������������������������������������������������������  148
+Blackmagic Cloud ��������������������������������������������������������� 150
+Project Media Location  ����������������������������������������������� 150
+Multi User Collaboration  ��������������������������������������������� 150
+Blackmagic Cloud Storage Syncing  ���������������������� 150
+Remote Cameras ������������������������������������������������������������ 150
+Blackmagic Cloud  ���������������������������������������������������������� 150
+Image Scaling �������������������������������������������������������������������� 151
+Image Scaling �������������������������������������������������������������������� 151
+Input Scaling  ��������������������������������������������������������������������� 152
+Output Scaling  ����������������������������������������������������������������� 152
+Color Management  ������������������������������������������������������� 153
+Color Space and Transforms  ������������������������������������ 153
+Dolby Vision™ ������������������������������������������������������������������� 154
+HDR10+ ������������������������������������������������������������������������������� 155
+HDR Vivid ��������������������������������������������������������������������������� 155
+Lookup Tables ����������������������������������������������������������������� 155
+Broadcast Safe  ����������������������������������������������������������������� 157
+General Options  ������������������������������������������������������������� 158
+Conform Options  ������������������������������������������������������������ 158
+Color ������������������������������������������������������������������������������������� 160
+Dynamics Profile  ��������������������������������������������������������������� 161
+Versions �������������������������������������������������������������������������������� 161
+Camera Raw ���������������������������������������������������������������������  162
+Capture and Playback �������������������������������������������������  162
+Deck Settings  ������������������������������������������������������������������� 163
+Capture ������������������������������������������������������������������������������� 163
+Playout ���������������������������������������������������������������������������������  164
+Subtitles and Transcription  �������������������������������������� 165
+Fusion ���������������������������������������������������������������������������������� 165
+Fairlight ������������������������������������������������������������������������������� 166
+General �������������������������������������������������������������������������������  166
+Audio Metering����������������������������������������������������������������� 167
+Path Mapping ������������������������������������������������������������������ 168
+Project Media Locations  ��������������������������������������������� 168
+Apple Immersive  ������������������������������������������������������������ 169
+Apple Immersive Processing ������������������������������������  169
+139Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+What Are the Project Settings?
+The Project Settings window contains all project-specific parameters that are saved along 
+with that project. These include essential project properties such as the timeline format, video 
+monitoring settings, how to optimize media, and where to save cache files. It also includes image 
+scaling properties, color management settings, and many other properties that affect projects in 
+fundamental ways.
+Opening and Editing Project Settings
+All of these project-specific settings are easily accessed from anywhere in DaVinci Resolve by clicking 
+the gear button at the bottom right of the page bar.
+Project Manager and Project 
+Settings buttons
+The Project Settings window opens in the middle of the screen.
+The Project Settings window.
+140Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+The Project Settings window is divided into a series of panels which can be selected from 
+a sidebar at the left. Each panel contains a collection of related settings that affects some 
+category of DaVinci Resolve functionality.
+To alter project settings:
+1 Click on the name of any group of settings in the sidebar at the left to open that panel.
+2 Change whatever settings you need to change.
+3 Do one of the following to apply your changes:
+Click Save to apply the changes you’ve made and close the Project Settings.
+Option-click Save to apply the changes you’ve made and keep the Project Settings window open, 
+so you can make other changes. This option is available because it’s sometimes necessary to 
+keep the Project Settings window open as you continue making changes that may visibly affect 
+the clips and timelines in your project.
+Searchable Preferences 
+and Project Settings 
+DaVinci Resolve has search bars in both the Preferences and Project Settings so you can easily locate 
+a particular setting.
+To search, type the setting name in the search bar. A list of possible matches will appear as 
+you type. You can then click on a setting name, which takes you to its corresponding page. It 
+will also briefly highlight the setting name, making it easier to locate. 
+Type the name of a setting in the search bar, then click on your chosen result from the list.  
+This brings you to that setting’s page and highlights it, making it easy to locate.
+141Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Presets
+The Presets menu lets you save customized collections of Project Settings for future recall. Presets 
+can save the state of nearly every parameter and setting in every panel of the Project Settings 
+window, and make it easy to switch among different setups for different tasks, or to accommodate 
+different types of projects.
+The Presets menu is accessed by clicking on the option menu (three dots) in the upper-right corner of 
+the Project Settings window. The Presets menu shows the following items:
+  Project Settings Presets: The list of all current Project Presets is shown here, headed by the 
+Default Preset.
+  Set Current Settings as Default Preset: This option saves the current Project Settings as the new 
+Default Preset.
+  Save Current Settings as Preset: This option allows you to save the current Project Settings as a 
+new preset that will show up in the menu list above.
+  Import Preset: This option will open a file browser to let you import a DaVinci Resolve Project 
+Settings Preset file. The extension for these files is .preset.
+You can use this menu to create, import, and export your own presets, adding as many as you 
+need to accommodate the types of projects you work on. 
+The Presets Menu is accessed by clicking on  
+the option menu of the Project Settings window
+To create a new preset:
+1 Do one of the following: 
+ — Right-click a project in the Project Manager, and choose Project Settings from the 
+contextual menu.
+ — Open any project, then open the Project Settings.
+2 Use the different panels of the Project Settings window to alter whichever settings you need to. 
+There’s no need to save your changes as you go; you’ll save them all at once later. 
+3 Click on the option menu (three dots) in the upper right-hand corner of the Project 
+Settings window.
+4 Select Save Current Settings as Preset.
+5 Enter a descriptive name for your new preset in the dialog box, and press the OK button.
+6 Your new preset name will now appear in the Project Settings Preset menu.
+Once you’ve created one or more custom presets, you can load them into a project at any time.
+142Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+To load a preset’s settings into a project:
+1 Open a project with a preset you want to update.
+2 Open the Project Settings window.
+3 Click on the option menu in the Project Settings window.
+4 Click on the Project Preset name you want to use for the open project.
+5 Select Load Preset from the dropdown menu.
+The Project Settings will be updated to the new preset immediately. There is no undo for 
+this function.
+To update a preset:
+1 Open the Project Settings window.
+2 Use the different panels of the Project Settings window to alter whichever settings you need 
+to update.
+3 Click on the option menu in the Project Settings window.
+4 Click on the Project Preset name you want to update.
+5 Select Update Preset from the dropdown menu, and select Update from the dialog box.
+The preset will be replaced with your current settings. There is no undo for this function.
+To set the default preset:
+1 Select the preset from the Project Settings Presets list you want to be loaded each time you make 
+a new project.
+2 Click on the preset and select Set As Default Preset.
+or
+1 Select “Set Current Settings as Default Preset” from the option menu of the Project Settings 
+window to make whatever your project settings are currently the new default preset.
+2 Select Update from the dialog box.
+The preset will be replaced with your current settings. There is no undo for this function.
+To export a preset:
+1 Click on the preset from the Project Settings Presets list you want to export.
+2 Choose Export Preset from the dropdown menu.
+3 Enter a name for the preset and where you want to save it in the file browser, and press Save.
+The DaVinci Resolve Project Settings Preset file will export to that destination with a 
+“.preset” extension.
+To import a preset:
+1 Click on the option menu in the Project Settings window.
+2 Select Import Preset.
+3 Navigate the file browser to the DaVinci Resolve Project Settings Preset file you wish to import. 
+The file will have a “.preset” extension. Press Open.
+To delete a preset:
+1 Click on the preset from the Project Settings Presets list you want to delete.
+2 Choose Delete Preset from the dropdown menu.
+3 Press Delete in the dialog box.
+The Project Settings will be deleted immediately. There is no undo for this function. 
+143Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Master Settings
+This panel is project specific and lets you set up and adjust the most essential properties of the 
+timelines in your project, including the timeline format, video monitoring method, and conform options. 
+In many workflows, you’ll want to adjust these settings before getting started with your project. 
+By default, all timelines use these project-wide settings. However, beginning with DaVinci Resolve 16, 
+you can optionally create timelines with individual Format, Monitoring, and Output Sizing settings. 
+However, if you change a timeline to use “Basic Settings,” then that timeline will mirror the project-wide 
+options that are selected in the Project Settings.
+Timeline Format
+This group of settings affects the geometry and image processing of the current project.
+  Timeline resolution: A dropdown menu that lets you choose a frame resolution preset to use 
+for image processing while grading. DaVinci Resolve is resolution independent, so you can 
+change the resolution at any time and all windows, tracks, sizing changes, and keyframe data will 
+be automatically recalculated to fit the new size. For example, you can work on a 4K project while 
+monitoring at HD resolutions if your room is only set up with an HD monitor, and then render the 
+finished project at 4K resolution for final delivery. Alternately, you can downsize an HD project to 
+an SD resolution to create another set of deliverables. 
+For more information on Resolve’s resolution independence, jump to this chapter:  
+Sizing and Image Stabilization”.
+  Frame size (Labeled “For X x Y processing”): Lets you set resolutions not found in the 
+“Timeline resolution” dropdown menu.
+  Use vertical resolution:  This checkbox swaps the horizontal and vertical pixels of the Timeline 
+resolution. This lets you format your timeline vertically for display on smart phones, tablets, or 
+televisions that are in an upright configuration for digital signage.
+  Pixel aspect ratio: Used to select PAR settings for image formats that don’t use the default 
+square pixel format. You can apply a 16:9 anamorphic PAR, a 4:3 PAR for SD projects, or a 
+Cinemascope ratio.
+  Timeline frame rate: Determines the primary frame rate used by the project. A variety of standard 
+and high frame rate (HFR) settings are available. If you’re importing an AAF or XML file, this setting 
+is automatically set via an option in the Project Import dialog. Ideally, you should choose a frame 
+rate before importing media into the Media Pool. However, the first time you import media into an 
+empty Media Pool, you’re prompted if the incoming media frame rate doesn’t match the Timeline 
+frame rate set here, and you have the option of automatically updating this setting to match that 
+of the media you’re importing. Once one or more files have been added to the Media Pool, this 
+setting cannot be changed.
+  Use drop frame timecode: Enables or disables drop frame timecode for the current project. 
+Off by default.
+  Enable interlace processing:  Interlaced media is supported throughout DaVinci Resolve. The 
+“Enable interlace processing” checkbox forces DaVinci Resolve to process all operations internally 
+using separated fields, in order to properly maintain the field integrity of interlaced clips in your 
+program. In addition, each clip in the Media Pool has a Field Dominance dropdown menu in the 
+Video panel of the Clip Attributes window that lets you specify whether clips are upper- or lower-
+field dominant; an Auto setting makes this choice by default.
+144Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+There is also a corresponding checkbox in the Render Settings panel of the Deliver page, 
+named “Field rendering,” that lets you enable and disable field rendering when you’re rendering 
+file-based output.
+There are two instances where you want to leave this setting turned off:
+ — If you’re working with progressive-frame media, it is not necessary to turn this checkbox on. 
+Doing so will unnecessarily increase processing time.
+ — If you’re using interlaced clips in a progressive-frame project and you’re intending to 
+deinterlace those clips using the Enable Deinterlacing checkbox in the Clip Attributes window, 
+then you must keep “Enable video field processing” off. Otherwise, the Enable Deinterlacing 
+checkbox will be disabled for all clips. 
+For more information about deinterlacing clips, jump to this chapter: Modifying Clips and 
+Clip Attributes .
+If you’re working on a project with interlaced media that you intend to keep interlaced, then 
+whether or not it’s necessary to turn field processing on depends on what types of corrections 
+you’re applying to your clips. If you’re mastering your program to an interlaced format, and you’re 
+applying any adjustments that would cause pixels from one field to move or bleed into adjacent 
+fields, then field processing should be enabled; effects requiring field processing include filtering 
+operations such as blur, sharpen, and OpenFX operations, as well as sizing transforms that include 
+pan, tilt, zoom, rotate, pitch, and yaw. 
+On the other hand, regardless of whether you’re outputting interlaced or progressive-frame media, 
+if you’re not filtering or resizing your clips, and you’re only applying adjustments to color and 
+contrast, it’s not necessary to turn on field processing for interlaced material, and in fact, leaving it 
+off may somewhat shorten your project’s rendering time. 
+  Align Clips to Frame Boundaries:  When working with interlaced material, you can chose whether 
+to perform edits at the field or frame boundaries. When checked this means all editing actions 
+and playhead stepping will occur at full frame boundaries. This works independently of the audio 
+subframe controls, so it’s still possible to get perfect audio sync while working with video at the 
+frame level. When unchecked, all editing actions and playhead stepping will be performed at the 
+field boundary instead.
+  Playback frame rate: Usually mirrors the frame rate selected in the “Video format” setting (in the 
+Video Monitoring section below), which is typically based on the frame rate of the external display 
+that’s connected to your video interface, given the “Timeline Frame Rate” setting. For example, 
+a 50Hz monitor requires a 25 fps playback frame rate for synchronous display without dropped 
+frames. If you want to monitor playback at a slower frame rate, type the frame rate of your choice 
+in this field and DaVinci Resolve will make the appropriate calculations to drop or repeat frames as 
+necessary to match it. This can be useful for temporarily seeing how clips look in slow motion.
+Video Monitoring
+The settings available in this group control the signal that’s output by the video output interface that’s 
+connected to your workstation, and let you specify what standard of signal is output, and via which 
+signal path. 
+By default the frame size and frame rate match those in the Timeline resolution and Playback frame 
+rate options. However, if necessary you can change these settings to match those of the external 
+display you’re using to monitor your work. For example, if you’re working with 2K files for 2K output, 
+but you’re color correcting using a high definition monitor set to 1080 resolution, you can select the 
+appropriate HD standard for that monitor without changing the Timeline Resolution settings.
+145Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+  Video Resolution: Lets you choose a standard video frame size to be output via your connected 
+video output interface.
+  Format: Lets you choose a standard video frame rate to be output via your connected video 
+output interface.
+  Video connection checkboxes:  Lets you choose the signal standard to output from your 
+connected video output interface to the video monitor. Make sure to choose a standard that’s 
+supported by both your video interface and your monitor. 
+The options are:
+Use 1080PsF: Output progressive video in 1080i format for older HDTV sets.
+Use 4:4:4 SDI: A signal path for monitoring image data to monitors that supports 4:4:4 
+chroma sampling, typically over SDI connections.
+Use Level A for 3Gb SDI output: A signal path for monitoring image data via a  
+single 3 Gb/s SDI connection.
+Use dual outputs on SDI output: All DaVinci Resolve systems can generate a side-by-side 
+display that can be sent to a Stereoscopic monitor via the HD-SDI output of an UltraStudio 4K 
+or DeckLink card. When dual SDI 3D monitoring is enabled, each eye is output separately at full 
+resolution. In this mode, split-screen wipes and cursors will not be visible on the grading monitor.
+  SDI Configuration:  Lets you choose from among Single Link, Dual Link, and Quad Link SDI, 
+depending on what your display supports.
+  Data Levels: This setting only affects the data levels being output via the video interface that 
+connects the DaVinci Resolve workstation to your external display. It has no effect on the data 
+that’s processed internally by DaVinci Resolve, or on the files written when you render in the 
+Deliver page. It is imperative that the option you choose in DaVinci Resolve matches the data 
+range to which your external display is set. Otherwise, the video signal will appear to be incorrect, 
+even though the internal data is being processed accurately by DaVinci Resolve.
+There are two options:
+Video: This is the correct option to use when using a broadcast display set to the 
+Rec. 709 video standard.
+Full: If your monitor or projector is capable of displaying “full range” video signals, and you wish to 
+monitor the full 10-bit data range (0–1023) while you work, this is the correct option to use.
+For more information about data levels, jump to this chapter: Data Levels, Color 
+Management, and ACES .
+  Retain sub-black and super-white data:  Turning this checkbox on lets DaVinci Resolve output the 
+undershoots (sub-black) and overshoots (super-white) within the headroom of video encoded data 
+levels to video. When this is turned off, these out-of-bounds values are clipped in video output.
+  Video bit depth: Choose the bit depth that corresponds to the capability of your display. You can 
+choose between 8-bit and 10-bit. Monitoring in 10-bit is more processor intensive, but preferable 
+to avoid the appearance of banding that may not in fact be in the image data being processed by 
+DaVinci Resolve. 
+  Monitor scaling: Defaults to basic, and is only enabled to smooth the edges of video being viewed 
+on a projector with very large screens. These settings minimize high frequency artifacts that may 
+be seen. This may also be noticeable if you have a 2K or HD project but are monitoring on an SD 
+monitor. The other option, Bilinear, has different effects on the monitored image depending on 
+your display device, so you may need to check to verify that it’s appropriate for your environment.
+146Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+  Use Rec601 Matrix for 4:2:2 SDI output: Don’t use this checkbox unless you know what it does. 
+You know who you are.
+  Enable HDR metadata:  (only available in Studio version) Turning on this checkbox outputs the 
+metadata necessary to send High Dynamic Range signals over HDMI 2.0a and have it be correctly 
+decoded by an HDR-aware video display. When this checkbox is enabled, it’s recommended to 
+also enable the “HDR mastering is for X nits” checkbox in the Color Management page, and set 
+the “nit” level (slang for cd/m2) to whatever peak luminance level your HDMI connected HDR 
+display is capable of.
+Optimized Media and Render Cache
+These settings govern the resolution and codec of optimized media that DaVinci Resolve can 
+generate in order to facilitate greater real time performance, as well as cached media that’s generated 
+by the Smart and User Cache.
+  Proxy media resolution: A dropdown list lets you choose whether to generate proxy media at 
+each clip’s Original size, or at Half, Quarter, One-Eighth, or One-Sixteenth the resolution of the 
+original media, or allow DaVinci Resolve to choose this automatically for you based on your 
+timeline settings.
+  Proxy media format: Specifies the format in which proxy media files will be written. You can 
+choose from among a variety of Uncompressed, ProRes, and DNxHD formats, depending on 
+your requirements.
+  Optimized media resolution:  A dropdown list lets you choose whether to generate optimized 
+media at each clip’s Original size, or at Half, Quarter, One-Eighth, or One-Sixteenth the resolution 
+of the original media, or allow DaVinci Resolve to choose this automatically for you based on your 
+timeline settings.
+  Optimized media format: Specifies the format in which optimized media files will be written. 
+You can choose from among a variety of Uncompressed, ProRes, and DNxHD formats, depending 
+on your requirements.
+  Render cache format: Specifies the format in which render cache files will be written. You 
+can choose from among a variety of Uncompressed, ProRes, and DNxHD formats, depending 
+on your requirements.
+  Enable background caching after X seconds: Specifies the duration of inactivity after which 
+automatic background caching will begin.
+A series of checkboxes let you force specific types of effects to be cached when you use the 
+User Cache, which is a more selective manner of caching than the Smart Cache. These include:
+Automatically cache transitions in user mode:  If you’re using User mode and you find that your 
+workstation does not have adequate performance to play transition effects in real time, you can 
+force these categories of effects to be automatically included in the Sequence Cache and cached 
+when you’re using the User mode of caching.
+Automatically cache composites in user mode:  If you’re using User mode and you find that your 
+workstation does not have adequate performance to play composite mode or opacity effects in 
+real time, you can force these categories of effects to be automatically included in the Sequence 
+Cache and cached when you’re using the User mode of caching.
+Automatically cache Fusion effects in user mode: If you’ve created effects for a clip in the Fusion 
+page and you find that your workstation does not have adequate performance to play that clip in 
+real time, you can force these categories of effects to be automatically included in the Sequence 
+Cache and cached when you’re using the User mode of caching.
+147Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Working Folders
+These fields let you specify to which folders cache and gallery files are written.
+   Project media location:  Lets you choose a specific folder on your system to hold all generated 
+media created for that project. Generated media includes things like new audio files created from 
+the Voiceover tool and Voice Convert, or essentially any type of new media created by DaVinci 
+Resolve itself. This allows you to make sure all the media for a project is in one common location, 
+making it easier to hand off, move or relink media, rather than have some media in DaVinci 
+Resolve’s internal file structure and some on a media drive. DaVinci Resolve will automatically 
+create new subfolders at your chosen media location based on media type, which makes it easy to 
+send some or all generated media to another location.
+You can also set this location in the Create New Project dialog when creating a new project.
+Inside the project media location, 
+DaVinci Resolve will create subfolders 
+automatically to organize any media 
+generated from within the program.
+  Proxy generation location:  All proxy media files that you create are saved in the directory path 
+specified by this field.
+  Cache files location:  All render cache files that you create are saved in the directory path 
+specified by this field. This path defaults to a hidden “CacheClip” directory that’s created at the 
+location of the first Media Storage Volume you specify in the DaVinci Resolve Preferences window.
+  Gallery stills location:  By default, all stills you save are saved in the DPX format, and are placed 
+in the directory path specified by this field. This path defaults to a hidden “.gallery” directory 
+that’s created at the location of the first Media Storage Volume you specify in the DaVinci Resolve 
+Preferences window.
+NOTE: If the volume you’ve selected to use for the cache becomes unavailable, DaVinci 
+Resolve will warn you with a dialog.
+Frame Interpolation
+These settings determine the default state for all retiming and speed change effects, including when 
+clips are in mixed frame rate timelines.
+  Retime Process: This dropdown menu lets you choose a default method of processing clips that 
+don’t match the project frame rate in mixed frame rate timelines and clips with speed effects 
+(fast forward or slow motion) applied to them, throughout the project. Since each clip in every 
+timeline defaults to “Project Settings,” changing this setting will change the way most mixed frame 
+rate and speed effected clips will be processed, except for those with custom settings selected. 
+There are three options:
+Nearest: The most processor efficient and least sophisticated method of processing; frames are 
+either dropped for fast motion, or duplicated for slow motion.
+148Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Frame Blend: Also processor efficient, but can produce smoother results; adjacent duplicated 
+frames are dissolved together to smooth out slow or fast motion effects. This option can provide 
+better results when Optical Flow displays unwanted artifacts.
+Optical Flow: The most processor intensive, but highest quality method of speed effect 
+processing. Using motion estimation, new frames are generated from the original source frames 
+to create slow or fast motion effects. The result can be exceptionally smooth when motion in a clip 
+is linear. However, two moving elements crossing in different directions or unpredictable camera 
+movement can cause unwanted artifacts.
+  Motion estimation mode:  When using mixed frame rate clips in a timeline that has Optical Flow 
+retiming enabled, when using Optical Flow to process speed change effects, or when using 
+Image Stabilization or Temporal Noise Reduction controls in the Color page, the Motion Estimation 
+dropdown of the Master Settings (in the Project Settings window) lets you choose options that 
+control the trade-off between speed and quality.
+There are additional “Enhanced” Optical Flow settings available in the “Motion estimation mode” 
+dropdown in the Master Settings panel of the Project Settings. The “Standard Faster” and 
+“Standard Better” settings are the same options that have been available in previous versions 
+of DaVinci Resolve. They’re more processor-efficient and yield good quality that are suitable for 
+most situations. However, “Enhanced Faster” and “Enhanced Better” should yield superior results 
+in nearly every case where the standard options exhibit artifacts, at the expense of being more 
+computationally intensive, and thus slower on most systems.
+“Speed Warp Faster” and “Speed Warp Better” are available for even higher-quality slow motion 
+effects using the DaVinci Neural Engine. Your results with this setting will vary according to the 
+content of the clip, but in ideal circumstances this will yield higher visual quality with fewer artifacts 
+than even the Enhanced Better setting. 
+“AI Speed Warp Metal” (macOS only) is a specifically enhanced version of Speed Warp that takes 
+advantage of Mac hardware. It should dramatically speed up the DaVinci Neural Engine Speed 
+Warp operations.
+  Motion range: When using mixed frame rate clips in a timeline that has Optical Flow retiming 
+selected, or when using Optical Flow to process speed change effects, this dropdown menu lets 
+you choose the default setting to use, small, medium or large motion, for all speed and motion 
+related calculations so you can try and improve the result by matching the type of motion in the 
+source media. 
+This setting can also be changed on a clip by clip basis in the Edit page Inspector.
+New improved Motion estimation mode settings in  
+the Master Settings panel of the Project Settings
+149Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Blackmagic Cloud
+The Blackmagic Cloud panel contains settings that control how your project interfaces with the 
+Blackmagic Cloud service.
+Project Media Location
+Chooses where you want to store media for use with Blackmagic Cloud projects.
+  Folder Location: Shows the file path for where the Blackmagic Cloud media is stored on your 
+computer. You can update this by pressing the Change location button and choosing a new 
+location in the file browser.
+Multi User Collaboration
+Chooses whether you want multiple users to be able to work on this project.
+  Allow multiple users to simultaneously access and work on this project: Check this box to 
+enable the collaborative workflow tools for this cloud project. Deselect if you are working on a 
+cloud project as a single user.
+Blackmagic Cloud Storage Syncing
+These tools allow you to control the syncing behavior of Blackmagic Cloud Storage.
+  For Media Files: These options let you choose what media to upload and sync to your Blackmagic 
+Cloud Storage account for other users’ access.
+Don’t Sync media: Does not upload any media to Blackmagic Cloud Storage.
+Sync proxies only: Uploads only proxy media to Blackmagic Cloud Storage.
+Sync proxies and originals: Uploads both proxies and the original media to Blackmagic Cloud 
+Storage. This can use an extremely large amount of storage depending on the amount and size of 
+the original media.
+Generate proxies automatically:  Check this box to have DaVinci Resolve automatically generate 
+proxy media for your master clips.
+  Proxies are created as: These options let you set the codec that proxy files will use.
+  Display synced media in: Lets you set the timeframe parameter for displaying any synced media.
+Remote Cameras
+Sets permissions for users of the Blackmagic Cameras and the Camera app.
+  Allow remote cameras to see this project and to load media directly into the media pool: Allows 
+Blackmagic Camera and Camera app users that are members of this project to upload camera 
+media to the Blackmagic Storage account and will add it to the project’s Media Pool directly.
+Blackmagic Cloud
+Press the Blackmagic Cloud Website button to go to the Blackmagic Cloud web interface, where you 
+can setup, access and pay for various Blackmagic Cloud services.
+150Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Image Scaling
+The Image Scaling panel contains settings that determine how and when clips are resized for 
+various reasons.
+Image Scaling
+These settings affect the methods used to resize clips in various situations.
+  Resize Filter: The first group of settings lets you choose the filter method used to interpolate 
+image pixels when resizing clips:
+Smoother: May provide higher quality for projects using clips that must be scaled down to fit an 
+SD resolution frame size.
+Bicubic: While the Sharper and Smoother options are slightly higher quality, Bicubic is still an 
+exceptionally good resizing filter and is less processor intensive than either of those options.
+Bilinear: A lower quality setting that is less processor intensive. Useful for previewing your work 
+on a low-performance computer before rendering, when you can switch to one of the higher 
+quality options.
+Sharper: Usually provides the best quality in projects using clips that must be scaled up to fill a 
+larger frame size or scaled down to HD resolutions.
+Custom: This setting lets you take control of the exact algorithm used in all resizing operations. 
+The custom Resize Filter options available are: Bessel, Box, Catmul-Rom, Cubic, Gaussian, 
+Lanczos, Mitchell, Nearest Neighbor, Quadratic, and Sinc. In practice, the difference between 
+these methods can be quite subjective. However, if you need to match a specific resizing method 
+used from another application, you can do it here. For everyday use, the normal resizing filters in 
+DaVinci Resolve should be sufficient.
+  Override input scaling: Checking this box lets you choose an Input Sizing preset to 
+apply to the project.
+  Override output scaling:  Checking this box lets you choose an Output Sizing preset to 
+apply to the project.
+  Deinterlace quality:  (only available in Studio version) A fourth group of settings lets you choose 
+the quality/processing time tradeoff when deinterlacing Media Pool clips using the Enable 
+Deinterlacing checkbox in the Clip Attributes window. There are three settings:
+Normal: A high-quality deinterlacing method that is suitable for most clips. For many clips, Normal 
+is indistinguishable from High. Normal is always used automatically during playback in Resolve.
+High: A more processor-intensive method that can sometimes yield better results, depending on 
+the footage, at the expense of slower rendering times.
+DaVinci Neural Engine: This option uses the advanced machine learning algorithms of the DaVinci 
+Neural Engine to analyze motion between the fields of interlaced material and reconstructs them 
+into a single frame. This option is very computationally intensive but, ideally, will deliver an even 
+more aesthetically pleasing result than the “high” setting.
+151Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Input Scaling
+Contains one setting, Mismatched resolution files, that lets you choose how clips that don’t match the 
+current project resolution are handled. There are four options:
+  Center crop with no resizing: Clips of differing resolution are not scaled at all. Clips that are 
+smaller than the current frame size are surrounded by blanking, and clips that are larger than the 
+current frame size are cropped.
+  Scale full frame with crop: Clips of differing resolution are scaled so that the clip’s shortest 
+dimension is fit to match the frame. Excess pixels are cropped.
+  Scale entire image to fit: The default setting. Clips of differing resolution are scaled so that the 
+clip’s longest dimension is fit to match the frame. The shorter dimension has blanking inserted 
+(letterboxing or pillarboxing). 
+  Stretch frame to all corners: Useful for projects using anamorphic media. Clips of differing 
+resolutions are squished or stretched to match the frame size in all dimensions. This way, 
+anamorphic media can be stretched to match full raster, or full raster media can be squished 
+to fit into an anamorphic frame. An added benefit of this setting is that it makes it easy to mix 
+anamorphic and non-anamorphic clips in the same project.
+Output Scaling
+These settings let you optionally choose a different resolution to be output via your video output 
+interface, for monitoring, outputting to tape, or rendering. In particular, if you set the resolution in 
+the Render Settings list of the Deliver page to something other than the Timeline Resolution, these 
+settings are used to make the change (for example, if you’re rendering a downconversion of the 
+current timeline). This can be used in situations where you’re working on a high resolution 4K project, 
+but you want to monitor using an HD display and output HD resolution media for approval.
+  Match timeline settings:  Turned on by default, so that these settings mirror the Timeline 
+Resolution, Image Scaling, and Input Image Scaling settings described above. Turning this 
+checkbox off lets you choose different settings for monitoring, outputting to tape, or rendering, 
+using the other settings in this group.
+  Output resolution: Lets you choose an alternate resolution.
+  For: Lets you specify a different custom alternate resolution.
+  Pixel aspect ratio: Lets you specify an alternate pixel aspect ratio to match the alternate 
+timeline format.
+  Mismatched resolution files:  Lets you choose an alternate way of handling mismatched resolution 
+files given the alternate resolution you’ve chosen. These options work identically to those of the 
+“Input Image Scaling” group.
+  Super Scale: Sets a very processor-intensive and high quality upscaling algorithm that actually 
+creates new pixels for the resized image. The possible values are: None, 2-3-4x, 2-3-4x Enhanced, 
+and Auto. 
+For more information on Super Scale, jump to this chapter: Image Sizing and Resolution 
+Independence.
+152Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Color Management
+The various options found in the Color Management panel let you configure DaVinci Color 
+Management (RCM) or ACES if you have either enabled, and they also allow you to pre- or post-
+process the DaVinci Resolve image processing pipeline using LUTs and Broadcast Safe settings, in 
+order to accommodate a wide range of different color workflows.
+Color Space and Transforms
+If you choose DaVinci YRGB Color Managed or ACES in the Color Science menu at the top, then the 
+other dropdown menus in this section become enabled. 
+For more information on DaVinci Resolve Color Management and ACES, 
+ jump to this chapter: Data Levels, Color Management, and ACES . 
+If you’re new to color or color management, you’re strongly recommended to read this chapter.
+If you choose to use Resolve Color Management (RCM), ACEScc, or ACEScct, the settings in this 
+panel give you extensive control over how color is transformed, starting with choosing the default 
+color settings for the source media in your project (via the Input Color Space), through choosing how 
+you want your grading controls in DaVinci Resolve to behave (via the Timeline Color Space), and then 
+specifying how the final color will look on your monitor and output device (via the Output Color Space).
+  Color science: There are four options that let you choose whether to work with manual or 
+automated color management. 
+DaVinci YRGB color science: DaVinci Resolve’s original color science, in which you manage all 
+and any color transforms from one color space to another manually, using either LUTs or manual 
+adjustments. 
+DaVinci YRGB Color Managed:  Enables the Resolve color-managed workflow (RCM) for grading. 
+DaVinci YRGB Color Managed (Legacy): Enables the legacy Resolve color-managed workflow for 
+compatibility with legacy projects.
+ACEScc or ACEScct: Both of these are standardized color management schemes that are available 
+for facilities using ACES workflows. Of the available settings, ACEScct is the most intuitive way of 
+working for most colorists, as it handles the lifting of shadows in a creatively useful way.
+For more information on Color Management and ACES, jump to this chapter:  
+Data Levels, Color Management, and ACES .
+  ACES version: This dropdown only appears if you choose one of the DaVinci ACES options from 
+the Color science dropdown menu. Lets you switch between different versions of the ACES 
+specification. This lets you choose the appropriate older version of ACES whenever you open an 
+older project. 
+  Use Separate Color Space and Gamma:  If this checkbox is turned off (the default), the 
+Color Management panel of the Project Settings exposes one dropdown each for the Input, 
+Timeline, and Output Color Space settings, and each setting simultaneously transforms the 
+gamut and gamma, depending on which option you choose. If you turn this checkbox on, then the 
+Color Management panel changes so that the Input, Timeline, and Output Color Space settings 
+each display two pop-ups. The first dropdown lets you explicitly set the gamut, while the second 
+dropdown lets you explicitly set the gamma.
+153Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+To provide more detailed information, the simple and advanced global controls available for 
+Resolve Color Management (RCM) are covered in a dedicated chapter. 
+For more information, jump to this chapter: Data Levels, Color Management, and ACES .
+Dolby Vision™
+DaVinci Resolve includes a GPU-accelerated software version of the Dolby Vision CMU (Content 
+Mapping Unit) for doing Dolby Vision grading and finishing workflows right in either the free version 
+of DaVinci Resolve or in DaVinci Resolve Studio. This is enabled and set up in the Color Management 
+panel of the Project Settings with the Enable Dolby Vision checkbox.
+Dolby Vision settings in the Color Management panel of the Project Settings
+There are five controls available:
+  Enable Dolby Vision: Turns Dolby Vision on and off. When on, this checkbox enables the Dolby 
+Vision palette in the Color page.
+  Dolby Vision version dropdown:  Lets you choose which version of the Dolby Vision algorithms to 
+use. Options at the time of this writing include 2.9 and 4.0.
+  Analysis tuning: Choose from a variety of options for how Dolby Vision will analyze and control 
+highlight retention.
+  Master Display dropdown:  Lets you choose the nit level and gamut of the master HDR display 
+you’re grading on.
+  Use External CMU: A checkbox lets you choose whether to use the built-in software CMU or a 
+hardware CMU that you have connected to your DaVinci Resolve workstation.
+  Enable Dolby Vision HDMI tunneling: If you are using a Blackmagic Decklink 8K Pro G2 device 
+for monitoring, you can check this box to enable HDMI tunneling. This lets you view Dolby Vision 
+content directly on a consumer display in real time.
+  Enable L5 metadata on HDMI: If HDMI tunneling is activated, enables the L5 metadata. This 
+should be checked if HDMI tunneling is on.
+NOTE: Dolby Vision controls are available to all DaVinci Resolve users for monitoring 
+and automatically generating Dolby Vision metadata for creating other HDR and SDR 
+deliverables from the HDR grade you’ve made. However, if you want to be able to make 
+manual trims on top of this automatic analysis, you must email dolbyvisionmastering@
+dolby.com for more information on obtaining a license.
+154Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+HDR10+
+DaVinci Resolve supports the new HDR10+ HDR format by Samsung. Please note that this support 
+is a work in progress as this is a new standard. When enabled, an HDR10+ palette exposes trimming 
+parameters that let you trim an automated downconversion of HDR to SDR, creating metadata to 
+control how HDR-strength highlights look on a variety of supported televisions and displays. This is 
+enabled and set up in the Color Management panel of the Project Settings with the Enable HDR10+ 
+checkbox. Turning HDR10+ on enables the Dolby Vision palette in the Color page.
+HDR10+ settings in the Color Management panel of the Project Settings
+HDR Vivid
+HDR Vivid is the HDR video technology standard released by the China UHD Video Industry Alliance 
+(CUVA). Mastering in this format assures wide compatibility with HDR televisions, phones, computers, 
+and other devices in China.
+  Mastering Display dropdown:  Lets you choose the nit level of the master HDR display you’re 
+grading on.
+HDR Vivid settings in the Color Management panel of the Project Settings
+Lookup Tables
+This group of controls lets you add LUTs to the Resolve image processing pipeline that affect every 
+timeline in the entire project all at once. These LUTs can be used for a wide variety of functions, such 
+as to trim Timeline grades, apply Log to Linear conversions, simulate film output, and limit the signal to 
+accommodate Broadcast Safe requirements. 
+Different options let you insert image processing to different stages of the pipeline as seen in the 
+following diagram: 
+DISPLAY LUT 
+Monitored Image
+Color Page
+Image Processing
+ INPUT LUTCamera Raw
+Decoding OUTPUT LUT
+Raw
+Image 
+Data 
+ 
+ 
+Deliver
+Page
+Output
+Media 
+155Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Keep in mind that since you can apply both 1D and 3D LUTs simultaneously, 1D LUTs at each step are 
+always applied before 3D LUTs.
+  Input Lookup Table: Two dropdown menus let you add 1D and/or 3D LUTs that process the current 
+Timeline before every other image processing operation in DaVinci Resolve.
+  Output Lookup Table: Two dropdown menus let you add 1D and/or 3D LUTs that process the 
+current Timeline after the operations applied in the Color page, but before the temporarily applied 
+Display LUT. 
+  Video Monitor Lookup Table: Two dropdown menus let you add 1D and/or 3D LUTs that process 
+the current Timeline after every other image processing operation in DaVinci Resolve. However, 
+Display LUTs are only temporarily applied for purposes of monitoring; they’re never applied to 
+rendered media, or to the signal that is output to tape using the controls in the Deliver page. 
+Display LUTs are particularly valuable for applying a film print emulation LUT in a Log workflow, or 
+for applying a monitor calibration LUT if you’re outputting to a single display and you don’t have 
+dedicated outboard calibration hardware. 
+  Here’s an example. It’s common, when grading for film output using a Log workflow, that you’ll 
+use the Display LUT dropdown menu to apply a film emulation LUT that simulates the image as it 
+will be output from the film recorder, taking into account the film lab and print stock used, in order 
+to make sure that the image you’re grading will appear as close as possible to what the eventual 
+release print will look like in the cinema.
+  Color Viewer Lookup Table: Two dropdown menus let you add 1D and/or 3D LUTs that process 
+the image shown in the Viewer on your computer display, independently of the Display LUT that’s 
+used to output to your broadcast display. By default, this follows the Video Monitor LUT setting, 
+but you can also use this option to apply a specific calibration transform for your computer monitor. 
+Alternately, you could use it to desaturate the GUI Viewer to be able to specifically evaluate image 
+contrast, or if you don’t want to have to argue with your client over which display looks correct.
+  Scopes Lookup Table: Ordinarily, DaVinci Resolve’s internal software video scopes provide an 
+unbiased analysis of the actual video data levels within the Resolve image processing pipeline. 
+However, you can choose to have the software scopes use the Video Monitor LUT selection, or 
+any other LUT installed on your system, to transform this analysis to reflect the monitored output.
+  3D Lookup Table Interpolation: Lets you choose the processing quality of both LUT and DCTL 
+operations in DaVinci Resolve. 3D Lookup tables (LUTs) are 3D tables of red, green, and blue 
+values that specify an output color value for each input color value, thereby providing a method 
+of making color transformations using pre-calculated data. While powerful, 3D LUTs have finite 
+detail; for example, one might have a 17x17x17 LUT that specifies 4913 individual color transforms. 
+When applied to a floating point image that contains more data than the LUT specifies transforms 
+for, color values falling between the 17x17x17 color transforms specified by the LUT need to 
+be interpolated. You can choose from two methods that trade off processing efficiency for 
+higher quality: 
+Trilinear: (Default) Trilinear is backward compatible with grades that use LUTs from previous 
+versions of DaVinci Resolve and matches the look of LUTs being applied in other applications.
+Tetrahedral: Tetrahedral is slightly more processor-intensive, but results in higher image quality 
+LUT and DCTL processing, with reduced color-banding. Tetrahedral is recommended for projects 
+that don’t need backward compatibility with previous versions of DaVinci Resolve or LUTs created 
+in other applications.
+  Update Lists button:  Refreshes the LUT dropdown menus if you’ve added new LUTs to your 
+system since DaVinci Resolve has been opened.
+  Open LUT Folder button: This selection opens the master folder in your file system, as described 
+in the list of DaVinci Resolve LUT paths shown above.
+156Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Adding Lookup Tables to Your DaVinci Resolve Installation
+The dropdown menus in the Color Management panel include a series of factory preset LUTs 
+that were installed with DaVinci Resolve, along with any LUTs that have been generated by 
+DaVinci Resolve, or that you’ve imported into the proper directory for your operating system.
+• On macOS: Library/Application Support/Blackmagic Design/DaVinci Resolve/LUT/
+• On Windows: C:\ProgramData\Blackmagic Design\DaVinci Resolve\Support\LUT
+• On Linux: /opt/resolve/LUT
+If you downloaded the non-studio version of DaVinci Resolve from the Apple App Store, LUTs 
+are saved in a different location in order for DaVinci Resolve to remain totally self-contained. 
+In this case, you can click the “Open LUT Folder” button in the Lookup Tables panel of the 
+Project Settings, to open up a Finder window at the location these LUTs are stored. You can 
+use this window to copy LUTs that you want Resolve to have access to, or delete LUTs that 
+you no longer need.
+If you add a LUT to one of these directories after DaVinci Resolve has been opened, you can 
+click the Update Lists button to refresh the contents of the dropdown menus. 
+DaVinci Resolve uses both 1D and 3D LUTs. 3D LUTs that are created by DaVinci Resolve 
+are in the .cube format, configured as 33x33x33 cubes with 32-bit floating point processing. 
+DaVinci Resolve can also read and use LUTs in the Shaperlut format.
+Broadcast Safe
+Broadcast Safe settings can be enabled while you grade to limit both the luma and chroma of the 
+video signal to one of three levels of acceptable overshoots and undershoots. 
+• Broadcast safe IRE (mV) levels: A dropdown menu for choosing one of three levels of 
+aggressiveness when limiting the signal. Choose the range that corresponds to your 
+QC requirements.
+• Make Broadcast Safe: A checkbox that turns broadcast safe limiting on and off.
+NOTE: The clipping imposed by Broadcast Safe itself does not have an inherently soft 
+roll-off. For best results, Broadcast Safe should be used in conjunction with the Soft Clip 
+controls in the Color page.
+157Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+General Options
+This panel presents a selection of general preferences that affect the interface and operation of 
+DaVinci Resolve.
+Conform Options
+The settings in this group determine how clips are conformed to match imported project files with 
+source media on disk by extracting timecode, reel names, file names, file paths, and so on. 
+For more information on conforming and relinking, jump to this section: Conforming and 
+Relinking Media.
+  Use Timecode: Determines how DaVinci Resolve extracts timecode from referenced media files. 
+There are two options:
+Embedded in the source clip: The preferred setting for most projects to conform automatically and 
+apply grades to the resulting clips. As long as DaVinci Resolve can reference the timecode in either 
+a media file’s timecode track, or in the header metadata of the frames in a DPX sequence, you can 
+use timecode to reconform clips, or even completely change the media file to which a clip refers. 
+From the source clip frame count: This setting is useful if the source media lacks timecode 
+metadata, and all that’s available is a frame count that identifies frames via sequentially numbered 
+integer values.
+  Conform partial clips with black gaps: Inserts black frames whenever you conform a clip that 
+doesn’t contain all the required frames. When this option is selected, partial clips are flagged in 
+the Edit page with a P in the thumbnail of the clip that it is lacking frames.
+  Automatically conform missing clips added to Media Pool:  Enabled by default, must be disabled 
+to use collaborative workflow. When this checkbox is turned on, DaVinci Resolve maintains a 
+dynamic relationship between clips in the Media Pool and those in a project’s various timelines. 
+When this checkbox is on and you import clips with matching timecode/file names/reel names to 
+clips in a timeline, DaVinci Resolve will automatically reconform all matching missing clips, and all 
+other timeline clips that have force conform turned off.
+  Assist using reel names from the: When this checkbox is turned on, DaVinci Resolve uses reel 
+numbers when conforming clips to match any imported project. This setting must also be turned 
+on if you want to choose different reel name extraction methods for individually selected clips 
+using the Clip Attributes window. Turning this checkbox off forces DaVinci Resolve to identify 
+clips using file names when conforming XML and AAF projects. File names can only be used for 
+conforming XML or AAF files, or when importing a DaVinci Resolve project. 
+There are four options:
+Source clip file pathname: Obtains the reel number by extracting it from each media file’s path. 
+This makes it possible to extract a reel number from all or part of the file name, or from all or part 
+of the name of any folder in the path that encloses that file. This extraction is defined using the 
+Pattern field.
+Pattern: A code that defines how a reel number should be extracted from the source clip path name. 
+For more information about creating patterns, jump to this section: Conforming and 
+Relinking Media.
+158Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Media Pool folder name: The reel number is obtained from the name of the bin in the Media Pool 
+that encloses that clip. This option is often used for stereo projects, deriving the reel number from 
+“Left” and “Right” named directories. It’s also useful for projects that are inheriting new VFX clips 
+on a daily basis.
+Embedding in source clip file:  Useful for file formats where the reel number is embedded within 
+the media file itself. QuickTime files created by Final Cut Pro, DPX frame files, and CinemaDNG 
+files are all formats that are capable of containing reel number header data.
+Source clip filename: If there is no defined reel number, often it’s easy to just use the source clip 
+filename. This is a safe option to use in situations where you want to manually choose different 
+reel name extraction methods for individual clips using the Clip Attributes window.
+  Limit reel name matching to X characters:  For situations where you’ve been provided with media 
+files with extra characters in the reel name that don’t correspond to the names used in the project 
+file you’ve been given, “Limit reel name matching to X characters” lets you omit a specific number 
+of characters from the end of a reel name. This works in conjunction with the following setting.
+  Ignore the first X characters of the reel name: For situations where you’ve been provided with 
+media files with extra characters in the reel name that don’t correspond to the names used in 
+the project file you’ve been given, “Ignore the first X characters of the reel name” lets you omit a 
+specific number of characters from the beginning of the reel name. Combined with the previous 
+setting, you can trim any reel name to a conformable subset of characters.
+  Extract reel names from EDL comments: Media file formats such as R3D have reel names, 
+obtained from the file names, that are longer than the eight characters that are allowable in 
+a standard EDL. This option allows DaVinci Resolve to extract reel names from appropriately 
+formatted EDL comments, such as those output from Final Cut Pro 7.
+  Sort timeline using reel number and timecode:  Lets you change the behavior of C mode sorting 
+in the Timeline. With this checkbox turned on (the default), all clips in the Timeline are sorted by 
+reel number first, and then by source timecode. This way, clips with similar timecode from the 
+same reel will appear next to one another in C mode. If you turn this checkbox off, reel number is 
+ignored, and all clips in the Timeline are sorted only by source timecode. This may result in clips 
+from multiple sources being mixed together, but it is useful in specific situations.
+  Mixed frame rate format: (Only available prior to importing media into a project) This dropdown 
+menu lets you choose the method used to conform mixed frame rates for rendering and playback. 
+Which option you choose dictates the accuracy with which retimed clips in DaVinci Resolve match 
+the same clips that were retimed in other editing applications when you import those timelines 
+into DaVinci Resolve via XML or AAF. This dropdown menu also appears in the Load AAF 
+or XML dialogs.
+If you’re editing from scratch in DaVinci Resolve:  You should leave this setting set to “Resolve.”
+When importing timelines via XML from Apple software:  Choose the “Final Cut Pro 7” or 
+“Final Cut Pro X” methods of conform. 
+When importing timelines via XML or AAF from Premiere Pro, Media Composer, Smoke, or 
+other NLEs: You should choose “Resolve.”
+When none is selected: DaVinci Resolve conforms and processes all clips in the Timeline to play 
+at the frame rate that’s selected in the “Timeline frame rate” dropdown menu. For example, 23.98, 
+29.97, 30, 50, 59.94 and 60 fps clips will all play at 24 fps if that’s what “Timeline frame rate” is set 
+to in the Master Project Settings, and clips will play slower or faster accordingly.
+How clips in mixed frame rate timelines are rendered out depends on whether the Render 
+Settings are set to render individual source clips or one single clip. When you render the Timeline 
+as individual source clips, all clips are rendered individually at their original frame rate. If you select 
+“single clip,” all clips are converted to the “Timeline frame rate” frame rate and rendered as a 
+single media file. 
+159Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Color
+These settings affect clip versions and timeline interactions when working in the Color page.
+  Automatically label gallery stills using:  When enabled, DaVinci Resolve automatically generates 
+labels for all gallery stills you take based on the following controls:
+Naming dropdown: Lets you choose what name to use for new stills. Options include: Clip Name, 
+Clip Version Name, Source Timecode, Timeline Timecode, Timeline Name, Display LUT Name, 
+Custom Label Using Tags (using metadata variables).
+Append still number on export checkbox: When enabled, each new still has an appended still 
+number. Where the number appears depends on the following radio buttons.
+As Suffix/As Prefix buttons: Lets you choose to place still numbers at the end of an auto 
+generated gallery label or at the beginning.
+  Luminance mixer defaults to zero: Selecting this option sets the Y channel of the YRGB 
+parameters for all grades to zero. This is required to be able to export a compliant ASC-CDL, and 
+will impact all grades that use the Lum Mix control.
+  Use legacy Log grading ranges and curve: DaVinci Resolve 12.5 introduced a modification to 
+the Log grading controls that provides smoother, more pleasing results using the same controls. 
+To maintain backward compatibility with older projects, a “Use legacy Log grading ranges 
+and curve” checkbox in the Color panel of the Project Settings lets you switch your project 
+between the older Log control behavior and the newer one. Older projects that are opened in 
+DaVinci Resolve have this checkbox turned on by default, while new projects have this turned off 
+by default.
+  Use S-curve for contrast: On by default, this checkbox sets the contrast control in the Color 
+Wheels palette to apply an “S-curve” to the image, such that the shadows and highlights of a 
+signal will not be clipped when you increase the value. If you would prefer for these contrast 
+adjustments to be made linearly, and for the signal to be allowed to clip when you reach the upper 
+and lower boundaries of the video signal, you can turn this checkbox off.
+  Use legacy sizing interactions for windows and effects: DaVinci Resolve 14.1.1 improved how 
+window tracking applies transformations, to correctly handle things like pixel aspect ratio (par). 
+New projects should leave this setting disabled, however older projects should leave this 
+checkbox enabled to ensure tracking and transforms remain applied the way they were before.
+  Apply stereoscopic convergence to windows and effects: When enabled, DaVinci Resolve 
+correctly maintains the position of a window that’s been properly placed over each eye as 
+convergence is adjusted in the 3D palette. Enabling this checkbox also enables an additional 
+Convergence parameter in the Window palette that lets you create properly aligned convergence 
+for a window that’s placed onto a stereoscopic 3D clip, as seen in the following screenshot. 
+l
+The Convergence control in the Transform section of 
+the Window palette appears when you enable “Apply 
+stereoscopic convergence to windows and effects”
+160Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+  Use local version for new clips in timeline:  Automatically sets all new clips that are added to 
+existing timelines, or all clips that are added to new timelines that are imported via AAF, EDL, or 
+XML, to use local grades by default. If you want all clips added to new timelines to use remote 
+grades instead, as with DaVinci Resolve version 9 and earlier, you can turn this checkbox off. 
+  Automatically match master timeline with media pool:  If you turn on this option before importing 
+any media into the Media Pool, or importing any timelines that will in turn import media into the 
+Media Pool, you can create projects with a Master Timeline. When enabled, clips are added to and 
+removed from the Master Timeline as they’re added to and removed from the Media Pool, so that 
+the Master Timeline always contains all media in the Media Pool. Once media has been imported 
+into a project, this setting cannot be changed.
+  Save timeline thumbnails with project:  To minimize project size, and maximize the speed 
+of saving and loading projects, you should leave this checkbox unchecked. If you select the 
+checkbox, all of your Timeline thumbnails will be stored inside every project, instead of in the 
+default directory that’s ordinarily dedicated to stills, during both Save and Auto Save operations. 
+This provides a good history of the project but takes much longer to complete and uses more hard 
+disk space.
+  Use BGR pixel order for DPX v2: Lets you choose a different pixel order for projects using 
+DPX version 2 media.
+  Embed timecode in audio output:  When turned on, directs DaVinci Resolve to output LTC 
+timecode that’s embedded in channel 16 of the SDI stream and channel 2 of the analog audio 
+output from your video interface.
+  Use Timelines Bin: This option is only available to be changed before you add clips to the Media 
+Pool; after you’ve added clips, it’s no longer available. Turning Use Timelines Bin on creates a 
+dedicated Timelines bin in the Media Pool, at the top of the Bin List. When enabled, the Timelines 
+bin contains all timelines in a project, and you’re prevented from putting timelines into any other 
+bin in the Media Pool. Whenever you create or import a new timeline, it automatically appears in 
+the Timelines bin. You can add subfolders to the Timelines bin for more specific organization.
+  Node Stack Layers: Lets you set the number of node stack layers you wish to use in the 
+Color page.
+Post Group Node Stack Layer: Adds a final Stack Layer after all the others, letting you dedicate 
+the last node stack layer for post group grades and transforms.
+Dynamics Profile
+Defines the default transition from one dynamic keyframe to the next for keyframed effects in the 
+Color page. By default this transition is linear, with the “Dynamic profile start” and “Dynamic profile 
+end” parameters set to 1. However, if you need to alter the acceleration of the interpolation of values 
+from one dynamic keyframe to the next, then you can change that keyframe’s Dissolve Type in order 
+to “ease” the effect transition you’re creating. The values in these settings correspond to the graph 
+curves found in the Dynamic Attributes dialog when editing keyframes in the Color page. 
+For more information, jump to this chapter: Keyframing in the C olor Page.
+Versions
+Ten text fields provide a way for you to designate automatic names for the versions of grades that you 
+select in the Color page. To the right of each text field, a dropdown menu lets you add a name from a 
+handy list of predefined terms that’s been provided. Alternately, you can simply click any field and type 
+your own custom name.
+161Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+When you change the name of a version in the Color page, the names you define in this list 
+are available from a dropdown menu in the Version Name dialog.
+Using a predefined list of names for your different versions avoids typos that can later create 
+folder naming issues when you use the “Commercial Workflow” options for rendering your 
+media in the Deliver page.
+Using the named dropdown  
+when editing the name of a version 
+Camera Raw
+This panel contains groups of parameters that correspond to every camera raw media format that’s 
+supported by DaVinci Resolve. Using these parameters in the Camera Raw panel, you can override 
+the original camera metadata that was written at the time of recording, and make simultaneous 
+adjustments to all camera raw clips using the “project” raw settings. 
+To provide more detail, these settings are covered in detail in a dedicated chapter.  
+For more information, jump to this chapter: Camera Raw  Settings.
+Capture and Playback
+All settings in this panel let you define the functionality of capture and playout to tape using 
+device controlled VTRs connected to your Resolve workstation via the connected video capture 
+and output interface. 
+For more information on deck capture, jump to this chapter: Ingesting From Tape . 
+For more information on video output to tape, jump to this chapter: Deliverin g to Tape.
+162Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Deck Settings
+These settings affect both capture and playback when using the tape ingest options of the Media 
+page, or the tape output options of the Deliver page.
+  Video capture and playback:  You can choose the video format (frame size and frame rate) with 
+which to output to tape from this dropdown menu. HD timelines can be downconverted to SD, and 
+SD timelines can be upconverted to HD using the format conversion of your DeckLink card.
+  Use left and right eye SDI: A checkbox that enables supported video interfaces to ingest and 
+output muxed stereoscopic video when used with supported VTRs, such as HDCAM SR decks 
+with 4:2:2 x 2 mode. (When muxed stereoscopic signals are ingested, each eye is separated into 
+individual left-eye and right-eye image files.) This parameter only appears when your hardware is 
+set up appropriately.
+  Video connection operates as: Selects between the available signal options: Use 4:4:4 SDI 
+and Enable Single Link. Which options are available depend on which video capture card you 
+are using.
+  Data Levels: Lets you specify the data range (normally Video or Full) that’s used when ingesting 
+from or outputting to tape. This option switches the data range of the signal output by your video 
+capture card, but only during capture from tape in the Media page, or output to tape in the Deliver 
+page. When capture or output is not currently occurring, your video capture card goes back to 
+using the identically named data range setting in the Master Project Settings pane, which governs 
+how you monitor the signal being output on an external broadcast display or projector.
+  Video bit depth: Choose the bit depth that corresponds to the capability of your deck. Depending 
+on your workstation’s configuration, you can choose between 8-bit and 10-bit. Outputting to 10-bit 
+is more processor intensive, but higher quality for compatible devices, and is the default setting.
+  Use deck autoedit: If supported by your video deck, this is the best method to record video 
+to the deck, as it enables the deck to roll the edit using the specified preroll, and control the 
+edits via serial device control. If this checkbox is turned off, a basic edit On/Off mode is used 
+by the deck, with the potential for frame inaccuracies if the “Non auto edit timing” setting is 
+not properly adjusted.
+  Non auto edit timing: Adjusts the edit synchronization of the connected deck when auto 
+edit is turned off.
+  Deck preroll: Sets the number of seconds for preroll. How much is appropriate depends on the 
+performance of your deck.
+  Video output sync source: When using a DeckLink card this is set to Auto. Other capture cards 
+may require you to set the sync source to “Reference” for playout and “Input” for ingest. This 
+setting is only available if you have a DVS card installed on your system.
+  Add 3:2 pulldown: Inserts or removes the 3:2 pulldown required to record or play 23.98 fps media 
+to or from a 29.97 tape format.
+Capture
+These settings are used when you use the Capture mode in the Media page to capture clips from tape 
+into the Media Pool.
+  Capture: Lets you choose whether to capture both Video and Audio, or Video Only.
+  Video Format: The format that scanned film frames are saved as. When capturing from tape, the 
+available options are DPX and QuickTime. When capturing from the Cintel film scanner, this is 
+restricted to Cintel Raw Image (CRI), which is a raw data format that DaVinci Resolve automatically 
+debayers as a Cineon log-encoded image for grading.
+163Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+  Codec: The codec used to write captured media. When capturing from tape, these include the 
+various type of Apple ProRes, 8- and 10-bit YUV 422, 10-bit RGB, and the various types of DNxHD. 
+Cintel Raw Image files default to rgb.
+  Save in folder path: A series of checkboxes let you specify what other information to use to define 
+the directory hierarchy that will hold the captured media. Every checkbox you turn on adds an 
+additional directory with a name defined by that checkbox’s metadata. You can choose any or all 
+of the following: Program name, Clip number, Reel number, and Roll/Card.
+  Apply reel number to: Lets you choose how to write the reel name. Two checkboxes let you write 
+the reel number to the file’s name, and/or to the Header data.
+  Use prefix: A field lets you type in a prefix to be used in the media file’s name. This lets you add 
+text identification that will make the media more easily identifiable and searchable.
+  Apply prefix to: Two checkboxes let you choose to use the prefix you typed in the file name, and/
+or in the folder name.
+  Use frame number with: When capturing to image sequences, you can choose how many digits to 
+use when writing the frame number into the name of each frame file.
+  Set batch ingest handles to: When capturing to image sequences from a batch list, defines how 
+many frames of additional handles to ingest along with each logged clip.
+  Input: Lets you choose how many tracks of audio to capture, from 2 to 16.
+Playout
+These settings only affect the video signal that’s output when you use the Edit to Tape mode of the 
+Deliver page.
+  Output: Lets you choose whether to output both Video and Audio, Video Only, or Audio Only if 
+you’re doing an audio layback.
+  Output Source Timecode: Turn this checkbox on to output each individual clip’s source timecode. 
+This option is only applicable when assemble editing to tape.
+  Output LTC: With a Blackmagic Design DeckLink or UltraStudio device using HD-SDI, longitudinal 
+timecode (LTC) is available on track 16 of the HD-SDI video signal, making it easy to use a Mini 
+Converter de-embedder to extract this analog timecode audio signal and feed it directly to a 
+recording device. This is particularly helpful if you have outboard video processing equipment 
+such as a noise reducer or format converter that passes through the VITC timecode.
+  Delay LTC by x frames: When outputting LTC to bypass outboard processing gear, such as a 
+noise reducer or format converter, you can compensate for the processing delay by delaying the 
+timecode by a matter of frames to ensure that the processed image and timecode reach the deck 
+at the same time. With a DVS card there is a separate timecode output.
+  Offset audio by x frames: Lets you specify an offset between the audio track and video to achieve 
+proper A/V sync in cases where the video is being delayed by outboard processing hardware.
+  Output x channels of audio: Choose the number of audio tracks to output to tape.
+  Set batch playout head handle to x seconds: When batch outputting multiple clips, you can 
+specify a number of frames before the In point of each clip to be output as well.
+  Set batch playout tail handle to x seconds: When batch outputting multiple clips, you can specify 
+a number of frames after the Out point of each clip to be output as well.
+164Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Subtitles and Transcription
+The Subtitles panel lets you adjust presets that govern subtitles being created in subtitle tracks of 
+the timeline.
+  Max Character Per Line: Defaults to 60. Lets you choose the maximum number of characters 
+allowed on one line in a subtitle.
+  Minimum Caption Duration:  Defaults to 3 seconds. Lets you choose the minimum duration 
+allowed for subtitles in the timeline.
+  Maximum Characters Per Second:  Defaults to 30. Automatically calculates the maximum 
+allowable characters per second based on a subtitle clip’s duration.
+The Transcription setup panel lets you select the language that DaVinci Resolve uses to 
+analyze audio clips for transcription.
+Language: Select one of the supported languages here. Selecting Auto lets DaVinci 
+Resolve analyze the audio clip and choose the language spoken.
+Enable Extended Language Support:  If your language isn’t on the language list, enable 
+this box to activate the extended language set. This feature is currently in beta.
+Fusion
+Fusion allows consistent frame numbering for all compositions, including trimmed clips. This means 
+that any composition created in Fusion can start with the same start frame number. In new projects 
+you can change the default start frame for Fusion compositions in the project settings.
+  Legacy Fusion Composition Frame Count: Sets the Fusion composition at zero frames to the first 
+frame of the source media for the composition.
+  Default Start Frame: Lets you type in a default frame number to start your fusion comps in 
+this project.
+This helps with Visual FX workflows in three ways:
+• Matching existing keyframes to the right frame offsets—when replacing an asset with 
+mismatched frame offsets (e.g., a sub clip, different format or round trip, or VFX connect 
+workflows with mismatching handles).
+• Rendering to specific frame ranges—when aligning to delivery standards for commercial 
+workflows (e.g., compositions should start at sequence frame 1000).
+• Consistent Referenced Comp behavior—essential when applying a referenced 
+composition to different clips with different trims.
+  Downscale to Timeline Resolution for Timeline Clip Compositions:  To increase playback 
+performance for complex fusion projects, you can check this box to automatically downscale all 
+media to the timeline resolution before fusion operations happen. This does not work with .exr 
+media however.
+165Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Fairlight
+The Fairlight panel lets you set up your project’s audio sample rate, as well as setting up various 
+audio-specific tools in the Fairlight page.
+General
+Audio Sample Rate
+This setting can only be changed prior to creation of your first timeline. Once one or more timelines 
+have been created in a project, the Audio Sample Rate is locked to whatever was chosen. 
+The Audio Sample Rate, measured in kilohertz, is the number of samples per second used for 
+audio processing in DaVinci Resolve. This setting defaults to 48000 (or 48 kHz), which is typical for 
+broadcast and cinema work. However, you can change this to 96000 or 192000 if you want to mix and 
+process audio at higher precision. 
+Be aware that using a higher sample rate, such as 96 kHz instead of 48 kHz, will use twice as much 
+processing power and result in media that’s twice the size.
+NOTE: Regardless of the Timeline Sample Rate you select, when you import audio files at 
+different sample rates, they will be automatically re-sampled to the Timeline Sample Rate so 
+they play correctly.
+Use Fixed Bus Mapping
+If you want to work using the previous method of fixed-bus mapping, you can do so for new 
+projects by opening the Fairlight panel of the Project Settings and turning on the “Use fixed bus 
+mapping” checkbox.
+If your project has fixed busing enabled and you want to change to FlexBus, then uncheck the “Use 
+fixed bus mapping” checkbox. Note that once you have made the change, it will not allow you to 
+change it back to legacy busing. The advantages to changing from legacy busing to FlexBus are 
+enormous, so you will not regret making the change.
+Use 32-Bit Float Recording
+Filling in this checkbox gives you the ability to record 32-bit floating point audio. This setting can only 
+be changed prior to creation of your first timeline.
+Enable Soft Fades
+Since version 14.0, Fairlight has automatically added a 1.5ms (72 samples) crossfade between adjacent 
+timeline clips, allowing you to quickly edit your audio without having to manually add crossfades to 
+prevent clicks or pops during playback.
+This feature is still active by default, but you can switch off Soft Fades by removing the checkmark, 
+which can be helpful when you need to hear the audio clips in their entirety.
+166Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Enable Ramp Up on Play
+When this feature is active, your mix will fade in to prevent clicks whenever playback starts. 
+The default faded-in (ramp-up) time is 2.1ms, but it can be adjusted up to 100ms.
+Ramp Up on Play is especially useful when working on mixes with high track counts.
+Audio Metering
+The options in this section of the Fairlight Project Settings let you customize the Loudness Meters on 
+the Fairlight page, while the others affect all other audio meters in DaVinci Resolve.
+  Meter Type: Lets you select the desired Meter Type. Selecting Custom from this dropdown menu 
+activates the following options:
+Level detector: This lets you select Sample Program, VU, or RMS for audio level metering detection.
+Scale: This setting lets you select either IEC 60268-18 or Quasi Linear for audio level metering scaling. 
+Decay: This determines the time in seconds for level metering decay in 20 dB increments, 
+following peak levels registering on the meters.
+Peak Indicator: This sets the hold time for peak level indication in the meters. 
+ — Off
+ — Short hold + fall
+ — Medium hold + fall
+ — Medium hold
+ — Long hold
+ — Infinite hold
+  Pre fader metering on tracks: This checkbox lets you choose how meters in the Fairlight page 
+display their audio analysis. There are two options:
+Post Fader (unchecked): Meters always display the level of each clip’s signal after whatever fader 
+adjustments have taken place. Fading a track’s level down diminishes the visible level of that 
+audio signal in the meter. This setting is good if you prefer a visual indication of the relative levels 
+you’ve set your various audio tracks to, which is a very NLE-oriented behavior.
+Pre Fader (checked): Meters always use the volume levels of the audio clips in that track, even if 
+you’ve lowered the level using the sliders. If you’ve keyframed a clip’s volume, that change will be 
+reflected by the audio meters, even though fader changes are not. Viewing meters this way means 
+you can always see how much level is available to clips in your mix, regardless of what the current 
+fader levels are set to, in the event you want to keep track of audio you want to bring back into the 
+mix later on. This is a very DAW-oriented behavior.
+  Target Loudness level: Lets you set the LUFS value that’s used as a reference level for loudness 
+metering. Defaults to –23 LUFS, which conveniently makes the display of these meters scale 
+similarly to traditional audio meters that you’re already used to.
+  Loudness Scale: Lets you choose which scale you want to use with which to measure the meters. 
+Options currently include the default of EBU +9 Scale (–18 to +9), and EBU +18 Scale (–36 to +18).
+  Bus Meter Alignment Level: Sets the peak of the bus meter.
+  Bus Meter High Level: Sets the dB level at which the meter starts showing red.
+  Bus Meter Low Level: Sets the dB level at which the meter starts showing yellow. 
+167Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+Path Mapping
+The Path Mapping panel lets you configure your system’s file paths, allowing you to seamlessly link 
+and share media clips while collaborating with other users on their own systems. For example, Editor 
+A and Colorist B are collaborating on the same project. Editor A is working on a Mac in L.A., where 
+Colorist B is working on a PC in Bangkok. They are both sharing media in a cloud service’s folder, but 
+the file paths to that cloud folder are different for both of them locally. 
+  The Editor’s Mac folder is at /Users/editor/cloudfolder/Episode 12
+  The Colorist’s Windows folder is at D:\Projects\Episodes\cloudfolder\Episode 12
+Normally if they were collaborating, each one would constantly have to re-link the files from 
+the other before they could continue as the path names would not match. By both of them 
+adding the “Episode 12” location, and mapping their local paths in this section, DaVinci 
+Resolve will automatically convert the file paths on the fly as they work. There would be no 
+need for re-linking the clips as long as all the media they used was in the same hierarchy in 
+the Episode 12 folder.
+You can use Path Mapping to make things easier for non-collaborative workflows as well. 
+For example, for a single user on a laptop, they could setup a link from their local media folder 
+to their NAS. This removes the need to relink the media each time they leave and return to 
+the office.
+NOTE: Path Mapping differs from using the older Mapped Mount option in the Media Storage 
+preferences. Mapped mount requires each user knowing the file path of all the other users. 
+Path Mapping lets the user just present their own file path, and DaVinci Resolve takes care of 
+the translation for all the other users instead.
+Project Media Locations
+This setting lets you set up your project’s media locations so that they can easily be shared and 
+translated with other DaVinci Resolve users. The idea is to have a media folder in common with all the 
+other users (i.e., all connected to the same shared cloud storage folder), and set up the path to your 
+own individual folder here.
+  Location: Shows you the name of the shared folder.
+  Local Path: Shows the path to this folder on your filesystem.
+  Add: Opens a filesystem dialog to let you select the shared folder.
+Once the location is selected, press the Browse button and use the file system to set the local 
+path to that folder on your computer.
+  Remove: Removes a shared folder from the Path Mapping settings. It does not delete the folder 
+from your system.
+  Automatically setup when relinking:  With this setting enabled, when relinking offline media, 
+DaVinci Resolve automatically creates a mapping. It compares the path in the project file and the 
+user selected path and creates a relative path between the two. It checks if other offline media 
+in this project is available in those relative paths and relinks them as appropriate. It also does the 
+same check with proxies in proxy subfolders.
+168Setup and Workflows | Chapter 6 Project Settings
+MEDIA
+The Path Mapping Project Settings
+Apple Immersive
+These controls let you set parameters for creating Apple Immersive content for the Vision Pro 
+VR headset.
+Apple Immersive Processing
+This section allows you to set custom ILPD (Immersive Lens Profile Data) to modify how the immersive 
+content is calibrated and projected.
+  Apple immersive calibration:  Shows you the name of the calibration file. Selecting the option 
+menu lets you choose from a list of previously used calibration files.
+  Projection format: Choose the projection format for the media files.
+  Update Lists: Click this button to refresh the ILPD content accessible in the Media Pool.
+  Open Calibration Folder:  Click this button to open the calibration folder on your local system, to 
+choose an ILPD file.
+169Setup and Workflows | Chapter 6 Project Settings
+MEDIA

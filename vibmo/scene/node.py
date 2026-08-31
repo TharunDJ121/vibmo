@@ -62,11 +62,14 @@ class Node:
         skew: Union[Vector2D, Sequence[float], float] = (0.0, 0.0),
         visible: bool = True,
         z_index: int = 0,
+        **kwargs: Any,
     ) -> None:
         self.id = str(uuid.uuid4())[:8]
         self.name = name or f"{self.__class__.__name__}_{self.id}"
         self.parent: Optional[Node] = None
         self.children: List[Node] = []
+        for k, v in kwargs.items():
+            setattr(self, k, v)
 
         # Animatable Signals
         self.position = Signal(Vector2D.from_any(position), f"{self.name}.position")

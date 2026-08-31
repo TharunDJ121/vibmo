@@ -171,3 +171,9 @@ class LiquidBubblesSuite:
             audio = audio * (0.8 / max_amp)
 
         return audio.astype(np.float32)
+
+    @classmethod
+    def water_bubble_pop(cls, duration: float = 0.09) -> np.ndarray:
+        """Crisp organic water bubble pop with resonant frequency decay."""
+        return cls.viscous_pop_bubble(duration=duration)
+

@@ -11,20 +11,28 @@ class HyperspaceWarpTunnel(Node):
     def __init__(
         self,
         speed: float = 1.0,
+        warp_speed: Optional[float] = None,
         rings: int = 20,
         tunnel_radius: float = 500.0,
         tunnel_depth: float = 2000.0,
         ring_color: Union[Color, str] = colors.CYAN,
+        streak_color: Optional[Union[Color, str]] = None,
         thickness: float = 2.0,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self.speed = Signal(float(speed), f"{self.name}.speed")
+        actual_speed = float(warp_speed if warp_speed is not None else speed)
+        actual_color = streak_color if streak_color is not None else ring_color
+        self.speed = Signal(actual_speed, f"{self.name}.speed")
         self.rings = rings
         self.tunnel_radius = Signal(float(tunnel_radius), f"{self.name}.tunnel_radius")
         self.tunnel_depth = Signal(float(tunnel_depth), f"{self.name}.tunnel_depth")
-        self.ring_color = Signal(Color.from_any(ring_color) if isinstance(ring_color, (str, Color)) else colors.CYAN, f"{self.name}.ring_color")
+        self.ring_color = Signal(Color.from_any(actual_color), f"{self.name}.ring_color")
         self.thickness = Signal(float(thickness), f"{self.name}.thickness")
+
+    @property
+    def warp_speed(self) -> float:
+        return float(self.speed.get(0.0))
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         speed = self.speed.get(time)
@@ -242,3 +250,14 @@ class InfiniteZoomVortex(Node):
             ctx.stroke()
             
         ctx.restore()
+
+
+# Semantic Alias
+HyperspaceTunnel = HyperspaceWarpTunnel
+
+__all__ = [
+    "HyperspaceWarpTunnel",
+    "HyperspaceTunnel",
+    "HexagonalSpeedTunnel",
+    "InfiniteZoomVortex",
+]

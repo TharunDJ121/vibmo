@@ -23,14 +23,20 @@ class Cursor(Node):
         self,
         position: Union[Vector2D, Sequence[float]] = (960.0, 540.0),
         size: float = 24.0,
+        style: str = "arrow",  # "arrow", "hand", "pointer"
         fill: Optional[Union[Color, str]] = None,
         stroke: Optional[Union[Color, str]] = None,
         **kwargs: Any,
     ) -> None:
         super().__init__(position=position, **kwargs)
         self.size_val = float(size)
-        self.fill_color = Color.from_any(fill) if fill else Color.hex("#0f172a")
-        self.stroke_color = Color.from_any(stroke) if stroke else Color.WHITE
+        self.style = style.lower()
+        if self.style in ("hand", "pointer"):
+            self.fill_color = Color.from_any(fill) if fill else Color.WHITE
+            self.stroke_color = Color.from_any(stroke) if stroke else Color.hex("#111827")
+        else:
+            self.fill_color = Color.from_any(fill) if fill else Color.hex("#0f172a")
+            self.stroke_color = Color.from_any(stroke) if stroke else Color.WHITE
         self._ripples: List[Tuple[float, float, Vector2D]] = []
 
     def move_to(
@@ -89,21 +95,48 @@ class Cursor(Node):
 
         # 3. Outer Stroke Outline
         ctx.set_source_rgba(self.stroke_color.r, self.stroke_color.g, self.stroke_color.b, self.stroke_color.a)
-        ctx.set_line_width(2.0)
+        ctx.set_line_width(2.5 if self.style in ("hand", "pointer") else 2.0)
+        ctx.set_line_join(cairo.LINE_JOIN_ROUND)
         ctx.stroke()
 
         ctx.restore()
 
     def _trace_cursor_path(self, ctx: Any, s: float) -> None:
-        ctx.new_path()
-        ctx.move_to(0, 0)
-        ctx.line_to(0, s * 1.3)
-        ctx.line_to(s * 0.35, s * 0.95)
-        ctx.line_to(s * 0.65, s * 1.5)
-        ctx.line_to(s * 0.9, s * 1.38)
-        ctx.line_to(s * 0.6, s * 0.85)
-        ctx.line_to(s * 1.0, s * 0.85)
-        ctx.close_path()
+        if self.style in ("hand", "pointer"):
+            # Clean vector pointing hand icon (Index finger pointing up)
+            ctx.new_path()
+            # Index fingertip
+            ctx.move_to(s * 0.35, 0)
+            ctx.arc(s * 0.45, s * 0.12, s * 0.10, -math.pi, 0)
+            # Index finger right edge down
+            ctx.line_to(s * 0.55, s * 0.60)
+            # Middle finger
+            ctx.arc(s * 0.65, s * 0.65, s * 0.10, -math.pi, 0)
+            ctx.line_to(s * 0.75, s * 0.72)
+            # Ring finger
+            ctx.arc(s * 0.85, s * 0.75, s * 0.10, -math.pi, 0)
+            ctx.line_to(s * 0.95, s * 0.85)
+            # Pinky finger
+            ctx.arc(s * 1.05, s * 0.90, s * 0.10, -math.pi, 0)
+            ctx.line_to(s * 1.15, s * 1.35)
+            # Palm base & wrist
+            ctx.line_to(s * 0.25, s * 1.35)
+            ctx.line_to(s * 0.10, s * 1.05)
+            # Thumb
+            ctx.arc(s * 0.10, s * 0.85, s * 0.12, math.pi * 0.5, math.pi * 1.5)
+            ctx.line_to(s * 0.35, s * 0.60)
+            ctx.line_to(s * 0.35, s * 0.12)
+            ctx.close_path()
+        else:
+            ctx.new_path()
+            ctx.move_to(0, 0)
+            ctx.line_to(0, s * 1.3)
+            ctx.line_to(s * 0.35, s * 0.95)
+            ctx.line_to(s * 0.65, s * 1.5)
+            ctx.line_to(s * 0.9, s * 1.38)
+            ctx.line_to(s * 0.6, s * 0.85)
+            ctx.line_to(s * 1.0, s * 0.85)
+            ctx.close_path()
 
 
 class ClickIndicator(Node):

@@ -1,0 +1,1838 @@
+Parameter Tabs
+Underneath the Inspector header is a series of panel tabs, displayed as thematic icons. Clicking one of 
+these icons opens a separate tab of parameters, which are usually grouped by function. Simple nodes, 
+such as the Blur node, consist of two tabs where the first contains all of the parameters relating to 
+blurring the image, and the second is the Settings tab.
+The parameter tabs of the Blur node
+More complicated nodes have more tabs containing more groups of parameters. For example, the 
+Delta Keyer has seven tabs: separating Key, Pre-Matte, Matte, Fringe, Tuning, and Mask parameters, 
+along with the obligatory Settings tab. These tabs keep the Delta Keyer from being a giant scrolling 
+list of settings and make it easy to keep track of which part of the keying process you’re finessing 
+as you work.
+The parameter tabs of the Delta Keyer node
+The Settings Tab
+Every node that comes with Fusion has a Settings tab. This tab includes a set of standard controls 
+that appear for nearly every node, although some nodes have special Settings tab controls that 
+others lack.
+The Settings tab in the Inspector
+1547Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+The following controls are common to most nodes, although some are node-specific. For example, 
+Motion Blur settings have no purpose in a Color Space node.
+Blend
+The Blend control is found in all nodes, except the Loader, MediaIn, and Generator nodes. It is used 
+to blend between the node’s unaltered image input and the node’s final processed output. When the 
+blend value is 0.0, the outgoing image is identical to the incoming image. Ordinarily, this will cause 
+the node to skip processing entirely, copying the input straight to the output. The default for this node 
+is 1.0, meaning the node will output the modified image 100%.
+Process When Blend is 0.0
+This checkbox forces the node to process even when the input value is zero and the image output 
+is identical to the image input. This can be useful on certain nodes or third-party plugins that store 
+values from one frame to the next. If this checkbox is disabled on nodes that operate in this manner, 
+the node will skip being processed when the Blend is set to 0, producing incorrect results on 
+subsequent frames.
+Red/Green/Blue/Alpha Channel Checkboxes
+Most nodes have a set of RGBA boxes in the Settings tab. These selectable boxes let you exclude any 
+combination of these channels from being affected by that node. 
+The channel limiting boxes in the Settings panel of a Transform 
+node set so that only the green channel is affected.
+For example, if you wanted to use the Transform node to affect only the green channel of an 
+image, you can turn off the Red, Blue, and Alpha checkboxes. As a result, the green channel 
+is processed by this operation, and the red, blue, and alpha channels are copied straight from 
+the node’s input to the node’s output, skipping that node’s processing to remain unaffected.
+Transforming only the green color channel of the image with a Transform effect
+1548Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Skipping Channel Processing
+Under the hood, most nodes actually process all channels first, but afterward copy the input image 
+to the output for channels that have been unchecked. Modern workstations are so fast that this isn’t 
+usually noticeable, but there are some nodes where deselecting a channel actually causes that node 
+to skip processing that channel entirely. Nodes that operate this way have a linked set of Red, Green, 
+Blue, and Alpha boxes on another tab in the node. 
+Channel boxes on the Controls tab of the Blur node indicate that 
+disabled channels won’t be processed at all, to save rendering time..
+In these cases, the Common Control channel boxes are instanced to the channel boxes found 
+elsewhere in the node. Blur, Brightness/Contrast, Erode/Dilate, and Filter are examples of 
+nodes that all have RGBY checkboxes in the main Controls tab of the Inspector, in addition to 
+the Settings tab.
+Apply Mask Inverted
+When the Apply Mask Inverted checkbox is enabled, masks attached to the Effect Mask input of that 
+node are inverted.
+TIP: The Apply Mask Inverted checkbox option operates only on effects masks, not on 
+garbage masks.
+Multiply By Mask
+Selecting this option will cause the RGB values of the masked image to be multiplied by the Mask 
+channel’s values. This will cause all pixels of the image not included in the mask (i.e., those set to 0) to 
+become black. This creates a premultiplied image.
+Use Object/Use Material (For Masking)
+Some 3D animation and rendering software can output to file formats that support auxiliary channels. 
+Notably, the OpenEXR file format supports Object ID and Material ID channels, either of which can be 
+used as a mask for an effect. This checkbox determines whether the channels will be used if they are 
+available. The specific Material ID or Object ID affected is chosen using the next set of controls.
+  Sample Controls: The Sample Controls are only displayed once the Use Object or Use Material 
+checkbox is enabled. These controls select which ID is used to create a mask from the Object 
+or Material channels saved in the image. You use the Sample button to grab IDs from the image 
+in the viewer, the same way you use the Color Picker to select a color, by holding down the left 
+mouse button on the Sample button, then dragging over to the viewer to the part of the image you 
+1549Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+want to select. The image or sequence must have been rendered from a 3D software package 
+with those channels included.
+  Correct Edges: The Correct Edges checkbox is only displayed once the Use Object or Use 
+Material checkbox is enabled. When the Correct Edges checkbox is enabled, the Coverage and 
+Background Color channels are used to separate and improve the effect around the edge of the 
+object. When disabled (or no Coverage or Background Color channels are available), aliasing may 
+occur on the edge of the mask.
+Motion Blur
+For nodes that are capable of introducing motion, such as Transform nodes, Warp nodes, and so 
+on, the Motion Blur checkbox toggles the rendering of motion blur on or off for that node. When this 
+checkbox is enabled, the node’s predicted motion is used to produce the blur caused by a virtual 
+camera shutter. When the control is disabled, no motion blur is created.
+When Motion Blur is disabled, no additional controls are displayed. However, turning on Motion Blur 
+reveals four additional sliders with which you can customize the look of the motion blur you’re adding 
+to that node.
+  Quality: Determines the number of samples used to create the blur. The default quality setting 
+of 2 will create two samples on either side of an object’s actual motion. Larger values produce 
+smoother results but will increase the render time.
+  Shutter Angle: Controls the angle of the virtual shutter used to produce the Motion Blur effect. 
+Larger angles create more blur but increase the render times. A value of 360 is the equivalent of 
+having the shutter open for one whole frame exposure. Higher values are possible and can be 
+used to create interesting effects. The default value for this slider is 100.
+  Center Bias: Modifies the position of the center of the motion blur. Adjusting the value allows for 
+the creation of trail-type effects.
+  Sample Spread: Adjusting Sample Spread modifies the weight given to each sample. This affects 
+the brightness of the samples set with the Quality slider.
+Scripting
+Scripting fields are present on every node and contain one or more editable text fields that can be 
+used to add scripts that process when that node is rendering. For more information on the contents of 
+this tab, please consult the Scripting documentation. 
+Comments
+A Comments field is found on every node and contains a single text field that is used to add comments 
+and notes to that node. To enter text, simply click within the field to place a cursor, and begin typing.
+When a note is added to a node, the comments icon appears in the Control Header and can be seen 
+in a node’s tooltip when the cursor is placed over the node in the Node Editor. The contents of the 
+Comments tab can be animated over time, if required.
+Additional controls appear under this tab if the node is a Loader. For more information, jump 
+to this chapter: Generator Nodes . You can also refer to  Chapter 44 in the Fusion Reference 
+Manual.
+1550Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Editing Individual Tool Controls 
+From the Inspector Context Menu
+To make adjustments to the parameters of a specific tool in the node tree, right-click in the Inspector 
+and select Edit Control to access the Control Editor.
+The Fusion Edit Control dialog box.
+Inspector Controls Explained
+Although a few nodes use fully customized interface elements that are unique to only that node, the 
+vast majority of nodes use a mix of sliders, angle wheels, and checkboxes. This section explains how 
+to use these controls.
+Fusion Slider Controls
+Slider Controls are used to select a single value from a range of values. You change the value by 
+dragging the slider or entering a value into the edit box. This is fairly standard behavior for sliders. 
+However, there is additional functionality that can increase your productivity when making changes 
+with sliders.
+Clicking on the gutter to the left or right of the handle will increase or decrease the value. 
+Holding Command while clicking on the gutter will adjust the values in smaller increments. 
+Holding Shift while clicking will adjust the value in larger increments.
+Hold Command while clicking in the gutter 
+to move in smaller increments
+1551Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+While slider controls use a minimum and maximum value range, entering a value in the edit 
+box outside that range will often expand the range of the slider to accommodate the new 
+value. For example, it is possible to enter 500 in a Blur Size control, even though the Blur 
+Size sliders default maximum value is 100. The slider will automatically adjust its maximum 
+displayed value to allow entry of these larger values.
+If the slider has been altered from its default value, a small circular indicator will appear below 
+the gutter. Clicking on this circle will reset the slider to its default.
+Thumbwheel
+A Thumbwheel control is identical to a slider except it does not have a maximum or minimum value. 
+To make an adjustment, you drag the center portion left or right or enter a value directly into the 
+edit box. Thumbwheel controls are typically used on angle parameters, although they do have other 
+uses as well.
+Thumbwheel controls for X,Y, and Z rotation with 
+arrows on either end for fine-tuning adjustments
+Once the thumbwheel has been selected, you can use the Up and Down Arrows on your keyboard 
+to further adjust the values. As with the slider control, the Command and Shift keys can be used to 
+increase or decrease the change in value in smaller or larger increments.
+If the thumbwheel has been altered from its default value, a small circular indicator will appear below 
+above the thumbwheel. Clicking on this circle will reset the thumbwheel to its default.
+Range Controls
+The Range controls are actually two separate controls, one for setting the Low Range value and one 
+for the High Range value. To adjust the values, drag the handles on either end of the Range bar. To 
+slide the high and low values of the range simultaneously, drag from the center of the Range bar. You 
+can also expand or contract the range symmetrically by holding Command and dragging either end of 
+the Range bar. You find Range controls on parameters that require a high and low threshold, like the 
+Matte Control, Chroma Keyer, and Ultra Keyer nodes.
+TIP: You can enter floating-point values in the Range controls by typing the values in using 
+the Low and High numeric entry boxes.
+A Matte Threshold Range control Checkboxes used to select options for tracking
+1552Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Checkboxes
+Checkboxes are controls that have either an On or Off value. Clicking on the checkbox control will 
+toggle the state between selected and not selected. Checkboxes can be animated, with a value of 0 
+for Off and a value of 1.0 or greater for On.
+Drop-Down Menus
+Drop-down menus are used to select one option from a menu. Once the menu is open, choosing one 
+of the items will select that entry. When the menu is closed, the selection is displayed in the Inspector.
+Drop-down menu selections can be animated, with a value of 0 representing the first item in the list, 1 
+representing the second, and so forth.
+Drop-down menu in the TimeSpeed node
+Button Arrays
+Button arrays are groups of buttons that allow you to select from a range of options. They are almost 
+identical in function to drop-down menu controls, except that in the case of a button array it is possible 
+to see all of the available options at a glance. Often button arrays use icons to make the options more 
+immediately comprehensible.
+The Lens Type button array in the Defocus node
+Color Chooser and Picker
+The Color panel is displayed wherever a parameter requires a color as its value, such as the Fill or 
+Outline color in the Text+ node. The selected color is shown in a swatch with an Eyedropper to its 
+right, and below the swatch is the Color Chooser. 
+The Color panel is extremely flexible and has four different techniques for selecting and 
+displaying colors.
+The Color panel with transparency preview
+1553Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+TIP: Color can be represented by 0–1, 0.255, or 0–65000 by setting the range you want in 
+the Preferences > General panel.
+macOS and Windows Color Nodes
+Clicking on the color swatch will display the operating system’s standard Color Selection node.
+Each operating system has a slightly different layout, but the general idea is the same. You can choose 
+a color from the swatches provided—the color wheel on macOS, or the color palette on Windows. 
+However you choose your color, you must click OK for the selection to be applied.
+macOS Colors panel  Windows Color dialog
+The Color Chooser
+You also have access to the built-in color chooser, which includes sections for choosing grayscale 
+values, as well as the currently chosen hue with different ranges of saturation and value. A hue bar and 
+alpha bar (depending on the node) let you choose different values.
+The color chooser in  
+the Background node
+1554Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Picking Colors from an Image
+If you are trying to match the color from an image in the viewer, you can hold down the cursor over 
+the Eyedropper, and then drag the pointer into the viewer. The pointer will change to an Eyedropper, 
+and a pop-up swatch will appear above the cursor with the color you are hovering over and its values. 
+When you are over the color you want, release the mouse button to set the color.
+The Color Picker normally selects from a single pixel in the image, but you can adjust the size of the 
+selection by dragging into the viewer with the Eyedropper, and then holding Command and dragging 
+out a rectangle for the sample size you want. The size change applies to all Color Pickers until the size 
+is changed again.
+The Eyedropper  
+with color swatch
+Gradients
+The Gradient Control bar is used to create a gradual blend between colors. The Gradient bar displays 
+a preview of the colors used from start to end. By default, there are two triangular color stops: one on 
+the left that determines the start color, and one on the right that determines the end color.
+The default Gradient controls
+Gradient Type
+The Gradient Type button array is used to select the form used to draw the gradient. 
+Linear gradient: Linear draws the gradient 
+along a straight line from the starting color 
+stop to the ending color stop.
+Linear gradient
+Reflect gradient: Reflect draws the gradient  
+by mirroring the linear gradient on either  
+side of the starting point.
+Reflect gradient
+1555Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Square gradient: Square draws the gradient 
+by using a square pattern when the starting 
+point is at the center of the image.
+Square gradient
+Cross gradient: Cross draws the gradient 
+using a cross pattern when the starting point is 
+at the center of the image.
+Cross gradient
+Radial gradient: Radial draws the gradient in 
+a circular pattern when the starting point is at 
+the center of the image.
+Radial gradient
+Angle gradient: Angle draws the gradient in 
+a counter-clockwise sweep when the starting 
+point is at the center of the image.
+Angle gradient
+Start and End Position
+The Start and End Position controls have a set of X and Y edit boxes that are useful for fine-tuning the 
+start and end position of the gradient. The position settings are also represented by two crosshair 
+onscreen controls in the viewer, which may be more practical for initial positioning.
+Gradient Colors Bar
+The Gradient Colors bar is used to select the blending colors for the gradient. The default two color 
+stops set the start and end colors. You can change the colors used in the gradient by selecting the 
+color stop, and then using the Eyedropper or color wheel to set the new color.
+You can add, move, copy, and delete colors from the gradient using the Colors bar.
+To add a color stop to the Gradient Colors bar:
+1 Click anywhere along the bottom of the Gradient Colors bar.
+2 Use the Eyedropper or color wheel to set the color for the color stop.
+To move a color stop on the Colors bar:
+  Drag a color stop left or right along the Gradient Color bar.
+1556Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+To copy a color stop on the Colors bar:
+  Hold Command while you drag a color stop.
+To delete a color stop from the Colors bar, do one of the following:
+  Drag the color stop up past the Gradient Colors bar. 
+  Select the color stop, then click the red X button to delete it.
+Interpolation Space
+The Gradient Interpolation Method pop-up menu lets you select what color space is used to calculate 
+the colors between color stops.
+Offset
+When you adjust the Offset control, the position of the gradient is moved relative to the start and end 
+markers. This control is most useful when used in conjunction with the repeat and ping-pong modes 
+described below.
+Once/Repeat/Ping-Pong
+These three buttons are used to set the behavior of the gradient when the Offset control scrolls the 
+gradient past its start and end positions. The Once button is the default behavior, which keeps the 
+color continuous for offset. Repeat loops around to the start color when the offset goes beyond the 
+end color. Ping-pong repeats the color pattern in reverse.
+1x1, 2x2, 3x3, 4x4, 5x5
+These buttons control the amount of sub-pixel precision used when the edges of the gradient become 
+visible in Repeat mode, or when the gradient is animated. Higher settings will take significantly longer 
+to render but will be more precise.
+Gradient Contextual Menu
+Gradients have their own contextual menu that you can bring up by right-clicking on the Gradient bar. 
+In the Gradient contextual menu are options for animating, publishing, and connecting one gradient 
+to another. There is also a gradient-specific modifier that builds a custom gradient by sampling colors 
+from the output of a node in the Node Editor.
+Modifiers
+Modifiers are expressions, calculations, trackers, paths, and other mathematical components that 
+you attach to a parameter to extend its functionality. When a modifier is attached to a parameter, its 
+controls will appear separately in the Inspector Modifiers tab.
+To attach a modifier:
+1 Right-click over the parameter to which you want to attach a modifier.
+2 Make a selection from the Modifier submenu in the contextual menu.
+1557Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Animating Parameters in the Inspector
+Fusion can keyframe most parameters in most nodes, in order to create animated effects such as 
+animated transforms, rotoscoping with splines, dynamically altering warping behaviors, and so on; the 
+list is endless. For convenience, a set of keyframing controls are available within the Inspector next to 
+each keyframable parameter. These controls are:
+  A gray Keyframe button to the right each keyframable parameter. Clicking this gray button creates 
+a keyframe at the current position of the playhead, and turns the button orange. 
+  When you add a keyframe to a parameter, moving to a new frame and changing the parameter will 
+automatically add a keyframe at the current position.
+  Whenever the playhead is sitting right on top of a keyframe, this button turns orange. Clicking an 
+orange Keyframe button deletes the keyframe at that frame and turns the button gray again.
+  Small navigation arrows appear to the right and left if there are more keyframes in those 
+directions. Clicking on navigation arrows to the right and left of keyframes jumps the playhead to 
+those keyframes.
+Orange Keyframe buttons in the Inspector 
+show there’s a keyframe at that frame
+Once you’ve keyframed one or more parameters, If Show Modes/Options has been enabled, 
+the node containing the parameters you keyframed displays a Keyframe badge, to show that 
+node has been animated.
+A keyframed node displays a  
+Keyframe badge in the Node Editor
+Once you’ve started keyframing node parameters, you can edit their timing in the Keyframes 
+Editor and/or Spline Editor. 
+For more information on keyframing in Fusion, jump to this chapter: Animating in Fusion’s 
+Keyframes Editor. You can also refer to Chapter 9 of the Fusion Reference Manual.
+Removing Animation From a Parameter
+To remove all keyframes from a parameter:
+1 Right-click over the name of the keyframed parameter in the Inspector.
+2 Choose Remove “node name:parameter name” from the contextual menu.
+1558Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+TIP: If you change the default spline type from Bézier, the contextual menu will display the 
+name of the current spline type.
+Attaching a Parameter to an Existing Animation Curve
+Multiple parameters can be connected to the same animation curve. This can be an invaluable 
+timesaver if you are identically animating different parameters in a node.
+To connect a second parameter to the same animation curve:
+1 Right-click on the second parameter you want to attach.
+2 In the contextual menu, hover over the Connect To submenu.
+3 In the Connect To submenu, choose the name of the animated parameter.
+Connecting Parameters
+It is often useful to connect two parameters together even without an animation curve. There are two 
+methods you can use.
+Connecting Parameters by Publishing
+If you want to tie two parameters together so adjusting one adjusts the other, you must connect them 
+together using the Publish menu command on the first parameter and the Connect menu command on 
+the second parameter.
+To Publish and Connect parameters:
+1 Right-click the name of the parameter you want to publish, and choose Publish from the 
+contextual menu.
+2 Right-click on the second parameter you want to attach, and choose the name of the parameter 
+you just published from the Connect To submenu.
+The Publish contextual menu
+Connecting Parameters by Pick Whipping
+You can also use simple expressions to link two parameters together. By using simple expressions via 
+pick whipping, values can be connected and combined visually without the need to publish a value 
+first. The pick whip is a temporary line drawn from one parameter to another in order to create a link 
+between the two.
+1559Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+To link two parameters using a pick whip:
+1 Double-click the field of a parameter you want to pick whip to another parameter, type =, and then 
+press the Return key.
+2 When Pick Whip controls appear underneath the parameter, drag a “whip” from the Add button to 
+the target parameter.
+Now, adjusting the target parameter automatically adjusts the original parameter.
+Pick whipping one parameter to another
+TIP: Disabling the Auto Control Close node’s General preference, and then selecting two 
+nodes in the Node Editor will allow you to pick whip two parameters from different nodes.
+The Expression field can further be used to add mathematical formulas to the value received 
+from the target parameter.
+For more information on Pick Whipping and Expressions, jump to this chapter: Using Modifiers, 
+Expressions, and Custom Controls . You can also refer to Chapter 12 of the Fusion Reference 
+Manual.
+Contextual Menus
+There are two types of contextual menus you can invoke within the Inspector.
+Node Contextual Menus
+To display the Node Context menu from the Inspector, right-click on the Inspector header. The node’s 
+contextual menu includes the same menu options that are accessed by right-clicking on a node in the 
+Node Editor. 
+For more information, jump to this chapter: Working in the Node Editor . You can also 
+refer to Chapter 5 of the Fusion Reference Manual .
+Parameter Contextual Menus
+The contextual menu for individual parameters is accessed by right-clicking over the parameter’s 
+name, slider, thumbwheel, range control, button array, or other control type. For example, right-
+clicking on a slider will provide the slider’s contextual menu, with options to animate the control or add 
+additional modifiers. Many of these options were described in this chapter.
+1560Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Multi-Inspector
+To streamline your workflows, you can edit common properties across multiple selected tools with 
+Multi-Inspector. If you select multiple tools in the Flow, the Multi-Inspector shows common controls 
+so you can simultaneously adjust these shared parameters. The changes are applied to every 
+selected tool.
+Changing Common Inspector Properties
+The Combine Selected Tools  
+icon in the Inspector header.
+When you select multiple tools, a new toggle icon in the Inspector header lets you combine them 
+into a single set, so that only the tools’ common controls are showed. Dragging one of these controls, 
+or typing in a new value, sets all of the selected tools at once. This means you can easily make 
+simultaneous tweaks to multiple tools.
+When the two uTransform nodes are combined, you 
+can set parameters for both tools simultaneously.
+1561Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+If your selected controls have different values for different tools, some control knobs and values will 
+be hidden. To individually add or subtract an offset for each tool’s control, drag on the Value Edit field. 
+This maintains that tool’s differences. 
+Meanwhile, the Size and Scale controls will apply a scaling factor and preserve the ratios between 
+each tool. For even more control, hold down the Opt/Alt key while dragging to switch to between 
+offsetting and scaling mode.
+The Set Values To context menu.
+When multiple controls are combined, you’ll be able to view a new set of you Set Values To options, 
+including First, Middle, Minimum, Maximum, Spread, and Jitter. These options work with the range of 
+values in the selected controls. You can set them all to a single point in the range, or to spread them all 
+out evenly across that range, or to add a little randomness to each value.
+Customizing Node Parameters 
+with User Controls
+The user interface for each node in Fusion is designed to provide access to the parameters in a logical 
+manner. Sometimes, though, you may want to add, hide, or change the controls. This is commonly 
+done for simple expressions and macros, but it can be done for usability and aesthetic reasons for 
+favorites and presets.
+User custom controls can be added or edited via the Edit Control dialog. Right-click the name of a 
+node in the Inspector (in the header bar) and choose Edit Control from the contextual menu. A new 
+window will appear, titled Edit Control.
+The Edit Control window
+1562Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+In the Input attributes, you can select an existing control or create a new one, name it, define 
+the type, and assign it to a tab. In the Type attributes, you define the input controls, the 
+defaults and ranges, and whether it has an onscreen preview control. The Input Ctrl attributes 
+box contains settings specific to the selected node control, and the View Ctrl attributes box 
+contains settings for the preview control, if any.
+All changes made using UserControls are stored in the node instance itself, so they can be 
+copy/pasted, saved to a setting, added to the Bins, or added to your favorites.
+An Example of Customizing Directional Blur
+In the following example, let’s suppose we wanted to create a more intuitive way of controlling a linear 
+blur than using the Length and Angle sliders independently.
+We could use the Center input control, along with its preview control, to set an angle and distance 
+from directly within the viewer using expressions.
+1 Right-click the label for the Length parameter, choose Expression from the contextual menu, and 
+then paste the following expression into the Expression field that appears:
+-sqrt(((Center.X-.5)*(Input.XScale))^2+((Center.Y-.5)*(Input.YScale)*(Input.
+Height/Input. Width))^2)
+2 Next, right-click the label for the Angle parameter, choose Expression from the contextual menu, 
+and then paste the following expression into the Expression field that appears:
+atan2(Center.Y-.5)/(Input.OriginalWidth/Input.X , .5-Center.X) * 180 / pi
+Default Directional Blur controls in the Inspector Directional Blur controlled by the Center’s position
+This functions fine, but the controls are confusing. The Center control doesn’t work as the 
+center anymore, and it should be named “Blur Vector” instead. The controls for the Length and 
+Angle aren’t meant to be edited, so they should be hidden away, and we’re only doing a linear 
+blur, so we don’t need the buttons for Radial or Zoom. We just need to choose between Linear 
+and Centered.
+1563Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Adding Another Control
+For the first task, let’s rename the Center. From the Add Control window, select Center from the 
+ID list. A dialog will appear asking if you would like to Replace, Hide, or Change ID. We’ll choose 
+Replace. Now we are editing the Center input. We’ll change the Name to Blur Vector, set the Type to 
+Point, and the Page to Controls, which is the first tab where the controls are normally. Press OK, and 
+our new input will appear on our node in the Node Editor. The ID of the control is still Center, so our 
+SimpleExpressions did not change.
+To hide the Length and Angle, we’ll run the UserControls script again. This time when we select the 
+Length and Angle IDs, we’ll choose Hide in the dialog. Press OK for each.
+Finally, to change the options available in the Type, we have two options. We can hide the buttons and 
+use a checkbox instead, or we can change the MultiButton from four entries to two. Let’s try both.
+  To add the checkbox, run UserControls again, but this time instead of selecting an existing ID, we’ll 
+type Centered into the Name. This will set the name and the ID of our input to Centered. The Type 
+is set to Number, and the Page is set to Controls. Now in the Type Attributes, set the Input Ctrl to 
+be CheckboxControl. Press OK, and now we have our checkbox. To make the new control affect 
+the Type, add a SimpleExpression to the Type:
+iif(Centered==1, 2, 0).
+Once that’s done, we can use the UserControls to hide the Type control.
+  To make a new MultiButton, run the UserControl script, and add a new control ID, TypeNew. You 
+can set the Name to be Type, as the Names do not need to be unique, just the IDs. Set the Type to 
+Number, the Page to Controls, and the Input Ctrl to MultiButtonControl. In the Input Ctrl attributes, 
+we can enter the names of our buttons. Let’s do Linear and Centered. Type them in and hit Add for 
+each. Press OK, and we have our new buttons with the unneeded options removed. To make this 
+new control affect the original Type, add a SimpleExpression to the Type:
+iif(TypeNew==0, 0, 2).
+Once that’s done, we can use the UserControls to hide the original Type control.
+Directional Blurs with UserControls applied
+1564Fusion Fundamentals | Chapter 69 Editing Parameters in the Inspector
+FUSION
+Chapter 70
+Animating in Fusion’s 
+Keyframes Editor
+This chapter covers how you can keyframe effects in Fusion’s Inspector and how 
+you can edit clips, effects, and keyframes in the Keyframes Editor.
+Contents
+Keyframing in the Inspector  ��������������������������������� 1566
+Removing Animation in the Inspector ���������������  1566
+Attaching a Parameter to 
+an Existing Animation Curve  ���������������������������������� 1567
+Keyframes Editor Overview ����������������������������������� 1567
+Keyframes Editor Tracks  ������������������������������������������ 1568
+The Timeline Header �������������������������������������������������  1568
+The Playhead ���������������������������������������������������������������� 1568
+Spreadsheet ������������������������������������������������������������������ 1569
+Scaling and Panning the Timeline  ���������������������  1569
+Working with Segments in the Timeline  ��������� 1570
+Moving Segments in the Timeline  ����������������������� 1570
+Trimming Segments ���������������������������������������������������� 1570
+Holding the First or Last Frame �����������������������������  1571
+Working with Keyframes in the Timeline  ��������� 1571
+Drag and Drop Keyframe Editing ��������������������������  1571
+Keyframe Editing Using the Time Editor ����������� 1572
+The Keyframe Spreadsheet  ������������������������������������ 1572
+Duplicating Spline Keyframes  �������������������������������� 1572
+Time Stretching Keyframes  ������������������������������������� 1573
+Showing Keyframe Values  ��������������������������������������� 1573
+Timeline Filters ������������������������������������������������������������� 1573
+Selected Filtering  ��������������������������������������������������������� 1575
+Sorting in the Timeline  ��������������������������������������������� 1575
+The Tree Item Order Menu �������������������������������������� 1575
+The Sort Menu ��������������������������������������������������������������� 1576
+Markers ����������������������������������������������������������������������������� 1576
+Jumping to Markers  ���������������������������������������������������� 1577
+Renaming Markers  ������������������������������������������������������ 1577
+Show Marker List ���������������������������������������������������������� 1577
+Deleting Markers  ���������������������������������������������������������� 1578
+Autosnap �������������������������������������������������������������������������� 1578
+Autosnap Points  ������������������������������������������������������������ 1578
+Autosnap Markers�������������������������������������������������������� 1579
+The Spreadsheet Editor  ������������������������������������������� 1579
+Selecting a Node to Edit  ������������������������������������������� 1579
+Inserting Keyframes  ��������������������������������������������������� 1580
+Selecting Multiple Nodes to Edit  �������������������������  1580
+Customizing the Keyframes Editor ��������������������  1580
+Line Size �������������������������������������������������������������������������� 1580
+Display Point Values �������������������������������������������������� 1580
+1565Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Keyframing in the Inspector
+Most parameters in most effects nodes can be keyframed in order to create animated effects such as 
+animated transforms, rotoscoping with splines, dynamically altering warping behaviors, and more; the 
+list is endless.
+For convenience, a set of keyframing controls is available within the Inspector next to each 
+keyframable parameter. These controls are:
+  A gray Keyframe button to the right each keyframable parameter. Clicking this gray button creates 
+a keyframe at the current position of the playhead, and turns the button orange. 
+  Whenever the playhead is sitting right on top of a keyframe, this button turns orange. Clicking an 
+orange Keyframe button deletes the keyframe at that frame and turns the button gray again.
+  Small navigation arrows appear to the right and left if there are more keyframes in those 
+directions. Clicking on navigation arrows to the right and left of keyframes jumps the playhead to 
+those keyframes.
+Orange Keyframe buttons in the Inspector  
+show there’s a keyframe at that frame
+Once you’ve keyframed one or more parameters, if Show Modes/Options has been enabled, 
+the node containing the parameters you keyframed displays a Keyframe badge to show that 
+node has been animated.
+Once you’ve started keyframing node parameters, you can edit their timing in the Keyframes 
+Editor and/or Spline Editor.
+A keyframed node displays a  
+Keyframe badge in the Node Editor
+Removing Animation in the Inspector
+To remove a keyframed spline from a parameter:
+1 Right-click the keyframe control of the parameter you want to remove animation from.
+2 Choose Remove [Name of parameter] from the contextual menu.
+1566Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Attaching a Parameter to an Existing Animation Curve
+Multiple parameters can be connected to the same animation curve. This can be an invaluable 
+timesaver if you are identically animating different parameters in a node.
+To connect a second parameter to the same animation curve:
+1 Right-click on the second parameter you want to attach.
+2 In the contextual menu, hover over the Connect To submenu.
+3 In the Connect To submenu, choose the name of the animated parameter.
+Keyframes Editor Overview
+The Keyframes Editor is essentially a timeline view of your composition, within which each clip 
+and effect node in your composition is represented by a track. These tracks have the same color 
+coding as the nodes they represent and are labeled where appropriate. A Time Ruler at the top 
+indicates the timing of your composition, while numerous controls let you control the contents of the 
+Keyframes Editor.
+The Keyframes Editor can be used for one of two things:
+  To adjust the timing of elements in a project, whether they’re clips or effects. You can trim, slide, 
+and extend clips, adjust the timing of an animation spline, or trim the duration of an effects node. 
+You can freely rearrange the order of nodes in the Timeline without affecting the layering order of 
+your composition. All compositing operations are handled in the Node Editor, while the Keyframes 
+Editor manages the timing of your composition.
+  To create and/or edit keyframes that you’ve applied to effects in a track-based manner, you can 
+retime keyframes, add and delete keyframes, and even edit keyframe values
+The Keyframes Editor
+To show the Keyframes Editor, do one of the following:
+  Click the Keyframes Editor button in the UI toolbar to toggle visibility of the Keyframes Editor 
+on and off.
+  Press F7 on the keyboard.
+1567Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Keyframes Editor Tracks
+While each clip and effect node in your composition is represented by a track, keyframed parameters 
+are exposed either as keyframes superimposed upon the track to which they’re applied (as seen on 
+the MOVEMENT track), or they can be opened up onto their own tracks for more precise editing, one 
+keyframe track per keyframed parameter, by clicking a disclosure control to the left of that track’s 
+name in the Timeline header (as seen under the “Drip1” track).
+The Timeline tracks
+The Timeline Header
+The Timeline header area on the left side of the Timeline is a hierarchical list of all tracks in a composition. 
+Each track displays the name of its corresponding node, a lock button, and a disclosure control for 
+revealing keyframe tracks for each keyframe animation, modifier, and mask that’s attached to it.
+Collapse/Open All
+A quick way to open or close all available keyframe tracks at once is to use the Expand/Collapse Tool 
+Controls commands in the Keyframe Timeline Option menu.
+The Timeline header area
+The Playhead
+As elsewhere in Fusion, the playhead is a red vertical bar that runs through the Timeline view to 
+indicate the position of the current frame or time. The Keyframes Editor playhead is locked to the 
+viewer playhead, so the image you’re viewing is in sync.
+The playhead about to be 
+dragged by the pointer
+1568Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+You must click on the playhead directly to drag it, even within the Timeline ruler (clicking and 
+dragging anywhere else in the Timeline ruler scales the Timeline). Additionally, you can jump the 
+playhead to a new location by holding down the Command-Option keys and clicking in the track area 
+(not the Timeline ruler).
+Spreadsheet
+If you turn on the Spreadsheet and then click on the name of a layer in the keyframe track, the numeric 
+time position and value (or values if it’s a multi-dimensional parameter) of each keyframe appear 
+as entries in the cells of the Spreadsheet. Each column represents one keyframe, while each row 
+represents a single aspect of each keyframe.
+For example, if you’re animating a blur, then the Key Frame row shows the frame each 
+keyframe is positioned at, and the Blur1BlurSize row shows the blur size at each keyframe. 
+If you change the Key Frame value of any keyframe, you’ll move that keyframe to a new 
+frame of the Timeline.
+Editing keyframes in the Spreadsheet
+Scaling and Panning the Timeline
+At the top, a series of zoom and framing controls let you adjust the work area containing the layers.
+The Keyframe Editor framing controls
+Zoom Height: A Horizontal zoom 
+control lets you scale the size of 
+the editor. 
+Fit button: Zoom to Fit button 
+fits the width of all tracks 
+to the current width of the 
+Keyframes Editor.
+Zoom to Rect tool: Lets you draw 
+a rectangle to define an area of 
+the Keyframes Editor to zoom into.
+Pop-up Menu: A Sort pop-up 
+menu lets you sort or filter the 
+tracks in various ways.
+Expand Keyframe Editor:  Open 
+the Fusion Keyframe editor in a 
+resizable window by clicking on 
+the Undock icon in the Keyframes 
+or Spline toolbar.
+Option Menu: An Option menu 
+provides access to many other 
+ways of filtering tracks and 
+controlling visible options.
+1569Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Working with Segments in the Timeline
+Most of the work in the Timeline involves trimming and aligning clip segments.
+To select a single segment in the Timeline, do one of the following:
+  Click the node’s name in the header.
+  Click the node’s segment in the Timeline.
+To add another segment to the selection, do one of the following:
+  Hold Command and click additional segments to select discontiguous selections.
+  Select a segment, and then hold Shift and click another segment to make a contiguous selection 
+of all segments in between.
+To remove a segment from the selection, do the following:
+  Hold Command and click a selected segment to deselect it.
+TIP: Selecting a node’s name from the Timeline header also selects the node’s tile in the 
+Node Editor, with its controls displayed in the Inspector.
+Moving Segments in the Timeline
+To move the position of a segment, drag on the node’s segment in the Keyframes Editor. The cursor 
+will resemble a bar with two arrows pointing in either direction. Moving a segment changes where that 
+clip begins and ends in the composition.
+The Move cursor
+Trimming Segments
+Trimming segments has different effects on Loaders, MediaIn and Effect nodes:
+  Trimming a Loader or MediaIn node is similar to trimming clips in an editing application, in that you’re 
+changing the in and out points of the range of media that clip makes available to your composition. 
+  Trimming the segments of effect nodes instead modifies the range of that node’s effect in the 
+composition. Outside of the trimmed region, that effect node will behave as if it were disabled.
+TIP: Shortening the duration of effects nodes can optimize processing. Imagine a Loader 
+or MediaIn node that represents a clip that’s 100 frames long and is connected to a Defocus 
+node that’s animated from frames 80–100. There is little to no point in processing the defocus 
+node between frames 0–79, so trimming the defocus segment to start at frame 80 in the 
+Timeline will effectively prevent it from rendering and consuming either memory or processor 
+time until needed.
+1570Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+To trim a segment in the Timeline, do the following:
+  Drag on either end of the node’s segment in the Timeline.
+The cursor changes to a vertical bar with a single arrow when the cursor is in the right location to trim.
+The Trim cursor
+Holding the First or Last Frame
+If you want to hold a Loader’s first or last frame of a clip for a certain number of frames, also called a 
+freeze frame, you can hold Command while you drag beyond the first or last of the segment in 
+the Timeline.
+Working with Keyframes in the Timeline
+Keyframes can be drawn in one of two ways. When keyframe tracks are closed, they’re drawn over the 
+node’s segment. Clicking on the disclosure icon to the left of the node’s name in the track header expands 
+the display so each keyframed parameter has its own track in the Timeline, enabling precise editing.
+Furthermore, each keyframe track, whether open or closed, exposes a miniature curve overlay 
+that provides a visual representation of the rise and fall of keyframed values. This little overlay isn’t 
+directly editable.
+The Drip1 segment has its keyframe tracks exposed, while the Text1 segment has 
+its keyframe tracks collapsed so they’re displayed within the segment.
+Drag and Drop Keyframe Editing
+Here are pointer-based keyframe editing methods that will get you started.
+Methods of selecting keyframes:
+  Click a single keyframe to select it.
+  Drag a bounding box over a series of keyframes to select them all.
+  Command-click to select discontiguous keyframes.
+  Shift-click the first and last of a range of keyframes to select a contiguous range.
+Methods of adjusting keyframes:
+  You can drag keyframes left and right to reposition them in time.
+  You can right-click one or more selected keyframes and use contextual menu commands to 
+change keyframe interpolation, copy/paste keyframes, or even create new keyframes.
+1571Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Keyframe Editing Using the Time Editor
+A drop-down and editing field at the bottom right of the Keyframes Editor lets you numerically edit the 
+timing, in frames, of any selected keyframe, making it easy to make precise adjustments. 
+To change the position of a keyframe using the toolbar, do one of the following:
+  Select a keyframe, and then enter a new frame number in the Time Edit box.
+  Choose T Offset from the Time Editor drop-down, select one or more keyframes, and 
+enter a frame offset.
+  Choose T Scale from the Time Editor drop-down, select one or more keyframes, 
+and enter a frame offset.
+The Time button can switch to Time Offset or Time Scale for moving keyframes.
+The Keyframe Spreadsheet
+If you turn on the Spreadsheet and then click on the name of a layer in the keyframe track, the numeric 
+time position and value (or values if it’s a multi-dimensional parameter) of each keyframe appear 
+as entries in the cells of the Spreadsheet. Each column represents one keyframe, while each row 
+represents a single aspect of each keyframe.
+Editing keyframes in the Spreadsheet
+For example, if you’re animating a blur, then the Key Frame row shows the frame each 
+keyframe is positioned at, and the Blur1BlurSize row shows the blur size at each keyframe. 
+If you change the Key Frame value of any keyframe, you’ll move that keyframe to a new 
+frame of the Timeline. 
+Duplicating Spline Keyframes
+Keyframes can be duplicated, either onto the same keyframe track or onto different tracks. This can 
+save you time if you need to repeat a keyframe sequence at another time on the same segment, or 
+even just create identically-timed keyframes on two different segments.
+To duplicate keyframes, do the following:
+1 Select one or more keyframes you want to duplicate.
+2 Hold Command and drag one of the selected keyframes to a new position.
+1572Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Time Stretching Keyframes
+If you select a range of keyframes in a keyframe track, you can turn on the Time Stretch tool in the 
+lower left of the Keyframes Editor, to show a box you can use to squeeze and stretch the entire 
+range of keyframes relative to one another, to change the overall timing of a sequence of keyframes 
+without losing the relative timing from one keyframe to the next. Alternatively, you can turn on Time 
+Stretch and draw a bounding box around the keyframes you want to adjust to create a time-stretching 
+boundary that way. Click the Time Stretch tool again to turn it off.
+Time stretching keyframes
+Showing Keyframe Values
+When a node and its accompanying segment have animated parameters, keyframes appear as 
+colored tick marks in keyframe tracks to indicate when animated changes occur. If the tracks and 
+splines are open on a parameter, choosing Show Values from the Keyframes Editor Option menu 
+shows editable fields beneath each keyframe. These fields show each keyframe’s current value and 
+allow you to edit them simply by entering a new number.
+Show values from the Keyframes Editor Option menu
+Timeline Filters
+When a composition grows to include hundreds of nodes, locating specific node layers can quickly 
+become difficult. Timeline filters can be created and applied to sift out nodes that are not necessary to 
+the current operation. The Global Timeline preferences include a number of pre-made filters that you 
+can enable, or you can create new ones as needed.
+To use a Timeline filter:
+Open the Keyframes Editor Option menu and choose an item from the top of the menu. 
+Default Timeline filters include;
+• Show All, which shows all node layers in the current composition.
+• Show None, which hides all layers.
+• Show Tools at Current Time, which only displays node layers under the playhead.
+• If you’ve created custom filters, they appear here as well, in alphabetical order.
+1573Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+To go back to showing everything:
+Choose Show All from the Keyframes Editor Option menu. All layers will reappear.
+Choosing a Timeline filter
+To create a Timeline filter:
+1 Choose Create/Edit Filters from the Keyframes Editor Option menu to open the Timeline panel of 
+the Fusion Settings window. This is where you can create new Timeline filters.
+The Global Timeline preferences for enabling filters
+2 Click the New button, enter a name for your new filter setting, and click OK. The filter you created 
+is now selected in the Filter pop-up menu at the top.
+3 Use the “Settings for filters” list to turn on the checkboxes of nodes you want to be seen and turn 
+off the checkboxes of nodes you want to filter out. Each category of node can be turned on and 
+off, or you can open up a category’s disclosure control to turn individual nodes on and off. Clicking 
+Invert All immediately turns off all node categories.
+4 When you’re finished creating filters, click the Save button to hide the Fusion Settings window.
+Filters that you’ve created in the Timeline panel of the Fusion Settings window appear in the 
+Keyframes Editor Option menu.
+1574Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+To delete a filter:
+1 Choose Create/Edit Filters from the Keyframes Editor Option menu to open the Timeline panel of 
+the Fusion Settings window. This is where you can delete Timeline filters.
+2 Choose the filter you want to delete from the Filter pop-up menu.
+3 Click the Delete button, and when a dialog asks if you really want to do that, click OK.
+Selected Filtering
+Choosing “Show only selected tools” from the Keyframes Editor Option menu filters out all segments 
+except for layers corresponding to selected nodes. This option can be turned on or off.
+TIP: When “Show only selected tools” is enabled, you can continue to select nodes in the 
+Node Editor to update what’s displayed in the Keyframes Editor.
+Sorting in the Timeline
+You can change the order in which the nodes are displayed from top to bottom in the Timeline. 
+  You can use the Tree Item Order Selection menu to sort the tracks by an assigned number.
+  You can use the Sort pop-up menu.
+The Tree Item Order Menu
+Right-clicking over any track on the Keyframes Editor will display a contextual menu that contains 
+the Tree Item Order Selection submenu. Choosing Start from the submenu allows you to start 
+numbering each item in the track header by clicking on them. The first item you click will be #1, the 
+second item #2, the third #3, and so on. Once you have selected all the items in the order you want 
+them to be organized in the Keyframes Editor, right-click over a track, and from the Tree Item Order 
+Selection submenu, choose End. The items will be ordered using the assigned numbers, with #1 
+appearing above #2, which appears above #3, and so on. The first items in the Keyframe track list 
+will always be the nodes that are the root of the node tree. The numbered nodes will appear in order 
+after the root nodes. For example, if the node tree starts with a background node, and then connects 
+to a Fast Noise, Blur, and Color Corrector, the background node will always appear at the top of the 
+Keyframes Editor track list because it is the root node.
+The Keyframes Editor Tree Item Order Selection menu
+If you begin numbering nodes in the track header and change your mind or decide on a different 
+order, you can choose Restart to begin numbering again or choose Cancel to keep the current order.
+1575Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+The Sort Menu
+The Sort menu reorders how the layers of each node appear in the Keyframes Editor. Setting the 
+menu back to All Tools will display them in a linear order, scanning the Node Editor from left to right 
+and top to bottom. This is the default setting.
+The Timeline Sort Order menu
+  All Tools: Forces all tools currently in the Node Editor to be displayed in the Keyframes Editor.
+  Hierarchy: Sorts with the most background layers at the top of the header, through to the most 
+foreground layers at the bottom, following the connections of the nodes in the Node Editor.
+  Reverse: The opposite of Hierarchy, working backward from the last node in the Node Editor 
+toward the most background source node.
+  Names: Sorts by the alphabetical order of the nodes, starting at the top with the beginning 
+of the alphabet.
+  Start: Orders layers based on their starting point in the composition. Nodes that start earlier 
+in the Global project time are listed at the top of the header, while nodes that start later are 
+at the bottom.
+  Animated: Restricts the Timeline to showing animated layers only. This is an excellent mode to 
+use when adjusting the timing of animations on several nodes at once.
+Markers
+Markers help identify important frames in a project that might affect how you keyframe animation. 
+They may indicate the frame where a dragon breathes fire at a protagonist, the moment that someone 
+passes through a portal, or any other important frame in a composition that you need to keep track of. 
+Markers added to the Timeline in the Cut, Edit, Fairlight, or Color page will appear in the Keyframes 
+Editor and Spline Editor of the Fusion page. They can also be added from the Keyframes Editor or the 
+Spline Editor while working in Fusion Studio or the Fusion page. Markers in Fusion appear as a small 
+handle with a line extending vertically through the graph view when selected.
+A marker being moved in the Keyframed Editor
+To create a marker, do the following:
+  Right-click at a frame in the Timeline Ruler of the Keyframes Editor and choose 
+Add Marker from the contextual menu.
+1576Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+The most important attribute of a marker is its position. For it to add value, a marker must be 
+placed on the frame you intended it to be on. Hovering the cursor over a marker displays a 
+tooltip with its current frame position. If it is on the wrong frame, you can drag it along the 
+Time Ruler to reposition it.
+Markers added to the Time Ruler are editable in the Fusion page, and the changes appear 
+back in the other DaVinci Resolve pages. Time Ruler markers can be added, moved, deleted, 
+renamed, and given descriptive notes from within Fusion’s Keyframes or Spline Editor.
+NOTE: Markers attached to clips in the Edit page Timeline are visible on MediaIn nodes in 
+Fusion’s Keyframes Editor but not editable. They are not visible in the Spline Editor.
+Jumping to Markers
+Double-clicking a marker jumps the playhead to that marker’s position.
+Renaming Markers
+By default, a marker uses the frame number in its name, but you can give it a more descriptive name 
+to go along with the frame number, making it easier to identify. To rename a marker in Fusion, right-
+click over the marker and choose Rename Guide from the contextual menu. Enter a name in the dialog 
+and click OK.
+The Marker contextual menu is accessed by  
+right-clicking over a marker or Keyframe Editor Time Ruler.
+Show Marker List
+Markers can be used to jump to specific locations in a composition using the Marker List. If you right-
+click over a marker or within the Keyframe Editor Time Ruler to bring up the contextual menu, you 
+can choose Show Marker List, or press Shift-G, to display the Marker List dialog. The Marker List is a 
+floating dialog that will remain on top of the main window until closed.
+The Marker List shows all the current markers in the composition, listed according to their 
+position in time along with any custom name you’ve given them. If you double-click a marker’s 
+name from the list, the playhead jumps to the marker’s location.
+1577Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+The Marker List dialog allows you to navigate 
+ through a composition using markers.
+There is a pair of checkboxes beside the names of each marker. One is for the Spline Editor, 
+and one is for the Keyframes Editor. By default, markers are shown in both the Spline Editor 
+and Keyframes Editor, but you can deselect the appropriate checkbox to hide the markers in 
+that view.
+Deleting Markers
+You can delete a marker by dragging it up beyond the Time Ruler and releasing the mouse. You can 
+also use the marker’s contextual menu to choose Delete Marker.
+Autosnap
+To help with precisely positioning keyframes and the start and end of segments as you drag in the 
+Timeline, you can have them snap to a field, a frame, or to markers. The Autosnap option is accessed 
+through the Options section in the Keyframes Editor’s contextual menu. There are two submenu 
+options for autosnapping. One option controls the snapping behavior when you drag keyframes, 
+control points, or the starting and ending edges of segments. The other option controls the snapping 
+behavior of markers.
+Autosnap Points
+When you drag keyframes or the edges of segments, often you want them to fall on a specific frame. 
+Autosnap restricts the placement of keyframes and segment edges to frame boundaries by default, 
+but you have other options found in the contextual menu. To configure autosnapping on keyframes 
+and segment edges, right-click anywhere within the Keyframes Editor and choose Options > Autosnap 
+Points from the contextual menu. This will display the Autosnap Points submenu with options for the 
+snapping behavior. The options are:
+  None: None allows free positioning of keyframes and segment edges with subframe accuracy.
+  Frame: Frame forces keyframes and segment edges to snap to the nearest frame.
+  Field: Field forces keyframes and segment edges to snap to the nearest field, 
+which is 0.5 of a frame.
+  Guides: When enabled, the keyframes and segment edges snap to markers.
+1578Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Autosnap Markers
+When you click to create a new marker, the default behavior is that it will snap to the closest frame. 
+If you reposition the marker, it also snaps to the nearest frame as you drag. This behavior can be 
+changed in the Keyframes Editor’s contextual menu by choosing from the Options > Autosnap Markers 
+submenu. The options are:
+  None: Markers can be placed anywhere with subframe accuracy.
+  Frame: Frame forces all markers to snap to the nearest frame.
+  Field: Field forces all markers to snap to the nearest field.
+The Spreadsheet Editor
+The Spreadsheet Editor is a separate panel that can be displayed beneath the Keyframes Editor. 
+It is used to compactly show the numeric values of the keyframes for selected parameters in the 
+Keyframes Editor’s header, via a table with rows and columns, showing time and value.
+To reveal the Spreadsheet Editor, click on the Spreadsheet button in the toolbar. The 
+Spreadsheet will split the Work Area panel and appear below the Keyframes Editor’s interface.
+The Spreadsheet Editor showing editable data for six keyframes
+Selecting a Node to Edit
+To display a node’s timing in the Spreadsheet, select the node’s name in the Keyframes Editor header. 
+The Start and End points of the selected node will appear in the keyframe’s line of the Spreadsheet.
+To edit an animation parameter in the Spreadsheet Editor, select the parameter in the Keyframes 
+Editor header. The keyframe row includes a box for each frame number that contains a keyframe. 
+The value of the keyframe is displayed in the cell below the frame number. Clicking on a cell allows 
+you to change the frame number the keyframe is on or the parameter’s value for that keyframe.
+Clicking on the parameter’s keyframe 
+value allows you to change it
+TIP: Entering a frame number using a decimal point (e.g., 10.25 or 15.75) allows you to set 
+keyframes on a subframe level to create more natural animations.
+1579Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Inserting Keyframes
+You can also add new keyframes to an animation by clicking in an empty keyframe cell and entering 
+the desired time for the new keyframe. Using the cell under the new keyframe, you can enter a value 
+for the parameter.
+Selecting Multiple Nodes to Edit
+Multiple splines and nodes can be edited together in the Spreadsheet. By default, selecting a new 
+parameter in the Timeline header will replace the parameter and keyframes currently listed in the 
+Spreadsheet Editor. Holding down Command, you can click on additional parameters on different 
+nodes to add them to the Spreadsheet.
+Customizing the Keyframes Editor
+There are a few ways you can change the appearance of the Keyframes Editor to better fit your needs. 
+All these options are found by right-clicking anywhere within the Keyframes Editor and choosing an 
+option from the contextual menu that appears.
+Line Size
+The Line Size option controls the height of each Timeline segment individually. It is often useful to 
+increase the height of a Timeline bar, especially when editing or manipulating complex splines.
+Methods of increasing or decreasing the height of segments:
+  To change the hight of just one segment: Right-click anywhere within the Keyframes Editor and 
+choose a size from the Line Size submenu. The options are Minimum, Small, Medium, Large, and Huge.
+  To change the height of all segments: Right-click anywhere within the Keyframes Editor and choose 
+a size from the All Line Size submenu. The options are Minimum, Small, Medium, Large, and Huge.
+Display Point Values
+A more traditional view of keyframes is to view them as control points instead of vertical bars, making 
+them easier to select for some people. From the Timeline contextual menu, you can right-click 
+anywhere within the Keyframes Editor and choose Options > Display Point Values to change how 
+keyframes look.
+The Options submenu for changing Display Point Values
+Here are the two options, compared.
+Keyframes displayed as bars (left), and keyframes displayed as Point Values (right).
+1580Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Displaying Audio Waveforms
+You can display a MediaIn node’s audio waveform in the Keyframes Editor and use it as a guide as you 
+add and move keyframes.
+Waveforms are displayed in the Keyframes Editor for all MediaIn nodes
+To display the audio waveform in the Keyframes Editor:
+1 Open the Keyframes Editor.
+2 Click the disclosure arrow next to the MediaIn node to view the audio waveform for that clip.
+To change the size of an audio waveform display:
+1 Open the Keyframes Editor.
+2 In the Keyframes Editor, select the audio track of the waveform you want to modify.
+3 Right-click over the audio waveform and choose Line Size > Minimum/Small/Medium/Large/Huge.
+4 When using Fusion Studio, you can view the audio waveforms in the Keyframes Editor by 
+displaying the Saver node.
+To view the Audio Waveform in Fusion Studio, do the following:
+1 Open the Keyframes Editor.
+2 Expand the Saver track to view the audio waveform. 
+When you want to find the precise location of an audio beat, transient, or cue, you can slowly drag 
+over the audio waveform to hear the audio. If you need to see more resolution in the waveform 
+display, you can increase the size.
+To change the size of an audio waveform display:
+1 Open the Keyframes Editor.
+2 Right-click over the audio waveform and choose Line Size > Minimum/Small/Medium/Large/Huge.
+TIP: Right-clicking a track in the Keyframes Editor and choosing All Line Size > 
+Minimum/Small/Medium/Large/Huge changes all the tracks and audio waveforms in the 
+Keyframes Editor.
+1581Fusion Fundamentals | Chapter 70 Animating in Fusion’s Keyframes Editor
+FUSION
+Chapter 71
+Animating in Fusion’s 
+Spline Editor
+This chapter covers how you can keyframe effects and control animations in 
+Fusion’s Spline Editor.
+Contents
+Spline Editor Overview  ��������������������������������������������� 1583
+Spline Editor Interface  ��������������������������������������������� 1583
+The Graph, Header, and Toolbar  ������������������������� 1584
+Renaming Splines  ������������������������������������������������������� 1585
+Changing Spline Colors  �������������������������������������������  1585
+Navigating Around the Spline Editor  ���������������  1586
+Markers  ���������������������������������������������������������������������������� 1587
+Autosnap  ������������������������������������������������������������������������ 1589
+Creating Animation Splines  ���������������������������������  1590
+Animating with Different Spline Types  ������������� 1590
+Working with Keyframes and Splines  ��������������� 1592
+Adding Keyframes  ������������������������������������������������������ 1592
+Locked and Unlocked Controls Points  �������������� 1593
+Selecting, Moving, and Deleting Keyframes  � 1594
+Showing Key Markers ����������������������������������������������� 1595
+Copying and Pasting Keyframes  ������������������������  1596
+Time and Value Editors  �������������������������������������������� 1597
+Modifying Spline Handles  �������������������������������������� 1599
+Reducing Points ����������������������������������������������������������  1599
+Filtering the Spline Editor  �������������������������������������� 1600
+Working with Filters  ���������������������������������������������������� 1601
+Changing a Spline’s Status  �����������������������������������  1602
+Selection States  ���������������������������������������������������������  1603
+Reshaping Splines Using the Toolbar  �������������� 1604
+Interpolation  ������������������������������������������������������������������ 1604
+Reversing Splines  ������������������������������������������������������ 1605
+Looping Splines  ���������������������������������������������������������� 1605
+Time Stretching  ����������������������������������������������������������� 1608
+Shape Box  ��������������������������������������������������������������������� 1609
+Ease In/Out  ��������������������������������������������������������������������  1610
+Importing and Exporting Splines  �����������������������  1610
+1582Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Spline Editor Overview
+The Spline Editor is the main area where animation is manipulated and refined. You primarily use the 
+Spline Editor to show the changing values of parameters over time in the form of splines. Whereas 
+Keyframes explicitly set the value of a parameter on a given frame, Splines are lines or curves 
+that interpolate the values between keyframes. Once you set a keyframe on a parameter, a spline 
+is created and can be displayed in the Spline Editor so you can make further refinements to the 
+animation. However, the Spline Editor is more advanced than a standard curve editor since it can 
+also display functions, which may not be splines, like changing characters within a text string or 
+mathematical expressions that drive your animations. 
+The Spline Editor with three animated parameters
+What Are Splines? 
+All animation uses splines that describe the value of a parameter at any given point in time. The Spline 
+Editor graph shows the time of the comp along the horizontal axis and the value of the parameter 
+along the vertical axis. 
+The advantage of using splines to represent animation instead of keyframes as in the Keyframes 
+Editor is that splines allow you to manipulate the interpolation between keyframes. For example, if a 
+keyframe is set at a value of 1.0 on a parameter for frame 1, followed by a keyframe value of 10.0 for 
+frame 10, the values between keyframes are smoothly interpolated or calculated based on the shape 
+of the spline. Using the functions and controls in the Spline Editor, you have a fantastic amount of 
+control over that interpolation.
+Spline Editor Interface 
+The Spline Editor is not visible by default, but you can show it at any time by clicking the Spline 
+button in the user interface toolbar. You can also display the Spline Editor by right-clicking on a 
+node in the Node Editor or a segment in the Keyframes Editor and choosing Edit Splines from the 
+drop-down menu. 
+The Spline Editor can be open alongside the Node Editor or Keyframes Editor, or displayed separately 
+in order to take up the entire work area.
+1583Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+The Graph, Header, and Toolbar
+The Spline Editor has three main working areas: the graph, header, and toolbar. On the left side of the 
+Spline Editor is the header, which shows a list of animated parameters. The majority of the panel is 
+taken up by the splines displayed in the graph area, and a toolbar runs along the bottom, providing a 
+variety of ways to manipulate the splines.
+Graph 
+The graph is the largest area of the interface. It is here that you see and edit the animation splines. 
+There are two axes in the graph. The horizontal axis represents time, and the vertical axis represents 
+the spline’s value. A thin bar, called the playhead, runs vertically through the graph to represent the 
+current time as it does in the Timeline Editor. You can drag the playhead to change the current time, 
+updating the frame displayed in the viewers. 
+Removing a spline from a parameter removes the animation
+Spline Editor Header
+The header provides a mechanism for determining what splines are visible in the graph. It shows the 
+name of each spline in the project beneath the tool that contains that parameter. The checkbox beside 
+each name shows whether that spline is currently displayed in the graph and whether the spline can 
+be edited. 
+The Spline header
+1584Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Spline Editor Toolbar
+The toolbar across the bottom of the Spline Editor represents the most common operations applied 
+to an animation spline. The various operations represented in the toolbar are all accessible from the 
+graph’s context menu as well, but the following buttons provide a faster shortcut. 
+Spline toolbar buttons
+Playhead 
+The playhead is the thin red vertical bar that runs vertically through the Spline Editor graph and 
+represents the current time of the comp. You can drag the playhead to change the current time. 
+Status Bar 
+The status bar in the lower-right corner of the Fusion window regularly displays information about the 
+position of the pointer, along with the time and value axes. 
+Contextual Menus 
+There are two contextual menus accessible from the Spline Editor. The Spline contextual menu is 
+displayed by right-clicking over the graph, while the Guide contextual menu is displayed by right-
+clicking on the Time Ruler above the graph.
+Right-click on the horizontal axis Time 
+Ruler for the Guide menu
+Renaming Splines
+The name of a spline in the header is based on the parameter it animates. You can change the name 
+of a spline by right-clicking on it in the header and choosing Rename Spline from the contextual menu.
+Changing Spline Colors
+Each spline in the graph is assigned a different color, making individual splines easier to identify when 
+multiple splines are visible at once. When the spline is active, a round color swatch is displayed next to 
+the spline’s name in the header. 
+To change the color of a spline:
+1 Click on the color circle next to the spline name in the header.
+2 Or right-click on the name of the spline in the header and choose Change Color from the 
+contextual menu. 
+3 Select the new color from the dialog box that appears and click OK.
+1585Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Navigating Around the Spline Editor 
+It is often necessary to magnify and pan around the graph area to ensure that the splines you want 
+to work on are visible. In general, scaling and panning the Spline Editor works the same as in all 
+navigable parts of the Fusion interface. However, there are several unique functions to the Spline 
+Editor for controlling your view based on the height, width, and selection of multiple animation splines.
+The most obvious navigation methods to use are the scale sliders and buttons located in the upper 
+left of the Spline Editor panel.
+The Zoom Height and Zoom Width sliders, Fit button, and Zoom to Rectangle 
+button can be used to navigate around the graph
+To scale and pan using the sliders and buttons:
+Zoom Height and Zoom Width sliders let you change the height and width of the 
+graph area. 
+The Fit button attempts to rescale the view so that all currently active splines fit within 
+the graph. 
+The Zoom to Rectangle button (Command-R) allows you to draw a bounding box around 
+the area of the graph you want centered and scaled.
+To scale using the axis labels: 
+Dragging in the Time 
+Ruler scales the 
+graph horizontally
+Place the mouse pointer over the rulers for the horizontal or vertical axis and 
+drag to resize the graph on that axis only. The view is scaled centered on the 
+original position of the pointer on the ruler.
+To scale and pan with the mouse and/or keyboard:
+  With the Spline Editor active, press the + and - keys on your keyboard to zoom in and 
+out of the graph. 
+  You can also zoom to a specific control point by holding down the Command key and scrolling the 
+middle mouse wheel. The mouse pointer location determines the area that gets magnified. 
+  Position the mouse pointer over the graph, and then hold down the middle mouse button. With the 
+middle mouse button pressed down, click once on the left mouse button to zoom in and once on 
+the right button to zoom out. 
+To pan the graph area:
+  Drag left or right using the middle mouse button or use the scroll bar along the bottom and right 
+side of the graph.
+1586Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Using the Graph contextual menu for navigation:
+There are several ways to navigate the graph area using the Spline Editor contextual menu as well.
+  Choose Scale > Scale to Fit (Command-F) to fit all active splines into the graph area. 
+  Choose Scale > Scale to Rectangle (Command-R) to draw a bounding box around the area of the graph 
+you want centered and scaled. This has the same effect as clicking the Zoom to Rectangle button.
+  Choose Scale > Default to reset the scaling of the graph area to default values. 
+  Choose Scale > Zoom In/Zoom Out to scale the graph area. This performs the same functions as 
+pressing the + and - keys on the keyboard. 
+  Choose Scale > Auto Fit to scale the graph to fit all splines dynamically as you make splines visible 
+and hidden. If the scaling is changed with Auto-Fit enabled, the graph area will scroll as you play 
+the comp to view all the keyframes.
+  Choose Scale > Auto Scroll to scroll the graph area if the splines fall outside the graph horizontally 
+as you play.
+  Choose Scale > Manual to disable all automatic attempts at showing splines in the graph.
+  Choose Options > Fit Times to automatically scale along the X-axis to fit the selected spline. 
+All visible splines are taken into account, not just the newly selected spline. With this option off, 
+activating a new spline will not change the horizontal scale. 
+  Choose Options > Fit Values to automatically scale along the Y-axis to fit the selected spline. 
+All visible splines are taken into account, not just the newly selected spline. With this option off, 
+activating a new spline will not change the vertical scale.
+Expand Keyframe Editor: 
+Open the Fusion Keyframe editor in a resizable window by clicking on the 
+Undock icon in the Keyframes or Spline toolbar.
+Markers 
+Markers help identify important frames in a project. They may indicate a frame where a ray gun shoots 
+a beam in the scene, the moment that someone passes through a portal in the image, or any other 
+important event in the composite. 
+Markers added to the Timeline in the Cut, Edit, Fairlight, or Color page will appear in the Keyframes 
+Editor and Spline Editor of the Fusion page. They can also be added from the Keyframes Editor or the 
+Spline Editor while working in Fusion Studio or the Fusion page. Markers appear along the top of the 
+horizontal axis Spline Editor’s Time Ruler. They are displayed as small blue shapes, and when selected, 
+a line extends from each guide down vertically through the graph. 
+NOTE: Markers attached to clips in the Cut, Edit, Color, or Fairlight pages Timeline are not 
+visible in Fusion’s Spline Editor.
+Unselected markers appear as blue shapes along the top, while 
+selected markers display a vertical line running through the graph
+1587Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Working with Markers 
+Markers call attention to a particular frame within a comp. They can be named, displayed in a list, and 
+edited. After you add markers, you can easily jump the playhead between them, change their position, 
+or delete them altogether.
+To create a marker:
+  Right-click in the horizontal axis Time Ruler and choose Add Marker. 
+Markers can be added by right-
+clicking in the horizontal time axis
+To delete a marker, do one of the following:
+  Drag the marker up outside the Spline Editor panel. 
+  Right-click on the marker and then choose Delete Marker from the menu. 
+  Select the marker and then press Delete or Backspace on the keyboard.
+  From the Marker List, select a guide in the list and click the Del button.
+To move a marker to a new frame, do one of the following: 
+  Drag the marker handle along the time axis.
+  Right-click in the marker area and choose Options > Enable Marker Grab, and then drag the 
+marker’s vertical line to move the guide.
+To move the Playhead to a marker:
+  Right-click on a marker and choose Set Current Time To [Frame number].
+Using the Marker List
+The Marker List is a list of all markers in the current comp. It can display the markers from either the 
+Keyframes Editor, the Spline Editor, or both panels simultaneously. Clicking on the frame number or 
+name of a guide causes the current time to change to that marker’s frame. Since the Marker List is a 
+floating window, it can remain open, allowing you to quickly jump to different markers while you work 
+in the Spline Editor.
+To show the Marker List:
+  Right-click in the horizontal axis and choose Show Marker List, or press Shift-G.
+The Marker List above shows markers in the current comp.
+1588Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+If markers currently exist in the comp, they are automatically displayed in the Marker List, 
+regardless of whether they were added in the Keyframes Editor or the Spline Editor or any 
+other page in DaVinci Resolve. You can also add markers directly from the Marker List, which 
+can be helpful if you have multiple markers you need to add, and you know the rough timing. 
+To add a guide from the Marker List:
+1 Click the Add button in the Marker List window.
+2 Enter a frame number in the Time field.
+3 Press Tab or click the Close button to close the Marker List.
+To name a marker, do one of the following:
+  In the Marker List, double-click in the Name column, to the right of the frame number, and enter a 
+name for the marker.
+  Right-click over a marker in the horizontal axis and choose Rename Marker. In the dialog that 
+opens, enter a name for the marker.
+Displaying Marker with the Timeline 
+The Marker List window includes checkboxes next to each marker that determines whether a 
+marker displays in the Spline Editor, the Keyframes Editor, both, or neither. By default, when 
+you create markers, they are active in both panels. To hide a marker from appearing in either 
+panel, deselect the appropriate checkbox. 
+Autosnap 
+To assist in precisely positioning keyframe control points along the horizontal (time) axis, you can 
+enable the Spline Editor’s Autosnap function. Right-clicking over a spline and choosing Options > 
+Autosnap Points provides a submenu with four options. 
+  None: Allows free, sub-frame positioning of the keyframes.
+  Frame: Keyframes snap to the nearest frame. 
+  Fields: Keyframes snap to the nearest field. 
+  Markers: Keyframes snap to the nearest marker.
+Autosnapping and Markers 
+By default, a newly-created marker snaps to the closest frame. Moving markers with the 
+mouse also snaps them to the current frame. You can change this behavior by selecting 
+Options > Autosnap Markers > None or by selecting Options > Autosnap Markers > Field from 
+the contextual menu. 
+1589Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Creating Animation Splines 
+Animation splines are created automatically when you keyframe a parameter in the Inspector or the 
+Keyframes Editor. However, you can create an animation spline without first having to add a keyframe.
+To create a spline:
+Right-click on the parameter to be animated in the Inspector, and choose Animate from the 
+contextual menu.
+Selecting Animate from the contextual menu connects the parameter to the default spline 
+type. This is usually a Bézier Spline unless you change the default spline in the Defaults panel 
+of the Fusion Preferences. 
+Choosing Animation from the menu  
+displays a spline in the Spline Editor
+Deleting Animation Splines 
+To remove an animation spline from a parameter, right-click on the control in the Inspector and select 
+Remove [tool parameter’s name] from the contextual menu. Removing a spline from a parameter only 
+deletes the spline if no other tool in the composition is connected to the same spline at that time. 
+Removing a spline from a parameter 
+removes the animation
+Animating with Different Spline Types
+A Bézier spline is the default spline unless changed in the Preferences. However, if you want to use a 
+spline type other than Bézier for the animation curve, you can choose the spline type from the Modify 
+With contextual submenu before creating any keyframes. 
+1590Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Three spline types in the Modify With menu
+  Bézier Spline: Bézier splines are the default curve type. Three points for each keyframe on the 
+spline determine the smoothness of the curve. The first point is the actual keyframe, representing 
+the value at a given time. The other two points represent handles that determine how smoothly 
+the curve for the segments leading in and out of the keyframe are drawn. Bézier is the most used 
+spline type because Bézier splines allow you to create combinations of curves and straight lines. 
+Bézier spline
+  Modify with > B-Spline:  B-splines use a single point to determine the smoothness of the curve. 
+Instead of using handles, a single control point determines the value as well as the smoothness 
+of the curve. Holding down the W key while dragging left or right on the control point adjusts the 
+tension of the curve. 
+B-spline
+1591Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+  Modify with > Cubic Spline:  Cubic splines are similar to Bézier splines, in that the spline 
+passes through the control point. However, Cubic splines do not display handles and always 
+make the smoothest possible curve. In this way, they are similar to B-splines. This spline type 
+is almost never used.
+Cubic spline
+  Modify with > Natural Cubic Spline:  Natural Cubic splines are similar to Cubic splines, except that 
+they change in a more localized area. Changing one control point does not affect other tangents 
+beyond the next or previous control points. 
+Natural Cubic spline
+Working with Keyframes and Splines
+Once you animate a parameter and display the Spline Editor, you can manipulate the spline’s 
+keyframes (and thus the animation) in a variety of ways. By selecting Keyframe control points, you can 
+move, copy, and change the interpolation of your animation.
+Adding Keyframes 
+Once you create one keyframe, additional keyframes are automatically added to a spline whenever 
+you move the playhead and change the value of that spline’s parameter. For example, if you change 
+the strength of an animated glow at frame 15, a keyframe with the new value occurs on frame 15. 
+In the Spline Editor, control points can also be added directly to a spline by clicking on the spline 
+where you want to add the new keyframe. 
+1592Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Adding Keyframes at the Playhead 
+If you want to add a new keyframe at the current playhead location, pressing Command-K 
+on the keyboard or right-clicking in the graph and choosing Set Key adds a keyframe under 
+the playhead.
+Adding Equal Keyframes 
+If you want to hold a value over several frames, right-clicking in the graph area and choosing 
+Set Key Equal To displays a submenu to add a new keyframe with a value equal to the next or 
+the previous keyframe.
+To hold a value between two keyframes choose from the Set Key Equal To submenu
+Locked and Unlocked Controls Points
+When animating the Center X/Y or Pivot X/Y parameters on any tool, you create a displacement spline 
+in the Spline Editor. The displacement spline represents the relative offset position of the animated 
+object along its path. Since the displacement spline is relative, keyframes use a value between 
+0.0 and 1.0. A displacement value of 0.0 in the Spline Editor indicates that the object is at the very 
+beginning of a path. A value of 1.0 indicates that the object is positioned at the end of the path.
+The displacement spline represents the relative position along a motion path 
+1593Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Displacement paths are composed of locked and unlocked points. Whether a point is locked is 
+determined by how you added it to the polyline. Locked points on the spline have an associated point 
+in the viewer’s motion path; unlocked points do not have a corresponding point in the viewer’s motion 
+path. Each has a distinct behavior, as described below.
+TIP: You can convert displacement splines to X and Y coordinates by right-clicking over the 
+motion path in the viewer and choosing Path#: Polyline > Convert to X/Y Path.
+Locked Points
+Locked points are the motion path equivalents of keyframes. They are created by moving the 
+playhead position and changing the parameter value. These points indicate that the animated object 
+must be in a specified position on a specified frame. Since these keyframes are only related to 
+position along the path, they can only be moved horizontally along the spline’s time axis.
+The locked points appear as larger-sized lock icons in the Spline Editor. Each locked key has an 
+associated point on the motion path in the viewer.
+Deleting a locked point changes the overall timing of the motion.
+Unlocked Points
+Unlocked points are created by clicking directly on the spline in the Spline Editor. These points 
+give additional control over the acceleration along the motion path without adjusting the path itself. 
+Conversely, you can add unlocked points in the viewer to control the shape of the motion path without 
+changing the timing.
+You can change an unlocked point into a locked point, and vice versa, by selecting the point(s), 
+right-clicking, and choosing Lock Point from the contextual menu.
+For more information on motion paths and locked keyframes, jump to these chapters: 
+Animating in Fusion’s Keyframes Editor  and Animating with Motion Paths . You can also 
+refer to Chapters 9 and 11 of the Fusion Reference manual .
+Selecting, Moving, and Deleting Keyframes 
+The placement of keyframes greatly affects the style of the animation. Using the graph, you can select 
+keyframes and move them up or down to change their value or move them left and right to change the 
+timing. Keyframes can be copied and pasted between splines and parameters. 
+Methods of selecting keyframes:
+  Click directly on a keyframe on the spline, or drag a bounding box around the keyframe. 
+  Drag a bounding box that encompasses multiple keyframes to select more than one. 
+  To add or remove a keyframe from the current selection, hold down the Command key while 
+selecting the keyframes. This will remove currently selected keyframes and add currently 
+unselected keyframes. 
+  Press Command-A or right-click in the graph area and choose Select Points > Select All from the 
+contextual menu to select all keyframes from the active splines. 
+1594Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Moving Keyframes 
+You can freely move keyframes with the mouse, keyboard, or the edit point controls. Keyframes can 
+even pass over existing points as you move them. For instance, if a keyframe exists on frame 5 and 
+frame 10, the keyframe at frame 5 can be repositioned to frame 15. 
+To move keyframes with the mouse:
+  Drag the selected keyframe to its new position in the graph. If more than one keyframe is 
+selected, all selected keyframes will be moved simultaneously. 
+  Hold down the Option key before dragging the keyframe to constrain its motion to a single axis. 
+To move keyframes with the keyboard:
+  The Up and Down Arrow keys will adjust the value of the keyframes by a small amount. 
+  The current scale of the graph determines the degree of vertical movement applied to the value 
+with each key press. The closer the zoom in the spline, the finer the adjustment. 
+  Hold down the Shift key while pressing the Up or Down Arrow keys to increase the value 
+adjustment in larger increments. 
+   You can use the comma (,)  and period (.) keys to nudge a Spline keyframe left or 
+right respectively.
+To move keyframes using edit fields:
+  The Value and Time Editors are found on the far right of the toolbar. These number fields allow 
+explicit values to be entered for selected keyframes. These controls are explained in more depth 
+later in this chapter. 
+To delete one or more keyframes:
+  Select one or more keyframes and press the Delete or Backspace key on the keyboard. This only 
+removes the keyframes; it does not remove the spline, even if there are no keyframes on the 
+spline. To remove the spline, right-click over the parameter in the Inspector and choose Remove 
+[parameter name].
+Showing Key Markers
+You can adjust the position of the keyframes in time, without worrying about manipulating splines, by 
+using the key markers. The horizontal time axis can show markers that indicate the position of each 
+keyframe. The display of these markers is enabled by right-clicking in the graph and choosing Show > 
+Key Markers from the contextual menu, or by clicking on the Show Key Markers button in the toolbar. 
+The key markers show keyframes in the horizontal axis using the same color as the splines
+1595Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Copying and Pasting Keyframes 
+To precisely match animation, Keyframes can be copied to a new location on the same spline or onto 
+completely different splines and different tools.
+There are two options in the graph’s contextual menu for copying keyframes. Choosing Copy Points 
+(Command-C) copies all selected points. Choosing Copy Value copies a single point identified by the 
+pointer from multiple selected points. This does not deselect your selection set, and you can pick out 
+numbers as needed.
+To copy and paste points to a new location on the same spline: 
+1 Select the desired keyframes on the spline.
+2 Right-click over the spline and choose Copy Points from the contextual menu or press 
+Command-C.
+3 Click in an empty area of the graph to deselect all the copied points.
+4 Move the playhead to the area of the spline where you want the points pasted and press 
+Command-V.
+Or, move the pointer over the spline where you want the points pasted, and when the spline 
+highlights, right-click and choose Paste Points/Value.
+Alternatively, you can copy and paste keyframes by dragging them with the mouse. After you 
+select the points, hold down the Command key and drag the points along the spline to where 
+you want them pasted. 
+To copy and paste keyframes from one spline to another: 
+1 Make one spline the active visible spline and select the desired keyframes on the spline.
+2 Right-click over the spline and choose Copy Points from the contextual menu or press 
+Command-C.
+3 Set the spline to viewed or disabled using the status checkbox next to the spline’s name in 
+the header.
+4 Make the destination spline the active visible spline and select the keyframe on the spline where 
+the new keyframes should be pasted.
+5 Right-click and choose Paste Points/Value or press Command-V.
+You can copy a single point’s value from a group of selected points. Since this process does 
+not deselect the selected set, you can continue picking out values as needed without having to 
+reselect points.
+To copy and paste a keyframe value:
+1 Make one spline the active visible spline and select all the keyframes on the spline.
+2 Right-click over a single point and choose Copy Value from the contextual menu.
+3 Set the spline to viewed or disabled using the status checkbox next to the spline’s name in 
+the header.
+4 Make the destination spline the active visible spline and select the keyframe on the spline where 
+the new keyframe should be pasted.
+5 Right-click and choose Paste Points/Value or press Command-V.
+Keyframes can also be pasted with an offset, allowing you to duplicate a spline shape but increase 
+the values or shift the timing using an offset to X or Y.
+1596Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+To paste keyframes points and values with an X or Y offset:
+1 Make one spline the active visible spline and select the desired keyframes on the spline.
+2 Right-click over the spline and choose Copy Points from the contextual menu or press 
+Command-C.
+3 Set the spline to viewed or disabled using the status checkbox next to the spline’s name in 
+the header.
+4 Make the destination spline the active visible spline and select the keyframe on the spline where 
+the new keyframes should be pasted.
+5 Right-click and choose Paste with Offset. In the Offset dialog, enter the Y value, which will be 
+added to the values of the pasted keyframes.
+TIP: You cannot copy and paste between different spline types. For instance, you cannot 
+copy from a Bézier spline and paste into a B-spline.
+Time and Value Editors 
+The Time and Value Editors in the lower-right corner of the Spline Editor are used to change the 
+position and parameter value of a keyframe by entering a number into the number field for each 
+button. Each field can switch between three modes that help modify the time and value of a keyframe 
+in three precise but distinct ways. The default mode for each field takes the explicit frame number or 
+parameter value at which you want the keyframe set. The other modes offset and scale the keyframe’s 
+position or value. 
+Use the number fields to enter in a value or a specific  
+time to change the selected keyframe
+Time Editor
+The Time Editor is used to modify the current time of the selected keyframe. You can change the Time 
+mode to enter a specific frame number, an offset from the current frame, or spread the keyframes 
+based on the distance (scale) from the playhead. You can select one of the three modes from the Time 
+mode drop-down menu. 
+Three time editing modes are selectable  
+from the Time mode drop-down menu
+Time 
+The number field shows the current frame number of the selected control point. Entering a 
+new frame number into the field moves the selected control point to the specified frame. If 
+no keyframes are selected or if multiple keyframes are selected, the field is empty, and you 
+cannot enter a time. 
+1597Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Time Offset 
+Selecting T Offset from the drop-down menu changes the mode of the number field to Time 
+Offset. In this mode, the number field offsets the selected keyframes positively or negatively 
+in time. An offset of either positive or negative values can be entered. For example, entering 
+an offset of 2 moves a selected keyframe from frame 10 to 12. If multiple keyframes were 
+selected in the previous example, all the keyframes would move two frames forward from their 
+current positions. 
+Time Scale 
+Selecting T Scale from the drop-down menu changes the mode of the number field to Time 
+Scale. In this mode, the selected keyframes’ positions are scaled based on the position of the 
+playhead. For example, if a keyframe is on frame 10 and the playhead is on frame 5, entering 
+a scale of 2 moves the keyframe 10 frames forward from the playhead’s position, to frame 15. 
+Keyframes on the left side of the playhead would be scaled using negative values.
+Value Editor
+The Value Editor is used to modify the selected keyframe’s parameter value using one of three Value 
+modes. You can change the Value mode to enter a specific value for a parameter, an offset from the 
+value, or to spread the values. The mode is chosen from the Value mode drop-down menu.
+Three value editing modes are selectable  
+from the Value mode drop-down menu
+Value 
+The number field shows the value of the currently selected keyframes. Entering a new number 
+into the field changes the value of the selected keyframe. If more than one keyframe is 
+selected, the displayed value is an average of the keyframes, but entering a new value will 
+cause all keyframes to adopt that value. 
+Value Offset 
+Choosing Offset from the drop-down menu sets the Value Editor to the Offset mode. In this 
+mode, the value for the selected keyframes are offset positively or negatively. An offset of 
+either positive or negative values can be entered. For example, entering a value of -2 changes 
+a value from 10 to 8. If multiple keyframes are selected, all the keyframes have their values 
+modified by -2.
+Value Scale 
+Choosing Offset from the drop-down menu sets the Value Editor to the Scale mode. Entering 
+a new value causes the selected keyframes’ values to be scaled or multiplied by the specified 
+amount. For example, entering a value of 0.5 changes a keyframe’s value from 10 to 5.
+1598Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Modifying Spline Handles
+All Bézier spline keyframes have a pair of control handles to shape the spline as it passes through the 
+key point. These handles are only displayed when the keyframe is selected. Initially, these handles 
+are set to linear, creating straight line changes between keyframes. However, any control point can be 
+made smooth by right-clicking over it and choosing Smooth or pressing Shift-S.
+Bézier splines can mix linear and smooth curves
+Dragging on a keyframe’s handles adjusts the slope of the segments passing through the spline. 
+By default, the two control handles on a control point are locked together so that if one moves, the 
+one on the other side moves with it. This maintains a constant tension through the keyframe. There 
+are situations, however, when it is desirable to modify these control handles separately for a more 
+pronounced curve or effect. 
+To temporarily break the control handles on a Bézier spline, moving one independently of the other:
+1 Select the control point to be modified.
+2 Hold down the Command key and drag one of the control handles. They will now move 
+independently of each other, as long as the Command key is held down. 
+To treat all Bézier handles as independent in the Spline Editor:
+  Right-click in the graph and choose Independent Handles from the Options contextual menu.
+Enabling this option causes all the Bézier handles to be independent. This is the same as using the 
+Command key when moving a handle, except it is applied to all control points until it is disabled.
+Reducing Points 
+When there are too many control points too close together on a spline, you can choose Reduce Points 
+to decrease their number, making it easier to modify the remaining points. The overall shape of the 
+spline is maintained as closely as possible while eliminating redundant points from the path. 
+To reduce the number of points on a spline:
+1 Select the range of keyframes you want to thin out. 
+2 Right-click in the graph area and choose Reduce Points from the contextual menu.
+3 When the Reduce Points dialog appears, drag the slider to a lower value. 
+You can set the slider value as low as possible as long as the spline still closely resembles the 
+shape of your original spline. 
+TIP: When the value is 100, no points will be removed from the spline. Use smaller values to 
+eliminate more points. 
+1599Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Filtering the Spline Editor
+The animation splines for multiple parameters can be displayed within the Spline Editor simultaneously, 
+and Fusion offers several ways for you to choose which spline to view and which to edit.
+A complex composition can easily contain dozens, if not hundreds, of animation curves. As a 
+composition grows, locating a specific spline can become more difficult. There are two ways to 
+filter the splines shown in the Spline Editor: display selected tools only or create a filter to show only 
+certain tools. 
+The Spline Editor includes different ways to control which splines are displayed. The majority of these 
+options are available in the Options menu, located in the upper-right corner of the Spline Editor panel.
+The Options menu is used to control  
+which splines are displayed in the Spline Editor
+  Show Only Selected Tool: You can choose to limit the splines displayed in the Spline Editor by 
+showing only the splines from selected tools. Choosing this option at the top of the Options menu 
+displays only the splines for tools currently selected in the Node Editor. 
+  Show All/None: The default behavior of the Spline Editor displays all the splines for all the nodes 
+with animated parameters. You can override this by enabling Show Only Selected Tools in the 
+Options menu. You can also disable the Show All setting by choosing Show None, in which case 
+the Spline Editor remains empty.
+  Expose All Controls: The Expose All Controls option is a way of not filtering the parameters. 
+Choosing this option displays all parameters in the Spline Editor header for all nodes in the 
+Node Editor. It can be a fast way of activating one of the parameters and automatically adding an 
+animation spline for it if one does not exist. 
+With a large number of nodes displayed, which themselves might have a large number of 
+parameters, this might lead to cluttering and slowing down the interface. This option is most 
+effective when used in conjunction with the Show Only Selected Tool option to limit the number of 
+nodes and parameters displayed and yield optimum performance.
+  Follow Active: The Follow Active option is located by right-clicking in the graph and choosing 
+Options > Follow Active. This option provides a way to filter the splines in the graph while not 
+filtering the header list of tools. Where the Show Only Selected Tool option hides other tools in 
+the header, the Follow Active option leaves the header displaying all the tools but automatically 
+enables only the splines of the Active tool.
+1600Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Working with Filters
+Filters allow you to select the specific types and classes of tools shown in the Spline Editor and 
+Keyframes Editor. For example, you can make a filter that shows only particle nodes or one that only 
+shows color correction and brightness/contrast tools. 
+To create a filter:
+1 From the Options menu, choose Create/Edit Filters. 
+2 Click the New button to create a new filter and name the new filter in the dialog box. 
+3 Enable a checkbox next to the entire category or the individual tools in each category to 
+determine the tools included in the filter. 
+Enable each tool you want to keep in the Spline Editor when the filter is selected 
+The Invert All and Set/Reset All buttons can apply global changes to all the checkboxes, toggling the 
+selected states as described. 
+To switch the selection state of the categories when creating a filter list:
+1 Click the Invert All button.
+2 After configuring the custom filter, click the Save button to close the Settings dialog and save the filter. 
+To enable all checkboxes or disable all checkboxes:
+1 Click the Set/Reset All button as many times as needed until all categories are either checked or 
+unchecked.
+2 After configuring the custom filter, click the Save button to close the Settings dialog and save the filter. 
+To apply a filter to the Spline Editor:
+  Choose the desired filter by name from the Options menu. The filter applies to both the Spline 
+Editor and the Timeline.
+Each filter you create is listed 
+in the Options menu
+1601Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+To disable a filter and show all tools in the Spline Editor again:
+  Choose Show All from the Options menu.
+Changing a Spline’s Status 
+The Spline header is a hierarchical list of animated parameters and their parent nodes. Clicking 
+the disclosure arrow next to a tool’s name reveals all the names of the animated parameters on 
+that tool. Clicking directly on the parameter name in the Spline header activates that spline for 
+display and editing. 
+The Spline header with the Brightness Contrast tool 
+and its animated Gain and Gamma parameters 
+Tool Status Checkbox 
+Next to the name of each spline is a checkbox that indicates the spline’s status. When you select a 
+parameter name, the checkbox becomes active, allowing you to see and edit the spline in the graph. 
+There are three selection modes for each checkbox: active, viewed, and disabled. Clicking directly 
+on the checkbox will toggle it between these three states. Changing the state of the parent node 
+checkbox sets the state for all splines for that node.
+  Active: When the checkbox is enabled with a check mark, the spline is displayed in the graph and 
+can be edited. 
+  Viewed: When the checkbox is enabled with a solid gray box, the spline is visible in the graph but 
+cannot be edited. It is read-only.
+  Disabled: When the checkbox is clear, the spline is not visible in the graph and cannot be edited. 
+Checkboxes determine which  
+splines are visible and editable
+1602Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Selection States 
+There are three selection options, labeled Select All Tools, Deselect All Tools, and Select One Tool, 
+that determine how the items in the Spline Editor header behave when a checkbox or label is selected 
+to activate a spline. These states are located in the Options menu in the upper-right corner of the 
+Spline Editor.
+The Options menu selection states  
+make it easier to select and deselect  
+all parameters in the header 
+• Select All Tools: Choosing this option activates all splines for editing. 
+• Deselect All Tools: Choosing this option sets all spline checkboxes to disabled. 
+• Select One Tool: This option is a toggle. When Select One Tool is chosen from the menu, 
+only one spline in the header is active and visible at a time. Clicking on any spline’s 
+checkbox will set it to active, and all other splines will be cleared. When disabled, multiple 
+splines can be active in the header.
+Selection Groups
+It is possible to save the current selection state of the splines in the header, making selection groups 
+that can easily be reapplied when needed. To create a selection group, right-click over any parameter 
+in the header or in an empty area of the graph and choose Save Current Selection from the contextual 
+menu. A dialog will appear to name the new selection. 
+To reapply the selection group, choose the selection group by name from the Set Selection menu 
+in the same contextual menu. Other context menu options allow selection groups to be renamed 
+or deleted. 
+1603Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Reshaping Splines Using the Toolbar
+There are several ways to manipulate the shape of a spline, thereby altering the animation that spline 
+generates. Other than manually adjusting Bézier handles, you can quickly squish, stretch, loop, 
+and reverse a spline. You can also quickly change the interpolation between keyframes from the 
+default linear motion to more natural smooth motion. All these options are provided at the bottom of 
+the Spline Editor in the toolbar. The toolbar is divided into different groups for setting interpolation, 
+reversing splines, looping splines, time stretching, and reshaping splines.
+Interpolation
+Keyframes are specific frames in an animation where control points are set to exact values on a given 
+parameter. Interpolation is the method used to fill in the unknown values between two keyframes. 
+Fusion automatically interpolates between two keyframes. However, you may want to modify the 
+interpolation to achieve a specific style of animation. The Spline Editor includes several interpolation 
+methods you can choose from using the toolbar.
+Interpolation buttons in the toolbar: Smooth, 
+Linear, Invert, Step In, and Step Out
+Smooth 
+A smoothed segment provides a gentle keyframe 
+transition in and out of the keyframe by slightly extending 
+the direction handles on the curve. This slows down the 
+animation as you pass through the keyframe. To smooth 
+the selected keyframe(s), press Shift-S or click the 
+toolbar’s Smooth button. 
+Smooth interpolation between keyframes
+Linear 
+A linear segment effectively takes the shortest route 
+between two control points, which is a straight line. To 
+make the selected keyframe(s) linear, press Shift-L or 
+click the Linear button in the toolbar.
+TIP: Invert is used only for non-animated LUT 
+splines, which are currently only available in the 
+LUT Editor window.
+Linear interpolation between keyframes
+1604Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Step In/Step Out
+On occasion, it is not desirable to have any interpolation 
+between two keyframes. Instead, the value of one 
+keyframe may hold its value until another keyframe 
+changes it. For these cases, use the Step In or Step 
+Out mode. 
+Step In causes the value of the previous keyframe 
+to hold, then jump straight to the value of 
+the next keyframe. 
+Step Out causes the value of the selected keyframe to 
+hold right up to the next keyframe. 
+Step In and Step Out modes can be set for 
+selected keyframes by clicking on the toolbar 
+buttons for each mode, or by right-clicking 
+and choosing the appropriate option from the 
+contextual menu. The keyboard shortcuts I and 
+O can also be used to enable Step In and Step 
+Out on selected keyframes.
+Step In holds a value until the next  
+keyframe is reached in the comp
+Step Out switches immediately to the 
+next keyframe value in a comp
+Reversing Splines 
+Reverse inverts the horizontal direction of a segment of an animation spline. To apply reverse, choose 
+a group of points in a spline and click the Reverse button, or right-click and choose Reverse from the 
+contextual menu, or press the V key. The group of points is immediately mirrored horizontally in the 
+graph. Points surrounding the reversed selection may also be affected.
+The Reverse button in the toolbar
+Looping Splines 
+It is often useful to repeat an animated section, either infinitely or for a specified number of times, such 
+as is required to create a strobing light or a spinning wheel. Fusion offers a variety of ways to repeat a 
+selected segment. 
+The various Loop buttons in the toolbar
+1605Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Set Loop 
+To repeat or loop a selected spline segment, select the keyframes to be looped. Select Set Loop 
+from the contextual menu or click on the Set Loop button in the toolbar. The selected section of the 
+spline repeats forward in time until the end of the global range, or until another keyframe ends the 
+repeating segment. 
+A looped section in the graph
+Changing and Removing the Loop
+You can change the looped segment by modifying any of the keyframes or control points originally 
+used to create the loop. Simply select one of the originating key points, make any necessary 
+modifications, and the looped segment updates. To remove the loop, select the keyframes you used 
+to create the loop, and then click the Loop button in the toolbar. 
+Ping-Pong 
+The Ping-Pong Loop mode repeats the selected segment, reverses each successive loop, and then 
+repeats. Ping-pong looping can be enabled on the selected segments from the context menu or 
+the toolbar. 
+A ping-pong section in the graph
+1606Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Relative Loop 
+The Relative Loop mode repeats the segment like the Loop, but each repetition adds upon the last 
+point of the previous loop so that the values increase steadily over time. 
+A Relative Loop section in the graph
+Looping Backward
+You can choose Set Pre-Loop by right-clicking in the graph area and choosing it from the contextual 
+menu. This option contains the same options for looping as the Loop option buttons in the toolbar, 
+except that the selected segment is repeated backward in time rather than forward.
+Repeating Splines X Number of Times
+You can duplicate splines and repeat them a set number of times by right-clicking in the graph area 
+and choosing Duplicate from the contextual menu. Duplicated splines are like looped splines, except 
+that the selected segment repeats only a specified number of times, and each repetition is a copy 
+rather than an instance. Adjustments to the original segment do not alter the shape of its repetitions. 
+The Duplicate modes are only accessed from the Duplicate contextual menu, which reveals a 
+submenu with all the looping modes described above. Selecting any of these modes opens a dialog in 
+which the number of repetitions can be entered. 
+The Duplicate contextual submenu
+1607Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Gradient Extrapolation
+You can choose Gradient Extrapolation by right-clicking in the graph area and choosing it from the 
+contextual menu. This option continues the trajectory of the last two keyframes.
+The Gradient Extrapolation applied to the spline
+Time Stretching 
+Time Stretching allows for a selected group of keyframes to be proportionally stretched or squashed. 
+This allows you to change the duration of the animation while keeping the relative distance between 
+each keyframe. To enable spline stretching, select the group of keyframes that you want to time 
+stretch, and then choose Modes > Time Stretching from the graph’s contextual menu or click the Time 
+Stretch button in the toolbar. 
+ 
+The Time Stretch button in the toolbar
+When you have more than one keyframe selected on the spline, enabling Time Stretch surrounds the 
+outer keyframes with two vertical white bars. Drag on the white vertical bars to stretch or shrink the 
+timing of the spline segments within the bars. Drag these bars back and forth to stretch or squash the 
+spline segment. 
+The Time Stretch bars in the graph
+1608Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+TIP: If no keyframes are selected when you enable Time Stretch, drag a rectangle to set the 
+boundaries of the Time Stretch. 
+To disable the Time Stretching mode:
+  Click on the Time Stretch button in the toolbar again or reselect Modes > Time Stretching from the 
+contextual menu. 
+Shape Box 
+The Shape Box transform mode is similar to Time Stretching; however, it can adjust the vertical scaling 
+of keyframe values as well as time. 
+To enable the Shape Box, do one of the following: 
+  Select a group of keyframes, and then choose Modes > Shape Box from the contextual menu. 
+  Select a group of keyframes, and then click the Shape Box button in the toolbar. 
+  Select a group of keyframes, and then press Shift-B to enable or disable the Shape Box mode. 
+The Shape Box button in the toolbar
+A white rectangle outlines the selected points when the mode is enabled. To scale, skew, or 
+stretch the spline, drag on any of the control points located around the box. To move all the 
+keyframes, drag on the box edges.
+The Shape Box in the graph
+TIP: If no points are selected, or if you want to select a new group of keyframes, you can 
+drag out a new rectangle at any time. 
+1609Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION
+Ease In/Out 
+For a more precise way to adjust the length of Bézier direction handles attached to selected 
+keyframes, you can use the Spline Ease dialog. To show the dialog, select a keyframe in the graph, 
+and then choose Edit > Ease In/Out from the graph’s contextual menu or press T on the keyboard.
+The Ease In/Out controls appear above the graph area. You can drag over the number fields 
+to adjust the length of the direction handles or enter a value in the fields. 
+The Ease In/Out controls above the graph area 
+Clicking the Lock In/Out button will collapse the two sliders into one, so any adjustments apply 
+to both direction handles. 
+Importing and Exporting Splines 
+Spline shapes can be imported and exported from or to an ASCII text file. This makes it easier to 
+save complex spline curves for later reuse, or to transfer tracking, path, and animation data from one 
+application to another. Exported splines are assigned the file extension .spl for easy identification. 
+To export a spline:
+1 Select the active spline in the Spline Editor.
+2 Right-click on the spline in the graph area to display the contextual menu and select Export.
+3 Choose from three format options in the submenu. 
+4 Enter a name and location in the file browser dialog, and then click Save. 
+Exporting a spline gives you three options. You can export the Samples, Key Points, or All Points. 
+Samples adds a control point at every frame to create an accurate representation of the spline. 
+Key Points replicates the control point positions and values on the spline using linear interpolation. 
+All Points exports the spline as you see it in the Spline Editor, using the same position, value, and 
+interpolation.
+To import a spline:
+1 Add an animation spline for the parameter. 
+2 In the Spline Editor, right-click on the animation spline and select Import Spline from the 
+contextual menu. 
+3 In the File Browser dialog, select the spline curve .spl file, and then click Open. 
+Importing a new curve will replace any existing animation on the selected spline.
+1610Fusion Fundamentals | Chapter 71 Animating in Fusion’s Spline Editor
+FUSION

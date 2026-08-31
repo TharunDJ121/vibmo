@@ -17,6 +17,7 @@ from vibmo.assets.library import (
 from vibmo.assets.icons import BuiltinIcon, Icon, ICON_REGISTRY
 from vibmo.assets.gradients import Gradients, GRADIENT_PRESETS
 from vibmo.assets.video_advanced import AdvancedVideoNode
+from vibmo.assets.stock import StockAssetConnector, StockMediaItem
 from vibmo.studio.asset_browser import AssetBrowser, get_asset_browser, BrowserFilter
 
 __all__ = [
@@ -25,6 +26,8 @@ __all__ = [
     "VideoNode",
     "VideoClip",
     "AdvancedVideoNode",
+    "StockAssetConnector",
+    "StockMediaItem",
     # Icons & Gradients
     "BuiltinIcon",
     "Icon",
@@ -44,3 +47,4 @@ __all__ = [
     "get_asset_browser",
     "BrowserFilter",
 ]
+

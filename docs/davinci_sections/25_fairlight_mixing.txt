@@ -1,0 +1,1134 @@
+However, “overcompressing” can remove natural dynamics of a sound, or remove too many of 
+the natural transients (energy bursts or “attacks”) that give the original sound its character. But 
+more extreme compression can also be used creatively to change a sound’s character to give it 
+more perceived attack, change its release characteristic, or change the balance and blend of the 
+environment a sound is recorded in (for example, compressing a source signal with a higher ratio and 
+fast release to raise up the presence of a room sound that the source is recorded in).
+  Compressor: Enables the Compressor.
+  Threshold: Sets the signal level above which compression is applied. The default is –15 dB. The 
+range is –50 to 0 dB.
+  Ratio: Adjusts the compression ratio. This sets the gain reduction ratio (input to output) applied 
+to signals which rise above the threshold level. The default is 2.0:1. The range is 1.0:1 to 10:1. 
+Commonly used ratios for dialogue processing are 2.5:1 to 3:1. With a 3:1 ratio, for every 3 dB of 
+increase in signal above the threshold, 1 dB is output.
+  Knee: Affects behavior with signals that are very near the threshold. The knee can smooth out the 
+transition between where you don’t hear any compression and when the “hard compression” (the 
+set ratio) starts. 
+The Knee: Control allows a smoothing of the slope of the threshold point. You can see Knee’s 
+effect on the graph when using a ratio like 4:1 and adjusting Knee; the graph will show the line 
+where compression “kicks in” being rounded off by higher values of the Knee control. 
+Normally, compression begins directly above the threshold. This is known as a “hard knee.” 
+For a smoother and less audible handling of compression, you can set a softer knee, so the 
+compression turns on gradually as signals approach the threshold and rise above. 
+Hard and Soft Knee graphs
+Mix: Adjusts the mix between the compressed (0) and non-compressed input signal (100), allowing 
+you to balance the compressed signal against the original, unaffected sound. 
+For example, if you’re creating a large explosion impact sound effect, it might sometimes be 
+useful to mix in just a bit of the original, uncompressed signal with a more compressed version 
+to preserve more of the original character along with compressed version. The default is 0 
+(all compression, no original signal).
+Attack: Adjusts how quickly the compression will occur when a signal exceeds the threshold. 
+The default is 1.4 ms. The range is 0 to 100 ms.
+Hold: After the attack phase has been completed, the Hold parameter controls how long this initial 
+attenuation is maintained, before entering the release phase. Defaults to 0 ms. The range is from 
+0 to 4000 ms.
+4020Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Release: Adjusts how quickly or gradually the sidechain detector stops applying compression 
+when a signal falls back below the threshold. The default is 93 ms. The range is 50 to 4000 ms 
+(4 seconds).
+Sidechain: This redesigned section lets you set up sidechain compression or “ducking” using 
+the parameters and controls listed below, instead of using a Send from a track or bus to feed the 
+sidechain input:
+Sidechain module
+  On: When clicked, this button turns red indicating that the Sidechain module is active.
+  Listen: Clicking this button lets you hear the incoming signal on its own, which is helpful if you 
+need to confirm that the correct audio signal is being sent to the Sidechain module.
+  Source: This button selects the track or bus the incoming audio is coming from.
+Sidechaining and “Ducking” with Dynamics
+The Dynamics module allows you to set up “sidechain” compression, which lets you temporarily lower 
+the level of a target track or bus using the audible signal from a source track or bus.
+For example, you may have a dialogue on a track or bus (the source) and another with music 
+(the target), and you want the dialogue to be heard more prominently. This can be done by 
+following the steps below: 
+1 Open the Dynamics plugin on the music track or bus, and switch on the Compressor.
+2 Click the Source dropdown and select the dialogue track or bus.
+TIP: Using a bus as the ducking source lets you use multiple sources to trigger changes 
+in your target track. 
+3 Click the On button, which turns red, indicating that the Sidechain section is active.
+4 While playing a section of your mix, set the amount of gain reduction by lowering the Threshold 
+and raising the Ratio until the target audio is attenuated to a level that makes the dialogue 
+more audible.
+5 If needed, adjust the Hold parameter to ensure the gain reduction doesn’t fluctuate too wildly. 
+6 You may also need to adjust the Release parameter to stop the gain reduction from 
+ending too abruptly. 
+Clicking the Listen button lets you hear the incoming signal if you need to confirm that the correct 
+input signal is coming into the Limiter. This button turns yellow when active.
+4021Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Limiter
+The third set of dynamics parameters let you apply limiting, which imposes a targeted maximum level 
+allowed for a signal. Limiting is similar to compression but essentially has a very high ratio.
+  Limiter: Enables the Limiter.
+Threshold: Sets the threshold above which limiting will occur. As the Limiter is designed to hard 
+limit the output, this also essentially sets maximum allowable output level. The default is –21 dB. 
+The range is from –50 to 0 dB. It’s best to set the amount of limiting by listening, and looking at the 
+amount of gain reduction in the meter. Too much limiting can “squash the life out of the sound” as 
+all of the internal dynamics of a mix can be lost. Used properly, you can smooth out the final mix 
+and achieve higher average level. You can also watch the yellow animated balls in the display to 
+see how the real time limiting response is affected by the controls.
+Attack: Adjusts the attack rate time constant of the sidechain detector. The default is 0.71 ms. The 
+range is 0 to 100 ms.
+Hold: Once the input level falls below the threshold, Hold keeps limiting active until the hold time 
+has elapsed, when release time will start. Default is 0 ms. The range is from 0 to 4000 ms.
+Release: Adjusts how quickly the sidechain detector stops applying limiting when the signal falls 
+below the threshold. The default is 90 ms. The range is 50 to 4000 ms.
+NOTE: When limiting is applied to the final output of your channel (or to an entire mix), you 
+often will need to use the Makeup Gain slider to maximize the output level (if a master) or to 
+match the original level of an individual track (unity). You can audition the difference in level 
+by bypassing the Dynamics module overall, or the Limiter only.
+EQ
+Each Mixer channel strip has a 6-band equalizer EQ, with a mini-EQ graph that displays the current 
+EQ curve, bypasses the plugin, and opens it when double-clicked.
+This plugin offers a choice of high and low shelving, parametric or notch response curves, and 
+high and low pass filters with selectable slopes up to 24dB/octave, with controls for boosting and 
+attenuating different frequency ranges.
+Each band has controls for the filter type (Bell, Lo-Shelf, Hi-Shelf, Notch), Frequency, Gain, and Q-factor 
+(sharpness of the band), with the available controls for each band of EQ changing depending on the 
+filter type. 
+You also have a choice of four response curves, from the Native Fairlight response curve to emulations 
+of classic EQs.
+The channel strip’s EQ Indicator.  
+(Left) EQ is adjusted, and (Right) EQ is flat (no EQ).
+4022Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+The channel strip EQ window
+Master EQ Controls
+The Equalizer window has the following overall controls:
+  Enable button: Turns the plugin on and off.
+  Reset button: The circular Reset icon on the upper right of the EQ resets all parameters to their 
+default settings and values.
+  Equalizer Type: This dropdown offers the Native Fairlight response curve and three emulations of 
+classic mixing console EQs.
+Earth: Native Fairlight response (Default)
+Air: SSL 4K
+Ice: Neve V
+Fire: Focusrite
+  Preset Menu: Your EQ settings can be saved as presets by clicking the Plus button to the left of 
+the Preset menu.
+  Gain fader: This post-EQ fader lets you boost or attenuate the processed signal to compensate for 
+your EQ adjustments. 
+4023Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+The EQ Graph
+The EQ graph provides a visual representation of the current EQ settings, with numbered “handles” for 
+each active EQ band, which can be dragged in any direction to change the corresponding frequency 
+and level. You can also use your mouse wheel to adjust the Q (bandwidth) of each band. 
+The EQ graph
+Dragging the numbered handles on this graph in turn modifies the parameters of the 
+corresponding band, and conversely, changing each band’s parameters will also alter the 
+EQ graph, which serves the additional purpose of providing a graphical representation of the 
+equalization curve being applied to that track. If you have a mouse wheel, it can be used to 
+control Q.
+Bands 1 and 6
+The outer two sets of band parameters are for processing the lowest or highest frequencies 
+of an audio signal.
+Band 1 controls active Band 6 controls active
+  Band filter type: Clicking the Band 1 or Band 6 buttons activates or deactivates their 
+respective controls.
+  Band filter type: Bands 1 and 6 are switched off by default, but when active, they each 
+allow access to filtering options below:
+Band 1: Low Shelf, Bell, High Shelf, and High Pass.
+Band 6: Low Pass, Low Shelf, Bell, and High Shelf. 
+  Frequency: Adjusts the center frequency of the EQ band.
+  Filter Slope: The high and low pass filters offer selectable slopes starting at 6dB/octave 
+up to 24dB/octave. 
+  Gain: When bands 1 and 6 are set to a bell or shelving response curve, this parameter cuts or 
+boosts the selected frequency with a range of ±20 dB.
+4024Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Bands 2–5
+These band controls are on by default and let you make a variety of EQ adjustments..
+The Band 3 controls
+  Band enable button: Clicking these Band buttons activates or deactivates 
+their respective controls.
+  Band filter type: Bands 2 to 5 offer the following filtering options: Low Shelf, Peaking, 
+Notch, and High Shelf.
+  Frequency: Adjusts the center frequency of the EQ adjustment.
+  L, ML, MH, H Buttons: These buttons restrict the center frequency of a band to one of the 
+following frequency ranges: Low, Medium Low, Medium High, or High.
+  Gain: This control is available when a band is set to a bell or shelving response curve and adjusts 
+the level of the center frequency within a range of ±20 dB.
+  Q Factor: This parameter is available when a band is set to a bell response or when the Equalizer 
+type is set to Fire and adjusts the bandwidth of an EQ band, with a range of .3 to 10.3.
+Smaller Q factors widen the bandwidth, while higher values make it narrower, determining how 
+much neighboring frequencies are also affected as the center frequency is adjusted. 
+Bus Sends
+Bus Sends let you route a channel strip’s source signals to a bus destination, with control over level, 
+pan, mute, and pre/post fader routing. You can create bus sends on channels that go to any bus 
+destination you’ve created. 
+Some common mixing tasks that sends can be useful for:
+  Submixing: For example, to render separate mixed outputs that are different formats, such as 
+stereo, 5.1 surround, or Dolby Atmos, all at the same time.
+  Feeding signals to a shared effect:  For example, route to a reverb plugin, where post fader sends 
+on various mixer channels feed a reverb placed on a bus channel strip by varying amounts.
+  Headphone cue mixes: Create separate pre-fader mixes for the talent so you don’t disturb what 
+you’re listening to on your main monitor speakers. 
+4025Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Creating Sends
+To create a Bus Send and access its controls:
+  Click on the assign button with the plus sign (+) in the Bus Sends area of the Mixer.
+  A dropdown menu appears with a list of busses; select one to assign.
+  Your send is now created. 
+You can hover over the rectangular name button and access a disable/bypass button, an 
+access icon to show the Bus Send window for the channel, and an “x” to delete the send. 
+A tooltip appears showing the send bus name.
+Hovering over the rectan -
+gular name button will show 
+send controls.
+Accessing the Bus Sends Window
+You can access the Bus Sends window to control a channel’s sends by clicking in the center of the 
+name button.
+Bus Send window controls
+Each Bus Send you create exposes the following controls in the Bus Send window:
+  On: Turns the send on or off.
+  Pre: Switches the send to use pre- or post-fader routing. Enabling this button allows that track to 
+send levels to the destination bus before level adjustments on that track are applied. 
+  Send Level: Adjusts the amount of signal sent from the selected feed to the send bus. 
+The range is OFF to +10dB.
+  Pan: Provides panning across Bus Send destinations.
+4026Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Uses for Pre-fader Routing
+One common use of pre-fader sends is for cue mixes to ADR or voice over talent, where the 
+artist wants to hear a completely different mix than the control room mix. Using pre-fader 
+sends and setting up a complete mix to a bus that feeds the headphone system allows a mix 
+that is completely independent.
+Pre-fader sends can also be used for special creative effects that might involve a dialogue 
+channel being sent to a reverb plugin via a send. If the send is routed pre-fader, when the 
+main channel fader is lowered to close to zero, the dialogue is still being fed to the reverb, 
+so the dialogue will sound extremely reverberant (almost all of the signal is “wet”). Gradually 
+raising the channel fader will make it sound like the voice is moving closer to the listener, 
+changing the reverb balance and sounding more present.
+Bus send levels are shown in the rectangles for each send and have the color codes assigned 
+to the destination busses. 
+Bus Send levels shown  
+on the Mixer channel strip
+Legacy Bus Sends – “Auxiliaries”
+Prior to DaVinci Resolve 17, the Bus Send panel was called Auxiliaries. Any projects created prior to 
+DaVinci Resolve 17 will use the legacy Fixed Busing. The only difference between the two is the use of 
+“Aux” to refer to sends in the windows and titles.
+Pan
+The Fairlight Mixer provides 2D and 3D pan controls that support various audio formats ranging from 
+mono and stereo to conventional 5.1 and 7.1 surround, as well as advanced immersive formats such as 
+Dolby Atmos, Ambisonics, Auro 3D, and NHK 22.2.
+Channel Strip Pan Controls
+The Pan section of each Channel Strip includes a Panning Indicator offering visualization and panning 
+control of left, right, front, and back. 
+4027Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Although you can open the Panner to access additional parameters by double-clicking the Panning 
+indicator, you can also do the following in the channel strip Pan section while the Panner is closed: 
+  Click and drag within the Pan Indicator to adjust the basic panning position. 
+  Single click to bypass panning.
+  Command-drag to adjust the width on multichannel tracks. 
+  View the Boom level for surround channels, which is displayed as a horizontal blue line at the 
+bottom of the Panning Indicator. 
+Channel strip Pan Indicator 
+for a stereo track
+2D Panner Controls
+Default View
+The Pan window’s control set varies based on the mapping of the source audio. Panning adjustments 
+can be made by dragging the icons in the Panner Viewer or using the controls on the left side of 
+the window. 
+The Panner control window – Default 2D view 
+4028Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+The default 2D version of the Audio Pan window includes the following controls: 
+  Pan Enable: Switches the Panner on and off.
+  Spherical: This button changes the Panner interface from the default 2D view to the 2D Spherical 
+top-down view. 
+  3D: Clicking this button switches the interface to the 3D Cartesian view, offering controls for 
+working with immersive audio formats such as Dolby Atmos, Ambisonics, Auro 3D, and NHK 22.2, 
+as described in the 3D Pan Controls section below. 
+Clicking the Spherical and 3D buttons switches the interface to the 3D Spherical view. 
+  Left/Right:  Changes the balance of the signal between the left and right speakers, depending on 
+the speaker configuration you’re mixing for. 
+  Front/Back: Lets you adjust the balance of the signal between the front and rear speakers based 
+on the surround format you’re mixing in. 
+  Rotate: This controller rotates the sound source (or sources) around the listening position in the 
+center of the sound field. 
+  Spread: In the case of multichannel audio, this adjusts the spread or distance between the sound 
+sources. This is measured on a numeric scale of 1-99, where 1 is labeled PNT (“Point”) and 99 is 
+labeled FULL. 
+  Divergence: Determines the amount of signal bleed or spillover of a signal from one speaker into 
+adjacent loudspeakers, allowing the sound to occupy more of the sound field, with less focus 
+toward a single speaker position. The amount of signal bleed is represented by green horizontal 
+lines emanating from either side of each speaker position that increases in length as you raise the 
+parameter value. 
+2D: Clicking this button changes the appearance of the divergence indicators to circles. 
+  Boom: This adjusts the send level to the LFE part of the mix (the Low-Frequency Extension 
+subwoofer system). 
+On: Enables the Boom output. 
+Pre: Routes the LFE signal pre-fader.
+Boom parameter
+TIP: To constrain left/right position as you adjust panning, hold down the Shift key. You can 
+reset any rotary control to its default value by double-clicking it. 
+4029Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Spherical View 
+Clicking the Spherical button at the top of the 2D Panner changes the interface to Spherical view, 
+which has the controls listed below including two parameters for Ambisonic panning: 
+The Panner control window – Spherical view 
+  Azimuth: This control lets you rotate the sound source around the circumference of the sphere.
+  Distance: This control adjusts the distance between the signal source and the listening position at 
+the center of the sphere.
+  Rotate: This controller rotates the sound source (or sources) around the listening position in the 
+center of the sound field.
+   Spread: In the case of multichannel audio, this adjusts the spread or distance between the sound 
+sources. This is measured on a numeric scale of 1-99, where 1 is labeled PNT (“Point”) and 99 is 
+labeled FULL.
+  Size: This parameter is not active at the time of writing.
+2D: This parameter is not active at the time of writing.
+  Boom: This adjusts the send level to the LFE part of the mix (the Low-Frequency Extension 
+subwoofer system). 
+  On: Enables the Boom output.
+  Pre: Routes the LFE signal pre-fader.
+4030Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+3D Panner Controls
+DaVinci Resolve includes 3D Cartesian and Spherical versions of this Panner, which lets you do spatial 
+audio positioning when working in advanced surround formats such as Dolby Atmos, Ambisonics, 
+Auro 3D, and NHK 22.2. 
+Cartesian View 
+The 3D Panner control window - Default Cartesian view 
+Clicking the 3D button changes the Panner interface to the default Cartesian view, which includes a 
+few more controls than the 2D Pan window: 
+  Pan enable: Toggles the Panner on and off.
+  Snap: This button toggles Speaker Snap mode on and off for a given object. During playback, 
+Speaker Snap mode moves an audio object to the active speaker nearest its established location, 
+to prevent issues like phantom panning. 
+  Panner viewer: A large 3D representation of the virtual room, with a blue sphere representing the 
+position of the track’s audio.
+Perspective Buttons:  These buttons let you view the room from different preset angles. You can 
+freely rotate it by holding down Command-Option-Shift (Ctrl + Alt + Shift in Windows) while 
+dragging it. If you want to return to a default view, click one of the perspective buttons. 
+  Front panner: A 2D panning control that lets you make adjustments along the horizontal 
+Left/Right axis and the vertical Down/Up axis.
+  Side panner: A 2D panning control that lets you make adjustments along the horizontal 
+Front/Back axis and the vertical Down/Up axis.
+  Top panner: A 2D panning control that represents the horizontal left/right axis the vertical 
+Front/Back axis, letting you make these specific spatial adjustments.
+4031Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+  Left/Right:  Changes the balance of the signal between the left and right speakers, depending on 
+the speaker configuration you’re mixing for.
+  Front/Back: Lets you adjust the balance of the signal between the front and rear speakers based 
+on the surround format you are mixing in.
+  Down/Up: This lets you change the position of a sound source along the vertical axis.
+  Height Mode Presets: Located to the right of the Down/Up control, these three height presets 
+lock the interaction of the Front/Back and Down/Up parameters together, providing fixed panning 
+paths that raise the height of a sound source to its maximum (100U), while moving it from one end 
+of the sound field to the other. 
+Freeform: This is the default setting for this section, which lets you adjust the Down/Up and Front/
+Back controls independently.
+Flyover: Moves the sound source upwards in a sharp arc to 100U, and then from one end of the 
+sound field to the other while maintaining maximum height.
+Triangular: This preset moves the source diagonally up to 100U and immediately back down again 
+as it travels from one end of the sound field to the other. 
+Arc: Moves the sound source upwards in an arc to 100U and immediately back down in the same 
+manner as it travels from one end of the sound field to the other.
+  Rotate: This controller rotates the sound source or mix around the listening position in the center 
+of the sound field.
+  Tilt: This knob tilts a sound source or mix up to ninety degrees to either side so that it vertically 
+rotates or “swings” around the listening position in the center of the sound field.
+  Spread: In the case of multichannel audio, this adjusts the spread or distance between the sound 
+sources. This is measured on a numeric scale of 1-99, where 1 is labeled PNT (“Point”) and 99 is 
+labeled FULL.
+  Divergence: Determines the amount of signal bleed or spillover of a signal from one speaker into 
+adjacent loudspeakers, allowing the sound to occupy more of the sound field, with less focus 
+toward a single speaker position. The amount of signal bleed is represented by green horizontal 
+lines emanating from either side of each speaker position that increases in length as you raise the 
+parameter value.
+2D: Clicking this button changes the appearance of the divergence indicators to circles. 
+  Boom: This adjusts the send level to the LFE part of the mix (the Low-Frequency Extension 
+subwoofer system).
+On: Enables the Boom output.
+Pre: Routes the LFE signal pre-fader.
+Only: Allows the panner to output an LFE signal only from the channel. The Boom level line in the 
+channel strip Pan Indicator is gray when this button is active. 
+4032Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Cartesian View — Dolby Atmos 
+The 3D Panner control window - Cartesian view – Dolby Atmos
+When working in a Dolby Atmos workflow, the 3D Cartesian view of the Panner includes all the 
+features mentioned above for the default Cartesian view, with the addition of the following controls 
+located at the top of the interface: 
+NOTE: These controls are not available on Dolby Atmos busses.
+  Elevation Button: This button hides and reveals the four top speakers in the Viewer.
+  Zone: In addition to the option to view all speakers this dropdown menu offers five others that let 
+you include or exclude certain speakers from this object’s mix:
+No Back: Hides the rear surround speakers.
+No Sides: Hides the side surround speakers.
+Center Back: Shows only the Center and Rear speakers.
+Screen Only: Shows only the Center and Left and Right Front speakers.
+Surr (Surround) Only:  Show only the Surround speakers. 
+4033Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Spherical View 
+The 3D Spherical Panner control window
+The 3D Spherical Panner lets you position your source anywhere in the sound field, including above 
+and below the listener. Spherical panning is based on Azimuth, Elevation, and Distance.
+This view of the 3D panner offers the following controls:
+  Azimuth: This control rotates the sound source around the circumference of the sphere. 
+  Elevation: This raises and lowers the sound source towards the top and bottom of the sphere, 
+which allows you to place it above or below the listener if you want.
+  Distance: This control adjusts the distance between the signal source and the listening position at 
+the center of the sphere.
+  Rotate: Rotates the sound source (or sources) around the listening position in the center of the 
+sound field.
+  Spread: This control adjusts the spread or distance between the sound sources. This is measured 
+on a numeric scale of 1-99, where 1 is labeled PNT (“Point”) and 99 is labeled FULL.
+  Size: This parameter is not active at the time of writing.
+  Room: This parameter is not active at the time of writing.
+  Pitch: This knob tilts the sound source or mix, forward or backward while rotating or “swinging” it 
+up to ninety degrees around the center listening position.
+  Roll: This knob tilts a sound source or mix, up to ninety degrees to either side so that it vertically 
+rotates or “swings” around the center listening position.
+  Panner viewer: A large 3D representation of the spherical sound field, with a blue sphere 
+representing the position of the track’s audio.
+  Perspective Buttons:  These buttons let you view the Sphere from different preset angles. You 
+can freely rotate it by holding down Command-Option-Shift (Ctrl + Alt + Shift in Windows) while 
+dragging it. If you want to return to a default view, click one of the perspective buttons. 
+4034Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Bus Assignment Buttons
+To route a bus created in the Bus Assignment dialog directly on the Mixer, click the + sign to see 
+a dropdown menu of available busses. To route multiple busses simultaneously, Command-Click 
+(Ctrl+Click) each of your choices in the dropdown menu. 
+The Bus Outputs panel is where you can route bus signals.
+Legacy Mixer Bus Assignment
+In the Legacy Mixer the bus assignments have two sets of buttons that let you route audio from one 
+channel strip’s output to Sub and Main busses that you’ve set up for your mix.
+The channel strip’s Bus Assignment buttons
+  Main: These buttons let you assign a track or sub’s channels to one or more of the main busses.
+  Submix: These buttons let you assign that track’s channels to one or more submix busses.
+Nested Audio Timelines
+Edited timelines can be combined with other timelines by dragging the desired nested timeline onto 
+an empty track in the destination timeline. This is a very powerful and useful feature. 
+For general information on nested timelines, jump to this chapter: Take Selectors, Compound 
+Clips, and Nested Timelines .
+For example, you might have created a master timeline that will contain your master mix, and 
+you’d like to bring the work done on a separate timeline that is focused on dialogue editing. 
+The dialogue timeline could now appear as a single nested timeline, represented as single 
+track in the master mixing timeline.
+4035Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Track A1, Dialogue, is a stereo representation of an edited timeline.
+If you want to work with the individual tracks and clips again, you can use a process called decompose 
+to change that single nested timeline track back to the edited sequence. There are a number of 
+options to decompose to the original set of tracks, with several bussing options available.
+This image shows what was a separate, edited timeline of tracks of dialogue and is now a single track, 
+A1 Dialogue, brought into the destination master mix timeline. By right-clicking the clip, a contextual 
+menu allows you to decompose the track in place, back into its original tracks and clip edits. 
+There are two decompose options for this. On the Fairlight page, you can Preserve Audio Data, and 
+when on the Edit page, you can Preserve Audio Data as well as decompose by Using Clips Only.
+Decompose in Place contextual menu
+4036Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Once you’ve chosen to decompose the track into its prior Timeline elements, then the Decompose 
+Preserving Audio Data dialog box appears, making several more options are available.
+Options for signal routing when decomposing a clip
+There are three options when choosing to decompose a nested timeline in the Fairlight page. 
+All three options preserve mix and plugin automation on the source tracks; they only differ in 
+terms of routing. The choices are:
+New Matching Busses: All of the busses from the nested source timeline are brought into 
+the current timeline as separate, new busses. These busses will have all of the processing, 
+routings, settings, and automation carried over from the nested source timeline. Any 
+preexisting bus routing in the destination timeline is left unaltered. 
+This option is best when you want combine different mix layouts and to preserve all 
+preexisting bus routing in the destination timeline, while adding the bus topology from the 
+nested source timeline to the destination to create a single, larger entity. 
+Preserve Existing Paths: This option preserves all of the master bus information in the current 
+timeline and routes matching busses from the decomposed nested timeline to preexisting, 
+identical busses in the destination timeline. 
+This option is best when the nested source timeline and the destination timeline share 
+the same bus routing structure, as might be the case of a common layout template. In this 
+case, you just want to add the tracks to the destination timeline and route them to the 
+same designations in the master. You still get all of your mix automation and plugins carried 
+across as well. 
+Leave Unassigned: This option leaves the new tracks unassigned when created, ready to be 
+routed in whatever way you need.
+4037Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Decomposed version of the nested dialogue timeline showing the original dialogue tracks and edits
+Nested audio timelines can be very useful when managing large projects with many tracks 
+and sophisticated routing. Multiple editors can be working on various aspects at one time. For 
+instance, a dialogue editor could be doing the dialogue and ADR in one timeline, an effects editor 
+can be designing and spotting effects in another timeline, a music editor can be cutting and 
+spotting music in another timeline, all separately. Then these interim timelines can be imported 
+later to a master timeline for a final main mix. 
+This is also useful for picture editors who don’t want to have to deal with many tracks of audio 
+when cutting picture. When working in the Edit page, when a track sequence is decomposed, 
+it can also revert back to the original track layout with all of the audio clips ready to be 
+further edited.
+VCA Faders
+A VCA fader is used to control the level of multiple tracks with a single control. You can assign multiple 
+faders to a dedicated VCA, and a VCA channel strip then appears at the right of the Mixer. VCAs let 
+you simultaneously adjust the underlying level of multiple faders using one VCA master fader and can 
+be helpful in managing the levels of complex collections of audio tracks. 
+The controls for doing this are found in the VCA and Group label area of each mixer channel strip, 
+which shows which VCA or Track Group each fader has been assigned to.
+Group Labels in each control strip, 
+above the control strip label
+4038Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Making Fader VCA Assignments
+You can assign any channel strip to one of 64 VCAs by right-clicking the VCA label area and choosing 
+a VCA from the dropdown that appears. If a fader is already assigned to a VCA, you can choose 
+“No VCA” to remove it. 
+NOTE: To reduce unneeded clutter, the VCA Assignment dropdown menu will only display 
+10 VCAs initially; others are added as needed. If the first 10 have all been assigned, the menu 
+display will add VCAs from the available pool, one a a time.
+Right-clicking a VCA Label reveals a 
+dropdown menu that lets you assign faders 
+to or remove faders from that VCA.
+TIP: You can quickly assign VCAs for a selected group of channel strips, or to all channel 
+strips, by holding down the Option key (Mac) or the Alt key (Windows) for all selected tracks 
+or Command-Option (Mac) or Control-Alt (Windows) for all mixer channel strips prior to 
+performing the operation. These shortcuts can save a lot of time in your workflow.
+Using VCA Faders
+Once you’ve assigned multiple faders to a VCA, a dedicated channel strip for that VCA appears at 
+the right side of the Mixer. Making adjustments to the VCA channel strip simultaneously controls all 
+the faders, solo buttons, and mute buttons of all channel strips that are members of that group, as 
+seen below.
+4039Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Adjusting the VCA 1 fader also adjusts the SYNC,  
+VO, and Drum Hit faders that are assigned to that VCA.
+When controlling faders belonging to a VCA, you can still move each individual channel strip 
+fader independently to make relative adjustments. 
+• Channel strip faders only move together when you adjust the VCA fader. 
+• While the VCA fader is being moved, each individual fader’s relative offset from other faders 
+controlled by the VCA is maintained. 
+For example, as seen in the screenshot above, the VCA 1 fader is moving the faders in tracks 
+SYNC, VO, and Drum Hit, while each individual channel strip fader in this group maintains its 
+offset from the others.
+Recording Fader Automation for VCAs
+You can record automation data to a VCA fader, and all faders in that VCA group will follow even 
+though they’re not actually automated themselves. This makes it easy to record complex automation 
+involving multiple faders when you still might want the freedom to finely adjust each individual 
+fader later on.
+Nesting VCAs
+VCAs can also be “nested,” where one or more VCAs can be controlled by yet another VCA. 
+To nest a VCA, simply assign the VCAs you want have controlled to yet another “master” VCA.
+4040Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Arm, Solo, and Mute Buttons
+These controls are identical to the controls found on the track header of each timeline audio track.
+  Record Arm: Enables a track for recording when the Record button on the transport is engaged 
+(highlights red when enabled). 
+  Solo: Lets you mute all other tracks in order to play a track you need to focus on in isolation 
+(highlights green when enabled). 
+If Solo is enabled for multiple tracks, all soloed tracks will play, and all non-soloed tracks 
+will be muted. 
+Solo status affects rendering, so if one or more tracks are soloed, the muted tracks won’t be 
+output or rendered.
+  Solo Safe: Command-Shift-click a Solo button to put it into Solo Safe mode 
+(highlights blue when enabled). 
+Channel strips set to Solo Safe always play even if Solo is enabled for other tracks. 
+Solo Safe can be useful for effect returns busses with effects like reverb where you may want to 
+hear the reverb when tracks feeding it are soloed.
+  Exclusive Solo: When active, clicking the Solo button on a track takes other soloed tracks out 
+of Solo mode. This means only one track can be soloed and heard at any given time, which 
+is useful if you want to compare audio sources, to hear sonic differences when comparing 
+levels or processing. 
+NOTE: Soloing a track in Exclusive Solo mode will not affect a track that is in Solo Safe 
+mode. If you want to include that track, you need to manually deactivate the Safe Solo 
+button first. 
+Disabled by default, Exclusive Solo can be enabled by selecting it in the Fairlight menu. You can 
+also map a key command to this function in the Keyboard Customization dialog. 
+For more information on Keyboard Customization, jump to this chapter:  
+System and User Preferences.
+  Mute: Turning on Mute disables audio playback from that track (highlights orange when enabled). 
+This affects rendering, so if one or more tracks are muted, they won’t be output or rendered.
+The channel strip’s Record Arm, Solo, and Mute buttons
+TIP: You can click a button and drag across multiple channel strips to turn that button on 
+or off for multiple tracks easily.
+4041Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Fader Controls
+Each track’s vertical fader lets you control the level that’s output by that track, either by using your 
+mouse, or using a physical fader of your Fairlight console or third party control surface. If you’re 
+working with a console, then the onscreen faders serve as a visual reference of what levels are set.
+  dB Indicator: Numerical at the top of the track indicates the volume, in decibels, that track is 
+currently set to.
+  Fader: Each track’s vertical fader can be dragged with your mouse or other pointing device to 
+adjust the volume of that track and perform automation recording. Dragging up increases volume, 
+dragging down decreases volume. Fader handles turn red while you record level automation, and 
+they turn green when automation has been recorded for that track.
+Methods of adjusting channel faders:
+To change level: Click and drag any fader up or down.
+To reset the level to default level of 0 dB: Double-click a fader’s handle. This does not work 
+after you’ve recorded automation for a track, unless you erase the automation first.
+A Fader in  
+the Fairlight Mixer
+4042Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Metering Options
+DaVinci Resolve has a variety of metering options that allow you to tailor metering to your workflow. 
+The settings appear in Project Preferences > Fairlight in the Audio Metering section, but they affect 
+mixer, Fairlight effects, or master metering on the Cut and Edit pages.
+Level Metering Options
+You can choose the response characteristic of the level meters for channel strips and Fairlight FX.
+The Meter Type dropdown allows you to choose between IEC 60268-18, Digital VU, and Custom 
+response characteristics. Both meter types have separate “hold and fall” metering, allowing you to see 
+the highest peak that is reached.
+IEC 60268-18: A digital PPM-type meter with reference standard of -18 dBFS, a fast response 
+to peaks, and a slower release characteristic. This is the default in DaVinci Resolve and is 
+used in all Blackmagic Design software and hardware products.
+Digital VU: A dual-value meter, showing the peak level as a single segment with fast ballistics, 
+and the RMS (volume unit) as a bar graph. It has a far faster quasi linear decay characteristic, 
+making it easy to monitor average levels while allowing sounds with quick transients and 
+decays to be more easily tracked. This option can be best for audio editing and mixing. 
+Custom: Allows each aspect of the meter response to be chosen, including level detector, 
+scale, peak, deck, and peak indication.
+Pre-fader Metering
+By default, “Pre fader metering on tracks” is unchecked (disabled), setting the metering on channel 
+strips to be post (after) the fader level and mute button. For example, if the source audio file has peaks 
+that are hitting -2 dBFS, and the channel fader is lowered from 0 to -10, then the peaks that show on 
+the meter will now be at -12. 
+When pre-fader metering is on, the metering point is set to be before the fader, and is not affected by 
+the fader’s position. However, the meter is affected by clip gain settings or key framing as these level 
+changes occur before the clip’s signal enters the mixer’s signal path. 
+With pre-fader metering, you could lower the fader to be fully off (minus infinity) and the meter will still 
+read the level of the source signal. This allows you to always be aware of the source signal and what it 
+is doing before being altered by mixer’s controls or processing.
+Many video editors prefer to work with post-fader metering, but most audio mixers prefer to work with 
+pre-fader in order to be aware of what the actual source level is at any time.
+Solo and Pre-fader Metering
+When pre-fader metering is enabled, soloing one or more tracks will show a lighter “ghost” version of 
+meter activity on non-soloed tracks, allowing you to always see audio levels on tracks that are muted 
+by the soloing process. This makes it easy to focus on tracks that are actually audible while still seeing 
+activity on those that are not.
+If pre-fader metering is off (the default), when one or more tracks are soloed, no metering occurs on 
+tracks unsoloed tracks.
+4043Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Pre-fader metering with light shaded  
+meters on non-soloed tracks
+Target Loudness Level
+Allows the target loudness level in LUFS for the master Loudness meters to be set to your desired 
+output target level. For example, DaVinci Resolve’s default loudness standard target is -23 LUFS, 
+but the YouTube target LUFS specification is -14 LUFS. If -14 LUFS is set, the “0” mark on the 
+loudness meter scale moves to this level, allowing you to focus your master mix levels towards that 
+loudness standard. 
+Bouncing Audio
+Bouncing audio refers to mixing and rendering audio from one or more Timeline tracks onto another 
+track of the Timeline, in the process “baking in” processor intensive effects and complicated 
+or intricate audio edits to create a new continuous piece of audio media. The bounced file is 
+written to the directory location specified by the Project Settings > Capture and Playback panel > 
+“Save clips to” field.
+There are two commands available for bouncing audio on the Fairlight page:
+  Timeline > Audio > Bounce Selected Tracks in Place
+  Timeline > Audio > Bounce Mix to Track
+To use Bounce Selected Tracks to New Layer:
+1 Set In and Out points to define the range of the Timeline you want to bounce. If you don’t do this, 
+nothing will happen.
+2 Command-click the track headers or mixer channel strips of all tracks you want to bounce in order 
+to select them.
+3 Choose Timeline > Audio > Bounce Selected Tracks to New Layer.
+The audio on each track is processed and rendered and appears as the top layer of audio on that 
+track. While View > Show Audio Track Layers is turned off, it will appear as if the new bounced 
+audio is the only clip on that track. However, the original audio (with any unrendered clip-based 
+effects) is still available as the bottom of the stack of layered audio on that track; turning on View > 
+Show Audio Track Layers will reveal this. 
+The bounced audio is a new audio media file that’s written to the directory location specified by 
+the Project Settings > Capture and Playback panel > “Save clips to” field.
+4044Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+To use Bounce Mix to Track:
+1 Choose Timeline > Bounce Mix to Track. The Bounce Mix to Track window appears, showing all 
+busses that are currently available.
+2 In the Destination Track column, set which mixes you want to bounce by choosing either 
+New Track, or choosing a specific existing track from the dropdown menus.
+3 Click OK.
+The specified mix is processed, mixed, and bounced to the specified track as a new piece of 
+audio. This creates new audio media that’s written to the directory location specified by the 
+Project Settings > Capture and Playback panel > “Save clips to” field.
+TIP: There’s also a Bounce Audio Effects command in the contextual menu of audio clips in 
+the Timeline that have clip-based audio effects applied to them. 
+For more information, jump to this chapter: Audio Effects . To learn more about on exporting 
+clips, ranges, and files, jump to this chapter: Editing Basics in the Fairlight Page .
+AI Audio Assistant (Studio Version Only)
+With the AI Audio Assistant, DaVinci Resolve can automatically organize and color-code your tracks, 
+even out your dialogue levels, and adjust the Fairlight mixer faders to create a professional-quality mix 
+of your music, sound effects, and dialogue.
+During this process, your dialogue will also be cleaned up, and if needed, Voice Isolation and 
+De-Essing will be applied. Ducking will be applied to music tracks, any required automation will be 
+written, and the appropriate mastering and finalizing plugins will be added and adjusted to help 
+achieve the correct loudness level for your chosen delivery standard.
+To use AI Audio Assistant:
+1 Open a timeline containing unmixed audio. The initial fader levels really don‘t matter as Audio 
+Assistant will handle all fader adjustments during the mixing process.
+2 To begin the automatic mixing process, choose Timeline > AI Tools > Audio Assistant from the 
+Timeline menu, select the Delivery Standard for your mix from the drop-down menu, and click the 
+Auto Mix button. 
+Audio Assistant dialog - Delivery Standard
+4045Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+3 The Audio Assistant dialog changes to display the progress of the mixing process with an option 
+to cancel it. 
+Audio Assistant dialog - Mix Progress
+4 When the mixing process has concluded, you can play back the mix and, if needed, make further 
+adjustments or completely undo it.
+NOTE: If a track is in the wrong category, right-click the corresponding track header and 
+choose the correct category from the Track Category section of the contextual menu, and 
+then rerun the Audio Assistant.
+Applied Effects Plugin View
+AI Audio Assistant gives you the option of switching between the default macro view and the full view 
+of any effect plugin applied and during the mixing process by clicking the change view icon located to 
+the right of the track name and effect slot number. 
+Macro Plugin View - Change View Icon  Full Plugin View - Change View Icon
+4046Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Third-Party Control Panel Support for Mixing
+DaVinci Resolve supports HUI- and MCU-compatible third-party mixing control panels with up to 
+eight faders, such as the Mackie MCU Pro Control Surface, connected via USB MIDI, and selectable 
+in the Control Panels panel of the Resolve System Preferences. Supported basic panel controls that 
+correspond to Fairlight features at the time of this writing include the following.
+Transport controls including:
+  Rewind (REW)
+  Fast Forward (FF)
+  Stop (double-press the Stop button for Home in the Timeline)
+  Play (double-press the Play button to “play again”)
+  Record (press Record+Play to begin recording if one or more tracks is record-enabled)
+  Jog control (Press SCRUB and rotate the jog wheel)
+Channel Strip controls including:
+  Rotary controls for panning, with Rotary Value display and Rotary touch
+  Alphanumeric Track Name display
+  Record button to record-enable tracks (only works if an input is patched to a track input)
+  Solo, with a double-press selecting or de-selecting that track
+  Mute
+  Select to select the track corresponding to that channel strip
+  Fader control and optional Level display
+  Channel and Fader Bank buttons to move left and right among banks of channel strips
+  Double-press the Fader Bank Left button to move the playhead Home in the mixer (track 1)
+  Double-press the Fader Bank Right to move to the Master channel strips
+Marker buttons:
+  Marker to add a marker
+  Pressing the Marker+Stop buttons sets Home
+  Pressing the Marker+FF/REW buttons jumps the playhead forward or backward
+Additional supported controls for control panels that have them include: 
+  Master Solo clear/restore
+  Undo (pressing the Undo+Option buttons does Redo)
+  Arrows to move the selection
+  Zoom horizontal and vertical controls
+  Audio Tracks, to turn Automation On/Off 
+  Write/Trim/Touch/Latch switches
+  Nudge controls
+  Cut, Copy, and Paste
+Monitoring controls include: 
+  Level control
+  Dim
+  Mute
+  Alt Speaker
+For more information on third-party mixing 
+control panel support, see the Blackmagic 
+Support site at www.blackmagicdesign.com/
+support/family/davinci-resolve-and-fusion .
+4047Fairlight | Chapter 177 Mixing in the Fairlight Page
+FAIRLIGHT
+Chapter 178
+Mix Automation
+The Fairlight page provides straightforward, flexible, and powerful automation 
+capabilities for audio mixing. 
+Automation data can be created graphically by drawing automation changes, or by recording on-
+screen mixer or effects controls movement and changes, using a mouse or Fairlight control surface. 
+You can even create panning automation based on the movements of on-screen people or objects in 
+the Fairlight Viewer.
+Once recorded, mix parameter automation for any control type—faders or sends, panning, or effects—
+can be played back in perfect sync with the audio and video.
+This chapter covers automation mixing using the combined controls of the on-screen mixer and timeline. 
+For more information on basic mixing operations, jump to this chapter:   
+Mixing in the Fairlight Page .
+Contents
+Creating Mix Automation  �������������������������������������� 4049
+Why Use Track Automation? ��������������������������������� 4049
+What Can Be Automated ���������������������������������������� 4049
+Audio Panning to Video  ������������������������������������������ 4049
+Drawing Automation  ������������������������������������������������� 4049
+Recording Automation  ��������������������������������������������� 4050
+Drawing Mix Automation  ��������������������������������������� 4050
+Enabling and Viewing Automation  �������������������� 4050
+Editing Mix Automation Curves  ������������������������� 4054
+Using Edit Operations  ���������������������������������������������� 4054
+Adjusting the Automation Line  ���������������������������� 4054
+Trimming Automation 
+from Unity in the Mixer ��������������������������������������������  4056
+Audio Panning to Video ������������������������������������������ 4057
+Automatic Tracking ���������������������������������������������������� 4057
+Manual Tracking  �������������������������������������������������������� 4058
+Recording Mix Automation  ����������������������������������� 4060
+Automation Controls  ����������������������������������������������� 4060
+How to Record Automation ����������������������������������  4061
+Recording Automation for Multiple Tracks  ����� 4061
+Recording Automation for 
+Specific Individual Tracks ���������������������������������������  4062
+Automation Preview Mode  ������������������������������������ 4063
+Automation Active Range  �������������������������������������� 4064
+Viewing Automation in the Timeline  ��������������� 4064
+Right-Click to View Automation  �������������������������� 4064
+The Automation Dropdown Menu  ��������������������� 4065
+Overwriting Automation  ���������������������������������������� 4065
+Automation Follows Edit  ���������������������������������������� 4066
+Editing Automation  ��������������������������������������������������� 4066
+Adjusting and Deleting 
+Automation Keyframes  �������������������������������������������� 4067
+Clear All Track Automation ������������������������������������ 4068
+Fairlight > Automation Controls  ������������������������� 4068
+Automation – Copy/Paste/Erase  ������������������������ 4068
+Automation – Mix List ����������������������������������������������  4069
+Playing Automation ���������������������������������������������������� 4071
+4048Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Creating Mix Automation
+The Fairlight page includes a comprehensive toolset for creating and editing mix automation. 
+You can draw automation data, or record mix changes by moving on-screen controls, or you can 
+use IntelliTrack-powered Audio Panning to Video, which writes panning automation based on the 
+movements of people or objects in the Fairlight Viewer. Yes, this really is “a thing.” 
+Why Use Track Automation?
+If you’re a video editor, you may be more familiar with using clip-based automation to make changes to 
+your audio mix, but this approach has limitations. Sometimes there are global changes you may want 
+to make to a track over the timeline or want to adjust groups of tracks at once.
+For more in information, jump to this chapter: Trac k Groups. 
+When working with time-based effects like reverb or a repeating delay, you may want to dynamically 
+adjust the level of “trails” as the track evolves. For example, you may have a scene that changes 
+perspective from a larger space to a smaller one, and the room ambience or tonal quality of the 
+dialogue needs to change over time as the characters move through the scene.
+This is where track automation techniques (whether drawing or recording the movement of controls) 
+can be powerful and creatively inspiring. 
+What Can Be Automated
+Automation can be recorded for nearly every control in a Mixer channel strip, including the fader, 
+sends, mute, and panning. You can also automate audio plugin parameters as well.
+Audio Panning to Video
+IntelliTrack-powered Audio Panning to Video accelerates creativity by automatically tracking people 
+or objects in the Fairlight viewer to generate pan automation that matches their on-screen movements 
+with the precision afforded by Resolve’s state-of-the-art object tracking engine. 
+Drawing Automation
+If you’re a video editor or audio creative, drawing mix automation data may be more straightforward 
+in many contexts, when making static or ramped level changes or switched changes to controls 
+such as a mute button, especially if you are using a mouse without the benefits of using Fairlight 
+hardware control.
+For example, trying to finesse a real-time “performance” of fader movements or effect 
+parameter changes, you could select a timeline range and mute several tracks at once, “carve 
+out” fixed level boosts or drops on tracks at the exact point you want them to occur based on 
+an on-screen event or dialogue, or slowly increase the strength of a reverb applied to foley 
+footsteps as a character walks into a long, dark cavern.
+When drawing automation, you don’t need to pay attention to the various Fairlight automation 
+recording modes or control enables/disables for the automation parameter you want to create 
+or edit; you can just draw or adjust your automaton data in the corresponding track “lane” on 
+the Timeline.
+4049Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Recording Automation
+You can also create mix automation by recording real-time on-screen fader, control movements, 
+or plugin parameter changes during playback. Afterwards, your “performance” can be accurately 
+played back. Another advantage of recording your automation is that you can intuitively “perform” the 
+changes against the picture as actions occur. 
+In this way, you can create a dynamic mix where different audio levels, pan, EQ, dynamics, and audio 
+processing settings change over time to fade music up or down against effects or dialogue, pan the 
+sound effect of a car driving by from one speaker to another, or gradually increase the strength of a 
+reverb effect as your character walks into that long, dark cavern.
+While the recording of keyframe automation is commonly associated with either the on-screen mixer 
+or the Fairlight console, you can also record automation using controls found in the Inspector, or using 
+the controls of the Pan, EQ, and Dynamics plugin effects, thereby enabling you to record automation 
+for the various audio effects that you’ve applied to a track. 
+Drawing Mix Automation
+Automaton can be drawn in the Timeline for any parameter by globally enabling automation recording 
+and playback, viewing a parameter to be automated, then drawing the automation in the Timeline.
+Enabling and Viewing Automation
+The Toggle Automation button, to the right of the transport controls, turns automation recording and 
+playback on and off. It must be enabled to draw or record track-based automation and to see busses 
+on the Timeline. 
+Toggle  
+Automation button
+TIP: You can quickly enable/disable automation safe on or off for a selected group of channel 
+strips, or to all channel strips, by holding down the Option key (Mac) or the Alt key (Windows) 
+for all selected tracks or Command-Option (Mac) or Control-Alt (Windows) for all mixer 
+channel strips prior to performing the operation. These shortcuts can save a lot of time in 
+your workflow.
+Automation View
+Audio tracks normally display an arrangement of clips on the Timeline (“Clips View”). 
+In Clips View, clips can be placed or edited, and clip gain for individual clips can be adjusted.
+For more information, jump to this chapter: The Fairlight I nspector. 
+TIP: Effects can also be added to clips, which can be managed in the Inspector.
+4050Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Tracks can also show an Automation View, which appears when the automation button is enabled. 
+When active, a dropdown menu appears under the track controls in the track header. By default, 
+the menu will display “None,” indicating you are working with clips only; no automation data 
+will appear. 
+Fairlight Automation View showing “None”
+Clicking on the dropdown menu allows you to choose an automation parameter to view or edit. 
+Choices are included for all parameters that can be controlled on a track, including fader, sends, 
+pan, mute, and built-in dynamics and EQ as well as AU or VST plugin effects. 
+Fairlight Automation View menu choices
+For a faster workflow, you can right-click the Mixer channel control or parameter on a Fairlight 
+FX plugin, supported Audio Unit, or VST plugin you want to view or edit.
+Once a parameter is chosen, the automation view changes so that the focus is on editing track 
+automation data rather than manipulating clips. The clips darken and the automation data line 
+is shown in light gray. When automation is drawn or recorded for the parameter, the line will 
+change to bright green. 
+NOTE: When in Automation View you can still move and trim clips, but cut/copy/paste and 
+delete operate on automation keyframe data only. When in Automation View, timeline-based 
+clip gain keyframe adjustment is not available, but overall clip gain can still be adjusted using 
+Volume slider in the Audio tab of the Inspector.
+4051Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Vector-based Automation
+Audio keyframe automation is vector-based, so levels will smoothly ramp between any 2 points on the 
+Timeline based on the direction of the change in control value and the time between the points. 
+For example, if you have a single keyframe setting fader level to 0 dB that occurs at 01:00:20:00 
+on the timeline, and then add a point at at 01:00:28:00 at -10.5 dB, the level will change smoothly 
+between 0 dB and -10 dB over the 8 seconds between the 2 points. 
+This allows you to draw individual keyframes to quickly construct different transition shapes, such as 
+fade-ins or fade-outs, with just a few points, or adjust them up or down by specific amounts quickly 
+and easily. 
+Creating Curves
+Keep in mind that audio automation keyframes are not Bezier keyframes, so they only let you 
+create a single level adjustment at that point in time. If you make a large adjustment with only a 
+single new keyframe, you can end up with an abrupt level change, or level changes that don’t 
+have a curve you may want (exponential changes can be particularly useful on fade ins or outs 
+to get a natural result). You can create convex or concave shapes when drawing by adding just 
+a few keyframes to create your curve, or you can perform the change exactly as you want by 
+recording the automation (see “Recording Mix Automation” later in this chapter).
+A fade out transition with 5 keyframes  
+for an exponential shape
+Track Automation Line
+Audio automation on a track is represented by a line that extends over length of the Timeline, called 
+the automation line, or “curve.” The level of the line can be changed by dragging, entering keyframes 
+one at a time, or using the Pencil tool to draw a series of keyframes. 
+Automation line for fader level showing multiple keyframes
+4052Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Sample Accuracy: Audio keyframes allow creation of precisely placed parameter changes on 
+timeline tracks. On the Fairlight page, audio keyframes are sample accurate, meaning they can 
+be placed at any sample location with sub-millisecond precision, allowing more precision than 
+keyframe handling on the Cut and Edit pages. However, sample-accurate audio automation 
+data created on the Fairlight page can be accurately played back on the other pages. 
+Sample accuracy is important when working to picture as the location of audio events often 
+does not fall on exact frame or sub-frame boundaries.
+Working with Audio Keyframes on the Timeline
+To draw automated changes to any audio control:
+  Enable the Automation button to see Automation View on all audio tracks.
+  On the track(s) where you want to create automation, choose the parameter you wish to automate 
+in the Automation type dropdown menu in the track header.
+  Using Focus Mode’s Multi tool allows you to draw automation using the up/down arrow cursor 
+(to adjust an overall curve), enter or delete keyframes one a time using modifier keys, create 
+different curves depending on individual keyframe position, select and delete a range of 
+keyframes, and more.
+Adding and Deleting Individual Keyframes
+Managing keyframes on the automation line is nearly identical to working with clip gain. 
+  To add a keyframe: Hold down the option key and a plus sign appears. Click to place a keyframe 
+on the automation line. 
+  To remove a keyframe: Hold down Command-option and a minus sign appears. Click on keyframe 
+to delete it.
+For more information, jump to this chapter: The Fairlight Inspector .
+TIP: You can quickly flip between Clips View and Automation View using the 
+keyboard shortcut F4. This can be changed by using the DaVinci Resolve > 
+Keyboard Customization dialog.
+4053Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Editing Mix Automation Curves
+Using Edit Operations
+Normal editing operations such as cut, copy, paste, delete, and nudge can all be used on automation 
+keyframe data. When automation data is cut or deleted, the value at either end of the selection 
+is preserved. 
+Nudging can be very useful when fine-tuning the location of automation events. 
+Before and after cut or deletion
+Adjusting the Automation Line
+Once one or more keyframes are on the automation line, the resulting curve for the entire track can be 
+adjusted. Individual keyframes can be edited up or down using the same techniques as with adjusting 
+clip gain; the whole line can be adjusted, or a selection can be affected.
+If you adjust the last keyframe on a line with multiple keyframe points, the line will change from that 
+point onwards to the newly set level. 
+Adjusting an individual keyframe changes the line from that point onwards.
+Adjusting the Entire Line
+To adjust the entire line:
+  With automation view enabled, click anywhere within the track, and select all automation data on 
+the curve by choosing Command-A. 
+  Position the cursor close to the line and and the dual arrow cursor appears, allowing the level of 
+the entire line to be adjusted. 
+Select all automation to adjust the entire line 
+4054Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Adjusting a Selected Range
+You can perform adjustments to only a specific range of the automation curve. This can be useful 
+when you want to make “snapshot” changes for a specific scene.
+To adjust only a selected range: 
+  Use the Focus Mode Select tool (I-beam cursor) to select the range you want to affect.
+  Position the mouse close to any area of the line, and the up/down arrow cursor appears. 
+  Trim the line up or down. A tooltip will appear showing the current value and a delta to the original 
+value, so any difference in a control’s value can be seen.
+  At the bounds of the selection, “bounding keyframes” are automatically created, so the level at the 
+edge of the selection is preserved. 
+Trimming a selected range of the automation curve
+TIP: Hold the Shift key when adjusting levels to maintain precision. When adjusting fader 
+levels this allows .1 dB accuracy, even when working with small track heights.
+Drawing Automation with the Pencil Tool
+The Pencil tool allows automation keyframes to be drawn freely:
+  Choose the Pencil tool in the Automation toolbar, or when in Focus mode, hold down Option-Shift 
+to temporarily switch to the Pencil tool.
+  Click the mouse and drag to draw keyframes in either direction. 
+Automating Switched Controls 
+Some automation parameters are switched (i.e., they have only fixed states). Examples of this type 
+of control are mutes (on or off). When adjusting switched automation, keyframes can only be at the 
+bottom end of the Automation view or the top. 
+Mute automation showing on and off states
+4055Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Trimming Automation from Unity in the Mixer
+Trim mode supports automation trimming from unity (Fader set to 0) in the Fairlight mixer by following 
+the steps below:
+1 On the Automation toolbar, set the Automation mode to Trim. 
+The Automation toolbar - Trim mode
+2 Choose a Touch mode (Latch, Snap, or Snap Latch).
+3 Click the Automation Arm button on the mixer channel or tracks you want to trim. The faders on 
+the armed mixer channels will turn yellow and snap to zero, and the dB Indicator above each 
+armed fader will read Δ0.0dB.
+TIP: You can either Command-Option click the Automation Arm button to trim automation 
+on all tracks or Option-click the button to trim automation for a collection of tracks or 
+mixer channels you’ve selected. 
+Mixer faders set to trim  
+utomation from unity
+4 Begin playback and move the fader above or below Δ0.0dB. The automation curve will be 
+trimmed, and the dB indicator will display the amount of trim as a plus or minus (+/-) value.
+If you’ve chosen Snap mode, the fader will return to Δ0.0dB based on the Glide time set in 
+Preference > User > Fairlight > Automation.
+4056Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Audio Panning to Video
+Audio Panning to Video uses DaVinci Resolve’s state-of-the-art object-tracking engine to help you 
+quickly generate precision panning automation based on the movements of people and objects in the 
+Fairlight Viewer.
+Audio Panning to Video offers Automatic and Manual modes of operation.
+Automatic Tracking
+In Automatic Tracking mode, you can select a person or object on screen, and DaVinci Resolve will 
+automatically process the related movement data across a selected timeline range, and then generate 
+the automation data.
+To enable and use Automatic Tracking:
+1 Click the Toggle Automation button to the right of the transport controls. 
+Toggle Automation button
+2 Click the Fairlight Viewer tools menu and choose Show Tracker Controls. 
+Fairlight Viewer Tools menu
+The Tracker Controls will appear along the lower edge of the Viewer, and you’ll see an Auto 
+Tracker Object on screen. 
+Tracker controls  Audio Tracker Object
+You can also select Show Tracker Coordinates, which provides an alpha-numerical representation 
+of the tracker’s current on-screen position. 
+Audio Tracker Object 
+with Coordinates
+4057Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+3 Select the target track you want to write panning automation to, and use the I-Beam tool to select 
+the Timeline range you want the tracking to work on.
+Range Select tool
+NOTE: Auto-tracking will not occur unless you select a Timeline range. 
+4 Click the Auto button in the Tracking Controls section to activate Auto Tracking.
+5 Based on the panning movement you want to automate (horizontal or vertical), click the Left-Right 
+(L–R) or Down-Up (D–U) button.
+TIP: The Front-Back (F-B) button is only available when the Auto button is off. 
+6 On the target track, click the Automation dropdown in the Track Header, then followed by Pan > 
+L/R Pan or Pan > U/D Pan to match your selection in the previous step.
+7 Move the Auto Tracker Object on top of the on-screen object or person you want to track. 
+8 Click the Track button to begin the Auto-Tracking process. 
+Track button
+9 Start playback to check your audio track. It should follow the object or person you selected 
+for tracking.
+TIP: If the track is more complex, for example, a person who is changing their position 
+relative to the camera or may have moved out of frame, you may need to do your tracking 
+in sections.
+In this instance, you can select an area that wasn’t tracking well, move the tracker object 
+into position, and track over the problem range to redo the track for that portion. 
+Manual Tracking 
+Manual mode lets you create keyframes based on the Playhead position on the Timeline, and DaVinci 
+Resolve will smoothly vector between the keyframes like any other automation curve data.
+To enable and use Manual Tracking:
+1 Click the Toggle Automation button to the right of the transport controls.
+2 Select the target track that you want to write your panning automation to.
+3 Click the Video Viewer tools menu and choose Show Tracker Controls.
+The tracker controls will appear along the lower edge of the Viewer, and you’ll see a Tracker 
+Object on screen as a simple crosshair. 
+4058Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Tracker Controls manual mode  Manual Tracker Object
+NOTE: The Tracker object will not appear onscreen unless an audio track 
+has been selected.
+You can also choose to Show Tracker Coordinates. 
+Manual Tracker  
+Object with Coordinates
+4 Ensure that the Auto button is inactive in the Tracking controls. Now you’re in Manual 
+Tracking mode.
+5 In the Tracking Controls, click the panning control you want to automate: Left-Right (L–R), 
+Front-Back (F-B), or Down-Up (D–U).
+6 On the target track, click the Automation dropdown in the Track Header, then Pan > L/R Pan, 
+Pan > F/B Pan, or Pan > U/D Pan to match your selection in the previous step.
+You can increase the track height if the Automation dropdown is not visible.
+7 Move the Playhead to the Timeline location where you want the automation to start.
+8 Write a keyframe at the current position in the video by Option-clicking the Viewer at the location 
+where you want to place the sound at that moment.
+A corresponding Automation node is placed at the Playhead position on the automation line.
+9 To add another keyframe, move the Playhead to another point in your timeline, Option-click the 
+on-screen person or object you’re tracking.
+The Tracker Object jumps to that position, a keyframe is written, and a new Automation mode is 
+added at the Playhead position.
+DaVinci Resolve will smoothly vector between the keyframes, as with any other 
+automation curve data.
+10 Continue creating keyframes at desired positions by repeating the previous step.
+11 To create a “bounding keyframe” to lock a position that holds the automaton line before moving to 
+a new position, Option-Shift-Click on a location.
+12  Start playback to check, and if needed, adjust your automation.
+4059Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT
+Recording Mix Automation
+Recording mix automation uses many of the same techniques as drawing but allows you to capture 
+a performance where you are moving the controls you want to automate. This can be flexible and 
+creative as you “perform to picture” to get the results you want.
+To get started, you’ll need to ensure that Automation recording is enabled (see “Enabling and Viewing 
+Automation” above) and that one or more parameters are enabled for automation recording. 
+Clicking the Automation 
+Controls button displays 
+the Automation toolbar
+Automation Controls
+The Automation Controls button, to the right of the transport controls, lets you show and hide the 
+Automation toolbar.
+The Automation toolbar has buttons for each option that’s available for preparing to record automation 
+in your mix.
+Automation toolbar options
+The Automation toolbar displays the following options:
+  Automation Modes: Controls how automation data is recorded.
+Write: Records absolute changes to a control’s position, replacing any data that was there 
+previously.
+Trim: Records relative changes to a control’s position, maintaining relative existing levels 
+created over time, but increasing or reducing those levels overall. This can be very useful when 
+incrementally refining a mix.
+  Touch Modes: Defines what happens when an automatable control is moved during a mix.
+Off: No automation is recorded.
+Latch: Automation is recorded once a control is moved and continues recording after the control is 
+released until the transport is stopped.
+Snap: Automation is recorded once a control is moved and then smoothly glides back to the pre-
+existing level at the point it was released, to create a seamless transition. 
+At the point where the glide transition ends, automation is no longer recorded unless the control 
+is moved once again while the transport is playing. You can continue to capture additional 
+automation with Snap until the transport is stopped. 
+The time for the glide transition can be set in milliseconds in Preferences > User > Fairlight > 
+Automation. The default is 250 ms.
+Snap Latch: A combination of Snap and Latch modes, where faders operate in Snap and all other 
+controls operate in Latch. This can be useful when dynamically changing fader levels through 
+a mix pass are desired, while other controls “stick” when they’re moved. It is particularly useful 
+when working with Fairlight mix control surfaces where faders and rotary controls can be changed 
+simultaneously during a mix pass. 
+4060Fairlight | Chapter 178 Mix Automation
+FAIRLIGHT

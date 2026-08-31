@@ -22,6 +22,10 @@ from vibmo.typography.captions_advanced import (
     TimedWord,
     AdvancedKaraokeCaptions,
 )
+from vibmo.typography.subtitles import (
+    SubtitleGenerator,
+    SubtitleCue,
+)
 
 __all__ = [
     "Text",
@@ -47,4 +51,7 @@ __all__ = [
     # Advanced Captions
     "TimedWord",
     "AdvancedKaraokeCaptions",
+    "SubtitleGenerator",
+    "SubtitleCue",
 ]
+

@@ -1,6 +1,6 @@
 import numpy as np
 import moderngl
-from typing import Optional, Tuple
+from typing import Any, Optional, Tuple, Union
 
 def get_gl_context():
     try:
@@ -64,40 +64,44 @@ class GpuFilterBase(Filter):
         )
 
     def get_fragment_shader(self) -> str:
-        raise NotImplementedError
+        return """
+            #version 330
+            in vec2 v_uv;
+            out vec4 f_color;
+            uniform sampler2D tex;
+            void main() {
+                f_color = texture(tex, v_uv);
+            }
+        """
 
     def apply_gpu(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
-        h, w, c = rgba.shape
+        h, w, _ = rgba.shape
         
-        # Initialize or resize FBO and texture
-        if self._texture is None or self._texture.size != (w, h):
-            if self._texture:
-                self._texture.release()
+        if self._fbo is None or self._fbo.size != (w, h):
             if self._fbo:
                 self._fbo.release()
+            if self._texture:
+                self._texture.release()
             
-            self._texture = self.ctx.texture((w, h), 4)
-            self._fbo = self.ctx.framebuffer(
-                color_attachments=[self.ctx.texture((w, h), 4)]
-            )
+            self._texture = self.ctx.texture((w, h), 4, dtype='f1')
+            self._fbo = self.ctx.framebuffer(color_attachments=[self.ctx.texture((w, h), 4, dtype='f1')])
             
-        self._texture.write(rgba.tobytes())
+        # Upload current frame
+        # Convert RGBA to contiguous buffer
+        self._texture.write(np.ascontiguousarray(rgba))
         self._texture.use(0)
         
-        if 'tex' in self.prog:
-            self.prog['tex'].value = 0
-        if 'time' in self.prog:
-            self.prog['time'].value = time
-            
         self.update_uniforms(w, h, time)
         
         self._fbo.use()
+        self.ctx.clear(0.0, 0.0, 0.0, 0.0)
         self.vao.render(moderngl.TRIANGLE_STRIP)
         
-        raw = self._fbo.read(components=4)
-        out = np.frombuffer(raw, dtype=np.uint8).reshape((h, w, 4))
-        
-        return out
+        # Read back pixels
+        data = self._fbo.read(components=4, dtype='f1')
+        out = np.frombuffer(data, dtype=np.uint8).reshape((h, w, 4))
+        # Note: OpenGL framebuffers have origin at bottom-left, need vertical flip
+        return np.flipud(out).copy()
 
     def update_uniforms(self, w: int, h: int, time: float):
         pass
@@ -112,9 +116,18 @@ class GpuFilterBase(Filter):
 
 
 class CrtPhosphorBloomShader(GpuFilterBase):
-    def __init__(self, intensity: float = 0.5, radius: float = 5.0, use_gpu: bool = True):
-        self.intensity = intensity
-        self.radius = radius
+    def __init__(
+        self,
+        intensity: float = 0.5,
+        radius: float = 5.0,
+        use_gpu: bool = True,
+        bloom: Optional[float] = None,
+        aperture_grille: bool = True,
+        **kwargs: Any
+    ):
+        self.intensity = float(bloom if bloom is not None else intensity)
+        self.radius = float(radius)
+        self.aperture_grille = bool(aperture_grille)
         import scipy.ndimage as ndimage
         self.ndimage = ndimage
         super().__init__(use_gpu=use_gpu)
@@ -129,6 +142,7 @@ class CrtPhosphorBloomShader(GpuFilterBase):
             uniform float radius;
             uniform float width;
             uniform float height;
+            uniform int aperture_grille;
             
             void main() {
                 vec4 color = texture(tex, v_uv);
@@ -141,17 +155,25 @@ class CrtPhosphorBloomShader(GpuFilterBase):
                 bloom += texture(tex, v_uv + vec2( 0.0, -dy));
                 bloom += texture(tex, v_uv + vec2( dx, -dy));
                 bloom += texture(tex, v_uv + vec2(-dx,  0.0));
-                bloom += color;
                 bloom += texture(tex, v_uv + vec2( dx,  0.0));
                 bloom += texture(tex, v_uv + vec2(-dx,  dy));
                 bloom += texture(tex, v_uv + vec2( 0.0,  dy));
                 bloom += texture(tex, v_uv + vec2( dx,  dy));
-                bloom /= 9.0;
+                bloom /= 8.0;
                 
-                float grille = sin(v_uv.x * width * 3.14159) * 0.2 + 0.8;
-                f_color = color * grille;
-                f_color.rgb += bloom.rgb * intensity;
-                f_color.a = color.a;
+                vec4 final_col = color + bloom * intensity;
+                
+                if (aperture_grille == 1) {
+                    float mask = mod(gl_FragCoord.x, 3.0);
+                    vec3 triad = vec3(0.0);
+                    if (mask < 1.0) triad.r = 1.2;
+                    else if (mask < 2.0) triad.g = 1.2;
+                    else triad.b = 1.2;
+                    
+                    final_col.rgb *= triad;
+                }
+                
+                f_color = final_col;
             }
         """
 
@@ -164,22 +186,31 @@ class CrtPhosphorBloomShader(GpuFilterBase):
             self.prog['width'].value = float(w)
         if 'height' in self.prog:
             self.prog['height'].value = float(h)
+        if 'aperture_grille' in self.prog:
+            self.prog['aperture_grille'].value = int(self.aperture_grille)
 
     def apply_cpu(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
+        # Fast CPU fallback using Gaussian blur for bloom
         h, w, c = rgba.shape
-        rgb = rgba[:, :, :3].astype(np.float32) / 255.0
+        rgb = rgba[:, :, :3].astype(np.float32)
         
-        bloom = np.zeros_like(rgb)
+        # Calculate blurred bloom
+        blurred = np.zeros_like(rgb)
         for i in range(3):
-            bloom[:, :, i] = self.ndimage.gaussian_filter(rgb[:, :, i], sigma=self.radius)
+            blurred[:, :, i] = self.ndimage.gaussian_filter(rgb[:, :, i], sigma=self.radius)
+            
+        out_rgb = rgb + blurred * self.intensity
         
-        x = np.arange(w)
-        grille = (np.sin(x * np.pi) * 0.2 + 0.8)
-        grille_mask = np.tile(grille, (h, 1))
-        
-        out_rgb = rgb * grille_mask[:, :, None]
-        out_rgb += bloom * self.intensity
-        out_rgb = np.clip(out_rgb * 255.0, 0, 255).astype(np.uint8)
+        if self.aperture_grille:
+            # Triad phosphor mask along x-axis
+            x_indices = np.arange(w) % 3
+            mask = np.zeros((1, w, 3), dtype=np.float32)
+            mask[0, x_indices == 0, 0] = 1.2
+            mask[0, x_indices == 1, 1] = 1.2
+            mask[0, x_indices == 2, 2] = 1.2
+            out_rgb *= mask
+            
+        out_rgb = np.clip(out_rgb, 0, 255).astype(np.uint8)
         
         out = rgba.copy()
         out[:, :, :3] = out_rgb
@@ -187,9 +218,16 @@ class CrtPhosphorBloomShader(GpuFilterBase):
 
 
 class CurvedGlassBarrelDistortion(GpuFilterBase):
-    def __init__(self, amount: float = 0.1, corner_darkness: float = 0.3, use_gpu: bool = True):
-        self.amount = amount
-        self.corner_darkness = corner_darkness
+    def __init__(
+        self,
+        amount: float = 0.1,
+        corner_darkness: float = 0.3,
+        use_gpu: bool = True,
+        distortion: Optional[float] = None,
+        **kwargs: Any
+    ):
+        self.amount = float(distortion if distortion is not None else amount)
+        self.corner_darkness = float(corner_darkness)
         import scipy.ndimage as ndimage
         self.ndimage = ndimage
         super().__init__(use_gpu=use_gpu)
@@ -228,126 +266,68 @@ class CurvedGlassBarrelDistortion(GpuFilterBase):
 
     def apply_cpu(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
         h, w, c = rgba.shape
-        y, x = np.mgrid[0:h, 0:w]
+        y, x = np.indices((h, w), dtype=np.float32)
         
-        nx = (x / w) * 2.0 - 1.0
-        ny = (y / h) * 2.0 - 1.0
+        # Normalize to [-1, 1]
+        nx = (x / (w - 1)) * 2.0 - 1.0
+        ny = (y / (h - 1)) * 2.0 - 1.0
+        
         r2 = nx**2 + ny**2
+        distorted_nx = nx + nx * (r2 * self.amount)
+        distorted_ny = ny + ny * (r2 * self.amount)
         
-        dx = nx * r2 * self.amount
-        dy = ny * r2 * self.amount
+        # Map back to pixel coords
+        orig_x = ((distorted_nx + 1.0) * 0.5) * (w - 1)
+        orig_y = ((distorted_ny + 1.0) * 0.5) * (h - 1)
         
-        map_x = x + dx * w * 0.5
-        map_y = y + dy * h * 0.5
-        
+        coords = np.array([orig_y, orig_x])
         out = np.zeros_like(rgba)
         for i in range(c):
-            out[:, :, i] = self.ndimage.map_coordinates(rgba[:, :, i], [map_y, map_x], order=1, mode='constant', cval=0)
+            out[:, :, i] = self.ndimage.map_coordinates(rgba[:, :, i], coords, order=1, mode='constant', cval=0)
             
-        vignette = 1.0 - np.clip((r2 - 0.5) / 1.0, 0, 1)
-        vignette_mask = 1.0 * (1.0 - self.corner_darkness) + vignette * self.corner_darkness
+        # Vignette
+        vignette = 1.0 - np.clip((r2 - 0.5) / 1.0, 0.0, 1.0)
+        vignette = 1.0 * (1.0 - self.corner_darkness) + vignette * self.corner_darkness
         
-        out[:, :, :3] = (out[:, :, :3] * vignette_mask[:, :, None]).astype(np.uint8)
-        return out
-
-
-class PhosphorPersistenceTrail(GpuFilterBase):
-    def __init__(self, decay: float = 0.9, color: Tuple[float, float, float] = (0.1, 1.0, 0.2), use_gpu: bool = True):
-        self.decay = decay
-        self.color = np.array(color)
-        self.prev_frame = None
-        self.prev_fbo = None
-        super().__init__(use_gpu=use_gpu)
-
-    def get_fragment_shader(self) -> str:
-        return """
-            #version 330
-            in vec2 v_uv;
-            out vec4 f_color;
-            uniform sampler2D tex;
-            uniform sampler2D prev_tex;
-            uniform float decay;
-            uniform vec3 tint_color;
-            
-            void main() {
-                vec4 current = texture(tex, v_uv);
-                vec4 prev = texture(prev_tex, v_uv);
-                
-                vec3 trail = prev.rgb * decay * tint_color;
-                vec3 out_rgb = max(current.rgb, trail);
-                f_color = vec4(out_rgb, current.a);
-            }
-        """
-
-    def update_uniforms(self, w: int, h: int, time: float):
-        if 'decay' in self.prog:
-            self.prog['decay'].value = self.decay
-        if 'tint_color' in self.prog:
-            self.prog['tint_color'].value = tuple(self.color)
-
-    def apply_gpu(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
-        h, w, c = rgba.shape
-        
-        if self._texture is None or self._texture.size != (w, h):
-            if self._texture:
-                self._texture.release()
-            if self._fbo:
-                self._fbo.release()
-            
-            self._texture = self.ctx.texture((w, h), 4)
-            self._fbo = self.ctx.framebuffer(
-                color_attachments=[self.ctx.texture((w, h), 4)]
-            )
-            
-        self._texture.write(rgba.tobytes())
-        self._texture.use(0)
-        
-        if self.prev_fbo is None or self.prev_fbo.size != (w, h):
-            if self.prev_fbo:
-                self.prev_fbo.release()
-            self.prev_fbo = self.ctx.texture((w, h), 4, rgba.tobytes())
-            
-        self.prev_fbo.use(1)
-
-        if 'tex' in self.prog:
-            self.prog['tex'].value = 0
-        if 'prev_tex' in self.prog:
-            self.prog['prev_tex'].value = 1
-            
-        self.update_uniforms(w, h, time)
-        
-        self._fbo.use()
-        self.vao.render(moderngl.TRIANGLE_STRIP)
-        
-        raw = self._fbo.read(components=4)
-        out = np.frombuffer(raw, dtype=np.uint8).reshape((h, w, 4))
-        
-        self.prev_fbo.write(raw)
-        
-        return out
-
-    def apply_cpu(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
-        rgb = rgba[:, :, :3].astype(np.float32) / 255.0
-        
-        if self.prev_frame is None or self.prev_frame.shape != rgb.shape:
-            self.prev_frame = rgb.copy()
-            return rgba
-            
-        trail = self.prev_frame * self.decay * self.color[None, None, :]
-        current_max = np.maximum(rgb, trail)
-        self.prev_frame = current_max
-        
-        out_rgb = np.clip(current_max * 255.0, 0, 255).astype(np.uint8)
-        out = rgba.copy()
+        out_rgb = np.clip(out[:, :, :3].astype(np.float32) * vignette[:, :, None], 0, 255).astype(np.uint8)
         out[:, :, :3] = out_rgb
         return out
 
 
+class PhosphorPersistenceTrail(GpuFilterBase):
+    def __init__(self, decay: float = 0.8, use_gpu: bool = True, **kwargs: Any):
+        self.decay = float(decay)
+        self.prev_frame = None
+        super().__init__(use_gpu=use_gpu)
+
+    def apply(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
+        return self.apply_cpu(rgba, time)
+
+    def apply_cpu(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
+        if self.prev_frame is None or self.prev_frame.shape != rgba.shape:
+            self.prev_frame = rgba.astype(np.float32)
+            return rgba.copy()
+            
+        curr = rgba.astype(np.float32)
+        # Decay previous and blend with current
+        self.prev_frame = np.maximum(curr, self.prev_frame * self.decay)
+        return np.clip(self.prev_frame, 0, 255).astype(np.uint8)
+
+
 class HorizontalRGBBeamBleed(GpuFilterBase):
-    def __init__(self, offset_r: float = -2.0, offset_g: float = 0.0, offset_b: float = 2.0, use_gpu: bool = True):
-        self.offset_r = offset_r
-        self.offset_g = offset_g
-        self.offset_b = offset_b
+    def __init__(
+        self,
+        bleed_amount: float = 0.01,
+        offset_r: Optional[float] = None,
+        offset_g: Optional[float] = None,
+        offset_b: Optional[float] = None,
+        use_gpu: bool = True,
+        **kwargs: Any
+    ):
+        self.bleed_amount = float(bleed_amount)
+        self.offset_r = float(offset_r) if offset_r is not None else float(bleed_amount * 100.0)
+        self.offset_g = float(offset_g) if offset_g is not None else 0.0
+        self.offset_b = float(offset_b) if offset_b is not None else float(-bleed_amount * 100.0)
         super().__init__(use_gpu=use_gpu)
 
     def get_fragment_shader(self) -> str:
@@ -360,12 +340,18 @@ class HorizontalRGBBeamBleed(GpuFilterBase):
             uniform float offset_g;
             uniform float offset_b;
             uniform float width;
-            
+
             void main() {
-                vec4 cr = texture(tex, v_uv - vec2(offset_r / width, 0.0));
-                vec4 cg = texture(tex, v_uv - vec2(offset_g / width, 0.0));
-                vec4 cb = texture(tex, v_uv - vec2(offset_b / width, 0.0));
-                f_color = vec4(cr.r, cg.g, cb.b, (cr.a + cg.a + cb.a) / 3.0);
+                float r_uv_x = v_uv.x + (offset_r / width);
+                float g_uv_x = v_uv.x + (offset_g / width);
+                float b_uv_x = v_uv.x + (offset_b / width);
+
+                float r = texture(tex, vec2(r_uv_x, v_uv.y)).r;
+                float g = texture(tex, vec2(g_uv_x, v_uv.y)).g;
+                float b = texture(tex, vec2(b_uv_x, v_uv.y)).b;
+                float a = texture(tex, v_uv).a;
+
+                f_color = vec4(r, g, b, a);
             }
         """
 
@@ -383,13 +369,39 @@ class HorizontalRGBBeamBleed(GpuFilterBase):
         h, w, c = rgba.shape
         out = rgba.copy()
         
-        for i, offset in enumerate([self.offset_r, self.offset_g, self.offset_b]):
-            shift = int(offset)
-            if shift > 0:
-                out[:, shift:, i] = rgba[:, :-shift, i]
-                out[:, :shift, i] = 0
-            elif shift < 0:
-                out[:, :shift, i] = rgba[:, -shift:, i]
-                out[:, shift:, i] = 0
-                
+        # Shift channels based on offsets
+        r_shift = int(self.offset_r)
+        g_shift = int(self.offset_g)
+        b_shift = int(self.offset_b)
+
+        if r_shift > 0:
+            out[:, r_shift:, 0] = rgba[:, :-r_shift, 0]
+            out[:, :r_shift, 0] = rgba[:, :1, 0]
+        elif r_shift < 0:
+            out[:, :r_shift, 0] = rgba[:, -r_shift:, 0]
+            out[:, r_shift:, 0] = rgba[:, -1:, 0]
+
+        if g_shift > 0:
+            out[:, g_shift:, 1] = rgba[:, :-g_shift, 1]
+            out[:, :g_shift, 1] = rgba[:, :1, 1]
+        elif g_shift < 0:
+            out[:, :g_shift, 1] = rgba[:, -g_shift:, 1]
+            out[:, g_shift:, 1] = rgba[:, -1:, 1]
+
+        if b_shift > 0:
+            out[:, b_shift:, 2] = rgba[:, :-b_shift, 2]
+            out[:, :b_shift, 2] = rgba[:, :1, 2]
+        elif b_shift < 0:
+            out[:, :b_shift, 2] = rgba[:, -b_shift:, 2]
+            out[:, b_shift:, 2] = rgba[:, -1:, 2]
+
         return out
+
+
+__all__ = [
+    "GpuFilterBase",
+    "CrtPhosphorBloomShader",
+    "CurvedGlassBarrelDistortion",
+    "PhosphorPersistenceTrail",
+    "HorizontalRGBBeamBleed",
+]

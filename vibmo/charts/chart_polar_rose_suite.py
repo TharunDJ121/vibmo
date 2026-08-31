@@ -1,15 +1,16 @@
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 import math
-from typing import Any, List, Dict, Optional, Union, Sequence
-import cairo
 
 from vibmo.scene.node import Node
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.color import Color, colors
-from vibmo.core.signal import Signal
-from vibmo.core.vector import Vector2D
+from vibmo.core.easing import Ease, EasingFunc
+from vibmo.timeline.scheduler import ParallelGroup
 from vibmo.typography.text import Text
 
+
 class ProportionalRadiusWedge(Node):
-    """Translucent colored wedge sectors layered by time/season."""
+    """Radial wedge whose area is strictly proportional to metric value."""
     def __init__(
         self,
         value: float,
@@ -26,30 +27,28 @@ class ProportionalRadiusWedge(Node):
         self.max_radius = max_radius
         self.start_angle = Signal(float(start_angle), f"{self.name}.start_angle")
         self.end_angle = Signal(float(end_angle), f"{self.name}.end_angle")
+        self.bloom_progress = Signal(1.0, f"{self.name}.bloom_progress")
 
         resolved_color = Color.from_any(color) if isinstance(color, (str, Color)) else color
-        # Ensure it is somewhat translucent if layered by time/season as requested, or we can leave it to the user.
-        # But we can just use the color directly.
         self.color = Signal(resolved_color, f"{self.name}.color")
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
-        val = self.value.get()
-        if val <= 0:
+        val = self.value.get(time)
+        prog = max(0.0, min(1.0, float(self.bloom_progress.get(time))))
+        if val <= 0 or prog <= 0.001:
             super().draw(ctx, time)
             return
 
-        # Radius is proportional to the square root of the metric area
-        # A = pi * r^2 * (theta / 2pi) -> r is proportional to sqrt(val)
-        ratio = val / self.max_value
+        ratio = val / self.max_value if self.max_value > 0 else 0.0
         if ratio < 0:
             ratio = 0
-        r = self.max_radius * math.sqrt(ratio)
+        r = self.max_radius * math.sqrt(ratio) * prog
 
-        start = self.start_angle.get()
-        end = self.end_angle.get()
+        start = self.start_angle.get(time)
+        end = self.end_angle.get(time)
 
         ctx.save()
-        c = self.color.get()
+        c = self.color.get(time)
         ctx.set_source_rgba(*c.to_cairo())
 
         ctx.move_to(0, 0)
@@ -57,9 +56,7 @@ class ProportionalRadiusWedge(Node):
         ctx.close_path()
         ctx.fill()
 
-        # Optional: draw outline? Not explicitly required, maybe simple fill is fine.
         ctx.restore()
-
         super().draw(ctx, time)
 
 
@@ -83,15 +80,13 @@ class ConcentricRadiusRings(Node):
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
-        c = self.color.get()
+        c = self.color.get(time)
         ctx.set_source_rgba(*c.to_cairo())
         ctx.set_line_width(self.line_width)
 
         for i in range(1, self.rings + 1):
-            # Equal area concentric rings or equal value concentric rings?
-            # Usually Florence Nightingale uses equal value steps, so r = sqrt(val)
             val = (i / self.rings) * self.max_value
-            r = self.max_radius * math.sqrt(val / self.max_value)
+            r = self.max_radius * math.sqrt(val / self.max_value) if self.max_value > 0 else 0.0
 
             ctx.new_path()
             ctx.arc(0, 0, r, 0, 2 * math.pi)
@@ -121,15 +116,11 @@ class AngularCategoryAxis(Node):
         self.text_color = Color.from_any(text_color)
         self.font_size = font_size
 
-        # Add Text children for each category
         n_categories = len(self.categories)
         if n_categories > 0:
             angle_step = 2 * math.pi / n_categories
             for i, cat in enumerate(self.categories):
-                # The label is placed at the center of the wedge
                 mid_angle = i * angle_step + angle_step / 2.0
-
-                # Position it slightly outside the max_radius
                 label_radius = self.max_radius * 1.15
 
                 x = label_radius * math.cos(mid_angle)
@@ -146,7 +137,7 @@ class AngularCategoryAxis(Node):
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         ctx.save()
-        c = self.color.get()
+        c = self.color.get(time)
         ctx.set_source_rgba(*c.to_cairo())
         ctx.set_line_width(self.line_width)
 
@@ -169,29 +160,42 @@ class PolarRoseAreaChart(Node):
     """Cyclic radial chart where sectors have equal angles and radius proportional to square root of metric area."""
     def __init__(
         self,
-        data: Dict[str, Sequence[float]],
-        categories: Sequence[str],
+        data: Optional[Dict[str, Sequence[float]]] = None,
+        categories: Optional[Sequence[str]] = None,
+        sectors: Optional[Union[List[Dict[str, Any]], List[float]]] = None,
         max_radius: float = 200.0,
         series_colors: Optional[Sequence[Union[Color, str]]] = None,
         rings: int = 5,
         **kwargs: Any
     ):
         super().__init__(**kwargs)
-        self.data = data
-        self.categories = list(categories)
+
+        parsed_data = data or {}
+        parsed_cats = list(categories) if categories is not None else []
+
+        if sectors is not None:
+            if isinstance(sectors, list) and sectors:
+                if isinstance(sectors[0], dict):
+                    parsed_cats = [s.get("category", s.get("label", f"Cat {i+1}")) for i, s in enumerate(sectors)]
+                    parsed_data = {"Series 1": [float(s.get("value", 0.0)) for s in sectors]}
+                else:
+                    parsed_cats = [f"Sec {i+1}" for i in range(len(sectors))]
+                    parsed_data = {"Series 1": [float(v) for v in sectors]}
+
+        self.data = parsed_data
+        self.categories = parsed_cats
         self.max_radius = max_radius
+        self.wedges: List[ProportionalRadiusWedge] = []
 
         n_categories = len(self.categories)
 
-        # Find maximum value to scale radii
         max_val = 0.0
         for series, values in self.data.items():
-            max_val = max(max_val, max(values))
+            max_val = max(max_val, max(values)) if values else max_val
 
         if max_val == 0:
-            max_val = 1.0  # avoid division by zero
+            max_val = 1.0
 
-        # Add Concentric Rings
         self.add(ConcentricRadiusRings(
             max_value=max_val,
             max_radius=self.max_radius,
@@ -200,7 +204,6 @@ class PolarRoseAreaChart(Node):
             line_width=1.0,
         ))
 
-        # Add Angular Axis
         self.add(AngularCategoryAxis(
             categories=self.categories,
             max_radius=self.max_radius,
@@ -210,10 +213,6 @@ class PolarRoseAreaChart(Node):
             font_size=14.0
         ))
 
-        # Add Wedges for each series and each category
-        # Nightingale charts often overlap series, largest values back to smallest,
-        # or have translucent colors. We'll use alpha on the colors.
-
         default_colors = [colors.ROSE_500, colors.BLUE_500, colors.EMERALD_500, colors.AMBER_500, colors.PURPLE_500]
         if series_colors is None:
             series_colors = default_colors
@@ -221,11 +220,9 @@ class PolarRoseAreaChart(Node):
         if n_categories > 0:
             angle_step = 2 * math.pi / n_categories
 
-            # For each series
             for s_idx, (series_name, values) in enumerate(self.data.items()):
                 s_color = series_colors[s_idx % len(series_colors)]
                 resolved_c = Color.from_any(s_color)
-                # Ensure it's translucent
                 if resolved_c.a == 1.0:
                     translucent_c = Color(resolved_c.r, resolved_c.g, resolved_c.b, 0.7)
                 else:
@@ -237,11 +234,32 @@ class PolarRoseAreaChart(Node):
                     start_angle = i * angle_step
                     end_angle = (i + 1) * angle_step
 
-                    self.add(ProportionalRadiusWedge(
+                    wedge = ProportionalRadiusWedge(
                         value=val,
                         max_value=max_val,
                         max_radius=self.max_radius,
                         start_angle=start_angle,
                         end_angle=end_angle,
                         color=translucent_c,
-                    ))
+                    )
+                    self.add(wedge)
+                    self.wedges.append(wedge)
+
+    def bloom_wedges(
+        self,
+        duration: float = 1.5,
+        delay: float = 0.0,
+        stagger: float = 0.05,
+        ease: Optional[EasingFunc] = None
+    ) -> ParallelGroup:
+        """Animates cyclic rose wedges blooming outward proportionally."""
+        e = ease or Ease.out_back
+        actions = []
+        for i, wedge in enumerate(self.wedges):
+            wedge.bloom_progress.set(0.0)
+            actions.append(wedge.bloom_progress.to(1.0, duration=duration, delay=delay + i * stagger, ease=e))
+        return ParallelGroup(actions)
+
+
+PolarRoseCoxcombChart = PolarRoseAreaChart
+RoseWedgeNode = ProportionalRadiusWedge

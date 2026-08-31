@@ -44,6 +44,7 @@ class ParticleFlameText(Node):
         self.font_family = font_family
         self.color = Signal(color, f"{self.name}.color")
         self.progress = Signal(0.0, f"{self.name}.progress")
+        self.disintegrate_progress = Signal(0.0, f"{self.name}.disintegrate_progress")
         
         self._rng = random.Random(hash(text) + id(self))
         self._particles = []
@@ -53,11 +54,20 @@ class ParticleFlameText(Node):
         ctx.select_font_face(self.font_family, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         ctx.set_font_size(font_size)
 
-    def ignite(self, duration: float = 2.0) -> AnimationAction:
-        return self.progress.to(1.0, duration=duration, ease=Ease.linear)
+    def ignite(self, duration: float = 2.0, delay: float = 0.0, ease: Optional[Any] = None) -> AnimationAction:
+        self.progress.set(0.0)
+        e = ease or Ease.linear
+        return self.progress.to(1.0, duration=duration, ease=e, delay=delay)
+
+    def disintegrate(self, duration: float = 3.0, delay: float = 0.0, ease: Optional[Any] = None) -> AnimationAction:
+        """Disintegrates flaming letters into ascending ember sparks and dissipating smoke."""
+        self.disintegrate_progress.set(0.0)
+        e = ease or Ease.in_out_quad
+        return self.disintegrate_progress.to(1.0, duration=duration, ease=e, delay=delay)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
         prog = self.progress.get(time)
+        dis_prog = self.disintegrate_progress.get(time)
         fs = self.font_size.get(time)
         c = self.color.get(time)
 
@@ -72,18 +82,21 @@ class ParticleFlameText(Node):
 
         ctx.save()
         
-        # Draw base text slightly glowing
-        self._setup_cairo_font(ctx, fs)
-        ctx.set_source_rgba(c.r, c.g, c.b, c.a * (0.8 + 0.2 * math.sin(time * 10)))
-        ctx.move_to(0, fs * 0.88)
-        ctx.show_text(self.text)
+        # Draw base text slightly glowing (fading out during disintegration)
+        base_alpha = (1.0 - dis_prog) if dis_prog > 0.0 else 1.0
+        if base_alpha > 0.01:
+            self._setup_cairo_font(ctx, fs)
+            ctx.set_source_rgba(c.r, c.g, c.b, c.a * (0.8 + 0.2 * math.sin(time * 10)) * base_alpha)
+            ctx.move_to(0, fs * 0.88)
+            ctx.show_text(self.text)
         
-        # Draw flames
-        if prog > 0:
+        # Draw flames / disintegrating embers
+        active_prog = max(prog, dis_prog)
+        if active_prog > 0:
             for px, py in self._particles:
                 # Add ascending motion based on progress and noise
-                noise_x = (self._rng.random() - 0.5) * 10 * prog
-                noise_y = -self._rng.random() * 50 * prog
+                noise_x = (self._rng.random() - 0.5) * (10 + 40 * dis_prog) * active_prog
+                noise_y = -self._rng.random() * (50 + 100 * dis_prog) * active_prog
                 
                 size = self._rng.random() * 3 + 1
                 alpha = max(0, 1.0 - prog) * self._rng.random()

@@ -1,0 +1,2327 @@
+Chapter 9
+Data Levels, 
+Color Management, 
+and ACES
+This chapter covers operational details that affect how color is managed for media 
+that is imported into and exported from DaVinci Resolve. If color accuracy is 
+important to you, then it’s a good idea to learn more about how Resolve handles 
+the data levels of each clip, how DaVinci Resolve Color Management helps you to 
+work with different formats, and how to use ACES. 
+Contents
+Data Levels Settings and Conversions  ������������������������������������������������������������������������������������������������������������������������������������� 227
+Converting Between Ranges and Clipping  ������������������������������������������������������������������������������������������������������������������������������ 227
+Internal Image Processing and Clip Data Levels ������������������������������������������������������������������������������������������������������������������� 228
+Assigning Clip Levels in the Media Pool �����������������������������������������������������������������������������������������������������������������������������������  228
+Video Monitoring Data Levels  �������������������������������������������������������������������������������������������������������������������������������������������������������� 229
+Deck Capture and Playback Data Level ������������������������������������������������������������������������������������������������������������������������������������  230
+Output Data Level Settings in the Deliver Page ��������������������������������������������������������������������������������������������������������������������  230
+So, What’s the “Proper” Data Range for Output? �������������������������������������������������������������������������������������������������������������������  231
+Introduction to DaVinci Resolve Color Management ���������������������������������������������������������������������������������������������������������  231
+Display Referred vs. Scene Referred Color Management  ������������������������������������������������������������������������������������������������� 231
+Updated RCM In DaVinci Resolve 17 ������������������������������������������������������������������������������������������������������������������������������������������� 232
+Resolve Color Management for Editors  ������������������������������������������������������������������������������������������������������������������������������������� 233
+The Input, Timeline, and Output Color Space  ������������������������������������������������������������������������������������������������������������������������ 233
+The RCM Image Processing Pipeline  ������������������������������������������������������������������������������������������������������������������������������������������ 234
+Identifying the Input Color Space of Different Clips ������������������������������������������������������������������������������������������������������������ 235
+225Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Simple RCM Setup �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  237
+Automatic Color Management  �������������������������������������������������������������������������������������������������������������������������������������������������������  237
+Resolve Color Management Presets  �������������������������������������������������������������������������������������������������������������������������������������������  237
+Output Color Space ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 238
+Advanced RCM Setup ������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 240
+Single Setting vs. Dual Setting RCM ������������������������������������������������������������������������������������������������������������������������������������������� 240
+Setting the Input Color Space ���������������������������������������������������������������������������������������������������������������������������������������� �����������������  241
+Choosing a Timeline Color Space  ������������������������������������������������������������������������������������������������������������������������������������������������ 242
+Timeline Working Luminance  ���������������������������������������������������������������������������������������������������������������������������������������������������������� 244
+203 Nit Support for SDR to HDR ��������������������������������������������������������������������������������������������������������������������������������������������������� 244
+Gamut Limiting, Restricting Values Within a Larger Gamut  ��������������������������������������������������������������������������������������������� 245
+Input DRT Tone Mapping ������������������������������������������������������������������������������������������������������������������������������������������������������������������ 245
+Output DRT Tone Mapping �������������������������������������������������������������������������������������������������������������������������������������������������������������� 246
+Use Inverse DRT for SDR to HDR Conversion ������������������������������������������������������������������������������������������������������������������������  248
+Use White Point Adaptation ������������������������������������������������������������������������������������������������������������������������������������������������������������� 248
+Color Space Aware Grading Tools ����������������������������������������������������������������������������������������������������������������������������������������������� 249
+Apply Resize Transformations In  ��������������������������������������������������������������������������������������������������������������������������������������������������� 249
+Graphics White Level  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 249
+Display HDR On Viewers If Available ������������������������������������������������������������������������������������������������������������������������������������������ 250
+HDR Mastering Is For (Studio Version Only) ����������������������������������������������������������������������������������������������������������������������������� 250
+Resolve Color Management and the Fusion Page  ��������������������������������������������������������������������������������������������������������������� 250
+Ability to Bypass Color Management Per Clip  ������������������������������������������������������������������������������������������������������������������������ 251
+Exporting Color Space Information to QuickTime Files  ������������������������������������������������������������������������������������������������������ 251
+Color Management Using ACES  �������������������������������������������������������������������������������������������������������������������������������������������������� 252
+Setting Up ACES in the Project Settings Window ����������������������������������������������������������������������������������������������������������������  253
+ACES AMF 2.0 ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 256
+The Timeline Color Space in ACES Workflows is Fixed �����������������������������������������������������������������������������������������������������  258
+Tips for Rendering Out of an ACES Project �����������������������������������������������������������������������������������������������������������������������������  258
+226Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Data Levels Settings and Conversions
+Different media formats use different ranges of values to represent image data. Since these data 
+formats often correspond to different output workflows (cinema vs. broadcast), it helps to know where 
+your project’s media files are coming from, and where they’re going, in order to define the various data 
+range settings in DaVinci Resolve and preserve your program’s data integrity.
+To generalize, with 10-bit image values (with a numeric range of 0–1023), there are two different data 
+levels (or ranges) that can be used to store image data when writing to media file formats such as 
+QuickTime, MXF, or DPX. These ranges are:
+• Video: Typically used by Y’CBCR video data. All image data from 0 to 100 percent must fit 
+into the numeric range of 64–940. Specifically, the Y’ component’s range is 64–940, while 
+the numeric range of the CB and CR components is 64–960. The lower range of 4–63 is 
+reserved for “blacker-than-black,” and the higher ranges of 941/961–1019 are reserved for 
+“super-white.” These “out of bounds” ranges are recorded in source media as undershoots 
+and overshoots, but they’re not acceptable for broadcast output.
+• Full: Typical for RGB 444 data acquired from digital cinema cameras, or film scanned to DPX 
+image sequences. All image data from 0 to 100 percent is simply fit into the full numeric 
+range of 4 to 1023.
+Keep in mind that every digital image, no matter what its format, has absolute minimum and 
+maximum levels, referred to in this section as 0–100 percent. Whenever media using one data 
+range is converted into another data range, each color component’s minimum and maximum 
+data levels are remapped so that the old minimum value is scaled to the new data level 
+minimum, and the old maximum value is scaled to the new data level maximum;
+• (minimum Video Level) 64 = 4 (Data Level minimum)
+• (maximum Video Level) 940 or 960 = 1023 (Data Level maximum)
+Converting Between Ranges and Clipping
+Simply converting an image from one data range to another should result in a seamless change. All 
+“legal” data from 0–100 percent is always preserved and is linearly scaled from the previous data 
+range to fit into the new data range. 
+The exceptions to this are undershoots and overshoots that you’ve deliberately set, also referred to 
+as out-of-bounds levels. The overshoots and undershoots that are allowable in “Video Levels” media 
+(known as sub-black or super-black and super-white) are usually clipped when converted to full-range 
+“Full Levels.” However, DaVinci Resolve preserves this data internally, and these clipped pixels of 
+detail in the undershoots and overshoots are still retrievable by making suitable adjustments in the 
+Color page to bring them back into the “legal” range.
+The out-of-bounds image data that’s preserved within the headroom of Video Levels by 
+DaVinci Resolve while working is usually clipped, however, when you either output to video or render 
+your output. There are two settings that let you get around this for instances where you want to 
+preserve these levels:
+227Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+A checkbox in the Video Monitoring group of the Master settings, “Retain sub-black and super-
+white data,” lets DaVinci Resolve output undershoots (sub-black) and overshoots (super-white) 
+to video when Data Level is set to Video. When this is turned off, these out-of-bounds values are 
+clipped on output.
+A checkbox in the Advanced settings of the Render settings in the Deliver page, “Retain sub-black 
+and super-white data,” lets DaVinci Resolve render undershoots (sub-black) and overshoots (super-
+white) to exported media when Data Level is set to Video.
+Internal Image Processing and Clip Data Levels
+It’s useful to know that, internally to DaVinci Resolve, all image data is processed as full range, 
+uncompressed, 32-bit floating point data. What this means is that each clip in the Media Pool, 
+whatever its original bit-depth or data range, is scaled into full-range 32-bit data. How each clip is 
+scaled depends on its Levels setting in the Clip Attributes window, available from the Media Pool 
+contextual menu.
+Selecting Auto, Video,  
+or Full levels
+By converting all clips to uncompressed, full-range, 32-bit floating point data, Resolve guarantees the 
+highest quality image processing that’s possible. As always, the quality of your output is dependent 
+on the quality of the source media you’re using, but you can be sure that Resolve is preserving all the 
+data that was present in the original media.
+Assigning Clip Levels in the Media Pool
+When you first import media into the Media Pool, either manually in the Media page or automatically 
+by importing an AAF or XML project in the Edit page, Resolve automatically assigns the “Auto” Levels 
+setting. When a clip is set to Auto, the Levels setting used is determined based on the codec of the 
+source media.
+DaVinci Resolve generally does a good job of figuring out the appropriate Levels setting of each 
+clip on its own. However, in certain circumstances, such as when you’re working with media that was 
+originated in one format but transcoded into another, you may find that you need to manually choose 
+the appropriate settings so that the levels of each clip are interpreted correctly. This can be done 
+using each clip’s Levels setting in the Clip Attributes window, available from the Media Pool contextual 
+menu in either the Media or Edit pages.
+To change a clip’s Data Level setting:
+1 Open the Media or Edit page.
+2 Select one or more clips, then right-click one of them and choose Clip Attributes.
+3 Click the Levels ratio button corresponding to the data level setting you want to assign, 
+then click OK.
+228Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+TIP: If you need to change the Levels setting of a range of clips that share a unique property 
+such as reel name, resolution, frame rate, or file path, you can view the Media Pool by column, 
+and sort by the particular column that will best isolate the range of media to which you need 
+to make a data level assignment.
+Once you change a clip’s Levels setting, that clip will automatically be reconverted based on the new 
+assignment. If it appears to be correct, then you’re ready to work. If it doesn’t, then you may want to 
+reconsider the Levels assignment you’ve made, and you should check with the person who provided 
+the media to find out how it was generated, captured, and exported.
+So long as the Levels settings used by your clips are accurate, you should be ready to work. However, 
+problems can still occur based on what external video hardware you’re using with your workstation, 
+and how you need to deliver the finished media to your client. For this reason, there are three 
+additional data level settings that you can use to maintain data integrity, while at the same time seeing 
+the proper image as you work.
+Video Monitoring Data Levels
+Superficial problems may result if the settings used by your external display differ from the settings 
+you’re using to process data levels in Resolve. Accordingly, there is a Video/Full Level setting in the 
+Master Settings panel of the Project Settings (in the Video Monitoring section).
+When you change this setting, the image being output to your external display should change, but the 
+image you see in your Viewer will not. That’s because this setting only affects the data levels being 
+output via the video interface connecting the Resolve workstation to your external display. It has no 
+effect on the data that’s processed internally by Resolve, or on the files written when you render in the 
+Deliver page. 
+There are two options:
+• Video: This is the correct option to use when using a broadcast display set to the 
+Rec. 709 video standard (10-bit 64–940).
+• Full: If your monitor or projector is capable of displaying “full range” video signals, and you 
+wish to monitor the full 10-bit data range (4–1023) while you work, then this is the correct 
+option to use.
+It is imperative that the option you choose in DaVinci Resolve matches the data range the 
+external display is set to. Otherwise, the video signal will appear to be incorrect, even though 
+the internal data is being processed accurately by DaVinci Resolve.
+Auto/Video/Full Level  
+selection for monitoring
+229Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Deck Capture and Playback Data Level
+There is a separate “Video/Data Level” setting that is specific to when you’re capturing from or 
+outputting to VTRs. This setting also affects the video signal that is output via the video interface 
+connecting the Resolve workstation to your VTR (which is usually also in the signal chain used for 
+monitoring). However, it only takes effect when you’re capturing from tape in the Media page, or 
+editing to tape in the Deliver page. If you never capture or output to tape, this setting will never 
+take effect.
+This setting is found in the Deck Capture and Playback panel of the Project Settings.
+The reason for a separate option for tape capture and output is that often you’d want to monitor in one 
+format (normally scaled Rec. 709), but output to tape in another (full range RGB 444). This way, you can 
+set up Resolve to accommodate this workflow, and then not have to worry about manually switching 
+your video interface back and forth.
+There are two options:
+• Video: This is the correct option to use when you want to output conventional Rec. 709 
+video to a compatible tape format.
+• Full: This is the correct option to use when you want to output “full range” RGB 444 video to 
+a compatible tape format.
+Once tape ingest or output has finished, your video interface goes back to outputting using 
+the setting specified by the “Colorspace conversion uses” setting in the Master Settings panel 
+of the Project Settings (in the Video Monitoring section).
+Output Data Level Settings in the Deliver Page
+Finally, there’s one last set of data level settings, available in the Render Settings list, within the Format 
+group. It’s the “Set to video or data level” dropdown menu. It’s there to give you the ability to convert 
+the data level of your rendered output, if necessary.
+All media is output using a single data level, depending on your selection.  
+There are three options:
+• Automatic: The output data level of all clips is set automatically based on the codec you 
+select to render to in the “Render to” dropdown menu.
+• Video: All clips are rendered as normally scaled for video (10-bit 64–940).
+• Full: All clips are rendered as full range (10-bit 4–1019).
+For most projects, leaving this setting on “Automatic” will yield the appropriate results. 
+However, if you’re rendering media for use by another image processing application (such as 
+a compositing application) that is capable of handling “full range” data, then full range output 
+is preferable for media exchange as it provides the greatest data fidelity. For example, when 
+outputting media for VFX work as a DPX image sequence, or as a ProRes 4444 encoded 
+QuickTime file, choosing “Unscaled full range data” guarantees the maximum available image 
+quality. However, it is essential that the application you use to process this media is set to read 
+it as “full range” data, otherwise the images will not look correct.
+230Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+So, What’s the “Proper” Data Range for Output?
+Strictly speaking, there is no absolutely “proper” data range to use when outputting image data. 
+As long as the Levels setting of each clip in the Media Pool is set to reflect how each clip was created, 
+your primary consideration is which data range is compatible with the media format or application 
+you’re delivering to. If the media format you’re exporting to supports either normally scaled or full 
+range, and the application that media will be imported into supports either normally scaled or full 
+range, then it’s really your choice, as long as everyone involved with the project understands how the 
+data range of the media is meant to be interpreted once they receive it.
+Outputting to hardware is a bit trickier, in that you need to make sure that the external display or VTR 
+you’re outputting to is set up to receive a signal using the data range you’ve chosen. If the device is 
+limited to only one data range, then you need to be sure that you’re outputting to it using that data 
+range, or the levels of the image will appear to be incorrect, even though the image data being 
+processed by Resolve is actually fine.
+Introduction to DaVinci Resolve 
+Color Management
+How color is managed in DaVinci Resolve depends on the “Color Science” setting at the top of the 
+Color Management panel of the Project Settings. There are four options: DaVinci YRGB, DaVinci 
+YRGB Color Managed, DaVinci ACEScc, and DaVinci ACEScct. This section discusses the second 
+setting, DaVinci YRGB Color Managed. ACEScc and ACEScct is discussed in the following section in 
+this chapter.
+Display Referred vs. Scene Referred Color Management
+The default DaVinci YRGB color science setting, which is what DaVinci Resolve has always used, 
+relies on what is called “Display Referred” color management. This means that Resolve has no 
+information about how the source media used in the Timeline is supposed to look; you can only 
+judge color accuracy via the calibrated broadcast display you’re outputting to. Essentially, you are 
+the color management, in conjunction with a trustworthy broadcast display that’s been calibrated to 
+ensure accuracy.
+DaVinci Resolve 12 introduced a color science option called “DaVinci YRGB Color Managed,” or 
+more simply “Resolve Color Management” (RCM). This introduced a so-called “Scene Referred” color 
+management scheme, in which you have the option of matching each type of media you’ve imported 
+into your project with a color profile that informs DaVinci Resolve how to represent each specific color 
+from each clip’s native color space within the common working color space of the timeline in which 
+you’re editing, grading, and finishing.
+This is important, because two clips that contain the same RGB value for a given pixel may 
+in actuality be representing different colors at that pixel, depending on the color space that 
+was originally associated with each captured clip. This is the case when you compare raw 
+clips shot with different cameras made by different manufacturers, and it’s especially true if 
+you compare clips recorded using the differing log-encoded color spaces that are unique to 
+each camera.
+231Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+This Scene Referred component of color management via RCM doesn’t do your grading for you, but 
+it does try to ensure that the color and contrast from each different media format you’ve imported 
+into your project are represented accurately in your timeline. For example, if you use two different 
+manufacturer’s cameras to shoot green trees, recording Blackmagic Film color space on one, and 
+recording to the Sony SGamut3.Cine/SLog3 color space on the other, you can now use RCM to make 
+sure that the green of the trees in one set of clips match the green of the trees in the other, within the 
+shared color space of the Timeline.
+It should be mentioned that this sort of thing can also be done manually in a more conventional 
+Display Referred workflow, by assigning LUTs that are specific to each type of media, or using 
+Color Space Transform Resolve FX in order to transform each clip from the source color space to 
+the destination color space that you require. However, RCM’s automation can make this process 
+faster by freeing you from the need to locate and maintain a large number of LUTs to accommodate 
+your various workflows. Also, the matrix math used by RCM (as well as the Color Space Transform 
+operation) extracts high-precision, wide-latitude image data from each supported camera format, 
+preserving high-quality image data from acquisition, through editing, color grading, and output. These 
+are all advantages when compared to lookup tables, which can have plenty of precision, but can clip 
+out-of-bounds image data and introduce issues when differing lookup table interpolation methods 
+cause minor inconsistencies with color space transformations from application to application.
+The preservation of wide-latitude image data deserves elaboration. LUTs clip image detail that goes 
+outside of the numeric range they’re designed to handle, so this often requires the colorist to make a 
+pre-LUT adjustment to “pull back” image data in the highlights that you want to retrieve. Using RCM 
+eliminates this two-step process, since the input color space matrix operations used to transform 
+the source preserves all wide-latitude image data, making highlights easily retrievable without any 
+extra steps.
+Updated RCM In DaVinci Resolve 17
+In version 17, DaVinci Resolve introduced the biggest improvements to Resolve Color Management 
+(RCM) since it was originally introduced, adding numerous features to simplify setup, improve image 
+quality, and make the “feel” of your grading controls more consistent. Specific improvements include 
+improved metadata management for incoming media files that support color metadata, a new wide 
+gamut color space suitable for using as your default Timeline working color space for any program, 
+a new Input Tone Mapping option (Input DRT) that makes it easier to mix media formats for SDR and 
+HDR grading, improved Timeline to Output Tone Mapping (Output DRT) that offers improved shadow 
+and highlight handling, and select color space-aware grading palettes that make controls feel and 
+perform well no matter what you’re grading.
+This updated Resolve Color Management has the same name as the previous version. However, 
+older projects using the previous version of RCM will have Color science set to Legacy, to preserve 
+the older color management settings and color transformations effect on your work. For more 
+information on how the previous generation of RCM works, refer to the September 2020 version of the 
+DaVinci Resolve 16 Manual.
+How Is DaVinci Resolve Color Management Different from ACES?
+This is a common question, but the answer is pretty simple. Resolve Color Management 
+(RCM) and ACES are both Scene Referred color management schemes designed to solve the 
+same problem. However, if you’re not in a specific ACES-driven cinema workflow, DaVinci 
+Resolve Color Management can be simpler to use, and will give you all of the benefits of color 
+management, while approximating the “feel” that the DaVinci Resolve Color page controls 
+have always had.
+232Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Resolve Color Management for Editors
+RCM isn’t just for Colorists. RCM can be easier for editors to use in situations where the source 
+material is log-encoded. Log-encoded media preserves highlight and shadow detail, which is great for 
+grading and finishing, but it looks flat and unpleasant, which is terrible for editing.
+Even if you have no idea how to do color correction, it’s simple to turn RCM on in the Color 
+Management panel of the Project Settings, and then use the Media Pool to assign the particular 
+Input Color Space that corresponds to the source clips from each camera. Once that’s done, each 
+log-encoded clip is automatically normalized to the default Timeline Color Space of Rec. 709 
+Gamma 2.4. So, without even having to open the Color page, editors can be working with pleasantly 
+normalized clips in the Edit page.
+The Input, Timeline, and Output Color Space
+The foundation of Resolve Color Management rests on three core settings. Not only do you have the 
+ability to either automatically or manually identify the color science of each individual source clip (the 
+Input Color Space), but you also have explicit control over the working color space within which all 
+color adjustments and operations are made (the Timeline Color Space), and you have separate control 
+over the Output Color Space that defines how your graded image will be monitored and output. 
+This means that, basically, Resolve Color Management consists of two color transforms working 
+together, converting each source clip via its Input Color Space definition into the Timeline Color Space 
+in which you work, and then converting the adjusted image from the Timeline Color Space to whatever 
+Output Color Space you require to deliver the project.
+Input Color Space Timeline Color Space Output Color Space
+Resolve Color Management consists of three color transforms working together.
+This means that, as a colorist, you can set the Timeline Color Space that you’re working in to whatever 
+you prefer. If you prefer grading wide-gamut log media because you like the way the grading controls 
+behave in that color space, you can set the Timeline Color Space in the Color Management panel of 
+the Project Settings to DaVinci Wide Gamut (more on this below), or any of the available log formats, 
+including ARRI Log C, REDWideGamutRGB/Log3G10, and Cineon Film Log. If you instead prefer 
+grading in the Rec. 709 color space because you’re mastering a standard dynamic range (SDR) 
+program to Rec. 709 and you’re more comfortable with how the controls in DaVinci Resolve have 
+always felt in that color space, you can choose that instead. Whatever Timeline Color Space you 
+assign is what all source clips will be transformed to for purposes of making grading adjustments in the 
+Color page, so you can make this choice using a single setting.
+233Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+A key benefit of the color space conversions that RCM applies is that no image data is ever clipped 
+during the Input to Timeline color space conversion. For example, even if your source is log -encoded 
+or in a camera raw format, grading with a Rec. 709 Timeline Color Space does nothing to clip or 
+otherwise limit the image data available to the RCM image processing pipeline. All image values 
+greater than 1.0 or less than 0.0 are preserved and made available to the next stage of RCM 
+processing, the Timeline to Output color space conversion.
+Consequently, if you’re grading in a color space other than the one you need to output to, you don’t 
+have to worry about data loss during the color transformation back to the color space you actually 
+want to output to. The Output Color Space setting gives you the freedom to work using whatever 
+Timeline Color Space you like while grading, with Resolve automatically converting your output to the 
+specific color space you want to monitor with and deliver to. And thanks to the precision of the image 
+processing in DaVinci Resolve, you can convert from a larger color space to a smaller one and back 
+again without clipping or a loss of quality. Of course, if you apply a LUT or use Soft Clip within a grade, 
+then clipping will occur, but that’s a consequence of using those particular operations.
+TIP: If you want to use Resolve Color Management, but you want the Input and Output Color 
+Spaces to match whatever you set the Timeline Color Space to, you can choose “Bypass” in 
+the “Input Colorspace” and “Output Colorspace” dropdown menus.
+Finally, it is the Output Color Space that determines the final color space of your rendered result. While 
+no image data is clipped during the Source to Timeline color space conversion, image data will be 
+clipped during the Timeline to Output color space conversion in order for the final image to conform to 
+the color space being rendered and output, unless you use the Gamut Mapping options to compress 
+image data during the Timeline to Output Color Space conversion.
+The RCM Image Processing Pipeline
+The previous explanation is, of course, simplified. To clarify the inner workings of Resolve Color 
+Management for advanced users, the following flowchart presents a rudimentary overview of how 
+every parameter works together to automatically manage the color of clips in your program.
+Input Color
+Space Input DRT
+Timeline 
+Color
+Space 
+Output DRTYour
+Grade
+Ouput Color
+Space Final Output
+Timeline Working
+Luminance 
+Source
+Media 
+Manual Color
+Space Tagging
+or
+Source Media Color
+Space Metadata
+or
+Input Color Space
+Project Setting
+ 
+Affects
+Input DRT
+Resolve Color Management Parameters
+Affects
+Output DRT
+Resolve Color Management’s image processing pipeline, illustrated
+234Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Identifying the Input Color Space of Different Clips
+Central to the process of automated color management is knowing the color space and transfer 
+function used by every clip of source media in your project. There are a variety of ways DaVinci 
+Resolve can figure this out, in a cascading decision-tree that can be manually overridden if necessary. 
+Deriving the Input Color Space involved the following stages of automated decision making:
+1 If the source media is a camera raw format like .braw, .R3D, .ari, etc., DaVinci Resolve uses 
+manufacturer-supplied colorimetry to automatically debayer the clip and identify its Input 
+Color Space.
+2 Otherwise, if the source media has embedded color space metadata (QuickTime or .MXF make 
+this possible), then use that to identify the Input Color Space.
+3 Otherwise, if there is no embedded color space metadata, use the default Input Color Space 
+setting of the Project Settings to assign an Input Color Space to all otherwise unidentified clips.
+4 If necessary, you can manually set the Input Color Space of clips in the Media Pool, which 
+overrides both embedded color space metadata (in case it’s wrong), or the default Input Color 
+Space setting (if you’re dealing with multiple color spaces). You cannot override the Input Color 
+Space of camera raw media.
+The following sections discuss each of these steps in more detail.
+Using Camera Raw Formats
+When you use RCM in a project that uses Camera Raw formats, color science data from each camera 
+manufacturer is used to debayer each camera raw file to specific color primaries with linear gamma, 
+so that all image data from the source is preserved and made available to DaVinci Resolve’s color 
+managed image processing pipeline. As a result, the Camera Raw project settings and Camera Raw 
+palette of the Color page are disabled, because RCM now controls the debayering of all camera 
+raw clips, and all image data from the raw file is available no matter which Timeline Color Space you 
+choose to work within.
+Using Source Media Color Space Metadata
+When enabled, RCM automatically identifies the color space information of imported media that’s 
+been either transcoded or recorded directly to supported non-raw media formats, reading the NCLC 
+metadata of QuickTime-wrapped files, the color space metadata of .mxf-wrapped files, and the XML 
+sidecar files that track color management in ACES workflows. This behavior is automatic; there are no 
+visible controls governing this behavior aside from the individual Input Color Space and Input Gamma 
+settings associated with each clip in the Media Pool.
+Color Space Metadata in QuickTime
+DaVinci Resolve is capable of reading the NCLC metadata found within media files wrapped within a 
+QuickTime container for proper color management. This metadata consists of three values formatted 
+as (for example) 1-1-1. From left to right, these three digits specify the Color Primary (or color space), 
+Transfer Function (or gamma), and Color Matrix used by that media file. 
+These values are standardized in the SMPTE Registered Disclosure Document RDD 36:2015. For your 
+information, the different codes are listed in the following table. In the previous example, the code 
+of 1-1-1 indicates a standard dynamic range clip that uses the BT.709 primaries, transfer function, 
+and color matrix.
+235Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Color Primary Transfer Function Color Matrix
+0 Reserved 0 Reserved 0 GBR
+1 ITU-R BT.709 1 ITU-R BT.709 1 BT709
+2 Unspecified 2 Unspecified 2 Unspecified
+3 Reserved 3 Reserved 3 Reserved
+4 ITU-R BT.470M 4 Gamma 2.2 curve 4 FCC
+5 ITU-R BT.470BG 5 Gamma 2.8 curve 5 BT470BG
+6 SMPTE 170M 6 SMPTE 170M 6 SMPTE 170M
+7 SMPTE 240M 7 SMPTE 240M 7 SMPTE 240M
+8 FILM 8 Linear 8 YCOCG
+9 ITU-R BT.2020 9 Log 9 BT2020 Non-
+constant Luminance
+10 SMPTE ST 428-1 10 Log Sqrt 10 BT2020 
+Constant Luminance
+11 DCI P3 11 IEC 61966-2-4 – –
+12 P3 D65 12 ITU-R BT.1361 Extended 
+Colour Gamut
+– –
+– – 13 IEC 61966-2-1 – –
+– – 14 ITU-R BT.2020 10 bit – –
+– – 15 ITU-R BT.2020 12 bit – –
+– – 16 SMPTE ST 2084 (PQ) – –
+– – 17 SMPTE ST 428-1 – –
+– – 18 ARIB STD-B67 (HLG) – –
+The Default Input Color Space
+The default Input Color Space can only be set if the “Resolve color management preset” 
+dropdown menu is set to Custom. Otherwise, it defaults to “Rec. 709 Gamma 2.4” for all 
+presets. Or else, this setting is the default color space that all otherwise unidentified clips in 
+the Media Pool will default to.
+Manually Tagging Clip Color Space
+If necessary, you can manually identify the color space of one or more selected clips in the 
+Media Pool by right-clicking them and choosing the Input Color Space (and optionally the 
+Input Gamma) from the contextual menu.
+236Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Simple RCM Setup
+When you first choose DaVinci YRGB Color Managed from the Color science dropdown menu of the 
+Color Management panel in the Project Settings, you’re presented with a simple pair of menus for 
+setting up how you want to work with Resolve Color Management: the “Resolve color management 
+preset,” and the “Output Color Space.”
+Automatic Color Management
+The first option when using RCM is to decide to use either Automatic Color Management or the 
+Manual Presets. When the Automatic Color Management box is checked, DaVinci Resolve presents 
+you with a simplified set of options for the most common use cases. For the Color Processing Mode, 
+you choose SDR or HDR, and based on the file types and codecs in the Media Pool, DaVinci Resolve 
+will automatically choose the appropriate input color space. Then, select from a list of common Output 
+color spaces for delivery. If you want specific control of these parameters, uncheck Automatic Color 
+Management box and select from the Color Management Presets below.
+Automatic Color Management presets for fast, simple color management set up
+Resolve Color Management Presets
+The Resolve Color Management preset menu lets you choose how you want to use RCM to grade 
+your program. Each of these presets fully configures your project’s use of color management, and the 
+setting you select directly impacts how you’ll grade your program. Because of this, once you choose 
+a method of working and you grade every clip in your program, those grades rely on the preset you 
+used being selected in order to appear as they should.
+ 
+Resolve Color Management presets for manual color management set up
+When it comes to choosing a preset, a good way to think about which to use is to choose an SDR 
+or HDR preset that corresponds to the primary deliverable you plan on outputting. Both SDR and 
+HDR presets have several variations that you can choose among.
+237Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+While these presets correlate to how you plan on outputting your program, they don’t lock you in, 
+since you can always change the Output Color Space (described below). This makes it possible 
+to export multiple versions of your program, each intended for different venues, no matter which 
+color management preset you’re using. 
+Whenever you choose a preset, a brief description explains the workflow that preset is intended to 
+facilitate. Here’s a list of the available presets, with slightly more detailed explanations.
+  SDR Rec.709: (default) Sets up a Rec. 709 SDR grading environment. Your work can be converted 
+to HDR on output, if specified, but is limited to a Rec. 709 gamut with out-of-bounds colors 
+being clipped. Gamma 2.4 is not mentioned in the name because scene versus display OOTF is 
+managed automatically. Suitable for conventional streaming and broadcast.
+  SDR P3 Broadcast: Sets up a P3-D65 SDR grading environment. Your work can be mapped 
+to HDR for output, if specified, but it is limited to a P3-D65 gamut with out-of-bounds colors 
+being clipped. Gamma 2.4 is not mentioned in the name because scene versus display OOTF is 
+managed automatically. Suitable for wider gamut streaming and broadcast at SDR levels.
+  SDR P3 Cinema: Sets up a P3-D60 SDR grading environment. Your work can be mapped to HDR 
+for output, if specified, but it is limited to a P3-D60 gamut with out-of-bounds colors being clipped. 
+Suitable for conventional Cinema projection.
+  SDR Rec.2020: Sets up a Rec. 2020 SDR grading environment. Your work can be mapped to HDR 
+for output, if specified. Good for wide gamut streaming and broadcast.
+  DaVinci Wide Gamut: Sets up an extra wide gamut grading environment that’s suitable for grading 
+either SDR or HDR. Capable of exporting with maximum image fidelity, preserving highlight details 
+of up to 10,000 nits. This is a log-encoded grading space for colorists wishing to work that way. 
+Suitable for creating mezzanine intermediates or final deliverables, or for grading HDR with high 
+nit levels.
+  HDR P3 Broadcast: Sets up a P3-D65 HDR grading environment. Output gamut is limited to 
+P3-D65, with out-of-bounds colors being clipped. Suitable for grading wide gamut SDR or HDR up 
+to 1000 nits.
+  HDR Rec.2020: Sets up a Rec. 2020 HDR grading environment. Suitable for wide gamut SDR or 
+HDR deliverables up to 1000 nits.
+  Custom: If none of the available presets suits how you need to work, you can choose Custom, 
+which exposes the full set of RCM settings for you to set up to suit your needs.
+IMPORTANT: For all presets, importing media that’s in an identical or smaller gamut maps 
+the image data into the larger color space of the preset without transforming it. Importing 
+media with a wider gamut than the color space of the preset remaps the image data to fit into 
+the smaller color space, while preserving as much image detail as possible.
+Output Color Space
+For most DaVinci Resolve installations and projects, you’ll set your Output Color Space to match the 
+needs of your program, according to your display’s capabilities (or the capabilities your display is set to 
+use for the project at hand). You’ll also typically use a Resolve Color Management preset that matches 
+those capabilities.
+However, RCM gives you the flexibility of grading in one color space and then outputting to others, 
+when necessary. For example, it’s easy to grade an SDR Rec. 709 version of a program for streaming 
+or broadcast, and then switch the Output Color Space to SDR P3 Cinema to output an additional 
+deliverable for theatrical exhibition. 
+238Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+To facilitate this, you can set the Output Color Space to any setting, independent of the Resolve Color 
+Management preset you’ve selected, and DaVinci Resolve will automatically convert from your Color 
+Management Preset to the Output Color Space of your choice. When you do so, here are the rules that 
+govern the resulting image transform.
+When going SDR to HDR:
+• 0-50 nits (18% mid-gray) in your program is mapped to 0-50 nits on output (no change).
+• Everything from 51-90 nits in your program is remapped from 51 to 100 nits 
+(slightly expanded).
+• Everything from 91-100 nits in your program is remapped from 101 to 1000 nits 
+(greatly expanded).
+Original SDR grade seen within an HDR scale,
+After an automatic SDR to HDR conversion
+When going from HDR to SDR, the reverse is done:
+• 0-50 nits (18% mid-gray) in your program is mapped to 0-50 nits on output (no change).
+• Everything from 51 to 100 nits in your program is remapped from 51-90 nits 
+(slightly compressed).
+• Everything from 101 to 1000 nits in your program is remapped from 91-100 nits 
+(greatly compressed).
+239Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+While these methods of converting between SDR and HDR provide an effective starting point for 
+conversion, they’re not meant to be an automatic solution. It’s critical that you do a trim pass whenever 
+outputting a deliverable in a new color space and EOTF, so you can check every clip and make 
+adjustments to improve the result when necessary.
+NOTE: When converting SDR to HDR, this behavior may exaggerate noise in imported SDR 
+media that happens to have large flat expanses of bright colors. If you see particular clips that 
+show this issue, you can disable this behavior on a clip by clip basis in the Media Pool clip 
+contextual menu, or the Thumbnail Timeline contextual menu in the Color page, by toggling 
+“Inverse DRT for SDR to HDR Conversion.”
+Advanced RCM Setup
+Advanced users who need more detailed control over every aspect of RCM can choose Custom from 
+the Resolve Color Management preset menu. This exposes every control that’s available, which opens 
+a world of workflow possibilities for advanced users and post production facilities.
+Because each of the settings encompasses a significant amount of functionality, the following 
+sections cover each particular parameter in detail.
+NOTE: Older projects using RCM will have Color science set to Legacy, to preserve the 
+older color management settings and color transformations effect on your work. For more 
+information on how the previous generation of RCM works, see the September 2020 version 
+of the DaVinci Resolve 16 Manual.
+Custom Color Management settings of Resolve Color Management, as updated in DaVinci Resolve 17
+Single Setting vs. Dual Setting RCM
+There are two ways you can set up RCM. When the “Use Separate Color Space and Gamma” 
+checkbox is turned off, the Color Management panel of the Project Settings exposes one dropdown 
+each for the Input, Timeline, and Output Color Space settings. Each setting lets you simultaneously 
+transform the gamut and gamma, depending on which option you choose. This makes it a bit simpler 
+to set up the transform you need.
+240Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Single setting Resolve Color Management
+If you turn the “Use Separate Color Space and Gamma” checkbox on, then the Color Management 
+panel changes so that the Input, Timeline, and Output Color Space settings each display two 
+pop-ups. The first dropdown lets you explicitly set the gamut, while the second dropdown lets you 
+explicitly set the gamma. This makes it easier to see exactly which pair of transforms is being used 
+at each stage of RCM.
+Dual setting Resolve Color Management
+Additionally, Dual Setting RCM enables you to assign separate gamut and gamma transforms 
+to clips in the Media Pool.
+Dual setting Resolve Color Management  
+assignments for Media Pool clips
+Setting the Input Color Space
+This setting is the default color space that all otherwise unidentified clips in the Media Pool will default 
+to, unless you manually identify the color space of these clips by right-clicking them and choosing an 
+Input Color Space (and optionally Input Gamma) from the contextual menu. 
+This setting does not affect media in camera raw formats, or media with embedded 
+color space metadata.
+241Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Choosing a Timeline Color Space
+The Timeline Color Space is the “working” color space that determines how each clip’s contrast and 
+color are mapped for adjustment, which in turn has an impact on how sensitive the effects and grading 
+controls are as you work. Some colorists prefer to work in the classic “video” color space of Rec. 709, 
+since the controls feel comfortable and familiar, particularly if you’re mastering SDR content. On the 
+other hand, colorists who are used to working with log-encoded media (likely using the Log controls) 
+often prefer to work in a more film-oriented workflow using Cineon, LogC, or other wide gamut, 
+logarithmically encoded formats.
+If you’re outputting an SDR deliverable, any color space that you’re comfortable will produce good 
+results. However, if you’re outputting an HDR deliverable, it’s in your best interest to choose a wide 
+gamut Color Space (and Gamma) to obtain the best results on output. In this instance, DaVinci Wide 
+Gamut is a great choice (see below for more information).
+No matter which Timeline Color Space you choose to work in, all clips in an edit are transformed from 
+the Input Color Space that’s either automatically or manually assigned to them, to the Timeline Color 
+Space setting to provide the final output. This is how you can grade within a Log-encoded timeline 
+color space and yet view a normalized or de-logged image.
+IMPORTANT: Once you choose a Timeline Color Space and begin grading, do not change 
+your Timeline Color Space, or you’ll end up changing all of the grades that are built using 
+the mathematics it defines. You can always change the Output Color Space to create a new 
+deliverable, but all of your grades depend on the Timeline Color Space to render correctly.
+DaVinci Wide Gamut Color Space and DaVinci Intermediate Gamma
+DaVinci Wide Gamut (DaVinci WG) and DaVinci Intermediate are Timeline Color Space and Gamma 
+settings developed by Blackmagic Design that provide a reliable universal internal working color 
+space, which encompasses a practical maximum of what image data any given camera can capture. 
+The DaVinci Wide Gamut color space is greater than BT.2020, ARRI Wide Gamut, and even ACES, so 
+you don’t ever lose image data, no matter where your media is coming from. 
+The DaVinci Wide Gamut color space
+242Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Furthermore, the primary color values of the DaVinci WG color space are set such that the process of 
+automatically mapping source media from different cameras into this gamut is extremely accurate as 
+part of the Input to Timeline Color Space conversion, and tone and saturation mapping from one color 
+space to another can be done more accurately in the Timeline to Output Color Space conversion. 
+This also helps to produce greater consistency among media from different cameras when making 
+manual grading adjustments (though some variations due to differences in camera and lens systems 
+will remain).
+The DaVinci Intermediate OETF gamma setting has been designed to work with DaVinci Wide Gamut 
+to provide a suitable internal luminance mapping of high precision image data, in preparation for 
+mastering to either HDR or SDR standards, as your needs require, without losing image data.
+The DaVinci Intermediate OETF seen encoding HDR levels
+The DaVinci Intermediate OETF encoding SDR levels
+243Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Resolve Color Management is extremely flexible, so you don’t have to use DaVinci Wide Gamut/
+DaVinci Intermediate as your Timeline color space if you don’t want. However, it presents many 
+advantages and is worth trying out to see if it can improve your workflow.
+For more information, refer to the “DaVinci Resolve Wide Gamut Intermediate” document at 
+https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion .
+Timeline Working Luminance
+This control is only visible while the Resolve Color Management presets menu is set to Custom 
+Settings. The Timeline Working Luminance dropdown menu lets you choose how the Input DRT 
+(described below) maps the maximum level of a source image to the currently selected Timeline Color 
+Space. This setting also defines the maximum highlight level that’s possible to output into the currently 
+selected Output Color Space using the Output DRT. 
+While it’s typical to set this according to the mastering standard you’re grading to via a collection of 
+SDR and HDR labeled settings, there are additional settings available that make it possible to add 
+more automatic compression of highlights as you grade.
+• SDR 100: The conventional setting for grading SDR material with a maximum level 
+of 100 nits.
+• HDR 500-4000:  Conventional settings for grading HDR material at a variety of maximum 
+mastering levels. So long as output DRT isn’t set to None, there will be some manner of 
+rolloff in the highlights, unless inverse DRT is enabled, in which case there will be no rolloff.
+• SDR and HDR ER settings: These “extended range” settings each specify two values and 
+provide more headroom for aggressive grading of highlights by enabling DaVinci Resolve to 
+compress a greater range of out-of-bounds image data without clipping, which can result in 
+a smoother look. 
+Here’s how it works. Suppose you choose the setting “HDR ER 1000/2000.” In this case, 
+the Input DRT is used to map the maximum brightness of each source image to the range 
+specified by the first value, which is 1000 nits. Then, when you grade, the signal isn’t clipped 
+until it reaches the maximum range specified by the second value, which is 2000 nits. This 
+provides an additional 1000 nits of out-of-bounds headroom before the image data is hard 
+clipped by RCM’s image processing pipeline. The Output DRT is then used to map from 
+the maximum brightness specified by the second number (2000 nits) to the output value 
+defined by the currently selected Output Color Space, in the process compressing this 
+out-of-bounds headroom to preserve as much highlight detail as is possible given the range 
+you’ve selected.
+• Custom: Exposes a field where you can enter a specific nit value.
+203 Nit Support for SDR to HDR
+This control is only visible while the Resolve Color Management presets menu is set to Custom 
+Settings. Resolve Color Management has support for remapping SDR content to HDR by mapping 
+100 nits to 203 nits (defined as the diffuse white level) according to the BT.2100 recommendation. 
+This enables the peak highlights of SDR material to compete more favorably against the significantly 
+brighter highlights of HDR content in programs that combine both (such as documentaries), so that 
+SDR whites continue to appear white, rather than gray, when compared to diffuse white in HDR.
+244Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+The checkbox that enables this is hidden by default. Whenever you set the Output to an HDR standard 
+while the Timeline is set to an SDR standard, the “Use 203 nits reference for Rec.2100 HDR” checkbox 
+for remapping SDR highlights to HDR appears in both the RCM settings of the Color Management 
+panel of the Project Settings and in the Color Space Transform Resolve FX plugin.
+The “Use 203 nits reference for Rec.2100 HDR” checkbox in Resolve Color 
+Management for scaling SDR levels appropriately into HDR color space
+Gamut Limiting, Restricting Values Within a Larger Gamut
+This control is only visible while the Resolve Color Management presets menu is set to Custom 
+Settings. In the emerging world of larger gamuts for distribution, it’s increasingly common for delivery 
+specifications to specify output to a large gamut, such as Rec. 2020, yet require that image values 
+be restricted to a smaller gamut, such as P3. This is to allow delivery to “future-proofed” delivery 
+standards, while preventing saturation values that are too high to be displayed on consumer displays 
+that aren’t capable of implementing the full scope of those standards.
+In this case, you’ll choose a larger gamut in Output Color Space, but you’ll then choose a smaller 
+gamut in “Limit Output Gamut To.” When you do this, all image values falling outside the “Limit Output 
+Gamut To” standard specified will be hard clipped. This setting defaults to None.
+Choose a setting from the Limit Output Gamut To menu to limit image values within a larger gamut
+Input DRT Tone Mapping
+This control is only visible while the Resolve Color Management presets menu is set to Custom 
+Settings. RCM has always transformed the color primaries of different media formats to match one 
+another within the shared Timeline Color Space. In this updated version, the Input DRT (Display 
+Rendering Transform) dropdown menu provides a variety of different options to enable DaVinci 
+Resolve to automatically tone map the image data of SDR and HDR clips to better match one another 
+when they’re fit into the currently selected Timeline Color Space. While each option varies in the 
+details, they are all automated input-to-timeline color transforms that do the following:
+245Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+• Log-encoded media, or media using a 2.4 gamma transfer function, is mapped so the black 
+point, midtones at 18% gray, and white levels match those of HDR media. Highlight data will 
+be carefully stretched as necessary so that the highlights of all clips in the Timeline, whether 
+SDR or HDR, are treated similarly.
+• Raw formats such as BRAW, RED, and ARRI RAW, and media using HDR transfer functions 
+are minimally mapped along an HDR range of tonality.
+• All color transforms into the Timeline Color Space are done without clipping.
+The idea is to distribute the image data of each clip in the Timeline, be it SDR or HDR media, along 
+a similar histogram, with shadows, midtones, and highlights spread out in such a way as to create an 
+easier starting point for grading. One result of this is that grades made for one type of media mostly 
+work well with other types of media.
+Different options are provided governing the details of how this Input to Timeline Color Space 
+transform is achieved. They all do the same thing but have different advantages.
+  None: This setting disables Input DRT Tone Mapping. No tone mapping is applied to the 
+Input to Timeline Color Space conversion at all, resulting in a simple 1:1 mapping to the 
+Timeline Color Space.
+  Simple: A good mapping for color transforms from HDR to SDR.
+  Luminance Mapping: Same as DaVinci, but more accurate when the Input Color Space of all your 
+media is in a single standards-based color space, such as Rec. 709 or Rec. 2020.
+  DaVinci: This option tone maps the transform with a smooth luminance roll-off in the shadows and 
+highlights, and controlled desaturation of image values in the very brightest and darkest parts of 
+the image. This setting is particularly useful for wide-gamut camera media and is a good setting to 
+use when mixing media from different cameras.
+  Saturation Preserving:  This option has a smooth luminance roll-off in the shadows and highlights, 
+but does so without desaturating dark shadows and bright highlights, so this is an effective option 
+for colorists who like to push color harder. However, because over-saturation in the highlights 
+of the image can look unnatural, two parameters are exposed to provide some user-adjustable 
+automated desaturation.
+Sat. Rolloff Start: Lets you set a threshold, in nits (cd/m 2), at which saturation will roll off along with 
+highlight luminance. Beginning of the rolloff.
+Sat. Rolloff Limit: Lets you set a threshold, in nits (cd/m 2), at which the image will be totally 
+desaturated. End of the rolloff. 
+Output DRT Tone Mapping
+This control is only visible while the Resolve Color Management presets menu is set to Custom 
+Settings. To accommodate workflows where you need to transform one color space into another that 
+has a dramatically larger or smaller gamut, an additional group of settings have been added that can 
+help to automate the expansion or contraction of image data necessary to give a pleasing result.
+Using the available options in the Output DRT dropdown menu will compress or expand your image 
+data as necessary during the Timeline to Output Color Space transformation that RCM performs when 
+monitoring or rendering a timeline, in order to make sure that the final result is either not clipping, or to 
+ensure that it’s taking better advantage of the new color space. This is not meant to provide your final 
+grade. Rather, it’s meant to give you a faster starting point, when you need it, for proceeding with your 
+own more detailed grade of the result.
+246Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Here are some examples of what the Gamut Mapping controls of RCM can be used for:
+1 If you’re working with high-dynamic-range log-encoded media and you’re outputting to Rec. 709 
+as you work, turning on Gamut Mapping lets RCM use saturation and tone mapping to give you a 
+more immediately pleasing image with highlight detail that’s not clipped.
+2 If you’re working with standard-dynamic-range log-encoded media and you’re outputting to an 
+HDR format as you work, turning on Gamut Mapping lets RCM use saturation and tone mapping 
+to expand the highlights of the image to HDR strength to give you an image with more immediate 
+visual impact on HDR screens.
+ 
+(Before/After) Gamut Mapping used to automatically fit 
+high-dynamic-range media into the Rec. 709 color space
+The Output DRT (Display Rendering Transform) dropdown menu provides the following options.
+  None: No tone mapping is applied to the Timeline to Output Color Space conversion at all, 
+resulting in a simple 1:1 output with no softness or rolloff applied. All image data outside of gamut 
+will be clipped.
+  Simple: A good mapping for color transforms from HDR to SDR. 
+  Luminance Mapping: Same as DaVinci, but more accurate when all your media is in a single 
+standards-based color space, such as Rec. 709 or Rec. 2020, set to the Timeline and Output.
+  DaVinci: This option tone maps your output with a smooth luminance roll-off in the shadows and 
+highlights, and controlled desaturation of image values in the very brightest and darkest parts 
+of the image. It’s been designed to give smooth, naturalistic highlights and shadows as you 
+push and pull the values of your images, without the need for additional settings. This setting is 
+particularly useful for wide-gamut camera media and is a good setting to use when mixing media 
+from different cameras.
+247Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+  Saturation Preserving:  This option has a smooth luminance roll-off in the shadows and highlights 
+to prevent clipping. It does so without desaturating dark shadows and bright highlights, so this 
+is an effective option for colorists who like to push color a bit harder. However, because over 
+saturation in the highlights of the image can look unnatural, two parameters are exposed to 
+provide some user-adjustable automated desaturation.
+Sat. Rolloff Start: Lets you set a threshold, in nits (cd/m 2), at which saturation will roll off along with 
+highlight luminance. Beginning of the rolloff.
+Sat. Rolloff Limit: Lets you set a threshold, in nits (cd/m 2), at which the image will be totally 
+desaturated. End of the rolloff. 
+  RED IPP2: This setting lets you use RED IPP2 tone mapping to output to an SDR format, such as 
+Rec. 709; two settings are exposed with which to choose how your output will be shaped.
+Output Tone Map: Lets you choose what kind of tone mapping you want to use for your output. 
+Options include: None, Low, Medium, and High.
+Highlight Roll Off:  Lets you choose what kind of highlight rolloff you want to use to prevent 
+clipping. Options include: None, Hard, Medium, Soft, and Very Soft.
+HDR peak nits: A slider lets you choose the peak nit level you want to tone map to. 
+Defaults to 10,000 nits.
+Use Inverse DRT for SDR to HDR Conversion
+This control is only visible while the Resolve Color Management presets menu is set to Custom 
+Settings. A device rendering transform (DRT) is typically used when converting high dynamic range 
+media to a lower dynamic range color space/mastering standard. Thus, setting up a color transform 
+from SDR to HDR is an “inverse” operation to expand the dynamic range of SDR media to HDR 
+standards. The way this works is that levels at 100 nits are mapped to the maximum value set for the 
+Timeline Working Luminance parameter, and all other image levels are strategically tone mapped in 
+order to give yourself a good starting point for grading SDR media into an HDR program.
+This setting also has a secondary use. With this setting turned on, you can output Rec. 709 clips with 
+color that’s identical to the input, with no compression in the highlights.
+NOTE: Turning on “Use Inverse DRT for SDR to HDR Conversion” may exaggerate noise in 
+imported SDR media with large flat expanses of bright colors.
+Use White Point Adaptation
+This control applies a chromatic adaptation transform to account for different white points between 
+color spaces. 
+  Uncheck this box if you simply want to view the input color space’s white point unaltered in the 
+output color space. For example, wanting to use a P3-D60 mastered clip inside a P3-D65 timeline 
+for reference purposes. 
+  Check this box to apply the chromatic adaptation transform to convert the input white point to 
+match the output color space’s white point. For example, wanting a P3-D60 mastered clip to cut in 
+with other clips mastered in a P3-D65 timeline.
+NOTE: This control is only visible while the Resolve Color Management presets menu is set 
+to Custom Settings.
+248Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Color Space Aware Grading Tools
+In DaVinci Resolve version 17, both Resolve Color Management and ACES enables “color space aware” 
+palettes, such as the new HDR palette, to have controls that feel consistent, no matter what color 
+space the original media is from, or what Timeline Color Space you’re using.
+Other palettes, such as the Qualifier and Curves palettes, become color space aware when you turn 
+on the “Use Color Space Aware Grading Tools” checkbox in the Color Management panel of the 
+Project Settings (this is turned on by default). When you’re using color space aware grading tools, you 
+should not turn on HDR Mode for the node you’re working on.
+  In the case of the Qualifier palette, this enables Qualifiers to create high-quality keys as you would 
+expect, no matter what the color space of the original media is, or what Timeline Color Space 
+you’re using.
+  In the case of the Curves palette, this makes the overall range of each curve better fit the overall 
+data range of the current clip, making curves adjustments easier and more specific.
+NOTE: This control is only visible while the Resolve Color Management presets menu is set 
+to Custom Settings.
+Apply Resize Transformations In
+When you’re using Resolve Color Management, a new “Apply Resize Transformations In” Project 
+Setting is available in the Color Management panel while the Resolve Color Management presets 
+menu is set to Custom Settings. This setting lets you choose which color space is used for resizing 
+operations. Ordinarily, resizing is done in Linear, but certain specialty workflows benefit from doing 
+resizing in other color spaces, so this option lets you choose which is best. The available options are:
+• Timeline: Uses the Timeline Color Space to perform all resizing operations.
+• Log: Uses a Log Color Space for resizing. Good for avoiding artifacts in certain high-contrast 
+images, such as titles and star fields.
+• Linear: Usually provides the best results with most SDR media.
+• Linear Mapped: Usually provides the best results with most HDR media.
+• Gamma: Provided in case you find a need for this option.
+• Gamma Mapped: Usually provides best results when mixing SDR media with 
+wide gamut and log-encoded media on the same timeline.
+Graphics White Level
+The “Graphics white level” setting lets you define a shared maximum level in nits (cd/m 2) for titles, 
+generators, and selected effects that generate color. Changing this setting lets you change the 
+maximum level of all DaVinci Resolve-generated titles, generator graphics, and effects at once to 
+accommodate different mastering and output requirements.
+249Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Display HDR On Viewers If Available
+Turn this checkbox on if your computer monitors and operating system are capable of accommodating 
+HDR display. This allows the Viewers to show true HDR, according to the capabilities of your 
+computer monitor.
+HDR Mastering Is For (Studio Version Only)
+If you have a DeckLink 4K Extreme 12G or an UltraStudio 4K Extreme video interface, then DaVinci 
+Resolve 12.5 and above can output the metadata necessary to correctly display HDR video signals to 
+display devices using HDMI 2.0a when you turn on the “Enable HDR metadata over HDMI” checkbox 
+in the Master Project Settings. 
+The Enable HDR metadata over HDMI option in the 
+Master Project Settings lets you output HDR via HDMI 2.0a.
+When you do so, a setting in the Color Management panel of the Project Settings, “HDR mastering 
+is for X” lets you specify the output, in nits, to be inserted as metadata into the HDMI stream being 
+output, so that the display you’re connecting to correctly interprets it. The output you specify should 
+match what your display is expecting.
+The “HDR mastering is for” setting lets you insert 
+metadata for HDR output via HDMI 2.0a.
+Resolve Color Management and the Fusion Page
+Enabling RCM also allows the Fusion page to handle the color of clips automatically. Images output by 
+MediaIn nodes are automatically converted to Linear color space, which is the preferred color space 
+with which to perform high-quality compositing operations. Setting the LUT menu of each Viewer in 
+the Fusion page to Managed ensures that you’re looking at the image in Rec. 709, so that the image 
+looks correct to the artist even though they’re really working in the Linear color space. Each MediaOut 
+node then converts the image back to the timeline color space for handoff to the Color page.
+With RCM off, you must manage color in the Fusion page manually, either using the Source Color 
+Space and Source Gamma Space settings of each MediaIn node, or using the CineonLog or FileLUT 
+nodes in your node tree.
+For more information on how color management affects the Fusion page, and why the Linear 
+color space is preferable for compositing, jump to this chapter: Controlling Image Processing 
+and Resolution.
+250Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Ability to Bypass Color Management Per Clip
+When you right-click a clip in the Thumbnail Timeline of the Color page, a “Bypass Color Management” 
+setting appears underneath the Input Color Space and Input Gamma submenus that let you identify a 
+clip’s color characteristics. Choosing this option so that it appears checked lets you exclude that clip 
+from color management altogether, in the event you want to manually manage that clip using LUTs, the 
+Color Space Transform node, or simply by doing manual grading.
+The Bypass Color Management option for clips in  
+the contextual menu of the Thumbnail Timeline
+Exporting Color Space Information to QuickTime Files
+If you render QuickTime files from the Deliver page, then color space tags will be embedded into each 
+file based on either the Timeline Color Space (if Resolve Color Management is disabled) or the Output 
+Color Space (if Resolve Color Management is enabled). Two settings in the Advanced Settings of the 
+Render Settings let you choose how color space metadata will be embedded into your output for 
+supported media formats, “Color Space Tag,” and “Gamma Tag.” These default to “Same as Project,” 
+which will match the Output Color Space currently selected in the Project Settings.
+The Color Space Tag and Gamma Tag settings in the Render Settings
+251Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Color Management Using ACES
+The ACES (Academy Color Encoding Specification) color space has been designed to make scene-
+referred color management a reality for high-end digital cinema workflows. ACES also makes it easier 
+to extract high-precision, wide-latitude image data from raw camera formats, in order to preserve high-
+quality image data from acquisition through the color grading process, and to output high-quality data 
+for broadcast viewing, film printing, or digital cinema encoding.
+An oversimplification of the way ACES works is that every camera and acquisition device is 
+characterized to create an IDT (Input Device Transform) that specifies how media from that device 
+is converted into the ACES color space. The ACES gamut has been designed to be large enough to 
+encompass all visible light, with more than 25 stops of exposure latitude. In this way ACES has been 
+designed to be future-proof, taking into consideration advances in image capture and distribution.
+Meanwhile, an RRT (Reference Rendering Transform) is used to transform the data provided by 
+each image format’s IDT into standardized, high-precision, wide-latitude image data that in turn is 
+processed via an ODT (Output Device Transform). Different ODT settings correspond to each standard 
+of monitoring and output, and describe how to accurately convert the data within the ACES color 
+space into the gamut of that display in order to most accurately represent the image in every situation. 
+The RRT and ODT always work together.
+Encode ACES to 
+ACEScc / ACEScct
+DaVinci Image
+ProcessingIDT
+Decode ACEScc / ACEScct 
+back to ACES 
+ODT RRT 
+Monitoring 
+Image
+Data
+Disable
+ODT for
+Deliver
+Page
+Output
+ 
+ 
+ACES signal and processing flow 
+By using the ACES color space and specifying an IDT and an ODT, you can ingest media from any 
+capture device, grade it using a calibrated display, output it to any destination, and preserve the color 
+fidelity of the graded image.
+For more information on ACES refer to the ACES Centra l Website.
+252Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Setting Up ACES in the Project Settings Window
+There are four parameters available in the Color Science dropdown of the Color Management panel of 
+the Project Settings that let you set up DaVinci Resolve to use the ACES workflow:
+  Color science is: Using this dropdown menu, you can choose either DaVinci ACES, or 
+DaVinci ACEScc color science, which enables ACES processing throughout DaVinci Resolve.
+ACEScc: Choose DaVinci ACEScc color science to apply a standard Cineon-style log encoding 
+to the ACES data before it is processed by DaVinci Resolve. This well defined common encoding 
+makes it possible for ASC CDL values to be used across systems using the same ACEScc 
+encoding. After processing, a reverse encoding is applied in order to output ACES linear data.
+ACEScct: A variation of ACEScc that adds a roll-off at the toe of the image that’s different from 
+the encoding of ACEScc, in order to make color correction lift operations “feel” more like they do 
+with film scans and LogC encoded images, which makes it easier to raise the darkest values of the 
+image and get milky shadows, something that can be difficult with ACEScc. After processing, a 
+reverse encoding is applied in order to output ACES linear data.
+  ACES Version: When you’ve chosen one of the ACES color science options, this dropdown 
+becomes available to let you choose which version of ACES you want to use. You can choose from 
+ACES 1.0.3, ACES 1.1, ACES 1.2, ACES 1.3, or ACES 2.0 (the latest version).
+  ACES AMF: For Aces 1.3 or above, you can select an ACES AMF file to be applied. More details 
+can be found in the ACES AMF section below.
+  ACES Input Device Transform: This dropdown menu lets you choose which IDT (Input Device 
+Transform) to use for the dominant media format in use. DaVinci Resolve currently supports the 
+following IDTs:
+ACEScc/ACEScct/ACEScg: Standardized transforms for each of these ACES standards.
+ADX (10 or 16): 10-bit or 16-bit integer film-density encoding transforms meant for use if you’re 
+working with film scans that were initially encoded in an ACES workflow. This transform is 
+designed to maintain the variation in look between different film stocks.
+ALEXA: Color management settings for all ARRI ALEXA cameras.
+BMD Film/4K/4.6K: Color management settings for Blackmagic Design cameras.
+Canon 1D/5D/7D/C200/C300/C300MkII/C500/C700:  Color management settings for 
+Canon cameras.
+DCDM: This IDT transforms X’Y’Z’-encoded media with a gamma of 2.6.
+DCDM (P3D65 Limited):  This IDT transforms X’Y’Z’-encoded media with a gamma of 2.6, 
+specifically hard clipped to a P3 gamut with a D65 white point.
+DRAGONcolor/2 and REDgamma3/4/REDlogFilm combinations:  Different combinations of the 
+DRAGONcolor, REDgamma, and REDlogFilm settings are provided for legacy RED workflows.
+P3-D60: Transforms RGB-encoded image data with a D60 white point, intended for monitoring 
+with a P3-compatible display using a D60 white point.
+P3-D65: Transforms RGB-encoded image data with a D65 white point; intended for monitoring 
+with a P3-compatible display using a D65 white point.
+P3-D65 (D60 sim.): Transforms RGB-encoded image data with a D65 white point; intended to 
+simulate monitoring with a P3-compatible display using a D60 white point on a display with D65.
+P3-D65 ST2084 (108/1000/2000/4000 nits):  Transforms an image that’s compatible with the P3 
+color gamut, using the SMPTE standard PQ (ST.2084) tone curve for High Dynamic Range (HDR) 
+post-production. Three settings for four different peak luminance ranges are provided; which 
+one is appropriate to use depends on the maximum white level of the display used to create the 
+media. Preliminary standards exist for HDR displays with peak luminance at 1000 nits, 2000 nits, 
+and 4000 nits. A setting of 108 nits is provided for Kodak laser projection.
+253Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+P3-D65: Transforms RGB-encoded image data with a D65 white point, intended for monitoring 
+with a P3-compatible display using a D65 white point.
+P3-D65 ST2084 (1000/2000/4000 nits):  Transforms an image that’s compatible with the P3 color 
+gamut, using the SMPTE standard PQ (ST.2084) tone curve for High Dynamic Range (HDR) post-
+production. Three settings for three different peak luminance ranges are provided; which one is 
+appropriate to use depends on the maximum white level of the display used to create the media. 
+Preliminary standards exist for HDR displays with peak luminance at 1000 nits, 2000 nits, and 4000˛nits.
+P3-DCI (D60 sim.): Produces output that’s specifically for output on a DCI projector with a 
+D60 white point. This output may look magenta on other display devices that aren’t set up for 
+DCI display.
+P3-DCI (D65 sim.): Produces output that’s specifically for output on a DCI projector with a 
+D65 white point. This output may look magenta on other display devices that aren’t set up for 
+DCI display.
+Panasonic V35: Color management settings for each listed camera.
+Rec.2020: This IDT transforms media created with the wide-gamut standard for consumer and 
+broadcast television.
+Rec.2020 ST2084 (1000/2000/4000 nits):  This IDT transforms media created within the 
+wide-gamut standard for consumer and broadcast television, using the SMPTE standard PQ 
+(ST.2084) tone curve for High Dynamic Range (HDR) post-production. Three settings provided 
+for HDR televisions with different peak luminance capabilities.
+Rec.2020 HLG (1000 nits): This IDT transforms media within the wide-gamut standard for 
+consumer and broadcast television and uses the Hybrid Log-Gamma (HLG) standard tone curve 
+for High Dynamic Range (HDR) post-production. A single setting is provided for HDR televisions 
+with peak luminance at 1000 nits.
+Rec.709 (Camera): A deprecated legacy IDT for Rec. 709 that’s included for backward 
+compatibility. Converts the source data to linear based on Rec. 709 and transforms the result 
+to ACES, but while this transformation is technically correct, it’s not necessarily pleasing after 
+conversion through the matching ODT. For this reason, the academy updated to the following Rec. 
+709 IDT, which is the inverse of the Rec. 709 ODT.
+Rec.709: A standard transform designed to move media in the Rec. 709 color space into the 
+ACES color space. This option is used for any other file type that might be imported, such as 
+ProRes from Final Cut Pro, DNxHD from Media Composer, and any media file captured from tape.
+Rec.709 (D60 sim.): A standard transform designed to move media in the Rec. 709 color space 
+with a white point of D60 into the ACES color space.
+REDColor2/3/4/REDGamma3/4/REDLogFilm combinations:  Different combinations of the 
+REDcolor, REDgamma, and REDlogFilm settings are provided for legacy RED workflows.
+RWGLog3G10: The standardized RED IPP2 color pipeline transform for all RED camera media.
+If you’re working on a project that mixes media formats that require different IDTs, then you can assign 
+different IDTs to clips using the Media Pool’s contextual menu, or using the Clip Attributes window, 
+which is also accessible via the Media Pool’s contextual menu.
+  ACES Output Device Transform: This dropdown menu lets you choose an ODT (Output Device 
+Transform) with which to transform the image data for monitoring on your calibrated display, and 
+when exporting a timeline in the Deliver page. You can choose from the following options:
+ADX (10 and 16): A standardized ODT designed for media destined for film output. Two settings 
+accommodate 10-bit and 16-bit output. This ODT is not meant to be used for monitoring. 
+DCDM: This ODT exports X’Y’Z’-encoded media with a gamma of 2.6 intended for handoff to 
+applications that will be re-encoding this data to create a DCP (Digital Cinema Package) for digital 
+cinema distribution. This can be displayed via an XYZ-capable projector.
+254Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+DCDM (P3D60 Limited):  Outputs a P3 hard-limited signal with a D60 white point. 
+DCDM (P3D65 Limited):  Outputs a P3 hard-limited signal with a D65 white point. 
+P3 D60: Outputs RGB-encoded image data with a D60 white point; intended for monitoring 
+with a P3-compatible display using a D60 white point.
+P3 D65: Outputs RGB-encoded image data with a D66 white point; intended for monitoring 
+with a P3-compatible display using a D66 white point.
+P3 D65 (D60 sim.): Outputs RGB-encoded image data to simulate monitoring with a 
+P3-compatible display using a D60 white point on a display with a D65 white point. 
+P3 D65 (Rec.709 Limited): Outputs RGB-encoded image data with a D65 white point within a 
+P3 gamut that’s hard-limited to the color range of Rec. 709.
+P3 D65 ST2084 (108/1000/2000/4000 nits):  Outputs an image that’s compatible with the 
+P3 color gamut, using the SMPTE standard PQ tone curve for High Dynamic Range (HDR) 
+post-production. Three settings for three different peak luminance ranges are provided; which one 
+is appropriate to use depends on the maximum white level of your display. Preliminary standards 
+exist for HDR displays with peak luminance at 1000 nits, 2000 nits, and 4000 nits. A setting of 
+108 nits is provided to simulate an HDR signal clipped to an SDR range.
+P3 DCI (D60 sim.): Outputs RGB-encoded P3 image data that appears as if with a D60 white point 
+on a DCI projector with a DCI white point.
+P3 DCI (D65 sim.): Transforms RGB-encoded image data with a D61 white point (the DCI mastering 
+standard) that appears as if with a D65 white point.
+P3-D65 ST2084 (1000/2000/4000 nits):  Transforms an image that’s compatible with the P3 color 
+gamut, using the SMPTE standard PQ (ST.2084) tone curve for High Dynamic Range (HDR) 
+post-production. Three settings for three different peak luminance ranges are provided; which 
+one is appropriate to use depends on the maximum white level of the display used to create the 
+media. Preliminary standards exist for HDR displays with peak luminance at 1000 nits, 2000 nits, 
+and 4000 nits.
+Rec.2020: This ODT is for compatibility with the full range of this wide-gamut standard for 
+consumer and broadcast television.
+Rec.2020 (P3D65 Limited):  Outputs a P3D65 hard-limited signal within this wide-gamut standard 
+for consumer and broadcast television.
+Rec.2020 (Rec.709 Limited): Outputs a Rec. 709 hard-limited signal within this wide-gamut 
+standard for consumer and broadcast television.
+Rec.2020 HLG: Outputs the full Rec. 2020 gamut to the Hybrid Log-Gamma standard for HDR.
+Rec.2020 HLG (1000 nits, P3D65 Limited): Outputs a 1000 nit, P3D65 hard-limited signal within 
+the Rec. 2020 gamut and the Hybrid Log-Gamma standard for HDR.
+Rec.2020 ST2084 (1000/2000/4000 nits):  This ODT transforms media created within the wide-
+gamut standard for consumer and broadcast television, using the SMPTE standard PQ (ST.2084) 
+tone curve for High Dynamic Range (HDR) postproduction. Three settings are provided for HDR 
+televisions with different peak luminance capabilities.
+Rec.2020 ST2084 (1000/2000/4000 nits, P3D65 Limited):  This ODT transforms media within 
+the wide-gamut standard for consumer and broadcast television but with hard clipping at the 
+boundary of the P3 gamut for televisions that are limited to the smaller P3 gamut for digital 
+cinema; also uses the SMPTE standard PQ (ST.2084) tone curve for High Dynamic Range 
+(HDR) post-production. Three settings are provided for HDR televisions with different peak 
+luminance capabilities.
+Rec.709: This ODT is used for standard monitoring and deliverables for TV.
+255Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Rec.709 (D60 Sim): A standard transform designed to move media in the Rec. 709 color space 
+with a white point of D60 into the ACES color space.
+sRGB: A standardized transform designed for media created for computer display in a 
+consumer environment.
+sRGB (D60 Sim): A standardized ODT designed for media destined for computer display in a 
+consumer environment. Suitable for monitoring when grading programs destined for the web.
+ACEScc/ACEScct/ACEScg: Standardized transforms for each of these ACES standards.
+You must manually select an ODT that matches your workflow and room setup when working in ACES.
+  Process Node LUTs in: This dropdown menu lets you choose how you want to process 
+CLF LUTs that are added to nodes in your grades while working in ACES, such as Look LUTs 
+in on-set or VFX workflows. There are two choices: ACEScc AP1 Timeline Space (the default), 
+and ACES AP0 Linear.
+ACEScc AP1: For LUTs that have been designed to take the specific range of ACEScc data using 
+the AP1 primary coordinates.
+ACES AP0: For LUTs that have been designed for normal ACES data from 65504 to -65504 
+floating point values.
+NOTE: ACES grades require CLF LUTs that have been specifically created for ACES 
+workflows. If you want to apply a regular LUT within a grade, you must do a color space 
+transform to convert the image from ACES to whatever space the LUT was designed to work 
+within, and then another color space transform to convert the image back to ACES; however, 
+this workflow does not alway provide ideal results.
+The Initial State of Clips When Working in ACES
+Don’t worry if the initial state of each image file appears differently than what was monitored originally 
+on set. What’s important is that if the camera original media was well exposed, the IDT used in ACES 
+mode will retain the maximum amount of image data, and provide the maximum available latitude for 
+grading, regardless of how the image initially appears on the Timeline.
+ACES AMF 2.0
+DaVinci Resolve supports ACES AMF 2.0 files for import and export. ACES AMF is a sidecar file written 
+in XML that defines the input and output transforms of the clip. This makes sure that the correct input 
+and output transforms are applied throughout the post production pipeline. These files can either 
+be loaded at a project level or a clip level. Clips with the “applied” attribute set to true are tagged 
+appropriately with no transforms applied. However, if they are set as false, the transform is applied 
+within DaVinci Resolve.
+NOTE: You must use version 1.3 or above of the ACEScc or ACEScct Color Science to 
+use AMF files.
+256Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Working with AMF Files
+• Project level AMF: These will have all transforms applied. (i.e., any defined input, look, or 
+output transforms which have their “applied” attribute set to false will be applied.) The input 
+and output transforms are applied via the project settings “ACES Input Transform” and 
+“ACES Output Transform” menus, and these menus will display “From AMF” if they are using 
+a transform from the loaded AMF file. 
+• Clip level AMF: An AMF can be loaded from the Color page clip thumbnail context menu 
+from the Clip AMF menu. This list is also populated from the ACES Transforms AMF 
+subfolder. A clip-level AMF will not apply the output transform; that can only be applied from 
+project settings. Any input or look transforms will have their “applied” attribute set to false. 
+The look transforms are applied within a compound node labeled AMF LMTs.
+• ACES Gamut Compression: If the ACES reference gamut compress algorithm is specified 
+in a look transform within the AMF, it will set the “Apply ACES reference gamut compress” 
+checkbox to checked. The user can see what input, gamut compress, look and output 
+transforms are applied by clicking the “View Transforms” button at the bottom of the “Color 
+Space & Transforms” section of the Settings > Color Management section. 
+To Import an AMF
+1 Place your AMF files in the ACES Transforms/AMF directory on your computer. This is 
+folder is found:
+MacOS: the users Library/Application Support/Blackmagic Design/DaVinci Resolve/Aces 
+Transforms/AMF 
+Windows: the users AppData\Roaming\Blackmagic Design\DaVinci Resolve\Support\ACES 
+Transforms\AMF
+Linux: opt/resolve/Developer/DaVinciCTL/AcesTransforms/AMF
+2 In the Project Settings, set the Color Management > Color Science setting to ACEScc or ACEScct.
+3 Select the ACES version to be 1.3 or above.
+4 Click on the ACES AMF dropdown menu, and select the AMF from the list.
+Exporting AMF Files
+There are three choices to select from when you export an AMF file.
+Source Master mode:
+• All the applied attributes will be set to false.
+• A source master is not associated with any clips or images.
+Dailies Request mode:
+• You can select the folder to store the output AMFs.
+• A dailies AMF is created for and associated with each clip, and the applied attribute will be 
+set to false.
+VFX Request mode:
+• A VFX AMF will only have the input transform with the applied attribute set to false.
+257Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+AMF Delivery Behaviors
+  For AMF delivery, the Export AMF option can be chosen in the Deliver page render settings. 
+  When using Source Master, the images are rendered to ACES AP0 or Linear masters with only the 
+input transforms applied; all other transforms are set to applied false. 
+  The resulting AMF is not associated with any clips or images with an aim to define and transmit a 
+color pipeline with its post production look alongside ACES AP0 or Linear data. 
+  In Dailies Request, all transforms are applied on the rendered images and all transforms are 
+set to applied true. 
+  The resulting AMF is associated with each clip in the project. 
+  In VFX Request, the clips are rendered to ACES AP0 or Linear with only the input transform 
+applied and all other transformed are set to false.
+  Displays the AMF transform name.
+  Custom ACES AMF folder support in Project Settings.
+  AMF tree selection from the project settings ACES AMF option menu.
+  Support for project-level Look transforms.
+  Indicator for the current working location.
+To Export an AMF
+1 Right-click on your timeline in the Media Pool.
+2 Select Timelines > Export > AMF in the contextual menu.
+3 Choose the type of AMF file to export: Source Master, Dailies Request, or VFX Request.
+4 Enter the name of the AMF file and its save location in the file browser.
+5 Click on the Save button.
+The Timeline Color Space in ACES Workflows is Fixed
+When you’re working in ACES, you do not get to change the Timeline Color Space as you do in 
+Resolve Color Management. The ACES working color space is a log-encoded color space, which 
+encourages a more traditional, film-oriented approach to grading.
+Tips for Rendering Out of an ACES Project
+When choosing an output format in the Deliver page, keep the following in mind:
+• If you’ve delivering graded media for broadcast, set the ACES Output Device Transform to 
+be Rec. 709, then you can output to whatever media format is convenient for your workflow.
+• When you’re delivering graded media files to another ACES-capable facility using the 
+DCDM or ADX ODCs, you should choose the OpenEXR RGB Half (uncompressed) 
+format in the Render Settings, and set the ACES Output Device Transform to “No Output 
+Device Transform.”
+• When you’re rendering media for long-term archival, you should choose the OpenEXR 
+RGB Half (uncompressed) format in the Render Settings, and set the ACES Output Device 
+Transform to “No Output Device Transform.”
+258Setup and Workflows | Chapter 9 Data Levels, Color Management, and ACES
+MEDIA
+Chapter 10
+HDR Setup 
+and Grading
+High Dynamic Range (HDR) grading for cinema, television, and streaming is the 
+latest evolution of the consumer media experience.While HDR workflows in 
+high-end cinema and television aren’t new, this way of mastering media has been 
+slow to expand to less expensive programming. 
+However, new developments and an expanding array of affordable HDR-capable consumer devices 
+are poised to make HDR mastering of visual content increasingly ubiquitous. 
+This chapter describes what HDR is for the uninitiated and covers the operational details that will let 
+you set up DaVinci Resolve to do HDR grading. 
+Contents
+High Dynamic Range (HDR)  Grading in DaVinci Resolve  ������������������������������������������������������������������������������������������������� 261
+HDR Isn’t Just for Televisions ����������������������������������������������������������������������������������������������������������������������������������������������������������� 261
+The Different Ways of Mastering HDR ���������������������������������������������������������������������������������������������������������������������������������������� 262
+What Do I Do With HDR? ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 263
+Analyzing HDR Signals Using Video Scopes  �������������������������������������������������������������������������������������������������������������������������� 263
+HDR Viewers ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 264
+MultiMaster Trim Manager (Studio Version Only) ����������������������������������������������������������������������������������������������������������������� 265
+Dolby Vision®  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 267
+Organizing Your Timeline for Dolby Vision Mastering  �������������������������������������������������������������������������������������������������������� 268
+Letterboxing for Dolby Vision Mastering  ���������������������������������������������������������������������������������������������������������������������������������� 269
+Setting Up Color Management for Dolby Vision Mastering  �������������������������������������������������������������������������������������������� 269
+Choosing Mastering Displays for Dolby Vision  ���������������������������������������������������������������������������������������������������������������������� 269
+Using the Dolby Vision Internal Content Mapping Unit ( iCMU) �������������������������������������������������������������������������������������� 270
+Simultaneous Master and Target Display Output for Dolby Vision  ������������������������������������������������������������������������������ 270
+HDMI Tunneling using DeckLink 8K Pro G2 �����������������������������������������������������������������������������������������������������������������������������  271
+External Content Mapping Unit (eCMU) for Dolby Vision �������������������������������������������������������������������������������������������������  272
+Dolby, Dolby Vision, and the double-D symbol are registered trademarks of Dolby Laboratories Licensing Corporation.
+259Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Auto Analysis is Available to All Studio Users ������������������������������������������������������������������������������������������������������������������������  272
+Licensing DaVinci Resolve to Expose Dolby Vision Trim Controls �������������������������������������������������������������������������������  273
+Dolby Vision® Trim Controls in DaVinci Resolve  ��������������������������������������������������������������������������������������������������������������������� 274
+Previewing and Trimming At Different Levels �������������������������������������������������������������������������������������������������������������������������  277
+Managing Dolby Vision™ Metadata  ����������������������������������������������������������������������������������������������������������������������������������������������  277
+Setting Up Resolve Color Management for Grading HDR �����������������������������������������������������������������������������������������������  278
+DaVinci Resolve Grading Workflow For Dolby Vision  �������������������������������������������������������������������������������������������������������� 279
+Delivering Dolby Vision  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������� 280
+SMPTE ST.2084 and HDR10 ������������������������������������������������������������������������������������������������������������������������������������������������������������ 281
+Monitoring and Grading to ST.2084 in DaVinci Resolve ���������������������������������������������������������������������������������������������������  283
+Connecting to HDR-Capable Displays using HDMI 2.0a  �������������������������������������������������������������������������������������������������� 283
+HDR10+™ ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 284
+Project Settings for HDR10+ ������������������������������������������������������������������������������������������������������������������������������������������������������������  284
+Monitoring and Grading to ST.2084 for HDR10+  ������������������������������������������������������������������������������������������������������������������� 284
+Simultaneous Master and Target Display Output for HDR10+  ���������������������������������������������������������������������������������������� 284
+HDR10+ Grading Workflow ��������������������������������������������������������������������������������������������������������������������������������������������������������������� 285
+HDR10+ Auto Analysis Commands ����������������������������������������������������������������������������������������������������������������������������������������� ����� 285
+Delivering HDR10+  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 286
+HDR Vivid ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 286
+Monitoring and Grading to ST.2084 for HDR Vivid  �������������������������������������������������������������������������������������������������������������� 287
+HDR Vivid Grading Workflow  ���������������������������������������������������������������������������������������������������������������������������������������������������������� 287
+Simultaneous Master and Target Display Output for HDR Vivid  ����������������������������������������������������������������������������������� 287
+HDR Vivid Trim Controls in DaVinci Resolve ���������������������������������������������������������������������������������������������������������������������������  288
+Delivering HDR Vivid  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 289
+Rendering an HDR Vivid Master ���������������������������������������������������������������������������������������������������������������������������������������������������� 289
+Hybrid Log-Gamma (HLG)  ���������������������������������������������������������������������������������������������������������������������������������������������������������������� 289
+Grading Hybrid Log  -Gamma in DaVinci Resolve  ������������������������������������������������������������������������������������������������������������������ 290
+Ouputting Hybrid Log-Gamma  ������������������������������������������������������������������������������������������������������������������������������������������������������� 290
+Reset HDR Trim Analysis from the Option Menu ����������������������������������������������������������������������������������������������������������������� 290
+Generate HDR Light Level Report (Studio Version Only) ���������������������������������������������������������������������������������������������������  291
+260Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+High Dynamic Range (HDR) 
+Grading in DaVinci Resolve
+The HDR features found in DaVinci Resolve are only available in DaVinci Resolve Studio.
+High Dynamic Range (HDR) video describes an emerging family of video encoding and distribution 
+technologies designed to enable a new generation of television displays to play video capable of 
+intensely bright highlights and increased saturation. The general idea is that the majority of an HDR 
+image will be graded similarly to how a Standard Dynamic Range (SDR) image is graded now, with the 
+shadows and midtones being mostly the same between traditionally SDR and HDR-graded images. 
+This is mostly because shadows are shadows and are meant to be dark; however this philosophy also 
+maintains a comfortable viewing experience and easier backward compatibility when you need to 
+master both SDR and HDR versions of a program. 
+The difference is that HDR provides abundant additional headroom for very bright highlights and color 
+saturation that far exceed what has been previously visible in SDR television and cinema. This enables 
+the colorist to create more vivid and life -like highlights in images, such as sunsets, lit clouds, firelight, 
+explosions, sparkles, and other intensely bright and colorful imagery. In short, you can now “open up” 
+the highlights in an image just as you’ve always been able to open up, or expand, the detail of the 
+shadows. This not only provides more life -like lighting intensity and saturation, but it also dramatically 
+expands the contrast available in the scene. For example, a calibrated SDR display should have a peak 
+luminance level of 100 nits (cd/m 2), but existing HDR displays can provide peak luminance levels of 
+700, 1000, or even 4000 nits.
+However, because it’s an evolving technology, the technical standards that have been 
+developed far exceed what current consumer televisions, projectors, phones, and tablets are 
+capable of. At the time of this writing, consumer televisions are capable of outputting 700 to 
+1600 nits. Furthermore, consumer displays are often saddled with automatic brightness 
+limiting (ABL) circuits that limit power consumption to acceptable levels for home use, which 
+means that only a certain percentage of the picture may reach these peak values at any one 
+time. This is fine, because the point of HDR is not that you’re making the entire image brighter, 
+it’s that you have more headroom for specific bright highlights and additional saturation.
+For all of these reasons, HDR standards focus on describing what displays should be capable 
+of, not how these levels are to be used. That is a creative decision.
+HDR Isn’t Just for Televisions
+Lest you think that living room televisions and projectors are the only way to watch HDR content, 
+certain flagship iOS and Android phones and tablets have implemented HDR viewing capabilities that 
+are capable of meeting or even exceeding the UltraHD requirements for HDR content on an OLED 
+display. This makes HDR, surprisingly, a widely available mobile experience.
+261Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+The Different Ways of Mastering HDR
+While different HDR technologies use different methods to map the video levels of your program to 
+an HDR display’s capabilities, they all output a “near-logarithmically” encoded signal that requires a 
+compatible television that’s capable of correctly stretching this signal into its “normalized” form for 
+viewing. This means if you look at an HDR signal that’s output from the video interface of your grading 
+workstation on an SDR display, it will look flat, desaturated, and unappealing until it’s plugged into your 
+HDR display of choice.
+A graded HDR image being output looks similar to a log-encoded image
+At the time of this writing, there are five principal approaches to mastering HDR that DaVinci Resolve is 
+capable of supporting, including:
+  Dolby Vision®
+  HDR10
+  HDR10+
+  HDR Vivid
+  Hybrid Log-Gamma (HLG)
+Each of these HDR standards define how an HDR signal is encoded for export and later mapped to the 
+visible output of an HDR or SDR display. Grading to each of these standards requires some degree of 
+color management, and DaVinci Resolve gives you three main ways to handle this:
+  The easiest way is to enable Resolve Color Management (RCM) or ACES in the Color Management 
+panel of the Project Settings, and use the Color Space conversion options that are available. 
+There are options there for each supported type of HDR.
+  The transforms that are available in RCM are also available as Resolve FX operations, if you want to 
+organize your grading pipeline more manually using the Color Transform Resolve FX adjustment.
+  LUTs are also available to accomplish each of these color space conversions if you want to develop 
+your own specific image processing pipeline based on custom-made LUT or DCTL transforms.
+Overall, Resolve Color Management and ACES are reliable and recommended approaches to handling 
+HDR grading in DaVinci Resolve in most instances. 
+For more information on Resolve Color Management, jump to this chapter: Data Levels, Color 
+Management, and ACES.
+262Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+What Do I Do With HDR?
+While these standards make HDR mastering and distribution possible, they have nothing to say about 
+how these HDR-strength levels should be used creatively. That’s up to you, because the question of 
+how to utilize the expansive headroom for brightness and saturation that HDR enables is fully within 
+the domain of the colorist, as a series of creative decisions that must be made regarding how to assign 
+the range of highlights that are available in your source media to the above-100 nit HDR levels you’re 
+mastering to as you grade, given the peak luminance level that you’re assigned to master with. Which 
+HDR peak luminance level you use (1000 nit, 3000 nit, 4000 nit) probably depends on which display 
+you have access to and who’s distributing the resulting program.
+Analyzing HDR Signals Using Video Scopes
+When you’re using waveform scopes of any kind, including parade and overlay scopes, the signal will 
+fit within the 10-bit scale used to analyze the signal much differently owing to the way HDR is encoded. 
+The following chart of values will make it easier to understand how each level in “nits” (i.e., cd/m 2) 
+corresponds to a code value within the 10-bit image scale:
+10-Bit Code
+Nearest  
+Value in cd/m2 HDR Display Peak Luminance Capability
+1019† 10,000 No commercially available display
+948 5000 Outdoor LED Displays
+920 4000 Professional HDR Displays from Sony, Dolby, Flanders Scientific, EIZO, etc.
+889 3000 Professional HDR Displays from Sony, Dolby, Flanders Scientific, EIZO, etc.
+844 2000 Professional HDR Displays from Sony, Dolby, Flanders Scientific, EIZO, etc.
+824 1600 Virtual Production Wall Panels
+767 1000 Professional HDR Displays from Sony, Dolby, Flanders Scientific, EIZO, etc.
+728 700 OLED mobile phone brightness
+691 500 Minimum standard for an “UltraHD” OLED display
+635 300 Professional SDR displays in “HDR preview mode”
+593 203 BT.2408 recommendation for diffuse white of SDR content being intercut 
+with 1000 nit max HDR content
+528 108 Dolby Cinema projector
+520 100 Standard peak luminance for SDR displays
+447 48 Standard peak luminance for SDR DCI projection, Dolby Cinema 3D peak 
+luminance
+4† 0 Absolute black
+† 0–3 and 1020–1023 are reserved values
+While this table of values is useful for understanding where HDR nit levels fall on legacy external 
+scopes, if you’re monitoring with the built-in video scopes in DaVinci Resolve, you can turn on 
+“HDR (ST.2084/HLG)” in the Waveform Scale Style settings in the Scopes option menu, which replaces 
+the 10-bit scale of the video scopes with a scale based on nit values (or cd/m 2) instead.
+263Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+The video scopes with HDR (ST.2084/HLG) on in the 
+Waveform Scale Style settings in the Scopes option menu
+IMPORTANT: If you are working in a non Davinci Resolve Color Managed workflow and 
+activate the HDR (ST.2084/HLG) scopes, the waveform will always reflect HDR levels, even if 
+you’ve manually selected the output color space as Rec.709, and thus not be 100% accurate.
+TIP: If you’re unsatisfied with the amount of detail you’re seeing in the 0–519 range 
+(0–100 nits) of the video scope graphs, then you can use the 3D Scopes Lookup Table setting 
+in the Color Management panel of the Project Settings to assign the appropriate “HDR X nits 
+to Gamma 2.4 LUT,” with X being the peak nit level of the HDR display you’re using. This 
+converts the way the scopes are drawn so that the 0–100 nit range of the signal takes up the 
+entire range of the scopes, from 0 through 1023. This will push the HDR-strength highlights 
+up past the top of the visible area of the scopes, making them invisible, but it will make it 
+easier to see detail in the midtones of the image.
+HDR Viewers
+You can display the native viewers in DaVinci Resolve in HDR on Mac and Windows systems. 
+The setting affects all DaVinci Resolve viewers, including the main page viewers, Cinema Mode, 
+Fairlight Floating Viewer, Scene Cut Dialog, and the Video Clean Feed.
+You will need an HDR-capable display and to turn on HDR in your OS: 
+  Activate the Windows HDR display settings (System > Display > HDR).
+  Activate the Mac HDR display settings (System Settings > Displays > High Dynamic Range).
+  In DaVinci Resolve Preferences > System > General, you will need to check the “Use 10-bit 
+precision in viewers if available” box.
+NOTE: The general controls/UI and non-viewer dialogs (e.g., secondary screen, project 
+manager, floating Media Pool) are not affected.
+264Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+MultiMaster Trim Manager 
+(Studio Version Only)
+DaVinci Resolve has simplified the management of HDR grade trims with the new MultiMaster Trim 
+Manager, which lets you manage multiple grade trims from a single timeline. The main node graph 
+(including Pre- and Post-Group and node stack layers) serves as the hero grade for your timeline, while 
+additional trim layers are grades that you can apply on top of the hero grade per deliverable. 
+For example, you can color grade your master 4000 nit HDR timeline, and simultaneously set 
+up and manage trims for HDR 1000 and SDR Rec.709 output.
+To enable the MultiMaster Trim Manager, go to Color > MultiMaster Trim Manager. Then toggle 
+the Trim Passes switch located on the top left of the window. 
+The MultiMaster Trim Manager.
+This window lets you create and manage unlimited trims for your timeline. Add or remove 
+trims by pressing the appropriate button. To rename a trim, click on its name in the list and 
+start typing. Each trim can also be configured with custom monitoring, output, and color 
+management output settings. 
+By default, each trim enables five types of node graphs: After Clip, Before Group, After Group, 
+Before Timeline, and After Timeline. To enable/disable a specific node graph element, go to 
+the 3-dot option menu > Trim Manager.
+265Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+The Enable Trim On Selector.
+To toggle your active trim, use the 3-dot option menu in the Color page node graph. The selected 
+trim’s name will be displayed at the top of the node graph, so you can easily identify which trim 
+is active.
+Selecting Trim Pass from the Node Graph option menu.
+You can also set your blanking (at the clip level or timeline level) per trim in the Output Sizing palette. 
+To do this, enable the Use Trim blanking checkbox, which will set the blanking at a trim level. Note that 
+this feature is independent of the node stack layers that you enable for the main clip grade.
+When it’s time to output in the Deliver page, go to Video Settings and select the specific Trim 
+Pass grade that you want to render for each output.
+Go to the Video Render settings to select the Trim Pass 
+you wish to output in the Deliver page.
+266Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Dolby Vision® 
+Long a pioneer and champion of HDR for enhancing the consumer video experience, 
+Dolby Laboratories has developed a method for mastering and delivering HDR called Dolby Vision. 
+As with most HDR standards discussed in this chapter, Dolby Vision uses the PQ (perceptual quantizer) 
+electrical-optical transfer function (EOTF, which defines how an electronic video signal is presented on 
+a display), which is defined by SMPTE ST.2084, along with a hierarchy of metadata that’s embedded 
+alongside the video stream. All metadata used by Dolby Vision is organized into levels, of which the 
+following are important to the colorist:
+  Level 0 metadata, which is global metadata that defines the Mastering Display (what the colorist is 
+using), including aspect ratio, frame rate, color encoding and information on all the target displays 
+that are used for the Level 2 and Level 8 trim metadata below.
+  Level 1 metadata, which is the Dolby Vision v2.9 analysis metadata that’s generated automatically 
+when you use the Dolby Vision controls to analyze the clips in the timeline. The controls for 
+automatically generating Level 1 metadata are available to all DaVinci Resolve Studio users.
+  Level 2 metadata, which is the Dolby Vision v2.9 trimming metadata that’s set by the colorist via 
+the version 2.9 trim controls available in the Dolby Vision palette of the Color page. This trimming 
+allows adjustment of how the Dolby Vision image is to be mapped to a target display (such as 
+a 100 nit BT.709 display) that’s different from the mastering display (such as a 1000 nit BT.2020 
+display). The purpose of this metadata is to maintain a program’s artistic intent by providing 
+guidance from the colorist over how the program’s signal should be fit into the differing luminance 
+ranges of a variety of displays with different peak luminance capabilities. Manually adjustable 
+Level 2 metadata is only available to DaVinci Resolve Studio users via a license obtained from Dolby.
+  Level 3 metadata, which is the offset for Dolby Vision v4.0 added to Level 1 metadata generated 
+by the analyze buttons in the Dolby Vision controls. It also stores the mid tone offset data. 
+  Level 5 metadata, which provides information about the aspect ratio of the deliverable format, and 
+the aspect ratio of the actual image within that format. This metadata is also applicable at the per 
+clip level.
+  Level 6 metadata, which stores the MaxCLL and MaxFALL levels required by the HDR10 mastering 
+standard of HDR.
+  Level 8 metadata, which is the updated Dolby Vision v4.0 trimming metadata that’s set by the 
+colorist via the v4.0 trim controls available in the Dolby Vision palette of the Color page. This 
+evolved set of trimming commands allows more detailed adjustment of how the Dolby Vision 
+image is to be mapped to a target display (such as a 100 nit BT.709 display) that’s different from 
+the mastering display (such as a 1000 nit BT.2020 display). Just like Level 2 metadata, the purpose 
+of Level 8 metadata is to maintain a program’s artistic intent by providing guidance from the 
+colorist over how the program’s signal should be fit into the differing luminance ranges of a variety 
+of displays with different peak luminance capabilities. Manually adjustable Level 8 metadata is 
+only available to DaVinci Resolve Studio users via a license obtained from Dolby. Whether you 
+use Level 2 trim controls or Level 8 trim controls depends on the Dolby Vision version setting you 
+choose in the Color Management panel of the Project Settings.
+NOTE: It’s currently recommended for all users to choose Dolby Vision v4.0 for analysis 
+and trimming, as it provides superior results. If you’re required to deliver Dolby Vision v2.9 
+metadata when mastering for backwards compatibility, DaVinci Resolve can now export v2.9 
+metadata from projects using v4.0 workflows.
+The metadata levels described above are current of this writing. However Dolby Vision 
+is a rapidly evolving technology, and as Dolby adds new features and metadata levels 
+you should reference Dolby’s website to keep track of the latest developments: https://
+professionalsupport.dolby.com/s/article/Dolby-Vision-Metadata-Levels?language=en_US
+267Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+For the foreseeable future, the current consumer display landscape encompasses a wide variety of 
+differently performing televisions and projectors that are guaranteed to improve year over year. This 
+means that mastering for today’s displays may render content less vibrant than content that emerges 
+five years from now. This can be especially vexing for narrative content that will have a long lifespan on 
+streaming services as new generations of viewers discover them. While one way of solving this would 
+be to re-grade your program many times at a variety of nit levels to create deliverables suitable to a 
+range of display capabilities, that’s an enormous amount of work.
+Dolby Vision offers a shortcut by using sophisticated algorithms to derive automatically analyzed 
+metadata that intelligently guides how an image graded at one nit level (say 4000 nits) can be 
+adjusted to be perceptually similar to viewers watching a 1000 nit display. Highlights and saturation 
+that are too bright for a particular display will be adjusted to provide as close to the same experience 
+without clipping or flattening image detail.
+Furthermore, this automatic analysis can be manually trimmed by a colorist to account for the artistic 
+intentions of the authors of a program, in cases where the automatic analysis doesn’t do exactly what’s 
+wanted. This combination of auto-analysis and manual trimming is key to how Dolby Vision streamlines 
+the process of mastering programs to accommodate backward compatibility with SDR displays, as 
+well as the varying peak luminance capabilities of different makes and models of HDR consumer 
+displays, both now and in the future. You’re only required to make a 100 nit trim pass to guide the HDR 
+program’s conversion all the way down to SDR, and the Dolby Vision system can use that information 
+to guide how intermediate presentations (such as at 700 or 1200 nits) should be adjusted. You can 
+even do multiple trim passes at specific nit levels, such as a 100 nit pass and a 1000 nit pass, to give 
+the Dolby Vision system more information to accurately guide intermediate presentations on different 
+displays. Additionally, you don’t have to trim every clip. If the analysis is good, you can skip those clips 
+and only trim clips that need it. The overall system has been created to make it as efficient as possible 
+for colorists to ensure that the widest variety of viewers see the image as it’s meant to be seen.
+This, in a nutshell, is the advantage of the Dolby Vision system. You can grade a program on a more 
+future-proofed 4000 nit display, and use auto-analysis plus one or two manual trim passes to make 
+the program backward compatible with SDR televisions, and capable of intelligently scaling the HDR 
+highlights to provide the best representation of the mastered image for whatever peak luminance and 
+color volume a particular television is capable of. All of this is guided by decisions made by the colorist 
+during the grade.
+At the time of this writing, all seven major Hollywood studios are mastering in Dolby Vision for cinema. 
+Studios that have pledged support to master content in Dolby Vision for home distribution include 
+Universal, Warner Brothers, Sony Pictures, and MGM. Content providers that have agreed to distribute 
+streaming Dolby Vision content include Netflix, Vudu, and Amazon. If you want to watch Dolby Vision 
+content on television at home, consumer television manufacturers LG, TCL, Vizio, HiSense, Sony, 
+Toshiba, and Bang & Olfusen have all shipped models with Dolby Vision support.
+Organizing Your Timeline for Dolby Vision Mastering
+One of the first things you need to do before doing a Dolby Vision grade is to organize your timeline 
+accordingly. Because each clip undergoes a visual analysis to facilitate the Dolby Vision workflow, 
+there are specific limitations to how clips can appear in a timeline.
+  All clips to be analyzed in a Dolby Vision workflow need to be on video track V1; clips on other 
+tracks will be ignored.
+  All clips that overlap one another as part of a composite must be turned into a single item in 
+the timeline in order to be correctly analyzed. This means that each group of clips that create 
+a composite in a timeline, be it multiple overlapping clips combined via keys or alpha channel 
+transparency, multiple overlapping clips combined using composite or blend modes, or text 
+generators appearing above one or more video clips, must be turned into a compound clip for 
+Dolby Vision analysis to work correctly.
+268Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Letterboxing for Dolby Vision Mastering
+The analysis of clips in a Dolby Vision workflow keeps track of the timeline aspect ratio, as well as the 
+image aspect ratio of each clip in that timeline. Programs that mix different aspect ratios of letterboxing 
+(or blanking) will be accommodated by the Dolby Vision analysis, however Dolby Vision does not 
+support letterbox on two sides (both pillarbox and letterbox), only one at a time.
+Setting Up Color Management for Dolby Vision Mastering
+For an HDR signal to look correct, you need to output your graded program using the right EOTF for 
+the HDR standard you’re mastering. The EOTF maps the different levels DaVinci Resolve outputs to 
+your HDR display using the SMPTE ST.2084 PQ setting required for outputting Dolby Vision. 
+You can set this up in one of three different ways, as: 
+• Output Color Space and Gamma settings in RCM or ACES
+• Color Space and Gamma settings within a series of Resolve FX Color Transform plugins that 
+can be used at the end of each grade or at the end of a Timeline grade
+• 3D LUTs used for converting signals from one standard to another that can be used at the 
+end of each grade or at the end of a Timeline grade
+While Dolby Vision content is not limited to a particular color space, Resolve Color 
+Management provides a P3 D65 setting that matches the capabilities of most mastering 
+displays in use at the time of this writing.
+Choosing Mastering Displays for Dolby Vision
+To do HDR grading, you need a suitable HDR display. Technically any monitor that supports SMPTE 
+ST.2084 (aka PQ) will work. Happily, a growing number of professional displays from Sony, Flanders 
+Scientific, TV-Logic, Canon, and Eizo are suitable for use in HDR grading suites. EBU Tech 3320 
+specifies the requirements for a Grade 1 HDR mastering monitor. 
+Dolby recommends the following minimum requirements for HDR monitors: 
+• A minimum Peak Luminance of 1000 nits
+• A 200,000:1 contrast ratio
+• Minimum black at 0.005 nits
+• Capable of at least 99% of P3 gamut
+For more information on Dolby best practices for color grading Dolby Vision, visit:  
+https://www.dolby.com/us/en/technologies/dolby-vision/dolby-vision-for-creative-
+professionals.html.
+269Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Using the Dolby Vision Internal Content Mapping Unit (iCMU)
+DaVinci Resolve has a GPU-accelerated “internal” software version of the Dolby Vision CMU (Content 
+Mapping Unit) for previewing Dolby Vision mapping right in DaVinci Resolve. iCMU support can be 
+enabled and set up in the Color Management panel of the Project Settings by turning on the Enable 
+Dolby Vision checkbox. This is a DaVinci Resolve Studio-only feature.
+Dolby Vision settings in the Color Management panel of the Project Settings
+The Dolby Vision group of settings also exposes menus for choosing the version of Dolby Vision you 
+want to use, the type of analysis and what kind of Master Display you’re using, and whether or not 
+to use an eCMU (assuming you possess the option). In addition, there are options to enable HDMI 
+tunneling (as described below). Finally, turning Dolby Vision on also enables the Dolby Vision palette 
+and controls in the Color page, which are described in greater detail later in this chapter.
+To master with Dolby Vision in DaVinci Resolve using the built-in iCMU, you still need a more 
+specific hardware setup than the average grading and finishing workstation, consisting of the 
+following equipment:
+• Your DaVinci Resolve grading workstation using a DeckLink 8K Pro or DeckLink 4K Extreme 
+12G video interface.
+• A mastering display capable of outputting HDR nit levels suitable for the deliverable you’re 
+required to produce
+Simultaneous Master and Target 
+Display Output for Dolby Vision
+When mastering HDR and trimming versions for more limited displays, it’s extremely useful to be able 
+to evaluate your HDR grade and SDR trim pass side-by-side. It’s possible to output both the Master 
+Display output and the Target Display output simultaneously when you’re grading with either Dolby 
+Vision or HDR10+ enabled. 
+Necessary Hardware
+To work in this manner, you must have the following equipment:
+  Your DaVinci Resolve grading workstation must output via a DeckLink 8K Pro via the attached 
+HDMI card. This will pass the Dolby Vision metadata through to the SDR display, so you will see 
+the SDR out from the HDR grade.
+  Your Mastering Display must be capable of HDR nit levels suitable for the deliverable you’re 
+required to produce.
+  A display that can be set to output calibrated SDR, probably using the BT.709 gamut
+270Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Enabling Simultaneous Monitoring
+When you set up your display hardware, the HDR Master Display must be connected to output A, 
+and the Target Display must be connected to output B of whichever BMD video output device you’re 
+using. Then, you need to turn on the “Use dual outputs on SDI” checkbox in the Master Settings of 
+the Project Settings. At this point, assuming all of your connections are compatible with one another, 
+you should see an HDR image output to your HDR display, and a trimmed image output to your 
+SDR display.
+HDMI Tunneling using DeckLink 8K Pro G2
+HDMI Tunneling allows you to preview Dolby Vision content directly on a consumer display in real 
+time. The variables involved in display type and manufacturer all have their own processing behaviors, 
+so HDMI tunneling is not for reference grading but more of letting you get an idea of what the 
+audience will be seeing at home for QC purposes. 
+Performing HDMI tunneling in DaVinci Resolve is possible using lower cost Blackmagic DeckLink cards 
+instead of Dolby’s dedicated eCMU hardware. Currently, the only DeckLink card that supports Dolby 
+Vision HDMI tunneling is the DeckLink 8K Pro G2.
+Setting up Dolby Vision HDMI Tunneling in DaVinci Resolve:
+1 In Preferences > System > Video and Audio I/O, make sure that both the Capture Device and 
+Monitor Device are set to the DeckLink 8K Pro.
+2 In Project Settings > Master Settings > Video Monitoring, set the following parameters:
+Use 4:4:4 SDI: Check this box.
+Video bit depth: Set this value to 12 bit.
+Enable HDR metadata:  Check this box.
+The Project settings in Video Monitoring to enable Dolby Vision HDMI tunneling
+3 In Project Settings > Color Management > Dolby Vision, set the following parameters:
+Enable Dolby Vision: Check this box.
+Enable Dolby Vision HDMI tunneling: Check this box.
+Enable L5 metadata on HDMI: Check this box.
+271Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+The Project settings in Dolby Vision to enable HDMI tunneling
+4 In the Color page, in the Dolby Vision palette, make sure that the Enable Tone Mapping Preview is 
+disabled (the box is not checked). HDMI tunneling will not work if this box is checked.
+Disable the Enable Tone Mapping Preview box  
+in the Dolby Vision palette in the Color page
+For more information on Dolby Vision HDMI tunneling refer to the Dolby’s website:  
+https://professionalsupport.dolby.com/s/article/HDMI-Tunneling?language=en_US
+External Content Mapping Unit (eCMU) for Dolby Vision
+DaVinci Resolve supports the use of a Dolby External Content Mapping Unit (eCMU) for studios doing 
+more intensive HDR mastering work, as it lets you monitor and adjust an HDR display simultaneously 
+to an SDR display for side-by-side trimming at high resolutions via hardware. The eCMU also has the 
+ability to preview Dolby Vision on a consumer display in real time via HDMI tunneling to view directly 
+what the audience will see at home.
+Auto Analysis is Available to All Studio Users
+Resolve Studio enables either unlicensed or licensed users to automatically analyze the image and 
+generate Dolby Vision analysis metadata. This metadata is used to deliver Dolby Vision content and 
+to render other HDR and SDR deliverables from the HDR grade that you’ve made. This enables any 
+DaVinci Resolve Studio user to create Dolby Vision deliverables with Level 1 metadata. However, 
+manual trimming of the analysis metadata requires a license from Dolby.
+272Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+The commands governing Dolby Vision auto-analysis, which are available to all Resolve Studio 
+users, are available in the Color > Dolby Vision™ submenu, as well as the Dolby Vision palette, 
+and consist of the following:
+• Analyze All Shots: Automatically analyzes each clip in the Timeline and stores 
+the results individually. 
+• Analyze Selected Shot(s):  Only analyzes selected shots in the Timeline. 
+• Analyze Selected And Blend:  Analyzes multiple selected shots as if they were a single 
+sequence. The result is the same analysis being saved to each clip. Useful to save time 
+when analyzing multiple clips that have identical content. 
+• Analyze Current Frame: A fast way to analyze clips where a single frame is representative 
+of the entire shot. 
+Once you analyze a clip, the Min, Max, and Average fields automatically populate with the 
+resulting L1 data; these fields are not editable.
+The metadata fields for each clip
+Additionally, clips that have been analyzed show an HDR badge in the Thumbnail timeline, 
+to help you keep track of which clips have been analyzed and which have yet to be.
+Analyzed clips have HDR 
+badges to identify them
+Licensing DaVinci Resolve to Expose Dolby Vision Trim Controls
+To expose the Dolby Vision controls in DaVinci Resolve Studio that let you make manual trims 
+on top of the automatic analysis that any copy of DaVinci Resolve Studio can do, you must email 
+dolbyvisionmastering@dolby.com  to receive more information about obtaining a license. 
+Once you’ve obtained a license file from Dolby, you can import it by choosing File > Dolby Vision > 
+Load License, and its successful installation will enable the Dolby Vision controls to be enabled in the 
+Color page. You should also receive a display configuration file, which can be loaded via the File > 
+Dolby Vision > Load Configuration command and lets you populate the Dolby Vision dropdown menus 
+with the most up to date options.
+273Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Dolby Vision® Trim Controls in DaVinci Resolve
+Once you’ve analyzed a clip, you’re in a position to trim the result. The latest version of the 
+Dolby Vision palette exposes four sets of controls. The first are the main controls:
+  Target Display Output: This dropdown specifies what Dolby refers to as the Target Display, used 
+to display the tone mapped image. This menu lets you choose specific display properties to obtain 
+a preview of what the trimmed image will look like on different displays with different gamuts 
+and peak luminance capabilities. You can link the Target Display Output and the Trim Controls 
+For fields by clicking on the little chain icon directly to the left of the options. This automatically 
+changes the Trim Controls For field to the same value you set in the Target Display Output, 
+ensuring your trim controls are always right for the selected display.
+  Trim Controls for: Which Target Display you’re currently trimming for. The default setting 
+(100-nit, BT.709, BT.1886, Full) lets you monitor an SDR version of the HDR image, so you can see 
+how the trim metadata tone maps the image on non-HDR televisions.
+  Analyze controls: The commands governing Dolby Vision auto-analysis are available as buttons, 
+which perform the same functions as their similarly named counterparts in the Color > Dolby Vision 
+submenu. Please note that most trim controls are disabled until you perform an analysis, which is a 
+necessary first step.
+All: Automatically analyzes each clip in the current Timeline and stores the results individually.
+Selected: Only analyzes selected shots in the Timeline.
+Blend: Analyzes multiple selected shots as if they were a single sequence. The result is the same 
+analysis being saved to each clip. You need to use the blend option when analyzing two clips that 
+meet at a through edit separating otherwise contiguous frames. It’s also typical to use the Blend 
+option when analyzing a scene of clips that take place at the same location at the same time, to 
+ensure that natural variations in lighting don’t add unwanted variations between the analyses of 
+clips that are supposed to already be balanced with one another. Blend also saves time when 
+analyzing multiple clips that have identical content.
+Frame: Useful in situations where part of a clip has an extreme level of color or lightness that’s 
+not typical of the rest of the clip, that incorrectly biases the analysis and produces a poor result. 
+Placing the playhead on a frame that’s representative of how the clip is supposed to look and 
+using the Frame option bases the analysis on only that frame. This is also a fast way to analyze 
+clips where a single frame is representative of the entire shot.
+  Enable Tone Mapping Preview: Lets you see the target display output in the Color page Viewer 
+and video output, so you can evaluate how the tone mapped version looks on your HDR display. 
+This control is disabled when you enable “Use dual-outputs on SDI” in the Master Settings of the 
+Project Settings, since the second output SDI now automatically displays the target display output.
+  Mid Tone Offset (CM v4.0 only): This control is used to match the overall exposure between the 
+tone mapped SDR signal to the HDR master. This offset is applied to the L1 Mid values, allowing 
+the adjustment of mid tones without affecting the blacks and highlights. It can be used to shift 
+overall L1 analysis to ensure the best preservation of artistic intent. This setting is shared among all 
+trim passes you do at all nit levels, so if you’ve done two trim passes, one at 100 nits and another 
+at 1000 nits, adjusting this setting always adjusts both trim passes at once. Changes made to this 
+control are recorded to the L3 metadata for each clip.
+The second are the Min, Mid, and Max metadata fields that are populated by the analyzed values of 
+the current clip. These fields cannot be edited, although analysis metadata can be copied and pasted 
+among clips. These values represent the L1 analysis and are used to calculate how the HDR image 
+should be trimmed to fit into the video standard specified by the Target Display.
+The third are the Primary Trims, which are only editable if you’ve performed an analysis and if you 
+have a license from Dolby. Which controls are exposed depends on the version of Dolby Vision you’ve 
+selected in the Color Management panel of the Project Settings.
+274Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Reset Dolby Vision Analysis from the Option Menu
+You can reset the Dolby Vision analysis from the three-dot option menu in the Dolby Vision pane of 
+the Color page. 
+Dolby Vision CM v2.9 Controls
+If you choose Dolby Vision 2.9 in the Color Management panel of the Project Settings, it activates the 
+2.9 version of Dolby’s content mapping algorithm and exposes the original Dolby Vision trim controls. 
+It is no longer suggested to use these, since you can do a Dolby Vision 4.0 analysis and trim, and still 
+export converted 2.9 metadata for legacy workflows.
+  Lift/Gamma/Gain:  These controls function similarly to the Y-only Lift, Gamma, and Gain master 
+wheels of the Color Wheels palette, to let you trim the overall contrast levels of the image. The 
+Dolby Best Practices Guide recommends to limit positive Lift to no more than 0.025, and mostly 
+restrict yourself to using Gamma and Gain if necessary to lighten the image.
+  Saturation Gain: Lets you trim the saturation of the most highly saturated areas within a scene. 
+Lesser saturated values will be less affected.
+  Chroma Weight: Darkens saturated parts of the image to preserve colorfulness in areas of 
+the image that are clipped by smaller gamuts that don’t have enough headroom for saturation 
+in the highlights.
+  Tone Detail: Lets you preserve contrast detail in the highlights that might otherwise be lost when 
+the highlights are mapped to lower dynamic ranges, usually due to clipping. Increasing Tone Detail 
+Weight increases the amount of highlight detail that’s preserved. When used, can have the effect 
+of sharpening highlight detail.
+Dolby Vision CM v4.0 Controls
+If you choose Dolby Vision 4.0 in the Color Management panel of the Project Settings, it activates 
+the 4.0 version of Dolby’s content mapping algorithm, and exposes the following controls.
+  Lift/Gamma/Gain:  These controls function similarly to the Y-only Lift, Gamma, and Gain master 
+wheels of the Color Wheels palette, to let you trim the overall contrast levels of the image. The 
+Dolby Best Practices Guide recommends to limit positive Lift to no more than 0.025, and mostly 
+restrict yourself to using Gamma and Gain if necessary to lighten the image.
+  Saturation Gain: Lets you trim the saturation of the most highly saturated areas within a scene. 
+Lesser saturated values will be less affected.
+  Chroma Weight: Darkens saturated parts of the image to preserve colorfulness in areas of 
+the image that are clipped by smaller gamuts that don’t have enough headroom for saturation 
+in the highlights.
+  Tone Detail: Lets you preserve contrast detail in the highlights that might otherwise be lost when 
+the highlights are mapped to lower dynamic ranges, usually due to clipping. Increasing Tone Detail 
+Weight increases the amount of highlight detail that’s preserved. When used, can have the effect 
+of sharpening highlight detail.
+  Mid Contrast Bias: Affects image contrast in the region around the computed average picture 
+level. This lets you increase or decrease contrast in the midtones of the image.
+  Highlight Clipping: Reduces details and affects the roll-off the brighter part of the image by 
+clipping the highlights as required. This is useful when the tone mapped image is displaying 
+unwanted details.
+275Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+The Primary Trims controls that are found in the Dolby Vision palette are only enabled 
+once you’ve authorized your system with a special license, available from Dolby.
+The fourth set of controls is available via a second palette mode, the Secondary Trims. These are only 
+editable if you’ve performed an analysis and if you have a license from Dolby.
+  Secondary Saturations:  A set of slider-based vector-style controls (similar to the Hue vs. Sat 
+curve) lets you adjust the Saturation of Red, Yellow, Green, Cyan, Blue, and Magenta to help you 
+selectively fine tune the results.
+  Secondary Hues: Another set of slider-based vector-style controls (similar to the Hue vs. 
+Hue≈controls) lets you adjust the Hue of Red, Yellow, Green, Cyan, Blue, and Magenta to help you 
+fine tune the results.
+The Secondary Trims controls, as seen on a licensed Dolby Vision system
+Together, all of this trimming metadata lets the colorist guide how the iCMU or eCMU transforms 
+the image from the Mastering Display specified in the Project Settings to the Target Display 
+specified in the Dolby Vision palette. This metadata is carried throughout the ecosystem so that 
+your artistic intent is preserved on a variety of platforms and displays.
+276Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Previewing and Trimming At Different Levels
+Additionally, the iCMU or eCMU can be used to preview 100 nit, 600 nit, 1000 nit, and 2000 nit versions of 
+your program, with different gamuts, if you want to see how your master will scale to those combinations 
+of peak luminance levels and standards. This, of course, requires your DaVinci Resolve workstation or 
+eCMU to be connected to a display that’s capable of being set to those peak luminance output levels.
+Though it’s not at all typical, you also have the option to set the “Trim Controls For” dropdown menu 
+to different combinations of peak luminance, gamut, and color temperature, in order to visually trim 
+the grades of your program at up to four different peak luminance levels, including 100 nit, 600 nit, 
+1000 nit, and 2000 nit reference points. Choosing a setting from the “Trim Controls For” dropdown 
+menu sets you up to adjust trim metadata for that setting.
+Choosing different settings from the “Trim Controls For” dropdown menu lets you can optimize a 
+program’s visuals for the peak luminance and color volume performance of many different televisions 
+with a much finer degree of control. If you take this extra step of doing a complete trim pass of your 
+program at multiple nit levels (using the Dolby Vision controls), the Level 2, or Level 8 metadata you 
+generate in each trim pass ensures that the artistic intent is preserved as closely as possible across a 
+wide variety of displays, in an attempt to provide the viewer with the best possible representation of 
+the director’s intent, no matter where it appears. 
+For example, if a program were graded relative to a 4000 nit display, along with a single 
+100 nit BT.709 trim pass, then a Dolby Vision-compatible television with 750 nit peak output 
+will reference the 100 nit trim pass metadata in order to come up with the best way of “splitting 
+the difference” to output the signal correctly. On the other hand, were the colorist to do three 
+trim passes, the first at 100 nits, -cond at 600 nits, and a third at 1000 nits, then a 750 nit-
+capable Dolby Vision television would be able to use the 600 and 1000 nit trim metadata 
+to output more accurately scaled color volume and HDR-strength highlights, relative to the 
+colorist’s adjustments, that take better advantage of the 750 nit output of that television.
+Managing Dolby Vision™ Metadata
+As you go through the process of analyzing and trimming the HDR grades displayed on your Master 
+Display to look appropriate on your Target Display, you’ll sometimes find it useful to copy and paste 
+metadata from one clip to another. You can copy and paste Analysis Metadata separately from Trim 
+Metadata and Mid Tone Offset, and you can choose to copy and paste metadata for all Target Displays 
+when you’re trimming multiple passes, or you can copy and paste metadata for only the current Target 
+Display if you’re trimming multiple passes and you only want to overwrite metadata for a single pass.
+Methods of Copying and Pasting Dolby Vision Metadata:
+To copy and paste Analysis Metadata: Select a clip you want to copy from, choose Copy Analysis 
+Metadata from the Dolby Vision palette option menu, then select a clip you want to paste to, and 
+choose Paste Analysis Metadata from the Dolby Vision palette option menu.
+To copy and paste Trim Metadata for all Target Displays: Do one of the following:
+  Select a clip you want to copy from, choose Edit > Dolby Vision > Copy Trim Metadata, then select 
+a clip you want to paste to, and choose Edit > Dolby Vision > Paste Trim Metadata.
+  Select a clip you want to copy from, choose Copy Trim Metadata from the Dolby Vision palette 
+option menu, then select a clip you want to paste to, and choose Paste Trim Metadata from the 
+Dolby Vision palette option menu.
+  Select a clip you want to paste to, then press and hold the Option-Shift keys, and middle-click the 
+clip you want to copy from.
+277Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+  To copy and paste Trim Metadata for the current Target Display: Do one of the following:
+ — Select a clip you want to copy from, choose Copy Trim Metadata from the Dolby Vision palette 
+option menu, then select a clip you want to paste to, and choose Paste Trim Metadata to 
+Current from the Dolby Vision palette option menu.
+ — Select a clip you want to paste to, then press and hold the Option key, and middle-click the clip 
+you want to copy from.
+  To copy and paste Mid Tone Offset: Select a clip you want to copy from, choose Copy Mid Tone 
+Offset from the Dolby Vision palette option menu, then select a clip you want to paste to, and 
+choose Paste Mid Tone Offset from the Dolby Vision palette option menu.
+Setting Up Resolve Color Management for Grading HDR
+Once the hardware is set up, setting up Resolve itself to output HDR for Dolby Vision mastering is easy 
+using Resolve Color Management (RCM). This procedure is pretty much the same no matter which 
+HDR mastering technology you’re using; only specific Output Color Space settings will differ.
+1 Set Color Science to DaVinci YRGB Color Managed in the Color Management panel of the 
+Project Settings.
+2 Then, open the Color Management panel, and set the Output Color Space dropdown to the 
+ST.2084 setting that corresponds to the peak luminance, in nits, of the grading display you’re 
+using. For example, if you’re grading with a Sony BVM X300, choose ST.2084 1000 nit, but if 
+you’re grading with a Flanders Scientific XM310K, choose ST.2084 3000 nit, in order to use the full 
+capabilities of each display. Be aware that whichever HDR setting you choose will impose a hard 
+clip at the maximum nit value supported by that setting. This is to prevent accidentally overdriving 
+HDR displays for which there are negative consequences (not all HDR displays have this limitation).
+ — ST.2084 300 nit
+ — ST.2084 500 nit
+ — ST.2084 800 nit
+ — ST.2084 1000 nit
+ — ST.2084 2000 nit
+ — ST.2084 3000 nit
+ — ST.2084 4000 nit
+This setting is only the output EOTF (a sort of gamma transform, if you will, using the terminology 
+that DaVinci Resolve’s UI has used up until now).
+3 Next, choose a setting in the Timeline Color Space that corresponds to the gamut you want 
+to use for grading, and that will be output. For example, if you want to grade the Timeline as 
+a log-encoded signal and “normalize” it yourself, you can choose ARRI Log C or Cineon Film 
+Log (this workflow is highly recommended for the best results). If you would rather save time by 
+having DaVinci Resolve normalize the Timeline to P3-D65 and grade that way, you can choose 
+that setting as well. In terms of defining the output gamut, the rule is that if “Use Separate Color 
+Space and Gamma” is turned off, the Timeline Color Space setting will define your output gamut. 
+If “Use Separate Color Space and Gamma” is turned on, then you can specify whatever gamut 
+you want in the left Output Color Space dropdown menu, and choose the EOTF from the right 
+dropdown menu (as described in step 2).
+278Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+4 Be aware that, when it’s being properly output, HDR ST.2084 signals appear very “log-like,” in 
+order to pack a wide dynamic range into the bandwidth of a standard video signal. It’s the HDR 
+display itself that “normalizes” this log-encoded image to look as it should. For this reason, the 
+image you see in your Color page Viewer is going to appear flat and log-like, even though the 
+image being displayed on your HDR reference display looks vivid and correct. If you’re using a 
+typical SDR computer display, and you want to make the image in the Color Page Viewer look 
+“normalized” at the expense of clipping the HDR highlights (in the Viewer, not in the grade), you 
+can use the 3D Color Viewer Lookup Table setting in the Color Management panel of the Project 
+Settings to assign the appropriate ST.2084 setting with a peak nit level that corresponds to the 
+HDR broadcast display you’re outputting to.
+5 Additionally, the “Timeline resolution” and “Pixel aspect ratio” (in the project settings) that your 
+project is set to use is saved to the Dolby Vision metadata, so make sure your project is set to the 
+final Timeline resolution and PAR before you begin grading.
+DaVinci Resolve Grading Workflow For Dolby Vision
+Once the hardware and software is all set up, you’re ready to begin grading HDR. The workflow is 
+fairly straightforward.
+1 First, grade the HDR image on your HDR Monitor to look as you want it to. Dolby recommends 
+starting by setting the look of the HDR image, to set the overall intention for the grade.
+2 When using various grading controls in the Color page to grade HDR images, you may find it 
+useful to enable the HDR Mode of the node you’re working on by right-clicking that node in 
+the Node Editor and choosing HDR Mode from the contextual menu. This setting adapts that 
+node’s controls to work within an expanded HDR range. Practically speaking, this makes controls 
+that operate by letting you make adjustments at different tonal ranges, such as Custom Curves, 
+Soft Clip, and so on, work more easily with wide-latitude signals.
+3 When you’re happy with the HDR grade, click the Analysis button in the Dolby Vision palette. 
+This analyzes every pixel of every frame of the current shot, and performs and stores a statistical 
+analysis that is sent to the iCMU or eCMU to guide its automatic conversion of the HDR signal to 
+an SDR signal.
+4 Choose “Target Display Output” and “Trim Controls For” settings that you want to trim to. 
+By default, these are set to “100-nit, BT.709, BT.1886, Full,” which is a typical SDR deliverable. 
+However, other options are available if you want to do multiple trim passes to obtain a more 
+accurate result. Whichever setting you choose from, “Trim Controls For” dictates which trim pass 
+you’re doing. You can do multiple trim passes by choosing another option from this menu.
+5 If you’re not happy with the automatic conversion, use the trim controls in the Dolby Vision palette 
+to manually trim the result to the best possible BT.709 approximation of the HDR grade you 
+created in step 1.
+6 If you obtain a good result, then move on to the next shot and continue work. If you cannot 
+obtain a good result, and worry that you may have gone too far with your HDR grade to derive an 
+acceptable SDR tone mapping, you can always trim the HDR grade a bit, and then retrim the SDR 
+grade to try and achieve a better tone mapping. Dolby recommends that if you make significant 
+changes to the HDR master, particularly if you modify the blacks or the peak highlights, you 
+should reanalyze the scene. However, if you only make small changes, then reanalyzing is not 
+strictly required.
+As you can see, the general idea promoted by Dolby is that a colorist will focus on grading the 
+HDR picture relative to the 1000, 2000, 4000, or higher nit display that is being used, and will then 
+rely on the colorist to use the Dolby Vision controls to “trim” this into a 100 nit SDR version. This 
+metadata is saved as part of the mastered media, and it’s used to more intelligently tone map the 
+entire image to fit within any given display’s parameters. The colorist’s artistic intent is used to guide 
+all dynamic adjustments to the content.
+279Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Delivering Dolby Vision
+Once you’re finished grading the HDR and trimming the SDR tone mapping, you need to output your 
+program correctly in the Deliver page.
+Rendering a Dolby Vision Master
+To deliver a Dolby Vision master after you’ve finished grading, you want make sure that the Output 
+Color Space of the Color Management panel of the Project Settings is set to the appropriate HDR 
+ST.2084 setting based on the peak output you want to deliver (any values above will be clipped). 
+Then, you want to set your render up to use one of the following Format/Codec combinations:
+  TIFF, RGB 16-bit
+  EXR, RBG-half (no compression)
+When you render for tapeless delivery, all Dolby Vision metadata is recorded into a Dolby Vision 
+XML and delivered along side either the Tiffs or EXR renders. To export a Dolby Vision XML file, 
+select your timeline in the media pool and choose File > Export >Timeline. Navigate to where you 
+want to save the file and select Dolby Vision v2.9 (or v4.0) MXF files from the file type selector 
+and click save. These two sets of files are then delivered to a facility that’s capable of creating the 
+Dolby Vision deliverable file. 
+Rendering a Dolby Vision IMF
+You can deliver directly to an IMF that includes an MXF with embedded Dolby Vision metadata in the 
+package. To export a Dolby Vision IMF use the following Video settings in the Deliver page:
+  Format: IMF
+  Codec: Kakadu JPEG 2000
+  Type: Dolby Vision (HD, 2K, UHD, or 4K) depending on your deliverable resolution.
+Configure the rest of the IMF settings as necessary for your project.
+The Video settings to use for creating a 
+Dolby Vision IMF in the Deliver page
+Rendering a Dolby Vision H.265 file
+You can deliver directly to a Dolby Vision compatible H.265 file, which allows you to playback video 
+that triggers playback in the Dolby Vision mode on your television or computer screen. To export a 
+Dolby Vision H.265 file, use the following Video settings in the Deliver page:
+  Format: MP4 or QuickTime
+  Codec: H.265
+  Dolby Vision Profile: Set the Dolby Vision profile you wish to use, or None to select the 
+Tone Mapping manually.
+280Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+  Tone Mapping: Choose None for no tone mapping, or Dolby Vision to expose a list of common 
+deliverables to tone map to.
+Configure the rest of the H.265 settings as necessary for your project.
+The Dolby Vision Profile and Tone Mapping settings in 
+the H.265 Video section of the Deliver page
+Rendering an Ordinary SDR Media File or Other Specific HDR Trim Pass
+If you want to export the SDR trim pass, then you can choose Dolby Vision from the Tone Mapping 
+dropdown menu in the Advanced Settings of the Render Settings list on the Deliver page, and choose 
+the 100-nit, BT.709, BT.1886, Full setting below. With this enabled, you can output the SDR version of 
+your program to any format you like.
+You can also export the trims for other HDR nit levels for specific displays, at 600, 1000 or 2000 nits 
+and in the either the BT.2020 or P3 gamuts.
+The Tone Mapping setting in the Advanced Settings of the Render Settings list
+SMPTE ST.2084 and HDR10
+Many display manufacturers who have no interest in licensing Dolby Vision for inclusion in their 
+displays are instead going with the simpler method of engineering their displays to be compatible with 
+SMPTE ST.2084. It requires only a single stream for distribution, there are no licensing fees, no special 
+hardware is required to master for it (other than an HDR mastering display), and there’s no special 
+metadata to write or deal with.
+Interestingly, SMPTE ST.2084 ratifies the “PQ” EOTF that was originally developed by Dolby, and 
+which is used by Dolby Vision, into a general standard that accommodates encoding HDR at peak 
+luminance values up to 10,000 cd/m 2. This standard requires at minimum a 10-bit signal for distribution, 
+and the EOTF is mathematically described such that the video signal utilizes the available code 
+values of a 10-bit signal as efficiently as possible, while allowing for such a wide range of luminance in 
+the image.
+SMPTE ST.2084 is also part of the “Ultra HD Premium” industry specification, which stipulates that 
+televisions bearing the Ultra HD Premium logo have the following capabilities:
+  A minimum UHD resolution of 3840 x 2160
+  A minimum gamut of 90% of P3
+  A minimum dynamic range of either 0.05 nits black to 1000 nits peak luminance (to accommodate 
+LCD displays), or 0.0005 nits black to 540 nits peak luminance (to accommodate OLED displays)
+  Compatibility with SMPTE ST.2084
+281Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Finally, ST.2084 has been included in the HDR 10 standard adopted by the Blu-ray Disc Association 
+(BDA) that covers Ultra HD Blu-ray. HDR 10 stipulates that Ultra HD Blu-ray discs have the following 
+characteristics:
+  UHD resolution of 3840 x 2160
+  Up to the Rec. 2020 gamut
+  SMPTE ST.2084
+  Mastered with a peak luminance of 1000 nits
+The downside is that, by itself, an HDR10 mastered program is not backward compatible with BT.709 
+displays using BT.1886 (although the emerging HDR10+ standard described later addresses this). 
+Furthermore, no provision is made to scale the above-100 nit portion of the image to accommodate 
+different displays with differing peak luminance levels. For example, if you grade and master an image 
+to have peak luminance of 4000 nits, and you play that signal on an HDR10-compatible television 
+(using ST.2084) that’s only capable of 800 nits, then everything above 800 nits will be clipped, while 
+everything below 800 nits will look exactly as it should relative to your grade. 
+This is because ST.2084 is referenced to absolute luminance. If you grade an HDR image 
+referencing a 1000 nit peak luminance display, as is recommended by HDR10, then any display using 
+ST.2084 will respect and reproduce all levels from the HDR signal that it’s capable of reproducing 
+as you graded them, up to the maximum peak luminance level it can reproduce. For example, on an 
+HDR10-compatible television capable of outputting 500 nits, all mastered levels from 501–1000 will be 
+clipped, as seen in the screenshot below.
+Comparing the original 1000 nit waveform representing the grading monitor 
+to a 500 nit clipped waveform representing the consumer television
+282Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+How much of a problem this is really depends on how you choose to grade your HDR-
+strength highlights. If you’re only raising the most extreme peak highlights to maximum HDR-
+strength levels, then it’s entirely possible that the audience might not notice that the display 
+is only outputting 800 nits worth of signal and clipping any image details from 801–1000 
+nits because there weren’t that many details above 800 anyway. Or, if you’re grading large 
+explosive fireballs up above 800 nits in their entirety because it looks cool, then maybe the 
+audience will notice. The bottom line is, when you’re grading for displays that are only capable 
+of ST.2084, you need to think about these sorts of things.
+Monitoring and Grading to ST.2084 in DaVinci Resolve
+Monitoring an ST.2084 image is as simple as obtaining a ST.2084-compatible HDR display and 
+connecting it to the output of your DeckLink 8K, DeckLink 4K Extreme 12G, or UltraStudio 4K Extreme.
+Setting up Resolve Color Management to grade for ST.2084 is identical to setting up to grade for 
+Dolby Vision. You’ll also monitor the video scopes identically, and output a master identically, given 
+that both standards rely upon the same PQ curve.
+TIP: If you’re monitoring with the built-in video scopes in DaVInci Resolve, you can turn on 
+“HDR (ST.2084/HLG)” in the Waveform Scale Style settings in the Scopes option menu, which 
+will replace the 10-bit scale of the video scopes with a scale based on nit values (cd/m2) instead.
+Connecting to HDR-Capable Displays using HDMI 2.0a
+If you have a DeckLink 4K Extreme 12G or an UltraStudio 4K Extreme video interface, then DaVinci 
+Resolve 12.5 and above can output the metadata necessary to correctly display HDR video signals to 
+display devices using HDMI 2.0a when you turn on the “Enable HDR metadata over HDMI” checkbox 
+in the Master Settings panel of the Project Settings. 
+The Enable HDR metadata over HDMI option in 
+the Master Settings panel of the Project Settings 
+lets you output HDR via HDMI 2.0a
+When you do so, a setting in the Color Management panel of the Project Settings, “HDR mastering 
+is for X” lets you specify the output, in nits, to be inserted as metadata into the HDMI stream being 
+output, so that the display you’re connecting to correctly interprets it. The output you specify should 
+match what your display is expecting.
+The “HDR mastering is for” setting lets you insert  
+ metadata for HDR output via HDMI 2.0a
+283Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+HDR10+™
+DaVinci Resolve supports the HDR10+ HDR format by Samsung. When enabled, an HDR10+ palette 
+shows the results of the trimming analysis that make an automated downconversion of HDR to SDR, 
+creating metadata to control how HDR-strength highlights look on a variety of supported televisions 
+and displays. 
+Project Settings for HDR10+
+An HDR10+ grade is set up in the Color Management panel of the Project Settings.
+  Color Science: DaVinci YRGB Color Managed
+  Color Processing Mode: HDR
+  Output Color Space: HDR PQ
+  HDR mastering is for XXXX nits: Type in the nit level of your mastering monitor.
+  Enable HDR10+ checkbox:  Check this box to enable HDR10+ and its palette in the Color page.
+HDR 10+ settings in the Color Management panel of the Project Settings.
+Monitoring and Grading to ST.2084 for HDR10+
+When you’re grading a program for HDR10+ output, you’ll need to monitor an ST.2084 image, which 
+is as simple as obtaining a ST.2084-compatible HDR display and connecting it to the output of your 
+DeckLink 8K, DeckLink 4K Extreme 12G, or UltraStudio 4K Extreme.
+Setting up Resolve Color Management to grade for ST.2084 is identical to setting up to grade for 
+Dolby Vision or regular HDR10. You’ll also monitor the video scopes identically, and output a master 
+identically, given that each of these standards rely upon the same PQ curve.
+TIP: If you’re monitoring with the built-in video scopes in DaVinci Resolve, you can turn 
+on “HDR (ST.2084/HLG)” in the Waveform Scale Style settings in the Scopes option menu, 
+which will replace the 10-bit scale of the video scopes with a scale based on nit values 
+(cd/m2) instead.
+Simultaneous Master and Target Display Output for HDR10+
+When mastering HDR and trimming versions for more limited displays, you may want to evaluate your 
+HDR grade and tone-mapped trim pass simultaneously. Starting in DaVinci Resolve 15, it’s possible 
+to output both the Master Display output and the Target Display output simultaneously when you’re 
+grading with either Dolby Vision or HDR10+ enabled. 
+284Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Necessary Hardware
+You must first have the following equipment:
+  A DaVinci Resolve grading workstation, which must output via a DeckLink 8K, DeckLink 4K 
+Extreme 12G, UltraStudio 4K Extreme video interface, or better.
+  A Mastering Display, which must be capable of HDR nit levels suitable for the deliverable you’re 
+required to produce.
+  An HDR target display that can be set to the appropriate tone-mapped output.
+Enabling Simultaneous Monitoring
+When you set up your display hardware, the HDR Master Display must be connected to output A, 
+and the Target Display must be connected to output B of whichever Blackmagic Design video output 
+device you’re using. 
+Next, enable the “Use dual outputs on SDI” checkbox in Project Settings > Master Settings. If all your 
+connections are compatible, you should see an HDR image output to your HDR display, and a trimmed 
+image output to your SDR display.
+HDR10+ Grading Workflow
+The concept behind the HDR10+ workflow is that you’ll grade the HDR version of each clip in your 
+program first, and then use the automatic analysis to create a down-converted, tone-mapped version 
+of each shot that’s controlled by metadata. Once the HDR10+ trim pass is complete, you’ll deliver the 
+rendered HDR output along with a set of HDR10+ JSON metadata files to a facility for final mastering.
+Exporting the HDR10+ .json sidecar file
+You can export a separate .json file of your trim data that allows it to be reviewed, archived, and saved 
+independently from the video file.
+1 Right-click on your timeline in the media pool. 
+2 Select Timelines > Export > HDR10+ JSON from the context menu.
+3 A file browser will appear for you to name and locate where you want to save the file.
+4 Select HDR10+ Profile B Files (*.json) as the file type.
+5 Click Save.
+HDR10+ Auto Analysis Commands
+After you’ve graded an HDR version of each clip in your program, a set of HDR10+ specific commands 
+let you auto-analyze each clip to create custom HDR to SDR downconversion metadata that give 
+you a starting point for the SDR trim pass you need to do. These commands are available in the 
+Color > HDR10+ submenu:
+  Analyze All Shots: Automatically analyzes each clip in the Timeline and 
+stores the results individually. 
+  Analyze Selected Shot(s):  Only analyzes selected shots in the Timeline. 
+  Analyze Selected and Blend:  Analyzed multiple selected shots and averages the result, which is 
+saved to each clip. Useful to save time when analyzing multiple clips that have identical content. 
+  Analyze Current Frame: A fast way to analyze clips where a single frame is 
+representative of the entire shot.
+285Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Delivering HDR10+
+Once you’re finished grading the HDR and trimming the SDR downconversion, you need to output 
+your program correctly in the Deliver page.
+Rendering an HDR10+ Master
+To deliver an HDR10+ master after you’ve finished grading, you want make sure that the Output Color 
+Space of the Color Management panel of the Project Settings is set to the appropriate HDR ST.2084 
+setting based on the peak output you want to deliver (any values above will be clipped). Then, you 
+want to set your render up to use the highest quality Format/Codec combination that can be delivered 
+to whomever is doing the final mastering.
+The HDR10+ analysis and manual trim metadata you generated while trimming is saved per clip, 
+in a series of JSON sidecar files, which should then be exported by right-clicking that timeline in the 
+Media Pool, and choosing Timelines > Export > HDR10+JSON.
+These two sets of files are then delivered to a facility that’s capable of creating an HDR10+ Mezzanine 
+File (this cannot be done in DaVinci Resolve).
+Rendering an HDR10+ HEVC File
+To render an HDR10+ video file that’s instantly viewable on an HDR10+ capable television without 
+creating the Mezzanine File, simply encode it to an HEVC file using these video settings in the 
+Deliver page:
+  Format: MP4
+  Codec: H.265
+  Embed HDR10+ Metadata:  Enable this box.
+  Encoding Profile: Main10
+When rendered with these settings, you can add the file on a USB drive and connect it to an 
+HDR10+ television for playback on the television’s menu system. To confirm the output works, 
+press the center button on the TV remote to view the file information overlay with the HDR10+ 
+logo. Alternatively, you can use third party video analysis software like MediaInfo. The correct 
+parameter to look for in the video settings is: SMPTE ST 2094 App4, Version 1, HDR10+ Profile 
+B.
+HDR Vivid
+HDR Vivid is the HDR video technology standard released by the UHD World Association (UWA). 
+Mastering in this format assures wide compatibility with HDR televisions, phones, computers, and other 
+devices adhering to this standard.
+HDR Vivid settings in the Color Management panel of the Project Settings
+286Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Monitoring and Grading to ST.2084 for HDR Vivid
+When you’re grading a program for HD Vivid output, you’ll need to monitor an ST.2084 image, which 
+is as simple as obtaining a ST.2084-compatible HDR display and connecting it to the output of your 
+DeckLink 8K, DeckLink 4K Extreme 12G, or UltraStudio 4K Extreme.
+Setting up Resolve Color Management to grade for ST.2084 is identical to setting up to grade for 
+Dolby Vision or regular HDR10. You’ll also monitor the video scopes identically, and output a master 
+identically, given that each of these standards rely upon the same PQ curve.
+TIP: If you’re monitoring with the built-in video scopes in DaVinci Resolve, you can turn 
+on “HDR (ST.2084/HLG)” in the Waveform Scale Style settings in the Scopes option menu, 
+which will replace the 10-bit scale of the video scopes with a scale based on nit values 
+(cd/m2) instead.
+HDR Vivid Grading Workflow
+The idea behind the HDR Vivid workflow is that you’ll grade the HDR version of each clip in your 
+program first, and then use the automatic analysis to create a downconverted tone mapped version of 
+each shot that’s controlled by metadata. Once the HDR Vivid trim pass is complete, you’ll deliver the 
+rendered HDR output with embedded HDR Vivid metadata.
+Simultaneous Master and Target Display Output for HDR Vivid
+When mastering HDR and trimming versions for more limited displays, it’s extremely useful to be able 
+to evaluate your HDR grade and tone mapped trim pass side by side. Starting in DaVinci Resolve 15, 
+it’s possible to output both the Master Display output and the Target Display output simultaneously 
+when you’re grading with HDR Vivid enabled. 
+Necessary Hardware
+To work in this manner, you must have the following equipment:
+  Your DaVinci Resolve grading workstation must output via a DeckLink 8K, DeckLink 4K Extreme 
+12G, UltraStudio 4K Extreme video interface, or better.
+  Your Mastering Display must be capable of HDR nit levels suitable for the deliverable you’re 
+required to produce.
+  An HDR target display that can be set to the appropriate tone mapped output.
+Enabling Simultaneous Monitoring
+When you set up your display hardware, the HDR Master Display must be connected to output A, 
+and the Target Display must be connected to output B of whichever BMD video output device you’re 
+using. Then, you need to turn on the “Use dual outputs on SDI” checkbox in the Master Settings of 
+the Project Settings. At this point, assuming all of your connections are compatible with one another, 
+you should see an HDR image output to your HDR display and a trimmed image output to your 
+SDR display.
+287Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+HDR Vivid Trim Controls in DaVinci Resolve
+The latest version of the HDR Vivid palette exposes three sets of controls. The first are the 
+main controls:
+  Target Display Output: This drop-down specifies what parameters are used to display the tone 
+mapped image. This menu lets you choose specific display properties to obtain a preview of what 
+the trimmed image will look like on different displays with different gamuts and peak luminance 
+capabilities.
+  Trim Mode: Determines the toolset used to create the trims, either Curve or Statistical modes.
+  Tone Mapping Mode: Lets you choose between Low Light (for protecting shadow details in the 
+trim) or Highlight (for ensuring the highlights don’t blow out in the trim).
+  Analyze controls: The commands governing HDR Vivid auto-analysis are available as buttons, 
+which perform the same functions as their similarly named counterparts in the Color > HDR Vivid 
+submenu. Please note that most trim controls are disabled until you perform an analysis, which is 
+a necessary first step. An HDR indicator appears on the thumbnail of each analyzed clip. To filter 
+timeline clips based on their status (Analyzed and/or Trimmed), click on the disclosure triangle in 
+the Clips tab and select HDR Vivid.
+All: Automatically analyzes each clip in the current Timeline and stores the results individually.
+Selected: Only analyzes selected shots in the Timeline.
+Frame: Useful when part of a clip has an extreme level of color or lightness that’s inconsistent 
+with the rest of the clip, resulting in a poor analysis result. Placing the playhead on a frame that’s 
+representative of how the clip is supposed to look, and using the Frame option, bases the analysis 
+on only that frame. This is also a fast way to analyze clips where a single frame is representative of 
+the entire shot.
+  Enable Tone Mapping Preview: Lets you see the target display output in the Color page Viewer 
+and video output, so you can evaluate how the tone mapped version looks on your HDR display.
+The next set of controls activate based on which Trim Mode you have selected.
+  Curve: The Curve trim mode exposes a variety of controls that lets the colorist adjust the trim 
+metadata manually at the clip or frame level. Offset, Brightness, and Detail settings are available 
+for the Dark and Bright parts of the curve. Midtones have a brightness control. Highlight Crop 
+lets you bring any highlights back into range that may have exceeded the display’s maximum 
+brightness, thus blowing out. Separate Global and Highlight saturation settings are also possible.
+  Statistical: The Statistical trim mode exposes controls that let you fine tune the automatic tone 
+mapping algorithm used in the Analyze step. 
+HDR Vivid controls in the Color page.
+288Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+Delivering HDR Vivid
+Once you’re finished grading the HDR and trimming the SDR downconversion, you need to output 
+your program correctly in the Deliver page.
+Rendering an HDR Vivid Master
+To deliver an HDR Vivid master after you’ve finished grading, you want make sure that the Output 
+Color Space of the Color Management panel of the Project Settings is set to the appropriate HDR 
+ST.2084 setting based on the peak output you want to deliver (any values above will be clipped). 
+Then, you want to set your render up to export an H.265, Quicktime, or MP4 codec in the Video 
+Settings, check the Embed HDR Vivid Metadata box, and select the appropriate HDR mode that you 
+used to grade the master in the dropdown box below.
+HDR Vivid settings in the Video section of the Deliver page
+Hybrid Log-Gamma (HLG)
+The BBC and NHK jointly developed another method of encoding HDR video, referred to as Hybrid 
+Log-Gamma (HLG). The goal of HLG was to develop a method of mastering HDR video that would 
+support a range of displays of different peak luminance capabilities without additional metadata, that 
+could be broadcast via a single stream of data, that would fit into a 10-bit signal, and that in the words 
+of the ITU-R Draft Recommendation BT.HDR, “offers a degree of compatibility with legacy displays by 
+more closely matching the previous established television transfer curves.”
+The basic idea is that the HLG EOTF functions very similarly to BT.1886 from 0 to 0.6 of the signal 
+(with a typical 0–1 range), while 0.6 to 1.0 smoothly segues into logarithmic encoding for the highlights. 
+This means that, if you just send an HDR Hybrid Log-Gamma signal to an SDR display, you’d be able 
+to see much of the image identically to the way it would appear on an HDR display, and the highlights 
+would be compressed to present an acceptable amount of detail for SDR broadcast.
+On a Hybrid Log-Gamma compatible HDR display, however, the log-like highlights of the image (not 
+the BT.1886-like bottom portion of the signal, just the highlights) would be stretched back out, relative 
+to whatever peak luminance level a given HDR television is capable of outputting, to return the image 
+to its true HDR glory. This is different from the HDR10 method of distribution described previously, in 
+which the graded signal is referenced to absolute luminance levels dictated by ST.2084, and levels 
+that cannot be represented by a given display will be clipped.
+And while this facility to support multiple HDR displays with differing peak luminance levels is 
+somewhat analogous to Dolby Vision’s ability to tailor HDR output to the unique peak luminance levels 
+of any given Dolby Vision-compatible television, HLG requires no additional metadata to guide how 
+the highlights are scaled, which depending on your point of view is either a benefit (less work), or a 
+deficiency (no artistic guidance to make sure the highlights are being scaled in the best possible way).
+289Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA
+As is true for most things, you don’t get something for nothing. The BBC White Paper WHP 
+309 states that, for a 2000 cd/m 2 HDR display with a black level of 0.01 cd/m 2, up to 17.6 stops 
+of dynamic range without visible quantization artifacts (“banding”) is possible. BBC White 
+Paper WHP 286 states that the proposed HLG EOTF should support displays up to about 
+5000 nits. So, partially, the backward compatibility that HLG makes possible is due in part to 
+discarding long-term support for 10,000 nit displays. However, it’s an open question whether 
+or not over 5000 nits is even necessary for consumer enjoyment.
+Sony, LG, Panasonic, JVC, Phillips, Hisense, Hitachi, and Toshiba have all either announced 
+or are shipping consumer HDR televisions capable of displaying HLG encoded video, and of 
+course DaVinci Resolve supports this standard through Resolve Color Management.
+Grading Hybrid Log -Gamma in DaVinci Resolve
+Monitoring an ST.2084 image is as simple as getting a Hybrid Log-Gamma-compatible HDR display, 
+and connecting the output of your video interface to the input of the display.
+Setting up Resolve Color Management to grade for HLG is identical to setting up to grade for Dolby 
+Vision, except that there are four HLG settings to choose from for the Output Color Space:
+  Rec.709 HLG ARIB STD-B67
+  Rec.2020 HLG ARIB STD-B67
+  Rec.2100 HLG
+  Rec.2100 HLG (Scene)
+Optionally, if you choose to enable “Use Separate Color Space and Gamma,” you can choose either 
+Rec. 2020 or Rec. 709 as your gamut, and Rec. 2100 HLG as your EOTF.
+The levels you’ll be monitoring in your scopes will be different from the table of data to nit values listed 
+previously for grading to the PQ EOTF.
+Ouputting Hybrid Log-Gamma
+Once you’ve created an HLG grade for your program, you can output it to any high-quality 10-bit 
+capable media format.
+Reset HDR Trim Analysis 
+from the Option Menu
+For any of the HDR standards, you can reset the HDR trim analysis from the three-dot option menu in 
+their respective tabs from the Color page.
+290Setup and Workflows | Chapter 10 HDR Setup and Grading
+MEDIA

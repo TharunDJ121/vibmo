@@ -60,3 +60,10 @@ def test_deck_snap_slide():
     # Check envelope start and end
     assert abs(audio[0]) < 1e-3
     assert abs(audio[-1]) < 1e-3
+
+def test_card_flip_shuffle():
+    audio = PaperCardSuite.card_flip_shuffle()
+    assert len(audio) == int(PaperCardSuite.SAMPLE_RATE * 0.22)
+    assert audio.dtype == np.float32
+    assert np.max(np.abs(audio)) > 0
+

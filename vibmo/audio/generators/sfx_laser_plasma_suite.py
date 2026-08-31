@@ -141,3 +141,9 @@ class LaserPlasmaSuite:
             env[-fade_samples:] *= np.linspace(1, 0, fade_samples)
 
         return (mix * env).astype(np.float32)
+
+    @staticmethod
+    def plasma_beam_fire(duration: float = 0.32) -> np.ndarray:
+        """Intense ionized plasma energy beam discharge."""
+        return LaserPlasmaSuite.plasma_pulse_blast(duration=duration)
+

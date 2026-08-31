@@ -1,0 +1,1783 @@
+DELIVER
+Deliver
+CONTENTS
+185 Delivery Effects Processing ������������������������������������������������������������������������������������������������������������������  4171
+186 Using the Deliver Page  �������������������������������������������������������������������������������������������������������������������������  4176
+187 Rendering Media  �������������������������������������������������������������������������������������������������������������������������������������  4185
+188 Delivering DCP and IMF ������������������������������������������������������������������������������������������������������������������������  4218
+189 Delivering to Tape  ����������������������������������������������������������������������������������������������������������������������������������  4233
+190 Exporting Timelines to Other Applications  ������������������������������������������������������������������������������������������������ 4241
+Chapter 185
+Delivery 
+Effects Processing
+This chapter discusses how different video effects will be handled when you use 
+the controls of the Deliver page.
+Contents
+Delivery Effects Processing  ����������������������������������������������������������������������������������������������������������������������������������������������������������� 4172
+When Rendering a Single Clip or When Outputting to Tape ������������������������������������������������������������������������������������������  4172
+When Rendering Individual Source Clips for Round-Trip Workflows  ������������������������������������������������������������������������� 4172
+More About Rendering Speed Effects  �������������������������������������������������������������������������������������������������������������������������������������� 4173
+Determining the Rendered Output Resolution of Clips in Mixed Timelines  ����������������������������������������������������������� 4173
+Rendering Edit and Input Sizing Adjustments  ����������������������������������������������������������������������������������������������������������������������� 4174
+Rendering Mixed Frame Rate Timelines ����������������������������������������������������������������������������������������������������������������������������������� 4174
+Export Alpha Channels in Individual Clips Mode  ����������������������������������������������������������������������������������������������������������������� 4175
+Export Alpha Channels in Single Clip Mode ��������������������������������������������������������������������������������������������������������������������������� 4175
+4171Deliver | Chapter 185 Delivery Effects Processing
+DELIVER
+Delivery Effects Processing
+For your final output, how effects are rendered depends on whether you’re rendering in Single Clip or 
+Individual Clips mode. 
+When Rendering a Single Clip or When Outputting to Tape
+Whether you’re rendering a QuickTime or MXF master of your project as a single clip, rendering a DPX 
+image sequence for film output, or outputting directly to tape, all supported compositing, speed, and 
+transform effects are rendered by DaVinci Resolve and “baked” into the output media. Unsupported 
+effects are completely ignored, cannot be seen, and have no effect on media that’s rendered and output.
+When Rendering Individual Source Clips 
+for Round-Trip Workflows
+In workflows where you’re rendering individual media files to send a project back to an NLE or 
+finishing application for final finishing (adding titles and other effects before final delivery), DaVinci 
+Resolve handles different types of effects in different ways.
+Unsupported effects do not appear in DaVinci Resolve. However, this effects data is internally 
+preserved, and when you export an XML or AAF file to send back to your NLE of choice, these effects 
+reappear, applied to the color corrected media that you rendered out of DaVinci Resolve and sent back.
+Effects that DaVinci Resolve does support such as composite modes, opacity settings, speed effects, 
+and transitions are handled differently. Even though these effects are visible in DaVinci Resolve while 
+you work, they’re not “baked” into the final media that you render in preparation for sending back to 
+your NLE or finishing application. Instead, the portion of each media clip that’s used in your project is 
+rendered as an individual file, and the XML file that you export from DaVinci Resolve contains all of the 
+effects information necessary to reassemble the rendered media into a timeline that uses Final Cut Pro 
+effects applied to DaVinci Resolve-graded media.
+EDL FCP 7 FCP X
+Premiere  
+Pro
+Media  
+Composer*
+Color Corrections N/A N/A Rendered N/A N/A
+Composite Modes N/A Sent Back Sent Back Sent Back Rendered
+Alpha Channels N/A Optionally 
+Rendered
+Optionally 
+Rendered
+Optionally 
+Rendered
+Optionally 
+Rendered
+Transitions Sent Back Sent Back Sent Back Sent Back Sent Back
+Opacity Settings N/A Sent Back Sent Back Sent Back Sent Back
+Position, Scale, Rotation N/A Conditional Conditional Conditional Conditional
+Linear Speed Effects Sent Back Sent Back Sent Back Sent Back Sent Back
+Variable Speed Effects N/A Sent Back Sent Back Sent Back Sent Back
+Long Duration Still Images N/A N/A N/A N/A N/A
+Freeze Frames N/A N/A N/A N/A Rendered
+*  These effects are only sent back in AAF round trips when you’re updating an existing AAF file, rather than generating a new AAF file.
+The chart shows which effects are rendered by DaVinci Resolve, and which 
+effects are passed back in different round trip workflows.
+4172Deliver | Chapter 185 Delivery Effects Processing
+DELIVER
+After you’ve reimported your project back into your NLE or finishing application, you’re free to 
+readjust these effects while completing your program, without the need to re-render individual clips in 
+DaVinci Resolve.
+IMPORTANT: One exception to the preservation of media and effects in round-trip 
+workflows is that nested sequences from Final Cut Pro 7 and Media Composer are not 
+compatible with DaVinci Resolve; XML and AAF files containing nested sequences cannot 
+be imported. On the other hand, Final Cut Pro X projects containing compound clips 
+can be imported.
+More About Rendering Speed Effects
+If you’re rendering a project with speed effects, you should be aware that DaVInci Resolve can 
+optionally render speed effects using Optical Flow processing, resulting in high-quality slow motion 
+and fast motion effects delivered straight out of DaVinci Resolve. If you’re satisfied with Optical Flow 
+processing in DaVinci Resolve, there may be no need for you to do a round-trip export if the main 
+reason you were doing so was to send the processing of slow motion clips to another application 
+for rendering, and rendering the Timeline in Single clip mode will “bake” the speed effects in using 
+whatever settings you’ve selected for the project, or for each clip if you’ve selected individual Retime 
+Process settings for different clips.
+However, if you want to send unrendered speed effects to another application, rendering your project 
+in Individual source clips mode guarantees that the full range of each original clip of media will be 
+rendered, with the speed effect itself exported within the XML, AAF, or EDL file that’s exported.
+NOTE: DaVinci Resolve adds three frame handles to clips with speed changes applied to 
+them, and to rendered clips that don’t match the project’s frame rate. This is done to facilitate 
+reconform in NLEs that require handles beyond the actual length of each of these clips.
+Determining the Rendered Output 
+Resolution of Clips in Mixed Timelines
+Ordinarily, rendering individual source clips results in each clip being rendered at either the project 
+resolution or the Resolution dropdown in the Render Settings (which overrides the project resolution), 
+with clips that don’t match the project resolution being resized or not according to the settings you’ve 
+chosen in the Image Scaling panel of the Project Settings. 
+However, if you’re rendering dailies for projects containing clips with mixed resolutions, you can 
+choose to render each clip at its original resolution by turning on the “Render at source resolution” 
+checkbox in the Video group of controls.
+4173Deliver | Chapter 185 Delivery Effects Processing
+DELIVER
+Rendering Edit and Input Sizing Adjustments
+Whether or not sizing is rendered into your final media depends on the “Disable sizing and blanking” 
+checkbox in the Advanced Settings options of the Render Settings panel. You can disable sizing and 
+blanking either when rendering the current Timeline as a single clip, or when rendering individual clips.
+If “Disable sizing and blanking output” is turned off: Output Blanking, Cut and Edit page sizing 
+adjustments, Color page Input and Output Sizing adjustments, and Image Stabilization are 
+rendered into the final rendered media using the optical-quality sizing algorithms available to 
+DaVinci Resolve. This is best if your sizing adjustments are approved and final, and you want 
+to “bake” sizing adjustments into the final media you’re delivering. 
+If “Disable sizing and blanking output” is turned on: Output Blanking, Cut and Edit page sizing 
+adjustments, Color page Input and Output Sizing adjustments, and Image Stabilization are not 
+rendered, and each clip will be rendered either at the source resolution if “Render at source 
+resolution” is enabled in individual clips mode, or to the currently specified resolution of the 
+Timeline or project. However, the sizing adjustments you’ve made will be exported as part of 
+the XML or AAF file that you’re exporting. This is best for workflows where the editor wants 
+to continue adjusting sizing after you’ve handed off the graded project relative to the original 
+size of the clips.
+Keep in mind that if you want to render Input Sizing adjustments into the media you’re outputting, the 
+“Force sizing to highest quality” checkbox guarantees that DaVinci Resolve will use the highest-quality 
+sizing setting, even if you’ve temporarily chosen a faster-processing option for a slower computer.
+NOTE: “Disable sizing and blanking output” does not disable any transform operations that 
+happen within the Fusion page, nor does it disable transforms happening as a result of an 
+Open FX or Resolve FX plugin applied to one or more clips in the Cut, Edit, or Color pages. 
+All of these effects will continue to be rendered into the final output.
+Rendering Mixed Frame Rate Timelines
+Mixed frame rates are supported by DaVinci Resolve when any option other then none is selected in 
+the “Mixed Frame Rate format” dropdown menu, either in the Conform Options section of the General 
+Options panel of the Project Settings, or in the Import AAF or XML dialog. When you choose the 
+appropriate option that corresponds to the application you’re exchanging projects with (or DaVinci 
+Resolve if you’re working entirely within DaVinci Resolve), then DaVinci Resolve conforms and 
+processes all clips in the Timeline to play at whichever frame rate is selected in the “Timeline frame 
+rate” dropdown menu. For example, 23.98, 29.97, 30, 50, 59.94, and 60 fps clips will all play at 24 fps if 
+that’s what “Timeline frame rate” is set to in the Master Settings panel of the Project Settings.
+How clips in mixed frame rate timelines are rendered out depends on whether the Render Settings are 
+set to render Individual source clips or a Single clip. 
+  Individual source clips: All clips are rendered individually at their original frame rate. 
+  Single clip: All clips are converted to the “Timecode calculated at” frame rate and rendered 
+as a single media file. Clips are converted using whatever method is selected in the Retime 
+process dropdown of the Master Settings panel of the Project Settings, or in the individual Retime 
+process setting found in the Video inspector of each clip that overrides the project-wide setting. 
+You can choose Optical Flow processing for the highest quality conversion that’s available in 
+DaVinci Resolve.
+4174Deliver | Chapter 185 Delivery Effects Processing
+DELIVER
+Export Alpha Channels in Individual Clips Mode
+This option only appears if you’re rendering to a media format that supports alpha channels. If your 
+media contains an Alpha channel, you have the option to turn on the Export Alpha checkbox in the 
+Video panel of the render settings whenever you render individual source clips. When you do so, 
+DaVinci Resolve renders clips with alpha channels in either of two cases:
+  Whenever there is an Alpha channel embedded in the source media for that clip, the embedded 
+Alpha channel will be copied to the rendered version of that clip.
+  Whenever a clip’s grade has a key connected to an Alpha output, the Alpha output will be 
+rendered as an Alpha channel for that clip.
+In either case, you may only render Alpha channels out when you render individual source clips to an 
+RGBA format such as TIFF, OpenEXR, ProRes 4444, ProRes 4444 XQ, or DNxHR 444.
+Export Alpha Channels in Single Clip Mode
+DaVinci Resolve allows rendering Alpha channels in Single Clip mode if the selected codec supports 
+an Alpha channel (i.e., ProRes 4444, DNxHR 444, etc.). This lets you apply a single Alpha channel to an 
+entire timeline for export, rather than just at the individual clip level.
+To Render an Alpha Channel in Single Clip Mode:
+1 Select “Single Clip” mode in the Render Settings.
+2 Select a codec that supports an Alpha channel in the Video tab’s Codec and Type 
+selection boxes.
+3 Select the checkbox “Export Alpha” that appears under the Frame rate selector.
+4 If supported by the codec, you can chose the Alpha Mode type. Premultiplied is the default.
+If the codec you have selected does not support an Alpha channel, the “Export Alpha” box will not 
+appear as an option.
+4175Deliver | Chapter 185 Delivery Effects Processing
+DELIVER
+Chapter 186
+Using the 
+Deliver Page
+Once you’ve finished grading your project, you need to either render it, or output 
+it to tape to deliver it to your client. This is where the Quick Export window and 
+Deliver page comes in. 
+This chapter describes how to use Quick Export, how to use the overall interface of the Deliver 
+page, and provides some general information about how effects are output from DaVinci Resolve 
+in different situations.
+Contents
+Using Quick Export ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������  4177
+Assign Icons to User Presets ���������������������������������������������������������������������������������������������������������������������������������������� ����������������� 4178
+The Deliver Page ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4179
+The Interface Toolbar ������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 4179
+The Render Settings  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4180
+Rendering Files vs. Outputting to Tape  ����������������������������������������������������������������������������������������������������������������������������������� 4181
+The Deliver Page Timeline  �������������������������������������������������������������������������������������������������������������������������������������������������������������  4181
+Filtering the Thumbnail Timeline  ��������������������������������������������������������������������������������������������������������������������������������������������������  4181
+The Viewer ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4182
+Skimming in the Viewer  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 4183
+Disabling Viewer Updates While Rendering  ������������������������������������������������������������������������������������������������������������������������� 4183
+The Render Queue ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������  4183
+Drag to Reorder Jobs in the Render Queue  �������������������������������������������������������������������������������������������������������������������������� 4184
+4176Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+Using Quick Export
+Not every situation requires a complicated delivery setup. When you just need to quickly export a 
+project, and the full power of the Deliver page is unneeded, you can choose File > Quick Export to 
+use one of a variety of export presets to export your program from any page of DaVinci Resolve. You 
+can even use Quick Export to export and upload your program to one of the supported video sharing 
+services, including YouTube, Vimeo, and Frame.io. You can also add your own presets to the Quick 
+Export window.
+To use Quick Export:
+1 (Optional) In the Cut, Edit, Fusion, or Color page, set In and Out points in the Timeline to choose 
+a range of the current program to export. If no timeline In or Out points have been set, the entire 
+timeline will be exported.
+2 Choose File > Quick Export.
+3 Select a preset to use from the top row of icons in the Quick Export dialog, and click Export.
+4 Choose a directory location and enter a file name using the export dialog, then click Save. 
+A progress bar dialog appears to let you know how long the export will take.
+The Quick Export Dialog showing a custom preset.
+To Create a New Custom Preset and Add it to Quick Export:
+1 On the Deliver page, select Custom Export from the Render Settings, and adjust the Video, Audio, 
+and File settings for your new preset. Only Single Clip settings can be made Custom Presets, not 
+Individual Clips.
+2 In the Render Settings 3-dot option Menu, select Save as New Preset.
+3 Type in a name for your new Preset, and choose a preset icon to represent it.
+4 Check the Add to quick export box.
+5 Click Save.
+Your preset and icon will now be added to the Quick Export Dialog across all pages of DaVinci 
+Resolve, and also be added to the Render Settings in the Deliver Page.
+4177Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+The List View icon (circled) in the Quick Export Dialog
+To View the Quick Export Options in List View:
+1 Open the Quick Export Dialog.
+2 Click on the List View icon in the Render Settings.
+Assign Icons to User Presets
+When you create a new Custom Preset in the Deliver page, in addition to entering a name, you can 
+now choose an icon from the list to represent it in the Render Settings and Quick Export dialog. 
+Creating a new Custom Preset in the Deliver page
+4178Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+The Deliver Page
+The Deliver page is divided into five areas of functionality, each of which lets you set up a different 
+part of a render or output to tape.
+Deliver page
+The Interface Toolbar
+At the very top of the Deliver page is a toolbar with buttons that let you show and hide different parts 
+of the user interface. These buttons are as follows, from left to right:
+The Interface toolbar
+Delivery full/half height button:  Lets you set the Render Settings panel to take up the full 
+height of your display, if you need more area for browsing the various render settings, at 
+the expense of a narrower Timeline.
+Render Settings: This panel lists all of the render settings that are available 
+for configuring rendering jobs in DaVinci Resolve. By default, you’re presented with a 
+short list, but more options are available by clicking “Advanced Settings.”
+Tape: Puts the Deliver page into Tape Output mode.
+Clips: Hides or shows the Thumbnail timeline above the Deliver page timeline
+Render Queue: A list of all jobs that you’ve set up to render in the current project. 
+Previously rendered jobs remain in the queue, for your reference or for you to reuse to 
+re-render those jobs, unless you manually delete them from the queue.
+Render Queue full/half height button:  Lets you set the Render Queue to take up the 
+full height of your display, if you need more area for listing render jobs at the expense of 
+a narrower Timeline.
+4179Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+The Render Settings
+The Render Settings contains the customizable settings that determine how media is rendered out of 
+DaVinci Resolve. If you’re using the Tape option, these settings are disabled.
+The Render Settings are divided into four general sections:
+  Render Presets: At the very top, a dropdown menu lets you choose one of a series of presets to 
+quickly set up the type of render you want. The Custom option exposes all render settings so you 
+can set up a render manually.
+  Render Location: A Browse button opens a dialog that lets you choose a volume and directory 
+to render to.
+  Render: Two options let you either render the entire selected area of the Timeline as a single 
+clip suitable for reviewing or mastering, or as a series of individual clips more suited to round-trip 
+workflows. The option you choose here changes which render settings are available below.
+  Video, Audio, and File Render Settings Panels: All other render settings are divided among 
+three panels. Checkboxes at the top of the Video and Audio panels let you selectively disable 
+video export (if you want to export the audio only) or disable audio export (if you want to 
+export video only).
+For more information on all of these settings, jump to this chapter: Render ing Media.
+Render Settings
+4180Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+Rendering Files vs. Outputting to Tape
+Because the Deliver page does double duty, you control whether you’re rendering files or outputting 
+to tape using the Tape button in the Interface toolbar. Doing so replaces the controls in the Viewer 
+with tape controls.
+Render or Edit to Tape modes
+The Deliver Page Timeline
+You’ll use the Timeline in the Deliver page to define the range of clips you want to render or output 
+to tape, and to choose which versions for each clip you want to output. The Deliver page Timeline 
+consists of a Thumbnail timeline at top (that can be shown or hidden via the Clips button) that makes 
+it easy to select individual clips or ranges of clips that you need to render, and a more ordinary timeline 
+below that you can use to set In and Out points for rendering arbitrary regions of your program. 
+A Timeline toolbar lets you choose the render range of the Timeline, and has controls for customizing 
+the look of the Timeline, and for zooming in and out.
+The Deliver page’s Timeline and Thumbnail timeline
+TIP: Press Shift-Z to fit the entire program into the available width of the Timeline.
+Filtering the Thumbnail Timeline
+The Deliver page Thumbnail timeline also has the Timeline Filter dropdown, available to the right of 
+the Clips button in the Interface toolbar. 
+The Deliver page’s Thumbnail timeline matches the Color page
+4181Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+Using this dropdown to filter the contents of the Timeline lets you restrict the range of media you 
+want to output in different ways. For example, if you’ve already rendered a timeline, but you’ve 
+since made some changes, you can use one of the “Modified Clips” options to display only the 
+clips that have changed within a particular timeframe. Another commonly used option is to choose 
+“Unrendered Clips” to isolate all clips that have not yet been rendered in workflows where you’re only 
+rendering a part of the Timeline at a time.
+When you filter the Thumbnail timeline, you can only set up jobs to render in Individual Clips mode. 
+You can tell if Thumbnail filtering is enabled by an orange underline under the Clips button in the 
+UI toolbar.
+An orange line under the Clips  
+button shows that filtering is enabled
+The Viewer
+When rendering file-based media, the Viewer shows you exactly how the media being output will 
+look using the current settings, and the transport controls move the playhead throughout the current 
+Timeline. Audio playback can be turned on or off by clicking on the speaker icon, or adjust the level by 
+right-clicking on the speaker icon and dragging the slider.
+Deliver page Viewer
+When outputting to tape, the Viewer shows you the tape output so you can set up insert or assembly 
+edit points, and the transport controls move the tape in the deck if device control is enabled. You 
+can also put the Viewer into Cinema Viewer mode by choosing Workspace > Viewer Mode > Cinema 
+Viewer (P), so that it fills the entire screen. This command toggles Cinema Viewer mode on and off.
+4182Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+Skimming in the Viewer
+You can skim footage in any viewer in the Media, Cut, Edit, Color, and Deliver pages by holding down 
+the C key, and scrubbing the pointer back and forth in the viewer.
+Disabling Viewer Updates While Rendering
+An Updates During Renders submenu in the Render page Viewer option menu lets you choose to 
+disable, minimize, or enable Viewer updates while a program is being rendered. Disabled or minimized 
+Viewer updates will speed rendering, especially on slower workstations.
+The Render Queue
+The Render Queue is a list of all the jobs you’ve queued up for delivery. Each job can have an 
+individualized range of clips and render settings, which you can use to render multiple sections or clips 
+of a timeline, the same timeline output to multiple formats, or multiple timelines.
+The Render Queue also has the option to show either just the jobs within the current project, or jobs 
+queued up and saved within all projects in the currently open SQL network project library (for the 
+current user) or local project library (at the currently selected disk location). This can be exceptionally 
+useful in situations where you’ve broken a program into multiple reels, with each reel being a different 
+project. This can be turned on and off via the “Show All Projects” option of the Render Queue 
+Option menu.
+Jobs in the Render Queue can be edited (by clicking the pencil button), they can be assigned to 
+remote rendering workstations, and they can be deleted. Jobs that have already been rendered can 
+be kept in the Render Queue and re-rendered at a later time.
+The Render Queue displays all jobs
+4183Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+TIP: There is an option to show the Render Settings of each item in the Render Queue, 
+by selecting “Show Job Details” in the Render Queue Option menu. This provides specific 
+details of each job’s dimensions, frame rate, codec etc. This is a great help in managing a 
+complex render queue at a glance.
+Drag to Reorder Jobs in the Render Queue
+You can manually reorder the Render Queue by dragging a job up and down in the stack. The 
+job numbers will remain in numerical order, but the actual render settings assigned to them will 
+be replaced.
+Dragging Job 3 (H.264) in front of  
+Job 2 (ProRes) in the Render Queue
+4184Deliver | Chapter 186 Using the Deliver Page
+DELIVER
+Chapter 187
+Rendering Media
+This section describes the options that are available for file-based delivery. 
+The workflow is simple; you define the format and other settings that dictate how the media is to be 
+rendered, define a range of clips in the currently selected session, and then add a job containing 
+these settings to the Render Queue. 
+You can queue up as many different render jobs as you like, each with different formats, output 
+options, and ranges of clips, depending on what you’re trying to accomplish. When you’re ready to 
+render, simply click the Start Render button.
+Contents
+Using Presets for Fast Rendering  ����������������������� 4186
+Custom ������������������������������������������������������������������������������ 4186
+Social Media Presets  �������������������������������������������������� 4187
+ProRes Master ��������������������������������������������������������������  4190
+H.264 Master  ���������������������������������������������������������������� 4190
+H.265 Master ������������������������������������������������������������������ 4191
+IMF (Studio Version Only) ������������������������������������������ 4191
+Final Cut Pro 7 or X XML �������������������������������������������� 4191
+Premiere XML ����������������������������������������������������������������� 4191
+Avid AAF��������������������������������������������������������������������������� 4192
+Pro Tools ��������������������������������������������������������������������������� 4192
+Audio Only ����������������������������������������������������������������������� 4193
+Creating and Using Your Own Presets  �������������� 4193
+Import and Export Custom Presets �������������������� 4194
+Choosing a Location to Render ���������������������������� 4195
+Single Clip vs. Individual Clips  ����������������������������� 4196
+Single Clip ������������������������������������������������������������������������ 4196
+Individual Clips  �������������������������������������������������������������� 4196
+All Other Render Settings for Output  ��������������� 4197
+Video Panel ��������������������������������������������������������������������� 4197
+Audio Panel ������������������������������������������������������������������� 4205
+File �������������������������������������������������������������������������������������� 4207
+Additional Outputs  ��������������������������������������������������� 4209
+How to Avoid Overwriting Clips 
+When Rendering Output Media  ��������������������������� 4210
+Defining a Range of Clips 
+and Versions to Render �������������������������������������������� 4210
+Choosing Which Versions 
+to Render for Each Clip ���������������������������������������������� 4211
+Using the Render Queue  ����������������������������������������� 4212
+Rendering Jobs from 
+Multiple Projects at Once ���������������������������������������� 4214
+Remote Rendering ������������������������������������������������������ 4215
+Using Multiple Project 
+Libraries in Remote Rendering  ������������������������������ 4215
+Sharing Storage  ������������������������������������������������������������ 4215
+Setting Up and Using Remote Rendering  �������� 4216
+When You’re Finished Remote Rendering  ������� 4216
+Setting Up a “Headless” 
+Remote Rendering Workstation  ���������������������������� 4217
+4185Deliver | Chapter 187 Rendering Media
+DELIVER
+Using Presets for Fast Rendering
+The very top of the Render Settings is a dropdown menu with a set of presets for many of the most 
+common rendering workflows you’ll need to accomplish. If you want to create your very own settings, 
+then choose custom. Each preset automatically sets up what you need and locks you out of settings 
+that are not necessary for rendering that type of media.
+Render presets selection
+Custom
+When custom is selected, nothing is automatically set, and all conventional media rendering 
+options are available, except for those that are specifically associated with particular presets. 
+You must manually choose the settings and options you need. All Render settings are saved on a 
+per-project basis.
+4186Deliver | Chapter 187 Rendering Media
+DELIVER
+Social Media Presets
+These presets let you render media specifically for video sharing services, with the option to upload 
+the rendered files automatically.
+YouTube 720p/1080p/1440p/2160p
+A dropdown menu lets you choose four different resolutions to render to and selects the appropriate 
+settings for exporting your program as a file suitable for uploading to YouTube and many other 
+video file sharing services. The preset renders a single clip at the timeline’s frame rate and sets the 
+following parameters:
+  Format: MP4
+  Video Codec: H.264
+  Encoding Profile: High
+  Audio: Main 1
+  Audio Codec: AAC
+  Data burn-in: Same as Project
+  Normalize Audio: Checking this box will normalize the clip’s audio level to YouTube’s standard.
+  Use Proxy Media: Lets your final render use the proxy media instead of the original source camera 
+files. Useful if speed is more important than quality.
+  Render without Timecode: If you’re using certain editing tools on mobile devices that have issues 
+with timecode, checking this box lets you Render without Timecode.
+  Upload directly to YouTube: When this box is checked, the resulting render will automatically 
+upload to your YouTube account, and the following parameters will become available. If you have 
+multiple YouTube Channels on your account, you can select which channel to upload to.
+Title: Enter the title of your video.
+Description: Enter a description of your video.
+Chapters from Markers: Checking this box embeds chapter points in the YouTube video 
+corresponding to the the selected marker color and the marker’s position on the Timeline.
+Upload Thumbnail: Checking this box will open a file browser, allowing you to select a still image 
+that will become the thumbnail image for your video on YouTube.
+Visibility: You can change how your video will be accessible on YouTube.
+Category: You can select your video’s YouTube category.
+Vimeo 720p/1080p/2160p
+A dropdown menu lets you choose three different resolutions to render to and selects the appropriate 
+settings for exporting your program as a file suitable for uploading to Vimeo and many other video file 
+sharing services. The preset renders a single clip at the timeline’s frame rate and sets the following 
+parameters:
+  Format: MP4
+  Video Codec: H.264
+  Encoding Profile: Auto
+  Audio: Bus 1
+  Audio Codec: AAC
+  Data burn-in: Same as Project
+  Use Proxy Media: Lets your final render use the proxy media instead of the original source camera 
+files. Useful if speed is more important than quality.
+4187Deliver | Chapter 187 Rendering Media
+DELIVER
+  Upload directly to Vimeo:  When this box is checked, the resulting render will automatically upload 
+to your Vimeo account, and the following parameters will become available.
+Title: Enter the title of your video.
+Description: Enter a description of your video.
+Visible To: You can change how your video will be accessible on Vimeo, including password 
+protection.
+TikTok Deliver Page Preset
+A dropdown menu lets you choose two different resolutions to render to and selects the appropriate 
+settings for exporting your program as a file suitable for uploading to TikTok and many other video file 
+sharing services. The preset renders a single clip and sets the following parameters:
+  Resolution: 1920x1080 HD
+  Use Vertical Resolution: Unchecked. Check this box if you want to deliver your video in portrait 
+mode for proper display on phones. This should be on for TikTok.
+  Frame rate: The chosen frame rate of your timeline. You can also override this and set another 
+frame rate manually.
+  Format: MP4
+  Video Codec: H.264
+  Encoding Profile: Auto
+  Audio: Bus 1
+  Audio Codec: AAC
+  Data burn-in: Same as Project
+  Use Proxy Media: Lets your final render use the proxy media instead of the original source camera 
+files. Useful if speed is more important than quality.
+  Upload directly to TikTok: When this box is checked, the resulting render will automatically upload 
+to your TikTok account, and the following parameters will become available.
+Title: Enter the title of your video.
+Visible To: Lets you choose who will be able to view this video. The options are 
+Private, Public, and Friends.
+Allow comments: Checking this box allows commenting on your TikTok video. Un-checking this 
+box forbids comments on your video.
+Allow Duet: Checking this box will allow your video to be used side-by-side with a video from 
+another creator in TikTok using the Duet function.
+Allow Stitch: Checking this box will allow your video to be edited and combined with a video from 
+another creator in TikTok using the Stitch function.
+Presentations Preset
+This setting lets you flag and format timelines to be used with Presentations in Blackmagic Cloud. 
+Unlike other presets, there are no codec settings to choose from. This setting simply adds the 
+metadata necessary for Presentations to share your timeline. You must have already created a 
+Presentation in Blackmagic Cloud before you can use this setting.
+  File Name: Choose the name of the timeline to be uploaded to Presentations.
+  Upload To: Choose the name of the existing Blackmagic Cloud Presentation to upload to.
+  Use Proxy Media: Use the Proxy Media as the source for the compression and upload to 
+Blackmagic Cloud rather than the original media.
+4188Deliver | Chapter 187 Rendering Media
+DELIVER
+Dropbox or Dropbox Replay 720p/1080p/2160p
+A dropdown menu lets you choose three different resolutions to render to and selects the appropriate 
+settings for exporting your program as a file suitable for uploading to Dropbox and many other video 
+file sharing services. 
+The preset renders a single clip at the timeline’s frame rate and sets the following parameters:
+  Format: MP4
+  Video Codec: H.264
+  Encoding Profile: Auto
+  Audio: Bus 1
+  Audio Codec: AAC
+  Data burn-in: Same as Project
+  Use Proxy Media: Lets your final render use the proxy media instead of the original source camera 
+files. Useful if speed is more important than quality.
+  Upload directly to Dropbox:  When this box is checked, the resulting render will automatically 
+upload to your Dropbox account.
+Setting Up Video Sharing Uploads
+DaVinci Resolve has account integration with YouTube, Vimeo, TikTok, Dropbox, and Frame.io that 
+allows you to render and upload directly to each service. An Internet Accounts panel in the System tab 
+of the DaVinci Resolve Preferences lets you sign into your YouTube, Vimeo, Dropbox, and Frame.io 
+accounts, as well as specify a local cache location for media being synced with Frame.io.
+For each service you sign into, a floating window presents the interface in which you’ll need to enter 
+your login name and password to enable integration, followed by whatever two-factor identification 
+and other required steps are necessary. Once entered, DaVinci Resolve will sign in to each of these 
+services automatically when DaVinci Resolve opens.
+For each service you sign into, the service’s upload parameters will also be available in the Custom 
+Export Video settings in the Deliver page. This allows you to create your own custom file settings that 
+can supersede the normal formats allowed by the service presets, while allowing you the convenience 
+of the all-in-one uploading and description entry of the preset.
+The Internet Accounts panel of the System tab of 
+the DaVinci Resolve Preferences window
+4189Deliver | Chapter 187 Rendering Media
+DELIVER
+NOTE: For Frame.io, the local cache location is used to store clips you import into a DaVinci 
+Resolve project from the Frame.io volume in the Media Storage panel of the Media page.
+Deliver and Upload to Social Media
+When you’ve configured YouTube, Vimeo, TikTok or Dropbox access in the Internet Accounts panel 
+of the System Preferences, the YouTube, Vimeo, and Dropbox presets expose an “Upload directly to 
+YouTube/Vimeo/TikTok/Dropbox” checkbox, which lets you choose whether or not to automatically 
+upload the rendered result.
+Choose the desired export options, then click the Add to Render Queue button to add this job to 
+the Render Queue as you would with any other export. When that job is rendered, it automatically 
+proceeds to upload to the selected video sharing service, and an upload percentage indicator 
+appears in the job listing to show how far along this upload is. This upload is done in the background, 
+so you can continue working on other things in DaVinci Resolve while the file uploads. If you want 
+to see how long the upload will take on any other page, you can choose Workspace > Background 
+Activity to see the Background Activity window.
+Waiting for your movie to upload
+Once the upload is finished, you can view the file directly on the social media site in a web browser by 
+right-clicking on the job in the Render Queue and selecting Reveal in Browser.
+Review Before Upload
+For an extra level of quality control before you send your video out live on the internet, you can select 
+Review Before Upload from the Render Queue option menu. This option will pause the automatic 
+upload process after the file has been rendered with a message, “Waiting for Upload.” You can then 
+right-click on the job in the Render Queue, and select Reveal in Finder to open and review your video. 
+Once you’ve made your decision, from that same menu, you can select either Upload to (service 
+name) to let your video go, or Cancel Upload if you’ve had second thoughts.
+ProRes Master
+For quickly outputting ProRes Master files of a whole program. When selected, defaults to rendering in 
+single clip mode, with the Format set to QuickTime, the Codec set to Apple ProRes, and the Type set 
+to Apple ProRes 422 HQ. Audio defaults to the Codec being Linear PCM and the Bit Depth being 16.
+H.264 Master
+For outputting H.264 files of a whole program. When selected, defaults to rendering in single clip 
+mode, with the Format set to QuickTime, and the Codec set to H.264. Quality, Encoding Profile, and 
+Entropy Mode are set to Auto, Passes defaults to Single, and Key Frames default to Automatic with 
+Frame Reordering turned on. Audio defaults to the Codec being AAC with the Data Rate set to 320 
+Kb/s and the Bit Depth set to 16.
+4190Deliver | Chapter 187 Rendering Media
+DELIVER
+H.265 Master
+For outputting H.265 files of a whole program. When selected, defaults to rendering in single clip 
+mode, with the Format set to QuickTime, and the Codec set to H.265. Quality is set to Automatic, 
+Encoding Profile is set to Main, Passes defaults to Single, and Key Frames default to Automatic with 
+Frame Reordering turned on. Audio defaults to the Codec being AAC with the Data Rate set to 320 
+Kb/s and the Bit Depth set to 16.
+IMF (Studio Version Only)
+A dropdown menu to the right of this preset provides options for Generic, 20th Century Fox, and 
+Netflix-qualified presets. This preset is for facilities that deliver IMF files as digital-only deliverables. 
+A Preset Type dropdown lets you choose the appropriate settings to populate the various locked 
+IMF-specific parameters that appear.
+Final Cut Pro 7 or X XML
+A dropdown menu attached to this preset lets you choose from two different XML formats to be 
+exported along with the media you’re rendering:
+• Selects the appropriate settings for projects that were sent from Final Cut Pro 7 to DaVinci 
+Resolve using XML. This is meant for situations when you’re rendering media intended for a 
+return trip to Final Cut Pro (by exporting an XML file from the Edit page). Renders Individual 
+Clips, the “Codec” setting on macOS, defaults to Apple ProRes 422 (HQ), Output Size 
+defaults to the current Timeline Resolution (as set in the Master Settings panel of the Project 
+Settings), and Use Unique Filenames is turned on. 
+When you choose this preset, an XML of the timeline is automatically exported along with 
+the media, with path names that reflect the rendered clips.
+• Selects the appropriate settings for projects that were sent from Final Cut Pro X to DaVinci 
+Resolve using XML. This is meant for situations when you’re rendering media intended for 
+a return trip to Final Cut Pro X (by exporting an FCPXML file from the Edit page). Renders 
+Individual Clips, the “Codec” setting on macOS, defaults to Apple ProRes 422 (HQ), Output 
+Size defaults to the current Timeline Resolution (as set in the Master Settings panel of the 
+Project Settings), and Use Unique Filenames is turned on. 
+When you choose this preset, an XML of the timeline is automatically exported along with 
+the media, with path names that reflect the rendered clips.
+Premiere XML
+Selects the appropriate settings for projects that were sent from Premiere Pro to DaVinci Resolve 
+using XML. This is meant for situations when you’re rendering media intended for a return trip to 
+Premiere Pro. Renders Individual Clips, the “Codec” setting on macOS defaults to Apple ProRes 422 
+(HQ), Output Size defaults to the current Timeline Resolution (as set in the Master Settings panel of the 
+Project Settings), and Use Unique Filenames is turned on. 
+When you choose this preset, an XML of the rendered timeline is automatically exported along with 
+the media, with path names that reflect the rendered clips.
+4191Deliver | Chapter 187 Rendering Media
+DELIVER
+Avid AAF
+Selects the appropriate settings for projects that were sent from Avid Media Composer or Symphony 
+to DaVinci Resolve using AAF. This setting is NOT for exporting to Pro Tools. This is meant for 
+situations when you’re rendering media intended for a return trip to Media Composer (by exporting an 
+AAF file from the Edit page). The “Codec” setting defaults to DNxHR 444 12 bit, Output Size defaults 
+to the current Timeline Resolution (as set in the Master Settings panel of the Project Settings), and 
+Render Clip with Unique Filename is turned on. 
+When you choose this preset, an AAF of the timeline is automatically exported along with the media, 
+with path names that reflect the rendered clips.
+Pro Tools
+As of DaVinci Resolve version 16, Pro Tools export has been dramatically improved. This preset 
+presents the appropriate options for exporting a specifically formatted AAF project file, linked audio 
+files, and a linked reference video file to Pro Tools, or any application capable of importing a Pro Tools 
+formatted AAF file.
+When exporting using the Pro Tools preset, you must use the AAF file that’s automatically created and 
+written to the target location, because it’s formatted specially for Pro Tools and it contains path names 
+reflecting the rendered clips. Do not export an AAF using the File > Export AAF/XML command, as this 
+will not provide the correct exchange file for Pro Tools, and it won’t work correctly.
+When you use the Pro Tools preset, DaVinci Resolve outputs the following:
+1 What you choose in the Codec dropdown menu of the Audio panel dictates whether you export 
+the audio from the Timeline as a collection of files that link to a separate AAF, or an AAF with 
+audio file embedded within as a single deliverable.
+  Choose Linear PCM to export individual files linked to a separate AAF interchange file
+  Choose Embedded in AAF to export an AAF with embedded Broadcast WAV audio files within it 
+as a single deliverable
+Whether you export separate files or a single embedded AAF deliverable, each of the audio 
+clips in the current Timeline can be exported as individual mono or multichannel audio files. 
+The standard mono round trip export from DaVinci Resolve to Pro Tools is the default setting, with 
+the “Render one track per channel” box checked in the Audio tab of the Pro Tools Render Setting. 
+With this option, a 5.1 polyphonic .wav file would be exported as six individual mono .wav files.
+If the “Render one track per channel” box is unchecked, DaVinci Resolve will output multichannel 
+polyphonic .wav files instead. If you do this, it’s important to check in advance that Pro 
+Tools supports the particular multi-channel formats you want to export before committing to 
+this workflow.
+Each exported file contains every audio channel from the source media, regardless of channels 
+that have been been muted in the audio panel of Clip Attributes. This means no matter how the 
+video editor organized the channels of audio in the Timeline, you’ll always deliver every channel of 
+each audio clip to whomever is doing your audio postproduction.
+2 You can also choose to include handles using the “Add X frame handles” option in the Advanced 
+Settings of the Video panel to add extra frames to the beginning and end of each exported audio 
+clip. This will provide needed editing flexibility to whomever is refining your audio.
+3 The type of audio file that’s exported is determined by your choice of video format in the 
+Video panel:
+  If you choose the MXF OP-Atom video format, then MXF audio files will be exported.
+  If you choose the QuickTime format, then Broadcast Wave files will be exported.
+4192Deliver | Chapter 187 Rendering Media
+DELIVER
+4 All video in your timeline will be rendered and output as a single reference movie, in the format 
+that’s selected in the Video panel, with all effects and titles baked in. Subtitles can also be burned 
+into the reference movie or exported as a file. If you want to provide a window burn, you can 
+enable visible metadata using the Workspace > Data Burn-In window. If you do not wish to export 
+a reference movie, you can uncheck the Export Video box in the Video panel.
+When you output using the Pro Tools preset, an AAF of the audio tracks of the current 
+Timeline is exported that’s formatted for import into Pro Tools, or any other digital audio 
+workstation (DAW) software that’s compatible with the Pro Tools style of AAF import.
+• Exported audio files have the file name and timecode of the source media they were 
+extracted from, to enable relinking to the source media in Pro Tools, if necessary. In the case 
+of Video+Audio files that have been synced in DaVinci Resolve, exported audio files are 
+given the timecode and name of the synced audio source file, not that of the video clip.
+• Each audio track exports whatever custom name you may have given it, for use by Pro Tools.
+• All track and clip volume automation is exported, with all keyframes.
+• iXML metadata is also exported, including channel names when available.
+IMPORTANT: When you export to Pro Tools in the Deliver page, audio effects are neither 
+exported nor baked in, which means that FairlightFX, EQ, Compression, Pitch, and Elastic 
+Wave effects will be ignored. If you are experiencing problems with imported AAF files, check 
+to see if there are audio effects or audio compound clips in the Timeline, and replace any you 
+find with duplicates of the same audio clips that have no effects.
+Audio Only
+This preset is specifically for rendering an audio-only media file from the Timeline. Video rendering 
+is disabled, and this preset defaults to rendering the Main 1 bus as a single clip, rendering one track 
+per channel using the MXF OP-Atom format set to the Linear PCM codec, at 16-bits. However, the 
+QuickTime, MP4, and WAV formats are also available, and you can also render 24- or 32-bit output. 
+Additionally, you have the option to render other Mains or Submixes, or to choose a specific Timeline 
+Track to render. Finally, you can choose to render the current program as Individual Clips.
+Creating and Using Your Own Presets
+If there is a particular group of settings that you find yourself using repeatedly, you can turn it into a 
+custom Easy Setup, for easy recall.
+To create a new Easy Setup:
+1 If you want to start from scratch, make sure to choose Custom from the preset panel to unlock 
+every setting in the Render Settings pane.
+2 Choose the particular settings you require in the Video, Audio, and File panels for your 
+new preset.
+3 Open the Render Settings Options menu, and choose Save as New Preset.
+4 Type a name into the “Render Preset” dialog, and click Save. The new preset now appears in the 
+Preset panel.
+4193Deliver | Chapter 187 Rendering Media
+DELIVER
+To load a preset:
+  Click any preset. Every setting in the Render Settings pane updates to reflect the 
+preset you selected.
+To change a custom preset that you’ve created
+  Click a preset you want to change, make whatever changes you need to in the Video, Audio, and 
+File panels, then click the Render Settings Option menu, and choose Update Current Preset.
+To delete a custom preset that you’ve created:
+  Click a preset you want to delete, then click the Render Settings Option menu, and choose 
+Delete Current Preset.
+Import and Export Custom Presets
+Custom render presets that you create can be imported and exported from the Deliver page. Presets 
+are saved in .xml files that can be easily sent to other users or workstations to ensure the exact same 
+delivery methods are used between machines. In addition, any newly created export presets are 
+available in the “Add to Render Queue Using” menu when you right-click a timeline.
+Render presets can now be imported and exported from the Deliver page.
+To save a custom render preset:
+1 In the Deliver page, adjust the Video, Audio, and File options in the Render Settings to your needs.
+2 In the Render Settings Option (3-dot) menu, select Save as New Preset.
+3 Enter a name for the new preset, and press OK.
+The new preset will be available in the Render Settings Option menu, as well as an option in the 
+Custom Preset Settings icon in the Render Presets row at the top of the Render Settings.
+ To export a custom render preset:
+1 In the Deliver page, click on the Render Settings Option (3-dot) menu.
+2 Select the name of the saved preset you wish to export.
+3 Select Export Preset from the dropdown menu.
+4 Use the file browser to name and set the save location of the preset.
+The new preset will be available as an .xml file.
+4194Deliver | Chapter 187 Rendering Media
+DELIVER
+To import a custom render preset:
+1 In the Deliver page, click on the Render Settings Option (3-dot) menu.
+2 Select Import Preset from the dropdown menu.
+3 Select the Render Setting .xml file in your file browser.
+4 Press Open.
+The imported preset will be available in the Render Settings Option menu, as well as an option in 
+the Custom Preset Settings icon in the Render Presets row at the top of the Render Settings.
+To update a custom render preset with new settings:
+1 Make any changes you wish to the Video, Audio or File Render Settings.
+2 In the Deliver page, click on the Render Settings Option (3-dot) menu.
+3 Select the name of the saved preset you wish to update.
+4 Select Update Preset from the dropdown menu.
+5 Press the Update Button from the warning dialog. This action can not be undone.
+The selected preset will be updated with the new settings you selected.
+To delete a custom render preset:
+1 In the Deliver page, click on the Render Settings Option (3-dot) menu.
+2 Select the name of the saved preset you wish to delete.
+3 Select Delete Preset from the dropdown menu.
+4 Press the Delete Button from the warning dialog. This action can not be undone.
+The selected preset will be permanently deleted from the Render Presets list.
+Choosing a Location to Render
+The first decision you have to make when rendering your output is where it’s going to be rendered. 
+Accordingly, this is the first set of controls appearing at the top of the Render Settings parameters.
+• Filename: A preview of what the file name will be based on the settings found in the File 
+panel described later. The Custom/Timeline name and File suffix fields, as well as the 
+“Use x digits in the filename” settings all determine what name appears here. The editable 
+portions of this filename preview can also be edited here.
+• Location: Click the Browse button to choose a directory in which to write the media being 
+output by DaVinci Resolve. After you’ve selected a directory, the path name appears in the 
+“Render job to” field.
+4195Deliver | Chapter 187 Rendering Media
+DELIVER
+Single Clip vs. Individual Clips
+While there are numerous options available in the Render Settings of the Deliver page, there are 
+basically two overarching ways you can render your project, depending on which of the “Render” 
+radio buttons you click in the Output group.
+Render a single clip or individual clips
+Single Clip
+When you select the Single clip option, you’re setting up a render wherein all clips in the session are 
+output together, as a single media file in whatever format you choose. This means you’ll be rendering 
+the selected range of the session to a single MXF or QuickTime file, or as a single collection of 
+image sequences. 
+  Timecode: The timecode that’s written out is dictated by the “Start timeline timecode at” setting 
+of the timeline being rendered. Media files contain a continuous timecode track, while image 
+sequences have timecode written into each frame’s data header, and integrated into the file name 
+(as a frame count). 
+  Frame Rate: If you’re rendering a project that uses mixed frame rates, rendering to a single clip 
+converts every clip in the entire session to the project frame rate, using either the project-wide or 
+clip specific “Retime process” setting.
+  Effects: Most effects are “baked into” the rendered output when you render a single clip.
+IMPORTANT: Whenever clip filtering is enabled (via the dropdown menu to the right of the 
+Clips button), Single Clip rendering cannot be selected. You can see if clip filtering is enabled 
+by an orange line underneath the Clips button in the UI toolbar.
+Individual Clips
+Selecting the Individual clips option sets up a render where each clip is rendered as an individual 
+media file in whichever format you choose. The result will be a collection of as many media files as 
+there are clips in the range you’ve selected to render. 
+  Timecode: The timecode written to each clip is cloned from the original source media, making it 
+easy to reconform media for projects being passed between DaVinci Resolve and NLEs.
+  Frame Rate: If you’re rendering a project that uses mixed frame rates, rendering to source renders 
+each clip at its own individual frame rate, to accommodate round-trip workflows.
+  Effects: You can choose whether any timeline-based effects are either ignored or “baked into” the 
+individual clips by checking/unchecking the Render Timeline Effects box.
+  Resolution: You can choose whether the individual clips are rendered at the timeline size or their 
+original source resolution by checking/unchecking the Render at Source Resolution box.
+4196Deliver | Chapter 187 Rendering Media
+DELIVER
+All Other Render Settings for Output
+This section covers the different render settings that are available for customizing your output. 
+Depending on which Render Setting mode you chose, some of these may be hidden, but this section 
+covers the full list found in the Advanced panel of controls. 
+If you choose one of the Easy Setups, then some of these settings will be locked, and others will be 
+editable, depending on the requirements of that setup. If none of the Easy Setups is suitable for the 
+task at hand, you can leave the Easy Setup dropdown menu set to none, and manually choose the 
+necessary settings for the task at hand.
+Video Panel
+This panel contains all video-oriented parameters.
+Format
+These top-level parameters let you choose whether or not to render video, and which format to render 
+it to. Depending on which Format, Codec, and Type you choose, other options may or may not appear.
+  Export Video: Turn this checkbox on to render the source video. Turn this checkbox off if you want 
+to render the source audio all by itself; this disables all video controls, and shows an Audio Format 
+dropdown menu in the audio section of settings.
+  Format: A dropdown menu that gives access to the container formats that are currently 
+available on your system. The available options depend on whether you have Final Cut Pro and 
+QuickTime installed, and on the operating system you’re using. This list is constantly growing, 
+as new file formats are added over time, so be sure to check each new version for the latest 
+supported formats.
+AVI: A now-deprecated file-based media format that, despite its age, remains popular with 
+Windows applications. Supports delivery using the Cineform, Grass Valley HQ and HQX, and 
+Uncompressed RGB and YUV codecs.
+Cineon: An older uncompressed image sequence format developed by Kodak, designed for film 
+scanning and digital mastering, which delivers RGB 10-bit.
+DCP: Native DCP encoding and decoding for creating unencoded DCP files only. If you have a 
+license for Frauenhofer’s EasyDCP, a setting in the Configuration panel of the System Preferences 
+enables you to choose whether to use EasyDCP (for creating encrypted DCP output), or the native 
+DaVinci Resolve encoding.
+DPX: An uncompressed image sequence format favored by the film industry for mastering and 
+delivery for DCDM mastering, which can be delivered as RGB 10-, 12-, 16-bit integer and half float, 
+or RGBA 8-bit.
+easyDCP: (when installed) An option that allows you to master a DCP or IMF directly 
+from DaVinci Resolve in conjunction when you have an installed license of Fraunhofer’s 
+EasyDCP software.
+EXR: The OpenEXR format is a high-dynamic-range image sequence format developed by ILM 
+for applications requiring high quality and multiple channels. Used for outputting ACES and HDR 
+deliverables. You can deliver to a variety of RGB Half and RGB Float settings. When choosing 
+the RGB half (DWAA) or (DWAB) compression codecs, an additional “Compression level” setting 
+appears that lets you choose how much compression to apply.
+GIF: The venerable Graphics Interchange Format allows you to output web animations, memes for 
+social media, and 1990’s internet aesthetics, in up to 256 colors.
+4197Deliver | Chapter 187 Rendering Media
+DELIVER
+HEIF: The High Efficency Image File Format lets you output a still image in a higher quality and 
+smaller file size than jpeg. This is a still image format only, if you output a video timeline it will 
+render as an image sequence of still images.
+IMF: A native IMF encoding option that lets you export to the SMPTE ST.2067 Interoperable 
+Master Format (IMF) for tapeless deliverables to networks and distributors, with support for 
+encoding of JPEG2000 using a library licensed from Kakadu software. No additional licenses 
+or plugins are required to output to IMF. The IMF format supports multiple tracks of video, 
+multiple tracks of audio, and multiple subtitle and closed caption tracks, all of which are meant to 
+accommodate multiple output formats and languages from a single deliverable. This is done by 
+wrapping a timeline’s different video and audio tracks (media essences) and subtitle tracks (data 
+essences) into a “composition” within the Material eXchange Format (MXF).
+JPEG: The Joint Photo Experts Group standard is still the primary still image format used 
+worldwide. Encoding your image as a .jpg ensures maximum compatibility with other software and 
+platforms. This is a still image format only, if you output a video timeline it will render as an image 
+sequence of still images.
+JPEG 2000: DaVinci Resolve 15 introduced support for the encoding and decoding of JPEG2000 
+using a library licensed from Kakadu software. This includes a complete implementation of the 
+JPEG2000 Part 1 standard, as well as much of Parts 2 and 3. JPEG2000 is commonly used for IMF 
+and DCP workflows.
+MJ2: The Motion JPEG 2000 format. DaVinci Resolve 15 introduced support for the encoding and 
+decoding of JPEG2000 using a library licensed from Kakadu software. This includes a complete 
+implementation of the JPEG2000 Part 1 standard, as well as much of Parts 2 and 3. JPEG2000 is 
+commonly used for IMF and DCP workflows.
+MKV: The Matroska video container lets you encode your video for playback in a wide variety of 
+computer video players, and home video servers.
+MP4: Dedicated MP4 encoding lets you export H.264-encoded movies.
+MXF OP–Atom: A simple standard for the Material eXchange Format, a file-based media format, 
+that’s often used when delivering DNxHD. This version conforms to the SMPTE 390M standard, 
+and can deliver using the DNxHD, DNxHR, Kakadu JPEG 2000, NTSC and PAL Avid, RGB Avid 10-
+bit, and XDCAM MPEG2 codec options.
+MXF OP1A: A version of the Material eXchange Format that conforms to the SMPTE 378M 
+standard, and can deliver using the 1080i Avid 8-bit, DNxHD, DNxHR, Kakadu JPEG 2000, NTSC 
+and PAL Avid, RGB Avid 10-bit, Sony MPEG4 422 and 444, and Sony XAVC Intra CBG and VBR, 
+and XDCAM MPEG2 codec options.
+PNG: The Portable Network Graphics format lets you output compressed full color still images 
+with an optional alpha channel. This is a still image format only, if you output a video timeline it will 
+render as an image sequence of still images.
+QuickTime: Apple’s file-based media format, used when delivering Apple ProRes, DNxHD or 
+DNxHR wrapped in QuickTime, GoPro Cineform RGB 16-bit and YUV 10-bit, Grass Valley HQ and 
+HQX, Kakadu JPEG 2000, H.264, HEVC, H.265 (single or multi-pass), Photo JPEG, Kakadu JPEG 
+2000, Uncompressed 8- and 10-bit formats with ARGB/BGRA/RGB/YUV channel orders, and VP9 
+at 8-, 10-, and 12-bits.
+TIFF: “Tagged Image File Format,” an image sequence format compatible with many desktop 
+video applications on many platforms and is also used when delivering for DCDM mastering.
+WebP: Google’s image format designed to supersede JPEG, PNG, and GIF formats for web 
+based content. It can be used to export animated video losslessly or with compression for 
+internet delivery.
+4198Deliver | Chapter 187 Rendering Media
+DELIVER
+Codec
+A dropdown menu that lets you choose from a selection of codecs that are available to the format 
+you’ve selected above.
+  Type: Different codec options may also present different bit depth and color space combinations, 
+as well, which are available from this menu.
+  Maximum Bit Rate: (Does not appear for all codecs) Codecs such as Kakadu JPEG 2000 let you 
+specify a maximum bit rate, in Mbits per second, with which to encode the delivered video.
+  Field rendering: If you’re processing interlaced source material, this checkbox sets DaVinci 
+Resolve to render each field individually before reintegrating them back into a single frame, in 
+order to process clips most accurately with filtering operations that would otherwise violate field 
+boundaries and cause problems. If you’re not rendering interlaced media, you should leave this 
+checkbox turned off, as it is more processing intensive.
+  Interlaced rendering: By default, frame-based media sources (image sequences, etc.) are 
+rendered progressively. You can now optionally render them as interlaced media instead by 
+checking this box. Once checked, select the Field Order to encode, either top or bottom field first.
+  Export HDR10 Metadata:  (Available in Single clip mode if HDR10+ is enabled in Project Settings) 
+Exports HDR10 metadata to the rendered file when you’re doing an HDR workflow.
+  Embed HDR10 Metadata:  (Available in Single clip mode if HDR10+ is enabled in Project Settings) 
+Exports HDR10 metadata to the rendered file when you’re doing an HDR workflow. Embeds 
+HDR10 metadata within the exported media of selected formats.
+  Embed HDR Vivid Metadata: Exports HDR Vivid metadata to the rendered file when you’re doing 
+an HDR workflow. Embeds HDR Vivid metadata within the exported media of selected formats.
+  Render at Source Resolution: (When rendering Individual Clips) This checkbox lets you render 
+each clip at the same resolution as its source media file, letting you preserve mixed frame sizes for 
+final delivery.
+  Resolution: The output resolution for rendering. This setting defaults to Timeline Resolution; 
+this lets you create a preset that automatically updates its resolution settings dynamically and 
+automatically changed to the currently loaded timeline/project. However, you can change 
+the resolution here if you want to set a specific resolution for the preset. Using this setting, 
+you can queue up different render jobs at different resolutions, in order to output both HD 
+and SD resolution media in the same render session, for example. Some file formats require 
+specific resolutions, in which case the Output Size settings will be automatically set to the 
+necessary resolution.
+  Frame rate: (When rendering Single Clip) This setting defaults to the Timeline Frame Rate; 
+this lets you create a preset that automatically updates its frame rate settings dynamically and 
+automatically changed to the currently loaded timeline/project. However, you may wish to set this 
+to a variation of the current conformed rate, for example choosing from between 23.98 or 24 fps. 
+Doing so will adjust the metadata written within the file, which is used to aid playback for the range 
+of systems available worldwide. 
+3:2 Pulldown Insertion Options: Starting with DaVinci Resolve Studio 12.5, you have the option 
+of outputting either 29.97 or 30 fps media with 3:2 pulldown insertion if your project’s playback 
+frame rate is either 23.98 or 24 fps. To output 29.97 media, the project must be 23.98 fps; simply 
+choose (23.976 3:2) from the Frame rate dropdown. Projects with 24 fps frame rates can only be 
+output at 30 fps.
+  Chapters from Markers: (QuickTime or MP4 only) Embeds chapter points in the rendered file 
+corresponding to the marker’s position on the Timeline of the selected marker color.
+  Export Alpha: (When rendering Individual Clips) Turning this checkbox on results in alpha 
+channels found in each clip’s source media file being output to each delivered clip, as well as 
+alpha information that you’re creating in DaVinci Resolve and inserting into that clip via the Alpha 
+output of the Color page Node Editor being output to each delivered clip.
+4199Deliver | Chapter 187 Rendering Media
+DELIVER
+  Alpha Mode: (When rendering Individual Clips) Lets you choose how to export alpha channels 
+when Export Alpha is enabled. You can choose Straight or Premultiplied.
+  Render Stereoscopic 3D: (Only appears if there are stereo clips in a timeline) Three options let 
+you choose how to render stereoscopic timelines, rendering just one eye’s worth of media at a 
+time, or rendering a single set of stereo media in one of four ways, depending on the option you 
+choose from the “Both eyes as” dropdown menu.
+Left eye: Lets you render only the left-eye media from a stereo timeline.
+Right eye: Lets you render only the right-eye media from a stereo timeline.
+Both eyes as: Lets you select from four ways of rendering the left and right eyes of stereo media 
+as a single set of media files. “Separate files” lets you output both the left-eye and right-eye media 
+as individual media files, all at once. Side-by-side, Line-by-Line, and Top-Bottom let you output 
+frame-compatible media that can be output to stereo-capable displays. Anaglyph lets you output 
+a traditional anaglyph red/cyan stereo image for viewing on any display using red/cyan glasses. 
+MV-HEVC lets you output spatial video clips compatible with most VR headsets.
+  Use Constant Bit Rate: If the Format and Codec you’ve specified allows you to switch 
+between variable and constant bit rate output, this checkbox lets you force video to render at a 
+constant bit rate.
+Optional MP4, H.264, H.265, VP9, or HEVC Controls
+If you choose MP4 as the format, or QuickTime with H.264, H.265, or VP9 as the codec, additional 
+options appear, described below. Workstations using NVIDIA GPUs that offer NVENC will present 
+alternative accelerated options, while other workstations offering QuickSync hardware encoding 
+instead will be able to use that option.
+  Use hardware acceleration if available:  DaVinci Resolve supports QuickSync hardware encoding 
+of H.264 and HEVC, if available on your workstation.
+  Quality: If the currently selected option in the Render to dropdown menu has options for changing 
+the compression quality, this dropdown menu lets you choose the quality you want to use. 
+Otherwise, it’s disabled.
+  Restrict to X Kb/s: You can choose Automatic, or select a maximum data rate with which to export.
+  Encoding Profile: A dropdown that lets you choose among different encoding profiles, each 
+of which has been optimized for different purposes. The tradeoff is between quality and 
+computational intensity for encoding and playback. The available options are:
+Auto: Automatically selects an encoding profile.
+Base: For H.264, intended for video conferencing and mobile phone use; highly compressed.
+Main: For H.264, intended for SD analog transmission. For H.265, intended for the compression of 
+4:2:0 video at up to 4K 60fps with a bit depth of 8-bits per channel.
+Main10: (H.265 only) Intended for the compression of 4:2:0 video at up to 4K 60fps with a bit 
+depth of 10-bits per channel.
+Main 4:2:2 10: (H.265 only) Intended for the compression of 4:2:2 video at up to 4K 60fps with a 
+bit depth of 10-bits per channel.
+High: For H.264, intended for Blu-Ray and HD transmission.
+  Entropy Mode: (called Entropy Coding Mode for compatible Nvidia GPUs) A dropdown that lets 
+you choose which algorithm the encoder should use for compression. The choices are:
+CALVC (context-adaptive variable-length encoding):  A lower-quality algorithm that’s less 
+computationally intensive to process and play.
+CABAC (context-based adaptive binary arithmetic coding):  A higher-quality algorithm that yields 
+better visual quality at lower bandwidth, at the cost of being more computationally expensive to 
+process and play.
+4200Deliver | Chapter 187 Rendering Media
+DELIVER
+  Multi-pass encode:  (Available for QuickTime H.264 and H.265) You can choose between Single 
+and Multi-pass encoding. Single pass is faster, but multi-pass yields superior results when quality 
+is important. When you enable Multi-pass, the number of passes performed is automatic.
+  Key Frames: (Available for QuickTime H.264 and H.265) You can choose Automatic, or select a 
+duration for manual keyframe insertion.
+  Frame Reordering: (Available for QuickTime H.264 and H.265) On by default, Frame Reordering 
+enables the encoding of B frames to improve the quality of the resulting compressed movie file. 
+Turning off Frame Reordering will speed encoding performance at the expense of visual quality.
+  Rate Control: (Available for compatible NVIDIA GPUs) Provides six options for controlling 
+Encoding Profile and Entropy Mode.
+  Lookahead: (Available for compatible NVIDIA GPUs) Lets you specify how many frames for the 
+encoder to examine in advance of compression.
+Optional DCP and IMF Controls
+If you choose DCP or IMF as the Format, additional options appear, described below.
+  Use interop packaging: (DCP only, located under Type parameter) Lets you create an Interop 
+DCP package, based on an earlier standard of DCP delivery that is not forward compatible with 
+SMPTE DCP packages. 
+  Package Type: (IMF) Defaults to App2 Extended (App2e), for encoding JPEG 2000 up to 4K.
+  Bit Depth: (IMF) The bit depth of the encoded IMF video.
+  Encoding Profile: (IMF) A dropdown that lets you choose among Auto, IMF, and Broadcast.
+  Encoding Level: (IMF) Provides different choices based on what is selected in Encoding Profile.
+  Maximum bit rate: (DCP, IMF) Lets you choose how much to compress the result.
+  Lossless Compression: (IMF) Lets you choose to encode using lossless compression.
+  Slope-Rate Control:  (DCP, IMF) A checkbox lets you specify lossless compression.
+  QStep: (DCP, IMF) Lets you choose either automatic or manually specified DCP quantization levels 
+at which to compress the video signal when using the Kakadu JPEG 2000 encoder.
+Advanced Controls
+An advanced settings disclosure button hides the following additional controls, by default.
+  Pixel aspect ratio: Lets you override the Project Settings and change the PAR of the rendered 
+output to either Square or Cinemascope.
+  Data levels: Defaults to “Auto,” which simply renders all clips with the data level appropriate to 
+the currently selected codec in the “Render to” dropdown menu, which is usually the preferred 
+behavior. Choosing one of the other options (“Video” or “Full”) outputs all clips using the selected 
+data range. 
+For more information, jump to chapter: Data Levels, Color Management, and ACES .
+Retain sub-black and super-white data:  Turning this checkbox on lets you choose to output 
+media files that preserve overshoots and undershoots, data that’s above the maximum and 
+minimum data levels of the data level you’ve selected, assuming this is supported by the video 
+format and codec you’re exporting to. Otherwise, DaVinci Resolve clips these “out-of-bounds” 
+parts of the signal in an effort to keep your deliverables from violating whatever QC standards 
+you’re adhering to in your grade.
+4201Deliver | Chapter 187 Rendering Media
+DELIVER
+  Color Space Tag: A dropdown menu that lets you choose a color space to embed as metadata 
+in the rendered file. This setting defaults to Same as Project if your project’s color science is set 
+to DaVinci YRGB Color Managed, or the ACES Output Device Transform if your color science 
+is set to ACEScc or ACEScct. You can override this option manually from the choices on the 
+dropdown menu.
+  Gamma Tag: A dropdown menu that lets you choose the gamma to embed as metadata in the 
+rendered file. This setting defaults to Same as Project if your project’s color science is set to 
+DaVinci YRGB Color Managed, or you can override this option manually from the choices on the 
+dropdown menu.
+  Data burn-in: A dropdown menu that defaults to “Same as Project,” which leaves the current Data 
+Burn In palette settings enabled while rendering, inserting a window burn into the media being 
+output. Choosing “None” disables window burns while rendering. Note that when rendering as 
+Individual Source Clips, individual clip burn in presets can be assigned if they’ve been created in 
+the Data Burn In palette. 
+  Bypass re-encode when possible:  Turning this checkbox on makes it possible to do a direct 
+copy of the video essence of video items in the Timeline, directly from the source media to the 
+file being output, when the selected Format, Codec, and Type matches the source. This also 
+preserves Alpha channel data for compatible formats.
+Bypass re-encode eliminates the need to re-encode video media, preserves quality, and speeds 
+up the output process dramatically, but it only works for clips in the Timeline to which no additional 
+effects have been added. Doing any grading, adding a Resolve FX plugin, adding any overlapping 
+effects or compositing to clips in the Timeline, resizing or stabilizing clips or altering the output 
+sizing of the Timeline, and adding Fusion effects will all necessitate re-encoding the entire clip 
+in order to process these effects. Transitions will require processing but only for the duration 
+of each transition.
+There are many situations where this is valuable:
+Fast output of simple edits: You’ve edited a simple cuts-only promo using footage cut 
+from a previously rendered program using QuickTime ProResHQ 422 media, and you’re 
+exporting to the exact same format. You can output all of the media very quickly using 
+Bypass re-encode when possible.
+Fast output of previously output timelines with small changes: You need to replace 
+a few shots in an effects-intensive program that’s already been output. You can import 
+the media file that was output into a new timeline, replace only the required shots with 
+new media. DaVinci Resolve will do a direct copy of all previously rendered media, while 
+re-encoding only the new clips with whatever effects and grading they contain. This lets 
+you quickly re-output a high-quality master file, while preventing you from needing to re-
+render the entire program.
+Fast output of previously output timelines with new audio mixes: You’ve placed a 
+previously rendered Video+Audio clip onto a timeline and edited a new audio mix clip to 
+replace the old audio mix. In this situation, a new Video+Audio file will be quickly written 
+with the new audio, but the video component of that file won’t be re-encoded, again 
+resulting in a fast export at the highest quality.
+TIP: For a list of which video formats are compatible with Bypass Re-encode on macOS, 
+Windows, and Linux, as well as which formats are compatible with Alpha channels, 
+see the “Supported Codec List” at the DaVinci Resolve Support page located at:  
+https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion .
+4202Deliver | Chapter 187 Rendering Media
+DELIVER
+  Use optimized media: When this checkbox is turned on, DaVinci Resolve will use optimized 
+media, when available, to do the final render, to save time. If your media has been optimized to 
+the same format as the one you’re outputting to (or better), this is convenient. However, if you’ve 
+optimized to a lower quality format than what you’re outputting to, you should turn this checkbox 
+off to force DaVinci Resolve to process all clips using the original media, guaranteeing the best 
+quality available.
+  Use proxy media: When this checkbox is turned on, DaVinci Resolve will use the generated proxy 
+media, when available, to do the final render, to save time. However, if your proxies are a lower-
+quality format than what you’re outputting to, you should turn this checkbox off to force DaVinci 
+Resolve to process all clips using the original media, guaranteeing the best quality available.
+  Use render cached images: When this checkbox is turned on, DaVinci Resolve will write media 
+from the cache to the files being output to save time. If you’re caching using the same media 
+format you’re outputting to (or better), this can be convenient. However, if you’re caching in a 
+lower-quality format than the one you’re outputting to, you’ll want to turn this checkbox off to force 
+DaVinci Resolve to process all media as it’s being rendered, writing at the maximum quality you’re 
+outputting to.
+  Force sizing to highest quality:  If you’ve been working with the “When resizing and scaling:” 
+option set to Bilinear to improve performance when working on slower workstations, turning this 
+checkbox on automatically renders all clips using the “Uses Sharper filter” setting of the Image 
+Scaling panel in the Project Settings. 
+For more information, jump to this chapter: System and User Preferences .
+  Force debayer res to highest quality: When rendering camera raw media formats that allow 
+variable quality debayering, it’s common to lower the debayering quality to improve real time 
+performance while grading. Turning this checkbox on guarantees that media will always be 
+rendered at the highest available quality, saving you from forgetting to manually change the 
+debayer setting back when setting up a render at 3am.
+  Render All Video Tracks: (When rendering Single Clips) You can un-check Render All Video 
+Tracks and select specific tracks in the Disable dropdown menu to exclude those tracks from the 
+final output on a per render job basis.
+  Enable flat pass: Three options let you choose whether or not to render each clip with its 
+grade applied.
+Off: DaVinci Resolve always applies each clip’s grade when rendering.
+With clip settings: For each version of a clip, the system will check that version’s pass flat flag. 
+If it’s turned on, the system disables color correction for that version of the clip. Otherwise, that 
+version will be rendered with its grade intact. Versions can be individually flagged by right-clicking 
+a clip’s thumbnail in the Timeline, choosing the submenu of the version you want to flag, and 
+choosing Enable Flat Pass.
+Always On: When checked, DaVinci Resolve disables the grade of every clip being rendered.
+  Disable sizing and blanking output:  When turned off, Output Blanking to create letterboxing or 
+pillarboxing is “baked” into the output, as are all sizing adjustments made on the Cut, Edit, and 
+Color pages, including Image stabilization. 
+When turned on, Output Blanking, Cut and Edit page sizing adjustments, Color page Input and 
+Output Sizing, and Image Stabilization are disabled. Rendered media is rendered either at the 
+source resolution if “Render at source resolution” is enabled in individual clips mode, or to the 
+currently specified resolution of the Timeline or project. If you’re outputting via Final Cut Pro or 
+Premiere Pro XML, or Avid AAF, sizing adjustments are output to the XML or AAF files that are 
+created for purposes of round-tripping these adjustments as editable metadata back to an NLE.
+4203Deliver | Chapter 187 Rendering Media
+DELIVER
+Be aware that “Disable sizing and blanking output” does not disable any transform operations that 
+happen within the Fusion page, nor does it disable transforms happening as a result of an OpenFX 
+or ResolveFX plugin applied to one or more clips in the Cut, Edit, or Color pages. All of these 
+effects will continue to be rendered into the final output.
+  Trigger script at: You now have the option of triggering a script to execute before or after 
+rendering a timeline, by checking the “Trigger script at” box.
+Start: Executes the script before the render job.
+End: Executes the script after the render job.
+Script: Chooses the specific script to run. You can select the specific script to execute using the 
+corresponding dropdown menu. Scripts must be written for the Resolve scripting framework in 
+either Python or Lua, and placed in the following directory:
+MacOS: /Library/Application Support/Blackmagic Design/DaVinci Resolve/Fusion/
+Scripts/Deliver/
+Windows: C:\ProgramData\Blackmagic Design\DaVinci Resolve\Fusion\Scripts\Deliver
+Linux: /opt/resolve/Fusion/Scripts/Deliver
+  Render full extents: (When rendering Individual Clips) When this box is checked, the entire 
+original media clip is rendered out completely, instead of just the portion delineated by the In and 
+Out points of the timeline clip.
+  Add X frame handles: (When rendering Individual Clips) Lets you specify front and rear handles 
+to be output in frames. This is particularly useful in round trips, when the finishing editor might 
+want additional handles with which to roll edit points or add transitions while fine-tuning the 
+graded edit.
+  Tone Mapping: (Available in Single clip mode if Dolby Vision or HDR10+ is enabled in Project 
+Settings) When set to None, the timeline is output using the current color management settings. 
+When set to either Dolby Vision or HDR10+, you can choose to output the timeline at a specific 
+peak nit level, color space, gamma, and Data Level using either the Dolby Vision or HDR10+ 
+metadata available to guide the tone mapping operation you’ve selected. This makes it easy to set 
+up multiple jobs to output HDR outputs at varying levels, as necessary.
+DCP and IMF Composition Settings
+If you’ve selected either DCP or IMF from the Format, a Composition Settings group appears with the 
+following parameters when you click the disclosure control, which let you populate generic DCP and 
+IMF composition metadata, as well as various studio specific settings:
+  Composition name: The name of the exported composition.
+  Issuer: The organization providing the composition.
+  Use current date: A checkbox that lets the current date be used as the Issue date automatically.
+  Issue date: The date the composition is issued.
+  Content kind: A dropdown provides a list of acceptable choices for defining the content.
+  Content originator: A text field to add who is responsible for this content.
+  Include volume index and output profile list:  Check this box to include these xml files in 
+the package.
+  Content version label: Meant to identify the version of the content being provided.
+  Annotate xml using composition name:  Auto-populates Asset Map, Composition Playlist, and 
+Packing List with data from the project. Otherwise these three fields are manually editable.
+4204Deliver | Chapter 187 Rendering Media
+DELIVER
+  Annotate reel index as suffix (DCP only): Auto-populates Reel Annotation with data from the 
+project. Otherwise this is manually editable.
+  Annotate media using filename:  Auto-populates Main Video Track and Audio Track 1 with data 
+from the project. Otherwise these three fields are manually editable.
+Subtitle Controls
+The Subtitle Settings group exposes controls governing how to export subtitles in your program:
+  Export Subtitle checkbox:  Lets you enable or disable subtitle/closed caption output.
+  Format pop-up: Provides four options for outputting subtitles/closed captions.
+As a separate file: Outputs each subtitle track you select as a separate file using the format 
+specified by the Export As pop-up. A set of checkboxes lets you choose which subtitle tracks you 
+want to output.
+Burn into video: Renders all video with the currently selected subtitle track burned into the video.
+As embedded captions:  Outputs the currently selected subtitle track as an embedded metadata 
+layer within supported media formats. There is currently support for CEA-608 closed captions 
+within MXF OP1A and QuickTime files. You can choose the subtitle format from the Codec pop-up 
+that appears.
+  Export As: (Only available when Format is set to “As a separate file.”) Lets you choose the subtitle/
+closed captioning format to output to. Options include: IMSC1, DFXP, SRT, and WebVTT.
+  Include the following subtitle tracks in the export:  (Only available when Format is set to “As a 
+separate file.”) A series of checkboxes lets you turn on which subtitle tracks to output.
+  Codec: (Only available when Format is set to “As embedded captions.”) Lets you choose how to 
+format embedded closed captions; choices include: Text and CEA-608.
+NOTE: Neither analog (Line 21) nor digital (CEA-708) closed caption output via Decklink or 
+UltraStudio is supported at this time.
+Audio Panel
+This panel contains all audio-oriented parameters.
+  Export audio: Turn this checkbox on to render the source audio, or audio that you’ve synchronized 
+in DaVinci Resolve, along with the media being output by DaVinci Resolve.
+  Format: You can choose which format of audio you want to render. Depending on which format 
+you choose, different audio codec options will appear below.
+MXF OP1A(IMF):  Generates media files that conform to the OP1a (Operational Pattern 1a) SMPTE 
+378M format of MXF media for file exchange.
+MXF OP-Atom: Generates media files that conform to the SMPTE 390M format of MXF media for 
+file exchange.
+QuickTime: Exposes all available formats of audio compatible with QuickTime.
+MP4: Generates media in the MPEG-4 file format.
+WAVE: Generates media in the WAVE file format.
+MP3: Generates media in the MPEG-3 file format.
+FLAC: Generates media in the FLAC file format.
+4205Deliver | Chapter 187 Rendering Media
+DELIVER
+  Codec: Lets you choose between Linear PCM (the default), AAC audio, IEEE Float, or MP3. AAC 
+audio encoding is only available on macOS.
+  Sample Rate: Lets you set the sample rate, in Hz, of the output of the audio.
+  Bit Rate Strategy: (Available for AAC encoding) You can choose among Constant Bit Rate, 
+Average Bit Rate, Variable Bit Rate Constrained, and Variable Bit Rate.
+  Quality: (Available for AAC encoding when Bit Rate Strategy is set to Variable Bit Rate) Five 
+settings you trade between speed and quality when encoding AAC audio.
+  Data Rate: (Available for AAC encoding when Bit Rate Strategy is set to Constant, Variable, or 
+Variable Constrained) Lets you choose the maximum data rate for AAC encoding.
+  Bit Depth: Lets you specify the bit depth at which to output the source audio.
+  Render one track per channel checkbox:  This checkbox lets you specify whether you want to 
+export each channel as an individual track in the structure of the exported file. Multi-channel 
+formats can be specified (2.0, 5.1, etc.), or can be output as flat multi-mono files.
+  Render as discrete audio tracks checkbox:  This checkbox is similar to the above, in that it still 
+outputs one channel per track. However, discrete tracks have no positioning info, nor do they 
+group as multi-channel clips (2.0, 5.1, etc.). For example, a mono file exported with Render one 
+track per channel, comes in front and centered. The same file exported as a discrete audio track 
+has no built in position information.
+  Output Track #: This dropdown menu lets you choose which Main or Submix bus you want to 
+output. A Plus button to the right lets you add additional tracks you want to export in this job, so if 
+you want to export multiple Mains or multiple Subs, you can add more Track pop-ups.
+When you choose a track with multiple channels of audio, a field appears showing how many 
+channels will be output; you have the option of using a virtual slider to change how many channels 
+are output.
+In Single Clip Mode, when you choose “All Timeline Tracks, each audio track in the current timeline 
+will be rendered as an individual track in the rendered media file you’re outputting. Multi-channel 
+tracks containing multi-channel clips will output audio tracks containing the same number of 
+channels in the output media, which means you can output mixed combinations of mono, stereo, 
+5.1 or 7.1, and adaptive audio tracks, and each separately rendered audio track will reflect identical 
+channel mappings.
+  Language: (Only available when outputting to the IMF format) This dropdown menu lets you 
+choose the language of a particular output track when you’re outputting to IMF. Since IMF files can 
+accommodate multiple audio tracks containing different mixes for different regions, it’s important 
+to identify each output track you’re outputting by language.
+  Content: (Only available when outputting to the IMF format) This dropdown menu lets you 
+choose the content of a particular output track when you’re outputting to IMF. Since IMF files 
+can accommodate multiple audio tracks containing different mixes and content, it’s important to 
+identify each output track you’re outputting by content.
+  Audio Normalization: You can select loudness standard presets from the Audio tab in the Render 
+settings on the Delivery page to automatically have the deliverable normalized accordingly. 
+These controls let you control the audio normalization on a per output basis. Unchecking this box 
+bypasses audio normalization and optimization.
+Normalize to Standard: Check this box to normalize loudness or peak (scaling whichever first 
+exceeds thresholds) to a standard.
+Optimize to Standard: Check this box to optimize loudness and peak (ensuring that loudness 
+meets the desired range and peaks remain lower than threshold) to a standard.
+Standard: Choose the normalization standard you want to apply.
+Target Level: Set the normalization level in dBFS.
+Output Track #: Check the box to apply the normalization to these outputs.
+4206Deliver | Chapter 187 Rendering Media
+DELIVER
+File
+This panel contains all other parameters.
+  Filename Uses: Three options let you automatically name the media file(s) that are 
+output automatically.
+Use Custom Filename: Lets you enter your own name in the Custom name/File prefix field.
+Use Timeline Name: (When rendering a Single Clip) When this option is selected, the name of the 
+Timeline is used.
+Use Source Filename: (When rendering Individual Clips) When this option is selected, the 
+filename of each clip’s corresponding source media file is cloned, and used as the filename of 
+media being output by DaVinci Resolve. This is preferred when you’re generating offline media 
+for use by an editor that you later want to reconform to the originating DaVinci Resolve project. 
+When this checkbox is turned off, you can customize filenames using the other options in this 
+section of settings.
+  Custom name: Lets you use custom text to name all rendered files. If you’re not using the source 
+filename, and not rendering to a file format that uses timecode, you can enter a filename here. 
+When editing the Custom Name or File Prefix (or File Suffix), you can use “metadata variables” that 
+you can add as graphical tags that let you display clip metadata. This is especially useful when 
+rendering Individual Source Clips. 
+For example, you could add the corresponding metadata variable tags %scene_%shot_%take and 
+the File Prefix would be written as “12_A_3” if “scene 12,” “shot A,” “take 3” were in the source 
+clip’s metadata. 
+For more information on the use of variables and a list of all the variables in 
+DaVinci Resolve, jump to chapter: Using Variables and Keywords .
+  File suffix: Lets you add custom text and/or metadata variables (described previously) to the end 
+of all rendered files.
+  Use unique filenames: (When rendering Individual Clips, and only when Filename uses is set 
+to Custom name) When enabled, additional characters are added to every rendered media file 
+to guarantee that each rendered media file has a completely independent name. This prevents 
+multiple rendered clips from the same source media file from overwriting one another when 
+saved to the same directory. “Uniquely” named clips append the clip name with the track and 
+clip number identifying a clip’s position in the currently selected session. For example, a clip 
+that’s linked to a media file named “DropThatThingCU.mov,” and edited as the twenty-fifth clip on 
+track V2, will be named “DropThatThingCU_V2-0025.mov” when rendered. When enabled, two 
+other options are revealed.
+Use unique filename prefix/Use unique filename suffix:  (When Use Unique Filenames is on) 
+Radio buttons let you choose whether to add the unique identifier at the beginning or end of a 
+clip. Choosing Prefix would result in “V2-0025 _DropThatThingCU.mov,” whereas choosing Suffix 
+would result in “DropThatThingCU_V2-0025.mov” when rendered.
+  Add source frame count to filename:  (When rendering Individual Clips, and only when Filename 
+uses is set to Custom name) When enabled, the source frame number of each clip is appended to 
+the end of the rendered file name. This is another way to make sure that multiple rendered clips 
+with custom names don’t overwrite one another.
+  Use filename digits:  Lets you specify how many digits to use when rendering an image sequence, 
+although the specified digits will also be used for any media format. This is particularly useful 
+if you’re outputting media to be used by an application that has strict requirements for image 
+sequence numbering. Defaults to eight digits.
+4207Deliver | Chapter 187 Rendering Media
+DELIVER
+  Each clips starts at frame:  (When rendering Individual Clips) This permits timecode to be written 
+to the header, and frame count to be written to the filename of the image sequences, which is 
+ideal for VFX workflows.
+  Start timeline timecode at:  (When rendering Single Clip) This option is only available when 
+rendering clips in Single clip order. Specifies the timecode that will be written to the media 
+being output by DaVinci Resolve. For DPX files, timecode is written into the header data, and 
+is simultaneously converted to a frame count that’s inserted into the filename of each frame 
+file, which provides a logical count of the frame numbers. For other media formats, timecode is 
+written to the appropriate metadata container. You may find it useful to use custom start times, 
+for example starting each reel of a project at a particular value, depending on the standards 
+employed at your shop.
+  Place clips in separate folders:  (When rendering Individual Clips) Useful if you need to preserve 
+the filenames of files you’re outputting when the filenames of clips coming from the same source 
+media file may cause them to overwrite one another. This option is also commonly used when 
+rendering VFX shots for additional post-production work, allowing the VFX department to identify 
+clips quickly and distribute the work accordingly.
+  Preserve Source directory levels: (When rendering Individual Clips) Retains a user-specified 
+depth of the original directory structure used by a clip’s corresponding source media file, 
+recreating it when rendering new files for output. The number you select determines how many 
+levels of subdirectories DaVinci Resolve will automatically create within the currently specified 
+“Render job to” directory to match the path used by the source files. Defaults to 0, which creates 
+no matching subdirectories.
+After Head/From Tail: When setting how many directory levels of each clip’s file path to preserve 
+(using the “Preserve x levels” parameter), click one of these buttons to specify whether that 
+number of path levels is defined relative to the head or the tail of each media file path.
+Preserved Path: Shows you a preview of the preserved path you’ve set up so you know you’ve 
+gotten it right.
+  File Subfolder: (Only appears in Additional Output panels) Lets you specify a subdirectory into 
+which to render the media files being output. If the specified subdirectory doesn’t exist, a new one 
+with that name will be created within the currently specified “Render job to” directory.
+  Use commercial workflow:  (When rendering Individual Clips) Automatically renders every version 
+that’s applied to each clip in the session, except for versions that have been flagged using the 
+“Render Disabled” flag, found in the Version submenu for each clip in the Timeline. This option is 
+typically used when you’ve graded multiple versions of a clip to be used for VFX work, and you 
+want to deliver each grade as a separate media file. This is also used when rendering programs 
+for commercial broadcast where you have two or more versions of a grade for each scene. When 
+using this option, alternate methods of outputting each rendered media file are used, and four 
+additional settings are revealed.
+Alternative pass offset:  Lets you separate the timecode values written into each version of a clip 
+with an offset. For example, if the default version timecode is 01:00:20:00, and you select a 10 
+minute offset in the Alternative Pass Offset timecode entry, then the second graded version of 
+that clip will start at 01:10:20:00, the third version will start at 01:20:20:00, and so on until every 
+version is rendered. You can offset the clips by whatever value you like, but the idea is to make 
+it easy for editors and VFX artists to find the versions of each grade. If the clips are shared with 
+a finishing artist, and they know that each alternate pass is 10 minutes apart, then it’s easy for 
+the finisher to change the clip version just by adding 10 minutes to the referenced timecode. 
+To simplify the workflow further, you can put separate source reels in separate folders using the 
+next three options.
+Place reels in separate folders: Automatically places all media that’s output using a particular reel 
+name into corresponding folders.
+4208Deliver | Chapter 187 Rendering Media
+DELIVER
+Place clips in separate folders:  Automatically places alternate grades of clips into 
+separate folders.
+Use version name for folders: Labels each folder with the name of the version when using the 
+Commercial Workflow option.
+  Render speed: A dropdown menu lets you throttle the speed at which media is rendered. 
+Ordinarily you’ll leave this set to the default of Maximum. However, some storage systems that are 
+shared by multiple rooms in a facility use storage area networks (SANs) with insufficient bandwidth 
+for multiple real-time image streams. DaVinci Resolve’s incredibly fast rendering speeds can cause 
+playback problems with other users accessing the SAN if available bandwidth is insufficient. In this 
+case, you can throttle the render speed to limit SAN bandwidth usage to between 1 to 50 percent 
+of full rendering speed.
+  Disk space currently used: Shows the amount of disk space available on the target volume.
+  Disk space used after render: Shows the new disk usage based on the specified range of the 
+current session that you’re rendering.
+Additional Outputs
+Each job you create in the Render Settings defaults to a single output. However, you can create 
+multiple outputs when you need to deliver multiple versions of media, with individual video 
+formats and codecs and different data burn-in settings, to be rendered into individually named 
+subfolders (optional). 
+This can be useful for setting up multiple rendered passes when your client requires two sets 
+of media, for example QuickTime ProRes 422 (HQ) media along with MXF DNxHD media. 
+This is also useful when you need to output two sets of media where one has window burns, 
+and the other is clean. 
+The menu command for creating an additional output, 
+shown next to an existing additional output in panel 2
+4209Deliver | Chapter 187 Rendering Media
+DELIVER
+To add additional outputs in the Render Settings:
+  Choose Create Additional Output from the Render Settings Option menu. A row of numbers below 
+the Filename and Location controls let you open each output you create and adjust its settings. 
+You can have as many outputs as you require.
+To remove an additional output:
+  Open the additional output panel you want to remove, and click the Delete button at the bottom.
+How to Avoid Overwriting Clips 
+When Rendering Output Media
+Three of the options described previously, “Use unique filenames,” “Place clips in separate folders,” 
+and “Use commercial workflow,” are all ways of organizing your rendered media to avoid overwriting 
+rendered clips that happen to share the same file name. These options are necessary because each 
+clip has one logical range of timecode, and because multiple clips often refer to a single source media 
+file with one name.
+When rendering a clip, DaVinci Resolve automatically overwrites any other media files that have the 
+same name. So, in instances where you’re trying to preserve the previous filename of the source 
+media file, or where you’re rendering out multiple versions of the same clip, it’s entirely likely that the 
+clips you’re trying to output will overwrite one another, leaving you with the last clip you rendered. 
+The three options mentioned previously prevent this in different ways.
+Defining a Range of Clips 
+and Versions to Render
+Once you’ve defined the Render Settings, now you need to decide how much of the Timeline you 
+need to render. A Mini-Timeline and Thumbnail timeline are available to help you navigate your 
+project’s clips in order to choose which ones you want to render. Track controls let you enable and 
+disable whole tracks from being output; for example if you need to render a textless version of a 
+timeline in which all the title clips are on track V4, you can disable track V4. Furthermore, you can also 
+use these controls to choose which clip versions you want to render.
+To render the entire Timeline:
+  Choose Entire Timeline from the Render dropdown in the Deliver page timeline. This option only 
+appears if clips are not filtered.
+To disable a video or audio track to exclude those clips from being rendered:
+  Click the Video or Audio Disable Track button for the tracks you want to exclude.
+To render a filtered subset of clips in the Timeline:
+1 Open the Color timeline, if it’s not already shown, and choose an option from the Timeline 
+Filter dropdown to the right of the Clips button in the Interface toolbar. 
+The contents of the Thumbnail timeline are restricted to show only the clips matching the selected 
+criteria. For example, if you’ve already rendered a session, but you’ve since made some changes, 
+you can use one of the “Show Modified Clips” options to display only the clips that have changed 
+within a particular timeframe. Another possibility is to choose the “Show Unrendered Clips” option 
+to show all clips that have not yet been rendered.
+2 Choose “All Filtered Clips” from the Render dropdown in the Timeline toolbar.
+4210Deliver | Chapter 187 Rendering Media
+DELIVER
+To clear clip filtering:
+  Choose All Clips from the Timeline Filter dropdown to the right of the Clips button in 
+the Interface toolbar.
+To define a continuous range of clips to render:
+1 To define the first clip in the range you want to render, do one of the following:
+  Right-click a clip thumbnail in the Thumbnail timeline and choose Mark In.
+  Position the playhead in the Timeline or the Viewer, and press the I key, or right-click the 
+Timeline ruler and choose Mark In.
+2 To define the last clip in the range you want to render, do one of the following:
+  Right-click a clip thumbnail (in the Color timeline) or a clip (in the Edit timeline) in the Thumbnail 
+timeline and choose Mark Out.
+  Position the playhead in the Timeline or the Viewer, and press the O key, or right-click the 
+Timeline ruler and choose Mark Out.
+In and Out points appear within the Timeline ruler, and an orange bar shows the range you’ve selected 
+to render. The In and Out fields update with the first and last frame numbers, in timecode and frame 
+count, and the Duration field updates with the total number of frames you’ll be rendering. 
+IMPORTANT: If you’re in Individual Clips mode, In and Out points automatically snap to the 
+nearest clip In or Out point in the Timeline. You cannot render partial clips in Individual Clips 
+mode, but you may do so in Single Clip mode.
+To render a single clip:
+  Open the Thumbnail timeline if it’s not open already, Right-click any clip thumbnail, and choose 
+Render This Clip.
+  An orange bar in the Timeline ruler shows that clip is selected for rendering. If you need to render 
+several clips individually, you can select each clip one at a time to add as individual jobs to the 
+Render Queue.
+Choosing Which Versions to Render for Each Clip
+By default, the currently selected version that was set in the Color page is rendered for each clip. If 
+you want to render a different version, the easiest thing to do is to make sure they’re selected on the 
+Color page Timeline before you open the Deliver page.
+However, a Versions submenu, within the Thumbnail timeline’s contextual menu for each thumbnail, 
+also provides options to manage grade versions. These commands are duplicates of options that are 
+available from the Thumbnail timeline of the Color page.
+To choose which version to render:
+  Right-click any clip thumbnail in the Thumbnail timeline, and choose a version from 
+the Versions submenu.
+TIP: You can right-click a clip in the Thumbnail timeline of the Color or Render screen and 
+rename any version of a grade. This can assist a facility’s workflow when sharing material 
+between suites and applications.
+4211Deliver | Chapter 187 Rendering Media
+DELIVER
+Using the Render Queue
+Once you’ve defined the settings necessary to render the type of media you require, and the range 
+of the current session you want to render, you need to add all that information as a job to the Render 
+Queue. You can add as many jobs to the Render Queue as you need, depending on what files you 
+need to output. 
+Each job can have individually specified ranges of clips and individual clip settings, which can include 
+different render directories, different formats, resolutions, data levels, burn-in settings, and so on. As 
+a result, you can use the Render Queue to queue up the render of multiple sections of the current 
+session, or multiple versions of the same media. Furthermore, you can queue up multiple sessions, if 
+you have several differently graded sessions.
+To add a job to the Render Queue:
+1 Select a timeline.
+2 Choose the settings you require in the Render Settings, using one of the Presets, or by choosing 
+your own custom settings.
+3 Choose a range of clips to render using the Deliver page Timeline using the procedures described 
+in the previous section.
+4 Click the Add to Render Queue button at the bottom of the Render Settings.
+5 If you haven’t chosen a location for the render yet, you’ll be prompted to do so now via a File 
+Destination dialog, so choose a location and click Ok. If there’s already media in the render 
+location you’ve specified, you may also see a dialog telling you “This render may overwrite 
+existing clips in this folder.” If you want to continue, click Yes, otherwise click No.
+That render setup is now added as a job to the Render Queue, showing the project and timeline 
+name, and location path where the render will be written to.
+A selected job in the Render Queue
+Media Offline Warning in Render Queue
+When you attempt to add a job to the Render Queue with a timeline that contains any offline 
+material, DaVinci Resolve automatically gives you a warning. You may choose to either cancel 
+adding the job, or to add it anyway, knowing you’re about to render one or more offline clips.
+Media Offline warning box that appears if your timeline contains offline 
+clips or frames and is added to the Render Queue
+4212Deliver | Chapter 187 Rendering Media
+DELIVER
+To show more details about jobs in the Render Queue:
+Click the Render Queue Option menu (at the upper right-hand corner) and choose Show Job 
+Details. Each job now lists the frame size, format, frame rate, audio channels and sample rate, 
+and duration below the name and location path.
+A selected job in the Render Queue with job details shown
+To rename a job:
+Jobs can be given custom names simply by clicking on the default job name (Job 1, Job 2, and 
+so on) and typing a new name of your own. This can be useful for setting up jobs that you may be 
+re-rendering over and over as you work on a project.
+To start rendering:
+1 If you want to restrict rendering to only selected jobs in the Render Queue, then select one or 
+more jobs by clicking on one, and then Command-clicking on others to choose discontinuous 
+jobs, or Shift-clicking on another to select an entire range of jobs. When you select one or more 
+jobs, only the selected jobs will be rendered. If no jobs are selected, then all jobs in the queue will 
+be rendered.
+2 Click the Start Render button, underneath the Viewer to the right of the interface.
+3 If there are jobs in the Render Queue that have already been rendered, a dialog will appear asking 
+“Selected items contain already rendered items. Do you want to re-render them?” Clicking Yes will 
+re-render all jobs in the Render Queue. Clicking No only renders the jobs that have not yet been 
+rendered. Clicking Cancel cancels the entire rendering operation.
+Rendering begins, starting with the highest job in the list. The Overall Progress bar starts to fill 
+up, from right to left, indicating how much of what’s been queued up has been rendered so far. 
+While rendering is in progress, the Start Render button changes to the Stop Render button, which 
+can be clicked at any time to halt rendering.
+TIP: While rendering is in progress, a small progress bar will appear on the DaVinci 
+Resolve icon in the dock of Mac OS X, or on the taskbar of Windows.
+To remove jobs from the Render Queue, do one of the following:
+  To clear a specific job: Click the X at the upper right-hand corner of a job’s entry in 
+the Render Queue.
+  To clear all previously rendered jobs: Click the Render Queue Option menu (at the upper right-
+hand corner) and choose Clear Rendered.
+  To clear all jobs: Click the Render Queue Option menu (at the upper right-hand corner) and 
+choose Clear All.
+4213Deliver | Chapter 187 Rendering Media
+DELIVER
+To change a job that has been rendered to appear unrendered again:
+Right-click any rendered job, and choose Clear Render Status. You can also select multiple jobs to 
+change their rendered status all at once. This makes it easy to re-render the exact same job.
+To edit a job that has or has not been rendered:
+1 Click the Pencil button in the Render Queue to select it.
+Clicking the pencil icon to edit a 
+job in the Render Queue
+The selected Render Queue’s settings repopulate the Render Settings list, and resets the 
+selected range of the Timeline corresponding to that job.
+2 Change whichever settings you need to.
+3 When you’re finished editing the job, click the Update Job button that appears at the bottom of the 
+Render Settings, or you can click Add New Job to create a new job with the changes you’ve made, 
+leaving the previous job untouched.
+NOTE: If you click the Pencil button again without clicking Update Job, you’ll be prompted to 
+Save, Cancel, or Don’t Save.
+To review clips that correspond to rendered jobs:
+To show a rendered clip in the Media Storage browser: Right-click any rendered job, and 
+choose Reveal in Media Storage.
+To show a rendered clip in your computer’s file system (Mac OS only): Right-click any 
+rendered job, and choose Reveal in Finder.
+Rendering Jobs from 
+Multiple Projects at Once
+You can also add multiple projects from the currently open PostgreSQL or local project library to the 
+render queue all at once. This can be exceptionally useful in situations where you’ve broken a program 
+into multiple reels, with each reel being a different project. 
+To render output from multiple projects at once:
+1 Open each project, set up whatever jobs you want to render in the Render Queue, and save that 
+project without rendering.
+2 When you’ve set up the last project, click the Render Queue Option menu (at the upper right-hand 
+corner) and choose Show All Projects.
+All queued items in projects belonging to the currently selected user (if using a network project 
+library) or in the currently specified disk location (if using a local project library) now appear in the 
+Render Queue.
+4214Deliver | Chapter 187 Rendering Media
+DELIVER
+3 Click Start Render to begin rendering every job from every project in the queue.
+4 When you’re finished, turn Show All Projects off to go back to displaying only the current project’s 
+render queue items.
+Remote Rendering
+If you have multiple DaVinci Resolve workstations on the same network, you can send a job in the 
+Render Queue from the workstation you’re using (referred to as the “artist workstation”) to one of 
+the “remote workstations” on the network using remote rendering. This lets you use any one of 
+your currently unused secondary workstations to render your jobs, while you continue working on 
+your main workstation.
+In order to use remote rendering, you must adhere to the following three criteria:
+  Both the artist workstation and the remote workstation must have DaVinci Resolve Studio 
+installed. Remote rendering does not work with the free version of DaVinci Resolve.
+  Both the artist workstation and the remote workstation can use the same shared network project 
+library, or any other Postgres project library that is connected to either one of the machines, or to a 
+dedicated Remote Project Library Server. 
+For more information on setting up and using shared project libraries, jump to chapter: 
+Managing Project Libraries and Project Servers .
+  Both the artist workstation and the remote workstation must have access to the same media files 
+on either the same storage volumes, or identically named storage volumes.
+Using Multiple Project Libraries in Remote Rendering
+You can set up remote renders for projects in all connected Davinci Resolve project libraries, 
+not just the currently active one. To activate this feature, check the “Automatically scan other 
+project libraries for Remote Rendering jobs” box in the General settings of the System tab, of the 
+DaVinci Resolve Preferences.
+Sharing Storage
+It’s important that both the artist and remote workstations have access to the same media on the same 
+named storage volume for remote rendering to work properly. This can be done via some manner of 
+shared storage, such as a SAN. However, it can also be done by mounting the same volume over your 
+network. This will be slower, but it will work. 
+If you’re mixing Mac OS X, Windows, and Linux workstations for remote rendering, you’ll need to use 
+the Mapped Mount column of the Media Storage Locations list in the Media Storage panel of the 
+System Preferences to add each volume’s path as it’s understood on the workstation it’s attached to. 
+For example, on a Windows workstation that’s accessing volumes from a Linux workstation, type in the 
+Linux-style file paths in the Mapped Mount column for each scratch disk that’s listed.
+4215Deliver | Chapter 187 Rendering Media
+DELIVER
+Setting Up and Using Remote Rendering
+Using remote rendering is easy, but it does require a bit of preparation.
+1 Make sure the storage volume containing the media being referenced by the project you want to 
+render is mounted on both the artist and remote workstations.
+2 Open DaVinci Resolve on the remote workstation, and do one of the following:
+  When the Project Browser opens, right-click anywhere and choose Remote Rendering. 
+  If you’ve already opened a project in DaVinci Resolve, you can also choose Workspace > 
+Remote Rendering.
+DaVinci Resolve will automatically open to the Deliver page, awaiting jobs to be assigned for 
+automatic rendering.
+3 On the artist workstation, add a job to the render queue as you normally would. 
+4 Click the Remote Rendering button for that job in the Render Queue and one of the options from 
+the list that appears:
+Any: Automatically assigns that job to the next workstation that isn’t currently rendering anything. 
+If all remote rendering workstations are rendering, assigns it as the next job in line.
+YourComputer.local: The artist workstation with the name “YourComputer.” Choose this if you 
+want to render the job locally, and not remotely.
+Other Workstations on Network:  All other remote rendering workstations are listed below, so you 
+can choose which specific workstation you want to assign a job to.
+Clicking the Remote Render button 
+to remotely render a job
+5 Click Start Render. The job is sent to the remote workstation you selected and is rendered, while 
+you’re free to continue working on your artist workstation.
+When You’re Finished Remote Rendering
+Once you’re done using a particular DaVinci Resolve workstation in Remote Rendering mode and you 
+want to go back to using it as an artist workstation, choose Workspace > Remote Rendering to exit 
+remote rendering and return to the Project Manager.
+4216Deliver | Chapter 187 Rendering Media
+DELIVER
+Setting Up a “Headless” Remote Rendering Workstation
+DaVinci Resolve allows remote rendering clients to operate in a so-called “headless” mode, with no 
+GUI. This can be accomplished from the command line, by opening the directory where the app is 
+located and then running DaVinci Resolve in Remote Rendering (–rr) mode using the correct command 
+line syntax for your operating system. Once run in this way, DaVinci Resolve silently and invisibly waits 
+on that system for remote rendering jobs to be sent to that workstation.
+On macOS
+Open Terminal. 
+Change the directory to:
+cd /Applications//DaVinci\ Resolve/DaVinci\ Resolve.app/
+Contents/MacOS/
+Run the following command:
+./Resolve -rr
+On Windows
+Open the Command Prompt.
+Change the directory to:
+C:\Program Files\Blackmagic Design\DaVinci Resolve\
+Run the following command:
+Resolve.exe -rr
+On a Linux CentOS 6.8 system
+Open Terminal.
+Change the directory to:
+cd /home/resolve/Cyclone/
+Run the following command:
+./script.start -rr
+On a Linux CentOS 7.x system
+Open Terminal.
+Change the directory to:
+cd /opt/resolve/bin
+Run the following command:
+./resolve -rr
+4217Deliver | Chapter 187 Rendering Media
+DELIVER
+Chapter 188
+Delivering 
+DCP and IMF
+For projects requiring Digital Cinema Package (DCP) or Interoperable Master 
+Format (IMF) mastering for digital cinema or broadcast distribution, DaVinci Resolve 
+allows native DCP and IMF encoding and decoding for the creation and playback 
+of unencrypted DCP and IMF deliverables, or it can be integrated with Fraunhofer’s 
+easyDCP application in order to master fully encrypted DCP files, play them back 
+for testing, and generate Key Delivery Messages (KDMs) for theatrical distribution, 
+all directly within DaVinci Resolve. 
+This means you can encode a DCP or IMF master straight from your program’s source media, all 
+within the 32-bit floating point image processing pipeline of DaVinci Resolve, for the highest possible 
+quality result.
+Contents
+Native IMF Encoding and Decoding 
+(Studio Version Only) �������������������������������������������������� 4219
+Native Unencrypted DCP Encoding 
+and Decoding (Studio Version Only) ������������������� 4221
+Native DCP Encoding Parameters  ����������������������� 4221
+Rendering IMF Segments and DCP Reels ����� 4223
+Creating DCP/IMF  
+Supplemental Packages  ����������������������������������������� 4224
+Importing a DCP or IMF Into a Timeline �����������  4224
+Editing the Resulting Timeline  ������������������������������ 4225
+Dolby Vision Metadata  ��������������������������������������������� 4226
+Exporting  ������������������������������������������������������������������������� 4226
+Photon Validation of IMF Packages ������������������ 4227
+Validating in the Media Pool  ���������������������������������� 4227
+Validating on Export  �������������������������������������������������� 4228
+Using and Licensing EasyDCP  ���������������������������� 4229
+Requesting Your Server Certificate Set  ����������� 4229
+Importing Your Server Certificate Set  �������������� 4230
+Switching Between Native DCP 
+and EasyDCP Encoding  ����������������������������������������� 4230
+EasyDCP Color Management  ����������������������������� 4230
+EasyDCP Output in the Deliver Page ���������������� 4231
+KDM Generation and Management  ������������������� 4232
+Publishing Your Encrypted 
+Digital Cinema Package ������������������������������������������� 4232
+Playing Your Digital Cinema Package  ��������������� 4232
+Playing Third-Party 
+Digital Cinema Packages  ���������������������������������������� 4232
+4218Deliver | Chapter 188 Delivering DCP and IMF
+DELIVER
+Native IMF Encoding and Decoding 
+(Studio Version Only)
+The Format dropdown in the Video panel of the Render Settings now has a native IMF option that 
+lets you export to the SMPTE ST.2067 Interoperable Master Format (IMF) for tapeless deliverables to 
+networks and distributors. No additional licenses or plugins are required to output to IMF. 
+The IMF format supports multiple tracks of video, multiple tracks of audio, and multiple 
+subtitle and closed caption tracks, all of which are meant to accommodate multiple output formats and 
+languages from a single deliverable. As of DaVinci Resolve 16, IMF export also supports exporting 
+IMF packages that use ST.2098 and Dolby immersive audio via selected Main busses. All of this is 
+done by wrapping a timeline’s different video and audio tracks (media essences) and subtitle tracks 
+(data essences) into a “composition” within the Material eXchange Format (MXF). 
+Additionally, a dropdown menu to the right of this preset provides options for Generic, 
+20th Century Fox, and Netflix versions of this preset.
+The IMF Generic preset in the Render Settings has options for different resolu -
+tions of output
+When IMF is selected from the Format dropdown, the Codec drop-down menu presents options for 
+Kakadu or EasyDCP encoding, with Kakadu being the method that’s included with DaVinci Resolve 
+Studio. A Type dropdown lets you choose what kind of JPEG2000 output you want, with options 
+including RGB, YUV, Dolby Vision, and HDR Vivid. 
+Additional parameters include:
+  Package Type: Defaults to App2 Extended (App2e), for encoding JPEG 2000 up to 4K.
+  Bit Depth: The bit depth of the encoded IMF video.
+  Encoding Profile: A dropdown that lets you choose among Auto, IMF, and Broadcast.
+  Encoding Level: Provides different choices based on what is selected in Encoding Profile.
+  Maximum bit rate: Lets you choose how much to compress the result.
+  Lossless Compression: Lets you choose to encode using lossless compression.
+  Slope-Rate Control:  A checkbox lets you specify lossless compression.
+  QStep: (DCP, IMF) Lets you choose either automatic or manually specified DCP quantization levels 
+at which to compress the video signal when using the Kakadu JPEG 2000 encoder. 
+4219Deliver | Chapter 188 Delivering DCP and IMF
+DELIVER
+Render settings in the Export Video section for the IMF format
+A separate group of parameters named Composition Settings, underneath the Advanced Settings, lets 
+you add metadata to your IMF package, including:
+  Composition name: The name of the exported composition.
+  Issuer: The organization providing the composition.
+  Use current date: A checkbox that lets the current date be used as the Issue date automatically.
+  Issue date: The date the composition is issued.
+  Content kind: A dropdown provides a list of acceptable choices for defining the content.
+  Content version label: Meant to identify the version of the content being provided.
+  Annotate xml using composition name:  Auto-populates Asset Map, Composition Playlist, and 
+Packing List with data from the project. Otherwise these three fields are manually editable.
+  Annotate media using filename:  Auto-populates Main Video Track and Audio Track 1 with data 
+from the project. Otherwise these three fields are manually editable.
+Parameters for adding composition metadata
+4220Deliver | Chapter 188 Delivering DCP and IMF
+DELIVER

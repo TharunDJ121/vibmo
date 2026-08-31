@@ -1,7 +1,7 @@
 import numpy as np
 import cairo
 from PIL import Image, ImageFilter
-from typing import Tuple
+from typing import Any, Optional, Tuple, Union
 
 try:
     from vibmo.fx.filters import Filter
@@ -14,9 +14,17 @@ class AsciiMatrixArtShader(Filter):
     """
     Converts full video frame luminance into real-time dynamic ASCII character grid.
     """
-    def __init__(self, char_set: str = "@%#*+=-:. ", grid_size: int = 10):
+    def __init__(
+        self,
+        char_set: str = "@%#*+=-:. ",
+        grid_size: int = 10,
+        char_size: Optional[int] = None,
+        green_phosphor: bool = True,
+        **kwargs: Any
+    ):
         self.char_set = char_set
-        self.grid_size = grid_size
+        self.grid_size = int(char_size if char_size is not None else grid_size)
+        self.green_phosphor = bool(green_phosphor)
         self.num_chars = len(char_set)
 
     def apply(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
@@ -43,7 +51,10 @@ class AsciiMatrixArtShader(Filter):
 
         ctx.select_font_face("monospace", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
         ctx.set_font_size(self.grid_size)
-        ctx.set_source_rgba(0, 1, 0, 1) # Matrix Green default
+        if self.green_phosphor:
+            ctx.set_source_rgba(0, 1, 0, 1) # Matrix Green default
+        else:
+            ctx.set_source_rgba(1, 1, 1, 1) # White phosphor
 
         for r in range(rows):
             for c in range(cols):
@@ -94,9 +105,19 @@ class DynamicCharResolutionGrid(Filter):
     """
     Adjustable grid cell granularity.
     """
-    def __init__(self, cols: int = 80, rows: int = 45):
-        self.cols = cols
-        self.rows = rows
+    def __init__(
+        self,
+        cols: int = 80,
+        rows: int = 45,
+        cell_size: Optional[int] = None,
+        **kwargs: Any
+    ):
+        if cell_size is not None and cell_size > 0:
+            self.cols = max(1, 1920 // int(cell_size))
+            self.rows = max(1, 1080 // int(cell_size))
+        else:
+            self.cols = int(cols)
+            self.rows = int(rows)
 
     def apply(self, rgba: np.ndarray, time: float = 0.0) -> np.ndarray:
         h, w, _ = rgba.shape
@@ -163,3 +184,17 @@ class EdgeContourAsciiOverlay(Filter):
         blended = np.clip(out_rgb * (1.0 - ascii_alpha) + ascii_rgb * ascii_alpha, 0, 255).astype(np.uint8)
         out[:, :, :3] = blended
         return out
+
+
+# Semantic Aliases
+AsciiMatrixArtFilter = AsciiMatrixArtShader
+LuminescenceGrid = DynamicCharResolutionGrid
+
+__all__ = [
+    "AsciiMatrixArtShader",
+    "AsciiMatrixArtFilter",
+    "TerminalColorPaletteFilter",
+    "DynamicCharResolutionGrid",
+    "LuminescenceGrid",
+    "EdgeContourAsciiOverlay",
+]

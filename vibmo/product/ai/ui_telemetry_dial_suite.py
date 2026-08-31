@@ -1,207 +1,343 @@
+"""
+Telemetry HUD & Real-time Metrics UI Suite for Vibmo / Motio.
+Components:
+- TelemetryDialHUD
+- RadialGaugeDial (CircularCpuGaugeDial)
+- RamMemoryMeterBar
+- NetworkPingLatencyLine
+- UptimePercentageBadge
+"""
+
+from __future__ import annotations
 import math
-from typing import Any
-from vibmo.scene.node import Node
-from vibmo.core.signal import Signal
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
+import cairo
+
 from vibmo.core.color import Color, colors
 from vibmo.core.vector import Vector2D
-from vibmo.layout.container import FlexContainer
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
+from vibmo.scene.node import Node
+from vibmo.spatial.shadows import DropShadow
 
 
-class CircularCpuGaugeDial(Node):
-    """Radial gauge dial displaying live CPU load percentage with color transition."""
+class RadialGaugeDial(Node):
+    """Radial gauge dial with colored arc sweep and center percentage readout."""
 
-    def __init__(self, radius: float = 50.0, load: float = 0.0, stroke_width: float = 8.0, **kwargs):
+    def __init__(
+        self,
+        label: str = "CPU Load",
+        value: float = 45.0,
+        radius: float = 55.0,
+        stroke_width: float = 9.0,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(**kwargs)
-        self.radius = radius
-        self.load = Signal(load)
-        self.stroke_width = stroke_width
+        self.label = label
+        self.radius = float(radius)
+        self.stroke_width = float(stroke_width)
+        self.value = Signal(float(value), f"{self.name}.value")
 
-    def _get_color_for_load(self, load_val: float) -> Color:
-        # Green -> Amber -> Red transition
-        load_val = max(0.0, min(1.0, load_val))
-        if load_val < 0.5:
-            # Green to Amber
-            progress = load_val * 2.0
-            return colors.GREEN.lerp(colors.AMBER, progress)
-        else:
-            # Amber to Red
-            progress = (load_val - 0.5) * 2.0
-            return colors.AMBER.lerp(colors.RED, progress)
+    def _get_color_for_val(self, val_pct: float) -> Tuple[float, float, float, float]:
+        v = max(0.0, min(100.0, val_pct)) / 100.0
+        if v < 0.6:
+            return (0.1, 0.85, 0.45, 0.95) # Green
+        elif v < 0.85:
+            return (0.95, 0.7, 0.15, 0.95) # Amber
+        return (0.95, 0.25, 0.35, 0.95) # Red
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
-        load_val = self.load.get(time)
-        color = self._get_color_for_load(load_val)
-        
+        val = self.value.get(time)
+        val_clamped = max(0.0, min(100.0, val))
+        r = self.radius
+        sw = self.stroke_width
+
         ctx.save()
-        
-        # Draw background track
-        ctx.arc(0, 0, self.radius, 0, 2 * math.pi)
-        ctx.set_source_rgba(*colors.SLATE_800.to_tuple_rgba())
-        ctx.set_line_width(self.stroke_width)
+        # Track background
+        ctx.arc(0, 0, r, -math.pi * 0.75, math.pi * 0.75)
+        ctx.set_source_rgba(0.12, 0.16, 0.24, 0.8)
+        ctx.set_line_width(sw)
+        ctx.set_line_cap(1) # Round
         ctx.stroke()
-        
-        # Draw foreground load arc (-90 degrees to start at top)
-        start_angle = -math.pi / 2
-        end_angle = start_angle + (load_val * 2 * math.pi)
-        
-        ctx.arc(0, 0, self.radius, start_angle, end_angle)
-        ctx.set_source_rgba(*color.to_tuple_rgba())
-        ctx.set_line_width(self.stroke_width)
-        ctx.set_line_cap(1) # ROUND
+
+        # Value Arc
+        sweep_angle = -math.pi * 0.75 + (val_clamped / 100.0) * (math.pi * 1.5)
+        ctx.arc(0, 0, r, -math.pi * 0.75, sweep_angle)
+        ctx.set_source_rgba(*self._get_color_for_val(val_clamped))
+        ctx.set_line_width(sw)
+        ctx.set_line_cap(1)
         ctx.stroke()
-        
+
+        # Center readout
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(18.0)
+        ctx.set_source_rgba(0.95, 0.98, 1.0, 0.95)
+        text = f"{int(val_clamped)}%"
+        ext = ctx.text_extents(text)
+        ctx.move_to(-ext.width * 0.5, 4.0)
+        ctx.show_text(text)
+
+        # Label below
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(0.6, 0.7, 0.8, 0.8)
+        lbl_ext = ctx.text_extents(self.label)
+        ctx.move_to(-lbl_ext.width * 0.5, r + 18.0)
+        ctx.show_text(self.label)
+
         ctx.restore()
-        super().draw(ctx, time)
+
+
+CircularCpuGaugeDial = RadialGaugeDial
 
 
 class RamMemoryMeterBar(Node):
-    """Segmented horizontal RAM memory usage bar."""
+    """Segmented horizontal RAM memory usage meter bar."""
 
-    def __init__(self, width: float = 200.0, height: float = 20.0, segments: int = 10, usage: float = 0.0, **kwargs):
+    def __init__(
+        self,
+        label: str = "RAM Allocation",
+        used_gb: float = 16.4,
+        total_gb: float = 32.0,
+        width: float = 240.0,
+        height: float = 40.0,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(**kwargs)
-        self.meter_width = width
-        self.meter_height = height
-        self.segments = segments
-        self.usage = Signal(usage)
-        self.gap = 2.0
+        self.label = label
+        self.total_gb = float(total_gb)
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.used_gb = Signal(float(used_gb), f"{self.name}.used_gb")
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
-        usage_val = self.usage.get(time)
-        usage_val = max(0.0, min(1.0, usage_val))
-        
+        w, h = self.width_val, self.height_val
+        used = max(0.0, min(self.total_gb, self.used_gb.get(time)))
+        fraction = used / max(0.1, self.total_gb)
+
         ctx.save()
-        
-        segment_width = (self.meter_width - (self.segments - 1) * self.gap) / self.segments
-        active_segments = int(round(usage_val * self.segments))
-        
-        current_x = -self.meter_width / 2.0
-        start_y = -self.meter_height / 2.0
-        
-        for i in range(self.segments):
-            ctx.rectangle(current_x, start_y, segment_width, self.meter_height)
-            
-            if i < active_segments:
-                ctx.set_source_rgba(*colors.INDIGO.to_tuple_rgba())
-            else:
-                ctx.set_source_rgba(*colors.SLATE_800.to_tuple_rgba())
-                
-            ctx.fill()
-            current_x += segment_width + self.gap
-            
+        # Label and readout
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(0.7, 0.8, 0.9, 0.9)
+        ctx.move_to(0.0, 12.0)
+        ctx.show_text(self.label)
+
+        val_text = f"{used:.1f} / {self.total_gb:.0f} GB"
+        ext = ctx.text_extents(val_text)
+        ctx.move_to(w - ext.width, 12.0)
+        ctx.set_source_rgba(0.2, 0.85, 1.0, 0.95)
+        ctx.show_text(val_text)
+
+        # Bar track
+        bar_y = 20.0
+        bar_h = 10.0
+        r = 4.0
+        ctx.new_path()
+        ctx.arc(w - r, bar_y + r, r, -math.pi * 0.5, math.pi * 0.5)
+        ctx.arc(r, bar_y + r, r, math.pi * 0.5, math.pi * 1.5)
+        ctx.close_path()
+        ctx.set_source_rgba(0.12, 0.16, 0.24, 0.8)
+        ctx.fill()
+
+        # Fill
+        fill_w = max(r * 2.0, w * fraction)
+        ctx.new_path()
+        ctx.arc(fill_w - r, bar_y + r, r, -math.pi * 0.5, math.pi * 0.5)
+        ctx.arc(r, bar_y + r, r, math.pi * 0.5, math.pi * 1.5)
+        ctx.close_path()
+        ctx.set_source_rgba(0.2, 0.7, 1.0, 0.95)
+        ctx.fill()
+
         ctx.restore()
-        super().draw(ctx, time)
 
 
 class NetworkPingLatencyLine(Node):
-    """Animated real-time latency line chart with ping spikes and 99th percentile marker."""
+    """Real-time latency sparkline graph with live ms ping readout."""
 
-    def __init__(self, width: float = 300.0, height: float = 100.0, history_size: int = 50, **kwargs):
+    def __init__(self, latency: float = 24.0, width: float = 240.0, height: float = 65.0, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.chart_width = width
-        self.chart_height = height
-        self.history_size = history_size
-        self.latencies = [20.0 + (i % 5) * 5.0 for i in range(history_size)] # Initial mock history
-
-    def add_latency(self, latency: float):
-        self.latencies.append(latency)
-        if len(self.latencies) > self.history_size:
-            self.latencies.pop(0)
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.latency = Signal(float(latency), f"{self.name}.latency")
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
-        ctx.save()
-        
-        # Background
-        start_x = -self.chart_width / 2.0
-        start_y = -self.chart_height / 2.0
-        ctx.rectangle(start_x, start_y, self.chart_width, self.chart_height)
-        ctx.set_source_rgba(*colors.SLATE_900.to_tuple_rgba())
-        ctx.fill()
-        
-        if not self.latencies:
-            ctx.restore()
-            super().draw(ctx, time)
-            return
+        w, h = self.width_val, self.height_val
+        lat = self.latency.get(time)
 
-        # Line chart
-        max_latency = max(100.0, max(self.latencies)) # minimum max scale is 100ms
-        
-        x_step = self.chart_width / max(1, len(self.latencies) - 1)
-        
-        ctx.move_to(start_x, start_y + self.chart_height - (self.latencies[0] / max_latency) * self.chart_height)
-        
-        for i, latency in enumerate(self.latencies[1:]):
-            x = start_x + (i + 1) * x_step
-            y = start_y + self.chart_height - (latency / max_latency) * self.chart_height
-            ctx.line_to(x, y)
-            
-        ctx.set_source_rgba(*colors.CYAN.to_tuple_rgba())
-        ctx.set_line_width(2.0)
+        ctx.save()
+        # Title
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(0.7, 0.8, 0.9, 0.9)
+        ctx.move_to(0.0, 12.0)
+        ctx.show_text("Network Latency")
+
+        val_text = f"{int(lat)} ms"
+        ext = ctx.text_extents(val_text)
+        ctx.move_to(w - ext.width, 12.0)
+        ctx.set_source_rgba(0.1, 0.85, 0.5, 0.95)
+        ctx.show_text(val_text)
+
+        # Sparkline
+        points = [22.0, 24.0, 28.0, 21.0, 25.0, 23.0, lat]
+        step = w / (len(points) - 1)
+        ctx.set_source_rgba(0.1, 0.85, 0.5, 0.8)
+        ctx.set_line_width(1.5)
+
+        for i, p in enumerate(points):
+            y = h - 8.0 - (p / 60.0) * (h - 26.0)
+            if i == 0:
+                ctx.move_to(0, y)
+            else:
+                ctx.line_to(i * step, y)
         ctx.stroke()
-        
-        # 99th percentile marker
-        sorted_latencies = sorted(self.latencies)
-        p99_idx = int(0.99 * len(sorted_latencies))
-        if p99_idx < len(sorted_latencies):
-            p99_val = sorted_latencies[p99_idx]
-            p99_y = start_y + self.chart_height - (p99_val / max_latency) * self.chart_height
-            
-            ctx.move_to(start_x, p99_y)
-            ctx.line_to(start_x + self.chart_width, p99_y)
-            ctx.set_source_rgba(*colors.RED.with_alpha(0.5).to_tuple_rgba())
-            ctx.set_line_width(1.0)
-            ctx.set_dash([4, 4], 0)
-            ctx.stroke()
-            ctx.set_dash([], 0) # reset dash
-        
+
         ctx.restore()
-        super().draw(ctx, time)
+
 
 class UptimePercentageBadge(Node):
-    """Emerald pill displaying '99.999% SLA Uptime'."""
-    
-    def __init__(self, **kwargs):
+    """Badge displaying SLA uptime percentage (`99.99% Uptime`)."""
+
+    def __init__(self, uptime: float = 99.98, width: float = 140.0, height: float = 28.0, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        # Using FlexContainer internally or just rendering custom
-        self.pill_width = 160.0
-        self.pill_height = 36.0
-        self.corner_radius = 18.0
-        
+        self.uptime = Signal(float(uptime), f"{self.name}.uptime")
+        self.width_val = float(width)
+        self.height_val = float(height)
+
     def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
+        val = self.uptime.get(time)
+
         ctx.save()
-        
-        start_x = -self.pill_width / 2.0
-        start_y = -self.pill_height / 2.0
-        
-        # Pill Background (Emerald)
-        # Simple rounded rect
+        r = 6.0
         ctx.new_path()
-        ctx.arc(start_x + self.corner_radius, start_y + self.corner_radius, self.corner_radius, math.pi, 1.5 * math.pi)
-        ctx.arc(start_x + self.pill_width - self.corner_radius, start_y + self.corner_radius, self.corner_radius, 1.5 * math.pi, 2 * math.pi)
-        ctx.arc(start_x + self.pill_width - self.corner_radius, start_y + self.pill_height - self.corner_radius, self.corner_radius, 0, 0.5 * math.pi)
-        ctx.arc(start_x + self.corner_radius, start_y + self.pill_height - self.corner_radius, self.corner_radius, 0.5 * math.pi, math.pi)
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
         ctx.close_path()
-        
-        ctx.set_source_rgba(*colors.EMERALD.with_alpha(0.15).to_tuple_rgba())
+
+        ctx.set_source_rgba(0.04, 0.16, 0.1, 0.85)
         ctx.fill_preserve()
-        
-        ctx.set_source_rgba(*colors.EMERALD.to_tuple_rgba())
+        ctx.set_source_rgba(0.1, 0.8, 0.45, 0.7)
+        ctx.set_line_width(1.0)
+        ctx.stroke()
+
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(11.0)
+        ctx.set_source_rgba(0.2, 0.95, 0.55, 0.95)
+        text = f"● {val:.2f}% Uptime"
+        ext = ctx.text_extents(text)
+        ctx.move_to((w - ext.width) * 0.5, h * 0.5 + ext.height * 0.35)
+        ctx.show_text(text)
+        ctx.restore()
+
+
+class TelemetryDialHUD(Node):
+    """
+    Telemetry HUD Suite.
+    Renders real-time cluster telemetry dials, memory bars, network ping sparklines,
+    and SLA uptime badges with signal reactivity.
+    """
+
+    def __init__(
+        self,
+        cpu: float = 45.0,
+        ram: float = 16.4,
+        latency: float = 24.0,
+        uptime: float = 99.98,
+        width: float = 750.0,
+        height: float = 400.0,
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.shadow = DropShadow(color=Color(0.0, 0.0, 0.0, 0.5), blur=32.0, offset=(0.0, 16.0))
+
+        # Dials
+        self.cpu_dial = RadialGaugeDial(label="CPU Cluster Load", value=cpu, radius=60.0)
+        self.cpu_dial.position.set(Vector2D(130.0, 150.0))
+
+        self.gpu_dial = RadialGaugeDial(label="GPU VRAM Compute", value=68.0, radius=60.0)
+        self.gpu_dial.position.set(Vector2D(310.0, 150.0))
+
+        # RAM bar
+        self.ram_bar = RamMemoryMeterBar(label="Host RAM Usage", used_gb=ram, total_gb=32.0, width=220.0)
+        self.ram_bar.position.set(Vector2D(480.0, 95.0))
+
+        # Latency sparkline
+        self.latency_line = NetworkPingLatencyLine(latency=latency, width=220.0, height=60.0)
+        self.latency_line.position.set(Vector2D(480.0, 160.0))
+
+        # Uptime Badge
+        self.uptime_badge = UptimePercentageBadge(uptime=uptime)
+        self.uptime_badge.position.set(Vector2D(self.width_val - 170.0, 24.0))
+
+        self.add(self.cpu_dial, self.gpu_dial, self.ram_bar, self.latency_line, self.uptime_badge)
+
+    def set_metric(
+        self,
+        metric: Optional[str] = None,
+        value: Optional[float] = None,
+        name: Optional[str] = None,
+        val: Optional[float] = None,
+        duration: float = 1.0,
+        ease: EasingFunc = Ease.out_quad,
+    ) -> AnimationAction:
+        """
+        Fluent generator animation verb to smoothly update a telemetry metric.
+        """
+        m_name = (name or metric or "CPU").lower()
+        v_num = float(val if val is not None else (value if value is not None else 88.5))
+        if "cpu" in m_name:
+            return self.cpu_dial.value.to(v_num, duration=duration, ease=ease)
+        elif "gpu" in m_name or "vram" in m_name:
+            return self.gpu_dial.value.to(v_num, duration=duration, ease=ease)
+        elif "ram" in m_name or "memory" in m_name:
+            return self.ram_bar.used_gb.to(v_num, duration=duration, ease=ease)
+        elif "lat" in m_name or "ping" in m_name:
+            return self.latency_line.latency.to(v_num, duration=duration, ease=ease)
+        elif "up" in m_name:
+            return self.uptime_badge.uptime.to(v_num, duration=duration, ease=ease)
+        return self.cpu_dial.value.to(v_num, duration=duration, ease=ease)
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        return (0.0, 0.0, self.width_val, self.height_val)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
+        ctx.save()
+
+        # Canvas card
+        r = 16.0
+        ctx.new_path()
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        ctx.close_path()
+
+        ctx.set_source_rgba(0.04, 0.06, 0.1, 0.95)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.18, 0.25, 0.38, 0.8)
         ctx.set_line_width(1.5)
         ctx.stroke()
-        
-        # Draw text "99.999% SLA Uptime"
-        # We would normally use KineticText, but we can do a simple cairo text draw for badge
-        ctx.set_source_rgba(*colors.EMERALD.to_tuple_rgba())
-        ctx.select_font_face("sans-serif", 0, 1) # normal, bold
-        ctx.set_font_size(14)
-        
-        text = "99.999% SLA Uptime"
-        extents = ctx.text_extents(text)
-        text_x = start_x + (self.pill_width - extents.width) / 2.0 - extents.x_bearing
-        text_y = start_y + (self.pill_height - extents.height) / 2.0 - extents.y_bearing
-        
-        ctx.move_to(text_x, text_y)
-        ctx.show_text(text)
-        
-        ctx.restore()
-        super().draw(ctx, time)
 
+        # Title
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(15.0)
+        ctx.set_source_rgba(0.95, 0.98, 1.0, 0.95)
+        ctx.move_to(24.0, 42.0)
+        ctx.show_text("Live Cluster Telemetry & Node HUD")
+
+        # Divider
+        ctx.set_source_rgba(0.2, 0.25, 0.35, 0.4)
+        ctx.set_line_width(1.0)
+        ctx.move_to(20.0, 64.0)
+        ctx.line_to(w - 20.0, 64.0)
+        ctx.stroke()
+
+        super().draw(ctx, time)
+        ctx.restore()

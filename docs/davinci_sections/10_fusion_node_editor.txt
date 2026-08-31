@@ -1,0 +1,1455 @@
+Chapter 66
+Working in the 
+Node Editor
+This chapter discusses how to work in the Node Editor, including multiple ways to 
+add, connect, rearrange, and remove nodes to create any effect you can think of.
+Contents
+Learning to Use the Node Editor ������������������������������������������������������������������������������������������������������������������������������������������������  1425
+Navigating within the Node Editor ��������������������������������������������������������������������������������������������������������������������������������������������  1426
+Automatic Node Editor Navigation  ���������������������������������������������������������������������������������������������������������������������������������������������  1426
+Using the Node Navigator ��������������������������������������������������������������������������������������������������������������������������������������������������������������  1426
+Node View Bookmarks  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1427
+Adding Nodes to a Composition ������������������������������������������������������������������������������������������������������������������������������������������������  1429
+Adding, Inserting, and Replacing Nodes Using the Toolbar  ����������������������������������������������������������������������������������������� 1430
+Adding Nodes Quickly Using the Select Tool Window  ������������������������������������������������������������������������������������������������������ 1431
+Adding Nodes from the Effects Library ������������������������������������������������������������������������������������������������������������������������������������  1432
+Adding, Inserting, and Replacing Nodes Using the Contextual Menu  ��������������������������������������������������������������������� 1435
+Deleting Nodes  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1435
+Disconnected Nodes  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1435
+Selecting and Deselecting Nodes  ���������������������������������������������������������������������������������������������������������������������������������������������  1436
+Loading Nodes into Viewers  ��������������������������������������������������������������������������������������������������������������������������������������������������������� 1437
+Viewed Nodes When You First Open Fusion ������������������������������������������������������������������������������������������������������������������������  1438
+Node View Indicators  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1438
+Drag and Drop Nodes into a Viewer �����������������������������������������������������������������������������������������������������������������������������������������  1439
+Using the Contextual Menu �����������������������������������������������������������������������������������������������������������������������������������������������������������  1439
+Clearing Viewers  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1439
+Create/Play Preview  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1439
+Connecting and Disconnecting Nodes  ����������������������������������������������������������������������������������������������������������������������������������� 1440
+Node Basics ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1440
+How to Connect Nodes ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1440
+Identifying Node Inputs  �������������������������������������������������������������������������������������������������������������������������������������������������������������������  1443
+Node Order Matters  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1443
+Upstream and Downstream Nodes  ������������������������������������������������������������������������������������������������������������������������������������������  1446
+1423Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Disconnecting and Reconnecting Nodes  ������������������������������������������������������������������������������������������������������������������������������� 1446
+Tracing Connections Through the Node Tree  ���������������������������������������������������������������������������������������������������������������������� 1447
+Branching ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1448
+Connecting Merge Nodes  �������������������������������������������������������������������������������������������������������������������������������������������������������������  1449
+Automatically Creating a Merge Node When Adding Nodes ��������������������������������������������������������������������������������������� 1450
+Automatically Creating a Merge Node by Connecting Two Outputs ������������������������������������������������������������������������  1450
+Connection Options and Routers  ������������������������������������������������������������������������������������������������������������������������������������������������ 1451
+Using Routers to Reshape and Branch Connections  �������������������������������������������������������������������������������������������������������� 1452
+Swapping Node Inputs  �������������������������������������������������������������������������������������������������������������������������������������������������������������������  1453
+Extracting and Inserting Nodes  �������������������������������������������������������������������������������������������������������������������������������������������������� 1454
+Cut, Copy, and Paste Nodes ��������������������������������������������������������������������������������������������������������������������������������������������������������� 1455
+Cut, Copy, and Paste in the Node Editor ���������������������������������������������������������������������������������������������������������������������������������  1455
+Pasting Node Settings  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������  1456
+Copying and Pasting Nodes to and from Any Text Editor ����������������������������������������������������������������������������������������������  1456
+Using Multilayer Nodes (Studio Version Only) ���������������������������������������������������������������������������������������������������������������������� 1457
+Viewer�������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1457
+Nodes and Inspector  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1458
+Input Layer Controls ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1459
+Instancing Nodes ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1459
+Using Instanced Nodes  �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1460
+De-Instancing and Re-Instancing Specific Parameters �����������������������������������������������������������������������������������������������������  1461
+Keeping Node Trees Organized ��������������������������������������������������������������������������������������������������������������������������������������������������  1461
+Moving Nodes ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1461
+Renaming Nodes ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1462
+Changing Node Colors  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������  1463
+Using Sticky Notes �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1463
+Using Underlay Boxes  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1464
+Node Thumbnails ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1465
+Choosing Which Nodes Show Thumbnails  ���������������������������������������������������������������������������������������������������������������������������� 1466
+Switching Thumbnails between Images and Icons  ������������������������������������������������������������������������������������������������������������ 1467
+Finding Nodes �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1467
+Performing Simple Searches  ��������������������������������������������������������������������������������������������������������������������������������������������������������� 1468
+Using Regular Expressions  ������������������������������������������������������������������������������������������������������������������������������������������������������������ 1468
+Custom Node Settings ��������������������������������������������������������������������������������������������������������������������������������������������������������������������  1469
+Managing Saved Settings  ��������������������������������������������������������������������������������������������������������������������������������������������������������������� 1469
+Resetting Defaults  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1470
+Saving and Loading Alternate Node Settings  ����������������������������������������������������������������������������������������������������������������������� 1470
+Adding Saved Settings from the File System �������������������������������������������������������������������������������������������������������������������������  1470
+Node Modes Including Disable and Lock  �������������������������������������������������������������������������������������������������������������������������������� 1471
+Node Editor Options  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1471
+Node Tooltips and the Status Bar ����������������������������������������������������������������������������������������������������������������������������������������������� 1472
+1424Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Learning to Use the Node Editor
+The Node Editor (formerly called the Flow or Flow Editor) is the heart of Fusion’s compositing interface. 
+It uses a flowchart structure called a node tree that lets you build a composition out of interconnected 
+nodes, as opposed to using layers in a layer list. Each clip you add to the composition, and each 
+image-processing operation you apply to those clips, is added as a node, all of which are joined 
+together with connections that propagate image data from one node to the next. Each individual node 
+performs a relatively simple operation, but collectively they combine to let you create wonderfully 
+complex results.
+The Node Editor.
+This chapter discusses how to work in the Node Editor in greater detail, showing you how to add, 
+connect, rearrange, and remove nodes to create any effect you can think of.
+To display the Node Editor:
+Click the Nodes button on the UI toolbar.
+The Nodes button in the UI toolbar.
+1425Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Navigating within the Node Editor
+The Node Editor is the place where everything relating to nodes and the construction of your 
+composites happens. The more you learn about how to navigate within the Node Editor, the faster 
+you’ll be able to work. There are a variety of standard methods of panning and zooming around the 
+Node Editor, many of which are shared with other panels in Fusion.
+Methods of panning the Node Editor:
+  Middle-click and drag to pan around the Node Editor.
+  Hold down Shift and Command, and then click and drag within the Node Editor to pan.
+  Drag with two fingers on a track pad to pan in the Node Editor
+Methods of zooming the Nod4e Editor:
+  Press the Middle and Left buttons simultaneously and drag to resize the Node Editor.
+  Hold down the Command key and use your pointer’s scroll control to resize the Node Editor.
+  Right-click the Node Editor and choose an option from the Scale submenu of the contextual menu.
+  Press Command-1 to reset the Node Editor to its default size.
+  Hold down the Command key and drag with two fingers on a track pad to resize the Node Editor.
+Automatic Node Editor Navigation
+If a node that is not visible in the Node Editor becomes selected, either by using the Find command 
+or by selecting a node’s header in the Inspector, the Node Editor will automatically pan to display the 
+node in the visible area. 
+Using the Node Navigator
+Another useful way to pan around the Node Editor is to use the Node Navigator. The Node Navigator 
+is a small rectangular overview in the upper-right corner of the Node Editor. It gives a bird’s eye view of 
+the entire composition, with an inner outline that indicates the portion of the composition that is visible 
+in the panel. You can use the Node Navigator when you are zoomed in on a node tree and want to 
+pan around a composition.
+The Node Navigator.
+1426Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+To display or hide the Node Navigator, do one of the following:
+  Right-click in an empty area of the Node Editor, and then choose Options > Show Navigator.
+  Press the V key.
+To have the Node Navigator resume displaying automatically when needed after you’ve closed it:
+  Right-click in an empty area of the Node Editor, and then choose Options > Auto Navigator.
+To change the size of Node Navigator, do the following:
+  Drag the lower-left corner of the Navigator to resize it.
+Drag the corner to resize the Navigator.
+To return to the default Node Navigator size, do the following:
+  Right-click anywhere within the Node Navigator and choose Reset Size.
+To pan the Node Editor using the Node Navigator, do the following:
+  Drag within the Node Navigator to move around different parts of your node tree.
+  Within the Navigator, drag with two fingers on a track pad to move around different 
+parts of your node tree.
+Node View Bookmarks
+Bookmarks are another way of navigating the Node Editor. Bookmarks save the position and 
+scale of the Node Editor, so you can quickly and precisely jump from viewing one group of nodes 
+to viewing another.
+To add a bookmark, do the following:
+1 Pan and scale in the Node Editor to view a group of nodes you are interested in.
+2 From the Options menu in the upper right of the Node Editor, choose Add Bookmark, or 
+press Cmd-D.
+3 In the Manage Bookmarks dialog that opens, enter a name for the bookmark and click the 
+Add button.
+1427Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+The first nine saved bookmarks are given keyboard shortcuts and listed in the Options menu. 
+They are also listed in the Go To Bookmarks dialog along with any saved bookmarks beyond 
+the initial nine.
+The Node Editor Options menu  
+with nine bookmarks added
+TIP: You can return the Node Editor to the default scale by right-clicking in the Node Editor 
+and choosing Scale > Default Scale or pressing Cmd-1.
+If your Node Tree changes and you want to update Bookmark names or delete bookmarks, 
+those tasks can be done in the Manage Bookmarks dialog.
+To rename or delete a bookmark, do the following:
+1 From the Options menu in the upper right of the Node Editor, choose Manage Bookmarks.
+2 In the Manage Bookmarks dialog that opens, right-click over the bookmark and 
+choose Rename or Remove.
+3 Click OK to close the Manage Bookmarks dialog.
+Using Bookmarks
+You can jump to a Bookmark view by selecting a bookmark listed in the Options menu or choosing 
+Go To Bookmarks to open the Go To Bookmarks dialog. The Go To Bookmarks dialog has all the 
+bookmarks listed in the order they were created in the current composition. Double-clicking on any 
+entry in the dialog will update the Node Editor to that view and close the Go To Bookmarks dialog.
+If you have a long list of bookmarks, you can use the search field at the bottom of the dialog to enter 
+the name of the bookmark you want to find.
+1428Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Changing the Sort Order and Assigning Keyboard Shortcuts
+Bookmarks appear in the Options menu and in the Go To Bookmarks dialog in the order they were 
+created. The top nine bookmarks listed are assigned keyboard short cuts. If you want to change the 
+sort order of the list you can do that in the Manage Bookmarks dialog. This can be useful if you want 
+some bookmarks to have specific keyboard shortcuts, or you want a bookmark you made early in the 
+process to not have a keyboard shortcut assigned to it.
+To change the order of the listed bookmarks, do the following:
+1 From the Options menu in the upper right of the Node Editor, choose Manage Bookmarks.
+2 In the Manage Bookmarks dialog drag a bookmark up or down in the list.
+3 An insert line appears where the bookmark will be inserted. Release the mouse button when the 
+insert line is where you want the bookmark to be listed.
+The keyboard short cuts will update to reflect the new order.
+TIP: You can hold down the Shift key to select multiple bookmarks and move them 
+simultaneously up or down in the Manage Bookmark list.
+Using Underlays as Bookmarks
+Underlays added to the Node Editor are automatically added as bookmarks. They are listed in the 
+Options menu below the list of your custom bookmarks. You can omit Underlays from showing in 
+the list of bookmarks by opening the Go To Bookmarks dialog and disabling the checkbox to Show 
+Underlays. When the checkbox is disabled, Underlays will not show in the Go To Bookmarks dialog, 
+and they will not appear in the Options menu.
+Adding Nodes to a Composition
+You can add nodes to the Node Editor in a variety of ways, depending on the type of node you’re 
+adding, and how much guidance you need to find what you’re looking for. Additionally, the way you 
+add nodes to a composition may also be dictated by how you need to attach that node to the current 
+node tree. 
+Make Sure You’re Adding Compatible Nodes
+It’s a good rule of thumb to make sure that whenever you’re adding or inserting new nodes 
+to the node tree, that you’re adding nodes that are compatible with the nodes you’re trying to 
+attach to. For example, you’ll have no problem inserting a Blur, Color, Filter, Paint, or Position 
+node after almost any 2D operation. However, if you try to add a Merge3D node after a Glow 
+node, it won’t automatically connect, because those two nodes cannot be connected directly.
+1429Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Adding, Inserting, and Replacing Nodes Using the Toolbar
+The Fusion toolbar, located above the Node Editor, displays a selection of frequently-used nodes, 
+displayed as buttons with distinct icons. These buttons make it fast to add Merge, Background, Paint, 
+Mask, Transform, and many other commonly used nodes with the click of a button, or the drag of 
+your pointer.
+ 
+The Fusion page toolbar.
+TIP: If you don’t know which node a particular icon corresponds to, just hover your pointer 
+over any toolbar button and a tooltip will display the full name of that tool.
+Methods of adding nodes by clicking toolbar buttons:
+  To add a node after a selected node: Select a node in the Node Editor and then click a 
+toolbar button. 
+  To add a disconnected node to the Node Editor: Deselect all nodes in the Node Editor and then 
+click a toolbar button.
+Methods of adding nodes by dragging toolbar buttons:
+  To insert a new node into the node tree: Drag a toolbar button into the Node Editor and onto the 
+connection line between any two compatible nodes. When the connection highlights as the node 
+is over it, drop the node and it’ll be inserted.
+  To create a disconnected node: Drag a toolbar button into an empty part of the Node Editor. 
+Dragging a toolbar button into the Inspector also creates a disconnected node.
+  To insert a new node after a node loaded into a viewer: Drag a toolbar button onto a viewer to 
+insert a new node after whichever node is viewed, regardless of whether any nodes are selected.
+To replace a node in the Node Editor with a node from the toolbar:
+1 Drag a button from the toolbar so that it’s directly over the node in the Node Editor that you want 
+replaced. When the node underneath is highlighted, drop the node.
+Dragging a node from the toolbar 
+to replace an existing tool.
+2 Click OK in the dialog to confirm the replacement. 
+TIP: When you replace one node with another, any settings that are identical between the 
+two nodes are copied into the new node. For example, replacing a Transform node with a 
+Merge will copy the existing center and angle values from the Transform to the Merge.
+1430Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Adding Nodes Quickly Using the Select Tool Window
+The next fastest way of adding or inserting nodes to the Node Editor is using the Select Tool window, 
+which lets you search for any node available to Fusion by typing a few characters. Once you learn this 
+method, it’ll probably become one of your most frequently-used ways of adding nodes.
+To use the Select Tool window to add nodes:
+1 Do one of the following to determine if you want to insert a node or create a disconnected node:
+  If you want to insert a node, select a node that’s compatible with the one you’ll be creating, and 
+the new node will be inserted after it.
+  If you want to create a disconnected node, deselect all nodes.
+2 Press Shift-Spacebar to open the Select Tool dialog.
+3 When the window appears, type characters corresponding to the name of the node you’re looking 
+for. A list automatically appears with likely candidates, and you can use the Up and Down arrow 
+keys to select the correct node (if it’s not selected already). If you don’t know the name of the 
+exact tool you’re looking for, you can also type in common keywords and categories (i.e., keyer, 
+materials, etc.) to get a selection of tools based on your input.
+4 When you’ve selected the correct node, press the Return key (or click OK), and that node will be 
+either inserted or added.
+The Select Tool dialog lets you find any 
+node quickly if you know its name.
+TIP: Whenever you use the Select Tool window, the text you entered is remembered the 
+next time you open it, so if you want to add another node of the same kind—for example, if 
+you want to add two Blur nodes in a row—you can just press Shift-Spacebar and then press 
+Return to add the second Blur node.
+1431Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Adding Nodes from the Effects Library
+While the toolbar shows many of the most common nodes you’ll be using in any composition, the 
+Effects Library contains every single tool available in Fusion, organized by category, with each node 
+ready to be quickly added to the Node Editor. If you need more guidance to find the node you’re 
+looking for, or if you just want to browse around and see what’s available, the Effects Library is the 
+perfect place to start.
+To open the Effects Library:
+  Click the Effects Library button in the UI toolbar at the top of the Fusion window.
+The Effects Library appears at the upper-left corner of the Fusion window, and consists of two 
+panels. A category list at the left shows all categories of nodes and presets that are available, and 
+a list at the right shows the full contents of each selected category.
+The Tools bin of the Effects Library exposing 3D nodes.
+By default, the category list shows the primary sets of effects: Tools, Open FX, Templates, 
+and LUTs; with disclosure controls to the left that hierarchically show all subcategories 
+within each category. 
+1432Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+The categories are:
+• Tools: Tools consist of all the effects nodes that you use to build compositions, organized by 
+categories such as 3D, Blur, Filter, Mask, Particles, and so on.
+• Open FX: All Resolve FX and any installed third party Open FX plugins will appear here.
+• Templates: When using the Fusion page in DaVinci Resolve, templates consist of presets, 
+macros, and utilities that have been created to get you started quickly. For example, 
+Backgrounds consists of a variety of customizable generators that have been created using 
+a combination of Fusion tools. Lens flares presents a wide variety of multi-element lens 
+flares that you can add to any composition. Particles has a selection of pre-made particle 
+systems that you can customize for your own use. Shaders has a variety of materials that you 
+can use as texture maps for 3D text and geometry that you create in Fusion. And there are 
+many, many other categories’ worth of useful presets and macros that you can learn from 
+and use in your own projects.
+• LUTs: An assortment of pre-installed Look Up Tables for gamma, gamut, and colorspace 
+conversions can be found here. Inserting a LUT into the Node Editor creates a new FileLUT 
+(FLUT) node with the selected LUT file preloaded. 
+For more information on adding your own LUTs to this list, jump to this chapter: U sing LUTs.
+Adding, Inserting, and Replacing Tools Using the Effects Library
+Adding nodes to the Node Editor from the Tools category of the Effects Library is very similar to 
+adding nodes from the toolbar.
+Methods of adding nodes by clicking in the Effects Library:
+  To add a node after a selected node: Select a node in the Node Editor and then click a node in 
+the browser of the Effects Library. 
+  To add a disconnected node to the Node Editor: Deselect all nodes in the Node Editor and then 
+click a node in the browser of the Effects Library.
+Methods of adding nodes by dragging from the Effects Library:
+  To insert a new node into the node tree: Drag a node from the browser of the Effects Library 
+into the Node Editor and onto the connection line between any two compatible nodes. When the 
+connection highlights as the node is over it, drop the node and it’ll be inserted.
+  To create a disconnected node: Drag a node from the browser of the Effects Library into an 
+empty part of the Node Editor. Dragging a toolbar button into the Inspector also creates a 
+disconnected node.
+  To insert a new node after a node loaded into a viewer: Drag a node from the browser of the 
+Effects Library onto a viewer to insert a new node after whichever node is viewed, regardless of 
+whether any nodes are selected.
+To replace a node in the Node Editor with a node from the Effects Library:
+1 Drag a node from the browser of the Effects Library so it’s directly over the node in the Node 
+Editor that you want replaced. When that node is highlighted, drop it.
+2 Click OK in the dialog to confirm the replacement. 
+1433Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Adding, Inserting, and Replacing Templates Using the Effects Library
+Adding items from DaVinci Resolve’s Fusion page Templates category is often a bit different. 
+Sometimes, as when adding a Lens Flare, a single node can be added or inserted into the Node 
+Editor. When this is the case, adding nodes works the same as when adding from the Tools category.
+Adding a Lens Flare effect.
+Other times, such as when adding an item from the “How to” category, dragging a single item from the 
+Node Editor results in a whole node tree being added to the Node Editor. Fortunately, all nodes of the 
+incoming node tree are automatically selected when you do this, so it’s easy to drag the entire node 
+tree to another location in the Node Editor where there’s more room. When this happens, the nodes of 
+the incoming effect are exposed so you can reconnect and reconfigure it as necessary to integrate the 
+effect with the rest of your composition.
+Adding a LightWrap effect from the “How to” bin  
+of the Templates category of the Effects Library.
+1434Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Adding, Inserting, and Replacing 
+Nodes Using the Contextual Menu
+Another way of adding, inserting, and replacing nodes is to use the Node Editor’s contextual menu, 
+which has dedicated submenus that let you create any kind of node available in Fusion. This can be 
+convenient when the pointer is already in the Node Editor selecting, moving, or connecting nodes.
+Methods of adding nodes using the contextual menu:
+  To add a node: Right-click in an empty area of the Node Editor, and choose a node from the 
+Add Tool submenu.
+  To insert a node: Right-click a node in the Node Editor, and choose a node from the Insert 
+Tool submenu.
+  To replace a node: Right-click a node in the Node Editor, and choose a node from the 
+Replace Tool submenu.
+TIP: When you replace one node with another, any settings that are identical between the 
+two nodes are copied into the new node. For example, replacing a Transform node with a 
+Merge will copy the existing center and angle values from the Transform to the Merge.
+Deleting Nodes
+To delete one or more selected nodes, press Delete (macOS) or Backspace (Windows), or right-click 
+one or more selected nodes and choose Delete from the contextual menu. The node is removed 
+from the Node Editor, and whichever nodes are connected to its primary input and output are now 
+connected together. Nodes connected to other inputs (such as mask inputs) become disconnected.
+Before deleting a node from a node tree (top), and after upstream 
+and downstream nodes have automatically reconnected (bottom).
+Disconnected Nodes
+It’s perfectly fine to have disconnected nodes, or even entire disconnected branches of a node tree, 
+in the Node Editor alongside the rest of a composition. All disconnected nodes are simply ignored 
+while being saved for possible future use. This can be useful when you’re saving nodes that you’ve 
+customized but later decided you don’t need. It’s also useful for saving branches of trees that you’ve 
+since exported to be self-contained media that’s re-imported to take the place of the original effect, 
+but you want to save the original nodes just in case you need to redo your work.
+1435Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Selecting and Deselecting Nodes
+In order to work with nodes in the Node Editor in any way, or modify node parameters in the Inspector, 
+you first need to learn to select the node or nodes you want to work with.
+Selecting Nodes
+Selecting nodes is one of the most fundamental things you can do to move nodes or target them for 
+different operations. There are a variety of methods you can use.
+Methods of selecting nodes:
+To select a single node: Click any node in the Node Editor. 
+To select multiple nodes one at a time: Command-click each node you want to select.
+To select a whole region of nodes: Drag a bounding box around all nodes you want to select.
+To select all upstream or downstream nodes: Right-click a node and choose 
+Select > Upstream Nodes/Downstream Nodes from the contextual menu.
+To select all nodes in the Node Editor: Press Command-A.
+To select a node from the Keyframe Editor: Click any layer in the Keyframe Editor to select 
+the corresponding node in the Node Editor.
+The Active Node
+When you select a single node using any of the methods described above, the selected node is 
+known as the active node, and is highlighted orange to indicate that its parameters are currently 
+editable in the Inspector (if the Inspector is open). This also indicates that node will be targeted for 
+specific operations (such as inserting new nodes). 
+While multiple nodes can be selected, only one node will be the active node. To indicate the 
+difference, the active node remains highlighted with orange, while all other selected nodes are 
+highlighted with white. Unselected nodes have simple black outlines.
+The active node is highlighted orange, while other selected nodes are highlighted white.
+To set the active node when there are multiple selected nodes: 
+  Option-click one of the selected nodes in the Node Editor to make that one the active node.
+  Open the Inspector (if necessary), and click a node’s header bar to make it the active node.
+1436Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Deselecting Nodes
+Deselecting nodes, when necessary, works pretty much as you would expect.
+Methods of deselecting nodes:
+  Click once in the background of the Node Editor to deselect all nodes.
+  Press Command-Shift-A to deselect all nodes.
+  Command-click to deselect multiple nodes one at a time.
+  Command-drag a bounding box to deselect a group of selected nodes at one time.
+Loading Nodes into Viewers
+Once you’ve started building a composition, the next thing you need to learn is how to view specific 
+nodes that you want to work on. This is important because the combination of which node is being 
+viewed and which node is currently selected (these aren’t always the same node) often determines 
+which onscreen controls are available and how they appear.
+In the following example, you’re set up to rotoscope an image using a Polygon node that’s attached to 
+the garbage mask input of a MatteControl node which is inserting the mask as an alpha channel.
+A node tree for doing a simple rotoscoping job.
+1437Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+As seen in the screenshot above, you’ll want to load the upstream MediaIn or Loader node 
+into a viewer while the Polygon node is selected for editing in order to see the full image 
+you’re rotoscoping while keeping the Polygon node’s spline visible.
+Viewed Nodes When You First Open Fusion
+When you first open the Fusion page in DaVinci Resolve, the output of the current empty composition 
+(the MediaOut1 node) is usually showing in viewer 2. If you’re in Dual-viewer mode, viewer 1 remains 
+empty until you assign a node to one of them. 
+When you first open Fusion Studio with an empty comp, both viewers remain empty even 
+after reading in media using a Loader node. The viewers only display content when you 
+assign a node to one of them. 
+There are several different ways to display a node in a viewer. Which ones you use depends 
+on how you like to work.
+Node View Indicators
+The View indicators are displayed under each node, and serve two purposes. First, they’re a clickable 
+interface for displaying a node’s output in one of the viewers. Second, they’re an indication of which 
+nodes in the Node Editor are being viewed. By default, there are two round indicators, representing 
+the two viewers. The left and right indicators correspond to the left and right viewers, regardless of 
+whether both viewers are visible or just one.
+A viewer indicator enabled for the right 
+viewer and disabled for the left viewer.
+To load a node into a viewer using the Node View indicators:
+  Clicking an indicator turns it white to show that node is currently loaded in the corresponding 
+viewer. Clicking it again turns the indicator black and removes it from the viewer. Nodes only 
+display View indicators if they’re currently being viewed. If you want to view indicators, hovering 
+the pointer over the node makes the indicators visible and available for clicking.
+  You can also use keyboard shortcuts to toggle each View indicator. The default two viewers are 
+assigned numeric keyboard shortcuts 1 and 2. Pressing the corresponding number once displays 
+the selected node in the appropriate display view, while pressing it again clears that display. 
+1438Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+For complex compositions, you may need to open additional viewers. For example, one 
+viewer may be used to display the end result of the final comp, while another viewer displays 
+the source, a third viewer displays a mask, and a fourth viewer might be a broadcast monitor 
+connected via a Blackmagic DeckLink card or other display hardware. When you have 
+more than two viewers, additional View indicators are added and each one is assigned a 
+consecutive number between 3 and 9.
+The more viewers you add, the more you may need help remembering which viewer is 
+represented by which View indicator. Positioning the pointer over the View indicator in 
+question will display a tooltip with the name of the viewer it represents.
+Drag and Drop Nodes into a Viewer
+If the View indicators are too small of a target for you to click on reliably and you are not keyboard 
+oriented, another way to load a node into a viewer is to drag and drop it onto the viewer you want to 
+load it into. This offers a quick explicit way to assign a node to a viewer, especially for pen and tablet 
+users. Please note that as you drag, the node will appear to move at first, but it’ll snap back into its 
+original location once the pointer leaves the Node Editor.
+Using the Contextual Menu
+You can also right-click a node, and then choose View On > Left or Right to display the node on the 
+appropriate viewer.
+Clearing Viewers
+Whenever you load a node into a viewer, you prompt that node, all upstream nodes, and other related 
+nodes to be rendered. If you load nodes into both viewers, this is doubly true. If you want to prevent 
+your computer from processing views that aren’t currently necessary, you can clear each viewer.
+Methods of clearing viewers:
+  Press 1 or 2 to empty the left or right viewers if they’re filled.
+  Press ` (the Accent key) to empty both viewers.
+Create/Play Preview
+You can right-click a node, and choose an option from the Create/Preview Play On submenu of the 
+contextual menu to render and play a preview of any node’s output on one of the available viewers. 
+The Render Settings dialog is displayed, and after accepting the settings, the tool will be rendered and 
+the resulting frames stored in RAM for fast playback on that view. 
+TIP: Hold the Shift key when selecting the viewer from the menu to bypass the Render dialog 
+and to start creating the preview immediately using the default settings or the last settings 
+used to create a preview.
+1439Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Connecting and Disconnecting Nodes
+Once you’ve started to add nodes to your composition, you need to connect them to perform their 
+intended operations. 
+Node Basics
+Each node displays small colored knots around the edges. One or more arrows represent inputs, and 
+the square represent the tool’s processed output, of which there is always only one. Outputs are white 
+if they’re connected properly, gray if they’re disconnected, or red to let you know that something’s 
+wrong and the node cannot process properly. 
+A Blur node with a Foreground 
+Input, Mask Input, and Output.
+Each node takes as its input the output of the node before it. By connecting a MediaIn node’s 
+output to a Blur node, you move image data from the MediaIn node to the Blur node, which 
+does something to process the image before the Blur node’s output is in turn passed to the 
+next node in the tree.
+Two nodes connected together.
+How to Connect Nodes
+To manually connect one node to another, click on one node’s output and drag a connection line 
+out to drop on another node’s input. The order in which you drag node connections is not important; 
+you can just as easily drag a connection from one node’s input to another node’s output and get the 
+same results.
+Before (top), and after (bottom) dragging a connection 
+line and dropping it to connect two nodes.
+1440Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Dropping Connections on Top of Nodes
+To make your life a bit easier, you can also drag a connection line and drop it directly on top of the 
+tile of a node to automatically connect to the default input of that node, which is usually labeled 
+“background” or “input.” In the following example, a connection is dragged from the output of a 
+MediaIn node and dropped onto the tile of a Blur1 node, and the background input is connected first.
+Before (top), and after (bottom) dragging a connection 
+line and dropping it on top of a node.
+If you drop a connection on top of a node that already has the background input connected, then the 
+second most important connection will be attached, which for multi-input nodes is the foreground 
+input, and for other single-use nodes may be the Effects Mask input.
+Before (previous page), and after (above) dragging a connection line and 
+dropping it on top of a node that has the background input already connected.
+Some multi-input nodes are capable of adding inputs to accommodate many connections, such as the 
+Merge3D node. These nodes simply add another input whenever you drop a connection onto them.
+1441Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+After dragging a connection line and dropping 
+it on top of a Merge3D node.
+Attaching Connections to Specific Inputs
+If you want to make sure you don’t attach a connection to the default input of a node, then you need to 
+drop it right on top of the specific node input you want to attach it to. If you can see the input’s label in 
+the tooltip bar, then you know you’re correctly positioned to make a good connection.
+However, there’s an alternate method of connecting nodes together in instances where there are 
+several inputs to choose from and you want to make sure you’re choosing the correct one. Hold down 
+the Option key while dragging a connection from one node’s output and dropping it onto the body of 
+another node. This opens a pop-up menu from which you can choose the specific input you want to 
+connect to, by name. Please note that this menu only appears after you’ve dropped the connection on 
+the node and released your pointing device’s button.
+Option-dragging a node connection to drop onto 
+another node exposes a node input menu.
+1442Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Automatically and Manually Attaching Mask Nodes
+Mask nodes, such as the Polygon, B-Spline, Ellipse, or Rectangle, have a different automatic behavior 
+when you connect them to other nodes. If you drag a connection from a Mask node onto the body of 
+another node, it will automatically connect itself to the default mask input, which is usually the effect 
+mask input. The assumption is that you’re using the mask to limit the node’s effect somehow. However, 
+this isn’t always the case, so you’ll need to be careful of this behavior to make sure you’re attaching 
+your mask to the input that will actually create the effect you need.
+Before (top) and after (bottom) dragging a connection from a  
+Mask node and dropping it on top of a MatteControl node.
+Identifying Node Inputs
+While you are still figuring out all the nodes and their inputs, hovering the pointer over any knot will 
+display a node tip with the knot’s name.
+TIP: Rather than remembering the different knot types, press the right mouse button, hold 
+Option, and drag from the output of a node to the center of another tool. When you release 
+the mouse, a tooltip will appear allowing you to select the knot you want to connect to.
+Node Order Matters
+The order in which nodes are attached defines the order in which each image-processing operation is 
+applied to the image.
+In the following example, a MediaIn node adds a clip to the composition, while a Defocus 
+node blurs the image, and then a TV node adds scanlines and vertical distortion. Those effect 
+nodes are then connected to the MediaOut node in the Fusion page in DaVinci Resolve or a 
+Saver node in Fusion Studio.
+1443Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Adding a Defocus effect first, then the TV node second.
+As you can see above, connecting the Defocus node first, followed by the TV node, means 
+that while the initial image is softened, the TV effect is sharp. However, if you reverse the 
+order of these two nodes, then the TV effect distorts the image, but the Defocus node now 
+blurs the overall result, so that the TV effect is just as soft as the image it’s applied to. The 
+explicit order of operations you apply makes a big difference.
+1444Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Adding a TV effect first, and a Defocus second.
+As you can see, the node tree that comprises each composition is a schematic of operations 
+with tremendous flexibility. Additionally, the node tree structure facilitates compositing by 
+giving you the ability to direct each node’s output into separate branches, which can be 
+independently processed and later recombined in many different ways, to create increasingly 
+complex composites while eliminating the need to precompose, nest, or otherwise compound 
+layers together, which would impair the legibility of your composition.
+In the following example, several graphics layers are individually transformed and combined 
+with a series of Merge nodes. The result of the last Merge node is then transformed, allowing 
+you to move the entire collection of previous layers around at once. Because each of 
+these operations is clearly represented via the node tree, it’s easy to see everything that’s 
+happening, and why.
+1445Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+The output of five Text nodes being combined using  
+Merge nodes is modified by a single Transform node.
+Upstream and Downstream Nodes 
+Since nodes can be positioned anywhere in the Node Editor, and added in any direction, nodes are 
+referred to as being upstream and downstream of one another. Once you select a node, all other 
+nodes that directly or indirectly connect to its input are considered to be upstream. Any other nodes 
+that are directly or indirectly connected to the output are said to be downstream. 
+This is an important distinction to make because, unlike layer-based systems, the visual positioning of 
+nodes in your node tree has no bearing on the order of operations in that composition. The only thing 
+that matters is whether nodes are upstream or downstream of each other.
+Tools upstream (left) and downstream (right) of the Merge node.
+TIP: To help you stay organized, there are Select > Upstream/Downstream commands in the 
+Node Editor contextual menu for selecting all upstream or downstream nodes to move them, 
+group them, or perform other organizational tasks.
+Disconnecting and Reconnecting Nodes
+Node trees are a continuous work in progress, requiring constant revision and rearrangement as 
+you discover new details that need to be finessed, or things that you can do better once the overall 
+composition has taken shape. To facilitate quick changes, each connection between two nodes is 
+divided into two halves: the output half (connected to the upstream node’s output) and the input half 
+(connected to the downstream node’s input). This can only be seen when you hover the pointer over a 
+connection. The half your pointer is over is highlighted in blue.
+1446Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+The two halves of a connection line that are 
+revealed when you hover your pointer over it.
+By clicking and/or dragging these two halves, it’s possible to quickly disconnect, reconnect, 
+and overwrite node connections, which is essential to rearranging your node tree 
+quickly and efficiently.
+To disconnect two nodes, do one of the following:
+  Click once on the input half of the connection between two nodes.
+  Click on the input arrow to which a connection is attached, then drag to pull the connection away 
+from the tool and drop it anywhere in an empty area of the Node Editor.
+To overwrite a current connection:
+  Drag the output or input half of a connection, and drop it directly onto another node’s input 
+or output. This simultaneously disconnects the previous connection and connects the one 
+you’re dragging.
+To reconnect a connection from one node to another:
+  Drag the output or input half of a connection to disconnect it from one node, and drop the 
+connection directly on another node’s input or output.
+Tracing Connections Through the Node Tree 
+Positioning the pointer over a node causes the connections attached to that node to become 
+highlighted, which makes it easier to see which nodes it’s attached to. Additionally, highlighted 
+connections display the color of the input they’re connected to, which makes it easy to see if they’re 
+connected to a foreground, a background, or a particular kind of mask.
+Hovering the pointer over a node highlights 
+the color of all connections, telling you 
+what kinds of inputs are connected.
+1447Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Additionally, positioning the pointer over a connection causes a tooltip to appear that displays 
+the output and input that connection is attached to.
+Hovering the pointer over a node highlights 
+the connection between it and other nodes.
+Branching
+A node’s input can only have one connection attached to it. However, a tool’s output can be 
+connected to inputs on as many nodes as you require. Splitting a node’s output to inputs on multiple 
+nodes is called branching. There are innumerable reasons why you might want to branch a node’s 
+output. A simple example is to process an image in several different ways before recombining these 
+results later on in the node tree. 
+A MediaIn node branched to two node operations 
+and then recombined using a Merge node.
+Alternatively, it lets you use one image in several different ways—for example, feeding the RGB to 
+one branch for keying and compositing, while feeding the A channel to the Effects Mask input of 
+another node to limit its effect, or feeding RGB to a tracker to extract motion information.
+A MediaIn node branched to two different 
+kinds of inputs, used separately.
+1448Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Connecting Merge Nodes
+The Merge node is the primary tool available for compositing images together. Each Merge node 
+is capable of combining two inputs to create a third, using standard compositing methods and 
+composite modes. 
+For more extensive information about the Merge node, jump to this chapter: I /O Nodes.  
+You can also refer to  Chapter 45 of the Fusion Reference Manual. 
+For this chapter, all you need to know is that if you attach a background image to the 
+Background input (such as a landscape), and a foreground image with an alpha channel to 
+the Foreground input (such as a graphic with an alpha channel), the Merge node will combine 
+them into a single image for further compositing.
+Two MediaIn nodes and a DeltaKeyer node  
+attached to a Merge node, creating a composite.
+Each Merge node has three inputs:
+  Background (orange): The default input. Whichever image is connected to this input defines the 
+output resolution of the Merge node.
+  Foreground (green): The secondary input, meant for whichever image you want to be “on top.”
+  Effect Mask (blue):  An optional input you can use to attach a mask or matte with which to limit the 
+effect of the Merge node.
+It’s important to make sure you’re attaching the correct nodes to the correct inputs to ensure you’re 
+getting the result you want, and it’s important to keep these inputs in mind when you connect to a 
+Merge node. Of course, you can always drag a connection to a specific input to make sure you’re 
+connecting things the way you need. However, if you’re in a hurry and you simply drag connections 
+right on top of a Merge node: 
+  The first connection will be made to the background input.
+  The second connection will be made to the foreground input.
+  The third connection will be made to the effect mask input.
+TIP: When you add a Merge node after a selected node by clicking the Merge button on the 
+toolbar, by clicking on the Merge icon in the Effects Library, or by right-clicking a node in the 
+node tree and choosing Insert Tool > Composite > Merge from the contextual menu, the new 
+Merge node is always added with the background connected to the upstream node coming 
+before it.
+1449Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Automatically Creating a Merge Node When Adding Nodes
+There’s a nice shortcut for connecting Merge nodes if you want to connect the incoming clip 
+immediately to your node tree as the top layer of a composite, and that’s to drag a clip from an 
+Operating System window or a Generator from the Effects Library right on top of any connection line. 
+When you drop the resulting node, this automatically creates a Merge node, the background input 
+of which is connected to the next node to the left of the connection you dropped the clip onto, and 
+the foreground input of which is connected to the new node that represents the clip or Generator 
+you’ve just added.
+Dragging a node from the Media Pool onto a connection (left), and dropping it to create a Merge node composite (right).
+Additionally, If you drag two or more nodes from an OS window into the Node Editor at the same 
+time, Merge nodes will be automatically created to connect them all, making this a fast way to initially 
+build a composite.
+By dragging three nodes from an OS window to the Node Editor (left), 
+Merge nodes are automatically created to connect them all (right).
+Automatically Creating a Merge 
+Node by Connecting Two Outputs
+Here’s an endlessly useful shortcut for when you have a disconnected node that you want to 
+composite over another node. Drag a connection from the output of the node you want to be the 
+foreground layer, and drop it on top of the output of the node you want to be the background layer, 
+and a Merge node will be automatically created to build that composite.
+Dragging a connection from a disconnected node to another node’s output (top), 
+and dropping it to create a Merge node composite (bottom).
+1450Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Connection Options and Routers
+By default, the Node Editor uses linear connections that are drawn straight between any two 
+connected nodes. While efficient, this sometimes causes connection lines to overlap nodes, which 
+some people feel interferes with the view of the Node Editor. 
+Linear connections between nodes.
+If you like, you can change how connections are drawn by enabling orthogonal  connections, which 
+automatically draws lines with right angles to avoid having connections overlap nodes. 
+Optional orthogonal connections between nodes.
+Functionally, there’s no difference to your composition; this only affects how your node tree appears.
+To change how connections are drawn in the Node Editor:
+  Right-click the Node Editor background and choose one of the following from the 
+contextual menu.
+  Options > Direct Pipes
+  Options > Orthogonal Pipes
+1451Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Using Routers to Reshape and Branch Connections
+If you want to force a particular connection to be drawn at an angle to keep your node tree tidy, 
+you can add a router to either linear or orthogonal connections to force an angle so it will be drawn 
+however you like. 
+A router added to force a connection to be drawn at an angle.
+Routers are tiny nodes with a single input and an output, but with no parameters except for 
+a comments field (available in the Inspector), which you can use to add notes about what’s 
+happening in that part of the composition. 
+Even more usefully, you can branch a router’s output to multiple nodes, which makes routers 
+even more useful for keeping node trees neat in situations where you want to branch the 
+output of a node in one part of your node tree to other nodes that are all the way on the 
+opposite end of that same node tree.
+A router branching its output to multiple nodes.
+1452Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Methods of using routers:
+  To add a router to a connection: Option-click anywhere on a connection.
+  To move a router: Drag the router to a new location, and the connection will reshape 
+itself as necessary.
+  To branch a router’s output: Drag a connection from the router output to the input of another 
+node. You can branch a router’s output as many times as you need to.
+  To remove a router: Select any router and press the Delete key, or right-click a router and choose 
+Delete from the contextual menu.
+Swapping Node Inputs 
+For multiple-input nodes such as the Merge, Merge 3D, and Dissolve nodes, there’s a quick method 
+of swapping the Primary and Secondary inputs, such as the foreground and background inputs of a 
+Merge tool, when you find you’ve accidentally connected them in the wrong order. If a node has more 
+than two of its inputs connected, only the foreground and background inputs will be swapped.
+To swap the primary inputs of a multi-input node, do one of the following:
+  Select a node and press Command-T to reverse its inputs.
+  Right-click a node and choose Swap Inputs from the contextual menu.
+Before swapping node inputs (top), and after swapping node inputs 
+(bottom), the connections don’t move but the colors change.
+Inputs can move freely around the node, so swapping two inputs doesn’t move the 
+connection lines; instead, the inputs change color to indicate you’ve reversed the background 
+(orange) and foreground (green) connections.
+1453Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Extracting and Inserting Nodes
+When building a composition, you’ll often find that you need to rearrange nodes that you’ve already 
+added, in order to connect them in different ways to obtain a better result. Happily, this is easy to do 
+by extracting one or more nodes from one part of a node tree and inserting them at another part of 
+the node tree.
+To extract one or more nodes from their position in the node tree:
+  To extract a single node: Hold down the Shift key, drag a node from the node tree up or down to 
+disconnect it, and then drop the node before releasing the Shift key. That node is now detached, 
+and the output of the next upstream node is automatically connected to the input of the next 
+downstream node to fill the gap in the node tree.
+  To extract multiple nodes: Select the nodes you want to extract, hold down the Shift key, drag 
+one of the selected nodes up or down to disconnect them, and then drop the node before 
+releasing the Shift key. Those nodes are now detached (although they remain connected to one 
+another), and the output of the next upstream node is automatically connected to the input of the 
+next downstream node to fill the gap in the node tree.
+Before extracting a pair of nodes (left), and after extracting a pair of nodes (right).
+After you’ve extracted a node, you can re-insert it into another connection somewhere else. 
+You can only insert one node at a time.
+To insert a disconnected node in the Node Editor between two compatible nodes: 
+1 Hold down the Shift key and drag a disconnected node directly over a connection between two 
+other nodes.
+2 Once the connection highlights, drop the node, and then release the Shift key. That node is now 
+attached to the nodes coming before and after it.
+Before inserting a node (left), and after inserting a node (right).
+TIP: If you hold down the Shift key, you can extract a node and re-insert it somewhere else 
+with a single drag.
+1454Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Cut, Copy, and Paste Nodes
+The standard operations of cut, copy, and paste are also available in the Node Editor. You can use 
+them to temporarily remove nodes from the Node Editor, create duplicate nodes, or even copy the 
+settings from one node and paste those settings into another node with compatible settings.
+Cut, Copy, and Paste in the Node Editor
+The standard commands all work, but with some special features specific to the Node Editor.
+To copy one or more selected nodes, do one of the following:
+  Right-click a node and choose Copy from the contextual menu.
+  Choose Edit > Copy from the Edit menu (Command-C).
+To cut one or more selected nodes, do one of the following:
+  Right-click over the node and choose Cut from the contextual menu.
+  Choose Edit > Cut from the Edit menu (Command-X).
+When you paste into the Node Editor, you create a copy of the last node or nodes you’ve cut 
+or copied. When pasting, there are a few different things you can do to control where pasted 
+nodes appear.
+To paste one or more selected nodes, do one of the following:
+  To paste nodes to be inserted after another node:  Select the node in the node tree you want to 
+insert the pasted node(s) to, and choose Edit > Paste (Command-V).
+  To paste nodes to be disconnected from the rest of the node tree: Deselect all nodes, and then 
+choose Edit > Paste (Command-V), or right-click anywhere in the Node Editor and choose Paste 
+from the contextual menu.
+  To paste disconnected nodes in a specific area of the Node Editor: Deselect all nodes, and 
+then click the place in the Node Editor where you want pasted node(s) to appear, and choose 
+Edit > Paste (Command-V), or right-click anywhere in the Node Editor and choose Paste from the 
+contextual menu.
+  To paste a node to replace an existing node in the Node Editor: Right-click a node in the Node 
+Editor that you want to replace, choose Paste from the contextual menu, and when a dialog 
+appears asking if you want to replace that node, click OK. This only works when you use the 
+contextual menu command.
+TIP: When you paste a MediaIn, Loader, or Generator node so it will be inserted after a 
+selected node in the node tree, a Merge tool is automatically created and used to composite 
+the pasted node by connecting it to the foreground input. While this can save you a few 
+steps, some artists may prefer to perform these sorts of merges manually, so this can be 
+changed using the Defaults panel in the Auto tools section of the Fusion > Fusion Settings.
+1455Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Pasting Node Settings
+Instead of pasting a node, you can choose to paste just the parameter settings that you copied from 
+another node. This can be useful if you’ve carefully set or animated parameters in one node that you 
+want to also use in another node.
+Note that you can paste settings between two nodes of the same type, or between two entirely 
+different kinds of nodes that happen to have one or more of the same parameters in the Inspector. 
+When copying settings from one type of node to another, only the settings that match between two 
+nodes will be copied. A common example is to copy an animated Center parameter from a Transform 
+node to the Center parameter of a Mask node.
+To Paste settings from one node to another:
+1 Select a node that has settings you want to copy, and choose Copy from the 
+Edit menu (Command-C).
+2 Right-click a node you want to paste those settings to, and choose Paste Settings 
+from the contextual menu.
+Copying and Pasting Nodes to and from Any Text Editor
+The format of nodes in the Node Editor is not binary, but is in fact a simple text format. The implications 
+of that may not be obvious, but one example benefit is clear when you start dealing with nodes. 
+One or more nodes can be copied from the Node Editor and pasted directly into a text editor or email. 
+This pastes the selection in text format, just as it’s saved internally in Fusion. For example, if you copy 
+the following set of three nodes:
+A set of three nodes being copied.
+And you then paste into a new text editing document, you get the following:
+The same three nodes pasted into a text editor.
+1456Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+At this point, you have the option of editing the text (if you know what you’re doing), emailing 
+it to colleagues, or storing it in a digital notepad of some sort for future use. To use this script 
+in Fusion again, you need only copy it and paste it back into the Node Editor.
+TIP: This is a very easy way to pass specific node settings back and forth between artists 
+who may not be in the same room, city, or country.
+Using Multilayer Nodes  
+(Studio Version Only)
+Fusion can intelligently handle multilayer image workflows with support for EXR, Stereoscopic 3D, 
+and PSD assets. Users can see a list of layers on the Fusion viewers and interact with layers in each 
+node in the Settings tab in the Inspector. As this layer structure is retained throughout the toolset, this 
+means you can isolate a tool to work on an individual layer, while still passing through the other layers 
+unmodified.
+Viewer
+When loading a multilayer file, you can preview specific layers in the Viewer and select a layer 
+from the drop-down list. Files without layer support will show only a ‘default’ option from the 
+drop-down menu.
+1457Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Using the Layer drop-down in the Viewer to select just the Asteroids layer from a multilayer file for viewing
+Nodes and Inspector
+In the Settings tab you’ll find a Layer category where you have access to a number of controls to affect 
+certain layers and to control layers from each tool input.
+  Process Layers: Select the layer to process for effects from:
+Default Layer (default): To apply the effect on the base/unnamed layer, not affecting other layers.
+All Layers: To apply the effect on all available layers.
+Custom: Choice of other available layers to apply the effect on, not affecting other layers.
+  Input Layer: The Input Layer lists all layers available from the upstream node of the default input. 
+The selected layer can be used by the current tool or further down the node tree in isolation.
+  Effect Mask Layer:  If the tool has an Effect Mask input, this control lists the available layers that 
+can provide mattes for the tool.
+Connecting the multilayer file, both directly to the 
+BrightnessContrast Effect Mask (blue arrow) in addition to its input, 
+allows you to quickly create perfect masks of any layer in the file.
+1458Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Tools with other named inputs (like Image ) can show additional layer controls with a 
+corresponding name (like Image Layer ).
+Input Layer Controls
+For optimal performance, Fusion tools request only the processed layers from each input. The Input 
+Layer, Effect Mask Layer, Image Layer and other input layer controls allow the user to customize this 
+behavior. In each input control, you can select Auto or Match or select an explicit layer value to map:
+  Auto (Default): Requests the layer selected in the Process Layers selection. If the layer does not 
+exist, the tool falls back to the default layer.
+  Match: Requests the layer selected in the Process Layers selection. If the layer does not exist, 
+the tool shows a failure.
+  Explicit Layer Selection:  Requests the explicit layer selection from one of the listed layers. 
+This isolates the specific layer for use in the current tool or further down the node tree.
+For Fusion plugins, the Process Layer and Input Layer controls are automatically generated in 
+the Inspector’s Settings tab. Creators of plugins can decide to define and place the controls 
+explicitly in another place, similar to how the MultiMerge places the controls in the main 
+controls section.
+Some Fusion tools include controls to handle additional layer-based decisions. 
+For example:
+• The Renderer3D shows a new Eye control > Layers option when using a stereoscopic 
+camera, allowing the left and right eyes to be output as individual layers.
+• When combining multilayered sources using composite nodes (e.g., MultiMerge), 
+Channel Booleans, or a MatteControl, the Settings tab has additional controls to select 
+Background or Foreground options to isolate and combine the selected layers.
+• The Combiner tool can be used to create custom layers. Set the Mode to Layer. 
+This exposes layer name fields allowing you to name the new layers.
+Instancing Nodes
+Normally, when you use copy and paste to create a duplicate of a node, the new node is completely 
+independent from the original node, so that changes made to one aren’t rippled to the other. However, 
+there are times when two nodes must have identical settings at all times. For example, when you’re 
+making identical color corrections to two or more images, you don’t want to constantly have to adjust 
+one color correction node and then manually adjust the other to match. It’s a hassle, and you risk 
+forgetting to keep them in sync if you’re working in a hurry. 
+While there are ways to publish controls in one node and connect them to matching controls in 
+another node, this becomes prohibitively complex and time consuming for nodes in which you’re 
+making adjustments to several controls. In these cases, creating “instanced” nodes is a real time-saver, 
+as well as an obvious visual cue in your node tree as to what’s going on.
+1459Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Using Instanced Nodes
+Instanced nodes are nodes that have been created using the Paste Instance command, and 
+which share settings with the original node so that a change made to one instanced node is also 
+automatically applied to all other instances of that node (as well as the original node you copied).
+To create an Instance, do the following:
+1 Select a node you want to instance, and copy it (Command-C).
+2 Do one of the following: 
+To create a disconnected instance of a node: Right-click in the background of the Node Editor, 
+and choose Paste Instance from the contextual menu (Command-Shift-V).
+To insert an instanced node between two other nodes: Select a node that’s upstream of where 
+you want to insert the instanced node, and press Command-Shift-V. Alternatively, you can right-
+click directly on a connection line, and choose Paste Instance from the contextual menu.
+However you paste an instance, the name of that instanced node takes the form 
+"Instance_NameOfNode." If you paste multiple instances, each instance is numbered 
+"Instance_NameOfNode_01."
+A green link line shows an instanced Blur node’s relationship to the original Blur node it was copied from.
+When a node tree contains instanced nodes, a green line shows the link between the original node 
+and its instances. You have the option to hide these green link lines to reduce visual clutter in the 
+Node Editor. 
+To toggle the visibility of green instance link lines in the Node Editor:
+1 Right-click anywhere in the background of the Node Editor.
+2 Choose Options > Show Instance Links from the contextual menu. 
+If you’ve been using an instance of a node and you later discover you need to use it to apply separate 
+adjustments, you can “de-instance” the node. 
+1460Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+To de-instance a node, making it independent:
+1 Right-click an instanced node. 
+2 Choose Deinstance from the contextual menu. That node is now independent from the original 
+node. Once you de-instance a node, you cannot re-instance it, but you can undo the operation. 
+NOTE: If you’ve de-instanced a node and you cannot undo the operation because you’ve 
+restarted DaVinci Resolve, you can only recreate an instance by copying the original and 
+pasting an instance again. 
+De-Instancing and Re-Instancing Specific Parameters
+By default, every parameter in an instanced node is linked to the original node, so that any change 
+you make is rippled across. However, from time to time you’ll find the need to independently adjust 
+just one or two parameters while keeping the rest of that node’s parameters linked. For this reason, 
+instead of de-instancing the entire tool, you can de-instance individual parameters. 
+To de-instance a single parameter:
+  Right-click on a parameter’s name or value in the Inspector, and choose Deinstance from the 
+contextual menu. 
+If you’ve only de-instanced individual parameters, you can re-instance those parameters later on if 
+you change your mind. 
+To re-instance a single parameter:
+Right-click on a parameter’s name or value in the Inspector, and choose Reinstance from the 
+contextual menu. That parameter immediately inherits the setting of the original node.
+Keeping Node Trees Organized
+Similar to working with files on your desktop, even the simplest of composites require you to do some 
+amount of organization. In this section we’ll look at some basic node operations, some of which you 
+may already be familiar with just from using your computer’s operating system or other applications.
+Moving Nodes
+Selecting one or more nodes and dragging them moves them to a new location, which is one of the 
+simplest ways of organizing a node tree, by grouping nodes spatially according to the role they play in 
+the overall composition.
+Keep in mind that the location of nodes in the Node Editor is purely aesthetic, and does nothing to 
+impact the output of a composition. Node tree organization is purely for your own peace of mind, as 
+well as that of your collaborators.
+TIP: Once you’ve arranged the nodes in a composition in some rational way, you can use 
+the Sticky Note and Underlay tools to add information about what’s going on and to visually 
+associate collections of nodes more definitively. These tools are covered later in this section.
+1461Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Snapping Nodes to the Grid
+By default, you can position nodes freely wherever you want them to be. However, keeping nodes and 
+connection lines straight and aligned can make them easier to read. To help keep them aligned, you 
+can have nodes you’re dragging automatically snap to the grid.
+To have nodes snap to the grid as they’re dragged:
+  Right-click over an empty area of the Node Editor, and choose Arrange Tools > To Grid from the 
+contextual menu. All nodes you drag now snap to the nearest grid coordinate.
+  Right-click over an empty area of the Node Editor, and choose Arrange Tools > To Connected 
+from the contextual menu. All nodes you drag now snap to the horizontal or vertical position of the 
+nodes they’re attached to.
+TIP: You can set “Arrange to Grid” or “Arrange to Connected” as the default for new 
+compositions by choosing Fusion > Fusion Settings in DaVinci Resolve or File > Preferences 
+in Fusion Studio, and turning the Fusion > Node Editor > Arrange To Grid or Arrange to 
+Connected checkboxes on.
+Commands to “Clean Up” a Node Tree
+The grid in the background of the Node Editor can be used to align nodes, either by eye 
+or automatically. 
+  To “clean up” an unruly node tree: Right-click in an empty section of the Node Editor, and choose 
+Line Up All Tools to Grid from the contextual menu. All nodes in the Node Editor will move to align 
+and center themselves along the nearest grid lines.
+  To “clean up” only one or more selected nodes: Right-click one of the selected nodes and 
+choose Line Up to Grid from the contextual menu. All selected nodes will move to align and center 
+themselves along the nearest grid lines, while all unselected nodes will be left as they are. 
+Renaming Nodes
+Each node that’s created is automatically assigned a name (based on its function) and a number 
+(based on how many of that type of node have been created already). For example, the first Blur 
+node added to a composition will be called Blur1, the second will be Blur2, and so on. Although 
+initially helpful, larger compositions may benefit from important nodes having more descriptive 
+names to make it easier to identify what they’re actually doing, or to make it easier to reference those 
+nodes in expressions.
+To rename a node:
+1 Do one of the following:
+  Right-click a node and choose Rename from the contextual menu. 
+  Select a node and press F2.
+2 When the Rename dialog appears, type a new name, and then click OK or press Return.
+NOTE: If multiple nodes are selected, multiple dialogs will appear asking for a 
+name for each tool.
+1462Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Since Fusion can be scripted and use expressions, the names of nodes must adhere to a 
+scriptable syntax. Only use alphanumeric characters (no special characters), and do not use 
+any spaces. 
+Also, you cannot start a node name with a number. If you accidentally create a name that doesn’t 
+exactly follow the guidelines, spaces and invalid characters will be automatically deleted.
+If you want to see the original node types instead of the node names, press and hold 
+Command-Shift-E.
+Changing Node Colors
+You can change the color of any node by selecting it, opening the Inspector, and choosing a new color 
+from the Node Color pop-up in the Inspector header for that node. Alternatively, you can right-click a 
+node and choose a color from the Set Color submenu.
+To return a node to its regular color, right-click it and choose Set Color > Clear Color from the 
+contextual menu, or open the Node Color pop-up for a node in the Inspector, and choose Clear Color.
+Using Sticky Notes
+A good way to add notes about different parts of a composition, client feedback about various details, 
+and other information you want to keep track of, is to add Sticky Notes to the Node Editor.
+ 
+A Sticky Note in the Node Editor.
+Sticky Notes are yellow boxes in which you can type whatever text you want. They can be resized, 
+moved, and collapsed when they’re not being edited, but once created they remain attached to the 
+background of the Node Editor where you placed them until you either move them or delete them.
+Methods of working with Sticky Notes:
+  To create a Sticky Note: Click somewhere in the Node Editor where you want a Sticky Note to 
+appear. Then, press Shift-Spacebar, type sticky, and press the Return key when the Sticky Note 
+appears in the Select Tool window. Alternatively, you can open the Effects Library, open the Tools 
+> Node Editor category, and click or drag the Sticky Notes node to create a new one.
+  To open a Sticky Note to full size: Double-click a minimized Sticky Note and it expands to a larger, 
+resizable yellow box. 
+  To edit a Sticky Note: If necessary, double-click a Sticky Note to open it to full size, and then click 
+once in the body of the note to place a text cursor. You can edit text within the Sticky Note just like 
+any other text editor.
+1463Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+  To rename a Sticky Note: Right-click a Sticky Note, choose Rename, type a new name into the 
+Rename dialog, and click OK. Alternatively, you can select a Sticky Note, press F2 to open the 
+Rename dialog, and press Return to close it when you’re done.
+  To resize a Sticky Note: Double-click a Sticky Note to open it to full size, and then drag any of the 
+edges or corners to make it larger or smaller.
+  To minimize a Sticky Note: Click the close box at the upper left-hand corner of the Sticky Note, 
+and it collapses to a small tile.
+  To delete a Sticky Note: Right-click any Sticky Note and choose Delete from the contextual menu 
+or select the Sticky note in the Node Editor and press the Delete key.
+Using Underlay Boxes
+Underlay Boxes are a good way of associating a collection of nodes that work together to perform a 
+specific task in your composition. They’re simply colored rectangles that you can put nodes inside of. 
+Once you place nodes inside an Underlay, you can move the Underlay, and all the nodes within move 
+along with it.
+An Underlay in the Node Editor.
+Underlay Boxes can be named to identify the purpose of that collection of nodes, and they can 
+be colored to be distinct from other Underlay Boxes or to adhere to some sort of color code for 
+your compositions.
+Methods of working with Underlay Boxes:
+  To create an Underlay Box: Click somewhere in the Node Editor where you want the Underlay 
+Box to appear. Then, press Shift-Spacebar, type under, and press the Return key when the 
+Underlay Box appears in the Select Tool window. Alternatively, you can open the Effects Library, 
+open the Tools > Node Editor category, and click or drag the Underlay Box node to create 
+a new one.
+  To create an Underlay Box around specific nodes: Select the nodes in the Node Editor that you 
+want surrounded by an Underlay Box. Then, press Shift-Spacebar, type under, and press the 
+Return key when the Underlay Box appears in the Select Tool window. Alternatively, you can open 
+the Effects Library, open the Tools > Node Editor category, and click the Underlay Box node to 
+have it added and sized to encompass all the selected nodes.
+  To resize an Underlay Box: Drag any of the edges or corners to make it larger or smaller.
+  To rename an Underlay Box: Option-click the Underlay Box to select just the box and not the 
+contents, and then right-click it and choose Rename (or press F2). Type a new name into the 
+Rename dialog and click OK or press Return.
+  To change the color of an Underlay Box: Option-click the Underlay Box to select just the box and 
+not the contents, and then right-click it and choose a color from the Set Color submenu.
+1464Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+  To put nodes inside of an Underlay Box: Select the nodes you want to place inside an 
+Underlay Box, and then drag them to fit inside. The Underlay Box must be big enough to fit all the 
+nodes. Alternatively, you can place an Underlay Box near a collection of nodes you want to put 
+inside it, and then resize the Underlay Box to encompass all those nodes.
+  To move an Underlay Box and all its nodes: Once nodes have been placed inside an Underlay 
+Box and have been deselected, you can move the entire collection of nodes together by dragging 
+the Underlay Box by its title bar.
+  To remove nodes from an Underlay Box: There are two ways you can remove nodes from an 
+Underlay Box.
+With both the Underlay Box and nodes deselected, drag a bounding box or Command-click to 
+select all nodes in the box you want to remove, and drag them out. 
+Resize the Underlay Box so that it’s smaller than the collection of nodes it originally encompassed. 
+Once an Underlay Box is so small that even the last node sticks out beyond its edge, those nodes 
+are automatically removed from the Underlay Box, and you can move or delete the Underlay Box 
+without moving those nodes.
+  To delete an Underlay Box and all nodes within: Select an Underlay Box and press the Delete 
+key to delete both the Underlay Box and all nodes found inside it. If you don’t also want to delete 
+the nodes, first drag the nodes out of the box.
+  To delete an Underlay Box but keep all nodes within: Option-click the Underlay Box to select it 
+and not the nodes, and then press the Delete key. The nodes within remain where they were.
+Node Thumbnails
+Once a source or an effect has been added to the Node Editor, it’s represented by a node. By default, 
+nodes are rectangular and thin, making it easier to fit reasonably complicated grades within a relatively 
+small area. However, if you like, you can also display node thumbnails.
+A node in the Node Editor shown without and with a thumbnail.
+Nodes can be displayed as a small rectangle or as a larger square. The rectangular form displays the 
+node’s name in the center, while the square form shows either the tool’s icon or a thumbnail of the 
+image it is outputting. 
+TIP: Even if you’re not displaying node thumbnails, you can quickly obtain detailed 
+information about a node and the data it’s processing by hovering your pointer over it in the 
+Node Editor and viewing the tooltip bar below.
+1465Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Choosing Which Nodes Show Thumbnails
+If you want to use node thumbnails to help visually identify media and operations in your node trees, 
+there are a variety options for which nodes should display thumbnails in the contextual menu that 
+appears when you right-click anywhere in the background of the Node Editor.
+Force All Tile Pictures
+This option shows thumbnails for every single node in the Node Editor. This can make simple node 
+trees easier to read, but it’ll make all node trees take up considerably more room.
+NOTE: If Show Thumbnails is enabled, nodes may not update until the playhead is moved in 
+the Time Ruler.
+Force Active Tile Pictures
+You may also choose to only show thumbnails for nodes that are currently selected, which can make it 
+easier to see which node you’re working on. When nodes become deselected, the thumbnails will be 
+hidden again. 
+Force Source Tile Pictures
+This enables thumbnails for all MediaIn and Loader nodes in the Node Editor, as well as all generators, 
+and is a great way to be able to quickly see where all the clips are in a composition.
+Force Mask Tile Pictures
+This enables thumbnails for all Mask nodes in a composition, which can make them easier to 
+distinguish when you’re building complex shapes made from multiple Mask nodes.
+Manually Showing Tile Pictures and Node Options
+You also have the option of manually choosing which nodes you’d like to show thumbnails. 
+For example, there may be certain key points of the node tree where you’d like to see a small visual 
+representation of what’s happening in the composition.
+To toggle thumbnails for one or more specific nodes:
+1 Select one or more nodes in the Node Editor. 
+2 Right-click one of the selected nodes, and choose one of the following from the contextual menu:
+  Show > Show Tile Pictures
+  Show > Show Modes/Options
+When you’ve manually enabled thumbnails for different nodes, they’ll remain visible whether or not 
+those nodes are selected.
+1466Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Switching Thumbnails between Images and Icons
+Whenever you enable node thumbnails, you have the choice of having these thumbnails either display 
+an image of the state of the image at that node, or you can instead choose to display the icon for that 
+particular node. The setting for this affects all nodes at once.
+To display icons instead of thumbnails:
+Right-click anywhere in the background of the Node Editor and deselect Show Thumbnails in the 
+contextual menu.
+Sometimes Nodes Only Show Icons
+As you add more and more nodes to a composition, you’ll notice that some nodes never 
+display an image in their thumbnail. In these cases, the default icon for that node is displayed 
+instead of an image. 
+Most nodes in the Particle and 3D categories fall into this group. The exceptions are the 
+pRender node and the Render 3D node. These two nodes are capable of displaying a 
+rendered thumbnail if you have the menu options set for Thumbnails to be displayed. 
+In other cases, whether nodes display images in their thumbnail is more situational. Some 
+Transform nodes are able to concatenate their results with one another, passing the actual 
+processing downstream to another node later in the node tree. In this case, upstream 
+Transform nodes don’t actually process the image, so they don’t produce a thumbnail.
+In other situations where the Loader is not reading in a clip or the clip is trimmed in the 
+Keyframes Editor to be out of range, it can cause the node not to process the image, so it will 
+not produce a rendered Thumbnail image. Also, nodes that have been set to Pass Through 
+mode are disabled and do not display a rendered Thumbnail image.
+Finding Nodes
+Modern visual effects require detailed work that often results in compositions with hundreds of nodes. 
+For such large node trees, finding things visually would have you panning around the Node Editor for a 
+long, long time. Happily, you can quickly locate nodes in the Node Editor using the Find dialog. 
+The Find dialog lets you quickly locate nodes wherever they are in the Node Editor.
+1467Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Performing Simple Searches
+To do simple searches using node names is easy.
+To search for a node in the Node Editor:
+1 Press Command-F, or right-click in an empty area of the Node Editor and choose Find from the 
+contextual menu.
+2 When the Find dialog appears, do the following:
+  Enter a search term in the Find field.
+  Choose search options, such as whether to match the whole phrase in the Find field, whether to 
+match the case, whether to use a sequence number, or whether to use a regular expression in 
+the Find field.
+  Choose what to search. Options include tool name, tool type name, or tool type ID. 
+3 To perform the find, do one of the following:
+  Click Find Next to try to select a downstream node matching the criteria.
+  Click Find Previous to try to select an upstream node matching the criteria.
+  Click Find All to try to select all nodes in the Node Editor that match the criteria.
+The Find window closes. If either the Find Next, Find Previous, or Find All operations are 
+successful, the found node or nodes are selected. If not, a dialog appears letting you know that 
+the string could not be found.
+TIP: Finding all the nodes of a particular type can be very useful if you want, for example, to 
+disable all Resize nodes. Find All will select all the nodes based on the search term, and you 
+can temporarily disable them by pressing the shortcut for Bypass, Command-P.
+Using Regular Expressions
+If you need to do more complicated searches, you can turn on the Regular Expression checkbox, 
+which lets you enter some simple expressions with which to create more complex find operations. 
+Some useful examples of regular expressions that are valuable include the use of Character Sets.
+Character Sets
+Any characters typed between two brackets [ ] will be searched for. Here are some examples of 
+character set searches that work in Fusion.
+[a-z]
+Finds: Every node using a lower caps letter
+[a-d]
+Finds: Every lower caps letter from a to d, 
+and will find nodes with a, b, c, or d
+[Tt]
+Finds: Every node with an upper case T 
+or a lower case t
+[aeiou]
+Finds: Every vowel
+[0-9]
+Finds: Every numeral
+[5-7]
+Finds: Every numeral from five to seven, and 
+will find nodes numbered with 5, 6, or 7
+1468Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Custom Node Settings
+When a node is added to the Node Editor, its parameters are set to the default values for that type 
+of node. If you find yourself constantly readjusting the parameters of a node to a preferred starting 
+point as soon as it’s added to the node tree, you can override the default node settings with your own 
+custom settings.
+To save new default settings for a particular type of node:
+1 Create a new node.
+2 Open the Inspector and customize that node’s settings to the new defaults you want it to have.
+3 Right-click that node in the Node Editor, or right-click that node’s control header in the Inspector, 
+and choose Settings > Save Default from the contextual menu.
+TIP: You can also save six different settings for a node in the Node Editor using the Version 
+buttons at the top of the Inspector. 
+For more information, jump to this chapter: Editing Parameters in the Inspector . You can also 
+refer to Chapter 8 in the Fusion Reference Manual .
+Managing Saved Settings
+Custom node default settings are saved to a folder on your hard drive that’s based on the Path Map 
+> Defaults preference in the Fusion Settings. This path is customizable for facilities where multiple 
+compositing artists use a common set of facility defaults, stored somewhere commonly accessible. 
+The default paths are:
+• For macOS systems, this path defaults to: /UserName/Library/Application Support/
+Blackmagic Design/DaVinci Resolve/Fusion/Defaults.
+• For Windows systems, this path defaults to: C:\Users\<username>\AppData\Roaming\
+Blackmagic Design\DaVinci Resolve\Fusion\Defaults.
+• For Linux systems, this path defaults to: ~/.fusion/BlackmagicDesign/DaVinci Resolve/
+Fusion/Defaults.
+If you browse this directory, the settings for each node are saved using a name taking the form 
+INTERNALNAME_PUBLICNAME.settings, where INTERNALNAME is the internal name of the Fusion 
+tool, and PUBLICNAME is the name of the Node that’s derived from the internal Fusion tool. For 
+example, the default setting for a Blur node would be called Blur_Blur.setting. This naming convention 
+is partly to ensure that third-party plugin nodes don’t overwrite the defaults for built-in Fusion nodes 
+that happen to have the same name.
+1469Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Resetting Defaults
+Even if you’ve created new default settings for new nodes, you can always reset individual parameters 
+to the original default setting. In addition, it’s easy to restore the original default settings for new nodes 
+you create.
+To reset a single parameter to the original default settings:
+1 Create a new node.
+2 Open the Inspector and customize a parameter to the new default value you want it to have.
+3 Right-click that parameter in the Inspector, and choose Set to Default from the contextual menu.
+To reset every parameter in a node to the original defaults, do one of the following:
+  Right-click on the node and choose Settings > Reset Default.
+  Right-click that node’s control header in the Inspector, and choose Settings > Reset Default.
+  Delete the .setting file from the Defaults folder.
+NOTE: When you use the Settings > Reset Default command, the default .setting file is 
+deleted. If you want to save a node’s settings as alternate settings, you should use the 
+Settings > Save As command.
+Saving and Loading Alternate Node Settings
+Once you change parameter values for a node using the Inspector, those values can also be saved as 
+an alternate setting for that node, which can be reused at a later time.
+To save alternate settings for a node:
+1 Right-click on a tool, and then choose Settings > Save As from the contextual menu.
+2 When the Save File dialog appears, enter a name for the Setting and save it to your hard drive. 
+Unlike saved defaults, the .settings files can be saved anywhere on the file system. They do not 
+need to be in the Default Settings folder. 
+To load a saved setting for one or more nodes:
+1 Right-click a node and choose Settings > Load from the contextual menu.
+2 Use the Open File dialog to select the settings you want to load into that node, and then click 
+Open. Those settings are now applied to that node.
+Adding Saved Settings from the File System
+Saved settings in your File system can also be used to create new nodes by dragging the .setting file 
+into the Node Editor from a standard file browser. Once dropped, that setting turns into a new node.
+TIP: If you drop a setting directly onto a connection line, the new node will be inserted onto 
+that connection.
+1470Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Node Modes Including Disable and Lock
+Right-clicking one or more nodes and opening the contextual menu reveals a series of commands in 
+the Modes submenu, some with accompanying keyboard shortcuts, that let you set control visibility, 
+disable, lock, update, and cache nodes.
+  Show Controls: Sets whether that node reveals its parameters in the Inspector when it’s selected 
+and whether its onscreen controls appear in viewers. On by default.
+  Pass Through: (Command-P) Identical to the toggle switch in the Inspector that turns nodes off 
+and on. Disabled nodes are ignored as image data is passed from the next previous upstream 
+node to the next downstream node. On by default.
+  Locked: (Command-L) Identical to the lock button in the Inspector that prevents a node from being 
+edited in the Inspector. Off by default.
+  Update: (Command-U) On by default. While this option is enabled, all changes to the node will 
+cause it to re-render. When Update is disabled, you can still change the node’s parameters, but 
+those changes will not process or update the image until Update is re-enabled. While disabled, 
+the last processed image for that node will be displayed as a freeze frame. One example of when 
+this is useful is when you have a large or processor-intensive composition (such as a particularly 
+intense particle system), and disabling this option temporarily will let you quickly make several 
+quick parameter adjustments to different nodes without forcing you to wait for the node tree to 
+re-render after every adjustment. Another example of when this is useful is when you want to 
+quickly see the effect of animated downstream nodes while keeping upstream nodes that are too 
+processor-intensive to play in real time from rendering additional frames.
+  Force Cache: When enabled, this node’s output for the current frame has an extremely high cache 
+priority, essentially forcing it to stay cached in memory. Off by default.
+Toggling any one of these node modes displays a badge within that node indicating its state.
+Node Editor Options
+Right-clicking in an empty area of the Node Editor will bring up the contextual menu and the Options 
+submenu. The Options submenu contains several choices that can be used to customize how the 
+Node Editor looks and behaves.
+  Pipes Always Visible: Enabling this option causes a connection to cross over a node instead of 
+beneath it, sometimes making it easier to follow the connection’s path.
+  Show Hidden Pipes: When enabled, the Inspector option to Hide Incoming Connections in every 
+node is overridden and all connections are displayed in the Node Editor.
+  Aspect Correct Tile Pictures: Aspect Correct Tile Pictures forces the display of thumbnails to be 
+aspect corrected, which is slower but visually more accurate. This option is enabled by default.
+  Full Tile Render Indicators:  Enabling this option causes the thumbnail to flash green 
+when rendering, which makes it easier to identify which node is processing in a large, 
+complex node tree. 
+  Show Grid: This option can be used to enable or disable the Node Editor’s background grid. 
+  Show Instance Links: When enabled, the Node Editor draws a green connection between an 
+instanced node and its parent. 
+  Auto Remove Routers: If routers are disconnected from a tool, they are automatically deleted 
+from the Node Editor. This option is enabled by default to eliminate the need to delete 
+orphaned routers.
+1471Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+  Show Navigator: Enabling this option displays a small overview window of the entire node tree in 
+the Node Editor’s top-right corner. For more information, see the Navigator section in this chapter.
+  Auto Navigator: The Navigator only appears when one or more nodes is outside the visible area 
+of the Node Editor. For more information, see the Navigator section in this chapter.
+  Build Flow Vertically/Horizontally:  Node trees can be built either horizontally from left to right or 
+vertically from top to bottom. Enabling one of these options determines whether new nodes are 
+added beneath the current node or to the right of the current tool. 
+  Orthogonal/Direct Pipes:  Use these two options to decide whether connections between nodes 
+are drawn as Direct (straight) lines or Orthogonal (bent) lines. 
+Node Tooltips and the Status Bar
+Even in simple node trees, it’s easy to forget some essential detail about the nodes in your comp. 
+To help you figure out what everything’s for, you can hover the pointer over any node in the Node 
+Editor to display information in the Status bar at the bottom of the Node Editor consisting of that node’s 
+name, frame size, pixel aspect, resolution, and color depth.
+The Status bar located beneath the Node Editor.
+If you wait a few moments later, a more elaborate presentation of the same information 
+appears within a floating tooltip in the Inspector. This tooltip gives you additional information 
+about the Domain (Image and DoD) and the data range used by that clip.
+The floating tooltip showing node information 
+that appears within the Node Editor.
+1472Fusion Fundamentals | Chapter 66 Working in the Node Editor
+FUSION
+Chapter 67
+Node Groups, 
+Macros, and 
+Fusion Templates
+This chapter reveals how to use groups, macros, and templates in Fusion so 
+working with complex effects becomes more organized, more efficient, and easier.
+Contents
+Groups ������������������������������������������������������������������������������� 1474
+Creating Groups  ����������������������������������������������������������� 1474
+Deleting Groups  ����������������������������������������������������������� 1475
+Expanding and Collapsing Groups ���������������������� 1475
+Panning and Scaling 
+within Open Group Windows  ��������������������������������� 1475
+Ungrouping Nodes  ����������������������������������������������������  1475
+Saving and Reusing Groups  ����������������������������������  1476
+Macros ������������������������������������������������������������������������������� 1476
+Using the Macro Editor ���������������������������������������������� 1476
+Using Macros ����������������������������������������������������������������� 1479
+Re-Editing Macros  ������������������������������������������������������ 1480
+Other Macro Examples  ��������������������������������������������� 1480
+Creating Fusion Templates ����������������������������������� 1480
+Getting Started with a Fusion Title Template  1480
+Saving a Title Macro ���������������������������������������������������� 1481
+Using Your New Title Template ����������������������������� 1483
+Getting Started with 
+a Fusion Transition Template ��������������������������������� 1485
+Creating a Fusion Transition Template  �������������� 1485
+Getting Started with 
+a Fusion Generator Template  �������������������������������� 1488
+Creating a Fusion Generator Template  ������������� 1489
+Using Your New Generator Template ����������������� 1491
+Creating a Fusion Effect Template �����������������������  1491
+Changing Durations of a Template  ���������������������� 1493
+Creating Media Drop Zones in Templates  ������� 1493
+Creating a Custom Template Icon ����������������������� 1494
+Using Fusion Template Bundles  ��������������������������� 1495
+1473Fusion Fundamentals | Chapter 67 Node Groups, Macros, and Fusion Templates
+FUSION
+Groups
+When you work on complex visual effects, node trees can become sprawling and unwieldy, so 
+grouping tools together can help you better organize all the nodes and connections. Groups are 
+containers in your node tree that can hold multiple nodes, similar to the way a folder on your Desktop 
+holds multiple files. There is no limit to the number of nodes that can be contained within a group, and 
+you can even create subgroups within a group.
+Creating Groups
+Creating a group is as simple as selecting the nodes you want to group together and using the 
+Group command.
+To create a group:
+1 Select the nodes you want grouped together.
+2 Right-click one of the selected nodes and choose Group from the contextual menu (Command-G).
+Several nodes selected in preparation for making 
+a group (top), and the resulting group (bottom).
+The selected nodes are collapsed into a group, which is displayed as a single node in the Node 
+Editor. The Group node can have inputs and outputs, depending on the connections of the nodes 
+within the group. The Group node only displays inputs for nodes that are already connected 
+to nodes outside the group. Unconnected inputs inside the group will not have an Input knot 
+displayed on the Group node.
+1474Fusion Fundamentals | Chapter 67 Node Groups, Macros, and Fusion Templates
+FUSION
+Deleting Groups
+Deleting a group is no different from deleting any other node in the Node Editor. Select a group and 
+press Delete, Backspace, or Forward-Delete, and the group along with all nodes contained within it 
+are removed from the node tree.
+Expanding and Collapsing Groups
+A collapsed group is represented by a single “stack” node in the node tree. If you want to modify any 
+of the nodes inside the group, you can open the group by double-clicking it or by selecting the group 
+node and pressing Command-E. 
+An open group window showing 
+the minimize button.
+When you open a group, a floating window shows the nodes within that group. This floating 
+window is its own Node Editor that can be resized, zoomed, and panned independently of the 
+main Node Editor. Within the group window, you can select and adjust any node you want to, 
+and even add, insert, and delete nodes while it is open. When you’re ready to collapse the 
+group again, click the minimize button at the top left corner of the floating window, or use the 
+keyboard shortcut (Cmd-E).
+Panning and Scaling within Open Group Windows
+You can pan and scale an open group window using the same mouse buttons you use to pan and 
+scale the main Node Editor. However, when you’re working in an expanded group and simultaneously 
+making changes to the main node tree, you may want to prevent the expanded group from being 
+individually panned or scaled. Turning off the Position button at the right of the group title bar locks 
+the group nodes to the size of the nodes in the rest of the overall node tree. Turning on this Position 
+button lets you size group nodes independently of the rest of the node tree.
+Ungrouping Nodes 
+If you decide you no longer need a particular group, or you simply find it easier to have constant 
+access to all the nodes in the group at once, you can decompose or “ungroup” the group without 
+deleting the nodes within it to eliminate the group but keep the contents in the Node Editor.
+To ungroup nodes, do the following: 
+1 Right-click on the group. 
+2 Choose Ungroup from the contextual menu. The nodes inside the group are placed back in the 
+main node tree. 
+1475Fusion Fundamentals | Chapter 67 Node Groups, Macros, and Fusion Templates
+FUSION

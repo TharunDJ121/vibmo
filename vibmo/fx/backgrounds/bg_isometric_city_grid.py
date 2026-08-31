@@ -1,15 +1,34 @@
+from __future__ import annotations
 import math
 import cairo
-from typing import Any
+from typing import Any, Optional, Tuple, Union
 from vibmo.scene.node import Node
 
 class IsometricCityGridBackdrop(Node):
     """Isometric 2.5D grid of minimalist building monoliths with glowing rooftop lights."""
-    def __init__(self, grid_size=10, cell_size=40, **kwargs):
+    def __init__(
+        self,
+        grid_size: int = 10,
+        cell_size: float = 40.0,
+        building_count: Optional[int] = None,
+        pulse_lights: bool = True,
+        speed: float = 1.0,
+        **kwargs: Any
+    ):
         super().__init__(**kwargs)
-        # Setup grid size and elements
-        self.grid_size = grid_size
-        self.cell_size = cell_size
+        if building_count is not None and building_count > 0:
+            self.grid_size = max(2, int(math.isqrt(building_count)))
+            self._building_count = int(building_count)
+        else:
+            self.grid_size = int(grid_size)
+            self._building_count = self.grid_size * self.grid_size
+        self.cell_size = float(cell_size)
+        self.pulse_lights = pulse_lights
+        self.speed = float(speed)
+
+    @property
+    def building_count(self) -> int:
+        return self._building_count
         
     def _apply_isometric_transform(self, ctx: cairo.Context):
         matrix = cairo.Matrix()
@@ -23,7 +42,7 @@ class IsometricCityGridBackdrop(Node):
         
         self._apply_isometric_transform(c)
         
-        t = time
+        t = time * self.speed
         offset = (self.grid_size * self.cell_size) / 2
         c.translate(-offset, -offset)
         
@@ -32,19 +51,10 @@ class IsometricCityGridBackdrop(Node):
                 x = i * self.cell_size
                 y = j * self.cell_size
                 
-                # Height variation based on position and time
-                # In isometric projection, increasing height shifts Y up (negative Y direction in typical coordinates before transform, or draw an offset top face)
-                # Since we already transformed context, actual height in 3D would just shift along screen Y, 
-                # but to do that while transformed we need to counter-transform or just shift along (-x, -y) equally to go "up".
-                # To go straight up in the transformed space, we can translate by (-h, -h)
-                
                 h = 20 + 30 * (math.sin(t * 2 + i * 0.5 + j * 0.3) * 0.5 + 0.5)
                 
                 c.save()
                 c.translate(x, y)
-                
-                # Draw front-left face (simplification)
-                # Not strictly necessary for "minimalist" but better with height
                 
                 # Top face
                 c.translate(-h, -h)
@@ -53,7 +63,10 @@ class IsometricCityGridBackdrop(Node):
                 c.fill_preserve()
                 
                 # Rooftop light
-                glow_intensity = 0.5 + 0.5 * math.sin(t * 5 + i * 1.2 + j * 0.8)
+                if self.pulse_lights:
+                    glow_intensity = 0.5 + 0.5 * math.sin(t * 5 + i * 1.2 + j * 0.8)
+                else:
+                    glow_intensity = 0.8
                 c.set_source_rgba(0.0, 1.0, 1.0, glow_intensity)
                 c.set_line_width(2)
                 c.stroke()
@@ -180,3 +193,14 @@ class ServerRackMatrixBackdrop(Node):
                 c.restore()
                 
         c.restore()
+
+
+# Semantic Alias
+IsometricCityGrid = IsometricCityGridBackdrop
+
+__all__ = [
+    "IsometricCityGridBackdrop",
+    "IsometricCityGrid",
+    "PulsingDataHighways",
+    "ServerRackMatrixBackdrop",
+]

@@ -6,6 +6,9 @@ class MotionPage {
     constructor() {
         this.timelineRuler = document.getElementById("timelineRuler");
         this.playheadNeedle = document.getElementById("playheadNeedle");
+        this.macroTimelineBar = document.getElementById("macroTimelineBar");
+        this.macroRuler = document.getElementById("macroRuler");
+        this.macroPlayhead = document.getElementById("macroPlayhead");
         this.tracksStack = document.getElementById("tracksStack");
         this.layersList = document.getElementById("layersList");
         this.timecodeDisplay = document.getElementById("timecodeDisplay");
@@ -15,6 +18,35 @@ class MotionPage {
 
         this.loadWaveform();
         this._setupRulerClick();
+        this._setupMacroTimelineClick();
+    }
+
+    _setupMacroTimelineClick() {
+        if (!this.macroTimelineBar) return;
+        const handleMacroScrub = (e) => {
+            const rect = this.macroTimelineBar.getBoundingClientRect();
+            const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            const dur = window.store.duration || 5.0;
+            let t = ratio * dur;
+            if (this.snappingEnabled) {
+                t = this.snapTime(t);
+            }
+            window.seekTo(t);
+        };
+
+        let isDraggingMacro = false;
+        this.macroTimelineBar.addEventListener("mousedown", (e) => {
+            isDraggingMacro = true;
+            handleMacroScrub(e);
+            const onMove = (ev) => { if (isDraggingMacro) handleMacroScrub(ev); };
+            const onUp = () => {
+                isDraggingMacro = false;
+                window.removeEventListener("mousemove", onMove);
+                window.removeEventListener("mouseup", onUp);
+            };
+            window.addEventListener("mousemove", onMove);
+            window.addEventListener("mouseup", onUp);
+        });
     }
 
     _setupRulerClick() {
@@ -79,16 +111,30 @@ class MotionPage {
     }
 
     renderRuler() {
-        if (!this.timelineRuler) return;
-        this.timelineRuler.innerHTML = "";
-        const dur = window.store.duration || 5.0;
-        const totalSec = Math.ceil(dur);
-        for (let i = 0; i <= totalSec; i++) {
-            const tick = document.createElement("div");
-            tick.className = "ruler-second";
-            tick.style.left = `${(i / dur) * 100}%`;
-            tick.innerText = `${i}s`;
-            this.timelineRuler.appendChild(tick);
+        if (this.timelineRuler) {
+            this.timelineRuler.innerHTML = "";
+            const dur = window.store.duration || 5.0;
+            const totalSec = Math.ceil(dur);
+            for (let i = 0; i <= totalSec; i++) {
+                const tick = document.createElement("div");
+                tick.className = "ruler-second";
+                tick.style.left = `${(i / dur) * 100}%`;
+                tick.innerText = `${i}s`;
+                this.timelineRuler.appendChild(tick);
+            }
+        }
+
+        if (this.macroRuler) {
+            this.macroRuler.innerHTML = "";
+            const dur = window.store.duration || 5.0;
+            const totalSec = Math.ceil(dur);
+            for (let i = 0; i <= totalSec; i++) {
+                const mTick = document.createElement("div");
+                mTick.className = "macro-tick";
+                mTick.style.left = `${(i / dur) * 100}%`;
+                mTick.innerText = `${i}s`;
+                this.macroRuler.appendChild(mTick);
+            }
         }
     }
 
@@ -214,12 +260,20 @@ class MotionPage {
     }
 
     updatePlayhead(t) {
-        if (!this.playheadNeedle) return;
         const dur = window.store.duration || 5.0;
-        const totalW = (this.tracksStack && this.tracksStack.clientWidth) ? this.tracksStack.clientWidth : 1000;
-        const laneWidth = Math.max(100, totalW - 200);
-        const px = 200 + (Math.max(0, Math.min(dur, t)) / dur) * laneWidth;
-        this.playheadNeedle.style.left = `${px}px`;
+        const clampedT = Math.max(0, Math.min(dur, t));
+
+        if (this.playheadNeedle) {
+            const totalW = (this.tracksStack && this.tracksStack.clientWidth) ? this.tracksStack.clientWidth : 1000;
+            const laneWidth = Math.max(100, totalW - 200);
+            const px = 200 + (clampedT / dur) * laneWidth;
+            this.playheadNeedle.style.left = `${px}px`;
+        }
+
+        if (this.macroPlayhead) {
+            const macroPct = (clampedT / dur) * 100;
+            this.macroPlayhead.style.left = `${macroPct}%`;
+        }
 
         if (this.timecodeDisplay) {
             this.timecodeDisplay.innerText = `${t.toFixed(2)}s / ${dur.toFixed(2)}s`;

@@ -1,9 +1,11 @@
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 import cairo
 
 from vibmo.core.color import Color, colors
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.vector import Vector2D
+from vibmo.core.easing import Ease, EasingFunc
+from vibmo.timeline.scheduler import ParallelGroup
 from vibmo.scene.node import Node
 from vibmo.layout.container import FlexContainer
 from vibmo.typography.text import Text
@@ -15,7 +17,8 @@ class RegionalHeatPolygon(Node):
     def __init__(self, coordinates: List[Tuple[float, float]], value: float = 0.0, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self.coordinates = coordinates
-        self.heat_value = Signal(value)
+        self.target_value = float(value)
+        self.heat_value = Signal(float(value), f"{self.name}.heat_value")
         self.base_color = Color.from_any(colors.SLATE_800)
         self.heat_color = Color.from_any(colors.EMERALD)
 
@@ -27,7 +30,7 @@ class RegionalHeatPolygon(Node):
         ctx.save()
 
         # Interpolate color based on heat value
-        val = self.heat_value.get()
+        val = max(0.0, min(1.0, float(self.heat_value.get(time))))
         current_color = self.base_color.lerp(self.heat_color, val)
 
         ctx.set_source_rgba(*current_color.to_cairo())
@@ -106,14 +109,37 @@ class CountryRankLeaderboard(FlexContainer):
 
 class ChoroplethWorldMiniMap(Node):
     """Stylized world vector polygon map where countries/regions are colored based on metric values."""
-    def __init__(self, regions_data: Dict[str, Dict[str, Any]], **kwargs: Any) -> None:
+    def __init__(
+        self,
+        regions_data: Optional[Dict[str, Dict[str, Any]]] = None,
+        regions: Optional[Dict[str, Dict[str, Any]]] = None,
+        **kwargs: Any
+    ) -> None:
         super().__init__(**kwargs)
-        self.regions_data = regions_data
+        self.regions_data = regions if regions is not None else (regions_data or {})
 
         self.polygons: Dict[str, RegionalHeatPolygon] = {}
         for region_id, data in self.regions_data.items():
             coords = data.get("coordinates", [])
-            val = data.get("value", 0.0)
+            val = float(data.get("value", 0.0))
             poly = RegionalHeatPolygon(coordinates=coords, value=val)
             self.polygons[region_id] = poly
             self.add(poly)
+
+    def animate_heat_gradient(
+        self,
+        duration: float = 1.5,
+        delay: float = 0.0,
+        ease: Optional[EasingFunc] = None
+    ) -> ParallelGroup:
+        """Animates heat intensity gradients rising across regional boundaries."""
+        e = ease or Ease.out_expo
+        actions = []
+        for poly in self.polygons.values():
+            poly.heat_value.set(0.0)
+            actions.append(poly.heat_value.to(poly.target_value, duration=duration, delay=delay, ease=e))
+        return ParallelGroup(actions)
+
+
+ChoroplethGeoMap = ChoroplethWorldMiniMap
+RegionPolygonNode = RegionalHeatPolygon

@@ -90,6 +90,10 @@ class Pipeline:
             render_h = max(360, int(self.scene.height * 0.667))
             render_fps = min(30.0, self.scene.fps)
 
+        # Force even dimensions for H.264 / YUV420p video codecs
+        render_w = int((render_w // 2) * 2)
+        render_h = int((render_h // 2) * 2)
+
         if max_workers is None:
             max_workers = min(max(1, (os.cpu_count() or 2) - 1), 16)
 

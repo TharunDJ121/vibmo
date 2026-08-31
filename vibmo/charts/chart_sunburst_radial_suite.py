@@ -8,9 +8,10 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import cairo
 
 from vibmo.scene.node import Node
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
 from vibmo.core.color import Color, colors
-from vibmo.core.easing import Ease
+from vibmo.core.easing import Ease, EasingFunc
+from vibmo.timeline.scheduler import ParallelGroup
 from vibmo.typography.text import Text
 
 
@@ -204,7 +205,8 @@ class SunburstRadialHierarchy(Node):
 
     def __init__(
         self,
-        data: Dict[str, Any],  # Nested dict structure with 'value' and 'children'
+        data: Optional[Dict[str, Any]] = None,
+        tree_data: Optional[Dict[str, Any]] = None,
         center_radius: float = 60.0,
         ring_width: float = 40.0,
         gap_angle: float = 0.02, # Radians gap between slices
@@ -212,7 +214,7 @@ class SunburstRadialHierarchy(Node):
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self.data = data
+        self.data = tree_data if tree_data is not None else (data or {})
         self.center_radius = Signal(float(center_radius), f"{self.name}.center_radius")
         self.ring_width = Signal(float(ring_width), f"{self.name}.ring_width")
         self.gap_angle = Signal(float(gap_angle), f"{self.name}.gap_angle")
@@ -281,3 +283,22 @@ class SunburstRadialHierarchy(Node):
 
         # Root layout uses full 360 degrees (0 to 2*pi)
         _layout_node(self.data, 0, 0.0, 2 * math.pi)
+
+    def expand_rings(
+        self,
+        duration: float = 1.2,
+        delay: float = 0.0,
+        stagger: float = 0.05,
+        ease: Optional[EasingFunc] = None
+    ) -> ParallelGroup:
+        """Animates sunburst rings expanding smoothly from the center outwards."""
+        e = ease or Ease.out_back
+        actions = []
+        for i, arc in enumerate(self._arcs):
+            arc.expand_progress.set(0.0)
+            actions.append(arc.expand_progress.to(1.0, duration=duration, delay=delay + i * stagger, ease=e))
+        return ParallelGroup(actions)
+
+
+RadialSunburstHierarchy = SunburstRadialHierarchy
+SunburstRing = ExpandingRingArc

@@ -1,0 +1,713 @@
+Chapter 58
+Speed Effects
+You can import both linear and nonlinear speed changes from other applications, or 
+you can create these effects from scratch in order to speed up or slow down clips 
+in your programs. 
+DaVinci Resolve has a comprehensive set of controls for creating these kinds of effects using 
+dedicated Retime controls, curves, and specific edit types. Once created, DaVinci Resolve also 
+provides different ways of processing these effects to create the smoothest possible playback.
+Contents
+Speed Effects and Retiming ���������������������������������������������������������������������������������������������������������������������������������������������������������  1254
+Creating Freeze Frames ������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1254
+Creating Simple Linear Speed Effects ������������������������������������������������������������������������������������������������������������������������������������  1255
+Speed Change Controls in the Video Inspector ����������������������������������������������������������������������������������������������������������������  1256
+Clip Retiming Controls  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1257
+Retiming an Entire Clip  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1257
+Rippling or Overwriting the Timeline When Using Retime  ��������������������������������������������������������������������������������������������� 1258
+Reading Clip Speed Arrows  ����������������������������������������������������������������������������������������������������������������������������������������������������������� 1258
+Creating Variable Speed Effects Using the Retime Controls  ���������������������������������������������������������������������������������������� 1258
+Closing Retime Controls  �������������������������������������������������������������������������������������������������������������������������������������������������������������������  1261
+Using Retime Curves  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1261
+Speed Effect Processing  ���������������������������������������������������������������������������������������������������������������������������������������������������������������� 1265
+Optical Flow Quality Settings Affecting Speed Effects ���������������������������������������������������������������������������������������������������� 1266
+1253Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Speed Effects and Retiming
+Speed effects describe any effect that speeds up, slows down, or otherwise changes the 
+playback speed of clips in the Timeline. There are four basic ways you can create speed effects in 
+DaVinci Resolve.
+  Importing speed effects:  DaVinci Resolve is capable of reading linear speed effects from 
+imported EDL, AAF, and XML projects, and nonlinear speed effects from XML and AAF project 
+files. When speed effects are present, DaVinci Resolve plays clips at the specified speed. 
+You can also create speed effects of your own using controls in the Edit page. There are two 
+methods of adjusting clip speed: using the Change Speed dialog, and using the Retiming 
+effect in the Timeline.
+  Creating speed effects using Fit to Fill edits: You can also change a clip’s speed in the Timeline 
+by editing it using the Fit to Fill command, which retimes the clip to fit into an arbitrary duration in 
+the Timeline of your choosing. 
+For more information on using Fit to Fill, jump to this chapter: Three- and Four-Point 
+Editing.
+  Creating freeze frames: You can use the freeze frame command to turn an entire clip into a freeze 
+frame of a frame intersecting the playhead.
+  Creating simple linear speed effects:  You can create simple fast or slow-motion speed effects 
+by using the Change Clip Speed command, or by using the left and right handles of the Retime 
+controls in the Timeline. Both of these methods are described in this section.
+  Creating variable speed effects:  You can create much more complex variable speed effects, 
+where the same clip speeds up or slows down multiple times by different amounts, using either 
+the Retime controls, or one of the two different speed curves that are available. These methods 
+are also covered later in this section.
+Speed Effects and Audio
+Any of the methods of creating linear speed effects that are available in DaVinci Resolve, 
+including the Change Clip Speed command, the Retime controls, and the Fit to Fill edit, will 
+retime a clip’s audio, without pitch correction on Linux and Windows, and with pitch correction 
+on Mac OS X (Yosemite and above), along with its video. However, audio that accompanies 
+variable speed effects will be muted.
+Creating Freeze Frames
+There are a few ways you can create a freeze frame, but the fastest is to position the playhead over 
+the frame you want to be the freeze frame, and choose Clip > Freeze Frame, or press Shift-R. The 
+entire clip becomes a freeze frame of the frame you parked the playhead over. 
+If you want to disable the freeze frame effect, you can select the clip and use the Remove Attributes 
+dialog to remove the speed effect, or you can simply open the Change Clip Speed dialog and turn the 
+Freeze Frame checkbox off.
+1254Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Creating Simple Linear Speed Effects
+If all you need to do is to make a clip play in slow motion, speed it up, reverse the clip, or create 
+a freeze frame, you can apply a simple speed effect using either the browser or the Change 
+Speed dialog.
+To change a clip’s speed, do one of the following:
+  Select a clip, choose Clip > Change Clip Speed, and use the controls of the 
+Edit Speed Change dialog.
+  Right-click a clip in the Timeline, choose Change Clip Speed, and use the controls of the 
+Edit Speed Change dialog.
+  You can change the speed of multiple selected clips at the same time using either the Inspector or 
+the Change Clip Speed dialog box.
+Change Clip Speed operations have the following options:
+  Change Clip Speed parameters:  Changes the speed of the selected clip by whatever percentage, 
+frame rate, or duration you like.
+  Ripple Sequence checkbox:  If you want the speed change you’re about to make to ripple the 
+Timeline, pushing or pulling all clips following the current one to accommodate the clip’s new size, 
+then turn on the checkbox.
+Speed effect parameters shown in the Speed dialog
+  Reverse Speed checkbox: Clicking this box sets the current speed to a negative value, reversing 
+the motion of the clip.
+  Freeze Frame checkbox: Changes the entire clip to a freeze frame of whichever frame is at the 
+current position of the playhead.
+1255Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+  Pitch Correction checkbox:  Checking this box will perform pitch correction on the audio attached 
+to the clip so that while the audio duration is changed to match the picture speed, it will still sound 
+natural. Be aware that pitch correction on large speed adjustments may not sound as good as 
+pitch corrections made to small speed adjustments.
+  Maintain Timing/Stretch to fit radio buttons: Choosing Maintain Timing leaves any keyframes 
+within the clip locked at their original position, while choosing Stretch Keyframes results in all 
+Composite, Transform, and Cropping keyframes being compressed or stretched by the same 
+percentage as the clip during a speed change.
+Speed Change Controls 
+in the Video Inspector
+You can also change the speed of your clip directly in the Video Inspector’s Speed Change controls. 
+This method has the benefit of being available in both Cut and Edit pages.
+  Direction: Selects the desired motion of the clip, forward, backward, or freeze frame.
+  Speed %: Adjusting this slider changes the clips motion on a percentage basis. 
+This value can be keyframed.
+  Frames Per Second: Adjusting this slider changes the clips motion by increasing or decreasing 
+the number of frames per second to play the clip back at. This value can be keyframed.
+  Duration: You can directly select how long you want the clip to be by setting a specific duration 
+here in HH:MM:SS:FF format. This will then automatically adjust the speed of the clip to playback 
+all frames in that exact amount of time.
+  Ripple Sequence checkbox:  If you want the speed change you’re about to make to ripple the 
+Timeline, pushing or pulling all clips following the current one to accommodate the clip’s new size, 
+then turn on the checkbox.
+  Pitch Correction checkbox:  Checking this box will perform pitch correction on the audio attached 
+to the clip so that while the audio duration is changed to match the picture speed, it will still sound 
+natural. Be aware that pitch correction on large speed adjustments may not sound as good as 
+pitch corrections made to small speed adjustments. 
+The Speed Change controls in the Video Inspector
+1256Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Clip Retiming Controls
+Another method of altering clip speed in the Timeline is to apply the Retime effect. This method of 
+clip retiming provides a convenient control overlay that you can use to adjust clip speed directly in the 
+Timeline, and it also provides the controls that are needed for creating variable-speed effects.
+To expose the Retime controls on a clip:
+  Select a clip, and choose Clip > Retime Controls (Command-R).
+  Right-click a clip and choose Retime Clip from the contextual menu.
+The Retime controls appear over that clip in the Timeline. They consist of a Retime control track 
+running along the top of the clip with arrows that indicate the speed and direction of playback 
+(the default blue right-facing arrows indicate normal 100% playback) and a Clip Speed pop-up menu at 
+the bottom center of the clip, which also shows the current speed of the clip.
+The Speed effect controls in the Timeline
+Retiming an Entire Clip
+The simplest way of using the Retiming effect is to change the playback speed of the entire clip, in the 
+process rippling the rest of the Timeline to the right of the retimed clip as you increase its duration by 
+stretching or compressing its duration.
+To retime a clip by dragging:
+Move the pointer to the left or right edge of the Speed Change name bar on top of the clip, and when 
+it turns into a Retime cursor, drag either side to stretch or squeeze the clip to retime it.
+To retime a clip by specific amounts:
+1 Select a clip and press Command-R.
+2 Click the pop-up next to the speed percentage text at the bottom of the clip.
+3 Do one of the following:
+  Choose a new playback speed from the Change Speed submenu.
+  Choose reverse segment to make the clip play in reverse. Reverse speed is shown in the Retime 
+control track as arrows facing left, instead of right.
+To return a clip to its original speed:
+Click the pop-up next to the speed percentage text at the bottom of the clip, 
+and choose Reset to 100%.
+1257Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Rippling or Overwriting the Timeline When Using Retime
+Whether or not clips to the right in the Timeline will ripple to accommodate the change in duration 
+resulting in speed changes you make with the Retime controls depends on whether you’re using 
+the Selection tool/mode (in which case the Timeline won’t ripple), or the Trim tool/mode (in which 
+case the Timeline will).
+Reading Clip Speed Arrows
+When you retime a clip, the Clip Speed pop-up menu displays the current speed of the entire clip. 
+Additionally, the arrows in the Retime control track show you the speed and direction of playback. 
+When clip speed is slowed down below 100%, the Retime control track shows yellow playback 
+triangles that are spaced farther apart. When clip speed is sped up above 100%, the Retime control 
+track shows blue triangles that are bunched closer together. At 100% normal speed, the Retime control 
+track shows blue, evenly spaced triangles, while left-facing blue arrows indicates reverse playback.
+Three clips set to different speeds. From left to right, 100% speed, 
+slow motion, and fast forward are indicated by the yellow arrows.
+Creating Variable Speed Effects Using the Retime Controls
+You can also use the Retime controls to insert freeze frames within the middle of a clip, and create 
+other custom variable speed effects using speed points. Additional variable speed options include 
+rewind and speed ramp effects, which automatically place speed points to create preset effects.
+To create a freeze frame at a particular moment in time:
+1 With the Retime controls exposed, move the playhead to the frame you want to freeze, within that 
+clip. Ideally, this will be for an effect where you want a character in motion to suddenly stop at a 
+particular frame.
+2 Open the Clip Speed pop-up menu (the pop-up next to the speed percentage text at the bottom 
+of the clip), and choose Freeze Frame. Two new speed points are added to the clip, defining a 
+range within which the clip is frozen at that frame. This can be seen by the vertical red bars in 
+the Retime control track. Past the second speed point, the clip resumes playback from the next 
+frame forward.
+Speed effect controls set to insert a momentary freeze frame within the clip
+1258Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+3 Drag the second speed point forward or back to define the duration of the freeze frame. The result 
+is that the clip plays normally up until the first speed point, then freezes on that frame until the 
+second speed point, at which playback resumes.
+To create variable-speed effects:
+1 With the Retime controls exposed, move the playhead to the frame at which you want to change 
+the speed of the clip, and choose Add Speed Point from the Clip Speed pop-up menu.
+2 Move the playhead forward to the next frame at which you want the clip speed to change again, 
+and add another speed point. It takes a minimum of two speed points to create a speed effect.
+3 To alter the speed of the clip segment appearing between these two speed points, 
+do one of the following:
+  Using the pointer, drag the top handle of the second speed point to the right to slow down clip 
+playback, or to the left to speed up clip playback within just that segment. Doing this either 
+shortens or lengthens the clip, and either overwrites or ripples neighboring clips depending on 
+whether you’re using the Selection or Trim modes.
+  Also using the pointer, you can drag the bottom handle of any speed point to widen the range 
+of the clip that plays at that particular speed. Doing this reallocates frames from before and after 
+the speed segment being adjusted to keep all speed segments playing at the same speed, and 
+this also shortens or lengthens the clip, but by a different amount.
+  Using the Clip Speed pop-up menu, choose a new speed for that segment from the 
+Change Speed pop-up menu. You can also set any segment to play in reverse by choosing 
+Reverse Segment.
+4 To clear a speed point and eliminate that particular clip’s speed segment from the effect, choose 
+Clear Speed Point from any Clip Speed pop-up menu to eliminate whichever speed point appears 
+to its left.
+When you create variable-speed effects, the arrows in the Retime control track can help you 
+keep track of what you’re doing, and each segment’s speed pop-up shows you the actual 
+numeric speed. The change in speed from each speed segment to the next is automatically 
+eased, for a smooth transition from one speed to another.
+Speed controls set to ramp among three different playback speeds; arrow spacing shows the timing
+There are two additional sets of commands for creating preset speed effects that use multiple 
+speed points.
+1259Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+To add a rewind effect:
+With a clip’s Retime controls exposed, open any Clip Speed pop-up menu and choose a preset 
+percentage from the Rewind submenu. This results in two additional speed points being added after 
+the rightmost speed point in the current segment, which creates the effect of the current segment 
+playing in fast reverse for the chosen percentage, and then playing a second time from the beginning.
+When Rewind is activated from the submenu, the added segment extends from the end of that 
+segment to the playhead, if the playhead is within the segment. If the playhead is outside the segment, 
+it extends from the start of the segment instead.
+Speed effect controls before and after creating a “rewind” effect
+To add a speed ramp:
+With a clip’s Retime controls exposed, open any Clip Speed pop-up menu and choose one of the two 
+options from the Speed Ramp submenu to replace the current speed effect with a series of five speed 
+segments that start at 10% and increase progressively to 30%, 50%, 70%, and then 90%. Once created, 
+you can drag the speed points to customize this effect to create whatever durations you require.
+Speed effect controls set to create a gradual ramp from 0 to 100 percent playback speed
+1260Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Closing Retime Controls
+When you’re finished creating your Retime effect, you can close the Retime controls so that clip 
+assumes a normal appearance again. Closing the Retime controls has no effect on the timing of the 
+clip, it just ensures you cannot accidentally modify the speed of the clip with the mouse.
+To close the Retime controls in the Timeline:
+  Click the X button at the upper left-hand corner of the Retime control box.
+  Press the escape key.
+  Select the retimed clip, and either choose Clip > Retime Controls, or press Command-R.
+When a retimed clip has its Retime controls hidden, a Retime badge appears to the left of that 
+clip’s name in the Timeline. You can reopen the Retime controls whenever you need to make 
+further changes.
+The Speed Effect badge that 
+shows a clip is being retimed
+To reopen the Retime controls in the Timeline:
+Select the retimed clip, and either choose Clip > Retime Controls, or press Command-R.
+Once you’ve retimed a clip using the Retime effect, you can use that clip’s Retime Process 
+parameter in the Inspector to define how that clip’s retiming is processed, using the low quality 
+Nearest option, using Frame Blending, or using Optical Flow. 
+Using Retime Curves
+You can also optionally use curves to retime clips, either in conjunction with the Retime controls, or by 
+themselves. For example, you can use the simpler retiming controls first to create the overall speed 
+effect you need, and then use either of the available Retime Curves to create further refinements by 
+adjusting Bezier curve handles to adjust the transition of one speed to another, or you can expose 
+either of the Retime Curves first and use it to create your speed effect from scratch by adding and 
+adjusting control points and curve segments. 
+No matter how you like to work, the control points of each of the speed curves have a 1:1 
+correspondence to the speed points that are exposed in the Retime controls, and curve segment 
+modifications are mirrored by speed point adjustments in the Retime controls if you have both 
+exposed at the same time. This means that, when creating complex variable retiming effects, it’s easy 
+to drag whichever control most easily adjusts the quality of speed you require.
+1261Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+The Retime Curves let you adjust the transition from one speed to another using handles
+In addition, there are two kinds of Retime curves you can use for maximum flexibility. Which is best 
+depends on what you’re more comfortable with, and on which will handle the type of motion you 
+want to create more easily:
+  The Retime Frame curve exposes a diagonal line that represents a time graph. This is a type of 
+curve found in many other post-production applications, in which the vertical axis represents 
+each frame of that clip’s source media, and the horizontal axis represents each frame of playback 
+in the Timeline. With the default diagonal graph, there is a one-to-one correspondence between 
+each frame of source media and each frame of timeline playback; this represents 100% speed. 
+However, adding control points lets you alter how source frames are mapped to the Timeline. 
+For any two control points on the Retime Frame curve, so long as the control point at the left is 
+lower than the control point at the right of a curve segment, there will be forward motion, with 
+longer shallow curve segments creating slower motion, and steeper shorter curve segments 
+creating faster motion in the clip. 
+1262Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+A diagonal Retime Frame curve (green) with two segments: a long shallow segment to the left 
+that creates slow motion, and a short steep segment to the right that creates fast motion
+  If a curve segment has a left control point that’s higher than the right control point, then the motion 
+will be reversed and that segment will play backward.
+A Retime Frame curve (green) with an inverted curve that creates reverse motion
+1263Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+  The Retime Speed curve exposes a flat line that represents 100% speed. Adding pairs of control 
+points and dragging each segment to raise or lower it alters speed; you must drag the segments, 
+not the control points themselves. Raising a curve segment shortens that segment and speeds up 
+that portion of the clip, while lowering a curve segment lengthens that segment and slows down 
+that portion of the clip. As you adjust each curve segment, a tooltip shows you the exact speed 
+percentage that segment represents. You should note that it’s impossible to create reverse motion 
+using the Retime Speed curve; you need to use either the Retime controls or the Retime Frame 
+curve described above.
+A Retime Speed curve (blue) lifting the line between two keyframes increases the speed, 
+the flat line on the 0 axis to the left and right indicates normal 100% speed.
+Methods of working with speed curves:
+To expose speed curves for a clip in the Timeline: 
+1. Select a clip in the Timeline, and choose the Keyframes tab from the top of the interface. 
+2. Select the Keyframe Curves icon, and the Curve Editor is exposed for that clip. 
+3. Choose Retime Speed and Retime Frame from the list of parameters, and you can then 
+edit them as you would any other curve, adding moving and deleting control points.
+1264Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Speed Effect Processing
+Once you’ve retimed a clip, you have the additional ability to change how the retimed clip is processed 
+in order to improve its visual playback quality, especially in the case of clips that are slowed down. 
+There are two ways you can set this. First, there’s a project-wide setting available in the Master 
+Settings of the Project Settings. Secondly, you can change how clips are retimed via a per-clip setting 
+available in the Inspector.
+To change the Retime Process setting of an entire project:
+1 Open the Project Settings and click to open the Master Settings panel.
+2 Choose an option from the Frame Interpolation group Retime Process pop-up menu.
+To change an individual clip’s Retime Process setting:
+Select a clip, then open the Inspector and choose an option from the Retime Process pop-up in the 
+Retime and Scaling group. If you choose Optical Flow, you can also choose an option from the Motion 
+Estimation pop-up.
+Here are the different options you have for processing speed effects:
+  Retime Process: Lets you choose a default method of processing clips in mixed frame rate 
+timelines and those with speed effects (fast forward or slow motion) applied to them, on a 
+clip-by-clip basis. The default setting is “Project Settings,” so all speed effected clips are treated 
+the same way. 
+There are three options: Nearest, Frame Blend, and Optical Flow, which are 
+explained in more detail in the Frame Interpolation section, jump to this chapter:  
+System and User Preferences.
+Nearest: The most processor efficient and least sophisticated method of processing; 
+frames are either dropped for fast motion, or duplicated for slow motion.
+Frame Blend: Also processor efficient, but can produce smoother results; adjacent 
+duplicated frames are dissolved together to smooth out slow or fast motion effects. This 
+option can provide better results when Optical Flow displays unwanted artifacts.
+Optical Flow: The most processor intensive but highest quality method of speed effect 
+processing. Using motion estimation, new frames are generated from the original source 
+frames to create slow or fast motion effects. The result can be exceptionally smooth when 
+motion in a clip is linear. However, two moving elements crossing in different directions or 
+unpredictable camera movement can cause unwanted artifacts.
+  Motion estimation mode:  When using Optical Flow to process speed change effects or clips with 
+a different frame rate than that of the Timeline, the Motion Estimation pop-up lets you choose 
+the best-looking rendering option for a particular clip. Each method has different artifacts, and 
+the highest quality option isn’t always the best choice for a particular clip. The default setting is 
+“Project Settings,” so all speed effected clips are treated the same way. There are several options. 
+  “Standard Faster” and “Standard Better” are the same options that have been available in 
+previous versions of DaVinci Resolve. They’re more processor-efficient and yield good quality 
+that are suitable for most situations. 
+  “Enhanced Faster” and “Enhanced Better” should yield superior results in nearly every case 
+where the standard options exhibit artifacts, at the expense of being more computationally 
+intensive, and thus slower on most systems. 
+1265Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+  “Speed Warp Faster” and “Speed Warp Better” are available for even higher-quality slow motion 
+effects using the DaVinci Neural Engine. Your results with this setting will vary according to 
+the content of the clip, but in ideal circumstances this will yield higher visual quality with fewer 
+artifacts than even the Enhanced Better setting.
+Optical Flow Quality Settings Affecting Speed Effects
+The “Motion estimation mode” pop-up in the Master Settings panel of the Project Settings let you 
+choose the tradeoff between quality and processing speed to use when processing optical flow-
+based slow motion and frame rate retiming effects. The “Standard Faster” and “Standard Better” 
+settings are the same options that have been available in previous versions of DaVinci Resolve. 
+They’re more processor-efficient and yield good quality that are suitable for most situations. However, 
+“Enhanced Faster” and “Enhanced Better” should yield superior results in nearly every case where the 
+standard options exhibit artifacts, at the expense of being more computationally intensive, and thus 
+slower on most systems.
+1266Editing Effects and Transitions | Chapter 58 Speed Effects
+EDIT
+Chapter 59
+Subtitles and 
+Closed Captioning
+DaVinci Resolve supports subtitles and closed captioning in sophisticated ways, 
+and the inclusion of automatic subtitling tools dramatically reduces the time and 
+effort required to build accurate subtitle tracks.
+With dedicated subtitle/closed caption tracks that can be shown or hidden, subtitle file import 
+and export, sophisticated subtitle editing and styling at the track and clip level, and comprehensive 
+export options, adding subtitles and closed captions to finish your project is a clear and 
+straightforward workflow.
+Contents
+Subtitles and Closed Captioning Support  ������ 1268
+Viewing Subtitle/Caption Tracks  �������������������������� 1268
+Adjusting QC Thresholds 
+For Subtitle/Caption Timing  ������������������������������������ 1268
+Importing Subtitles and Captions  ����������������������� 1270
+Adding Subtitles and Captions Manually  ������� 1272
+Create Subtitles from Audio 
+(Studio Version Only) ��������������������������������������������������  1274
+Create Subtitles from 
+Audio Language Support  ����������������������������������������� 1276
+Find and Replace Subtitles  ������������������������������������� 1276
+Editing Subtitles and Captions  ����������������������������� 1278
+Styling Subtitles and Captions  ������������������������������ 1278
+Subtitle Fade Controls  ������������������������������������������������ 1281
+AI Animated Subtitles (Studio Version Only) ����  1281
+Subtitle Tracks Using 
+Fusion Templates for Styling  ����������������������������������� 1281
+Linking Subtitles to Clips  ������������������������������������������ 1282
+Using Subtitles in Nested Timelines  ������������������� 1283
+Subtitle Regions ����������������������������������������������������������� 1283
+Adding and Deleting Subtitle Regions  �������������� 1283
+Using Subtitle Regions  ���������������������������������������������� 1284
+Naming Subtitle Tracks �������������������������������������������� 1285
+Exporting Subtitles and Closed Captions  ������ 1287
+Exporting Subtitles Via the File Menu  ��������������� 1287
+Exporting Subtitles Via the 
+Subtitle Track Header  ������������������������������������������������ 1287
+Exporting, Burning, or Embedding 
+Subtitles During Delivery  ����������������������������������������� 1287
+1267Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+Subtitles and Closed Captioning Support
+Subtitles are supported in DaVinci Resolve using specially typed subtitle tracks containing specifically 
+designed subtitle generators to add and edit subtitles for a program. Typically each subtitle track 
+corresponds to a single language or use, and you can change the name of a subtitle track to 
+reflect its contents. 
+Subtitle tracks can be locked, have Track Selector and Sync Lock controls, and can be enabled or 
+disabled like any other track. Additionally, a special subtitle-only destination control lets you choose 
+which subtitle track to edit subtitle clips into. Furthermore, subtitle generator clips can be resized, 
+moved, edited, and overwritten like most other clips.
+Subtitle track with Track Selectors, Lock, Sync Lock, and enable/disable controls
+Viewing Subtitle/Caption Tracks
+One important difference between subtitle tracks and other kinds of tracks is that only one subtitle 
+track can be visible at any given time. That means if you have multiple subtitle tracks, each for a 
+different language, clicking the Enable control for one subtitle track disables all others.
+Viewing one subtitle track at a time
+Adjusting QC Thresholds For Subtitle/Caption Timing
+To help you adhere to guidelines that specify the recommended duration, line length, and speed 
+of captions and subtitles, the Subtitles panel of the Project Settings has parameters you can set to 
+warn you when a particular subtitle clip exceeds thresholds of Characters Per Line, Minimum Caption 
+Duration, and Maximum Characters Per Second.
+1268Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+ 
+The Subtitles Setup parameters in the Subtitles panel of the Project Settings
+As you edit a subtitle clip, these thresholds are used to automatically calculate how many lines 
+and characters are allowable for a particular subtitle clip given its duration. For example, if you 
+exceed the calculated threshold, the CPS value of that caption turns red to warn you.
+ 
+The CPS value of a subtitle has turned red because it  
+exceeds the current QC threshold
+Adjusting QC Thresholds for Individual Subtitle Tracks
+While setting the QC thresholds for subtitles in the Project Settings is usually fine for a single 
+deliverable, those deliverables with multiple subtitle tracks in different languages may need different 
+parameters for each track, allowing longer line lengths, time on the screen, etc. for the unique 
+characteristics of each language.
+To individually adjust the subtitle settings per track:
+1 Select the subtitle track you want to change in the Timeline.
+2 Open the Inspector, and select the Track tab.
+3 In the Subtitle Settings pane, uncheck Use Project Settings.
+4 Make any necessary adjustments to the Max Line Length, Min Duration, and Max CPS controls.
+These settings will now override the Subtitle Project Settings for the selected track only. 
+1269Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+The Subtitle Settings in the Track pane of the Inspector lets  
+you customize parameters for individual subtitle tracks.
+Importing Subtitles and Captions
+Oftentimes, adding subtitles or closed captions to a DaVinci Resolve timeline will involve importing 
+a subtitle file that’s been prepared elsewhere. Currently, DaVinci Resolve supports subtitle files in 
+multiple formats such as .srt, .srtx, .vtt, .xml, and .ttml. 
+To import a subtitle or closed captioning file using the Media Pool:
+1 Open the Media Pool.
+2 Navigate to the folder containing your subtitles. Compatible subtitles will show up as a blank clip 
+icon with a subtitle icon in the lower left corner.
+3 Add the subtitle to the Media Pool by dragging, importing via the contextual menu, or any other 
+method identical to adding video clips into the Media Pool.
+To import a subtitle or closed captioning file using the Import Subtitle function:
+1 Open the Media Pool.
+2 Right-click on any bin in the Bin list, or anywhere in the background of the Media Pool browser, 
+and choose Import Subtitle.
+3 In the resulting file dialog, find and select the subtitle file you want to import, and click Open.
+4 The subtitle file appears as a subtitle clip in the Media Pool, ready for editing into a subtitle track. 
+A badge indicates that it’s a subtitle clip.
+An imported .srt subtitle file
+TIP: Subtitle files can be relinked in the Media Pool, just like video clips.
+1270Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+To add a subtitle clip to the Timeline:
+1 To add a subtitle clip to a timeline automatically and match its position via timecode:
+Right click on the subtitle and select “Insert Selected Subtitles to Timeline Using Timecode.”
+The subtitle clip will decompose into individual subtitles appearing in the subtitle track, and each 
+subtitle will be aligned with the timeline’s timecode.
+2 To add a subtitle clip to a timeline manually if you don’t have matching timecode, 
+do one of the following:
+  Drag a subtitle file you’ve imported into the unused gray area at the top of your video tracks, 
+and a subtitle track will automatically be created for adding those subtitles into
+  Drag a subtitle file you’ve imported into a pre-existing subtitle track
+As you drag the subtitle clip, it’ll immediately be decomposed so that each title is added to the 
+Timeline as an individual subtitle clip, with its timing offset relative to the position of the first 
+frame of the first subtitle in that file. 
+(Top) The original Timeline, (Bottom) The Timeline after dragging a subtitle file has created a new subtitle track
+3 Position the imported subtitles so that they align with the first frame of your program that they’re 
+supposed to, and drop the titles into the track. If you inadvertently misplace the subtitles, don’t 
+worry, you can always select them all and slide them earlier or later, just like any other clips.
+4 If you’ve added a new subtitle track, you can rename it to identify what language and country that 
+track corresponds to. Please note that subtitle track names are used when exporting or encoding 
+subtitles, so please make sure your tracks are named appropriately prior to export/delivery.
+5 If you want to restyle all of the subtitles you’ve just added, for example to make them smaller or 
+change the font, then click on the header of the subtitle track you’ll be working on, open the Track 
+panel of the Inspector, and select the formatting you want that track to use.
+To see a list of every subtitle clip you’ve added, you can select the header of the subtitle track you’ve 
+just added and open the Captions panel in the Inspector. A list at the bottom of the Captions panel 
+gives you a convenient way of navigating the subtitles in a given track (using the Prev and Next 
+buttons) and making selections. If you set the Inspector to be full height, you’ll have even more room 
+for browsing the subtitle list.
+1271Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+The Captions list shows you every caption or subtitle on a track, 
+for selecting, editing, deleting, or navigating
+Adding Subtitles and Captions Manually
+Other times, you may need to create subtitles on your own. Before doing so, you’ll need to add one 
+or more subtitle tracks. Once those tracks are created, you can add subtitle generators to them in a 
+variety of ways. You can add as many subtitle tracks as you need, one for each language you require.
+To add new subtitle tracks:
+  Right-click in any track header of the currently open timeline, and choose Add Subtitle Track. 
+An empty subtitle track will appear at the top of the Timeline, named “Subtitle 1,” and if Subtitle 
+Tracks were hidden, they’re now shown. Once you’ve added a new subtitle track, you can rename 
+it to identify what language and country that track corresponds to. Please note that subtitle track 
+names are used when exporting or encoding subtitles, so please make sure your tracks are 
+named appropriately prior to export/delivery.
+You can show and hide subtitle tracks in case you need to free up room in the Timeline for 
+working on other tracks. Subtitles on the currently selected subtitle track continue to be visible, 
+however, regardless of whether or not the subtitle tracks are shown.
+1272Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+Showing and hiding subtitles tracks:
+  Open the Timeline View options, and click on the Subtitle button to toggle the visibility of subtitles 
+tracks on and off.
+The show/hide subtitle tracks button  
+in the Timeline View Options
+To add individual subtitles to a subtitle track:
+1 If you want to adjust the default style of a particular subtitle track before you start adding subtitles, 
+then click on the header of the subtitle track you’ll be working on, open the Track panel of the 
+Inspector, and select the formatting you want that track to use.
+2 If you have multiple subtitle tracks, click the destination control of the subtitle track you want to 
+add titles to. They’re labeled ST1, ST2, ST3, etc.
+3 Move the playhead to the frame where you want the new subtitle to begin.
+Positioning the playhead where you  
+want a new subtitle to begin
+4 To add a new subtitle clip, do one of the following:
+  Open the Inspector and click Create Caption in the Captions panel of the Inspector. If there’s 
+already one or more captions in that subtitle track, click the Add New button above the caption 
+list, instead.
+  Right-click anywhere on the subtitle track and choose Add Subtitle to add a subtitle clip starting 
+at the position of the playhead
+  Open the Effects Library, click the Titles category, and drag a Subtitle generator to the Subtitle 
+track you want it to appear on.
+Manually adding a subtitle
+1273Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+5 If necessary, you can now edit the clip to better fit the dialog that’s being spoken or the sound 
+that’s being described, by dragging the clip to the left or right, or dragging the beginning or end of 
+the clip to resize it.
+6 While the new subtitle clip you’ve created is selected, use the Captions panel in the Inspector to 
+type the text for that particular subtitle. The text appears on the subtitle clip as you type it.
+Editing the text of the subtitle we just created
+Every time you add a subtitle, an entry is added to the subtitle list at the bottom of the 
+Captions panel in the Inspector. This list gives you another convenient way of navigating the 
+subtitles in a given track (using the Prev and Next buttons) and making selections.
+Create Subtitles from Audio 
+(Studio Version Only)
+Due to recent advances in AI and expert system technologies, it’s become possible to get remarkably 
+accurate and perfectly timed subtitles of spoken text using DaVinci Resolve’s Create Subtitles from 
+Audio function. Create Subtitles from Audio will analyze the speech in a timeline and automatically 
+create a subtitle track with all the spoken dialog converted into text subtitle clips.
+Create Subtitles from Audio just doesn’t directly translate phonetic speech to text. It will also correctly 
+analyze the context of that speech and translate that into proper punctuation and grammar for the 
+subtitle. For example, Create Subtitles from Audio will pick out proper names and capitalize them, it will 
+add a question mark to the end of sentence if your subject is asking a question, it will add quotation 
+marks in the correct locations if your subject is quoting something, and if it detects music in the 
+background, it will add a [Music Playing] subtitle. It handles accents and knows when there are multiple 
+people speaking in the same scene. You may find it surprising just how accurate the Create Subtitles 
+from Audio tool can be.
+1274Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+Create Subtitles from Audio fully automates the subtitling process.
+To Create Subtitles from Audio for a timeline:
+1 Go to the Edit page (Workspace > Switch to Page > Edit), then open the timeline you want to use 
+for creating subtitles from audio.
+2 Select an In-Out range for the subtitles on the Timeline, or leave blank to Create Subtitles from 
+Audio for the entire Timeline.
+3 Select Timeline > AI Tools > Create Subtitles from Audio.
+4 In the Create Subtitles from Audio dialog, select the following options:
+Language: The language of the spoken text. Auto lets DaVinci Resolve detect the language 
+automatically.
+Caption Preset: The Caption Preset style you want the subtitles to be formatted to.
+Max Characters per Line:  The maximum number of characters per line in the subtitle. Larger 
+numbers create longer lines of text on the screen. Smaller numbers create shorter lines of text.
+Lines: Sets the choice between a single line or double lines of text for your subtitles. 
+Gap Between Subtitles:  The amount of frames inserted between subtitle clips. 0 is the default.
+5 Click the Create button.
+Create Subtitles from Audio will then start to transcribe the spoken text, and a dialog box will 
+show you its progress. When it’s finished, the resulting subtitles will be added to the Subtitle 
+track. If there is no Subtitle track on your Timeline, it will automatically make one for you. If 
+there is more than one subtitle track on your Timeline, Create Subtitles from Audio will always 
+use the highest track to write to.
+1275Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+The Create Subtitles from Audio options.
+The one area where the Create Subtitles from Audio tool still commonly fails is when there is 
+overlapping dialog clips on multiple tracks. As a workaround, you can mute any audio track on 
+the Timeline you don’t want used in the subtitle analysis.
+Once the Create Subtitles from Audio is complete, you can manually edit the captions to 
+fix any minor errors using the tools described above in the Adding Subtitles and Captions 
+Manually section.
+Create Subtitles from Audio Language Support
+As the time of writing, Create Subtitles from Audio supports the following languages:
+  Chinese (Simplified Mandarin), Danish, Dutch, English, French, German, Italian, Japanese, Korean, 
+Norwegian, Portuguese, Russian, Spanish, and Swedish.
+  Many other languages are also available by using the Extended AI Transcription Support 
+Package in the Extras Downloads Manager. These include: Afrikaans, Arabic, Armenian, 
+Azerbaijani, Belarusian, Bosnian, Bulgarian, Catalan, Croatian, Czech, Estonian, Finnish, Galician, 
+Greek, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Kannada, Kazakh, Latvian, Lithuanian, 
+Macedonian, Malay, Marathi, Maori, Nepali, Persian, Polish, Romanian, Serbian, Slovak, Slovenian, 
+Swahili, Tagalog, Tamil, Thai, Turkish, Ukrainian, Urdu, Vietnamese, and Welsh.
+Find and Replace Subtitles
+You can search for and replace specific words or phrases across an entire subtitle track using the 
+Subtitle Inspector. To open the Find and Replace tool, click the search icon in the upper-right of the 
+Subtitle Inspector.
+The first option lets you choose whether to match any partial text containing the search term, or to limit 
+the search to the entire term. Then go to the search field and enter the text you wish to locate, and 
+click the Search button.
+When a match is found, it will be highlighted in yellow in the Caption tab. Use the left and right arrows 
+located beside the search button to navigate between matches. A numerical indicator shows the total 
+number of “hits” the tool found, and which match is currently selected.
+1276Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+To replace text, enable the Replace box. From here, you can enter the replacement text in the field. 
+Click the Replace button to overwrite the currently selected match, or Replace All to replace every 
+instance in the subtitle track. 
+You can also click on any caption in the Caption tab to load it into the Caption box, where you can edit 
+the text directly.
+Clicking on the search icon (circled red) in the Subtitle Inspector 
+reveals the search and replace tools. Search matches are 
+highlighted in yellow throughout all the captions.
+1277Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+Editing Subtitles and Captions
+Subtitle clips can be selected singly or together, and slipped, slid, resized, rolled, and rippled just 
+like any other clip in the Timeline, using the mouse or using keyboard commands, with either the 
+Selection, Trim, or Razor tools. You can select subtitle clips in their entirety, or just their edit points, 
+in preparation for nudging or dynamic trimming. In short, subtitle clips can be edited, in most ways, just 
+like any other clips.
+Styling Subtitles and Captions
+When it comes to styling subtitle text, there are a wealth of styling controls in the Track Style panel 
+of the Inspector.
+To modify the styling of all titles on a particular subtitle track:
+1 Click on the header of the subtitle track you’ll be working on, or select a clip on a particular 
+subtitle track either in the subtitle track or in the subtitle list of the Captions panel in the Inspector.
+2 Open the Inspector, and then open the Track panel that appears within.
+3 Edit whatever parameters you need to set the default style of all subtitles and closed captions that 
+appear on that track. The Track panel has many more options than the Captions panel, including 
+a group of Style and Position controls over Font and Font Face, Color, Size, Line Spacing, and 
+Kerning, Alignment, Position X and Y, Zoom X and Y, Opacity, and Text Anchoring.
+Selecting a Font Case in the Track tab  
+of the Subtitle Inspector
+Keep in mind that there are additional groups of controls that let you add a Drop Shadow, Stroke, 
+and/or Background to all text on that track, which can be found at the bottom of the Track panel of 
+the Inspector.
+You can also modify the look of each subtitle clip individually, even down to changing a single 
+word or letter, regardless of the settings in the Track panel.
+1278Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+To modify the styling of a single subtitle on a particular subtitle track:
+1 Select a clip on a particular subtitle track, either in the subtitle track or in the subtitle list of the 
+Captions panel in the Inspector.
+2 Select the Customize Caption check box under the Caption.
+3 Edit whatever parameters you need to set the style of only this single subtitle. All other titles in the 
+track will remain in the original track style.
+To modify the styling of a single word or words in a particular subtitle:
+1 Select a clip on a particular subtitle track, either in the subtitle track or in the subtitle list of the 
+Captions panel in the Inspector.
+2 Select the Customize Caption check box under the Caption.
+3 Highlight the text that you want to change in the Caption panel.
+4 Edit whatever parameters you need to set the style of the highlighted text on this subtitle. All other 
+titles in the track will remain in the original track style.
+Checking the Customize Caption box reveals the tools  
+for changing the look of an individual subtitle or text.
+1279Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT
+Using Subtitle Track Style Presets
+If you want to save and re-use a specific subtitle style, you can add it to the Subtitle Style Preset menu, 
+accessed by clicking on the Subtitle option menu (3 dots) in the upper right corner of the Subtitle 
+Inspector. You can also export and import presets to share a subtitle style between systems.
+To add a new subtitle style preset:
+1 Create a subtitle track and adjust its style in terms of fonts, position, colors, etc. 
+2 Click on the option menu (3 dots) in the upper right corner of the Subtitle Inspector.
+3 Select Save Track as Preset from the drop-down menu.
+4 Give your preset a new name.
+Your subtitle style preset will now appear in the Subtitle Inspector’s option menu.
+To change a subtitle track to another style preset:
+1 Select an existing subtitle track that you want to change. 
+2 Click on the option menu (3 dots) in the upper right corner of the Subtitle Inspector.
+3 Select the subtitle style preset from the drop-down menu.
+4 Select Load Preset from the submenu.
+Your subtitle track will instantly be updated to the new style preset. This command is undoable.
+To update a subtitle style preset:
+1 Load a subtitle style preset from the Subtitle Inspector option menu. 
+2 Make any changes you need to the style in terms of fonts, position, colors, etc. 
+3 Click on the option menu (3 dots) in the upper right corner of the Subtitle Inspector.
+4 Select the subtitle style preset you wish to update from the drop-down menu.
+5 Select Update Preset in the submenu.
+6 Select Update from the dialog box.
+Your subtitle style preset will replace the existing preset of the same name. There is no undo for 
+this action.
+To delete a subtitle style preset:
+1 Click on the option menu (3 dots) in the upper right corner of the Subtitle Inspector.
+2 Select the subtitle style preset you wish to delete from the drop-down menu.
+3 Select Delete Preset in the submenu.
+4 Select Delete from the dialog box.
+The subtitle style preset will be removed from the Subtitle Inspector’s option menu. There is no 
+undo for this action.
+To export a subtitle style preset:
+1 Click on the option menu (3 dots) in the upper right corner of the Subtitle Inspector.
+2 Select the subtitle style preset you wish to export from the drop-down menu.
+3 Select Export Preset in the submenu.
+4 Choose the location to save the “.preset” file from the file browser.
+5 Press Save.
+The subtitle style preset file will be saved to the user’s computer. The file will have the name of the 
+preset with a .preset extension.
+1280Editing Effects and Transitions | Chapter 59 Subtitles and Closed Captioning
+EDIT

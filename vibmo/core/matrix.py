@@ -4,7 +4,7 @@ Affine 2D Matrix (3x3) transformations for scene graph hierarchy and camera proj
 
 from __future__ import annotations
 import math
-from typing import Tuple, Union, Sequence
+from typing import Tuple, Union, Sequence, Optional
 from vibmo.core.vector import Vector2D
 
 

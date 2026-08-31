@@ -1,0 +1,703 @@
+COLOR
+Color
+CONTENTS
+125 Introduction to  
+Color Grading  �������������������������������������  3085
+126 Using the Color Page  ����������������������  3097
+127 Viewers, Monitoring, 
+and Video Scopes  ������������������������������  3115
+128 Color Page Timeline  
+and Lightbox  ����������������������������������������  3159
+129 Automated Grading Commands  
+and Imported Grades  ������������������������  3175
+130 Camera Raw Palette �������������������������  3189
+131 Primaries Palette  ��������������������������������  3195
+132 HDR Palette  �����������������������������������������  3214
+133 RGB Mixer  ��������������������������������������������  3238
+134 Curves  ����������������������������������������������������  3244
+135 ColorSlice  ��������������������������������������������  3265
+136 Color Warper  ���������������������������������������  3272
+137 Secondary Qualifiers  ����������������������  3294
+138 Secondary Windows  �����������������������  3322
+139 Magic Mask  �����������������������������������������  3338
+140 Motion Tracking Windows  ������������� 3366
+141 Using the Gallery  ������������������������������  3392
+142 Grade Management  �������������������������  3409
+143 Node Editing Basics  ������������������������  3446
+144 Image Processing 
+Order of Operations  ������������������������  3469
+145 Serial, Parallel,  
+and Layer Nodes ��������������������������������  3472
+146 Combining Keys  
+and Using Mattes  ������������������������������  3480
+147 Channel Splitting  
+and Image Compositing  �����������������  3504
+148 Keyframing in the Color Page  ������  3519
+149 Copying and Importing 
+Grades Using ColorTrace  ��������������  3534
+150 Using LUTs ������������������������������������������  3544
+Chapter 125
+Introduction to 
+Color Grading
+For over thirty years, DaVinci has pioneered the development of color 
+correction hardware and software designed to enhance visual images 
+acquired from film and video. 
+This release of DaVinci Resolve possesses our newest and most evolved professional color correction 
+tools yet. However, for all its technological sophistication, DaVinci Resolve is merely a tool that 
+requires the hands of a skilled artist to realize its full potential.
+Subsequent chapters of this user manual cover the DaVinci Resolve grading tools in the Color page 
+in great detail, but before getting into the specifics of color balancing and contrast adjustment, 
+Power Windows, and Custom Curves, it’s important to step back and consider what these tools are for, 
+and why you’re learning to use this application in the first place.
+This introduction is for those of you who are new to this process we call color correction, 
+or color grading. If you’re a veteran colorist then you might want to skip ahead, but if you’re just 
+starting out, the following sections are intended to describe the many goals of color correction, and 
+how the DaVinci Resolve toolset has been designed to address them; making it fast and efficient to 
+alter images in innumerable ways as we elevate raw footage to cinematic art.
+Contents
+The Goals of Color Correction ���������������������������������������������������������������������������������������������������������������������������������������������������� 3086
+Maximizing the Look of Your Media  ���������������������������������������������������������������������������������������������������������������������������������������� 3086
+Emphasizing What’s Important  �������������������������������������������������������������������������������������������������������������������������������������������������� 3089
+Audience Expectations  ������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3090
+Balancing Scenes ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3091
+Adding Style ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3092
+Quality Control  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3095
+Never Stop Experimenting  ����������������������������������������������������������������������������������������������������������������������������������������������������������� 3096
+3085Color | Chapter 125 Introduction to Color Grading
+COLOR
+The Goals of Color Correction
+If reality is a fire hose of visual information, then digital cinema and broadcast would be represented 
+by a garden hose. Color correction, therefore, could be considered the process of choosing which 
+parts of the fire hose of raw image data to fit into the garden hose of our displays in order to create a 
+pleasing image for the viewer. 
+Maximizing the Look of Your Media
+Clearly, the most fundamental aspect of the color correction process is that of making every clip 
+look its best. While the job of the cinematographer is to light and expose the image with an artistic 
+intent, your job is to realize this intent by making adjustments to the color and contrast of the 
+image, so that the final result is as close to what the director and cinematographer had in mind as 
+is humanly possible. In the process, you have the opportunity to overcome inconsistencies with 
+exposure and white balance that were, for various reasons, unavoidable. Furthermore, you can make 
+subtle adjustments to add warmth or contrast that was not available during the shoot, but that the 
+cinematographer would have liked.
+Increasingly, color correction is seen as a critical stage in the post-production process. For example, 
+the newer generation of digital cinema cameras are capable of shooting raw colorspace image data, 
+or RGB image data with a log exposure, in order to preserve the maximum amount of image data for 
+manipulation during the color correction process. However, when you acquire image data this way, 
+it must be transformed into a viewable image via color correction in the same way that film negative 
+must first be developed and printed to positive film.
+Log encoded source  Normalized and corrected
+Source footage courtesy of Gianluca Bertone DP, www.bertonevisuals.com
+Of course, there are also situations in which you may find it necessary to attempt to fix source media 
+with far more substantial problems in color and exposure. In these cases, the tools exist to make far 
+more involved adjustments to the image; however, the quality of your results will depend heavily on 
+the data quality and “latitude” of your source media. 
+For example, Blackmagic URSA, ARRI ALEXA, and RED DRAGON cameras record quite a bit of image 
+data, making extreme corrections far more possible than more heavily compressed camera formats 
+such as the Canon 5D. However, in either case, DaVinci Resolve provides the tools to process images 
+in many different ways to adjust the image for a better look.
+3086Color | Chapter 125 Introduction to Color Grading
+COLOR
+Underexposed source  Balanced and gain corrected
+Whether clips need changes large or small, the primary DaVinci Resolve toolset adjusts the 
+characteristics of hue, saturation, and contrast in a variety of ways. In the Color Wheels palette, 
+Color balance wheels let you adjust all three color channels at once, altering the color temperature 
+of the scene at specific ranges of tonal detail referred to as lift, gamma, and gain. Alternately, the 
+slider-based Primaries Bars mode lets you make the same kinds of controls via independently 
+adjustable red, green, and blue lift, gamma, and gain controls.
+Primary correction wheels, Primary correction bars
+3087Color | Chapter 125 Introduction to Color Grading
+COLOR
+All of these controls let you adjust the color tone of the shadows, midtones, and highlights 
+independently from each other.
+Cool look Warm look
+Meanwhile, the Master Lift, Gamma, and Gain wheels work together to let you alter image contrast in 
+different ways: deepening shadows, lightening highlights, and brightening or darkening the midtones 
+in between to create whatever image tonality you prefer for a given scene.
+High contrast  Low contrast
+Source footage courtesy of Gianluca Bertone DP, www.bertonevisuals.com
+Separate saturation controls let you increase or decrease color intensity throughout the scene, while 
+the Lum vs. Sat and Sat vs. Sat curves give you the ability to fine-tune saturation very specifically.
+High Saturation  Low Saturation
+For more information on these controls, which are essential to the color correction process,  
+jump to this chapter: Primarie s Palette.
+3088Color | Chapter 125 Introduction to Color Grading
+COLOR
+Emphasizing What’s Important
+Another important aspect of the color correction process is the ability to make adjustments 
+to emphasize or de-emphasize specific elements within the frame. It’s similar in concept to 
+equalization in audio mixing, in that you’re choosing which color values to boost or suppress using a 
+variety of techniques.
+This can be done to direct the viewer’s gaze, for example by surrounding a specific part of the image 
+with a window, which lets you restrict specific adjustments made to the inside and outside of the 
+window’s shape.
+Drawing a window to isolate a region of the picture to highlight
+Specific alterations can also be made to prevent audience distraction. For example, a low-saturation 
+monochromatic tint may be a pleasing look overall, but in the soft wash of color, the viewer might lose 
+track of the watch that’s preoccupying the protagonist. Using tools such as the Hue curves and HSL 
+Qualifier, you can quickly and easily tune the color of the woman’s hands and of the watch to guide the 
+viewer’s eye, and bring some needed depth to the scene.
+Source image  Curves and HSL qualification used to 
+distinguish hands and highlight watch
+For more information on Power Windows, jump to this chapter: Secondary  Windows.  
+For more information on Hue curves, jump to this chapter: Curves .
+3089Color | Chapter 125 Introduction to Color Grading
+COLOR
+Audience Expectations
+There is another family of tools, the HSL, RGB, and Luma Qualifiers, that provide even more specific 
+control, and they’re useful for adjusting ranges of color to either play into or against the audience 
+expectations for color in a scene. Substantial research into what has been termed “memory color” 
+shows that people have finely tuned expectations for the hues of particular subjects, such as 
+flesh tone, foliage greens, and sky blues. Deviation from these expectations can create a sense of 
+something being not quite right, which can be either detrimental or beneficial, depending on your 
+goals for a particular scene.
+HSL Qualification is effectively a chroma keyer that lets you sample the image to create a key that’s 
+used to define where to apply a specific correction. 
+For example, if you’re happy with the rest of the image, but the skin tone of the actor has an unhealthy 
+green tinge to it as a result, you can isolate the color of that actor’s skin and adjust it to a healthier hue.
+Source Image HSL qualification on the skin
+Skin now has warmer grade
+Another common example is the adjustment of skies. If you’re aiming for a gorgeous summer day, a 
+washed out sky in the source media can be a bit of a bummer. However, using qualification it’s easy to 
+isolate that wedge of blue, then push and pull it into just the right amount of summertime joy.
+Originally graded scene  HSL qualification of the sky
+3090Color | Chapter 125 Introduction to Color Grading
+COLOR
+Corrected and sky enhanced
+For more information on using qualifiers, jump to this chapter: Secondary Q ualifiers.
+Balancing Scenes
+It’s rare when the uncorrected shots of a scene match one another perfectly. Even the most carefully 
+exposed angles of coverage can have small variances that need to be evened out. On the other end 
+of the spectrum, run-and-gun programs using available light often result in edited scenes with huge 
+changes in lighting and color as each shot cuts away to the next. 
+Small or large, unintended variations from one shot to the next can call undue attention to the editing, and 
+jar the audience’s attention in ways that throw them out of the program. Evening out these differences 
+and balancing the clips in each scene to match is another of the fundamental tasks of the colorist. 
+You know you’re finished when the color in the scene flows unnoticeably from one clip to the next.
+DaVinci Resolve has a variety of tools that you can use to help you compare images with one another, 
+the most important of which is the Gallery, in which you can save still images of clips that you can then 
+compare to other clips using an adjustable split screen.
+Timeline thumbnail view of unbalanced clips
+Thumbnail view of balanced clips
+By using the Gallery to play stills, either split or whole (flipping back and forth between the clip you’re 
+adjusting and the still), it becomes easier to use the extensive DaVinci Resolve toolset to match the 
+color and exposure of every clip in a scene.
+3091Color | Chapter 125 Introduction to Color Grading
+COLOR
+Split screen of two shots Left image corrected to match right
+An additional set of features let you manage grades by copying them from clip to clip, or by linking 
+similar clips, either automatically, or manually using groups.
+Link icon indicates clips are grouped for grading
+For more information on using the Still Store, jump to this chapter: Using the Co lor Page.  
+For more information on grade management, jump to this chapter: Grade M anagement.
+Adding Style
+Of course, it’s not all about subtlety and correction. It’s often appropriate, when grading music videos 
+and commercials, for instance, to add some radical style to a piece. Here, too, DaVinci Resolve 
+provides an abundance of features for manipulating unexpected aspects of the image; for example, by 
+abusing the Custom Curves to create the illusion of chemical cross -processing.
+Custom Curves controls
+3092Color | Chapter 125 Introduction to Color Grading
+COLOR
+Original image  Image enhanced with Curves
+DaVinci Resolve’s node-based image processing makes it possible to use more exotic node structures 
+to create effects using composite modes, such as a colored glow generated by adding two differently 
+graded versions of the same image together using a Layer node.
+Node tree adding two different treatments together
+Original image  Enhanced and balanced final
+You can also create complex node trees to build specific mattes, to use for isolating specific elements 
+of the image. For example, if you wanted to isolate an actor in color against a background turned 
+monochromatic, you can create multiple keys (pulled via HSL Qualification) and combine them using a 
+Key Mixer node to build that effect.
+3093Color | Chapter 125 Introduction to Color Grading
+COLOR
+Node tree to isolate the man’s face and clothes
+Original image   The final effect, desaturating 
+everything except for the man
+Finally, DaVinci Resolve doesn’t just have tools governing color and contrast. A Blur palette provides 
+controls over blurring, sharpening, or adding mist to all or part of the image. When combined with the 
+other tools that are available for isolation and color adjustment, these are powerful additions to your 
+creative arsenal.
+Defocus effect created in real time
+3094Color | Chapter 125 Introduction to Color Grading
+COLOR
+Quality Control
+Lastly, it’s important to keep in mind that, for all the creative possibilities that DaVinci Resolve affords, 
+it’s still important that the final deliverables that you give to your client has appropriate signal levels 
+relative to their requirements. In particular, programs destined for broadcast have specific outer 
+boundaries of luma and chroma that you must not exceed, or you’ll risk having a show rejected for 
+QC (quality control) violations. 
+However, even if you’re not delivering a show for broadcast, it’s important to be aware of the 
+mathematical limitations of a digital video signal to make sure you’re not clipping or crushing image 
+detail through overzealous adjustments that you may, in fact, want to preserve.
+For example, if you take a look at the next two images, you can see the perils of overzealous 
+adjustments when compared to a clip that, while graded creatively, has been adjusted with respect to 
+the mathematical boundaries of image data.
+Image graded to preserve detail in highlights Image graded with highlight detail blown out
+Here, too, DaVinci Resolve provides tools designed to help you exercise control over the fine-tuning 
+of the image. A Video Scopes window provides the standard Waveform, Parade, Vectorscope, and 
+Histograms that are used to analyze your image data. These scopes let you see the boundaries of 
+what’s possible, and make it easy to spot subtle problems, and compare the characteristics of one 
+image to another.
+Video scopes
+3095Color | Chapter 125 Introduction to Color Grading
+COLOR
+When the time comes that you want to start clipping data in the highlights and shadows, as part of 
+a creative look, the Soft Clip controls let you introduce a subtle or large roll-off, compressing the 
+extremes of the signal so that what clipping you do is softer and more pleasing.
+For more information on the video scopes and the Soft Clip controls, jump to these chapters: 
+Using the Color Page and Curves.
+Never Stop Experimenting
+So now that you’ve gotten an extremely brief overview of the grading process as seen through 
+the toolset of DaVinci Resolve, we invite you to use this manual to explore DaVinci Resolve more 
+thoroughly. You may discover that, the more you work with the different features that are available, 
+the more unexpected uses you’ll find for different controls that you thought you knew well.
+Have fun.
+3096Color | Chapter 125 Introduction to Color Grading
+COLOR
+Chapter 126
+Using the Color Page
+Given the origin of DaVinci Resolve as a professional grading application, 
+the Color page is at the heart of the DaVinci Resolve experience. 
+Within the Color page are all of the controls available for manipulating color and contrast, reducing 
+noise, creating limited secondary color corrections, building image effects of different kinds, 
+adjusting clip geometry, and making many other corrective and stylistic adjustments.
+In this chapter, you’ll learn how to understand the Color page interface, how to customize it, 
+and how to work within it to play through and navigate your project’s timeline. You’ll also learn 
+how to analyze and compare clips in preparation for grading using stills, playheads, and DaVinci 
+Resolve’s own internal video scopes.
+Contents
+The Color Page Interface �������������������������������������������������������������������������������������������������������������������������������������������������������������� 3098
+The Interface Toolbar ����������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3098
+Showing Which Panel Has Focus ����������������������������������������������������������������������������������������������������������������������������������������������� 3099
+Viewer������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3099
+Gallery ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3102
+LUT Browser ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 3102
+Media Pool���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3104
+Node Editor �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3105
+Timeline ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3105
+Palette Area �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3107
+Dual-Monitor Layout  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3109
+The Info Palette and Clip Information ����������������������������������������������������������������������������������������������������������������������������������������� 3111
+Clip Info ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3111
+System Info ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3112
+Clip Details ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3112
+Customizing the Color Page  ����������������������������������������������������������������������������������������������������������������������������������������������������������  3113
+Undo and Redo in DaVinci Resolve �������������������������������������������������������������������������������������������������������������������������������������������  3114
+3097Color | Chapter 126 Using the Color Page
+COLOR
+The Color Page Interface
+The Color page is divided into seven main areas that work together to let you build a grade. 
+This section provides an overview of what these areas are and how they function.
+The default layout of the Color page.
+The Interface Toolbar
+At the very top of the Color page is a toolbar with buttons that let you show and hide different parts of 
+the user interface. These buttons are as follows, from left to right:
+The Interface toolbar
+Gallery: Opens and closes the Gallery panel.
+LUTs: Opens and closes the LUT Browser.
+Media Pool: Opens and closes the Media Pool.
+Clips: Opens and closes the Thumbnail timeline. To the right is a drop-down 
+menu that lets you choose a timeline filtering option for the Thumbnail timeline.
+Quick Export:  Opens the Quick Export window.
+3098Color | Chapter 126 Using the Color Page
+COLOR
+Timeline: Opens and closes the Mini-Timeline.
+Nodes: Opens and closes the Node Editor.
+Open FX: Opens and closes the Open FX panel.
+Lightbox: Opens and closes the Lightbox.
+Showing Which Panel Has Focus
+Whenever you click somewhere on the DaVinci Resolve interface using the pointer, or use a keyboard 
+shortcut to “select” a particular panel (such as in the Edit page), you give that panel of the user 
+interface “focus.” A panel with focus will capture specific keyboard shortcuts to do something within 
+that panel, as opposed to doing something elsewhere in the interface. A highlight appears at the top 
+edge to show you which panel has focus so that you can keep track of which part of the current page 
+is taking precedence, and you can switch focus as necessary to do what you need to do. You can 
+turn the Focus Indicator on and off in Preferences > User > UI Settings > Show focus indicators in the 
+user interface. 
+The focus indicator shown at the top edge of the Media Pool, shown next to a Viewer that doesn’t have focus
+Viewer
+The Viewer shows the frame at the current position of the playhead in the Timeline. At the top of the 
+Viewer is a header that displays the Project and Timeline names, as well as a Viewer Timecode display 
+that shows the source timecode of each clip by default. The Timeline name is also a drop-down 
+display that lets you switch to any other timeline in the project. A scrubber bar underneath the image 
+lets you drag the playhead across the entire duration of the clip, while transport controls underneath 
+that let you control playback. A toolbar at the top provides controls governing Image Wipes, 
+Split-Screen controls, and Highlight display. Additional controls let you loop playback, switch Unmix 
+mode on and off, turn audio playback on and off, and choose which onscreen controls are currently 
+displayed. More information about using the Viewer appears later in this chapter.
+3099Color | Chapter 126 Using the Color Page
+COLOR
+The default Viewer with transport controls
+You can also put the Viewer into one of three alternate modes to be able to see a larger image as 
+you work. All three of these modes are available from the Workspace > Viewer Mode submenu.
+  Enhanced Viewer: (Option-F to toggle this on and off) hides everything to the left and right of the 
+Viewer, giving you a large working area for tasks such as window positioning and rotoscoping, 
+while keeping the palettes and their controls visible as you work.
+The Color page in Enhanced Viewer mode
+3100Color | Chapter 126 Using the Color Page
+COLOR
+  Full Screen Viewer: (Shift-F to toggle this on and off) is available to provide more working area for 
+tasks such as window positioning and rotoscoping. Full Screen Viewer also lets you display the 
+Effects panel at full height, and you can turn the Node Editor on and off to access different effects 
+controls while you work.
+The Color page in Full Screen Viewer mode
+  Cinema Viewer: (P to toggle this on and off) expands the Viewer to fill your workstation’s entire 
+monitor. This is useful if you want to play the current Timeline without any distractions. When 
+you move the pointer over the image, transport controls and a jog bar appear to let you control 
+playback. For DITs, a contextual menu is available by right-clicking anywhere on the image with 
+which you can turn on and customize a video scope overlay (which can be dragged to different 
+locations on the Viewer).
+The Color page in Cinema Viewer mode
+3101Color | Chapter 126 Using the Color Page
+COLOR
+Gallery
+The Gallery is used for storing still frames to use as reference, and grades you might like to copy; 
+stills and grades are stored together. A button lets you open up the Album browser, used for 
+organizing your stills. At the bottom of the Gallery, Memories let you store grade information that you 
+can apply using a control panel or keyboard shortcuts. The Gallery on the Color page mirrors the 
+contents of the Gallery page. 
+For more information on the Gallery page, jump to this chapter: Using th e Gallery.
+The Gallery has Memories, stills saved in albums and your PowerGrades
+LUT Browser
+The LUT Browser provides a centralized area for browsing and previewing all of the LUTs installed on 
+your workstation. All LUTs appear in the sidebar, by category.
+The LUT Browser
+3102Color | Chapter 126 Using the Color Page
+COLOR
+By default, all LUTs appear with a test thumbnail that give a preview of that LUT’s effect, but 
+you can also get a live preview of how the current clip looks with that LUT by hover scrubbing 
+with the pointer over a particular LUT’s thumbnail (this is described in more detail below).
+To open the LUT Browser:
+Click the LUT Browser button in the UI Toolbar at the top of the Color page.
+Methods of working with the LUT Browser:
+  To see the LUTs in any category: Click on a LUT category to select it in the sidebar, and its LUTs 
+will appear in the browser area.
+  To make a LUT a favorite: Hover the mouse over a LUT and click the star badge that appears at 
+the upper right-hand corner, or right-click any LUT and choose Add to Favorites. That LUT will then 
+appear when you select the Favorites category.
+  To search or filter for specific LUTs: Open a bin that has the LUT you’re looking for, then click 
+the magnifying glass icon to open the search field, and type text that will identify the LUTs 
+you’re looking for.
+  To see LUTs in Column or Thumbnail view: Click the Column or Thumbnail buttons at the top right 
+of the LUT Browser to choose how to view LUTs in the browser area.
+  To sort LUTs in Thumbnail view: Click the Thumbnail Sort drop-down menu and choose which 
+criteria you want to sort LUTs by. The options are Filename, Type, Relative Path, File Path, Usage, 
+Date Modified. There are also options for ascending and descending sort modes.
+  To sort LUTs in Column view: Click the column header to sort by that column. Click a header 
+repeatedly to toggle between ascending and descending modes.
+  To update the thumbnail of a LUT with an image from a clip: Choose a clip and frame that you 
+want to use as the new thumbnail for a particular LUT, then right-click that LUT and choose Update 
+Thumbnail With Timeline Frame.
+  To reset the thumbnail of a LUT to use the standard thumbnail: Right-click a LUT and choose 
+Reset Thumbnail to go back to using the standard test image.
+  To refresh a LUT category with new LUTs that may have been installed: Select a LUT category, 
+then right-click anywhere within the browser area and choose Refresh to refresh the contents of 
+that category from disk.
+Methods of adding LUTs to a grade from the LUT Browser:
+  To apply a LUT to the current node: Select a clip in the Thumbnail timeline, then right-click a LUT 
+and choose Apply LUT to Current Node from the contextual menu.
+  To apply a LUT to a specific node: Drag a LUT from the LUT Browser and drop it onto the node 
+you want to apply a LUT to. If you drag a LUT onto a node that already has a LUT, the previous LUT 
+will be overwritten by the new one.
+3103Color | Chapter 126 Using the Color Page
+COLOR
+Media Pool
+The Media Pool is available in the Color page, making it easy to drag and drop clips you want to use 
+as external mattes right into the Node Editor, for easy and fast connection to create various Color 
+page effects. When opened, the Media Pool replaces the Gallery, fitting into the same area. In most 
+respects, the Media Pool in the Color page works the same as the Media Pool on nearly every other 
+page of DaVinci Resolve.
+The Media Pool is available in the Color page.
+When you drag a clip from the Color page Media Pool to the Node Editor, two things happen:
+  That clip is turned into an external matte in the current grade, which you can use as a matte for 
+secondary adjustments, or as a compositing layer (in conjunction with the Layer mixer) for mixing 
+textures or images with your grade.
+  That clip is also automatically attached to the Media Pool clip that corresponds to the clip you’re 
+grading as a clip matte, to help you keep track of which clips are using other clips as mattes.
+For more information on the Media Pool, jump to this chapter: Adding and Organizing Media 
+with the Media Pool.
+3104Color | Chapter 126 Using the Color Page
+COLOR
+Node Editor
+The Node Editor is where you assemble one or more individual corrections (nodes) together into 
+a complete multi-correction grade (node tree). This is a powerful way of assembling grades, since 
+different types of nodes let you create different combinations of corrections and very specific 
+adjustments by reordering operations, combining keys, or changing the layer order of different 
+adjustments. 
+For more information on the Node Editor, jump to this chapter: Node Editi ng Basics.
+Node Editor to construct your grade processing signal flow
+Timeline
+The Timeline provides several ways of navigating the clips in your project, as well as keeping track 
+of what has been done to which clips. The Timeline is divided into two parts, each of which shows 
+different information and provides differing controls, and each of which can be opened or closed 
+separately via the Clips and Timeline buttons on the Interface toolbar.
+The Thumbnail timeline with a Mini-Timeline below
+Thumbnail Timeline
+At the top is the Thumbnail timeline, in which each clip is represented by a single frame. The Thumbnail 
+timeline (or its alter-ego, the Lightbox) provides the easiest way of selecting which clip you want 
+to work on and of making clip selections for various grade management operations. The currently 
+selected clip that reveals its controls in the various palettes of the Color page is highlighted in orange.
+Much valuable information appears above and below each thumbnail, such as each clip’s clip number, 
+source timecode, track number, whether it’s been flagged, whether it’s automatically linked or part of a 
+group, whether it’s been tracked, and so on.
+3105Color | Chapter 126 Using the Color Page
+COLOR
+A clip thumbnail in  
+the Thumbnail timeline
+What’s displayed underneath each thumbnail can be changed by double-clicking the space 
+underneath each thumbnail. There are several options; you can keep double-clicking to cycle 
+among them:
+  Clip format or codec (the default)
+  Clip Name (clip name or file name, depending on what View > Show File Names is set to) or 
+Multicam Angle (if you’re working with multicam clips)
+  Version name or number
+Mini-Timeline
+Underneath, the Mini-Timeline shows a small representation of the video tracks of the Timeline in the 
+Edit page wherein each clip is as long as its actual duration. This provides the best representation 
+of the structure of the current timeline, in which clip length shows duration and multiple tracks are 
+displayed, so you can see which clips are superimposed. A Timeline Ruler lets you scrub the playhead 
+across multiple clips and can be zoomed out enough to show every clip in your entire program.
+The Mini-Timeline lets you see timeline structure, and small track header controls let 
+you enable tracks, disable tracks, and set the playhead to ignore specific tracks
+Small track labels at the left of each track in the Mini-Timeline let you enable or disable tracks by 
+clicking them (enabled tracks have white labels, disabled tracks have gray labels). Option-clicking one 
+of these controls sets that track to be enabled but ignored by the playhead when you use the Next 
+and Previous Clip commands, in the event you want to ignore clips you don’t need to grade (tracks in 
+this mode show a red label).
+Within the Mini-Timeline the currently selected clip is highlighted in orange, and you can click any clip 
+to select it. A scroll bar at the bottom lets you navigate to the left and right, while using the scroll wheel 
+of your mouse zooms in and out. The Mini-Timeline shows at most six tracks of video. If your project 
+has more tracks than that, you can scroll up and down to reveal the hidden tracks. Any markers that 
+were placed on clips or the Timeline in the Edit page appear here, and you can click any marker to 
+reveal and edit its color and notes.
+As seen above, a colored outline appears around the clip number of shots that have been graded, and 
+this outline is doubled if there are additional versions applied to that clip.
+For more detailed information on the Color page timeline, jump to this chapter: Color Page 
+Timeline and Lightbox,
+3106Color | Chapter 126 Using the Color Page
+COLOR
+Palette Area
+Most everyday tools and functions for grading are distributed among a series of palettes found in the 
+palette area of the Color page. These palettes can be accessed via a series of palette buttons running 
+along the Palette bar at the top of this area.
+All palettes seen in the Palette bar
+These buttons also give you feedback about which palettes have adjustments for the current 
+selected node in the Node Editor. Palettes with adjustments show a small orange dot in the 
+corresponding palette button.
+An orange dot in a palette button lets you know there are adjustments in that palette
+Left Palettes
+A series of palettes at the bottom left of the Color page provide access to different sets of grading 
+tools, used principally for manipulating color, contrast, and raw media format settings. Each individual 
+palette is opened by clicking the corresponding icon at the top of the Palette panel.
+Left palette selection buttons
+Camera Raw palette: For making metadata adjustments to raw media formats
+Color Match palette: Automatic grading based using test charts
+Primaries: Graphical color balance controls and master wheels, along with a Slider 
+mode for adjusting YRGB Lift/Gamma/Gain
+HDR palette: Advanced primary grading controls designed for wide-gamut media and 
+SDR or HDR mastering
+RGB Mixer: For mixing color channels into one another
+Motion Effects palette: With controls for noise reduction and artificial motion blur
+The five available palettes can be used individually or together depending on what you’re trying to accomplish.
+3107Color | Chapter 126 Using the Color Page
+COLOR
+For more information on most of these palettes, jump to this chapter: Primaries Palette . 
+For more information on the Motion Effects palette, jump to this chapter:  
+The Motion Effects and Blur Palettes .
+Center Palettes
+At 1920x1080 resolution or higher, a second set of palettes is organized at the bottom center of the 
+Color page. These palettes span a 
+ range of functionality, and the adjustments you make with them can be combined with those made 
+using the Color palettes.
+Center palette selection buttons
+NOTE: At lower resolutions, the Left and Center palettes are merged to fit the 
+DaVinci Resolve interface into a smaller area.
+The center palettes include the Curves palette, Color Slice palette, the Color Warper palette, 
+the Qualifier palette, the Window palette, the Tracker palette, the Magic Mask palette, the Blur palette, 
+the Key palette, the Sizing palette, and the Stereoscopic 3D palette.
+Curves palette
+ ColorSlice palette
+Color Warper palette
+ Qualifier palette
+Window palette
+ Tracker palette
+Magic Matte palette
+ Blur palette
+Key palette
+ Sizing palette
+Stereoscopic 3D palette
+3108Color | Chapter 126 Using the Color Page
+COLOR
+Keyframe Editor, Video Scopes, and Information
+The bottom right of the Color page can be switched between one of three things:
+Right palette selection buttons
+The three controls for displaying the Keyframe Editor, video scopes, or Information palette
+Keyframe Editor: Provides an interface for animating Color, Sizing, and Stereo Format 
+adjustments over time. Each node in the Node Editor corresponds to a track in the 
+Keyframe Editor, which lets you animate each node’s adjustments independently. 
+Furthermore, each node’s track can be opened up to reveal parameter groups, so 
+that you can animate subsets of an individual node’s functions independently of other 
+functions within the same node. 
+For more information on keyframing, jump to this chapter:  
+Keyframing in the Color Page.
+Video scopes: Provides a docked area where you can expose one video scope at 
+a time for reference while you work. You can also “undock” the video scopes into a 
+stand-alone window, in which you can show four different scopes at a time. 
+More information on using the video scopes appears later in this chapter.
+Information: Provides a way of seeing clip and system information while you work.
+Dual-Monitor Layout
+The Color page has a dual monitor layout that provides maximum space for the Viewer, Node Editor, 
+and Control palettes on the primary monitor, and a simultaneously displayed Gallery, Lightbox, 
+Keyframe Editor, Metadata Editor, and Video Scope panel on the secondary monitor. The second 
+screen of a dual-screen layout can be resized, but not reorganized. 
+If you have an single ultra-wide monitor, you can also use the dual-monitor layout, and DaVinci Resolve 
+will scale the interface as if you had two normal monitors side by side.
+To enter dual-screen mode:
+Choose Workspace > Dual Screen > On.
+3109Color | Chapter 126 Using the Color Page
+COLOR
+The Color page in dual screen mode
+To switch which UI elements appear on which monitors:
+Choose Workspace > Primary Display > (Monitor Name), which reverses the contents of 
+both monitors in dual screen mode.
+3110Color | Chapter 126 Using the Color Page
+COLOR
+The Info Palette and Clip Information
+The Info palette is hidden by default. Clicking the Info palette button at the far right of the toolbar 
+reveals it. The Info palette has two tabs that display different information. There are no user-editable 
+controls in the Info palette.
+Info palette displaying Clip Info and System Status
+Clip Info
+The first tab displays information about whichever clip is currently selected in the Timeline. 
+This information is not editable, but is provided for reference, and includes:
+File Name The name of the media file on disk. If the current clip is a Multicam clip, this shows 
+the name of the currently selected angle.
+Reel Name The reel name of that clip, if one is being read properly.
+Start T/C The source timecode value of the first frame in the clip.
+End T/C The source timecode value of the last frame in the clip.
+Duration The duration of the clip, in timecode.
+Frames The duration of the clip, in frames.
+Version The name of the remote or local version used by that clip.
+Frame Rate The frame rate used by that clip.
+Source Res The native resolution of the source clip.
+Codec The codec or format used by the source clip.
+3111Color | Chapter 126 Using the Color Page
+COLOR
+System Info
+The second tab displays information about operational modes currently in use by DaVinci Resolve. 
+It’s meant to provide the status of different DaVinci Resolve features that can be enabled, disabled, or 
+cycled among various options. This information includes:
+Clips The total number of clips in the Timeline.
+Proxy The status of Proxy mode (On or Off).
+Clip Cache The status of the Clip Cache mode (Off, All, Dissolves, User, User & D).
+Ref Transform The status of Reference Still reposition. 
+Ref Mode The status of the Reference mode (Gallery, Timeline, Offline).
+Wipe Style The currently selected Wipe Style for split screens (Wipe-H, Wipe-V, 
+Wipe-M, Wipe-A).
+Convergence The current Convergence setting (Linked Zoom, Opposite)
+Stereo Grade The currently displayed Eye and Gang mode (Left or Right - Gang or Solo).
+Stereo Display The current Stereo Display mode (Mono or Stereo).
+Clip Details
+You can right-click the currently selected clip in the Thumbnail Timeline and choose View Clip Details 
+to show a small window with all of that clip’s information available at a glance. You can drag this 
+window anywhere you like, even to another display.
+The Clip Details window
+This information is not editable, but is provided for easy reference, and includes:
+File Name The name of the media file on disk appears at top.
+Start Timecode The source timecode value of the first frame in the clip.
+End Timecode The source timecode value of the last frame in the clip.
+Duration The duration of the clip, in timecode.
+3112Color | Chapter 126 Using the Color Page
+COLOR
+Frames The duration of the clip, in frames.
+Reel Name The reel name of that clip, if one is being read properly.
+Version The name of the remote or local version used by that clip.
+Format The format used by the source clip, along with the frame size and bit depth.
+Codec The codec used by the source clip.
+Folder Which directory on disk the source media resides in.
+Description The description field of the Metadata Editor.
+Comments The Comments field of the Metadata Editor.
+EDL Comments EDL comments for that event, if any exist.
+Customizing the Color Page
+The various sections of the Color page can be resized, hidden, and rearranged as needed to 
+accommodate different working styles. This section covers all of the methods that are available for 
+Color page customization.
+You can easily resize the Viewer, Gallery, and Nodes Editor relative to one another to make the 
+Viewer larger, expand the width of the Node Editor to have more workspace, or to create more or less 
+room for stills in the Gallery.
+To resize the Viewer, Gallery, and Node Editor:
+Move the pointer over the vertical divider between any two areas. When the resize icon appears, drag 
+the divider to the left or right to make one area larger while making the other smaller.
+You can also fully expand the Gallery, the Memories, the Node Editor, and the Keyframe Editor to replace 
+completely whichever interface area is adjacent.
+To expand the Keyframe Editor, Viewer, and Gallery:
+Click the Expand control at the upper right of whichever interface area you want to expand. Once 
+expanded, clicking the Expand control again will collapse that interface area back to its original size, 
+revealing whatever was hidden.
+In Display mode, you can completely hide the Viewer, pushing the Gallery all the way to the right side of 
+the DaVinci Resolve window, and expanding the Node Editor to take the rest of the space.
+To toggle Display mode:
+Right-click in the empty area of the Node Editor, and choose Toggle Display Mode from the contextual 
+menu. Do this again to toggle Display Mode off and return the interface to the way it was.
+To show and hide the Mini-Timeline:
+Click the Timeline button at the right of the palette button bar.
+To show and hide the Color page Viewer upper toolbar:
+Click the Viewer option menu and choose Show Viewer Options to uncheck it.
+To return all pages to their default layout:
+Choose Workspace > Reset UI Layout.
+3113Color | Chapter 126 Using the Color Page
+COLOR
+Undo and Redo in DaVinci Resolve
+No matter where you are in DaVinci Resolve, Undo and Redo commands let you back out of 
+steps you’ve taken or commands you’ve executed, and reapply them if you change your mind. 
+DaVinci Resolve is capable of undoing the entire history of things you’ve done since creating or 
+opening a particular project. When you close a project, its entire undo history is purged. The next time 
+you begin work on a project, its undo history starts anew.
+Because DaVinci Resolve integrates so much functionality in one application, there are three 
+separate sets of undo “stacks” to help you manage your work.
+• The Media, Cut, Edit, and Fairlight pages share the same multiple-undo stack, which lets 
+you backtrack out of changes made in the Media Pool, the Timeline, the Metadata Editor, 
+and the Viewers.
+• Each clip in the Fusion page has its own undo stack so that you can undo changes you 
+make to the composition of each clip, independently.
+• Each clip in the Color page has its own undo stack so that you can undo changes you make 
+to grades in each clip, independently.
+In all cases, there is no practical limit to the number of steps that are undoable (although there 
+may be a limit to what you can remember). To take advantage of this, there are three ways you 
+can undo work to go to a previous state of your project, no matter what page you’re in.
+To simply undo or redo changes you’ve made one at a time:
+• Choose Edit > Undo (Command-Z) to undo the previous change.
+• Choose Edit > Redo (Shift-Command-Z) to redo to the next change.
+3114Color | Chapter 126 Using the Color Page
+COLOR
+Chapter 127
+Viewers, Monitoring, 
+and Video Scopes
+Viewers let you see what you’re working on, provide a UI for transport controls 
+and image comparison, draw windows and drag on-screen controls, and provide a 
+variety of warnings and information not found anywhere else. 
+However, at the same time, professional workflows require real time monitoring via supported video 
+I/O devices on a calibrated display. Lastly, video scopes provide a more precise analysis of the state 
+of the video signal you’re viewing, and DaVinci Resolve has built-in scopes you can use for creative 
+decision making and troubleshooting.
+This chapter covers the Color page Viewer, external monitoring and display calibration, and video 
+scopes in more detail. 
+Contents
+Using the Viewer ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3117
+The Viewer Title Bar ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3117
+Viewer Guides ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3119
+Proxy Handling  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3123
+Timeline Resolution  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3123
+Bypass Color Grades and Fusion  ������������������������������������������������������������������������������������������������������������������������������������������������ 3124
+Viewing Isolated Channels  ������������������������������������������������������������������������������������������������������������������������������������������������������������� 3124
+The Viewer Toolbar ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3124
+Showing Marker Overlays and Annotations  ������������������������������������������������������������������������������������������������������������������������� 3125
+The Onscreen Control (OSC)  Menu �������������������������������������������������������������������������������������������������������������������������������������������  3125
+Toggling Viewer Overlays On and Off ��������������������������������������������������������������������������������������������������������������������������������������� 3127
+Onscreen Controls and External Displays �������������������������������������������������������������������������������������������������������������������������������  3127
+Zooming into the Viewer ����������������������������������������������������������������������������������������������������������������������������������������������������������������  3128
+Using the Jog Bar and Transport Controls ���������������������������������������������������������������������������������������������������������������������������  3129
+Navigating Using the Arrow Keys �����������������������������������������������������������������������������������������������������������������������������������������������  3129
+Controlling Playback Using the Spacebar and JKL Keys  ������������������������������������������������������������������������������������������������ 3129
+Skimming in the Viewer  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3130
+3115Color | Chapter 127 Viewers, Monitoring, and Video Scopes
+COLOR

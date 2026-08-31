@@ -1,0 +1,2127 @@
+Using the Grid Controls to Manipulate Color
+This palette has two modes; each lets you manipulate the colors of the image in different ways, and 
+each has a different style of grid used for warping the different color channels that are affected. 
+Learning how to manipulate the color warping points of each of these grids is central to understanding 
+how this palette works.
+(Left) The radial grid in Hue-Saturation mode,  
+(Right) The two rectangular grids in Chroma-Luma mode
+Dragging to Warp Colors
+Despite the different shapes, each of these grids are manipulated in similar ways. Dragging a control 
+point alters whatever color corresponds to that point, while the colors that surround this dragged point 
+are also adjusted proportionally according to their location between the point being dragged and 
+surrounding points that either (a) aren’t affected, or (b) are locked into place. Locked points prevent the 
+colors at those points from being changed. By locking some parts of a grid and dragging other parts, 
+you can create sophisticated hue-specific adjustments.
+The orange control point has been selected and dragged 
+to make an adjustment. Control points with black outlines 
+are locked in place and help prevent control points on the 
+opposite side from being moved. All other control points 
+between the selected and locked control points are stretched 
+or squished depending on the selected point’s adjustment.
+3280Color | Chapter 136 Color Warper
+COLOR
+The image above shows the three states of control points in the grid:
+  Orange: Selected points appear orange. You can select multiple points by Command-clicking 
+multiple points, by dragging a bounding box over multiple points, or by using the draw selection 
+tool to click and draw over any points you want to select. Once you’ve selected and moved a 
+control point, it becomes locked to keep that adjustment in place.
+Selected points appear orange; in this example four 
+points are selected to move them all together.
+  Outlined: White control points with a black outline are locked . Locked points do not move 
+automatically when nearby points are dragged, so locked points are important for preventing 
+specific colors you don’t want altered from being changed, as well as for saving changes to points 
+that you’ve adjusted. All adjusted points become locked. The outer corners of the Chroma-Luma 
+grid are locked, as is the outer ring and center point of the Hue-Saturation web.
+Locked points with black outlines keeping other 
+colors in the image from being adjusted by the selected point
+  White: White control points are neither selected nor locked, and will be stretched or squished 
+when adjacent control points are moved.
+3281Color | Chapter 136 Color Warper
+COLOR
+Unlocked control points between a selected point and 
+locked points (in this case the corners of the grid) will squish 
+and stretch to warp an entire range of color as you drag.
+While control points work much the same in either the Hue-Saturation or Choma-Luma modes, 
+there are some important differences. The radial “spokes” of the Hue-Saturation wheel don’t 
+influence neighboring spokes, so any adjustment you make to a control point on one spoke only 
+affects the colors that fall between it and the two neighboring spokes that surround it. This means 
+it’s not necessary to lock control points on neighboring spokes of this wheel-shaped grid to 
+prevent them from changing.
+Adjustments made to control points on one “spoke” of the 
+Hue-Saturation wheel grid don’t affect those on neighboring 
+spokes, which act as if they’re locked, even though they’re not.
+Both the Hue-Saturation and Chroma-Luma warper grids lock the outer boundary of the grid. 
+You can still drag these points to adjust them, but they can’t be unlocked and they won’t 
+move automatically when you adjust other control points. The Hue-Saturation grid has an 
+additional point locked right in the center, which keeps the neutral colors (black through gray 
+and white) neutral.
+3282Color | Chapter 136 Color Warper
+COLOR
+TIP: Dragging the locked center point of the Hue-Saturation grid lets you alter the color 
+of the white point, while proportionally warping all other colors in the image to smoothly 
+accommodate this change. This can be the starting point of a lot of different looks.
+Previewing Which Colors Are 
+Warped By Each Control Point
+If you press and hold the Option key while you click on a control point in the warp grid, you get a 
+preview in the Viewer of which colors that control point will affect. Affected pixels appear in color 
+against black, which represents all pixels that will remain unaffected by that control point.
+Holding the Option key down while clicking a Color Warper control point 
+shows a preview of affected pixels against black.
+Sampling to Warp Colors
+While it’s important to learn how control points in the grid are manipulated, the most intuitive way of 
+working with this control is to use the pointer to click within the Viewer to sample a color you want to 
+adjust, hold the pointer button down, and then drag to adjust the color. 
+When moving the pointer in the Viewer, you’ll see a crosshairs moving around the warping grid that 
+shows you the exact color on the vectorscope graph, while a yellow box indicates the control point 
+that’s closest to the color you’re sampling that will be selected if you click. In the following example, 
+positioning the eyedropper over the sky shows that clicking will select a control point close to the 
+center of the grid.
+Moving the pointer in the Viewer shows a preview in the warping grid 
+of which control point you’ll select were you to click.
+3283Color | Chapter 136 Color Warper
+COLOR
+Clicking and dragging selects and then moves the control point corresponding to that color in the 
+Viewer. As you drag the pointer, you’ll see the selected control point move in the same direction as 
+the mouse while the colors of the image update in real time to show the adjustment you’re making. 
+Meanwhile, an arrow in the grid shows you the delta of the current adjustment. Moving a selected 
+control point to another hue in the grid warps the original color to the new color.
+Clicking and dragging moves the control point corresponding to that color 
+in the grid to adjust the color and locks it into place.
+You can also lock control points by sampling the image. Hold the Command and Shift keys down, and 
+then click on the color or colors you want to lock in the warp grid to prevent them from being changed. 
+This makes it easy to work directly in the Viewer to lock colors you don’t want to change, before 
+adjusting other colors that you do want to change.
+In the following example, Command-Shift-clicking on the woman’s shoulder locks the yellowish 
+highlights falling on her uniform in place. Then, clicking and dragging a highlight on her face lets us 
+push the highlights towards teal without losing the warmer highlights on her shoulder, all by sampling 
+directly in the Viewer.
+ 
+(Top) Command-Shift-clicking to lock the closest control point to a color on the warping grid you don’t want to change, 
+(Bottom) Warping a neighboring color while the control point you just locked keeps that part of the image from changing
+3284Color | Chapter 136 Color Warper
+COLOR
+Resetting Grid Points
+If, at any point, you adjust a point that you want to reset, simply right-click on that point to de-lock 
+and reset it.
+Grid Resolution Affects The Specificity 
+and Quality of Adjustments
+You can change the resolution of the grids in either Hue-Saturation or Chroma-Luma modes, using 
+the controls at the bottom of the Color Warper palette, underneath the grid itself. Separate drop-down 
+menus let you choose the resolution of control points for hue and saturation, or for chroma and luma 
+separately, although by default they’re linked together.
+The two resolution controls found underneath the grid controls
+By default, the Hue-Saturation grid has a resolution of 6x6, which is the lowest resolution available. 
+The Chroma-Luma grid defaults to 6x6, but can be set lower, to 4x4. Low resolution warping grids 
+make it easy to create broad color adjustments affecting large ranges of analogous color with 
+smooth results. Additionally, lower quality media that’s 8-bit, with 4:2:0 chroma subsampling, and/
+or highly compressed benefits from lower resolution warping grids to avoid artifacts and keep color 
+adjustments smooth.
+(Left) The Hue-Saturation grid set to a resolution of 6x6,  
+(Right) The Hue-Saturation grid set to a resolution of 24x16
+On the other hand, higher resolution grids let you make more specific adjustments to tighter ranges 
+of color. However, this approach is more useful in projects using high quality media (10- or 12-bit, 4:2:2 
+or 4:4:4 chroma subsampling, and minimally compressed) to avoid unwanted artifacts. If you’re using 
+high-quality media, you’ll find you can use the Color Warper to make incredibly specific adjustments.
+You can set the default Hue and Saturation grid resolutions in the Color Warper’s Option menu by 
+choosing Default Hue Resolution or Default Saturation Resolution and selecting your preferred 
+resolution from the drop-down menu.
+3285Color | Chapter 136 Color Warper
+COLOR
+The Chroma-Luma grid set to a resolution of 6x6
+The Chroma-Luma grid set to a resolution of 24x24
+NOTE: If you make adjustments with the grid at one resolution, it’s possible to change the 
+grid to a higher or lower resolution, and your adjustment will be interpolated to fit the new 
+grid resolution, although the resulting adjustment may change a bit.
+You Can Warp Color in Different Color Spaces
+A drop-down menu at the bottom right of the warping grid lets you choose which color space to use 
+for manipulating the colors of the image. Different color spaces project the colors of the image into 
+the two-dimensional warping grid in different ways, and some may make it easier to manipulate a 
+particular image in the way you want by spreading out different ranges of color more widely.
+3286Color | Chapter 136 Color Warper
+COLOR
+The color space found underneath the grid controls
+The available color spaces are:
+• HSV
+• HSL
+• HSY
+• HSP
+Hue – Saturation Controls
+As the name implies, the Hue-Saturation mode lets you alter hue and saturation simultaneously. 
+For most people, this is likely the most intuitive mode in which to work as the range of hues and 
+saturation in the image is represented radially, just like the Vectorscope; in fact a Vectorscope graph of 
+the image appears underneath the “wheel” grid of control points used to manipulate color. 
+By default, dragging any point of this grid changes the colors immediately surrounding that point that 
+are between the point being manipulated and adjacent “spokes” of the radial grid that either aren’t 
+influenced by that point, or are locked into place. In fact, you can pull these radial control points well 
+past the boundary of adjacent spokes of the grid to warp those colors to entirely different hues.
+The selected control point being adjusted doesn’t 
+affect points on adjacent columns of control points that 
+stretch from the outer ring to the center of this control, even 
+when the dragged point is moved all the way past.
+When manipulating control points to alter color, adjustments are similar to pushing color around a 
+color wheel. Moving a control point radially around the circumference of the grid changes the hue of 
+the colors corresponding to that control point. Moving a control point closer to the center desaturates 
+those colors, while moving a control point closer to the edge of the grid increases the saturation of 
+those colors.
+3287Color | Chapter 136 Color Warper
+COLOR
+The following sections describe how the different tools available in this mode work to let you 
+manipulate these radial control points in different ways.
+Tools
+Each of the available tools let you manipulate control points on the warping grid in different ways when 
+you click on them.
+  Selection Tool: The default tool mode. Selecting this tool lets you select control points either 
+individually (by clicking on a single point or command-clicking multiple points) or collectively by 
+dragging a bounding box over multiple points, and you can right-click on control points to de-
+select, unlock, and reset them. You can also Shift-click with this tool to lock points into place 
+without moving them. This is the most useful tool to use when manipulating the image by clicking 
+and dragging in the Viewer to sample a color and adjust it at the same time.
+  Draw Selection: Selecting this tool lets you make a selection of control points by clicking and 
+dragging to draw over all the points you want to select. This is good for making large, but specific, 
+selections of points.
+  Pin/De-Pin: Selecting this tool lets you pin multiple control points by either clicking on them or by 
+clicking and dragging to draw over all the points you want to pin/de-pin.
+  Pull Points: Selecting this tool lets you make adjustments by clicking anywhere on the warp grid, 
+even between points, to pull all neighboring control points towards where you clicked. This can be 
+used to reduce color contrast within a specific range of colors.
+  Push Points: Selecting this tool lets you make adjustments by clicking anywhere on the warp grid, 
+even between points, to push all neighboring control points within a particular proximity away from 
+where you clicked. This can be used to increase color contrast within a specific range of colors.
+Modifiers
+Each of the Modifier buttons let you manipulate selections and selected control points on the warping 
+grid in different ways immediately upon clicking each button.
+  Increase Falloff/Smooth Selection:  If you’ve selected one or more control points, clicking this 
+button expands the selection to include all adjacent control points surrounding the selection.
+  Decrease Falloff/Smooth Selection:  If you’ve selected a group of control points, clicking this 
+button shrinks the selection by deselecting the outermost ring of selected control points, leaving 
+the inner control points selected.
+  Invert Selection:  Clicking this button selects all unselected control points, and de-selects all 
+selected control points. This is useful when you want to make separate color adjustments to both 
+specifically selected halves of the warping grid.
+  Convert Selection to Pin:  Clicking this button pins all currently selected control points.
+  Select/Pin Column:  If you have one or more control points selected, clicking this button expands 
+the selection to include all points on every column that have at least one selected point.
+  Select/Pin Ring:  If you have one or more control points selected, clicking this button expands 
+the selection to include all points on every ring around the center that have at least one 
+selected point.
+  Select/Pin All, Deselect/Pin All:  Clicking this button toggles the selected state of the entire 
+warping grid on or off.
+  Reset Selection/Pins:  If you have one or more control points selected, clicking this button resets 
+their position to the original default position in the warping grid, without de-selecting them.
+3288Color | Chapter 136 Color Warper
+COLOR
+Range
+The Range control is a fast method of selecting multiple control points corresponding to a specific 
+range of colors.
+  Range: A gradient shows the range of hues currently being presented in the warping grid. 
+Dragging the left and right handles of the Range control selection box lets you automatically 
+select all control points corresponding to the hues that appear within the selection box. This is a 
+fast way of selecting all points within a range of colors for uniform manipulation.
+Auto Lock Controls
+The Auto Lock controls enables DaVinci Resolve to automatically lock a border of control points 
+surrounding any control point you select and adjust, which makes highly-specific color adjustments 
+easier to accomplish.
+  Auto Lock: Enables and disables this behavior.
+  X Points Border: Lets you set how many points away from the control point you’re adjusting the 
+border of locked control points that restricts your adjustments is. How large an area this ends 
+up being depends on how many points you choose, and on the resolution of the warping grid. 
+At higher grid resolutions, the same points distance isolates a smaller region of color.
+Smoothing Controls
+The smoothing controls let you “ease off” an adjustment you’ve made by progressively moving one or 
+more selected control points towards their original default position in the warping grid.
+  Smooth Chroma: Each click of this button rotates the angle of selected control points around the 
+circumference of the circular warping grid towards their original position, bringing the hue of the 
+adjusted colors closer and closer to the original hues of the image. Saturation is unaffected.
+  Reset Chroma: Resets the angle of all selected control points to the original hues of those control 
+points. Saturation adjustments are unaffected.
+  Smooth Saturation: Each click of this button moves the position of a control point closer to its 
+original position relative the center of the circular warping grid, thus bringing the saturation at that 
+point closer to the original image saturation of the node’s input. Hue is unaffected.
+  Reset Saturation: Resets the distance from the center of all selected control points to the original 
+image saturation at those control points.
+  Reset Luma: Resets luma to the original image values.
+Chroma-Luma Controls
+The Chroma-Luma mode lets you alter the hue and lightness of colors in the image simultaneously. 
+This may not feel like a particularly intuitive way of working, as the grid controls are overlaid on colors 
+projected as different sides of an RGB cube. However, this enables some powerful adjustments once 
+you get the hang of how multiple adjustments interact in this mode, as well as the power of locking 
+control points to limit your adjustments to specific areas of the two grids.
+Whether you’re sampling the image or manipulating the control points of this grid directly, dragging 
+any point of this grid changes the color of the image corresponding to that point. Vertical adjustments 
+change lightness, where up makes that part of the image lighter, and down makes that part of the 
+image darker. Horizontal adjustments change hue, depending on which range of hues are shown in 
+the two Chroma-Luma warping controls, and which of these you’re adjusting.
+3289Color | Chapter 136 Color Warper
+COLOR
+By default, only the outer four corners of this control are locked, so any adjustment you make to 
+any control point pushes and pulls all the other colors throughout the image, depending on your 
+adjustment. Working this way, multiple adjustments to multiple colors gradually pins different 
+colors into place, with each adjustment warping the colors falling in between to maintain a smooth 
+transformation from one adjustment to the next. This can be a good way to make an overall stylistic 
+adjustment to the image.
+The original image
+The result of making multiple interacting color adjustments across the entire Chroma Luma grid
+Another approach to using this mode is to make more targeted corrections by manually locking 
+different colors in the image that you don’t want to adjust. You can do this by using the Selection tool 
+and Shift-clicking any value in the Viewer, or by Shift-clicking any control point on the grid control. 
+By locking colors you don’t want to change, you can focus on manipulating a more specific range of 
+colors without altering the entire image.
+Alternately, this is where the Auto Lock controls really shine. When you turn these on, you can choose 
+the type of region you want to affect (vertical column, horizontal row, or a square region), then choose 
+how large a region of color you want to manipulate (one or two points away from the point that’s 
+selected). Keep in mind that the current resolution of the warping grid also has an effect on how large 
+the resulting region of color will be. Lower resolution grids will let you manipulate larger regions of 
+color, while higher resolution grids will let you adjust a more narrow range of color.
+The Auto Lock controls let you make highly targeted 
+adjustments to specific sections of the warping grid.
+3290Color | Chapter 136 Color Warper
+COLOR
+Once these controls are enabled, simply clicking once on the image or warping grid selects a control 
+point and automatically locks off the region of the grid you want to focus your adjustment on. In the 
+following example, a medium-resolution grid is used in conjunction with the Auto Lock controls set to 
+lock a 2-point rectangular region. So, clicking on the skin of the woman’s face and dragging adjusts a 
+section of available reds within the locked-off region of the grid. 
+Making a targeted color adjustment to a locked-off region of the Chroma Luma grid
+The following sections describe how the different tools available in this mode work to let you 
+manipulate these radial control points in different ways.
+Axis Angle
+When you’re in Chroma-Luma mode, an additional control appears underneath the warping grids, a 
+slider named Axis Angle. Dragging this slider to the left or right changes the range of hues in each of 
+the two warping grids that’s presented, letting you manipulate different ranges of color.
+Tools
+Each of the available tools let you manipulate control points on the warping grid in different ways when 
+you click on them.
+The Tools buttons
+  Grid 1/Grid 2 tabs: Since the Chroma-Luma controls expose two grids representing two different 
+ranges of hue and luma, these two tabs let you choose which grid will be manipulated when you 
+sample the image in the Viewer, as well as which grid the Tools controls affect.
+  Selection Tool: The default tool mode. Selecting this tool lets you select control points either 
+individually (by clicking on a single point or command-clicking multiple points) or collectively by 
+dragging a bounding box over multiple points. You can also Shift-click with this tool to lock points 
+into place without moving them, and you can right-click on control points to de-select, unlock, 
+and reset them. This is the most useful tool to use when manipulating the image by clicking and 
+dragging in the Viewer to sample a color and adjust it at the same time.
+  Draw Selection: Selecting this tool lets you make a selection of control points by clicking and 
+dragging to draw over all the points you want to select. This is good for making large, but specific, 
+selections of points.
+  Pin/De-Pin: Selecting this tool lets you pin multiple control points by either clicking on them or by 
+clicking and dragging to draw over all the points you want to pin/de-pin.
+3291Color | Chapter 136 Color Warper
+COLOR
+  Pull Points: Selecting this tool lets you make adjustments by clicking anywhere on the warp grid, 
+even between points, to pull all neighboring control points towards where you clicked. This can be 
+used to reduce color contrast within a specific range of colors.
+  Push Points: Selecting this tool lets you make adjustments by clicking anywhere on the warp grid, 
+even between points, to push all neighboring control points within a particular proximity away from 
+where you clicked. This can be used to increase color contrast within a specific range of colors.
+Modifiers
+Each of the Modifier buttons let you manipulate selections and selected control points on the warping 
+grid in different ways immediately upon clicking each button.
+The Modifier buttons
+  Increase Falloff/Smooth Selection:  If you’ve selected one or more control points, clicking this 
+button expands the selection to include all adjacent control points surrounding the selection.
+  Decrease Falloff/Smooth Selection:  If you’ve selected a group of control points, clicking this 
+button shrinks the selection by deselecting the outermost ring of selected control points, leaving 
+the inner control points selected.
+  Invert Selection:  Clicking this button selects all unselected control points, and de-selects all 
+selected control points. This is useful when you want to make separate color adjustments to both 
+specifically selected halves of the warping grid.
+  Convert Selection to Pin:  Clicking this button pins all currently selected control points.
+  Select/Pin Column:  If you have one or more control points selected, clicking this button expands 
+the selection to include all points on every column that have at least one selected point.
+  Select/Pin Row:  If you have one or more control points selected, clicking this button expands the 
+selection to include all points on every row that have at least one selected point.
+  Select/Pin All, Deselect/Pin All:  Clicking this button toggles the selected state of the entire 
+warping grid on or off.
+  Reset Selection/Pins:  If you have one or more control points selected, clicking this button resets 
+their position to the original default position in the warping grid, without de-selecting them.
+Range
+The Range control is a fast method of selecting multiple control points corresponding to a specific 
+range of colors.
+The Range control
+  Range: A gradient shows the range of hues currently being presented in the warping grid. 
+Dragging the left and right handles of the Range control selection box, or dragging within the 
+range control to set both boundaries, lets you automatically select all control points corresponding 
+to the hues that appear within the selection box. Once you’ve set a range, you can move the 
+range to the left and right by dragging the center of the selection. This is a fast way of selecting all 
+control points within a range of colors for uniform manipulation.
+3292Color | Chapter 136 Color Warper
+COLOR
+Auto Lock Controls
+The Auto Lock controls enables DaVinci Resolve to automatically lock a border of control points 
+surrounding any control point you select and adjust, which makes highly specific color adjustments 
+easier to accomplish. These are particularly useful in the Chroma-Luma warping grid.
+The Auto Lock controls
+  Auto Lock: Enables and disables this behavior.
+  X Points Border: Lets you set how many points away from the control point you’re adjusting the 
+border of locked control points that restricts your adjustments is. How large an area this ends 
+up being depends on how many points you choose, and on the resolution of the warping grid. 
+At higher grid resolutions, the same points distance isolates a smaller region of color.
+  Lock Column: Lets you choose to restrict your adjustment to affect all control points within a 
+particular column of the rectangular Chroma-Luma graph. The width of this column is defined by 
+the border width controls. This is useful when you want to primarily adjust the lightness of a range 
+of colors, while making a small adjustment to hues.
+  Lock Row: Lets you choose to restrict your adjustment to affect all control points within a particular 
+row of the rectangular Chroma-Luma graph. The height of this row is defined by the border width 
+controls above. This is useful when you want to primarily adjust the hue of a range of colors, while 
+making a small adjustment to lightness.
+  Lock Region: Lets you choose to restrict your adjustment to affect all control points within a 
+rectangular region surrounding the selected point. The is useful when you want to adjust a 
+targeted region of color that corresponds to a well-defined feature of the image, such as a 
+specifically colored hat, shirt, foliage, or skin tone. Smaller regions will make more specific 
+adjustments than larger regions.
+Smoothing Controls
+If you’ve found that you’ve gone a bit too far with an adjustment and need to back off a little bit, the 
+Smooth controls let you do so gradually, or start over if necessary.
+The Smoothing controls
+  Smooth Chroma: Each click of this button moves selected control points left or right, back towards 
+their original position, bringing the hue of the adjusted colors closer and closer to the original hues 
+of the image. Luma is unaffected.
+  Reset Chroma: Resets the position of all selected control points to the original hues of those 
+control points. Luma adjustments are unaffected.
+  Smooth Luma: Each click of this button moves selected control points up or down, back towards 
+their original position, bringing the luma of the adjusted colors closer and closer to the original 
+luma of the image. Chroma is unaffected.
+  Reset Luma: Resets the position of all selected control points to the original luma of those control 
+points. Chroma adjustments are unaffected.
+3293Color | Chapter 136 Color Warper
+COLOR
+Chapter 137
+Secondary Qualifiers
+Secondary correction describes isolating a specific part of the image, 
+or a specific subject, using a key. 
+Keys in DaVinci Resolve are grayscale images that define which areas of the picture you want to alter 
+(in white) and which parts of the picture you want to leave alone (in black). 
+Keys can be generated either using the controls in the Qualifier palette, by using a Power Window, 
+or by importing an external matte. 
+For more information on how to use external mattes, jump to this chapter: Combining Keys 
+and Using Mattes. This chapter focuses on how you can use qualifiers to key a range of color 
+values (similarly to doing a green screen key) in order to create a matte with which to do this 
+kind of isolated adjustment.
+Contents
+Secondary Qualifiers  ����������������������������������������������� 3295
+Adding a Secondary Operation 
+to the Node Editor �����������������������������������������������������  3295
+The Qualifier Interfaces  ������������������������������������������ 3296
+Which Qualifier Do I Use?  ��������������������������������������� 3297
+Set the Default Qualifier Mode ��������������������������  3298
+Basic Qualification Using  
+the 3D Qualifier  ���������������������������������������������������������� 3299
+Basic Qualification Using  
+the HSL Qualifier  �������������������������������������������������������� 3303
+HSL Qualifier Presets  ���������������������������������������������� 3306
+Using Highlight to See 
+What You’re Isolating ���������������������������������������������� 3306
+Using Highlight to Solo Nodes  ���������������������������� 3308
+Showing Picker RGB Values ��������������������������������  3308
+Qualifier Parameters  ������������������������������������������������ 3309
+HSL Qualification Controls  ������������������������������������ 3309
+RGB Qualification Controls  �������������������������������������� 3311
+Luma Qualification Controls  ������������������������������������ 3311
+3D Qualifier Controls  �������������������������������������������������� 3312
+Matte Finesse Controls  �������������������������������������������� 3315
+The Many Ways to Invert a Key ���������������������������� 3319
+Combining Qualifiers and Windows  ���������������� 3320
+Manipulating Keys Using Additional Nodes  �� 3321
+3294Color | Chapter 137 Secondary Qualifiers
+COLOR
+Secondary Qualifiers
+This section covers the use of the Qualifier palette, which lets you pull a 3D, HSL, RGB, or Luma key, 
+with which to isolate the correction you need. The Qualifier controls are fast and flexible when you 
+need to isolate an irregularly shaped subject with a distinct range of color or lightness. Since you’re 
+generating a key by sampling the image, there’s no need for tracking or keyframing, so in the right 
+situation qualifiers can be your fastest solution. In the following example, the client likes the slightly 
+cool treatment overall, but wishes that the skin tones were a little more vibrant. This is exactly the sort 
+of situation where qualifiers can help out. Adding a second node, and using the 3D or HSL Qualifier to 
+isolate the face makes it relatively simple to add color exactly where you want it.
+Adding a second node and using HSL 
+Qualification to isolate the skin tones 
+The image with a simple primary correction  The final adjusted image 
+Just about every control in the Color page can be limited using of the Qualifier modes available in 
+DaVinci Resolve. This makes the Qualifier palette a jack-of-all-trades tool with 101 uses. A few practical 
+examples include keying a red element that’s too intense for broadcast, in order to darken it or 
+desaturate it; keying a range of green foliage, so you can shift its hue to a more attractive color; keying 
+an actor’s skin tone in a commercial, to apply some selective softening to it; or keying a range of sky, 
+in which to add blue.
+The Qualifier palette is color-space-aware when you’re using Resolve Color Management (RCM) or 
+ACES. This enables Qualifiers to create high-quality keys as you would expect, no matter what the 
+color space of the original media is, or what Timeline Color Space you’re using, for both SDR and HDR 
+mastering. This makes Qualifier isolations easier, and a more consistent experience no matter what 
+your workflow happens to be.
+Adding a Secondary Operation to the Node Editor
+Any node can be switched between functioning as a primary correction, where the adjustments you 
+make affect the entire image, and a secondary correction, where you’re adjusting a specific element in 
+the scene. The only difference is that nodes being used for secondary corrections are limited using a 
+qualifier, Power Windows, or an external matte.
+3295Color | Chapter 137 Secondary Qualifiers
+COLOR
+If you’re planning to add a secondary operation to the current grade, you’ll need to first add another 
+node in the Node Editor. When pulling a key to qualify part of the image, it’s important to understand 
+that you’ll be sampling the YRGB values being fed to that node from any previous nodes in the 
+tree. That means that the state of the image being fed to a node you’re qualifying affects the key 
+you’re pulling.
+For example, if the image coming out of Node 1 is well saturated and has a neutral color 
+balance with a wide range of colors, but the image coming out of Node 2 applies a low 
+saturation, monochromatically orange color wash, you may find it more difficult to pull a 
+detailed key from Node 2 than you would from Node 1. 
+Choosing your battles–the image coming out of 
+Node 1 will be easier to key than the highly stylized 
+image coming out of Node 2
+This is important because you have the flexibility of determining from what image you 
+want to try pulling a qualified key. By connecting the node that’s outputting the best YRGB 
+image for the key you’re trying to create to the node you’re qualifying, you can control what 
+you’re keying. 
+For more information on choosing which node to use for setting up a qualifier,  
+jump to this chapter: Combining Keys and Usi ng Mattes.
+The Qualifier Interfaces
+The DaVinci Resolve Qualifier palette interface is straightforward. To the left, graphical controls above 
+numeric parameters let you manually adjust what ranges of each color component contributes to the 
+key you’re creating. To the right, Selection Range tools below let you define a key by sampling pixels 
+of the image using the pointer, while below a set of Matte Finesse parameters let you alter the shape 
+of the key that’s been pulled.
+Qualifier palette with HSL controls selected
+3296Color | Chapter 137 Secondary Qualifiers
+COLOR
+The default qualification mode is the HSL Qualifier, which uses three color components, hue, 
+saturation, and luma, to define a key. However, you can also use the RGB or LUM (Luma) qualification 
+modes to pull keys using other combinations of color components. The LUM qualifier mode, in 
+particular, lets you make targeted adjustments to specific ranges of image lightness. This is a 
+technique employed by many colorists to alter color temperature within a specific range of image 
+highlights or shadows.
+Alternately, you can use the 3D qualifier to quickly and easily pull well-refined keys by drawing lines to 
+sample colors from the image that correspond to volumes of color within a three -dimensional gamut. 
+While the underlying technology is sophisticated, all you have to do is to draw blue lines to sample 
+colors you want to isolate, or red lines to sample colors you want to subtract from the isolation you’re 
+creating, all of which automatically generate a high-quality key. Each line you draw adds a sample to 
+the selection list; you can turn each sample off and on to evaluate its contribution to the resulting key, 
+or delete samples that don’t make a positive contribution.
+The 3D qualifier
+No matter which qualifier mode you use, the Matte Finesse controls make it easy to refine the resulting 
+key to be even cleaner and more usable. In some instances, you can even take a marginal key that 
+would otherwise be unusable, and squeeze it into something useful using the Clean Black, Clean 
+White, and Blur Radius controls.
+Which Qualifier Do I Use?
+The Qualifier palette’s four modes offer you the flexibility to use the best keyer for the job when it 
+comes to isolating a range of color or brightness values. In some cases, keys that are difficult to pull 
+using some modes are easier to pull using others. Here’s a brief summary:
+HSL: In many instances, the HSL keyer is not as immediately accurate as the 3D keyer, 
+and will include a broader portion of the image for any given sample. On the other 
+hand, if the 3D keyer is not giving you satisfactory results for a particular shot, the HSL 
+keyer can sometimes do a better job. Because of its interface, the HSL keyer makes it 
+easier to “fine-tune” the range and softness of each individual color component that’s 
+sampled, in order to improve the result. The HSL keyer also gives you the option of 
+disabling color components that you don’t want to contribute to the final key, so that you 
+can pull a saturation-only key, or a hue-only key, for instances where that may solve the 
+issue at hand.
+3297Color | Chapter 137 Secondary Qualifiers
+COLOR
+RGB: The RGB keyer shares many of the limitations and advantages of the HSL keyer, 
+but since you’re sampling and adjusting red, green, and blue color components, the 
+specificity with which you can fine-tune the resulting key works much differently. 
+LUM: The LUM keyer works specifically to isolate parts of the image based on image 
+tonality, lightness, or darkness. This is the perfect tool when you’re trying to isolate 
+highlights or shadows in the image, which let you solve a multitude of different creative 
+and technical issues. The LUM keyer is identical to using the HSL keyer with the Hue and 
+Saturation qualifier controls turned off.
+3D: The 3D keyer is a good one to start with if you’re trying to isolate a range of color 
+such as a blue shirt, a cyan sky, a performer’s skin tone, or the orange leaves of a tree 
+in autumn. Its interface of drawing lines over the part of the image you want to isolate, 
+coupled with its high quality and extreme specificity, make it a fast and accurate tool 
+to use in a variety of circumstances. However, the 3D keyer always samples every 
+color component of the image; it’s not useful when you want to isolate specific color 
+components, such as luma only, or hue and saturation without luma. The 3D keyer’s 
+greatest strength, the speed with which you can sample areas of the picture to include 
+(or exclude) from the final key, is also occasionally a weakness with images where your 
+initial samples aren’t giving you satisfactory results, because there aren’t many ways to 
+fine tune the key as it’s being generated (although you can manipulate the result). On 
+the other hand, for most images you would want to qualify, two or three samples is all 
+you need, in conjunction with using the Matte Finesse controls to adjust the resulting 
+key. If you need to do some compositing in the Color page, the 3D keyer also does an 
+excellent job doing blue and green screen keying to create transparency, and has a built-
+in Despill control as well.
+Set the Default Qualifier Mode
+You can set your favorite qualifier to open as the default when you apply a qualifier on a new clip on 
+the timeline. This can save a significant amount of clicks over the course of a project. As expected, if a 
+qualifier other than the default has been applied to the clip, that qualifier will open instead.
+To change the Default Qualifier, click on the Qualifiers (3-dot) Option menu, select Default Qualifier, 
+and choose an option from the list.
+Changing the Default Qualifier to 3D, which will now open the 3D 
+qualifier instead of the HSL qualifier on new clips
+3298Color | Chapter 137 Secondary Qualifiers
+COLOR
+Basic Qualification Using the 3D Qualifier
+The 3D Qualifier mode offers a fast, simple way of pulling a key to isolate a range of color in the image, 
+by drawing lines over the parts of the image you want to key. Each line you draw over the image adds 
+to or subtracts from the cloud of values you’re carving out of a three-dimensional representation of all 
+available colors; you don’t see this representation, but this “under the hood” functionality is what gives 
+the 3D keyer its name.
+The 3D keyer is a general-purpose keyer, letting you isolate any color you like. However, the 3D keyer 
+is not good at pulling luma-only keys. If you’re looking to isolate a range of luma values in the image, 
+you should use the LUM mode.
+To use the 3D mode to isolate a subject in the Viewer:
+1 Open the Qualifier palette, choose the 3D icon in the upper right and click the eyedropper.
+2 Click and drag across the part of the image you want to isolate to draw a line. Lines that add to the 
+key are colored blue.
+Drawing a line to create a key using the 3D qualifier
+3 To see the key you’re creating as you work, click the Highlight button in the Viewer Options 
+toolbar at the top of the Viewer. As you draw the line, the viewer will update to show your current 
+key in real time.
+Viewing the key using the Highlight button
+3299Color | Chapter 137 Secondary Qualifiers
+COLOR
+4 If necessary, draw additional lines to add more of the image to the key you’re creating. Ordinarily, 
+it’s a good idea to not to draw more then two or three lines to sample the part of the image you’re 
+trying to isolate. A few long strokes are better than several short ones. Ideally, you want the key 
+you’re pulling to have a somewhat soft edge, which makes it easier to use the Matte Finesse 
+controls to fine-tune your result later on. If you draw too many lines to sample the image, the result 
+can be a key with hard, jagged edges that can sometimes be more difficult to adjust later on.
+A hard-edged key created with three samples
+5 Alternately, if there are parts of the image that are included in the key that you want to omit, hold 
+the Option key down and draw a line over these areas. You can see that Option-drawn lines 
+are red, and these subtract areas from the key you’re creating. Again, try not to overdo drawing 
+subtractive red lines, as you can end up with an overly hard-edged key that’s difficult to adjust 
+using other controls in the next few steps. Additionally, you can still use power windows in 
+conjunction with the 3D qualifier to exclude specific parts of the image.
+Blue lines add to the key and a red line subtracts the  
+grass from the key, as seen with the highlight turned off
+6 If you find yourself wondering whether a particular sample in the list at left is doing any good, you 
+can click the color patch at the left of any entry in the list to toggle that sample off and on. If you 
+decide you don’t need a particular sample, click the trash can button at the right to delete it.
+3300Color | Chapter 137 Secondary Qualifiers
+COLOR
+Controls for toggling samples off and on,  
+and deleting them from the list
+7 When you’re satisfied that the key is good enough to start fine-tuning, stop drawing lines. It’s 
+all right if there’s a bit of noise, speckling, or if there are small holes in the key you’re creating, 
+because you can take care of these using the Matte Finesse controls.
+A sampled key that’s ready for further refinement
+Nearly every key you pull will benefit from some further “post-key” refinement. What this means is 
+that, once you’ve created the best key you can procedurally through sampling the image, you can 
+now adjust the resulting key itself, which is just a gray-scale image, to improve the isolated result. 
+This is what the Matte Finesse controls are for.
+3301Color | Chapter 137 Secondary Qualifiers
+COLOR
+Matte Finesse controls
+8 The three most common methods of key refinement using the Matte Finesse controls are to 
+increase Clean Black to fill in “holes” in the parts of the image you’re omitting (the background), 
+increase Clean White to close holes in the part of the image you’re isolating (the foreground), and 
+then use Blur Radius and In/Out Ratio controls to blur the edge of the key and push it in and out. 
+Using these controls, you can vastly improve nearly any key without the need to endlessly readjust 
+the Qualifier controls.
+More information about using the Matte Finesse controls appears later in this chapter.
+9 When you’re finished, click the Highlight control to turn the highlight off, and make whatever 
+adjustment you need. In this example, the orange of the helicopter will be adjusted using the Hue 
+control to make it blue instead.
+Adjusting the orange color of the helicopter to be blue instead
+3302Color | Chapter 137 Secondary Qualifiers
+COLOR
+Basic Qualification Using the HSL Qualifier
+The HSL qualifier is one of the most flexible tools in DaVinci Resolve. Using any combination of 
+sampled hue, saturation, and luma, you can isolate different ranges of color and contrast for specific 
+adjustment. HSL is a general-purpose keyer, meaning you can key any color you like; it’s not restricted 
+to blue or green.
+The most straightforward way to use any qualifier is to sample the image in the Viewer. A set of four 
+controls let you sample pixels within the image in different ways. When you sample one or more 
+pixels, the Hue, Saturation, and Luma values are analyzed, and set different ranges in each of the Hue, 
+Saturation, and Luma qualifier controls. There are a number of different eyedropper controls available 
+to control how you sample color in the image.
+Color Picker  
+button
+Add and Subtract  
+color buttons
+Add and Subtract  
+qualifier softness
+Sample Eyedropper: The first 
+control you use whenever 
+sampling the image. It 
+defines the initial range of the 
+qualification; you must use this 
+tool before any of the others. 
+Clicking once with this tool 
+selects a single pixel value, 
+while clicking and dragging 
+selects a range of image 
+values that add together.
+Add/Subtract Color Range:  
+These two controls let you 
+add areas of the image 
+to, or subtract them from, 
+the currently selected 
+inner range of values that 
+define the core of the key. 
+As with the eyedropper, you 
+can click on single pixels, or 
+drag over a range of color.
+Add/Subtract Softness:  These 
+two controls let you redefine 
+the softness that transitions 
+from the inner range of the key, 
+falling off towards the outer 
+edge of the key. Just like the 
+other controls, you can click 
+on single pixels, or drag over a 
+range of color.
+NOTE: When you select one of the sampling controls, it remains selected until you select 
+another sampling control. If you select another clip in the Timeline, then click in the Viewer to 
+sample a key and nothing happens, make sure that you select the Eyedropper control in the 
+Qualifier palette.
+If you’re working with the DaVinci Resolve onscreen interface, the easiest way to qualify a 
+subject is to use the pointer in conjunction with the sampling controls.
+3303Color | Chapter 137 Secondary Qualifiers
+COLOR
+Example image to qualify
+To use the HSL Qualifier mode to isolate a subject in the Viewer:
+1 Open the Qualifier palette, choose HSL from the mode drop-down, and click the eyedropper.
+2 Either click a pixel of the part of the image you want to isolate, or click and drag across a range of 
+pixels within that subject.
+Picking to qualify the ocean
+3 To see the key you’re creating as you work, click the Highlight button in the Viewer Options 
+toolbar at the top of the Viewer. 
+By default, the area of the image you’re isolating appears in color, while the area of the image 
+being excluded appears solid gray. 
+Viewer image with highlight turned on, isolated  
+region appears in color, omitted region appears gray
+3304Color | Chapter 137 Secondary Qualifiers
+COLOR
+Even though the highlight obscures the rest of the image, this doesn’t prevent you from using the 
+sampling tools to select pixels you can’t see.
+4 To subtract from the inner range of the key you’re creating, click the minus Color Range control, 
+and click or drag across the portion of the keyed image that you’d like to exclude.
+5 To add softness to the outer range of the key you’re creating, click the plus Softness control and 
+then click or drag across the portion of the image you’d like to include as a soft edge.
+Once you’ve finished using the range and softness sampling controls to refine the key you’re 
+using to isolate the subject, nearly every key you pull will benefit from some further “post-key” 
+refinement. What this means is that, once you’ve created the best key you can procedurally 
+through sampling the image, you can now adjust the resulting key itself, which is just a grayscale 
+image, to improve the isolated result. This is what the Matte Finesse controls are for.
+Matte Finesse controls
+6 The three most common methods of key refinement using the Matte Finesse controls are to 
+increase Clean Black to fill in “holes” in the parts of the image you’re omitting (the background), 
+increase Clean White to close holes in the part of the image you’re isolating (the foreground), and 
+then use Blur Radius and In/Out Ratio controls to blur the edge of the key and push it in and out. 
+Using these controls, you can vastly improve nearly any key without the need to endlessly readjust 
+the Qualifier controls.
+More information about using the Matte Finesse controls appears later in this chapter.
+7 When you’re finished, click the Highlight control to turn the highlight off, and make whatever 
+adjustment you need. In this example, the saturation has been raised and the color balance 
+changed to make the adjustment obvious.
+3305Color | Chapter 137 Secondary Qualifiers
+COLOR
+Altered color balance of the ocean and sky
+HSL Qualifier Presets
+There is a set of HSL Qualifier presets, or Six Vector presets, that you can use to isolate automatically 
+a predefined wedge of color (green, blue, red, magenta, yellow, or cyan) or chroma intensity (chroma 
+light, chroma dark, or both). These presets are available either from the Color > Presets menu, or using 
+the DaVinci Resolve Advanced control panel. 
+Selecting one of these presets automatically sets the HSL Qualifier to the corresponding range or 
+color or lightness. Afterwards you can continue modifying the HSL Qualifier to suit your purpose.
+The Color > Presets menu
+Using Highlight to See 
+What You’re Isolating
+The Highlight control at the top of the Viewer (revealed by turning on Viewer Options in the Viewer’s 
+Option menu) lets you overlay a representation of the key you’re creating over the current image in the 
+Viewer. Overlays are also mirrored to your video output, so they’ll show up on an external display as 
+well, in the event that you’re hiding the onscreen Viewer.
+There are two types of highlights with which you can evaluate a qualification you’re creating. Each is 
+useful for different tasks.
+3306Color | Chapter 137 Secondary Qualifiers
+COLOR
+Flat-Gray: The default highlight that DaVinci Resolve uses shows the selected portion of the 
+image with the original colors, and the unselected portion of the image with a flat gray. It is 
+useful for seeing the subject you’re isolating even while you’re adjusting the Qualifier controls, 
+which lets you also see the color or contrast adjustments you’re applying at the same time.
+Oranges qualified and highlighted
+High-Contrast: Pressing Option-Shift-H, you can show what’s called a “high-contrast” 
+highlight, which should be familiar to you if you’ve used other color correction applications 
+and plugins; it’s a more typical display wherein the selected portion of the image is white, 
+and the unselected portion of the image is black. The high-contrast highlight is useful in 
+situations where you need to eliminate holes in a key, or evaluate how “chattery” a key is since 
+irregularities are easier to spot when divorced from the original image.
+High-Contrast B&W highlighting
+3307Color | Chapter 137 Secondary Qualifiers
+COLOR
+To enable or disable a highlight, do one of the following:
+  In the Viewer Options toolbar at the top of the Viewer, click the Highlight control, and choose the 
+type of highlight you want from the buttons that appear at the right.
+  Choose an option from the Highlight submenu in the Viewer’s option menu; a regular 
+Highlight is Shift-H.
+To enable or disable a high-contrast highlight, do one of the following:
+  Choose Highlight > Highlight BW (Option-Shift-H) from the Viewer’s option menu.
+To make high-contrast black and white the default highlight:
+1 Open the Preferences > User > Color window.
+2 Check “Mattes display high contrast black and white.”
+3 Click Save.
+The next time you click the Highlight control in the Qualifier palette, the high-contrast 
+highlight will display.
+Using Highlight to Solo Nodes
+There’s one other use of the Highlight control, and that’s to solo individual nodes in the Viewer and 
+video out, rather than outputting the sum of the entire node tree. For example, if you’re trying to adjust 
+a stack of nodes attached to a Parallel or Layer Mixer node, it’s difficult to see what you’re doing while 
+adjusting one of the stack of nodes, because only the final result is being output. 
+However, if you turn on Highlight while you’re selecting a node with no key, then only the currently 
+selected node is output, making it easy to view just one node as you adjust it. Just make sure you turn 
+Highlight off before moving on, or you may confuse yourself.
+Showing Picker RGB Values
+While you’re dragging the pointer over the Viewer and looking for a feature to sample, you can enable 
+a tooltip that shows you the RGB Value of the pixel under the pointer by right-clicking the Viewer and 
+choosing Show Picker RGB Value to toggle this feature on and off. When you turn this feature on, the 
+Show RGB Picker Values In submenu in the Viewer’s option menu has options for displaying either 
+8- or 10-bit tristimulus values.
+The Color Picker tooltip that appears when 
+you turn on show RGB Picker Values 
+3308Color | Chapter 137 Secondary Qualifiers
+COLOR
+Qualifier Parameters
+Each of the Qualifier modes, except for the 3D qualifier, has parameters that correspond to the 
+relevant color components for that mode, with which you can identify a range and softness, similar to 
+using the sample tools. These parameters can be edited precisely with virtual sliders using the pointer, 
+or using the knobs of a supported grading control panel. However, mouse and tablet users can take 
+advantage of each qualifier’s draggable white overlays, for more direct adjustment. 
+  Drag the left and right edges of any qualifier control overlay to adjust the Low and High values 
+(or the Width value of the Hue control). 
+  Drag the center of any qualifier control to change the center or to simultaneously change the 
+Low and High parameters together. 
+  Option-drag the left and right edges of any qualifier overlay to adjust softness. 
+These draggable controls work for the HSL, RGB, and LUMA qualifier controls (the 3D qualifier 
+works differently).
+Draggable qualifier controls
+HSL Qualification Controls
+The HSL Qualifier is by far the most versatile mode of the Qualifier palette. It’s also the qualifier 
+that’s easiest to understand, and the easiest to adjust by hand if you don’t feel the need to 
+sample the image. By selecting range and softness for each of three different color components, 
+hue, saturation, and luma, you can isolate a wide variety of colorful subjects, or ranges of image 
+lightness and saturation.
+The HSL Qualifier controls in close up
+3309Color | Chapter 137 Secondary Qualifiers
+COLOR
+One of the HSL Qualifier’s key strengths, and one of its most underutilized features, is that you can 
+enable or disable each of the three HSL components using the Hue, Sat, and Lum buttons, using 
+toggle controls found at the left of each qualifier range control’s name. This lets you ignore specific 
+color components, while focusing on others that are more important. 
+For example, if you’re trying to isolate the saturated parts of an image, regardless of the hue 
+or brightness, you can turn off the Hue and Lum qualifiers so that only Sat is used to sample 
+the image.
+Qualification with saturation only to isolate the most saturated portion of the picture
+The HSL parameters include:
+  Hue Center: Defines the center of the range of Hue being isolated.
+  Hue Width: Defines the width of the range of hue being isolated. Widening or narrowing this 
+parameter widens and narrows the range of hue about the current Hue Center.
+  Hue Soft: Widens or narrows the falloff at both sides of the currently selected range of hue.
+  Hue Symmetry: Lets you selectively alter the angle of Hue Soft falloff at either the right or left 
+side. Lowering this parameter makes the softness to the right of the hue range grow steeper. 
+Raising this parameter makes the softness to the left of the hue range grow steeper.
+  Sat Low/High: Two parameters let you define the upper and lower range of saturation 
+being isolated.
+  Sat Low Soft/High Soft: Two parameters let you define the upper and lower softness falling off 
+outside the current range of saturation.
+  Lum Low/High: Two parameters let you define the upper and lower range of luma being isolated.
+  Lum Low Soft/High Soft: Two parameters let you define the upper and lower softness falling off 
+outside the current range of luma.
+3310Color | Chapter 137 Secondary Qualifiers
+COLOR
+RGB Qualification Controls
+The RGB Qualifier mode lets you isolate range and softness in the Red, Green, and Blue channels of 
+an image. While this is not necessarily an intuitive way of manually creating a qualification from scratch, 
+it can provide a different way of isolating potentially trickier ranges of the RGB color space. 
+If you start by sampling the image, then you can widen and narrow each color channel’s isolated range 
+of values. In some cases, you may find it’s faster to isolate a specific range of continuous color by 
+adjusting these controls.
+RGB qualification controls
+The RGB parameters include:
+  Red Low/High: Two parameters let you define the upper and lower range of the Red channel 
+being isolated.
+  Red Low Soft/High Soft: Two parameters let you define the upper and lower softness falling off 
+outside the current range of red.
+  Blue Low/High: Two parameters let you define the upper and lower range of the Blue channel 
+being isolated.
+  Blue Low Soft/High Soft: Two parameters let you define the upper and lower softness falling off 
+outside the current range of blue.
+  Green Low/High: Two parameters let you define the upper and lower range of the Green channel 
+being isolated.
+  Green Low Soft/High Soft: Two parameters let you define the upper and lower softness falling off 
+outside the current range of green.
+Luma Qualification Controls
+The Luma Qualifier mode simply pulls a key from the Luma channel all by itself. It’s identical to the HSL 
+qualifier with H and S turned off. This single-component keyer is more useful than you might think; it’s 
+a common technique to isolate a range of highlights, midtones, or shadows throughout the image to 
+alter the color temperature selectively. 
+3311Color | Chapter 137 Secondary Qualifiers
+COLOR
+The Luma Keyer mode automatically disables the Hue and Saturation controls
+Also, keep in mind that the luma component is the sharpest keyable component when you’re working 
+with heavily compressed video. Keys that are noisy or chunky with HSL qualification may be sharper if 
+you just use the Luma Qualifier, although you won’t be able to be chromatically specific.
+The Luma Qualifier has four parameters:
+  Lum Low/High: Two parameters let you define the upper and lower range of the luma component 
+being isolated.
+  Lum Low Soft/High Soft: Two parameters let you define the upper and lower softness falling off 
+outside the current range of luma.
+3D Qualifier Controls
+As discussed earlier in this chapter, the 3D Qualifier works much differently than the other qualifiers in 
+DaVinci Resolve. In this mode, drawing lines over parts of the image you want to isolate adds samples 
+to the Sample list, some of which add to the key (when you drag with the pointer) and some of which 
+subtract from the key (when you Option-drag with the pointer). While this functionality is very simple to 
+use, there are other controls that are available.
+The 3D Qualifier mode
+3312Color | Chapter 137 Secondary Qualifiers
+COLOR
+The 3D Stroke Pickers:
+Picker: Chooses the initial color to qualify. Longer strokes will tend to give you a better key.
+Picker -: Removes a color region from the qualifier; also available by holding down the 
+Option key.
+Picker +: Choses an additional color region to add to the initial qualifier.
+Invert: Inverts the current key; qualified areas are then unqualified and vice versa.
+Show Paths: A checkbox that lets you turn the visibility of the lines you’re drawing to 
+sample the image on and off. Turning lines off does not affect the key in any way.
+Auto-B/W Highlight:  With this checkbox enabled, the viewer automatically switches to 
+Highlight B/W mode while drawing a line, to better show you the resulting key in real time. 
+When the button is released the viewer will switch back to its original viewing mode.
+Colorspace: A drop-down menu that lets you choose whether you’re sampling colors in 
+YUV colorspace, or HSL, HSP, or LAB colorspaces. YUV is the default, but if you find you’re 
+not getting satisfactory results, you can reset the Qualifier palette and switch to different 
+ones to see if that works any better.
+Strokes list: A list shows each line you drew as a sampled entry. A color patch at the left 
+shows you the average color you sampled; clicking the color patch lets you temporarily 
+turn any color sample off to evaluate its contribution to the overall key. A plus or minus 
+icon shows you whether that patch is adding to or subtracting from the key. The average 
+red, green, and blue color values are shown next, and a trash can icon at the right lets you 
+delete any sample from the list.
+The 3D Qualifier Modes:
+Soft: Provides a softer edge to the key that is more forgiving of Chroma and Luma 
+adjustments. The more gentle drop-off is suitable for situations like subtle light changes 
+across a face. Use the Shadow / Midtone / Highlight Matte Finesse Controls in conjunction 
+with this mode to fine tune the result.
+Flat: The default mode. Each color selected is 100% keyed, and adjustments are made for 
+small color variations. This is the ideal mode for chroma keying a green or blue screen. 
+Additionally, turning up the Pre-Filter setting in the Matte Finesse controls can make for a 
+smoother, flatter key.
+Tight: Only keys the exact color picked, and does not apply any softening based on color 
+ranges. You chose that exact color, and only that exact color. Single pixel sharpness levels 
+are expected. This can be used for difficult keying jobs, requiring adjusting the filter and 
+softness manually in the Matte Finesse Controls.
+Luma: Functions similar to the Tight setting but ignores all chroma data. This mode is used 
+for black and white footage.
+Despill: If you’re using the 3D qualifier to pull a blue or green screen key to create 
+transparency, this slider lets you adjust an automatic color correction that eliminates blue 
+or green spill from the image, while retaining the image’s original color.
+3313Color | Chapter 137 Secondary Qualifiers
+COLOR
+The 3D Qualifier Chroma and Luma Adjustments 
+showing the colors selected in the Strokes List.
+The Chroma and Luma adjustment section is dominated by the Color Space box and the 
+Brightness Range. The Color Space box is laid out roughly in the same manner as the 
+Color Wheels, with primary colors laid out around its edge. The exact colors and layout is 
+determined by the Color Space that you choose in the 3D Qualifier. The Brightness Range is 
+represented as a bar underneath the Color Space, with left being black and right being white. 
+Inside the Color Space and Brightness Range lie the individual colors that you chose with the 
+pickers in the Strokes List. The tools around the periphery adjust the colors within the box in 
+various ways, allowing you to visualize changes to the key.
+The 3D Qualifier Chroma & Luma Adjustments:
+Chroma Tolerance: Click and drag left and right to expand or contract the range of colors 
+selected by the key.
+Chroma Softness: Click and drag left and right to change the sensitivity to similar colors 
+selected by the key. This determines whether the key is a hard cutoff or a soft selection of 
+similar colors.
+Adaptive Chroma Softness: Activating this icon allows the keyer to operate consistently 
+in both highly saturated and desaturated regions of the image at the same time. The 
+majority of the time you will want to leave this on. The exception is If you are having 
+difficulty in manually adjusting chroma softness in Soft or Flat mode, then turning Adaptive 
+Chroma Softness off will give you more range to work with. Adaptive Chroma Softness 
+is automatically disabled in Tight and Luma modes, as it is contrary to the functionality of 
+these modes.
+X: Moves your selected color region within the color space, changing its chroma based on 
+its horizontal position.
+Y: Moves your selected color region within the color space, changing its chroma based on 
+its vertical position.
+3314Color | Chapter 137 Secondary Qualifiers
+COLOR
+Angle: Moves your selected color region within the color space, changing its chroma 
+based on its rotation around the central origin point.
+Low: Expands or contracts the dark areas of the key in the brightness range.
+High: Expands or contracts the bright areas of the key in the brightness range.
+Low Soft: Controls how well defined the low end of the brightness range is. 
+This determines whether the key is a hard cutoff or a soft selection of similar 
+brightness levels.
+High Soft: Controls how well defined the high end of the brightness range is. 
+This determines whether the key is a hard cutoff or a soft selection of similar 
+brightness levels.
+Matte Finesse Controls
+After you’ve used the sample controls and qualifier parameters to create the most useful key for 
+your purposes, you may find that it has problems that cannot be overcome easily by the available 
+adjustments. Issues such as chattery edges, holes, or noisy bits can sometimes be easily fixed 
+using the Matte Finesse controls. These controls filter the output of the Qualifier controls and are 
+adjustments that are made to the matte itself, so they may work well in some instances, and poorly in 
+others, depending on what you’re trying to do.
+The Matte Finesse controls 
+Pre-FIlter
+This slider attempts to clean up the image before colors are sampled. This adjustment can be useful 
+when you have footage containing MPEG blocking artifacts.
+3315Color | Chapter 137 Secondary Qualifiers
+COLOR
+Clean Black
+Clean Black is a specialized operation that eliminates noise (seen as white speckling when viewing 
+a high-contrast highlight) in the black area of a key that omits the regions of the image you don’t 
+want to isolate, and shrinks the key by making the dark parts of a key darker the higher you raise this 
+parameter, pushing dark gray areas of the key toward black. The practical result is that raising Clean 
+Black lets you “fill holes” in the background portion of a key and erode translucent edges.
+Before/after raising Clean Black, viewing the high contrast matte
+Black Clip
+Raising Black Clip applies a “lift” adjustment such that translucent areas of the matte (gray areas when 
+viewing a high-contrast highlight) are pushed towards black. The range is 0 to 100, with 0 being the 
+default setting.
+Before/after raising Black Clip
+Clean White
+Clean White is another specialized operation that eliminates noise (seen as black speckling when 
+viewing a high-contrast highlight) in the white portion of a key that include areas of the image 
+you’re isolating, and expands the key by making light parts of a key lighter the higher you raise this 
+parameter, pushing light gray areas of the key toward white. The practical result is that raising Clean 
+White lets you “fill holes” in the foreground portion of a key and grow translucent edges.
+Before/after raising Clean White, viewing the high contrast matte
+3316Color | Chapter 137 Secondary Qualifiers
+COLOR
+White Clip
+Lowering White Clip applies a “gain” adjustment such that translucent areas of the matte (gray areas 
+when viewing a high-contrast highlight) are pushed towards white. The range is 0 to 100, with 100 
+being the default setting.
+Before/after lowering White Clip
+Blur Radius
+In small amounts, blurring a key does well to take the edge off problem edges. However, blurring a key 
+can also feather the edges of a key past the border of the subject you’re keying, with the result being 
+a visible “halo” around your subject depending on the adjustment you’re making. The range is 0 to 
+2000, with 0 being the default. With such a large maximum blur radius, combined with the capabilities 
+that the In/Out Ratio provides in customizing the direction of spread, you can turn some pretty 
+precarious mattes into surprisingly smooth and useful results.
+TIP: If haloing is a problem, you can try adjusting the In/Out Ratio parameter, or you may want 
+to consider using the Qualifier Softness parameters to feather the edges of the key, instead.
+Using the Blur parameters to soften the edges of a key
+In/Out Ratio
+Controls whether the “Blur Radius” is applied equally to the inside and outside of the edge of the 
+matte (zero), applied only within the matte (negative values), or applied only outside the matte (positive 
+values). Using In/Out Ratio can help eliminate fringing when using the Blur Radius parameter.
+(Left) In/Out Ratio lowered so blurring ends at the edge of the matte and feathers inward, 
+(Right) In/Out Ratio raised so that blurring starts at the edge of the matte and feathers outward
+3317Color | Chapter 137 Secondary Qualifiers
+COLOR
+However, you can also use In/Out Ratio even in situations where no Blur Radius is applied at all. 
+Raising In/Out Ratio will fill in small black holes in the matte, while lowering In/Out Ratio below 0 will 
+eliminate speckling by pushing small white bits of the matte toward black.
+(Left) In/Out Ratio controls lowered to expand holes in the matte, (Right) In/Out Ratio 
+controls raised to fill in small black holes in the matte
+Morph Operation
+Lets you choose how you want to modify the alpha channel/key. You can choose Shrink or Grow to 
+dilate or erode the edges of the matte with great accuracy. Or, you can choose Opening or Closing to 
+plug or expand holes to clean up a ragged matte.
+(Left) A matte with small holes in the face, (Right) Mode set to Shrink, Morph Radius set to 3; used to close holes in a matte
+Morph Radius
+Combined with Morph Operation, this slider adjusts how much to shrink, grow, open, or close the 
+edge’s key.
+Denoise
+Denoise provides a distinct way to post-process extracted keys to selectively reduce the noise in a 
+key, getting rid of stray areas of qualification and softly filling holes in a matte.
+Before/after raising Denoise, viewing the high contrast matte
+3318Color | Chapter 137 Secondary Qualifiers
+COLOR
+Shadow
+Adjusts key strength based on the darker parts of the original image.
+Midtone
+Adjusts key strength based on the midtones of the original image.
+Highlight
+Adjusts key strength based on the brighter parts of the original image.
+Post-Filter
+Performs a final clean-up of the key, using the original image for reference, useful for bringing back 
+some fine detail in sharp edges or hair.
+The Many Ways to Invert a Key
+Sometimes, you’ll need to isolate a subject or range of values in an image, and then make a change 
+to everything else. One way to do this is to add an Outside node after the node in which you’ve 
+created the key. This lets you make one set of adjustments to what you’ve keyed, and another set of 
+adjustments to everything outside the key.
+If you just need to make a simple adjustment, you can invert the key from within the Qualifier 
+palette. However, there are three other ways to invert a key.
+The Qualifier Invert button: Clicking this control simply inverts the key being generated by all 
+of the controls within the Qualifier palette.
+Key Palette Qualifier Invert: The Qualifier Invert control within the Key palette provides 
+another control with which you can invert the key that’s generated by the Qualifier palette.
+Key Palette Output Invert: The Output Invert control within the Key palette is notable 
+because it inverts the sum of all keys applied within that node. For example, if you’re using 
+a Qualifier in conjunction with a Window, the two invert controls mentioned previously 
+will only invert the Qualifier key; the Window key remains unaffected. However, using the 
+Output Invert control inverts the overall combination of the Qualifier key and the Window, all 
+together.
+3319Color | Chapter 137 Secondary Qualifiers
+COLOR
+Combining Qualifiers and Windows
+This is covered in more detail in a subsequent section, but if you create a key using one of the 
+Qualifier modes, and you then add a Window, the final key that’s output by that node is limited to the 
+intersection of the Qualifier key and the Window. This makes it easy to use a Window to “garbage 
+matte” out bits of a key that you don’t want, that can’t be eliminated by further adjustment of the 
+Qualifier controls.
+The woman’s skin tone is too close to other elements in the scene.
+A Circular Power Window is used to further isolate the woman being isolated.
+3320Color | Chapter 137 Secondary Qualifiers
+COLOR
+Manipulating Keys Using Additional Nodes
+If you need to make more adjustments to a qualified key than the Matte Finesse controls will allow, you 
+can use the Node Editor to feed the key output of one node to the RGB input of another, at which point 
+you can use all of the second node’s color adjustment controls to manipulate the grayscale image that 
+constitutes that key, to improve it.
+Connecting a key output to an RGB input, and then connecting the 
+RGB output back to the next node’s KEY input again 
+You can also use the Key Mixer node to combine multiple keys in several different ways, adding 
+keys together, or subtracting them from one another, in order to create exactly the key you need. 
+Adding multiple keys together using a Key Mixer
+For more information on these techniques, jump to this chapter:  
+Combining Keys and Using Mattes.
+3321Color | Chapter 137 Secondary Qualifiers
+COLOR
+Chapter 138
+Secondary Windows
+Secondary correction describes isolating a specific part of the image, or a specific 
+subject, using a key. 
+Keys in DaVinci Resolve are grayscale images that define which areas of the picture you want to alter 
+(in white) and which parts of the picture you want to leave alone (in black). 
+Keys are generated either using the controls in the Qualifier palette, by using a Power Window, or by 
+importing an external matte. 
+For more information on how to use external mattes, jump to this chapter: Combining Keys 
+and Using Mattes. This chapter shows you how to use Power Windows to create shapes 
+with which you can isolate parts of the image in different ways in order to do these kinds of 
+targeted corrections.
+Contents
+Power Windows ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3323
+Adding Nodes with Windows  ������������������������������������������������������������������������������������������������������������������������������������������������������� 3324
+The Window Palette Interface ����������������������������������������������������������������������������������������������������������������������������������������������������  3326
+Managing Windows  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3327
+Showing and Hiding Onscreen Window Controls  �������������������������������������������������������������������������������������������������������������� 3327
+Using the High-Visibility Power Window Outline Option  ����������������������������������������������������������������������������������������������� 3328
+Window Transform Controls  ���������������������������������������������������������������������������������������������������������������������������������������������������������  3328
+Window Softness  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 3330
+Drawing Curves �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  3331
+Converting Linear, Circular, and Polygon Windows into Bezier Curves  �����������������������������������������������������������������  3332
+Resetting the Window Palette  ����������������������������������������������������������������������������������������������������������������������������������������������������� 3333
+Combining Power Windows with the Mask Control ��������������������������������������������������������������������������������������������������������  3333
+Copying and Pasting Windows  �������������������������������������������������������������������������������������������������������������������������������������������������� 3335
+Saving Window Presets  �����������������������������������������������������������������������������������������������������������������������������������������������������������������  3335
+Using Windows and Qualifiers Together  ������������������������������������������������������������������������������������������������������������������������������ 3336
+3322Color | Chapter 138 Secondary Windows
+COLOR
+Power Windows
+Power Windows are another way of making secondary correction, being essentially shapes you can 
+use to isolate regions of the image. Different controls let you use oval, rectangular, polygonal, or 
+custom curved shapes. Because you can isolate regions of the image by drawing, Power Windows 
+produce exceptionally clean results, with edges that can be precisely positioned and feathered to 
+achieve a variety of effects.
+Before/after Curve Power Window isolates the sky area for a targeted correction.
+Power Windows (also referred to as simply “windows”) are excellent when what you need to 
+adjust can be encompassed within a clearly defined geometrical area. For example, the oval of a 
+person’s face, the front of a car, or a wide expanse of sky are all good candidates for windowed 
+adjustments. A drawback of windows can be that they must be animated to follow whatever 
+subject they’re isolating. Fortunately, this is where DaVinci Resolve’s powerful tracker comes in, 
+making it easy to track Power Windows quickly and accurately to follow along with the subject 
+being isolated.
+3323Color | Chapter 138 Secondary Windows
+COLOR
+Circular Power Window to focus attention to the skin
+DaVinci Resolve makes it easy to combine multiple Power Windows in different ways, to intersect 
+with one another and create even more sophisticated shapes. For example, multiple windows can 
+be added together, or one window can be used to cut out part of another window, which saves 
+you from the need to make complicated keyframing operations to animate that window’s shape.
+Multiple windows combined to isolate and mask the image.
+This section covers the use of Power Windows, how to create and modify them, as well as 
+how to combine multiple windows, and combine windows and qualifiers to create highly 
+specific isolations.
+Adding Nodes with Windows
+As with qualifiers, you must first add a node to a grade’s node tree before you begin windowing a 
+correction. This is because all of the windows within a particular node work together to limit that 
+node’s grade. As a reminder, any node can be changed from a primary operation that affects the 
+entire image, to a more targeted secondary operation, simply by turning on a window, using a qualifier, 
+or enabling an external matte.
+3324Color | Chapter 138 Secondary Windows
+COLOR
+Serial nodes showing the window on Node 2
+If you don’t create a new node before creating a window, you’ll discover you’ve inappropriately 
+changed a primary correction into a secondary correction. If you create a new serial node, 
+you’ll then need to use the controls found within the Window palette to turn on a window to 
+customize for your purposes. However, there are also a set of commands you can use to add 
+serial nodes with a window already turned on, saving you a few clicks or button presses in 
+the process.
+To add a new node with a window already turned on:
+Choose Color > Nodes > Add Serial Node + CPW (Option-C) to create a new serial node with a 
+circular window.
+Choose Color > Nodes > Add Serial Node + LPW (Option-Q) to create a new serial node with a 
+linear window.
+Choose Color > Nodes > Add Serial Node + PPW (Option-G) to create a new serial node with a 
+polygonal window.
+Choose Color > Nodes > Add Serial Node + PCW (Option-B) to create a new serial node with a 
+Curve window.
+When you add a node with a Power Window, the Window palette automatically opens up, 
+ready for editing.
+The Window palette
+  The Window palette is divided into three sets of controls: the Window list, the Presets, and the 
+Transform and Softness controls.
+3325Color | Chapter 138 Secondary Windows
+COLOR
+The Window Palette Interface
+Once you’ve created a node with which to apply a Power Window correction, you need to open the 
+Window palette if it hasn’t been opened already.
+To open the Window palette:
+  Click the Window palette button.
+The majority of the Window palette is occupied by the Window list, within which you can create as 
+many windows as you need for the task at hand. There are five types of windows you can create, 
+each of which has a different geometry. You can use these windows individually, or you can 
+combine them to create even more complex shapes and interactions. The Window palette has four 
+groups of controls that let you use these windows in different ways.
+The Window palette with the Window list
+  Window list: A row of buttons at the top of this list lets you add new windows, which you can then 
+customize as necessary. Each window in the list exposes an On/Off button that shows the shape 
+type, a Layer Name field (blank until you add some text) that you can use to identify what each 
+window is for, an Invert button, and a Mask button that governs how that window interacts with the 
+other windows that are currently enabled (adding to other windows by default, or subtracting from 
+other windows in Mask mode).
+  Transform parameters: Controls the overall size, aspect ratio, position, and rotation of the 
+currently selected window. 
+  Softness parameters:  Controls the edge softness of the currently selected window. Different 
+window shapes have different softness options.
+  Option drop-down menu:  The Option drop-down menu has commands for creating and modifying 
+custom window presets for easy recall later, resetting windows, deleting windows, saving and 
+managing window presets, and copying and pasting track data.
+3326Color | Chapter 138 Secondary Windows
+COLOR
+Using buttons along the top of the Window palette, there are five types of windows you can create:
+  Linear: A four-point shape that can be edited into any kind of rectangle or trapezoid you might 
+need. In addition to the center and corner controls, you can also drag any of the four sides to 
+change the shape.
+  Circular: An oval that can be shaped, sized, and feathered to solve an amazing number 
+of problems.
+  Polygonal: A four-point shape that can be expanded with additional control points to create 
+complex sharp-cornered polygonal shapes.
+  Curve: A Bezier drawing tool that you can use to create any kind of shape, curved, polygonal, or 
+mixed, that you require.
+  Gradient: A simple two-handled control for dividing the screen into two halves, with options for 
+the center, angle, and feathering of the shape. Good for fast sky adjustments.
+Managing Windows
+To manipulate a window, first you need to create the type of window you want to use, or if you’ve got a 
+group of windows created already, you need to select the window you want to work on.
+Methods of creating and selecting windows:
+  To create a new window: Click the Shape icon button or click the Create Window button (at the 
+top of the Window list) that corresponds to the window you want to create.
+  To select a window using the onscreen controls: Click anywhere within a window to select it in 
+the Viewer.
+  To select a window from the Window list: Click the Shape icon button corresponding to the 
+window you want to select. 
+To delete a window you no longer want: 
+  Select a window, then click the Delete button.
+To reset a window:
+  To reset one window to its default shape: Select a window, then choose Reset Selected Window 
+from the Option drop-down.
+Showing and Hiding Onscreen Window Controls
+When you open the Window palette, the Viewer goes into Power Window mode. Enabling a window 
+makes that window’s onscreen controls appear within the Viewer, and are mirrored to video out so you 
+can see the window controls on your external display. If you like, you can change how and where the 
+onscreen controls appear.
+To choose whether onscreen controls are mirrored to video out, or disabled, 
+do one of the following:
+Choose an option from the Window Outline submenu in the Viewer’s option menu.  
+There are three options:
+• Off: Hides the window outline on both the external display and the Viewer.
+• On: The default, shows the window outline on both the external display and the Viewer.
+• Only UI: Hides the window outline on your external display, but leaves it in the Viewer.
+Press Option-H to toggle among all three of the above modes.
+3327Color | Chapter 138 Secondary Windows
+COLOR
+This command is a three-way toggle. The first use of this command hides the window outline on your 
+external display, but leaves it in the Viewer. The second use of this command hides the window outline 
+on both the external display and Viewer. The third use of this command shows the window outline on 
+both the external display and Viewer.
+TIP: If you leave the onscreen controls visible in the Viewer, you may find that as you work 
+you want to temporarily hide or show the onscreen controls in the Viewer so you can get an 
+uncluttered look at the image you’re adjusting. You can quickly toggle any set of onscreen 
+controls off and on without selecting Off in the menu by pressing Shift-` (tilde).
+Using the High-Visibility Power Window Outline Option
+Ordinarily, Power Window outlines are white (for the center shape) and gray (for the softness 
+shapes). However, sometimes this color scheme can be difficult to see, so the Color panel of the 
+User Preferences has an option in the General Settings section called “High visibility Power Window 
+outlines.” Turning this on sets Power Window outlines to be drawn as green (for the center shape) and 
+yellow (for the softness shapes), to make these windows easier to see in certain circumstances.
+(Left) Default window outlines, (Right) High Visibility window 
+outlines enabled in the Color panel of the User Preferences
+Window Transform Controls
+Windows have transform parameters that are similar to those found in the Sizing palette. 
+These parameters let you alter the window, affecting all of its control points together. 
+Window transform controls
+3328Color | Chapter 138 Secondary Windows
+COLOR
+  Size: Scales the entire window up or down. 50.00 is the default size.
+  Aspect: Alters the aspect ratio of the window. 50.00 is the default value, larger values make the 
+window wider, and smaller values make the window taller.
+  Pan: Repositions the window along the X axis. 50.00 is the default position, larger values move 
+the window to the right, smaller values move the window to the left.
+  Tilt: Repositions the window along the Y axis. 50.00 is the default position, larger values move the 
+window up, smaller values move the window down.
+  Rotate: The default value is 0. Increasing this parameter rotates the shape clockwise, decreasing 
+this parameter rotates the shape counterclockwise. 
+  Opacity: Lets you vary the transparency of an individual window’s contribution to a node’s key.
+  Convergence: When “Apply stereoscopic convergence to windows and effects” is enabled in the 
+General Options of the Project Settings, this additional Transform parameter appears that lets you 
+create properly aligned convergence for a window placed onto a stereoscopic 3D clip. 
+For more information on working with Stereoscopic 3D projects, jump to this chapter: 
+Stereoscopic Workflows .
+The transform parameters also correspond to onscreen controls found in the Viewer, which can be 
+manipulated directly using the pointer.
+Manipulating the window position on the Viewer
+While many of the onscreen controls correspond to parameters within the Window palette, some 
+onscreen controls, such as the control points that govern reshaping linear, polygonal, and Curve 
+windows, are only adjustable via the pointer.
+Onscreen controls for window transforms:
+  To select any window: Click on one of an arrangement of many windows to select it, making that 
+window’s controls active.
+  To reposition any window: Drag anywhere within the window’s onscreen control. Window position 
+corresponds to the Window palette’s Pan and Tilt parameters. For a gradient window, drag the 
+center control point.
+  To resize a circular window while locking its aspect ratio: Drag one of the four blue corner points 
+out to enlarge, or inwards to shrink. This corresponds to the Window palette’s Size parameter.
+3329Color | Chapter 138 Secondary Windows
+COLOR
+  To squish or stretch a circular window, altering its aspect ratio: Drag one of the blue top, 
+bottom, left, or right control points. These adjustments correspond to the Window palette’s 
+Aspect parameter.
+  To rotate a window: Drag the top inner white rotate handle, in the middle of the window. 
+For a gradient, drag the bottom arrow handle.
+  To alter window softness: Drag any one of the magenta softness handles. Different window 
+shapes have different sets of handles, which correspond to the Softness parameters.
+  To reshape a linear window: Drag any of the white corner handles to corner pin the window, 
+or drag one of the white top, bottom, or side handles to move an entire side segment of the 
+window around.
+  To reshape a polygonal window: Turning on a polygonal window reveals a simple white rectangle 
+with four corner control points. Click anywhere on the surface of the rectangle to add additional 
+control points with which to reshape the polygon, and drag any control point to alter its shape. 
+Polygonal windows are limited to a maximum of 128 control points.
+  To change the size and aspect of a curve: Shift-drag a bounding box around the control 
+points you want to transform, and then adjust the corners of the box to resize the points while 
+maintaining the aspect ratio of the shape, or adjust the top, bottom, left, or right points to squish or 
+stretch the shape.
+  To remove control points from polygonal or Curve windows: Middle-click the control point you 
+want to remove.
+NOTE: Removing a control point from a polygonal window that’s already been animated 
+using the Keyframe Editor results in that point abruptly popping on and off at the keyframes 
+creating the animation.
+Window Softness
+Each type of window has different Softness parameters, depending on how adjustable that window is.
+  Circular: A single parameter, Soft 1, lets you adjust the uniform softness of the oval’s edge.
+  Linear: Four parameters, Soft 1–4, let you adjust the softness of each of the four sides of the linear 
+window independently. Magenta softness control points on the top, bottom, left, and right let you 
+adjust the softness of each side of the linear shape independently.
+  Polygon: Two parameters, Inside Softness and Outside Softness, let you adjust the overall 
+softness of a polygonal window. There are no onscreen softness control points.
+  Curve: Two parameters, Inside Softness and Outside Softness, let you adjust the overall softness 
+of a curve. Using the onscreen controls, you can adjust the magenta inside and outside softness 
+control points independently, creating any softness shape you need. 
+  Gradient: A single parameter, Soft 1, lets you adjust the uniform softness of the 
+gradient window’s edge.
+3330Color | Chapter 138 Secondary Windows
+COLOR
+Drawing Curves
+The Curve window is the only window that doesn’t display any onscreen controls when it’s first turned 
+on. Instead, you must click within the Viewer to add control points, drawing your own custom shape to 
+isolate whatever region you want.
+Curve window to isolate a car
+TIP: Turning on the Viewer’s full-screen mode can make it easier to draw detailed shapes. 
+You can also zoom into and out of the Viewer while you’re drawing, using either the scroll 
+wheel of a mouse or by pressing Command-Plus or Command-Minus.
+To draw a curve:
+1 Turn on the Curve window style control.
+2 Click anywhere in the Viewer to start adding control points and drawing the shape you need. 
+3 Click and drag to add and shape Bezier curves, or just click and release to add a hard angle.
+4 To finish drawing and close the shape, click the first control point you created to create a corner, or 
+click and drag on the first control point you created to create a Bezier curve.
+Once you’ve drawn a curve, there are many ways of manipulating it.
+Simple methods of modifying a curve:
+  To add points: Click anywhere on a curve to add control points.
+  To reshape a curve: Drag any control point to a new location. You can drag control points even 
+while you’re drawing a new curve, selecting previously drawn points to move them, to adjust their 
+spline handles, or to delete previously added points, without the need to finish the window first.
+  To move a curve: Drag anywhere within or just outside a curve to move it.
+  To symmetrically alter a Bezier curve: Drag any Bezier handle. The opposite handle automatically 
+moves in the other direction.
+  To asymmetrically alter a Bezier curve: Option-drag any Bezier handle. The opposite handle 
+stays in place while you drag the current handle. Once you’ve created an asymmetric pair of 
+Bezier handles, they move together as one if you simply drag a handle. You need to Option-drag 
+to change the angle.
+  To change a curve into a corner: Option-double-click any Bezier curve control point to change it 
+to a sharp-angled corner point.
+  To change a corner into a curve: Option-click any corner point and drag to pull out a Bezier 
+handle, changing it to a curve.
+  To remove points: Middle-click the control point you want to remove.
+3331Color | Chapter 138 Secondary Windows
+COLOR
+NOTE: Removing a control point from a polygonal window that’s already been animated 
+using the Keyframe Editor results in that point abruptly popping on and off at the keyframes 
+creating the animation.
+You can also Shift-drag a bounding box to select multiple control points on a curve to move, delete, or 
+transform them all at once.
+You can Shift-drag a bounding box over multiple control 
+points to manipulate them all at once.
+To select multiple control points on a curve:
+1 Hold the Shift key down and drag a bounding box around the control points you want to 
+manipulate or delete. All included control points will become highlighted.
+2 Do one of the following:
+  To move the control points: Drag anywhere within the bounding box.
+  To transform the control points: Drag one of the outer corners to resize all control points 
+symmetrically, drag the top, bottom, or side handles to squish or stretch the control points 
+relative to one another, or move the pointer to one of the corners until the rotate cursor appears, 
+and then drag to rotate the control points.
+  To delete the control points: Press the Backspace key.
+3 When you’re finished, press the Escape key to deselect the control points.
+Converting Linear, Circular, and Polygon  
+Windows into Bezier Curves
+If you start out isolating a subject using one of the simple Linear, Circular, or Polygon shape windows 
+and you realize that you need a more complex shape to accomplish the task at hand, you can easily 
+convert them to a more complex Bezier curve by choosing Convert to Bezier from the Window palette 
+Option menu.
+3332Color | Chapter 138 Secondary Windows
+COLOR
+Before and after converting a circular window to a Bezier curve and 
+adjusting the result, before adding softness to the edge
+Once you’ve converted a simple shape to a Bezier window, you can add control points and manipulate 
+the shape in any way you need to make it better conform to the subject, just as you would with 
+any curve.
+Resetting the Window Palette
+The entire Window palette can be reset using the Option menu’s Reset command.
+Combining Power Windows 
+with the Mask Control
+Adding multiple windows to a single node is an easy way to create composite keys. When combining 
+windows, the Mask control defines whether one window adds to another window, or subtracts from 
+that window.
+In the following example, Circular and Curve windows have both been created, and each window’s 
+Mask control is also turned on (by default), resulting in both masks being added together so that the 
+sunset look correction affects both the sky and the woman’s face.
+The two images show the combination of the key mattes.
+By turning the Mask control of the circular window off, the circular window is subtracted from the curve.
+3333Color | Chapter 138 Secondary Windows
+COLOR
+Turning off the Mask control of the circular window
+Now, the woman’s face is being protected from the aggressive sky treatment.
+The two images show the result of subtracting the circular window
+Since windows can be individually tracked and keyframed, you can quickly set up complex 
+interactions of windows to solve common problems you’ll encounter. For example, when you’re 
+tracking a window to follow a moving subject that moves behind something in the frame, you can use 
+a second window with Mask turned off to cover the object in front. Now, when the tracked window 
+intersects the subtractive window, the correction will disappear along with the subject. 
+You can also use the Mask control to create more complex shapes than you can with a single window.
+Mattes and mask used together to make complex shapes
+Furthermore, once you reach the limits of what shapes you can create using the four available 
+windows, you can combine multiple nodes containing multiple shapes and qualifiers using the 
+Key Mixer. 
+3334Color | Chapter 138 Secondary Windows
+COLOR
+Copying and Pasting Windows
+If there’s a particular window you’ve created that you want to either duplicate within the current node, 
+or apply to another node, you can copy and paste an individual window’s shape from one item in the 
+Window list to another.
+Methods of copying and pasting windows:
+  To copy a window: Click any enabled window in the Window list, then click the Window palette 
+option menu and choose Copy Window.
+  To duplicate a window: After copying a window, create another window of the same type that you 
+copied, and then click the Window palette option menu and choose Paste Window.
+  To paste a window to another node: Double-click or otherwise select another node, open the 
+Window palette, choose the same type of window that you copied in the Window list, and then 
+click the Window palette option menu and choose Paste Window.
+  To paste a window to the same node: Click any enabled window in the Window list, then click the 
+Window palette option menu and choose Copy Window, then click Paste Append Window in the 
+Window Option menu.
+Saving Window Presets
+If you find there’s a particular window shape or combination of windows that you use frequently, you 
+can save one or more windows as a preset for easy recall whenever needed. For example, if you’re 
+working on a documentary within which you find you need to do a lot of face brightening, you can 
+create preset face ovals for close-up, medium, and wide shots, to save you from having to customize 
+a stock circular window for every single new shot. You can also save groups of windows together as a 
+single preset, in order to reuse complicated multi-window shapes.
+Window presets are available from a group of Presets controls in the option menu in the upper right-
+hand corner of the Window palette.
+Controls for saving, applying,  
+and deleting window presets
+3335Color | Chapter 138 Secondary Windows
+COLOR
+Methods of working with Power Window presets:
+  To save a window preset: Once you’ve created one or more windows you want to save, click the 
+Save as New Preset option in the Window palette’s option menu. Type a name into the resulting 
+dialog, and click OK. That preset is now available in the Preset section of the option menu.
+  To recall a window preset: Click to open the Window palette’s option menu, and choose a preset 
+from the list. Loaded window presets overwrite whatever other windows were set up in that node.
+  To update an already saved preset: Recall a preset, change the resulting window(s), then click to 
+open the Window palette’s option menu. Select Update Preset, then select the preset name. This 
+will overwrite the selected preset with the altered window arrangement.
+  To delete a window preset: Click to open the Window palette’s option menu, and choose Delete 
+Preset, then choose a preset from the list. Make sure you chose the correct preset name; there is 
+no warning before the deletion, and you cannot undo the deletion once it’s done.
+Once recalled, windows created by presets can be modified and tracked just like any other window.
+Using Windows and Qualifiers Together
+Another use of windows is to act as a “garbage matte” when used together with a qualifier. By default, 
+when you use a window and qualifier together, a key is only output where both the window and 
+qualifier intersect. This makes it easy to exclude unwanted parts of a key that are too difficult to 
+eliminate by further refinement of the qualifier controls.
+For example, the following qualification is intended to isolate the woman’s face, but some of 
+the similarly colored wood and sky in the background is also included.
+Instead of driving yourself crazy trying to eliminate the unwanted parts of the key by modifying 
+the current qualification, which is doing a great job of isolating the skin tones, you could 
+instead use a window to isolate her face, excluding everything outside the window, and 
+simplifying your job considerably.
+A qualified image with highlight on
+3336Color | Chapter 138 Secondary Windows
+COLOR
+If she moves, then you can simply track the window to follow. For more information on simple 
+tracking, jump to this chapter: Motion Trackin g Windows.
+Now with additional Power Window isolation
+Furthermore, you can use the window’s Invert control to do the reverse, excluding all qualified 
+portions of the key inside the window, and including all qualified portions of the key outside 
+the window.
+If you need to build more complex qualifier/window combinations than this, you can add 
+more windows, or you can use multiple qualifiers and windows with the Key Mixer node, jump 
+to this chapter: Combining Keys and Usi ng Mattes.
+3337Color | Chapter 138 Secondary Windows
+COLOR
+Chapter 139
+Magic Mask
+The Magic Mask palette uses the DaVinci Neural Engine, guided by the user via a 
+click-based interface, to automatically create detailed masks with which to isolate 
+objects or humans, either whole or in part, to which you want to make secondary 
+adjustments in DaVinci Resolve. 
+This chapter describes how to guide these powerful features using the stroke and tracking controls 
+found within this palette.
+Contents
+Magic Mask v2 (Studio Version Only) ���������������� 3339
+Tracking ���������������������������������������������������������������������������� 3341
+Fixing Masks with the Paint Tool ��������������������������  3341
+The Magic Mask Interface ��������������������������������������  3343
+Mask Adjustment Controls 
+and Matte Finesse  ������������������������������������������������������ 3344
+Rendering AI Magic Mask 2 as an 
+External Matte  �������������������������������������������������������������� 3346
+Magic Mask v1 (Legacy Version)  �������������������������� 3347
+What Magic Mask Is Good 
+For, and What It’s Not ���������������������������������������������� 3350
+The Magic Mask Interface ��������������������������������������� 3351
+Magic Mask Toolbar ���������������������������������������������������� 3351
+Stroke List ����������������������������������������������������������������������� 3352
+Mask Adjustment Controls 
+and Matte Finesse  ������������������������������������������������������ 3353
+Choosing What to Isolate ��������������������������������������� 3353
+Object Mode ������������������������������������������������������������������ 3353
+Person Mode ����������������������������������������������������������������� 3354
+Features Mode ������������������������������������������������������������� 3354
+Identifying More Than One Person  �������������������� 3355
+Using Matte Finesse Controls  ����������������������������� 3355
+Using Magic Mask as a Garbage Matte ����������  3356
+Dealing With Hair  ������������������������������������������������������� 3356
+About Hats ��������������������������������������������������������������������� 3357
+Dealing With Accessories ��������������������������������������� 3357
+Adding Strokes to Guide Mask Creation �������� 3358
+Managing Strokes in the Stroke List  ������������������ 3361
+Stroke Duration ����������������������������������������������������������� 3362
+Tracking Strokes to 
+Follow Subject Motion  ���������������������������������������� 3362
+Methods of Moving Strokes 
+to Follow Subject Motion  ���������������������������������������� 3362
+Option Menu Commands 
+for Removing Strokes and Tracking  ������������������� 3363
+An Example Stroke Tracking Workflow  ������������ 3363
+3338Color | Chapter 139 Magic Mask
+COLOR
+Magic Mask v2 (Studio Version Only)
+The underlying AI technology in Magic Mask has been entirely redesigned to both simplify the 
+interface and provide dramatically better results over the previous version and has been designated 
+Magic Mask v2. In addition to better pattern and shape recognition, you will notice the benefits in 
+difficult tracking situations, like objects passing in front of the mask and other depth related issues.
+Magic Mask v2 user controls remain mostly the same from the original Magic Mask with the following 
+new changes:
+  There are no longer separate Person or Object modes. Magic Mask v2 can handle both 
+on its own.
+  Drawing Strokes is no longer necessary and has been replaced by simply performing Clicks on 
+the object to make a selection.
+  A simple paint tool has been added to manually paint in or out additional regions from the mask on 
+a frame by frame basis.
+The Magic Mask palette uses the DaVinci AI Neural Engine to automagically create a mask to 
+isolate one or more people or objects in the frame, guided by user-applied clicks to identify 
+the subject for isolation. Masks can be generated for either an entire object, person, or for 
+specific features of that person (their face, hair, arms, shoes, etc.). The following images show 
+these two kinds of masks with Highlight enabled in the Viewer. A red onionskin overlay lets 
+you see what Magic Mask is isolating.
+Using Magic Mask to isolate just skin tones,
+Using Magic Mask to isolate just the apron. Note how the color 
+of the apron and shirt are very close together, but Magic Mask 
+understands the shape of the apron to generate the mask. 
+3339Color | Chapter 139 Magic Mask
+COLOR
+While the masks generated by Magic Mask can often be good enough to use directly for making high-
+quality isolated adjustments, it won’t always give perfect results. In these cases, the Matte Finesse 
+controls let you make the resulting mask softer and looser, as necessary, to clear the edge of a difficult 
+subject you’re isolating with the help of another mask generation technique, such as a qualifier key 
+or window. For quick touch up work on a frame, you can also use the paint tool to manually include or 
+exclude regions of the mask. 
+If you’re isolating specific features of a person, you can also mix and match what you’re isolating to 
+create exactly the type of mask you require. In the above example, you might isolate the face, along 
+with exposed skin on the torso and arms, to create a mask for creating an overall skin tone adjustment 
+that doesn’t include the subject’s hair or clothes.
+This whole process is guided by clicks you make to identify the subject. In a typical workflow, you’ll 
+make positive clicks (colored blue) over the person or feature you want to isolate. Then, if necessary, 
+you can also make subtractive clicks (colored red) over parts of the image that are not the person or 
+feature you’re isolating, to correct any problems you see in the generated mask.
+Blue clicks identify a person or feature to isolate, while red clicks 
+identify things that shouldn’t be included in the mask. In this example 
+we added a positive click (blue) to isolate the wood cutting board, and 
+three subtractive clicks (red) on items that were also roughly wood 
+colored (the wood serving dish and pepper grinder on the left, and 
+her arm) to ensure they would never become part of the mask.
+Ideally, both positive and subtractive clicks should be centered on the part of the person or 
+object you’re trying to add to the mask. If you don’t like the result you’re getting in the mask 
+with a particular click you’ve made, you can drag it to another position without clicking again; 
+clicks are live and can be selected using the pointer to move or delete them. 
+A single blue click on her back correctly masks her entire body, including arms 
+and hair. Note Magic Mask v2 correctly differentiates her from her reflection in 
+the mirror, even when they are overlapping.
+3340Color | Chapter 139 Magic Mask
+COLOR
+As you work, each click shows up in the Click list, which lets you select, enable/disable, delete, 
+and otherwise manage the different clicks you create to guide automatic mask generation.
+The Click list keeps track of all clicks you’ve made.
+Tracking
+After you’ve made one or more clicks to guide the analysis, you can motion track these clicks to follow 
+the subject throughout that shot using the tracking controls within this palette. If you’ve made multiple 
+clicks, they’re all tracked at once, and each click automatically follows along with whatever image 
+details immediately surround that click, so there’s no set up necessary. You simply make one or more 
+clicks, then press the track forward or backward button. When you track a click, the overall tracking 
+bar shows you which frames have been tracked (tracked frames are blue).
+Controls let you track all mask analysis  
+clicks forward and backward through the shot.
+Once you’ve added the clicks that are necessary to isolate the subject, and you’ve motion tracked 
+them to follow along with the motion of the shot, a mask is automatically generated live for each 
+frame of the shot. This is important to know because any change you make, adding or removing 
+clicks or moving them manually, will alter the resulting mask on the fly.
+Fixing Masks with the Paint Tool
+Occasionally the Magic Mask might miss its mark over the course of tracking and include something 
+in the mask you don’t want, or exclude something that you do. There is a simple paint tool available in 
+the toolbar to patch up holes in the mask, or remove masked areas from the selection. The paint tool 
+works on a frame by frame basis, and so won’t track with the mask. It’s great for removing short mask 
+hiccups, but for anything more than fixing a few frames, you should go back and refine your mask 
+using the add and subtract tools.
+3341Color | Chapter 139 Magic Mask
+COLOR
+The Add/Subtract Paint Stroke tools  
+and the Brush Size control
+The plus and minus paint tools let you add or subtract strokes from the mask as necessary, 
+while the paint brush size tool lets you grow or shrink the brush used to make the strokes.
+(Left) In this frame, Magic Mask accidentally included the silver rings on her fingers in the mask. For most of the 
+track it did not, so we just need to fix a few frames. (Right) Selecting the Subtract Paint Stroke tool (green circle) 
+and adjusting its size, we carefully paint a hole in the mask over her rings.
+The final frame, with the rings  
+correctly excluded from the mask
+3342Color | Chapter 139 Magic Mask
+COLOR
+The Magic Mask Interface
+The Magic Mask palette is divided into three sets of controls: the Toolbar, the Click list, and the Mask 
+Finesse panel. When you first open the Magic Mask palette, it’s empty, and you’re told to click in the 
+Viewer to create a mask.
+The controls of the Magic Mask palette
+Magic Mask Toolbar
+A toolbar at the top contains most of the interactive controls of the Magic Mask palette.
+  Tracking Controls: The following controls let you track all available clicks to follow camera or 
+subject motion in the frame. From left to right, these include: 
+Go To Reference Frame: Moves the playhead to the frame on which you initially made the clicks.
+Go To First Frame of Tracked Area: Moves the playhead to the first tracked frame of a range 
+of tracked frames in preparation for tracking backwards if there are untracked frames at the 
+beginning of the clip.
+Track One Frame Reverse: Tracks one frame backwards and stops. Useful if you’re tracking frame 
+by frame to watch the progress of a particularly complicated bit of motion. If something goes 
+wrong, you can back up to the last frame where the click was able to properly track the subject, 
+and drag the click to a better location using the pointer to make it follow the subject properly. If 
+necessary, you can go a frame at a time, dragging the click to a better position every time it fails to 
+follow the feature you’re using it to isolate.
+Track Reverse: Continuously tracks from the current frame all the way to the beginning of the clip.
+Stop Tracking: Stops tracking in cases where there’s a problem with the track and you want to 
+make a change.
+Track Forward and Reverse: Tracks from the current frame all the way to the end of the clip, then 
+returns to the original tracking point and tracks backwards to the beginning of the clip. 
+Track Forward: Continuously tracks from the current frame all the way to the end of the clip.
+Track One Frame Forward: Tracks one frame forward and stops. Useful if you’re tracking frame by 
+frame to watch the progress of a particularly complicated bit of motion. If necessary, you can go a 
+frame at a time, dragging the click to a better position every time it fails to follow the feature you’re 
+using it to isolate.
+Go To Last Frame of Tracked Area: Moves the playhead to the last tracked frame of a range of tracked 
+frames in preparation for tracking forwards if there are untracked frames at the end of the clip.
+3343Color | Chapter 139 Magic Mask
+COLOR
+  Click tools: Two tools at the right let you choose whether to make clicks to identify the feature you 
+want to isolate or identify things that aren’t the feature in order to eliminate unwanted excursions 
+in the resulting mask. The plus eyedropper adds an area to the mask; the minus eyedropper 
+removes an area from the mask.
+  Paint tools: The three paint tools let you do quick touchup work on a mask on a frame by frame 
+basis. The plus paint brush lets you add to the mask, while the minus paint brush lets you subtract 
+from the mask. The paint brush size control lets you change the size of the brush.
+  Invert Mask: A button lets you invert the resulting mask in cases where you want to use the 
+feature analysis of this palette to isolate everything except the feature or features being analyzed.
+  Mask Overlay: Turns on an onion-skinned overlay to see what parts of the image are being 
+masked alongside which aren’t, so you can continue to refine the result by adding, moving, or 
+deleting clicks. The isolated part of the mask is tinted translucent red.
+Click List
+Once you start making clicks to identify features for mask generation, they appear in this Click list. 
+  Click list header: The header, at the left of the Click list, has controls for selecting and deleting 
+individual clicks.
+  Click timeline area: A Timeline ruler shows the duration of the current clip you’re creating a mask 
+for. The Overall Track displays how many frames of each click have been tracked. There is a small 
+colored mark (blue or red) on each click track to show where the reference frame is.
+Mask Adjustment Controls and Matte Finesse
+There are two sets of controls for refining the mask that’s output by the Magic Mask palette. The first 
+set of controls, at top, let you adjust how the mask is generated based on the analysis data, which lets 
+you refine the mask result based on characteristics of the image.
+Quality: Two options let you choose a tradeoff between quality and performance. Faster lets 
+you generate a lower quality mask more quickly, that’s suitable for garbage matting. Better 
+generates a higher quality mask with more detail, that’s more processor-intensive.
+Smart Refine: In Better mode this control lets you expand or contract the resulting mask 
+based on the analysis of the image, such that expanding the mask doesn’t expand it deeply 
+into surrounding parts of the image that aren’t connected to that person or object. This 
+operation does not introduce softness. Instead, it enlarges or shrinks the overall mask 
+generated by this palette.
+A second set of mask manipulation controls are for manipulating the mask after it’s been generated. 
+Most of these are the same Matte Finesse controls that are available in the Qualifier palette, which are 
+useful for trying to fix issues with problem masks or soften the edges when you need to have a more 
+feathered result.
+  Mode/Shape: Lets you choose how you want to modify the Alpha channel/key. You can choose 
+Shrink or Grow to dilate or erode the edges of the matte with great accuracy. Or, you can choose 
+Opening or Closing to plug or expand holes to clean up a ragged matte. Shape lets you choose 
+the shape of the growth or contraction.
+  Radius: this slider adjusts how much to shrink, grow, open, or close the edge’s key.
+  Smoothing: Smooths along the temporal frames.
+3344Color | Chapter 139 Magic Mask
+COLOR
+  Blur Radius: In small amounts, blurring a key does well to take the edge off problem edges. 
+However, blurring a key can also feather the edges of a key past the border of the subject you’re 
+keying, with the result being a visible “halo” around your subject, depending on the adjustment 
+you’re making.
+  Clean Black: Clean Black is a specialized operation that eliminates noise seen as white speckling 
+in the black area of a key. Raising Clean Black lets you “fill holes” in the background portion of a 
+key and erode translucent edges.
+  Clean White: Clean White is another specialized operation that eliminates noise (seen as black 
+speckling when viewing a high-contrast highlight) in the white portion of a key that includes 
+areas of the image you’re isolating and expands the key by making light parts of a key lighter the 
+higher you raise this parameter, pushing light gray areas of the key toward white. The practical 
+result is that raising Clean White lets you “fill holes” in the foreground portion of a key and grow 
+translucent edges.
+  Iterations: Refines the recognized shape.
+  Denoise: Provides a distinct way to post-process extracted keys to selectively reduce the noise in 
+a key, getting rid of stray areas of qualification and softly filling holes in a matte.
+  In/Out Ratio: Using In/Out Ratio can help eliminate fringing. Raising In/Out Ratio will fill in small 
+black holes in the matte, while lowering In/Out Ratio below 0 will eliminate speckling by pushing 
+small white bits of the matte toward black.
+  Black Clip: Raising Black Clip applies a “lift” adjustment such that translucent areas of the matte 
+(gray areas when viewing a high-contrast highlight) are pushed toward black.
+  White Clip: Lowering White Clip applies a “gain” adjustment such that translucent areas of the 
+matte (gray areas when viewing a high-contrast highlight) are pushed toward white.
+  Post Filter: Performs a final clean up of the key, using the original image for reference; useful for 
+bringing back some fine detail in sharp edges or hair.
+  Consistency: After you’ve tracked each click to follow the subject over the duration of the clip, 
+this setting lets you choose how much temporal smoothing is necessary to ameliorate jitter in the 
+edges of the resulting mask in areas of low confidence, such as frizzy hair or translucent clothing. 
+Higher settings apply more smoothing to the edges of the mask but are more processor intensive 
+and may affect how closely the mask follows motion in the image. Lower settings will be faster 
+and more accurate but may allow more edge jitter in the resulting mask, which can be distracting 
+in the final adjustment you’re making. This parameter defaults to 0, so your first application of 
+Magic Mask will always begin with the most accurate (and potentially most active) application of 
+this feature’s analysis.
+IMPORTANT: Consistency requires a click to have a duration of at least a few frames in order 
+to function correctly. This requires you to track each click to follow the motion of the camera 
+and subject in order to extend the duration of each click. Because Consistency is trying to 
+eliminate one or two frame “noise” in the shape of the mask, clicks of short duration may end 
+up having their effect eliminated.
+NOTE: The original Magic Mask is still accessible in DaVinci Resolve 20 by selecting Legacy 
+Object Mask from the Magic Mask 2 options menu.
+3345Color | Chapter 139 Magic Mask
+COLOR
+Rendering AI Magic Mask 2 as an External Matte
+You can render a Magic Mask 2 as a separate matte node. This lets you use the resulting magic mask 
+frames externally as an alpha source for various effects and purposes.
+The external matte node, created by rendering the Magic Mask.
+To do so, go to the 3-dot option menu and select Render in Place Magic Mask, then set a 
+render location for the cached frames.
+To create the external matte, select Render in 
+Place Magic Mask from the option menu.
+3346Color | Chapter 139 Magic Mask
+COLOR
+Magic Mask v1 (Legacy Version)
+NOTE: The original Magic Mask v1 has been superseded by Magic Mask v2 as described 
+above. However, the v1 Magic Mask is still accessible for legacy projects, as detailed below. 
+To enable it, go to the Magic Mask 2 options menu and select Legacy Object Mask.
+The Magic Mask palette uses the DaVinci Neural Engine to automagically create a mask to isolate one 
+or more people or object in the frame, guided by user-applied paint strokes to identify the subject for 
+isolation. Masks can be generated for either an entire object, person, or for specific features of that 
+person (their face, hair, arms, shoes, etc.). The following images show these two kinds of masks with 
+Highlight enabled in the Viewer. A red onionskin overlay lets you see what Magic Mask is isolating.
+(Left) Using Magic Mask to isolate an entire person, (Right) Using Magic Mask to isolate someone’s face 
+Once the Magic Mask palette has generated a mask, Matte Finesse controls let you adjust the mask’s 
+size and feathering. This lets you deal with difficult edges that might tip your hand depending on the 
+kind of adjustment you’re trying to make.
+While the masks generated by Magic Mask can often be good enough to use directly for making high 
+quality isolated adjustments, it won’t always give perfect results. Keep in mind that Magic Mask is as 
+much for the fast creation of detailed garbage masks as it is for doing direct isolation. 
+In these cases, the Matte Finesse controls let you make the resulting mask softer and looser as 
+necessary to clear the edge of a difficult subject you’re isolating with the help of another mask 
+generation technique, such as a Qualifier key or window. When you use the Magic Mask palette 
+within the same node in which you’re also creating a key in the Secondary palette, or a window in the 
+Window palette, the key or window and Magic Mask are combined to output a boolean intersection. 
+This means the isolation is limited to areas where both kinds of masks overlap one another.
+(Left) Using Magic Mask to create a mask, (Right) Combining the Magic Mask 
+with a circular window, the resulting mask is an intersection of the two
+3347Color | Chapter 139 Magic Mask
+COLOR
+Objects can also be isolated by Magic Mask, allowing you to create complicated masks of complex 
+shapes that may be difficult to isolate with other tools. For example, using the Magic Mask in Object 
+mode to modify only the wood grain section of this guitar.
+(Left) Multiple strokes in Object mode isolating the wood grain of the guitar, while ignoring 
+the musician’s arm, (Right) The finished shot, with a warmer wood grain
+If you’re isolating specific features of a person, you can also mix and match what you’re isolating 
+to create exactly the type of mask you require. For example, you might isolate the face, along 
+with exposed skin on the torso, arms, and legs, to create a mask for creating an overall skin tone 
+adjustment that doesn’t include the subject’s hair or clothes.
+(Left) Using Magic Mask to isolate a face, (Right) Using Magic Mask to isolate all exposed skin
+As described earlier, this whole process is guided by strokes you draw to identify the subject. In a 
+typical workflow, you’ll draw short positive strokes (colored blue) over the person or feature you want 
+to isolate. Then, if necessary, you can also paint short subtractive strokes (colored red) over parts of 
+the image that are not the person or feature you’re isolating, to correct any problems you see in the 
+generated mask.
+Blue strokes identify a person or feature 
+to isolate, while red strokes identify things 
+that shouldn’t be included in the mask.
+3348Color | Chapter 139 Magic Mask
+COLOR
+Ideally, both positive and subtractive guidance strokes should be relatively short, and centered on the 
+part of the person or object you’re trying to add to the mask. Stroke position is usually more important 
+than stroke length, and in fact if you don’t like the result you’re getting in the mask with a particular 
+stroke you’ve drawn, you can drag it to another position without redrawing it; strokes are live and can 
+be selected using the pointer to move or delete them. 
+Selecting a stroke with the pointer; 
+selected strokes become highlighted.
+Very long paint strokes aren’t usually that useful, and can be counterproductive later on when you’re 
+trying to track strokes to follow motion in the clip. This is particularly true if a stroke needs to follow 
+something that’s changing shape as it moves, like an arm. Furthermore, while you can make as many 
+strokes as you like, fewer strokes work better than many strokes, and as a general rule you shouldn’t 
+use more than five strokes to isolate a particular person or feature (nor should you need to).
+As you work, each stroke shows up in the Stroke list, which lets you select, enable/disable, delete, and 
+otherwise manage the different strokes you create to guide automatic mask generation.
+(Left) Multiple strokes in Features mode isolating exposed skin, 
+(Right) The Stroke list keeps track of all strokes you’ve made.
+But what about camera and/or subject motion, you ask? After you’ve painted one or more strokes to 
+guide the analysis, you can motion track these strokes to follow the subject throughout that shot using 
+the stroke tracking controls within this palette. If you’ve made multiple strokes, they’re all tracked at 
+once, and each stroke automatically follows along with whatever image details immediately surround 
+that stroke, so there’s no setup necessary. You simply draw one or more strokes, then click the track 
+forward or backward button. When you track a stroke, the tracking bar for that stroke in the Stroke list 
+shows you which frames have been tracked (tracked frames are blue).
+3349Color | Chapter 139 Magic Mask
+COLOR
+Controls let you track all mask analysis strokes forward and backward through the shot.
+Once you’ve added the strokes that are necessary to isolate the subject, and you’ve motion 
+tracked them to follow along with the motion of the shot, a mask is automatically generated live 
+for each frame of the shot. This is important to know because any change you make, adding or 
+removing strokes or moving them manually, will alter the resulting mask on the fly.
+What Magic Mask Is Good 
+For, and What It’s Not
+Keep in mind that the Magic Mask tool does not specialize in soft translucent mask edges, such as 
+those created by the HSL, Luma, or 3D Keyers (when they’re used carefully). On the other hand, it 
+excels at creating form-fitting masks that isolate human features in situations where a typical keyer 
+does poorly. For example, Magic Mask can isolate exposed skin in shots where that person is standing 
+in front of a background with wood, stone, or soil that inhabits the same ranges of color as that person. 
+It can isolate beige clothes against a beige background. It can even isolate a person within a black and 
+white clip. 
+Once you’ve drawn one or more strokes to isolate a mask, a variety of controls let you adjust the 
+resulting mask to better fit the subject, if necessary. Depending on the adjustment you’re making 
+to the subject at hand, you may find that the keys generated using Magic Mask are sufficient to 
+convincingly isolate the person you’re grading, particularly if you’re working in Better mode.
+However, real world projects pose plenty of unexpected challenges. Keep in mind that, depending 
+on what you’re trying to do, the resulting automated mask isn’t always going to be perfect enough to 
+replace precise rotoscoping for intensive secondary color adjustments. However, it’s been designed 
+to easily create tight-fitting garbage masks to use in conjunction with secondary keys or windows, with 
+which to exclude the background around a difficult-to-isolate subject.
+If you’re using Magic Mask to create a garbage mask, keep in mind that the Faster mode has been 
+optimized to create looser masks more quickly for situations where you’ll be using it in conjunction 
+with a keyer or window to isolate a specific area for special grading.
+TIP: The Magic Mask palette can even isolate people in photos and paintings. However, 
+figurative representations must have a minimal level of shadow rendering and anatomical 
+detail for a figure or feature to be recognized. For this reason, cartoony or abstract 
+representations won’t isolate very well.
+3350Color | Chapter 139 Magic Mask
+COLOR
+The Magic Mask Interface
+The Magic Mask palette is divided into three sets of controls: the Toolbar, the Stroke list, and the Mask 
+Finesse panel. When you first open the Magic Mask palette, it’s empty, and you’re told to draw a stroke 
+in the Viewer to create a mask.
+The controls of the Magic Mask palette in Object mode
+Magic Mask Toolbar
+A toolbar at the top contains most of the interactive controls of the Magic Mask palette.
+  Object Mode: Selecting this icon puts the Magic Mask tool into Object mode for isolating subjects 
+that are not people.
+  Person Mode: Selecting this icon puts the Magic Mask tool into Person mode for isolating people 
+and parts of people. A tab control at the left lets you choose the type of mask you want created. 
+There are two choices:
+Person: For creating a mask to isolate as much of a person is visible, given the framing of the shot.
+Features: For creating a mask isolating just someone’s face, or hair, or arms, for example. In 
+Features mode, you can also combine multiple specific features into a single mask.
+  Tracking Controls: The following controls let you track all available strokes to follow camera or 
+subject motion in the frame. From left to right, these include: 
+Go To Reference Frame: Moves the playhead to the frame on which you initially drew the strokes.
+Go To First Frame of Tracked Area: Moves the playhead to the first tracked frame of a range 
+of tracked frames, in preparation for tracking backwards if there are untracked frames at the 
+beginning of the clip.
+Track One Frame Backwards: Tracks one frame backwards and stops. Useful if you’re tracking 
+frame by frame to watch the progress of a particularly complicated bit of motion. If something goes 
+wrong, you can back up to the last frame where the stroke was able to properly track the subject, 
+and drag the stroke to a better location using the pointer to make it follow the subject properly. 
+If necessary, you can go a frame at a time, dragging the stroke to a better position every time it 
+fails to follow the feature you’re using it to isolate.
+Track All Frames Backwards: Continuously tracks from the current frame all the way to the 
+beginning of the clip.
+Stop Tracking: Stops tracking, in cases where there’s a problem with the track and 
+you want to make a change.
+3351Color | Chapter 139 Magic Mask
+COLOR
+Track Forwards and Backwards:  Tracks from the current frame all the way to the end of the clip, 
+then returns to the original tracking point and tracks backwards to the beginning of the clip.
+Track All Frames Forwards: Continuously tracks from the current frame all the way 
+to the end of the clip.
+Track One Frame Forwards: Tracks one frame forward and stops. Useful if you’re tracking frame 
+by frame to watch the progress of a particularly complicated bit of motion. If necessary, you can 
+go a frame at a time, dragging the stroke to a better position every time it fails to follow the feature 
+you’re using it to isolate.
+Go To Last Frame of Tracked Area: Moves the playhead to the last tracked frame of a range of 
+tracked frames in preparation for tracking forwards if there are untracked frames at the end of the 
+clip.
+  Stroke tools: Two tools at the right let you choose whether to draw strokes to identify the feature 
+you want to isolate or identify things that aren’t the feature in order to eliminate unwanted 
+excursions in the resulting mask. The plus eyedropper adds an area to the mask; the minus 
+eyedropper removes an area from the mask.
+  Invert Mask: A button lets you invert the resulting mask in cases where you want to use the 
+feature analysis of this palette to isolate everything except the feature or features being analyzed.
+  Mask Overlay: Turns on an onion-skinned overlay with which to see what parts of the image are 
+being masked alongside which aren’t, so you can continue to refine the result by adding, moving, 
+or deleting strokes. The isolated part of the mask is tinted translucent red.
+Stroke List
+Once you start drawing strokes to identify features for mask generation, they appear in this Stroke list. 
+  Stroke list header: The header, at the left of the Stroke list, has controls for selecting, 
+enabling/disabling, and naming each stroke (if you need that level of organization). Right-clicking 
+any stroke in its header reveals controls to Reset Tracking Data and change the mask type 
+(feature or not feature).
+In Object mode, this is just a flat list of strokes, each of which help to either define the object you 
+want to isolate, or the background.
+In Person mode, this is just a flat list of strokes, each of which help to either define the person you 
+want to isolate, or the background. 
+In Features mode, an additional drop-down menu lets you choose which specific feature you 
+want to identify with a guidance stroke. All strokes are sorted hierarchically by the feature they 
+correspond to, so for example each Face stroke appears underneath a Face title bar. The title bar 
+for each feature has a toggle control that lets you turn that feature off and on. When off, you 
+disable that feature’s contribution to the overall mask being generated.
+  Stroke timeline area: A Timeline ruler shows the duration of the current clip you’re creating a mask 
+for. Each stroke in this list has a track that displays how many frames of each stroke have been 
+tracked. As you track each stroke, these tracks fill up with colored bars to show which frames have 
+tracking data. 
+Tracks of strokes that identify a person or object are blue, while tracks for strokes identifying 
+things that aren’t the feature are red. Using this timeline, you can keep track of which strokes need 
+to be tracked, and manipulate the tracking data as necessary to obtain a useful result.
+3352Color | Chapter 139 Magic Mask
+COLOR
+Mask Adjustment Controls and Matte Finesse
+There are two sets of controls for refining the mask that’s output by the Magic Mask palette. The first 
+set of controls, at top, let you adjust how the mask is generated based on the analysis data, which lets 
+you refine the mask result based on characteristics of the image. These include:
+Quality: Two options let you choose a tradeoff between quality and performance. Faster lets 
+you generate a lower quality mask more quickly, that’s suitable for garbage matting. Better 
+generates a higher quality mask with more detail, that’s more processor-intensive.
+Smart Refine (Person Mode): This control lets you expand or contract the resulting mask 
+based on the analysis of the image, such that expanding the mask doesn’t expand it deeply 
+into surrounding parts of the image that aren’t connected to that person. This operation does 
+not introduce softness. Instead, it enlarges or shrinks the overall mask generated by this 
+palette. 0.5 is unity, 0 is the maximum amount of expansion, while 1 is the maximum amount of 
+contraction.
+Refine Range (Object Mode): This control lets you adjust the sensitivity of the resulting mask 
+based on the analysis of the image. This lets you fine tune the mask to encompass more or 
+less of the selected object. 30 is unity, 100 is the maximum amount of sensitivity, while 1 is the 
+minimum amount of sensitivity.
+A second set of mask manipulation controls are for manipulating the mask after it’s been generated. 
+Most of these are the same Matte Finesse controls that are available in the Qualifier palette, which are 
+useful for trying to fix issues with problem masks, or soften the edges when you need to have a more 
+feathered result. 
+For more information on the Matte Finesse controls, jump to this chapter:  
+Secondary Qualifiers.
+Choosing What to Isolate
+This section elaborates on the different choices that are available for isolation and offers tips for what 
+each choice is good for.
+Object Mode
+Object mode is the easiest choice to make. Essentially, use this mode for any subject that is not a 
+person. Subjects like cars, pets, and food are all good candidates for Object mode. The notable 
+exception to this rule are items of clothing like shirts, hats etc. that are being worn by a human. Worn 
+clothing is much better isolated in Person mode instead.
+Drawing positive strokes in Object mode will select areas of similar contrast and color, allowing you to 
+link complex shapes together. Generally you will need more strokes to actively define an object than a 
+person, due to the greater variety of the shapes involved.
+Drawing negative strokes in Object mode removes areas from the object that you don’t want to isolate. 
+This can be something simple like removing the wheels of a car from a mask, or more complicated like 
+removing specific books from a mask of a bookshelf.
+3353Color | Chapter 139 Magic Mask
+COLOR
+Person Mode
+When you choose Person, every stroke you draw over someone helps to isolate that person’s entire 
+body, or however much of that person is visible onscreen. This includes all clothes that person 
+is wearing, including their shirt, pants, shorts, dress or skirt, bathing suit, knickers, jumpsuits, hat, 
+shoes, even armor or space suit (yes, we’ve tested both), whatever. Most clothing should be correctly 
+identified as part of the isolation mask you’re creating. However, excessively flowing garments may 
+need an extra stroke or two to identify them in complex visual compositions.
+Drawing negative strokes, when in Person mode, will identify everything that’s not the person you’re 
+isolating; this omits both the background and/or other people from the mask being generated. 
+Drawing negative strokes isn’t mandatory; you only need to draw a negative stroke if you see a 
+problem such as part of the background being included in the isolation mask.
+Features Mode
+When you choose Features, a drop-down menu appears at the top of the Stroke list. You must first 
+choose the feature you want to isolate from this menu, and then draw strokes over the selected 
+feature (face, hair, etc.) you want to isolate. Each feature’s collection of strokes can be turned on or off 
+to add that feature to the overall mask being created.
+  Face: Isolates just the face and ears, including eyes and glasses. This omits hair and the neck 
+(which is considered part of the torso). Facial hair, particularly bigger beards, will usually be 
+omitted from an initial stroke made on exposed skin of the face, so you can work on just the skin if 
+you want. However, an additional stroke on the beard will include it in the face isolation.
+  Hair: Isolates just the hair, stopping at the bangs and ears, and omitting as much of the face as 
+possible. Curly, frizzy, or wispy hair will produce oversized masks encompassing as much of the 
+hair detail as possible. This tool does not create fine transparency. Fine and irregular hair detail 
+can cause jittery edges, but this can be ameliorated using the Consistency control.
+  Torso (Exposed Skin): Isolates exposed skin above the waist and below the face, excluding the 
+arms. This is the selection you want to enable if you want to isolate the neck, neckline, and any 
+part of the chest that’s exposed when wearing v-necks, plunge necks, tank tops, crop tops, or 
+bikini tops.
+  Clothing (Top): Any clothing above the waist. Exposed skin is omitted.
+  Clothing (Bottom): Any clothing below the waist. Exposed skin is omitted.
+  Arms (Exposed Skin):  The exposed parts of arms or hands. Shirt and dress sleeves are omitted, 
+as are sun sleeves.
+  Shoes: Most styles of shoes will be isolated.
+  Legs (Exposed Skin): Isolates exposed skin below the torso, excluding socks and leggings.
+  Hat: Most styles of hats will be isolated, although thin accessories such as streaming ribbons or 
+feathers might not be included.
+Remember, no matter what feature you’ve selected to isolate, you can always draw negative 
+strokes to omit other parts of the person or their clothing that are erroneously being included 
+in the mask.
+IMPORTANT: When you’re drawing strokes in Features mode, accidentally drawing a stroke 
+over a feature other than the one that’s selected in the drop-down menu at the top of the 
+Stroke list will result in a completely incorrect mask. If you see this happen, delete the stroke 
+you just made, double-check which feature is currently selected, and either redo the stroke 
+or choose the correct feature you want to isolate.
+3354Color | Chapter 139 Magic Mask
+COLOR
+Identifying More Than One Person
+In both Person and Feature mode, you can add strokes to identify more than one person, or more than 
+one person’s features. There’s nothing special you need to do, simply draw strokes over each person 
+you want to isolate, or over the same feature of each person you want to include (for example, drawing 
+stroke over three people’s faces in Face mode).
+You can draw strokes over multiple people to isolate them together in the same mask.
+Using Matte Finesse Controls
+There are plenty of situations where a seemingly problematic mask can be improved using the Smart 
+Refine and Matte Finesse controls at the right of the Magic Mask palette. If the mask is only a few 
+pixels off, and the color adjustment you want to make is reasonably subtle, you can probably use 
+Blur Radius and In/Out Ratio to create a soft edge that falls off just at the outer edge of the subject 
+(so as not to create a halo effect) with which to make your adjustment.
+(Left) The hard edges of the initial mask aren’t quite close enough to the edges of the woman’s 
+arm to make a subtle adjustment, (Right) Using the Blur Radius and In/Out Ratio controls 
+to create soft edges that don’t extend past the subject to make a useful mask
+3355Color | Chapter 139 Magic Mask
+COLOR
+Using Magic Mask as a Garbage Matte
+In situations where the outer edge of a person is not being detected closely enough for Magic Mask 
+to give a useful result for a more extreme color adjustment, you’re probably better off expanding 
+the result into a closely-fitting garbage matte to use for isolating the person or features using 
+other techniques, such as a keyer in the Qualifier palette. Even for this purpose, you’ll find using 
+Magic Mask is typically faster than rotoscoping a relatively close garbage matte over a moving figure 
+using windows.
+(Left) The initial mask isn’t quite close enough to the edges to make an extreme 
+adjustment, (Right) Using the Mode/Shape/Radius/Iterations/Blur Radius controls 
+to expand the matte to be a garbage matte for use with other keys
+Dealing With Hair
+Wispy or frizzy hair, individual strands of hair being thrown back, and tips of dreadlocks or heavily 
+moussed hair that comes to points will often require special handling with this tool. Keep in mind 
+that the Magic Mask tool does not specialize in soft translucent mask edges like a keyer does. 
+When it comes to hair styles that are loose and free, in many situations you may be able to finesse 
+an acceptable result using the Matte Finesse controls to expand a softened version of the matte to 
+encompass the entire hairstyle. 
+If this interferes too much with the edges of other features of the subject you’re isolating, you can 
+create a dedicated hair mask in Features mode by drawing Hair strokes. You can then use the Matte 
+Finesse controls at the right of the palette to create softened edges that work well with the outer 
+boundary of the hair style you’re isolating.
+Creating a soft-edged hair mask
+3356Color | Chapter 139 Magic Mask
+COLOR
+At this point, you can try doing different color adjustments using two different correction nodes, one 
+for the subject’s hair, and another using Magic Mask to isolate everything but the hair. 
+Alternately, if you want a single matte with which to isolate the entire subject, you can then use 
+additional instances of the Magic Matte tool (one per node), using one node to isolate just the face and 
+body without the hair, and a third node to isolate the entire subject but with a very soft edge. Then, 
+you can use a Key Mixer node to combine all these masks together with the original hair mask you 
+created, with which to feed a complete key to another node used to make the correction.
+(Left) Nodes 2, 3, and 4 are creating three different masks that are combined using a key mixer and connected 
+to the Key input of Node 5 to make an adjustment, (Right) The final result of this three-mask approach.
+While hair with soft edges can be a challenge, Magic Mask excels at many elaborate hair styles 
+with detailed shapes and hair accessories, including jewelry and ribbons. For example, the stylized 
+hairstyles found in European and Chinese period movies and shows give the DaVinci Neural Engine 
+no trouble at all, particularly as these styles are usually tightly bound with no wispy hair.
+Asymmetrical hairstyles may require extra strokes to identify hair that’s significantly longer on one 
+side of the face. This may also be true for unorthodox hair styles, such as hair that’s been sculpted into 
+distinct sculptural shapes. Lastly, tight braids that expose skin on the scalp are also challenging for 
+the kind of hard masks that Magic Mask produces, so you’re better off using Magic Mask as a garbage 
+matte and using a keyer to create a detailed soft mask to use in these instances.
+About Hats
+Magic Mask works with an incredibly wide variety of hats from all time periods. On hats, tassels or 
+details like feathers can be a problem (in testing, the feather on Errol Flynn’s cap in Robin Hood 
+couldn’t consistently be included, even though the cap itself was no problem). Additionally, veils 
+that are part of hats may or may not be easily identified, but an additional stroke usually solves 
+the problem.
+Dealing With Accessories
+Things that people are holding, such as handkerchiefs or umbrellas, are best selected in Object mode. 
+Jewelry and watches pose a special problem, as they’re typically so thin and small that they can be 
+difficult to omit, but you may not want to include them depending on the adjustment you’re trying 
+to make. Your results will vary with the thickness of the items and the framing of your subject, but in 
+general your results will probably be better if you simply add a stroke or two to include these items in 
+the isolation, since omitting fine detail like a necklace can be problematic.
+3357Color | Chapter 139 Magic Mask
+COLOR
+Adding Strokes to Guide Mask Creation
+Here are some tips for how to draw strokes to analyze the image. To identify people, try starting with a 
+single short positive stroke (blue), centered on the face or body. 
+Drawing the first stroke to identify an entire person
+Depending on the result, more strokes may be needed to differentiate an arm or frizzy hair from the 
+background. If you’re adding a stroke to an arm or hair, don’t put it right at the edge; the goal is not to 
+trace the subject, but to use strokes within the body of the subject to clarify what features belong to 
+the subject, and which do not. 
+Adding a stroke to the arm to include it as well
+3358Color | Chapter 139 Magic Mask
+COLOR
+As you do this, resist the urge to use too many strokes. One stroke might well be all you need, or you 
+might need two or three, but using more than five strokes for any subject or feature may cause more 
+problems than it solves.
+Adding negative strokes to the reflection to remove
+To identify faces, try starting with a single short stroke in the middle of the face, along the nose, or 
+from eyes to the lips. Depending on the result, you may need additional strokes to identify the chin, a 
+beard, or to distinguish the forehead from wispy hair.
+Drawing strokes to identify a face; notice that additional strokes are needed to include the beard.
+3359Color | Chapter 139 Magic Mask
+COLOR
+It’s a good idea to start with a single stroke, then track the stroke through the duration of the clip 
+(described later in this section). Over the entire clip, you’ll see which parts of the mask may exhibit 
+problems. This will guide where you put additional strokes, in order to more clearly identify the person 
+versus the background, in order to clean up the resulting mask. As you add additional strokes, track 
+those as well and see how things go.
+If you notice parts of the background that are erroneously added to the mask, you can add a negative 
+stroke (red) to clarify that those parts of the image should not be isolated. Short strokes, longer 
+strokes, and zig zags are good for backgrounds. Since strokes just help the analysis update the mask, 
+you can try different types of strokes to see what works best, and delete any stroke that doesn’t give 
+good results. As with positive strokes, don’t use more strokes than are absolutely necessary to get the 
+result you want.
+(Left) The microphone incorrectly identified as part of the woman being interviewed, (Right) Drawing negative 
+strokes to identify the microphone as background, using a zig-zag pattern to tag the entire microphone
+Similarly, if you’re isolating features such as a face, and you find other features, such as hair, getting in 
+the way, you can draw a negative stroke on the hair to identify it as not part of the face.
+If there’s a “hole” in the resulting mask that’s actually part of the background and not the subject, you 
+can try drawing a stroke connecting that hole to the rest of the background.
+Drawing strokes to connect the background with itself,  
+to remove part of the mask that’s not part of the person
+3360Color | Chapter 139 Magic Mask
+COLOR

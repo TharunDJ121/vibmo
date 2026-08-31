@@ -1,9 +1,10 @@
 """
-CapCut-Style Player Viewport with 16:9 Video Canvas, Fast Proxy Frame Rasterization,
-Strict LRU Frame Cache, Timecode Readout, and Async Rendering.
+CapCut-Style Player Viewport with 16:9 Video Canvas, Real-Time Video Decoding,
+Fast Proxy Frame Rasterization, Strict LRU Frame Cache, Timecode Readout, and Async Rendering.
 """
 
 from __future__ import annotations
+import os
 from typing import Any, Dict, Optional, Tuple
 from collections import OrderedDict
 import numpy as np
@@ -22,13 +23,73 @@ from PySide6.QtGui import QFont, QColor, QImage, QPixmap
 from vibmo.graph.engine import VibmoStateGraph
 
 
+from threading import RLock
+
+
+class VideoClipDecoder:
+    """Fast frame decoder for video media files on the timeline with stream caching."""
+    def __init__(self):
+        self._caps: Dict[str, Any] = {}
+        self._lock = RLock()
+
+    def get_capture(self, file_path: str):
+        with self._lock:
+            if not os.path.exists(file_path):
+                return None
+            if file_path not in self._caps:
+                try:
+                    import cv2
+                    cap = cv2.VideoCapture(file_path)
+                    if cap.isOpened():
+                        self._caps[file_path] = cap
+                except Exception as e:
+                    print(f"[Decoder] Failed to open video {file_path}: {e}")
+                    return None
+            return self._caps.get(file_path)
+
+    def extract_frame(self, file_path: str, frame_num: int, target_w: Optional[int] = None, target_h: Optional[int] = None) -> Optional[QImage]:
+        with self._lock:
+            cap = self.get_capture(file_path)
+            if not cap:
+                return None
+            try:
+                import cv2
+                cap.set(cv2.CAP_PROP_POS_FRAMES, max(0, frame_num))
+                ret, frame = cap.read()
+                if not ret or frame is None:
+                    return None
+                
+                if target_w and target_h:
+                    frame = cv2.resize(frame, (target_w, target_h))
+
+                rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                h, w, c = rgb.shape
+                return QImage(rgb.data.tobytes(), w, h, w * c, QImage.Format.Format_RGB888).copy()
+            except Exception as e:
+                print(f"[Decoder] Frame extract error at {frame_num}: {e}")
+                return None
+
+    def release_all(self):
+        with self._lock:
+            for cap in self._caps.values():
+                try:
+                    cap.release()
+                except Exception:
+                    pass
+            self._caps.clear()
+
+
+_GLOBAL_DECODER = VideoClipDecoder()
+
+
 class RenderWorker(QThread):
-    """Background thread to handle heavy rasterization asynchronously."""
+    """Background thread to handle heavy rasterization and timeline clip decoding asynchronously."""
     frame_ready = Signal(int, float, QImage, int, int) # frame, scale, qimage, w, h
     error_occurred = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.state_graph = None
         self.scene = None
         self.frame = 0
         self.fps = 60.0
@@ -36,7 +97,8 @@ class RenderWorker(QThread):
         self.is_running = True
         self.request_pending = False
 
-    def request_render(self, scene: Any, frame: int, fps: float, scale: float):
+    def request_render(self, state_graph: Any, scene: Any, frame: int, fps: float, scale: float):
+        self.state_graph = state_graph
         self.scene = scene
         self.frame = frame
         self.fps = fps
@@ -48,23 +110,45 @@ class RenderWorker(QThread):
     def run(self):
         while self.is_running and self.request_pending:
             self.request_pending = False
-            if not self.scene:
-                continue
             
             try:
-                t = float(self.frame) / max(1.0, self.fps)
-                t = min(self.scene.duration, t)
-                
-                # Fast proxy rasterization
-                rgba = self.scene.render_frame(time=t, scale=self.scale)
-                h, w, c = rgba.shape
-                
-                # Copy buffer to prevent memory corruption when passing to GUI thread
-                qimg = QImage(rgba.data.tobytes(), w, h, w * 4, QImage.Format.Format_RGBA8888).copy()
-                
-                # Only emit if no new request was queued during rendering
-                if not self.request_pending:
-                    self.frame_ready.emit(self.frame, self.scale, qimg, w, h)
+                # 1. First priority: Render from Python scene graph if available
+                if self.scene:
+                    t = float(self.frame) / max(1.0, self.fps)
+                    t = min(self.scene.duration, t)
+                    rgba = self.scene.render_frame(time=t, scale=self.scale)
+                    h, w, c = rgba.shape
+                    qimg = QImage(rgba.data.tobytes(), w, h, w * 4, QImage.Format.Format_RGBA8888).copy()
+                    if not self.request_pending:
+                        self.frame_ready.emit(self.frame, self.scale, qimg, w, h)
+                    continue
+
+                # 2. Second priority: Evaluate NLE Timeline video clips
+                if self.state_graph and hasattr(self.state_graph, "project") and self.state_graph.project.timeline.clips:
+                    active_clip = None
+                    # Find clip covering the current frame (reverse track order for top-layer priority)
+                    for clip in sorted(self.state_graph.project.timeline.clips.values(), key=lambda c: c.start_frame):
+                        if clip.start_frame <= self.frame < clip.start_frame + clip.duration_frames:
+                            active_clip = clip
+                            break
+
+                    if active_clip and active_clip.media_id:
+                        media = next((m for m in self.state_graph.project.media_pool if m.id == active_clip.media_id), None)
+                        if media and media.file_path and os.path.exists(media.file_path):
+                            if media.kind == "video":
+                                src_f = int((active_clip.source_in_frame or 0) + (self.frame - active_clip.start_frame))
+                                qimg = _GLOBAL_DECODER.extract_frame(media.file_path, src_f)
+                                if qimg and not self.request_pending:
+                                    self.frame_ready.emit(self.frame, self.scale, qimg, qimg.width(), qimg.height())
+                                    continue
+                            elif media.kind == "image":
+                                from PySide6.QtGui import QImageReader
+                                reader = QImageReader(media.file_path)
+                                qimg = reader.read()
+                                if not qimg.isNull() and not self.request_pending:
+                                    self.frame_ready.emit(self.frame, self.scale, qimg, qimg.width(), qimg.height())
+                                    continue
+
             except Exception as e:
                 self.error_occurred.emit(str(e))
                 
@@ -74,7 +158,7 @@ class RenderWorker(QThread):
 
 
 class CapCutPlayer(QFrame):
-    """Clean 16:9 Dedicated Video Player with Fast Proxy Rasterization & Frame Caching."""
+    """Clean 16:9 Dedicated Video Player with Fast Proxy Rasterization & Real Video Clip Decoding."""
     play_toggled = Signal(bool)
     frame_rendered = Signal(int)
 
@@ -125,8 +209,8 @@ class CapCutPlayer(QFrame):
 
         self.screen_label = QLabel()
         self.screen_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.screen_label.setStyleSheet("color: #3F3F46; font-size: 13px; font-weight: bold; border: none;")
-        self.screen_label.setText("Run a Python Script or Scrub Timeline to View Frame")
+        self.screen_label.setStyleSheet("color: #52525B; font-size: 12px; font-weight: 500; border: none;")
+        self.screen_label.setText("Import media or drag video clips to timeline to preview")
         sc_layout.addWidget(self.screen_label, 1)
 
         layout.addWidget(self.screen_container, 1)
@@ -196,7 +280,7 @@ class CapCutPlayer(QFrame):
         self.render_frame_at(self.current_frame)
 
     def render_frame_at(self, frame: int) -> None:
-        """Requests rendering of the frame using fast proxy cache or async worker."""
+        """Requests rendering of the frame using fast proxy cache, scene rasterization, or video clip decoder."""
         self.current_frame = max(0, frame)
         fps = self.state_graph.project.fps if self.state_graph else 60.0
         tot_f = self.state_graph.project.duration_frames if self.state_graph else 600
@@ -206,36 +290,43 @@ class CapCutPlayer(QFrame):
         # 1. Check strict LRU Frame Cache for instant 0ms retrieval
         cache_key = (self.current_frame, self.proxy_scale)
         if cache_key in self._frame_cache:
-            # Move to end to mark as most recently used
             pix = self._frame_cache.pop(cache_key)
             self._frame_cache[cache_key] = pix
             self.screen_label.setPixmap(pix)
             self.frame_rendered.emit(self.current_frame)
             return
 
-        # 2. Render from active Scene async
-        if self.state_graph and hasattr(self.state_graph, "active_scene") and self.state_graph.active_scene:
-            self.worker.request_render(self.state_graph.active_scene, self.current_frame, fps, self.proxy_scale)
-        else:
-            if self.screen_label.pixmap() is None or self.screen_label.pixmap().isNull():
-                self.screen_label.setText("Run a Python Script or Scrub Timeline to View Frame")
+        # 2. Asynchronously request render from Scene or Timeline Video Clips
+        scene = getattr(self.state_graph, "active_scene", None)
+        self.worker.request_render(self.state_graph, scene, self.current_frame, fps, self.proxy_scale)
 
     def render_frame_sync(self, frame: int) -> None:
-        """Synchronously renders the frame on the calling thread (instant 0ms for tests and previews)."""
+        """Synchronously renders the frame on calling thread."""
         self.current_frame = max(0, frame)
         fps = self.state_graph.project.fps if self.state_graph else 60.0
         tot_f = self.state_graph.project.duration_frames if self.state_graph else 600
         self.set_timecode(self.current_frame, tot_f, fps)
-        if self.state_graph and hasattr(self.state_graph, "active_scene") and self.state_graph.active_scene:
-            scene = self.state_graph.active_scene
+
+        scene = getattr(self.state_graph, "active_scene", None)
+        if scene:
             t = min(scene.duration, float(self.current_frame) / max(1.0, fps))
             rgba = scene.render_frame(time=t, scale=self.proxy_scale)
             h, w, _ = rgba.shape
             qimg = QImage(rgba.data.tobytes(), w, h, w * 4, QImage.Format.Format_RGBA8888).copy()
             self._on_frame_rendered(self.current_frame, self.proxy_scale, qimg, w, h)
+        elif self.state_graph and self.state_graph.project.timeline.clips:
+            for clip in self.state_graph.project.timeline.clips.values():
+                if clip.start_frame <= self.current_frame < clip.start_frame + clip.duration_frames:
+                    if clip.media_id:
+                        media = next((m for m in self.state_graph.project.media_pool if m.id == clip.media_id), None)
+                        if media and media.file_path:
+                            src_f = int((clip.source_in_frame or 0) + (self.current_frame - clip.start_frame))
+                            qimg = _GLOBAL_DECODER.extract_frame(media.file_path, src_f)
+                            if qimg:
+                                self._on_frame_rendered(self.current_frame, self.proxy_scale, qimg, qimg.width(), qimg.height())
+                                return
 
     def _on_frame_rendered(self, frame: int, scale: float, qimg: QImage, w: int, h: int) -> None:
-        # Scale smoothly to fit screen surface
         target_w = max(100, self.screen_container.width() - 4)
         target_h = max(60, self.screen_container.height() - 4)
         scaled = QPixmap.fromImage(qimg).scaled(
@@ -246,23 +337,20 @@ class CapCutPlayer(QFrame):
         cache_key = (frame, scale)
         self._frame_cache[cache_key] = scaled
         if len(self._frame_cache) > self._max_cache_size:
-            # Pop least recently used (first item)
             self._frame_cache.popitem(last=False)
             
-        # Only update display if it's the currently requested frame
-        if frame == self.current_frame and scale == self.proxy_scale:
+        if frame == self.current_frame:
             self.screen_label.setPixmap(scaled)
             fps = self.state_graph.project.fps if self.state_graph else 60.0
             t = float(frame) / max(1.0, fps)
             
-            orig_w = getattr(self.state_graph.active_scene, "width", 1920) if self.state_graph else 1920
-            orig_h = getattr(self.state_graph.active_scene, "height", 1080) if self.state_graph else 1080
-            proxy_tag = f" ({w}x{h} Proxy)" if scale < 1.0 else ""
-            self.res_badge.setText(f"{orig_w}x{orig_h}{proxy_tag} @ {int(fps)} FPS • t={t:.2f}s")
+            orig_w = getattr(self.state_graph.active_scene, "width", w) if self.state_graph else w
+            orig_h = getattr(self.state_graph.active_scene, "height", h) if self.state_graph else h
+            self.res_badge.setText(f"{orig_w}x{orig_h} | {int(fps)} FPS • t={t:.2f}s")
             self.frame_rendered.emit(frame)
 
     def _on_render_error(self, err: str) -> None:
-        self.screen_label.setText(f"Rendering Error: {err}")
+        self.screen_label.setText(f"Preview: {err}")
 
     def toggle_playback(self) -> None:
         """Toggles real-time video playback."""
@@ -281,7 +369,7 @@ class CapCutPlayer(QFrame):
         tot_f = self.state_graph.project.duration_frames if self.state_graph else 600
         next_f = self.current_frame + 1
         if next_f >= tot_f:
-            next_f = 0  # Loop playback
+            next_f = 0
         self.render_frame_at(next_f)
 
     def _step_prev(self) -> None:
@@ -301,3 +389,9 @@ class CapCutPlayer(QFrame):
             return f"{hours:02d}:{mins % 60:02d}:{secs:02d}:{fr:02d}"
 
         self.timecode_label.setText(f"{fmt(current_frame)} / {fmt(total_frames)}")
+
+    def closeEvent(self, event: Any) -> None:
+        self.play_timer.stop()
+        self.worker.stop()
+        super().closeEvent(event)
+

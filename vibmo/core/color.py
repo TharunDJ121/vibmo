@@ -228,6 +228,9 @@ class Color:
     def to_tuple_rgba(self) -> Tuple[float, float, float, float]:
         return (self.r, self.g, self.b, self.a)
 
+    to_rgba = to_tuple_rgba
+
+
     def to_cairo(self) -> Tuple[float, float, float, float]:
         return (self.r, self.g, self.b, self.a)
 

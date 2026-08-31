@@ -54,3 +54,12 @@ def test_celebration_fanfare_tone_output():
     assert audio.dtype == np.float32
     assert len(audio) == int(48000 * 1.0)
     assert np.max(np.abs(audio)) <= 1.0
+
+def test_celestial_wind_chime():
+    audio = ChimesHarmonicSuite.celestial_wind_chime()
+    assert isinstance(audio, np.ndarray)
+    assert audio.dtype == np.float32
+    assert len(audio) == int(48000 * 1.2)
+    assert np.max(np.abs(audio)) > 0
+    assert np.max(np.abs(audio)) <= 1.0
+

@@ -277,6 +277,13 @@ class StudioState:
         elif prop == "z":
             if hasattr(target_node, "z"):
                 target_node.z.set(float(value))
+        elif prop == "color":
+            if hasattr(target_node, "color"):
+                from vibmo.core.color import Color
+                target_node.color = Color.from_any(value)
+        elif prop == "font_size":
+            if hasattr(target_node, "font_size"):
+                target_node.font_size = float(value)
 
         self.color_grade_override: Optional[Dict[str, Any]] = None
 

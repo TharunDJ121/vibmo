@@ -55,5 +55,11 @@ class TestImpactSubSuite(unittest.TestCase):
         audio = ImpactSubSuite.card_slam_impact(duration=duration)
         self._verify_audio_props(audio, duration)
 
+    def test_cinematic_trailer_sub_drop(self):
+        decay = 2.0
+        audio = ImpactSubSuite.cinematic_trailer_sub_drop(decay=decay)
+        self._verify_audio_props(audio, decay)
+
 if __name__ == '__main__':
     unittest.main()
+

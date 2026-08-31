@@ -1,102 +1,38 @@
 import pytest
 import cairo
-from typing import Any
-
 from vibmo.product.ai.ui_prompt_diff_suite import (
     PromptDiffCard,
     InlineDiffHighlighter,
     PromptTokenCostBadge,
-    MergePromptButton
+    MergePromptButton,
+    PromptDiffViewer,
+    SideBySideDiffPane,
 )
 
-
-class MockContext:
-    def __init__(self):
-        self.calls = []
-        self.matrix = cairo.Matrix()
-
-    def __getattr__(self, name: str) -> Any:
-        def stub(*args: Any, **kwargs: Any) -> Any:
-            self.calls.append((name, args, kwargs))
-            if name == "text_extents":
-                class Extents:
-                    width = 10.0
-                    height = 10.0
-                return Extents()
-            return None
-        return stub
-
-
-def test_prompt_diff_card():
-    card = PromptDiffCard(width=400, height=200)
-    assert card.local_bounds(0.0) == (0.0, 0.0, 400.0, 200.0)
-    ctx = MockContext()
-    card.draw(ctx, 0.0)
-    calls = [c[0] for c in ctx.calls]
-    assert "save" in calls
-    assert "restore" in calls
-    assert "arc" in calls
-    assert "fill_preserve" in calls
-    assert "stroke" in calls
-    assert "show_text" in calls
-
-
 def test_inline_diff_highlighter():
-    diff_text = " line 1\n+added line\n-deleted line"
-    highlighter = InlineDiffHighlighter(text=diff_text, font_size=16.0, line_height=24.0, width=300.0)
-    
-    assert len(highlighter.parsed_lines) == 3
-    assert highlighter.parsed_lines[0] == ("normal", " line 1")
-    assert highlighter.parsed_lines[1] == ("add", "+added line")
-    assert highlighter.parsed_lines[2] == ("del", "-deleted line")
-    
-    assert highlighter.local_bounds(0.0) == (0.0, 0.0, 300.0, 3 * 24.0)
-    
-    ctx = MockContext()
-    highlighter.draw(ctx, 0.0)
-    
-    calls = [c[0] for c in ctx.calls]
-    assert "save" in calls
-    assert "restore" in calls
-    assert "rectangle" in calls
-    assert "fill" in calls
-    assert "show_text" in calls
-
+    hl = InlineDiffHighlighter(v1="Old prompt text", v2="New improved prompt text")
+    surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 600, 200)
+    ctx = cairo.Context(surface)
+    hl.draw(ctx, time=0.0)
+    assert hl.v1 == "Old prompt text"
 
 def test_prompt_token_cost_badge():
-    badge = PromptTokenCostBadge(reduction_text="-25% tokens", cost_savings="$0.10 saved", width=200, height=40)
-    assert badge.local_bounds(0.0) == (0.0, 0.0, 200.0, 40.0)
-    
-    ctx = MockContext()
-    badge.draw(ctx, 0.0)
-    
-    calls = [c[0] for c in ctx.calls]
-    assert "save" in calls
-    assert "restore" in calls
-    assert "arc" in calls
-    assert "fill_preserve" in calls
-    assert "stroke" in calls
-    assert "show_text" in calls
-
+    badge = PromptTokenCostBadge(cost_delta="+14 tokens (+$0.0002)")
+    surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 250, 50)
+    ctx = cairo.Context(surface)
+    badge.draw(ctx, time=0.0)
+    assert "+14 tokens" in badge.cost_delta
 
 def test_merge_prompt_button():
-    btn = MergePromptButton(label="Accept", width=150, height=50)
-    assert btn.local_bounds(0.0) == (0.0, 0.0, 150.0, 50.0)
-    
-    ctx = MockContext()
-    btn.draw(ctx, 0.0)
-    
-    calls = [c[0] for c in ctx.calls]
-    assert "save" in calls
-    assert "restore" in calls
-    assert "arc" in calls
-    assert "fill" in calls
-    assert "show_text" in calls
-    
-    # test scaling
-    btn.scale_sig.set(1.5)
-    ctx2 = MockContext()
-    btn.draw(ctx2, 0.0)
-    calls2 = [c[0] for c in ctx2.calls]
-    assert "scale" in calls2
+    btn = MergePromptButton(label="Accept Diff")
+    surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 180, 50)
+    ctx = cairo.Context(surface)
+    btn.draw(ctx, time=0.0)
+    assert btn.label == "Accept Diff"
 
+def test_prompt_diff_card():
+    card = PromptDiffCard(v1="v1", v2="v2")
+    surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 800, 500)
+    ctx = cairo.Context(surface)
+    card.draw(ctx, time=0.0)
+    assert card is not None

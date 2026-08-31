@@ -101,3 +101,9 @@ class PaperCardSuite:
         audio = PaperCardSuite._apply_envelope(filtered, env)
         audio = audio / (np.max(np.abs(audio)) + 1e-9)
         return audio.astype(np.float32)
+
+    @staticmethod
+    def card_flip_shuffle(duration=0.22) -> np.ndarray:
+        """Tactile card flip and sliding shuffle texture."""
+        return PaperCardSuite.card_shuffle_slide(duration=duration)
+

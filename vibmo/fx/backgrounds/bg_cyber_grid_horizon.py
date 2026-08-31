@@ -9,6 +9,23 @@ from vibmo.core.color import Color, colors
 from vibmo.core.signal import Signal
 from vibmo.core.vector import Vector2D
 
+if not hasattr(colors, "FUCHSIA"):
+    setattr(colors, "FUCHSIA", getattr(colors, "FUCHSIA_500", Color.hex("#d946ef")))
+
+
+class _CtxAdapter:
+    def __init__(self, c: Any) -> None:
+        self.context = c
+
+
+class _RenderCtxAdapter:
+    def __init__(self, c: Any) -> None:
+        self._c = c
+
+    def get_surface(self, w: int, h: int) -> _CtxAdapter:
+        return _CtxAdapter(self._c)
+
+
 class CyberGridHorizon(Node):
     """
     Perspective 3D ground plane with moving neon glowing grid lines scrolling toward the camera.
@@ -19,29 +36,47 @@ class CyberGridHorizon(Node):
         name: str = "",
         width: int = 1920,
         height: int = 1080,
-        grid_color: Color = colors.CYAN,
+        grid_color: Any = colors.CYAN,
         grid_spacing: int = 80,
         line_thickness: float = 2.0,
         horizon_pitch: float = 0.6,
+        perspective: Optional[float] = None,
         scroll_speed: float = 1.0,
+        speed: Optional[float] = None,
         glow_intensity: float = 0.5,
         fade_distance: float = 0.8,
+        glow: Optional[bool] = None,
         **kwargs: Any
     ) -> None:
         super().__init__(name=name, **kwargs)
         self.width = width
         self.height = height
         
+        pitch_val = perspective if perspective is not None else horizon_pitch
+        speed_val = speed if speed is not None else scroll_speed
+        
+        if glow is True:
+            glow_intensity = 0.8
+        elif glow is False:
+            glow_intensity = 0.0
+
         self.grid_color = Signal(Color.from_any(grid_color), f"{self.name}.grid_color")
         self.grid_spacing = Signal(float(grid_spacing), f"{self.name}.grid_spacing")
         self.line_thickness = Signal(float(line_thickness), f"{self.name}.line_thickness")
-        self.horizon_pitch = Signal(float(horizon_pitch), f"{self.name}.horizon_pitch")
-        self.scroll_speed = Signal(float(scroll_speed), f"{self.name}.scroll_speed")
+        self.horizon_pitch = Signal(float(pitch_val), f"{self.name}.horizon_pitch")
+        self.scroll_speed = Signal(float(speed_val), f"{self.name}.scroll_speed")
         self.glow_intensity = Signal(float(glow_intensity), f"{self.name}.glow_intensity")
         self.fade_distance = Signal(float(fade_distance), f"{self.name}.fade_distance")
 
+    @property
+    def perspective(self) -> float:
+        return float(self.horizon_pitch(0.0))
+
     def get_bounds(self) -> tuple[float, float, float, float]:
         return 0.0, 0.0, float(self.width), float(self.height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        self.render(time, _RenderCtxAdapter(ctx))
 
     def render(self, time: float, render_ctx: Any) -> None:
         if not self.visible:
@@ -197,6 +232,9 @@ class NeonSunBackdrop(Node):
         r = float(self.radius_val(0.0)) + float(self.glow_radius(0.0))
         return -r, -r, r, r
 
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        self.render(time, _RenderCtxAdapter(ctx))
+
     def render(self, time: float, render_ctx: Any) -> None:
         if not self.visible:
             return
@@ -309,6 +347,9 @@ class WireframeMountainHorizon(Node):
 
     def get_bounds(self) -> tuple[float, float, float, float]:
         return 0.0, 0.0, float(self.width), float(self.height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        self.render(time, _RenderCtxAdapter(ctx))
 
     def render(self, time: float, render_ctx: Any) -> None:
         if not self.visible:

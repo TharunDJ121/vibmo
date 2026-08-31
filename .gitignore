@@ -81,5 +81,19 @@ venv.bak/
 .DS_Store
 Thumbs.db
 
-# Aider / Assistant history
+# Aider / Assistant history & agent worker caches
 .aider*
+.agents/*
+!.agents/skills/
+!.agents/skills/**
+
+# Large binaries & media datasets
+*.pdf
+.vibmo_chromadb/
+.vibmo_cloud_cache/
+temp_analysis_frames/
+temp_compare/
+*.otio
+draft.json
+
+

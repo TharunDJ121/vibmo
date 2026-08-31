@@ -156,10 +156,63 @@ class VibmoStateGraph:
                 else:
                     kind = "video"
 
+            width = None
+            height = None
+            fps = None
+            duration_frames = None
+            duration_seconds = None
+            metadata = {}
+
+            # Probe media metadata and thumbnail
+            if kind == "video":
+                try:
+                    import cv2
+                    cap = cv2.VideoCapture(abs_path)
+                    if cap.isOpened():
+                        fps = float(cap.get(cv2.CAP_PROP_FPS) or 30.0)
+                        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH) or 1920)
+                        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT) or 1080)
+                        duration_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 120)
+                        duration_seconds = float(duration_frames / max(1.0, fps))
+                        
+                        # Extract representative thumbnail frame at ~10% duration
+                        cap.set(cv2.CAP_PROP_POS_FRAMES, min(duration_frames - 1, int(fps * 1.0)))
+                        ret, thumb_frame = cap.read()
+                        if ret and thumb_frame is not None:
+                            # Resize thumbnail to 160x90
+                            thumb_small = cv2.resize(thumb_frame, (160, 90))
+                            _, enc = cv2.imencode(".jpg", thumb_small, [cv2.IMWRITE_JPEG_QUALITY, 80])
+                            import base64
+                            metadata["thumbnail_b64"] = base64.b64encode(enc).decode("utf-8")
+                        
+                        mins = int(duration_seconds // 60)
+                        secs = int(duration_seconds % 60)
+                        metadata["duration_formatted"] = f"{mins:02d}:{secs:02d}"
+                        cap.release()
+                except Exception as probe_err:
+                    print(f"[StateGraph] Video probe error: {probe_err}")
+
+            elif kind == "image":
+                try:
+                    from PIL import Image
+                    with Image.open(abs_path) as img:
+                        width, height = img.size
+                        duration_frames = 150
+                        duration_seconds = 5.0
+                        metadata["duration_formatted"] = "IMAGE"
+                except Exception:
+                    pass
+
             item = MediaItem(
                 name=base_name,
                 file_path=abs_path,
                 kind=kind, # type: ignore
+                width=width,
+                height=height,
+                fps=fps,
+                duration_frames=duration_frames,
+                duration_seconds=duration_seconds,
+                metadata=metadata,
             )
             self.project.media_pool.append(item)
             self._notify("media_imported", {"media_id": item.id, "name": item.name})

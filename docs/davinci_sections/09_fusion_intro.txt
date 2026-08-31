@@ -1,0 +1,1617 @@
+FUSION
+Fusion  
+Fundamentals
+CONTENTS
+62 Introduction to  
+Compositing in Fusion  ����������������������  1318
+63 Exploring the Fusion Interface  ������ 1324
+64 Getting Clips into Fusion  ����������������� 1372
+65 Rendering Using Saver Nodes  ����� 1400
+66 Working in the Node Editor  ������������ 1423
+67 Node Groups, Macros, 
+and Fusion Templates  �����������������������  1473
+68 Using Viewers  �������������������������������������  1496
+69 Editing Parameters  
+in the Inspector ����������������������������������  1539
+70 Animating in Fusion’s 
+Keyframes Editor ��������������������������������  1565
+71 Animating in Fusion’s  
+Spline Editor  ����������������������������������������  1582
+72 Animating with Motion Paths  ����������  1611
+73 Using Modifiers, Expressions, 
+and Custom Controls �����������������������  1629
+74 Preferences  ������������������������������������������  1642
+75 Controlling Image  
+Processing and Resolution  ������������  1689
+76 Managing Color for  
+Visual Effects ��������������������������������������  1700
+77 Understanding Image Channels  ���� 1714
+78 Compositing Layers in Fusion  ������ 1750
+79 Rotoscoping with Masks  ������������������  1774
+80 Paint ��������������������������������������������������������  1798
+81 Using the Tracker Node  ������������������  1825
+82 Planar Tracking  ������������������������������������  1861
+83 Using Open FX, Resolve FX,  
+and Fuse Plugins �������������������������������  1868
+84 3D Compositing Basics  �������������������� 1873
+85 3D Camera Tracking  �������������������������  1929
+86 Particle Systems  ����������������������������������  1947
+87 Optical Flow and  
+Stereoscopic Nodes  �������������������������  1956
+Chapter 62
+Introduction to 
+Compositing 
+in Fusion
+This introduction is designed explicitly to help users who are new to Fusion get 
+started learning this exceptionally powerful environment for creating and editing 
+visual effects and motion graphics right from within DaVinci Resolve or using the 
+stand-alone Fusion Studio application.
+This documentation covers both the Fusion Page inside DaVinci Resolve and the 
+stand-alone Fusion Studio application.
+Contents
+What Is Fusion? ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1319
+The Fusion Page within DaVinci Resolve  ��������������������������������������������������������������������������������������������������������������������������������� 1319
+The Fusion Studio Stand-Alone Application  �������������������������������������������������������������������������������������������������������������������������� 1321
+What Kinds of Effects Does Fusion Offer? �������������������������������������������������������������������������������������������������������������������������������  1321
+How Hard Will This Be to Learn? �������������������������������������������������������������������������������������������������������������������������������������������������  1323
+1318Fusion Fundamentals | Chapter 62 Introduction to Compositing in Fusion
+FUSION
+What Is Fusion?
+Blackmagic Design Fusion is powerful 2D and 3D visual effects compositing software with over 
+thirty years of evolution serving the motion picture and broadcast industry, creating effects seen in 
+countless films and television series. It is available as a stand-alone application as well as a page 
+within DaVinci Resolve.
+In its purest form, Fusion is a collection of image-processing engines called nodes. These nodes 
+represent effects like blurs and color correctors, as well as images, 3D models, and spline masks. 
+Similar to effects you may be familiar with, each node includes a set of parameters that can be 
+adjusted and animated over time. Stringing different nodes together in a graphical user interface 
+called a node tree allows you to create sophisticated visual effects. The nodes, node trees, and all 
+settings you create are saved in a document called a Composition, or “comp” for short.
+The Fusion Page within DaVinci Resolve
+Merged right into DaVinci Resolve, the Fusion page makes it possible to jump immediately from editing 
+right into compositing, with no need to export media, relink files, or launch another application to get 
+your work done. Now everything you need lives right inside DaVinci Resolve.
+The Fusion page in DaVinci Resolve, showing viewers, the Node Editor, and the Inspector
+How Do I Use the Fusion Page?
+The relationship between the Edit page and the Fusion page is similar to the relationship between the 
+Edit page and the Color page. Each clip can have a grade applied to it in the Color page, and similarly 
+every clip can have a composition applied to it in the Fusion page.
+If you use the Fusion page to create any kind of effect or composite, a badge appears on that clip in 
+the Timeline to show that clip has a composition applied to it.
+1319Fusion Fundamentals | Chapter 62 Introduction to Compositing in Fusion
+FUSION
+Clips with Fusion page compositions have a 
+Fusion badge to the right of the name.
+To create an effect in the Fusion page of DaVinci Resolve, you need only park the playhead over a clip 
+in the Edit or Cut page and then click the Fusion page button. Your clip is immediately available as a 
+MediaIn node in the Fusion page, ready for you to add a variety of stylistic effects. You can paint out 
+an unwanted blemish or feature, build a quick composite to add graphics or text, or accomplish any 
+other visual effect you can imagine, built from the Fusion page’s toolkit of effects.
+Alternatively, in DaVinci Resolve, you have the option of editing together all the clips you want to use, 
+superimposing and lining up every piece of media you’ll need with the correct timing, before selecting 
+them and creating a Fusion clip. A Fusion clip functions as a single item in the Edit or Cut page 
+timeline, but once in the Fusion page, each piece of media you’ve assembled is revealed in a fully built 
+Fusion composition, ready for you to start adding nodes to customize for whatever effect you need 
+to create.
+Whichever way you want to work, all this happens on the very same timeline as 
+editing, grading, and audio post, for a seamless back and forth as you edit, refine, 
+and finish your projects.
+How Do Fusion Effects Differ from Edit Page Effects?
+When using DaVinci Resolve, you can create numerous effects in the Edit page. Transitions, fades, 
+superimpositions, over-the-shoulder picture-in-picture effects, time remapping, and lower third 
+titles are some of the effects that can be quickly and more efficiently created in the Edit or Cut page 
+timeline. However, the Fusion page’s node-based interface lets you go deep into the details of a 
+composition to create sophisticated 2D and 3D effects with precise control and endless customization. 
+Effects that include more than two or three layers can be much more manageable in Fusion. Green or 
+blue screen composites, sky replacements, and object removal are all effects better suited for Fusion’s 
+more advanced toolset.
+How Do Fusion Effects Differ from Color Page Effects?
+The Color page in DaVinci Resolve can also handle some visual effects work. Effects that blur the line 
+between color grading and finishing can be very fast and intuitive in the Color Page, especially for 
+people already familiar with the Color page toolset. Beauty work and small image repairs can make 
+efficient use of the Color page’s straightforward Tracking tool, Face Refinement, and Patch Replacer 
+effects. However, when it comes to more challenging blue/green screen compositing, the tools built 
+around Fusion’s powerful Delta keyer are more capable of handling these shots. Integrating 3D 
+objects into live-action scenes, split-screen effects, motion graphics, and precise keyframing are all 
+better suited to the Fusion page.
+1320Fusion Fundamentals | Chapter 62 Introduction to Compositing in Fusion
+FUSION
+The Fusion Studio Stand-Alone Application
+Creating visual effects with the stand-alone Fusion Studio software begins with opening Fusion, 
+creating a new composition, importing some clips via Loader nodes, and building out your composite 
+with effects. Just like the Fusion Page in DaVinci Resolve, you add effects using different nodes from 
+the Effects Library, and you combine multiple layers of imagery using Merge nodes. Once you’ve 
+created the desired result, add a Saver node to the end of the tree of nodes you’ve created to render 
+your final result.
+Rendering Out Your Final Result
+Unlike the Fusion Page in DaVinci Resolve, which renders directly back into the Edit or Cut page 
+timeline, the final step in Fusion Studio is to render the finished effect to disk as a movie file or image 
+sequence. The last node in every node tree is a Saver node. Saver nodes configure the output file 
+format and render the file to disk. You can use as many Saver nodes in a composite as you need. For 
+instance, you might use multiple Saver nodes to render out intermediate areas of a composite or to 
+output a composite in multiple formats.
+What Kinds of Effects Does Fusion Offer?
+In addition to the kinds of robust compositing, paint, rotoscoping, and keying effects you’d expect from 
+a fully-featured 2D compositing environment, Fusion offers much more.
+3D Compositing
+Fusion has powerful 3D nodes that include extruded 3D text, simple geometry, and the ability to 
+import 3D models. Once you’ve assembled a 3D scene, you can add cameras, lighting, and material 
+shaders, and then render the result with depth-of-field effects and auxiliary channels to integrate with 
+more conventional layers of 2D compositing, for a sophisticated blending of 3D and 2D operations in 
+the very same node tree.
+ 
+A 3D scene with textured 3D text, created entirely within Fusion
+Particles
+Fusion also has an extensive set of nodes for creating particle systems that have been used in 
+major motion pictures, with particle generators capable of spawning other generators, 3D particle 
+generation, complex simulation behaviors that interact with 3D objects, and endless options for 
+experimentation and customization. You can create particle system simulations for VFX or more 
+abstract particle effects for motion graphics.
+1321Fusion Fundamentals | Chapter 62 Introduction to Compositing in Fusion
+FUSION
+A 3D particle system, also created entirely within Fusion
+Text
+The Text tools in Fusion are exceptional, giving you layout and animation options in both 2D and 3D. 
+Furthermore, within DaVinci Resolve, these Text tools have been incorporated into the Edit and Cut 
+pages as Fusion Titles. These title templates are compositions saved from Fusion as macros with 
+published controls that are visible in the Edit or Cut page Inspector for easy customization, even if 
+you’re working with people who don’t know Fusion.
+A multi-layered text composite integrating video clips and Fusion-generated elements
+And Lots More
+The list goes on. With Stereo and VR adjustment nodes, Planar Tracking, Deep Pixel nodes for 
+re-compositing rendered 3D scenes using Auxiliary Channel data, powerful Masking and Rotoscoping 
+nodes, and Warping effects, Fusion is an impressively featured environment for building worlds, fixing 
+problems, and flying multi-layered motion graphics animations through your programs.
+1322Fusion Fundamentals | Chapter 62 Introduction to Compositing in Fusion
+FUSION
+How Hard Will This Be to Learn?
+That depends on what you want to do, but honestly it’s not so bad with this PDF at your side, helping 
+guide the way. It’s worth repeating that this Fusion documentation was developed specifically to help 
+users who’ve never before worked with Fusion learn the core concepts needed to perform the basics, 
+in preparation for learning the rest of the application on your own.
+Fusion is a deep, production-driven product that’s had decades of development, so its feature set is 
+deep and comprehensive. You won’t learn it in an hour, but much of what you’ll find won’t be so very 
+different from other compositing applications you may have used. And if you’ve familiarized yourself 
+with the node-based grading workflow of the DaVinci Resolve Color page, you’ve already got a leg up 
+on understanding the central operational concept of compositing in Fusion.
+1323Fusion Fundamentals | Chapter 62 Introduction to Compositing in Fusion
+FUSION
+Chapter 63
+Exploring the 
+Fusion Interface
+This chapter provides an orientation on the Fusion user interface, providing a 
+quick tour of what tools are available, where to find things, and how the different 
+panels fit together to help you build and refine compositions in this powerful 
+node-based environment.
+Contents
+The Fusion User Interface �������������������������������������������������������������������������������������������������������������������������������������������������������������  1326
+The Work Area ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1327
+Interface Toolbar���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1327
+Choosing Which Panel Has Focus  ����������������������������������������������������������������������������������������������������������������������������������������������  1328
+Viewers ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1329
+Zooming and Panning into Viewers  ������������������������������������������������������������������������������������������������������������������������������������������� 1330
+Loading Nodes Into Viewers ��������������������������������������������������������������������������������������������������������������������������������������������������������� 1330
+Clearing Viewers  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1331
+Viewer Controls  ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1331
+Time Ruler and Transport Controls  �������������������������������������������������������������������������������������������������������������������������������������������  1333
+Time Ruler Controls in the Fusion Page ����������������������������������������������������������������������������������������������������������������������������������  1333
+Time Ruler Controls in Fusion Studio ����������������������������������������������������������������������������������������������������������������������������������������  1334
+The Playhead ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1335
+Zoom and Scroll Bar ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1335
+Transport Controls in the Fusion Page �������������������������������������������������������������������������������������������������������������������������������������  1335
+Audio Monitoring  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1337
+The Current Time Field ��������������������������������������������������������������������������������������������������������������������������������������������������������������������  1338
+Transport Controls in Fusion Studio  ������������������������������������������������������������������������������������������������������������������������������������������  1339
+Changing the Time Display Format  �������������������������������������������������������������������������������������������������������������������������������������������  1343
+Keyframe Display in the Time Ruler  �������������������������������������������������������������������������������������������������������������������������������������������  1343
+The Fusion RAM Cache for Playback  ���������������������������������������������������������������������������������������������������������������������������������������� 1343
+1324Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Toolbar �����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1345
+Customizing the Toolbar �����������������������������������������������������������������������������������������������������������������������������������������������������������������  1346
+Node Editor��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1347
+Adding Nodes to Your Composition ������������������������������������������������������������������������������������������������������������������������������������������� 1347
+Removing Nodes from Your Composition  ������������������������������������������������������������������������������������������������������������������������������ 1348
+Identifying Node Inputs and Node Outputs  �������������������������������������������������������������������������������������������������������������������������� 1348
+Node Editing Essentials  ������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1349
+Navigating the Node Editor  ����������������������������������������������������������������������������������������������������������������������������������������������������������� 1350
+Vertical Node Editor Layouts ���������������������������������������������������������������������������������������������������������������������������������������� ������������������ 1351
+Keeping Organized ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1352
+Status Bar ����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1352
+Effects Library  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1353
+The Inspector����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1354
+The Tools and Modifiers Panels ���������������������������������������������������������������������������������������������������������������������������������������������������  1354
+Parameter Header Controls  ����������������������������������������������������������������������������������������������������������������������������������������������������������� 1354
+Parameter Tabs ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1355
+Keyframes Editor ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1355
+Keyframes Editor Control Summary  ������������������������������������������������������������������������������������������������������������������������������������������ 1356
+Adjusting Clip Timings  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1356
+Adjusting Effect Timings  ������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1356
+Adjusting Keyframe Timings ����������������������������������������������������������������������������������������������������������������������������������������������������������� 1357
+Spline Editor ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1358
+Spline Editor Control Summary  ���������������������������������������������������������������������������������������������������������������������������������������������������� 1359
+Choosing Which Parameters to Show  �������������������������������������������������������������������������������������������������������������������������������������� 1359
+Essential Spline Editing  ��������������������������������������������������������������������������������������������������������������������������������������������������������������������  1359
+Essential Spline Editing Tools and Modes  ������������������������������������������������������������������������������������������������������������������������������ 1360
+Thumbnail Timeline in the Fusion Page  ����������������������������������������������������������������������������������������������������������������������������������  1361
+The Media Pool in the Fusion Page ������������������������������������������������������������������������������������������������������������������������������������������  1362
+Importing Media Into the Media Pool on the Fusion Page ���������������������������������������������������������������������������������������������  1363
+Bins in Fusion Studio ������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1364
+Bins Interface  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1364
+The Bin Studio Player ������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1366
+The Console ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1367
+Customizing Fusion ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1368
+The Fusion Settings Window  �������������������������������������������������������������������������������������������������������������������������������������������������������� 1368
+Showing and Hiding Panels  ����������������������������������������������������������������������������������������������������������������������������������������������������������� 1369
+Resizing Panels ������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1369
+Fusion Studio Floating Frame �������������������������������������������������������������������������������������������������������������������������������������������������������  1369
+Fusion Keyboard Remapping  �������������������������������������������������������������������������������������������������������������������������������������������������������� 1370
+Fusion Studio Keyboard Remapping ����������������������������������������������������������������������������������������������������������������������������������������� 1370
+Undo and Redo �������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1371
+1325Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+The Fusion User Interface
+If you open up everything at once, Fusion is divided into four principal regions designed to help 
+you make fast work of node-based compositing. The viewer(s) are at the top, the work area is at the 
+bottom, the Inspector is at the right, and the Effects Library is the area found at the left. In DaVinci 
+Resolve’s Fusion page, the Effects Library shares space with the Media Pool. All these panels work 
+together to let you add effects, paint to correct issues, create motion graphics or title sequences, or 
+build sophisticated 3D and multi-layered composites.
+The complete Fusion user interface.
+However, Fusion doesn’t have to be that complicated, and in truth, you can work very nicely with only 
+the viewer, Node Editor, and Inspector open for a simplified experience.
+A simplified set of Fusion controls for everyday working
+1326Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+The Work Area
+You probably won’t see the term “the work area” used much, in favor of the specific panels within the 
+work area that you’ll be using. Still, the area referred to as the work area is the region at the bottom 
+half of the Fusion user interface, within which you can expose the three main panels used to construct 
+compositions and edit animations in Fusion. These are the Node Editor, the Spline Editor, and the 
+Keyframes Editor. By default, the Node Editor is the first thing you’ll see, and the main area you’ll be 
+working within, but it can sit side-by-side with the Spline Editor and Keyframes Editor as necessary. 
+You can make more horizontal room on your display for these three panels by putting the Effects 
+Library and Inspector into a half-height mode, if necessary.
+The work area showing the Node Editor, the Spline Editor, and the Keyframes Editor
+Interface Toolbar
+At the very top of Fusion is a toolbar with buttons that let you show and hide different parts of the user 
+interface (UI). Buttons with labels identify which parts of the UI can be shown or hidden. In DaVinci 
+Resolve’s Fusion page, if you right-click anywhere within this toolbar, you have the option of displaying 
+this bar with or without text labels.
+The UI toolbar of the Fusion page
+The UI toolbar of Fusion Studio
+These buttons are as follows, from left to right:
+  Media Pool/Effects Library Full Height:  Lets you set the area used by the Media Pool 
+(DaVinci Resolve only) and/or Effects Library to take up the full height of your display, giving you 
+more area for browsing at the expense of a narrower Node Editor and viewer area. At half-height, 
+the Media Pool/Templates/Effects Library are restricted to the top half of the UI along with 
+the viewers (you can only show one at a time), and the Node Editor takes up the full width of 
+your display.
+  Media Pool: (DaVinci Resolve only): Shows and hides the Media Pool, from which you can drag 
+additional clips into the Node Editor to use them in your Fusion page composition.
+  Effects Library:  Opens or hides the repository of all node tools available to use in Fusion. 
+From here, you can click nodes to add them after the currently selected node in the Node Editor, 
+or you can drag and drop nodes to any part of the node tree you like.
+  Clips: (DaVinci Resolve only): Opens and closes the Thumbnail timeline, which lets you 
+navigate your program, create and manage multiple versions of compositions, and reset the 
+current composition.
+1327Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+  Nodes: Opens and closes the Node Editor, where you build and edit your compositions.
+  Console (Fusion Studio only):  The Console is a window in which you can see the error, log, 
+script, and input messages that may explain something Fusion is trying to do in greater detail. 
+The Console is also where you can read FusionScript outputs, or input FusionScripts directly.
+  Spline: Opens and closes the Spline Editor, where you can edit the curves that interpolate 
+keyframe animations to customize and perfect their timing. Each keyframed parameter appears 
+hierarchically within the effect in which it appears in a list to the left.
+  Keyframes: Opens and closes the Keyframes Editor, which shows each clip and effects node in 
+your Fusion composition as a layer. You can use the Keyframes Editor to edit and adjust the timing 
+of keyframes that have been added to various effects in your composition. You can also use the 
+Keyframes Editor to slide the relative timing of clips that have been added to Fusion, as well as 
+to trim their In and Out points. A spreadsheet can be shown and hidden within which you can 
+numerically edit keyframe values for selected effects.
+  Metadata (DaVinci Resolve only): Hides or shows the Metadata Editor, which lets you read 
+and edit the available clip and project metadata associated with any piece of media within a 
+composite.
+  Inspector: Shows or hides the Inspector, which shows you all the editable parameters and controls 
+that correspond to selected nodes in the Node Editor. You can show the parameters for multiple 
+nodes at once, and even pin the parameters of nodes you need to continue editing so that they’re 
+displayed even if those nodes aren’t selected.
+  Inspector Height:  Lets you open the Inspector to be half height (the height of the viewer area) or 
+full height (th e height of your entire display). Half height allows more room for the Node Editor, 
+Spline Editor, and/or Keyframes Editor, but full height lets you simultaneously edit more node 
+parameters or have enough room to display the parameters of multiple nodes at once.
+Choosing Which Panel Has Focus
+Whenever you click somewhere on the Fusion interface using the pointer or using a keyboard 
+shortcut to “select” a particular panel, you give that panel of the user interface “focus.” A panel with 
+focus captures specific keyboard shortcuts to do something within that panel, as opposed to doing 
+something elsewhere in the interface. 
+To make it easier to keep track of which panel has focus, a highlight appears at the top edge of 
+whichever panel has focus. In DaVinci Resolve, you must turn on “Show focus indicators in the 
+User Interface” in the UI Settings panel of the User Preferences to see the highlight.
+The focus indicator shown at the top edge of the Media Pool, shown next to a viewer that doesn’t have focus
+1328Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Viewers
+The viewer area displays either one or two viewers at the top of the Fusion page, and this is 
+determined via the Viewer button at the far right of the Viewer title bar. Each viewer can show a single 
+node’s output from anywhere in the node tree. You assign which node is displayed in which viewer. 
+This makes it easy to load separate nodes into each viewer for comparison. For example, you can 
+load a Keyer node into the left viewer and the final composite into the right viewer, so you can see the 
+image you’re adjusting and the final result at the same time.
+Dual viewers let you edit an upstream node in one while seeing its effect on the overall composition in the other.
+Ordinarily, each viewer shows 2D nodes from your composition as a single image. However, when 
+you’re viewing a 3D node, you have the option to set that viewer to one of several 3D views. 
+A perspective view gives you a repositionable stage on which to arrange the elements of the world 
+you’re creating. Alternatively, a quad view lets you see your composition from four angles, making 
+it easier to arrange and edit objects and layers within the XYZ axes of the 3D space in which 
+you’re working. 
+Loading a 3D node into a viewer switches on a Perspective view
+1329Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+TIP: In Perspective view, you can hold down the middle and right mouse buttons, then drag 
+in the viewer to pivot the view around the center of the world. All other methods of navigating 
+viewers work the same.
+The viewers have a variety of capabilities you can use to compare and evaluate images. This section 
+provides a short overview of viewer capabilities to get you started.
+Zooming and Panning into Viewers
+There are standardized methods of zooming into and panning around viewers when you need 
+a closer look at the situation. These methods also work with the Node Editor, Spline Editor, and 
+Keyframes Editor.
+Methods of panning viewers:
+  Middle-click and drag to pan around the viewer.
+  Hold down Shift and Command and drag the viewer to pan.
+  Drag with two fingers on a track pad to pan.
+Methods of scaling viewers:
+  Click a viewer, and press the equals key (=) to zoom in, and the minus key (-) to zoom out.
+  Press the middle and left mouse buttons simultaneously and drag left or right to resize the viewer.
+  Hold down the Command key and use your pointer’s scroll control to zoom in and out of the viewer.
+  Hold down the middle mouse button, and then click the left mouse button to zoom in, or click the 
+right button to zoom out. The scaling uses a fixed amount, centered on the position of the cursor.
+  Click a viewer and press Command-1 to resize the image in the viewer to 100 percent.
+  Click a viewer and press Command-2 to resize the image in the viewer to 200 percent.
+  Click a viewer and press F to reset the image in the viewer to fit the viewer.
+  Click the Scale viewer menu and choose Fit or a percentage.
+  Right-click on a viewer and choose an option from the Scale submenu of the contextual menu. 
+This includes a Custom Scale command that lets you type your own scale percentage.
+  Hold down the Command key and drag with two fingers on a track pad to zoom in and out 
+of the viewer.
+Methods of spinning 3D viewers:
+  In 3D Perspective view, hold down the middle and right mouse button, then drag to 
+spin the stage around.
+  In 3D Perspective view, hold down the Shift key and drag with two fingers on a track pad to 
+spin the stage around.
+Loading Nodes Into Viewers
+When you first open the Fusion page in DaVinci Resolve, the output of the current empty composition 
+(the MediaOut1 node) is usually showing in viewer 2. If you’re in Dual-viewer mode, viewer 1 remains 
+empty until you assign a node to one of them. 
+When using Fusion Studio, nothing is loaded into either of the viewers until you assign a node to 
+one of them.
+1330Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+To load specific nodes into specific viewers:
+  Hover the pointer over a node, and click one of two buttons that appear at the bottom 
+left of the node.
+  Click once to select a node, and press 1 (for the left viewer) or 2 (for the right viewer).
+  Right-click a node and choose View On > None/Left View/Right View in the contextual menu.
+  Right-click the control header of a node in the Inspector, and choose View On > None/Left View/
+Right View from the contextual menu.
+  Drag a node and drop it over the viewer you’d like to load it into (this is great for tablet users).
+When a node is being viewed, a View Indicator button appears at the bottom left. This is the 
+same control that appears when you hover the pointer over a node. Not only does this control 
+let you know which nodes are loaded into which viewer, but they also expose little round 
+buttons for switching between viewers.
+Viewer assignment buttons at the bottom of 
+nodes indicate when they’re being viewed.
+Clearing Viewers
+To clear an image from a viewer, click in the viewer to make it active; a thin red highlight is displayed at 
+the top of the active viewer. With the viewer active, press the ` (accent) key. This key is usually found to 
+the left of the 1 key on U.S. keyboards. The fastest way to remove all the images from all the viewers is 
+to make sure none of the viewers is the active panel, and then press the Tilde key.
+You can also select the node that is currently showing in the viewer, and press the viewer number 
+again (1 or 2 respectively) to clear the viewer.
+Viewer Controls
+A series of buttons and pop-up menus in the viewer’s title bar provides several quick ways of 
+customizing the viewer display.
+Controls in the viewer title bar
+  Zoom menu: Lets you zoom in on the image in the viewer to get a closer look, or zoom out to get 
+more room around the edges of the frame for rotoscoping or positioning different layers. Choose 
+Fit to automatically fit the overall image to the available dimensions of the viewer.
+  Split Wipe button and A/B Buffer menu: You can actually load two nodes into a single viewer 
+using that viewer’s A/B buffers by choosing a buffer from the menu and loading a node into the 
+viewer. Turning on the Split Wipe button (press Forward Slash) shows a split wipe between the 
+two buffers, which can be dragged left or right via the handle of the onscreen control, or rotated 
+1331Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+by dragging anywhere on the dividing line on the onscreen control. Alternatively, you can switch 
+between each full-screen buffer to compare them (or to dismiss a split-screen) by pressing Comma 
+(A buffer) and Period (B buffer).
+  SubView type: (These aren’t available in 3D viewers.) Clicking the icon itself enables or disables 
+the current “SubView” option you’ve selected, while using the menu lets you choose which 
+SubView is enabled. This menu serves one of two purposes. When displaying ordinary 2D nodes, 
+it lets you open up SubViews, which are viewer “accessories” within a little pane that can be used 
+to evaluate images in different ways. These include an Image Navigator (for navigating when 
+zoomed far into an image), Magnifier, 2D viewer (a mini-view of the image), 3D Histogram scope, 
+Color Inspector, Histogram scope, Image Info tooltip, Metadata tooltip, Vectorscope, or Waveform 
+scope. The Swap option (Shift-V) lets you switch what’s displayed in the viewer with what’s being 
+displayed in the Accessory pane. When displaying 3D nodes, this button lets you have access to 
+an additional mini 3D viewer.
+  Node name: The name of the currently viewed node is displayed at the center of the 
+viewer’s title bar.
+  ROI controls: Clicking the icon itself enables or disables RoI (Region of Interest) limiting in the 
+viewer, while using the menu lets you choose the region of the RoI. RoI lets you define the region 
+of the viewer in which pixels actually need to be updated. When a node renders, it intersects 
+the current RoI with the current Domain of Definition (DoD) to determine what pixels should be 
+affected. When enabled, you can position a rectangle to restrict rendering to a small region of the 
+image, which can significantly speed up performance when you’re working on very high resolution 
+or complex compositions. Auto (the default) sets the region to whatever is visible at the current 
+zoom/pan level in the viewer. Choosing Set lets you draw a custom region within the frame by 
+dragging a rectangle that defaults to the size of the viewer, which is resizable by dragging the 
+corners or sides of the onscreen control. Choosing Lock prevents changes from being made to 
+the current RoI. Choosing Reset resets the RoI to the whole viewer.
+  Color controls: Lets you choose which color and/or image channels to display in the viewer. 
+Clicking the icon itself toggles between Color (RGB) and Alpha, the two most common things 
+you want to see (pressing C or A also toggles between Color and Alpha). Opening the menu 
+displays every possible channel that can be displayed for the currently viewed node, commonly 
+including RGB, Red, Green, Blue, and Alpha (available from the keyboard by pressing R, G, B, or A). 
+For certain media and nodes, additional auxiliary channels are available to be viewed, including 
+Z-depth, Object ID, Material ID, XYZ Normals, and so on.
+  Viewer LUT: Clicking the icon itself toggles LUT (LookUp Table) display on or off, while the menu 
+lets you choose which of the many available color space conversions to apply to the viewer. The 
+top options let you choose Fusion controls that can be customized via the Edit item at the top of 
+this menu. The rest of this menu shows all LUTs installed in the LUT directory to use for viewing.
+By default, when using DaVinci Resolve, the viewers in the Fusion page show you the image prior 
+to any grading done in the Color page, since the Fusion page comes before the Color page in 
+the DaVinci Resolve image processing pipeline. When you’re working on clips that have been 
+converted to linear color space for compositing, it is desirable to composite and make adjustments 
+to the image relative to a normalized version of the image that appears close to what the final will 
+be. Enabling the LUT display lets you do this as a preview, without permanently applying color 
+adjustments to the image.
+  Option menu: This menu contains various settings that pertain to the viewers in Fusion.
+Snap to Pixel: When drawing or adjusting a polyline mask or spline, the control points 
+will snap to pixel locations.
+Show Controls: Toggles whatever onscreen controls are visible for the currently selected node.
+Region: Provides all the settings for the Region of Interest in the viewer.
+1332Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Smooth Resize: This option uses a smoother bilinear interpolated resizing method when zooming 
+into an image in the viewer; otherwise, scaling uses the nearest neighbor method and shows 
+noticeable aliasing artifacts. However, this is more useful when you zoom in at a pixel level since 
+there is no interpolation.
+Show Square Pixels: Overrides the auto aspect correction when using formats with 
+non-square pixels.
+Checker Underlay: Toggles a checkerboard underlay that makes it easy to see 
+areas of transparency.
+Normalized Color Range: Allows for the visualization of brightness values outside of the normal 
+viewing range, particularly when working with floating-point images or auxiliary channels.
+Gain/Gamma: Exposes a simple pair of Gain and Gamma sliders that let you adjust the 
+viewer’s brightness. 
+360 View: Used to properly display spherical imagery in a variety of formats, selectable 
+from this submenu. 
+Stereo: Used to properly display stereoscopic imagery in a variety of formats, 
+selectable from this submenu.
+Time Ruler and Transport Controls
+The Time Ruler, located beneath the viewer area, is based on the total duration of the composition. 
+What it represents depends on which version of Fusion you’re using:
+• For DaVinci Resolve users, the duration displayed in the Time Ruler range depends on 
+what’s currently selected in the Edit or Cut page timeline. 
+• In Fusion Studio, the Time Ruler depends on the Global Start and End values set in the 
+Fusion Studio Preferences > Defaults.
+The transport controls under the Time Ruler include playback controls, audio monitoring, as well as 
+number fields for the composition duration and playback range. Additional controls enable motion blur 
+and proxy settings.
+Time Ruler Controls in the Fusion Page
+If you’ve selected a single clip in the Edit or Cut page Timeline, then the global range shown in the 
+Time Ruler is based on the total source duration for that clip. You cannot move the playhead outside 
+the global range. The yellow lines, called the render range, identify the current In and Out points for 
+the clip and are the only frames visible in the Fusion page. All frames outside of this range constitute 
+the unused head and tail handles of that source clip.
+The Time Ruler displaying ranges for a clip in the Timeline via yellow marks (the playhead is red)
+If you’ve created a Fusion clip or a compound clip, then the “working range” reflects the entire 
+duration of that clip.
+1333Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+The Time Ruler displaying ranges for a Fusion clip in the Timeline
+Render Range
+The render range determines the range of frames that are visible in the Fusion page and that are used 
+for interactive playback, disk caches, and previews. Frames outside the default render range are not 
+visible in the Fusion page and are not rendered or played.
+You can modify the duration of the render range for preview and playback only. Making the range 
+shorter or longer does not trim the clip in the Edit or Cut page Timelines.
+You can change the render range in the Time Ruler by doing one of the following:
+  Hold down the Command key and drag a new range within the Time Ruler.
+  Drag either the start or end yellow line to modify the start or end of the range.
+  Right-click within the Time Ruler and choose Set Render Range from the contextual menu.
+  Enter new ranges in the Range In and Out fields to the left of the transport controls.
+  Drag a node from the Node Editor to the Time Ruler to set the range to the duration of that node.
+You can return the render range to the In and Out points 
+of the timeline clip by doing one of the following.
+  Right-click within the Time Ruler and choose Auto Render Range.
+  Click back in the Edit or Cut page, and then return to the Fusion page.
+Time Ruler Controls in Fusion Studio
+The Time Ruler, located beneath the viewer area, displays two different frame ranges: one for the 
+entire composition, called the global range, and the other called the render range, which determines 
+what to render and what to cache in memory for previews. The global start and end range takes up the 
+entire Time Ruler and sets the total duration of a composition. You cannot move the playhead outside 
+the global range.
+The Time Ruler displaying ranges for a clip in the Timeline via yellow marks (the playhead is red)
+Global Start and End Range
+The global start and end range is simply the total duration of the current composition. 
+You can change the global range by doing one of the following:
+  To change the global range for all new compositions, choose Fusion Studio > Preferences on 
+macOS or File > Preferences on Windows or Linux. In the Global and Default Settings panel, enter 
+a new range in the Global range fields.
+  To change the Global range for the current composition, enter a new range in the Global Start and 
+End fields to the left of the transport controls.
+  Dragging a node from the Node Editor to the Time Ruler automatically sets the Global and Render 
+Range to the extent of the node. 
+1334Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Render Range
+The render range determines the range of frames used for interactive playback, disk caches, and 
+previews. Frames outside the render range are not rendered or played, although you can still drag the 
+playhead to these frames to see the unused frames.
+To preview or render a specific range of a composition, you can modify the render range in a 
+variety of ways.
+You can set the render range in the Time Ruler by doing one of the following:
+  Hold down the Command key and drag a new range within the Time Ruler.
+  Right-click within the Time Ruler and choose Set Render Range from the contextual menu to set 
+the Render Range based on the selected Node’s duration.
+  Enter new ranges in the Range In and Out fields to the left of the transport controls.
+  Drag a node from the Node Editor to the Time Ruler to set the range to the duration of that node.
+The Playhead
+A red playhead within the Time Ruler indicates the currently viewed frame. Clicking anywhere within 
+the Time Ruler jumps the playhead to that frame, and dragging within the Time Ruler drags the 
+playhead within the available duration of that clip or composition.
+Zoom and Scroll Bar
+A two-handled gray scroll bar lets you zoom into the range shown by the Time Ruler, which is useful 
+if you’re using a very large Global range such that the Render range is a tiny sliver in the Time Ruler. 
+Dragging the left or right handles of this bar zooms relative to the opposite handle, enlarging the width 
+of each displayed frame. Once you’ve zoomed in, you can drag the scroll bar left or right to scroll 
+through the composition.
+TIP: Holding the middle mouse button and dragging in the Time Ruler lets you scroll the 
+visible range.
+Transport Controls in the Fusion Page
+The Transport Controls in DaVinci Resolve’s Fusion page include buttons that control playback as 
+well as time fields on the left side for setting the render range and the current time on the right side. 
+Additional controls are available in the right-click menu.
+Controlling Playback
+There are six transport controls underneath the Time Ruler in the Fusion page. These buttons include 
+Composition First Frame, Play Reverse, Stop, Play Forward, Composition Last Frame, and Loop.
+The Fusion page controls for playback
+1335Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Navigation Shortcuts
+Many standard transport control keyboard shortcuts you may be familiar with work in Fusion, but some 
+are specific to Fusion’s particular needs.
+To move the playhead in the Time Ruler using the keyboard, do one of the following:
+  Spacebar: Toggles forward playback on and off.
+  JKL: Basic JKL playback is supported, including J to play backward, K to stop, and L to 
+play forward.
+  Back Arrow: Moves 1 frame backward.
+  Forward Arrow: Moves 1 frame forward.
+  Shift-Back Arrow:  Moves to the clip’s Global Start frame.
+  Shift-Forward Arrow:  Moves to the clip’s Global End frame.
+  Command-Back Arrow:  Jumps to the Render Range In point.
+  Command-Forward Arrow:  Jumps to the Render Range Out point.
+Real-Time Playback Not Guaranteed
+Because many of the effects you can create in the Fusion page are processor-intensive, there 
+is no guarantee of real-time playback at your project’s full frame rate unless you’ve cached your 
+composition first (discussed later).
+Frame Increment Options
+Right-clicking either the Play Reverse or Play Forward buttons opens a contextual menu. This menu 
+contains options to set a frame increment value, which lets you use a keyboard shortcut to move the 
+playhead in sub-frame or multi-frame increments.
+Moving the playhead in multi-frame increments can be useful when rotoscoping. Moving the playhead 
+in sub-frame increments can be useful when rotoscoping or inspecting interlaced frames one field at a 
+time (0.5 of a frame).
+Right-click the Play Forward or 
+Play Backward buttons to choose a frame 
+increment in which to move the playhead.
+1336Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Looping Options
+The Loop button can be toggled to enable or disable looping during playback. You can right-click this 
+button to choose the looping method that’s used:
+  Playback Loop: The playhead plays to the end of the Time Ruler and starts from the 
+beginning again.
+  Ping-pong Loop: When the playhead reaches the end of the Time Ruler, playback reverses 
+until the playhead reaches the beginning of the Time Ruler, and then continues to ping-pong 
+back and forth.
+Render Range Fields
+The two time fields on the left side of the transport controls are used to modify the Render Range. 
+You can enter time values in frames, or click and drag inside the fields to modify the In and Out of the 
+render range for previews and caching.
+The Render Start and  
+Render End time fields
+Audio Monitoring
+Playing a composition in DaVinci Resolve’s Fusion page will play the audio from the Edit or Cut page 
+Timeline. You can choose to hear the audio or mute it using the Audio toolbar button to the left of the 
+transport controls. The audio waveforms are displayed in the Keyframes Editor to assist in the timing of 
+your animations.
+TIP: If the Mute button is enabled on any Timeline tracks, audio from those tracks will not be 
+heard in Fusion. 
+For Fusion Studio, audio can be loaded using the Loader node’s Audio tab. The audio functionality is 
+included in Fusion Studio for scratch track (aligning effects to audio and clip timing) purposes. Final 
+renders should almost always be performed without audio. Audio can be heard if it is brought in 
+through a Loader node.
+To hear the audio from a specific Loader node:
+Right-click over the Speaker icon and choose the file name that contains the audio 
+you want to hear.
+Audio Toolbar Button
+The Audio button in the toolbar is a toggle that can be used to enable or mute audio playback 
+associated with the clip. Additionally, right-clicking this button displays a contextual menu that can 
+be used to select a MediaIn node in the Fusion page or an external WAV file in Fusion Studio for 
+audio playback.
+1337Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+The Current Time Field
+The Current Time field at the right of the transport controls displays the frame number for the playhead 
+position, which corresponds to the frame seen in the viewer. Clicking and dragging in this field scrubs 
+the playhead position back and forth. However, you can also enter time values into this field to move 
+the playhead by specific amounts.
+When setting ranges and entering frame numbers to move to a specific frame, numbers can be 
+entered in sub-frame increments. You can set a range to be –145.6 to 451.75 or set the playhead to 
+115.22. This can be very helpful when animating parameters because you can set keyframes where 
+they actually need to occur, rather than on a frame boundary, so you get more natural animation. 
+Having sub-frame time lets you use time remapping nodes or just scale keyframes in the Spline view 
+and maintain precision.
+The Fusion Page Viewer Quality and Proxy Options
+Right-clicking anywhere in the transport control area other than over the Play Forward/Play Reverse 
+buttons lets you turn on and off Fusion quality controls. You can either enable high-quality playback at 
+the expense of more significant processing times or enter various proxy modes that temporarily lower 
+the display quality of your composition to speed processing as you work.
+Rendering for final output is always done at the highest quality, regardless of these settings.
+High Quality
+As you build a composition, often the quality of the displayed image is less important than the 
+speed at which you can work. The High Quality setting gives you the option to either display images 
+with faster interactivity or at final render quality. When you turn off High Quality, complex and 
+time-consuming operations such as area sampling, anti-aliasing, and interpolation are skipped to 
+render the image to the viewer more quickly. Enabling High Quality forces a full-quality render to the 
+viewer that’s identical to what is output during final delivery.
+Motion Blur
+The Motion Blur button is a global setting. Turning off Motion Blur temporarily disables motion blur 
+throughout the composition, regardless of any individual nodes for which it’s enabled. This can 
+significantly speed up renders to the viewer. Individual nodes must first have motion blur enabled 
+before this button has any effect.
+Proxy
+The Proxy setting is a draft mode used to speed processing while you’re building your composite. 
+Turning on Proxy reduces the resolution of the images that are rendered to the viewer, speeding 
+render times by causing only one out of every x pixels to be processed, rather than processing 
+every pixel. The value of x is decided by adjusting a slider in the Proxy section in the Fusion > Fusion 
+Settings > General panel.
+Auto Proxy
+The Auto Proxy setting is a draft mode used to speed processing while you’re building your 
+composite. Turning on Auto Proxy reduces the resolution of the image while you click and drag to 
+adjust a parameter. Once you release that control, the image snaps back to its original resolution. 
+This lets you adjust processor-intensive operations more smoothly, without the wait for every frame 
+to render at full quality causing jerkiness. You can set the auto proxy ratio by adjusting a slider in the 
+Proxy section of the Fusion > Fusion Settings > General panel.
+1338Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Selective Updates
+When working in Fusion, only the tools needed to display the images in the viewer are updated. The 
+Selective Update options select the mode used during previews and final renders. 
+The options are available in the Proxy section of the Fusion > Fusion Settings > General panel. The 
+three options are:
+  Update All (All): Forces all the nodes in the current node tree to render. This is primarily used 
+when you want to update all the thumbnails displayed in the Node Editor.
+  Selective (Some): Causes only nodes that directly contribute to the current image to be rendered. 
+So named because only selective nodes are rendered. This is the default setting.
+  No Update (None): Prevents rendering altogether, which can be handy for making many changes 
+to a slow-to-render composition.
+Transport Controls in Fusion Studio
+The transport controls in Fusion Studio include buttons to control playback, time fields on the left 
+side for setting the global range and render range, and a Render button to initiate rendering of the 
+composite. There are also controls on the right side for proxy and motion blur. The time field on the far 
+right is used for the current time.
+Fusion Studio transport controls
+Controlling Playback
+There are eight transport controls underneath the Time Ruler in Fusion Studio. These buttons 
+include Composition First Frame, Step Backward, Play Reverse, Stop, Play Forward, Step Forward, 
+Composition Last Frame, and Loop.
+Fusion Studio transport controls
+Navigation Shortcuts
+Many standard transport control keyboard shortcuts you may be familiar with work in Fusion, but there 
+are some keyboard shortcuts specific to Fusion’s particular needs.
+To move the playhead in the Time Ruler using the keyboard, do one of the following:
+  Spacebar: Toggles forward playback on and off.
+  JKL: Basic JKL playback is supported, including J to play backward, K to stop, 
+and L to play forward.
+  Back Arrow: Moves 1 frame backward.
+  Forward Arrow: Moves 1 frame forward.
+  Shift-Back Arrow:  Moves to the clip’s Global End frame.
+  Shift-Forward Arrow:  Moves to the clip’s Global Start frame.
+  Command-Back Arrow:  Jumps to the Render Range In point.
+  Command-Forward Arrow:  Jumps to the Render Range Out point.
+1339Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Real-Time Playback Not Guaranteed
+Because many of the effects you can create in the Fusion page are processor-intensive, there is 
+no guarantee of real-time playback at your project’s full frame rate, unless you’ve cached your 
+composition first. For more information, see the “Fusion RAM Cache for Playback” section later in 
+this chapter.
+Frame Increment Options
+Right-clicking the Step Backward, Play Reverse, Play Forward, or Step Forward buttons opens a drop-
+down menu with options to set a frame increment value. Selecting a frame number from the menu lets 
+you move the playhead in sub-frame or multi-frame increments whenever you use a keyboard shortcut 
+or press the Step Forward/Backward buttons.
+Moving the playhead in multi-frame increments can be useful when rotoscoping. Moving the playhead 
+in sub-frame increments can be useful when rotoscoping or inspecting interlaced frames one field at a 
+time (0.5 of a frame). 
+Right-click the Step Forward or Step 
+Backward buttons to choose a frame 
+increment in which to move the playhead.
+Looping Options
+The Loop button can be toggled to enable or disable looping during playback. You can right-click this 
+button to choose the looping method that’s used:
+  Playback Loop: The playhead plays to the end of the Time Ruler and starts from the 
+beginning again.
+  Ping-pong Loop: When the playhead reaches the end of the Time Ruler, playback 
+reverses until the playhead reaches the beginning of the Time Ruler, and then continues to 
+ping-pong back and forth.
+Range Fields
+The four time fields on the left side of the transport controls are used to quickly modify the global 
+range and render range in Fusion Studio. 
+1340Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Global Time Fields to the left of the transport controls
+Audio
+The Audio button is a toggle that mutes or enables any audio associated with the clip. Additionally, 
+right-clicking on this button displays a drop-down menu that can be used to select a WAV file, which 
+can be played along with the composition, and to assign an offset to the audio playback. 
+Render
+Clicking the Render button in the transport controls displays the composition’s Render Settings dialog. 
+This dialog is used to configure the render options and initiate rendering of any Saver nodes in the 
+composition. Shift-clicking on the button skips the dialog, using default render values (full resolution, 
+high quality, motion blur enabled). 
+The Current Time
+The Current Time field at the right of the transport controls shows the frame at the position of the 
+playhead, which corresponds to the frame seen in the viewer. However, you can also enter time values 
+into this field to move the playhead by specific amounts.
+When setting ranges and entering frame numbers to move to a specific frame, numbers can be 
+entered in sub-frame increments. You can set a range to be –145.6 to 451.75 or set the playhead 
+to 115.22. This can be very helpful when animating parameters because you can set keyframes where 
+they actually need to occur, rather than on a frame boundary, so you get more natural animation. 
+Having sub-frame time lets you use time remapping nodes or just scale keyframes in the Spline view 
+and maintain precision.
+NOTE: Many fields in Fusion can evaluate mathematical expressions that you type into them. 
+For example, typing 2 + 4 into most fields results in the value 6.0 being entered. Because 
+Feet + Frames uses the + symbol as a separator symbol rather than a mathematical symbol, 
+the Current Time field will not correctly evaluate mathematical expressions that use the 
++ symbol, even when the display format is set to Frames mode.
+Fusion Studio Viewer Quality and Proxy Options
+Five buttons along the right side of the transport controls let you either enable high-quality playback 
+at the expense of greater processing times, or enter various proxy modes that temporarily lower the 
+display quality in order to speed processing as you work.
+Rendering for final output is always done at the highest quality, regardless of these settings.
+Five buttons control the viewer quality, motion blur, proxy 
+options, and image-processing update settings.
+1341Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+HiQ
+As you build a composition, often the quality of the displayed image is less important than the 
+speed at which you can work. The High Quality setting gives you the option to either display images 
+with faster interactivity or at final render quality. When you turn off High Quality, complex and time-
+consuming operations such as area sampling, anti-aliasing, and interpolation are skipped to render the 
+image to the viewer more quickly. Enabling High Quality forces a full-quality render to the viewer that’s 
+identical to what will be output during final delivery.
+MB
+The Motion Blur button is a global setting. Turning off Motion Blur temporarily disables motion blur 
+throughout the composition, regardless of any individual nodes for which it’s enabled. This can 
+significantly speed up renders to the viewer. Individual nodes must first have motion blur enabled 
+before this button has any effect.
+Prx
+A draft mode to speed processing while you’re building your composite. Turning on Proxy reduces the 
+resolution of the images that are rendered to the viewer, speeding render times by causing only one 
+out of every x pixels to be processed, rather than processing every pixel. The value of x is decided 
+by adjusting a slider in the General panel of the Fusion Preferences, found under the Fusion menu on 
+macOS or the File menu on Windows and Linux.
+Aprx
+A draft mode to speed processing while you’re building your composite. Turning on Auto Proxy 
+reduces the resolution of the image while you click and drag to adjust a parameter. Once you release 
+that control, the image snaps back to its original resolution. This lets you adjust processor-intensive 
+operations more smoothly, without the wait for every frame to render at full quality causing jerkiness. 
+You can set the auto proxy ratio by adjusting a slider in the General panel of the Fusion Preferences, 
+found under the Fusion menu on macOS or the File menu on Windows and Linux.
+Selective Updates
+The last of the five buttons on the right of the transport controls is a three-way toggle that determines 
+when nodes update images in the viewer. By default, when working in Fusion, any node needed to 
+display the image in the viewer is updated. The Selective Update button can change this behavior 
+during previews and final renders. 
+The three options are:
+  Update All (All): Forces all the nodes in the current node tree to render. This is primarily used 
+when you want to update all the thumbnails displayed in the Node Editor.
+  Selective (Some): Causes only nodes that directly contribute to the current image to be rendered. 
+So named because only selective nodes are rendered. This is the default setting.
+  No Update (None): Prevents rendering altogether, which can be handy for making a lot of changes 
+to a slow-to-render composition.
+The options are also available in the Fusion Preferences General panel.
+1342Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Changing the Time Display Format
+By default, all time fields and markers in Fusion count in frames, but you can also set the time display 
+to SMPTE timecode or Feet + Frames.
+To change the time display format:
+1 Choose Fusion > Fusion Settings in DaVinci Resolve, choose Fusion Studio > Preferences in 
+Fusion Studio on macOS, or choose File > Preferences in Fusion Studio on Windows or Linux.
+2 When the Fusion settings dialog opens, select the Defaults panel and choose a Timecode option. 
+3 Select the Frame Format panel. If you’re using timecode, choose a frame rate and turn on the 
+“has fields” checkbox if your project is interlaced. If you’re using feet and frames, set the Film Size 
+value to match the number of frames found in a foot of film in the format used in your project.
+4 Click Save.
+Keyframe Display in the Time Ruler
+When you select a node with keyframed parameters, those keyframes appear in the Time Ruler 
+as little white tic marks, letting you navigate among and edit keyframes without having to open the 
+Keyframes Editor or Spline Editor to see them.
+The Time Ruler displaying keyframe marks
+To move the playhead in the Time Ruler among keyframes:
+  Press Option-Left Bracket ([) to jump to the next keyframe to the left.
+  Press Option-Right Bracket (]) to jump to the next keyframe to the right.
+The Fusion RAM Cache for Playback
+When assembling a node tree, all image processing operations are rendered live to display the final 
+result in the viewers. However, as each frame is rendered, and especially as you initiate playback 
+forward or backward, these images are automatically stored to a RAM cache as they’re processed so 
+you can replay those frames in real time. The actual frame rate achieved during playback is displayed 
+in the Status bar at the bottom of the Fusion window during playback. Of course, when you play 
+beyond the cached area of the Time Ruler, uncached frames need to be rendered before being added 
+to the cache.
+Priority is given to caching nodes that are currently being displayed, based on which nodes are loaded 
+to which viewers. However, other nodes may also be cached, depending on available memory and on 
+how processor-intensive those nodes happen to be, among other factors.
+Memory Limits of the RAM Cache
+There is a single setting in DaVinci Resolve for limiting the RAM used for caching. This setting is 
+located in the DaVinci Resolve Preferences Memory and GPU panel.
+1343Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Limit Fusion Memory Cache To: This slider sets the maximum amount of RAM that Fusion can 
+access for caching. It is a subset of the RAM allocated to DaVinci Resolve. You can assign a 
+maximum of 75% to Fusion from DaVinci Resolve’s total RAM allocation. When not using the 
+Fusion page, the RAM is released for other pages in DaVinci Resolve. 
+There are two settings in Fusion Studio for limiting the RAM used for caching. These settings 
+are located in the Preferences Memory panel.
+• Limit Caching To: This slider sets the maximum amount of RAM used for caching. The 60% 
+default setting on a 32-GB system limits the cache to 19.2 GB. The maximum amount you 
+can assign to Fusion Studio is limited to 80% of the total system memory. This leaves a 
+minimum amount of memory for other applications and the operating system.
+• Leave at least # MBytes: This number field further limits caching in cases where the 
+system’s available free RAM drops below the entered value. For instance, setting this to 
+200 MB attempts to keep 200 MB of RAM free for the OS or other applications. Setting the 
+number field to 0 allows Fusion Studio to use the full amount of RAM specified by the Limit 
+Caching To setting, ignoring other apps.
+When the size of the cache reaches the Fusion Caching/Memory Limits setting found in 
+the Memory panel of the Preferences, then lower-priority cache frames are automatically 
+discarded to make room for new caching. You can keep track of the RAM cache usage via a 
+percentage indicator on the far right of the Status bar at the bottom of the Fusion window.
+Displaying Cached Frames
+All cached frames for the currently viewed node are indicated by a green line at the bottom of the 
+Time Ruler. Any green section of the Time Ruler should play back in real time.
+The green lines indicate frames that have been cached for playback.
+Temporarily Preserving the Cache When Changing Quality or Proxy Settings
+If you toggle the composition’s quality settings or proxy options, the cache is not immediately 
+discarded. The green line instead turns red to let you know the cache is being preserved and can be 
+used again when you go back to the original level of quality or disable proxy mode. However, if you 
+play through those frames at the new quality or proxy settings, this preserved cache is overwritten 
+with a new cache at the current quality or proxy setting.
+A red line indicates that cached frames from a  
+different quality or proxy setting are being preserved.
+1344Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+There’s one exception to this, however. When you cache frames at the High Quality setting, 
+and you then turn off High Quality, the green frames won’t turn red. Instead, the High Quality 
+cached frames are used even though the HiQ setting has been disabled.
+Toolbar
+The toolbar, located underneath the Time Ruler, contains buttons that let you quickly add commonly 
+used nodes to the Node Editor. Clicking any of these buttons adds that node after the currently 
+selected node in the node tree, or adds an unconnected instance of that node if no nodes are 
+selected. The Toolbar can be customized and saved for specific tasks.
+The toolbar has buttons for adding commonly used nodes to the Node Editor.
+The default toolbar is divided into sections that group commonly used nodes together. As you hover 
+the pointer over any button, a tooltip shows you that node’s name.
+  Loader/Saver nodes (Fusion Studio Only): The Loader node is the primary node used to 
+select and load clips from the hard drive. The Saver node is used to write or render your 
+composition to disk. 
+  Generator/Title/Paint nodes:  The Background and FastNoise generators are commonly used to 
+create all kinds of effects, and the Title generator is obviously a ubiquitous tool, as is Paint.
+  Color/Blur nodes: ColorCorrector, ColorCurves, HueCurves, and BrightnessContrast are the four 
+most commonly used color adjustment nodes, while the Blur node is ubiquitous.
+  Compositing/Transform nodes:  The Merge node is the primary node used to composite one 
+image against another. ChannelBooleans and MatteControl are both essential for reassigning 
+channels from one node to another. Resize alters the resolution of the image, permanently altering 
+the available resolution, while Transform applies pan/tilt/rotate/zoom effects in a resolution-
+independent fashion that traces back to the original resolution available to the source image.
+  Mask nodes: Rectangle, Ellipse, Polygon, and BSpline mask nodes let you create shapes to use 
+for rotoscoping, creating garbage masks, or other uses.
+  Particle system nodes: Three particle nodes let you create complete particle systems when you 
+click them from left to right. pEmitter emits particles in 3D space, while pMerge lets you merge 
+multiple emitters and particle effects to create more complex systems. pRender renders a 2D 
+result that can be composited against other 2D images.
+  3D nodes: Seven 3D nodes let you build sophisticated 3D scenes. These nodes auto attach to 
+one another to create a quick 3D template when you click from left to right. ImagePlane3D lets you 
+connect 2D stills and movies for compositing into 3D scenes. Shape3D lets you create geometric 
+primitives of different kinds. Text3D lets you build 3D text objects. Merge3D lets you composite 
+multiple 3D image planes, primitive shapes, and 3D text together to create complex scenes, while 
+Camera3D lets you frame the scene in whatever ways you like. SpotLight lets you light the scenes 
+in different ways and Renderer3D renders the final scene and outputs 2D images and auxiliary 
+channels that can be used to composite 3D output against other 2D layers.
+When you’re first learning to use Fusion, these nodes are really all you need to build most common 
+composites. Once you’ve become a more advanced user, you’ll still find that these are truly the most 
+common operations you’ll use.
+1345Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Customizing the Toolbar
+You can add and remove tools from the Fusion toolbar and then save the custom toolbar as a preset. 
+New tools can be added by dragging them from the Effects Library or the Node Editor, and dividers 
+can be added to group tool sets together.
+To create a new toolbar, do the following:
+1 Right click in an empty area of the toolbar and choose Customize > Create Toolbar from the 
+contextual menu.
+2 Enter a name for the toolbar in the dialog box, and click OK.
+To rearrange the tools in the toolbar, do the following:
+1 Create a new custom toolbar or select an existing custom toolbar.
+2 Drag a node in the toolbar to a new location.
+To add a tool to the toolbar:
+1 Create a new custom toolbar or select an existing custom toolbar.
+2 Do one of the following:
+  Drag a node from the Effects Library to the location on the toolbar where you want it added.
+  Drag a node from the Node Editor to the location on the toolbar where you want it added.
+To add a divider to a toolbar, do the following:
+1 Create a new custom toolbar or select an existing custom toolbar.
+2 Right-click over any tool and choose Customize > Add Divider. A divider is 
+added to the right of the tool.
+To remove a tool from a toolbar, do the following:
+1 Create a new custom toolbar or select an existing custom toolbar.
+2 Right-click over any tool and choose Remove [name of tool].
+To remove a group of tools between two dividers, do the following:
+1 Create a new custom toolbar or select an existing custom toolbar.
+2 Right-click over any tool in a group and choose Remove Group.
+To prevent a custom toolbar from being modified:
+  Right-click over the toolbar and choose Lock from the contextual menu.
+To switch between toolbars:
+  Right-click over the toolbar and choose the custom toolbar name or choose Default to return to 
+Fusion’s default toolbar.
+To rename a custom toolbar, do the following:
+1 Right-click over the toolbar and choose the name of the custom toolbar you want to rename.
+2 Right-click over the toolbar again and choose Customize > Rename [toolbar name].
+3 Enter a new name for the toolbar.
+To delete a custom toolbar, do the following:
+1 Right-click over the toolbar and choose the name of the custom toolbar you want to delete.
+2 Right-click over the toolbar again and choose Customize > Remove [toolbar name].
+1346Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+TIP: Adding and deleting tools from a custom toolbar is not undoable. If you are creating a 
+complex toolset, make a new custom toolbar based on your current toolbar in between major 
+changes and work off that. That way if you make an error, you can revert back to the last 
+known good toolbar. Once you have the final toolbar the way you want it, you can go back 
+and remove all the interim custom toolbars you made.
+Node Editor
+The Node Editor is the heart of Fusion because it’s where you build the tree of nodes that makes up 
+each composition. Each node you add to the node tree adds a specific operation that creates one 
+effect, whether it’s blurring the image, adjusting color, painting strokes, drawing and adding a mask, 
+extracting a key, creating text, or compositing two images into one. 
+The Node Editor displaying a node tree creating a composition
+You can think of each node as a layer in an effects stack, except that you have the freedom to route 
+image data in any direction to branch and merge different segments of your composite in completely 
+nonlinear ways. This makes it easy to build complex effects, but it also makes it easy to see what’s 
+happening, since the node tree doubles as a flowchart that clearly shows you everything that’s 
+happening, once you learn to read it.
+Adding Nodes to Your Composition
+Depending on your mood, there are a few ways you can add nodes from the Effects Library to your 
+composition. For most of these methods, if there’s a single selected node in the Node Editor, new 
+nodes are automatically added after it, but if there are no selected nodes or multiple selected nodes, 
+then new nodes are added as disconnected from anything else.
+1347Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Methods of adding nodes include:
+• Click a button in the toolbar.
+• Open the Effects Library, find the node you want in the relevant category, and click once on 
+a node you’d like to add.
+• Right-click on a node and choose Insert Tool from the drop-down menu to add it after the 
+node you’ve right-clicked on. Or, you can right-click on the background of the Node Editor to 
+use that submenu to add a disconnected node.
+• Press Shift-Spacebar to open a Select Tool dialog, type characters corresponding to the 
+name of the node you’re looking for, and press the Return key (or click OK) when it’s found. 
+Once you learn this method, it’ll probably become one of your most frequently used ways of 
+adding nodes.
+The Select Tool dialog lets you find  
+any node quickly if you know its name.
+Removing Nodes from Your Composition
+Removing nodes is as simple as selecting one or more nodes, and then pressing the Delete or 
+Backspace keys.
+Identifying Node Inputs and Node Outputs
+Each node displays small colored connections around the edges. One or more arrows represent 
+inputs, and the square connection represents the tool’s processed output, of which there is always 
+only one. If you hover the pointer over any of a node’s inputs or output, the name of that input or 
+output immediately appears in the Status bar. If you wait for a few more moments, a floating tooltip 
+displays the same name right over the node.
+1348Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Node Editing Essentials
+Each node has inputs and outputs that are “wired together” using connections. The inputs are 
+represented by arrows that indicate the flow of image data from one node to the next, as each node 
+applies its effect and feeds the result (via the square output) to the next node in the tree. In this way, 
+you can quickly build complex results from a series of relatively simple operations.
+Three nodes connected together
+You can connect a single node’s output to the inputs of multiple nodes (called “branching”).
+One node branching to two to split the image to two operations
+You can then composite images together by connecting the output from multiple nodes to certain 
+nodes such as the Merge node that combines multiple inputs into a single output.
+Two nodes being merged together into one to create a composite
+By default, new nodes are added from left to right in the Node Editor, but they can also flow from top 
+to bottom, right to left, bottom to top, or in all directions simultaneously. Connections automatically 
+reorient themselves along all four sides of each node to maintain the cleanest possible presentation as 
+you rearrange other connected nodes. 
+Nodes can be oriented in any direction; the input arrows let you follow the flow of image data.
+1349Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Navigating the Node Editor
+As your Node tree gets larger, parts inevitably go offscreen. When a portion of the node tree is 
+offscreen, a resizable Navigator pane appears in the upper-right corner. The Navigator is a miniature 
+representation of the entire node tree that you can drag within to pan to different parts of your 
+composition quickly. You can resize the navigator using a handle in the lower-left corner, and you can 
+choose to show or hide the Navigator by pressing the V key, or by right-clicking the Node Editor to 
+access the Options submenu of the contextual menu.
+The Navigator pane for accessing offscreen parameters or tools
+There are other standard methods of panning and zooming around the Node Editor.
+Methods of navigating the Node Editor:
+• Middle-click and drag to pan around the Node Editor.
+• Hold down Shift and Command and drag the Node Editor to pan.
+• Press the Middle and Left mouse buttons simultaneously and drag to resize the Node Editor.
+• Hold down the Command key, and use your mouse’s scroll control to resize the Node Editor.
+• Right-click the Node Editor and choose an option from the Scale submenu of the 
+contextual menu.
+• Press Command-1 to reset the Node Editor to its default size.
+• Drag two fingers on a track pad to pan.
+• Hold the Command key down and drag two fingers on a track pad to resize the Node Editor.
+1350Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Vertical Node Editor Layouts
+Alternative Node View Layout presets located in the Fusion page allow for positioning the Node Editor 
+vertically, either alongside the Inspector, or along the left side of the screen. This can be very helpful 
+when animating in the Spline Editor or Keyframes Editor.
+When in the Fusion page, you can choose the layouts from Workspace > Layout Presets. Choosing 
+a vertical layout allows the node tree to flow from top to bottom, leaving much more room along the 
+lower half of the screen for the Spline Editor or Keyframes Editor.
+The Mid Flow Vertical layout preset used with the Vertical Flow direction setting.
+When using the vertical layouts, enabling the Flow > Build Direction > Vertical option in the 
+Fusion settings will cause all new Node trees to build vertically, leaving maximum room for 
+Fusion’s animation tools.
+You can then save alternative layouts based on these two vertical presets using the 
+Workspace > Layout Presets submenu.
+When you want to return to the default horizontal Node Editor layout, just choose 
+Workspace > Layout Presets > Fusion Presets > Default.
+These Layout options are not available in Fusion Studio, however, you can use the 
+Floating Frame to position the Node Editor wherever you like.
+1351Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Keeping Organized
+As you work, it’s important to keep the node trees that you create tidy to facilitate a clear 
+understanding of what’s happening. Fortunately, the Fusion Node Editor provides a variety of methods 
+and options to help you with this, found within the Options and Arrange Tools submenus of the Node 
+Editor contextual menu.
+Status Bar
+The Status bar in the lower-left corner of the Fusion window shows you a variety of up-to-date 
+information about things you’re selecting and what’s happening in Fusion. For example, hovering the 
+pointer over a node displays information about that node in the Status bar. Additionally, the currently 
+achieved frame rate appears whenever you initiate playback, and the percentage of the RAM cache 
+that’s used appears at all times. Other information, updates, and warnings appear in this area 
+as you work.
+The Status bar under the Node Editor showing you information about a node under 
+the pointer, as well as a popup box with even more relevant info.
+Occasionally the Status bar will display a badge to let you know there’s a message in the console 
+you might be interested in. The message could be a log, script message, or error.
+A notification that there’s a message in the Console
+1352Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Effects Library
+The Effects Library in Fusion shows all the nodes and effects available in Fusion, including third-
+party OFX plugins, if installed. If you are using DaVinci Resolve, Resolve FX also appear in the OFX 
+category. While the toolbar shows many of the most common nodes you’ll use in any composite, the 
+Effects Library contains every single tool available in Fusion, organized by category, with each node 
+ready to be quickly added to the Node Editor. Suffice it to say that there are many, many more nodes 
+available in the Effects Library than on the toolbar, spanning a wide range of uses.
+The Effects Library with Tools open
+ The Templates section of the Effects Library
+The hierarchical category browser of the Effects Library is divided into several sections depending 
+on whether you are using Fusion Studio or the Fusion page within DaVinci Resolve. The Tools section 
+is the most often used since it contains every node that represents an elemental image-processing 
+operation in Fusion. Hovering the pointer over a specific tool will reveal a tool-tip explaining its 
+functionality at the bottom right of the DaVinci Resolve interface. The OpenFX section contains third-
+party plugins, and if you are using the Fusion page, it also contains ResolveFX, which are included with 
+DaVinci Resolve. A third section, only visible when using the Fusion page in DaVinci Resolve, is the 
+Templates section. The Template section contains a variety of additional content including templates 
+for Lens Flares, Backgrounds, Generators, Particle Systems, Shaders (for texturing 3D objects), and 
+other resources for use in your composites.
+The Effects Library’s list can be made full height or half height using a button at the far left of 
+the UI toolbar. 
+1353Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+The Inspector
+The Inspector is a panel on the right side of the Fusion window that you use to display and manipulate 
+the parameters of one or more selected nodes. When a node is selected in the Node Editor, its 
+parameters and settings appear in the Inspector. 
+1
+The Inspector shows parameters from 
+one or more selected nodes.
+The Modifier panel  
+showing a Perturb modifier
+The Tools and Modifiers Panels
+The Fusion Inspector is divided into two panels. The Tools panel is the main panel that shows you 
+the parameters of selected nodes. The Modifiers panel shows optional extensions to the standard 
+parameters of a tool. In the following image, a Perturb modifier has been added to a parameter to add 
+random animation to that parameter, and the controls found on the Modifier panel let you customize 
+what kind of randomness is being added.
+Other nodes display node-specific items here. For example, Paint nodes show each brush 
+stroke as an individual set of controls in the Modifiers panel, available for further editing 
+or animating.
+Parameter Header Controls
+A cluster of controls appears at the top of every node’s controls in the Inspector.
+Common Inspector controls
+1354Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Set Color: A pop-up menu that lets you assign one of 16 colors to a node, overriding a 
+node’s own color.
+Versions: Clicking Versions reveals another toolbar with six buttons. Each button can 
+hold an individual set of adjustments for that node that you can use to store multiple 
+versions of an effect.
+Pin: The Inspector is also capable of simultaneously displaying all parameters for 
+multiple nodes you’ve selected in the Node Editor. Furthermore, a Pin button in the 
+title bar of each node’s parameters lets you “pin” that node’s parameters into the 
+Inspector so that they remain there even when that node is deselected, which is 
+valuable for key nodes that you need to adjust even while inspecting other nodes of 
+your composition.
+Lock: Locks that node so that no changes can be made to it.
+Reset: Resets all parameters within that node.
+Parameter Tabs
+Many nodes expose multiple tabs’ worth of controls in the Inspector, seen as icons at the top of the 
+parameter section for each node. Click any tab to expose that set of controls.
+Nodes with several tabs’ worth of parameters
+Keyframes Editor
+The Keyframes Editor displays each node in the current composition as a stack of layers within a 
+miniature timeline. The order of the layers is largely irrelevant as the order and flow of connections in 
+the node tree dictate the order of image-processing operations. You use the Keyframes Editor to trim, 
+extend, or slide Loader, MediaIn, and effects nodes, or to adjust the timing of keyframes, which appear 
+superimposed over each effect node unless you open them up into their editable track.
+The Keyframes Editor is used to adjust the timing of clips, effects, and keyframes.
+1355Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Keyframes Editor Control Summary
+At the top, a series of zoom and framing controls let you adjust the work area containing the layers.
+These controls let you manipulate the Keyframes Editor view.
+A Horizontal zoom control lets you scale the size of the editor. 
+  A Zoom to Fit button fits the width of all layers to the current width of the Keyframes Editor.
+  A Zoom to Rect tool lets you draw a rectangle to define an area of the Keyframes 
+Editor to zoom into.
+  A Sort pop-up menu lets you sort or filter the tracks in various ways.
+  An Option menu provides access to many other ways of filtering tracks and 
+controlling visible options.
+A timeline ruler provides a time reference, as well as a place in which you can scrub the playhead.
+At the left, a track header contains the name of each layer, as well as controls governing that layer. 
+  A lock button lets you prevent a particular layer from being changed.
+  Nodes that have been keyframed have a disclosure control, which when opened displays a 
+keyframe track for each animated parameter.
+In the middle, the actual editing area displays all layers and keyframe tracks available in the 
+current composition.
+At the bottom-left, Time Stretch and Spreadsheet mode controls provide additional ways 
+to manipulate keyframes.
+At the bottom right, the Time/TOffset/TScale drop-down menu and value fields let you numerically 
+alter the position of selected keyframes either absolutely, relatively, or based on their distance from 
+the playhead.
+Adjusting Clip Timings
+Each Loader or MediaIn node that represents a clip used in a composition is represented as a layer 
+in this miniature timeline. You can edit a layer’s In or Out points by positioning the pointer over the 
+beginning or end of a segment and using the resize cursor to drag that point to a new location. You 
+can slide a layer by dragging it to the left or right, to better line up with the timing of other elements in 
+your composition. 
+The Keyframes Editor also lets you adjust the timing of elements that you’ve added from directly 
+within Fusion.
+Adjusting Effect Timings
+Each effect node also appears as a layer, just like clips. You can resize the In and Out points of an 
+effect layer, and slide the entire layer forward or backward in time, just like a Loader or MediaIn 
+layers. If you trim an effect layer to be shorter than the duration of the composition, the effect cuts in 
+at whichever frame the layer begins, and cuts out after the last frame of that layer, just like a clip on 
+a timeline.
+1356Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Adjusting Keyframe Timings
+When you’ve animated an effect by adding keyframes to a parameter in the Inspector, the Keyframes 
+Editor is used to edit the timing of keyframes easily. By default, all keyframes applied to parameters 
+within a particular node’s layer appear superimposed in one flat track over the top of that layer. 
+To edit keyframes, you can click the disclosure control to the left of any animated layer’s name in the 
+track header, which opens up keyframe tracks for every keyframed parameter within that layer. 
+Keyframe tracks exposed
+Keyframe Editing Essentials
+Here’s a short list of keyframe editing methods that will get you started.
+Methods of adjusting keyframes:
+  You can click on a single keyframe to select it.
+  You can drag a bounding box over a series of keyframes to select them all.
+  You can drag keyframes left and right to reposition them in time.
+  You can right-click one or more selected keyframes and use commands from the drop-down menu 
+to change keyframe interpolation, copy/paste keyframes, or even create new keyframes.
+  You can Command-drag one or more selected keyframes to drag a duplicate of them to another 
+position in the keyframe track.
+To change the position of a keyframe using the toolbar, do one of the following:
+  Select a keyframe, and then enter a new frame number in the Time Edit box.
+  Choose T Offset from the Time Editor pop-up, select one or more keyframes, and enter a 
+frame offset.
+  Choose T Scale from the Time Editor pop-up, select one or more keyframes, and enter a multiplier 
+added to the current playhead frame position. For instance, if the playhead is on frame 10 and the 
+keyframe is on frame 30, entering the TScale value of 2 will position the keyframe on frame 50. 
+The distance between the playhead and original keyframe is 20, so (20 x 2) = 40, which is then 
+added to the playhead position.
+Time Stretching Keyframes
+If you select a range of keyframes in a keyframe track, you can turn on the Time Stretch tool to show 
+a box used to squeeze and stretch the entire range of keyframes relative to one another. The Time 
+Stretcher changes the overall timing of a sequence of keyframes without losing the relative timing from 
+one keyframe to the next. Alternatively, you can turn on Time Stretch and draw a bounding box around 
+the keyframes you want to adjust to create a time-stretching boundary that way. Click the Time Stretch 
+tool again to turn it off. 
+Time stretching keyframes
+1357Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+The Keyframe Spreadsheet
+If you turn on the Spreadsheet and then click on the name of a layer in the keyframe track, the numeric 
+time position and value (or values if it’s a multi-dimensional parameter) of each keyframe appear 
+as entries in the cells of the Spreadsheet. Each column represents one keyframe, while each row 
+represents a single aspect of each keyframe.
+Editing keyframes in the Spreadsheet
+For example, if you’re animating a motion path, then the “Key Frame” row shows the frame 
+each keyframe is positioned at, and the “Path1Displacement” row shows the position along the 
+path at each keyframe. If you change the Key Frame value of any keyframe, you’ll move that 
+keyframe to a new frame of the Timeline.
+Spline Editor
+The Spline Editor provides a more detailed environment for editing the timing, value, and interpolation 
+of keyframes. Using control points at each keyframe connected by splines (also called curves), you 
+can adjust how animated values change over time. The Spline Editor has four main areas: the Zoom 
+and Framing controls at the top, the Parameter list at the left, the Graph Editor in the middle, and the 
+toolbar at the bottom.
+The Spline Editor is divided into the Zoom controls at top,  
+Parameter list at left, Graph Editor, and toolbar.
+1358Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Spline Editor Control Summary
+At the top, a series of Zoom and Framing controls let you adjust the work area containing the curves.
+  Vertical and horizontal zoom controls let you scale the size of the editor. 
+  A Zoom to Fit button fits the width of all curves to the current width of the Spline Editor.
+  A Zoom to Rect tool lets you draw a rectangle to define an area of the Spline Editor to zoom into.
+A Timeline ruler provides a time reference, as well as a place in which you can scrub the playhead.
+The Parameter list at the left is where you decide which splines are visible in the Graph view. By 
+default, the Parameter list shows every parameter of every node in a hierarchical list. Checkboxes 
+beside each name are used to show or hide the curves for different keyframed parameters. Color 
+controls let you customize each spline’s tint to make splines easier to see in a crowded situation.
+The Graph view that takes up most of this panel shows the animation spline along two axes. The 
+horizontal axis represents time, and the vertical axis represents the spline’s value. Selected control 
+points show their values in the edit fields at the bottom of the graph.
+Lastly, the toolbar at the bottom of the Spline Editor provides controls to set control point interpolation, 
+spline looping, or choose Spline editing tools for different purposes.
+Choosing Which Parameters to Show
+Before you start editing splines to customize or create animation, you need to choose which 
+parameter’s splines you want to work on.
+To show every parameter in every node:
+  Click the Splines Editor Option menu and choose Expose All Controls. Toggle this control off again 
+to go back to viewing what you were looking at before.
+To show splines for the currently selected node:
+  Click the Splines Editor Option menu and choose Show Only Selected Tool.
+Essential Spline Editing
+The Spline Editor is a deep and sophisticated environment for keyframe and spline editing and retiming, 
+but the following overview will get you started using this tool for creating and refining animation.
+To select one or more control points:
+  Click any control point to select it.
+  Command-click multiple control points to select them.
+  Drag a bounding box around multiple control points to select them as a group.
+To edit control points and splines:
+  Click anywhere on a spline to add a control point.
+  Drag one or more selected control points to reshape the spline.
+  Shift-drag a control point to constrain its motion vertically or horizontally.
+To edit Bézier curves:
+  Select any control point to make its Bézier handles visible, and drag the Bézier handles.
+  Command-drag a Bézier handle to break the angle between the left and right handles.
+To delete control points:
+  Select one or more control points and press the Delete or Backspace key.
+1359Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Essential Spline Editing Tools and Modes
+The Spline Editor toolbar at the bottom contains a mix of control point interpolation buttons, Spline 
+loop modes, and Spline editing tools.
+Control Point Interpolation
+The first six buttons let you adjust the interpolation of one or more selected control points.
+Control point interpolation controls
+Smooth: Creates automatically adjusted Bézier curves to create smoothly 
+interpolating animation.
+Linear: Creates linear interpolation between control points.
+Invert: Inverts the vertical position of non-animated LUT splines. This does not operate on 
+animation splines.
+Step In: For each keyframe, creates sudden changes in value at the next keyframe 
+to the right. Similar to a hold keyframe in After Effects® or a static keyframe in the 
+DaVinci Resolve Color page.
+Step Out: Creates sudden changes in value at every keyframe for which there’s a change 
+in value at the next keyframe to the right. Similar to a hold keyframe in After Effects or a 
+static keyframe in the DaVinci Resolve Color page.
+Reverse: Reverses the horizontal position of selected keyframes in time, so the keyframes 
+are backward.
+Spline Loop Modes
+The next three buttons let you set up spline looping after the last control point on a parameter’s spline, 
+enabling a limited pattern of keyframes to animate over a far longer duration. Only the control points 
+you’ve selected are looped.
+Spline Loop modes
+Set Loop: Repeats the same pattern of keyframes over and over.
+Set Ping Pong: Repeats a reversed set of the selected keyframes and then a duplicate set 
+of the selected keyframes to create a more seamless pattern of animation.
+Set Relative: Repeats the same pattern of selected keyframes but with the values of 
+each repeated pattern of keyframes being incremented or decremented by the trend of 
+all keyframes in the selection. This results in a loop of keyframes where the value either 
+steadily increases or decreases with each subsequent loop.
+1360Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Spline Editing Tools
+The next five buttons provide specialized Spline editing tools.
+Spline editing controls
+Select All: Selects every keyframe currently available in the Spline Editor.
+Click Append: Click once to select this tool and click again to de-select it. This tool lets 
+you add or adjust keyframes and spline segments (sections of splines between two 
+keyframes), depending on the keyframe mode you’re in. With Smooth or Linear keyframes, 
+clicking anywhere above or below a spline segment adds a new keyframe to the segment 
+at the location where you clicked. With Step In or Step Out keyframes, clicking anywhere 
+above or below a line segment moves that segment to where you’ve clicked.
+Time Stretch: If you select a range of keyframes, you can turn on the Time Stretch tool 
+to show a box you can use to squeeze and stretch the entire range of keyframes relative 
+to one another, to change the overall timing of a sequence of keyframes without losing 
+the relative timing from one keyframe to the next. Alternatively, you can turn on Time 
+Stretch and draw a bounding box around the keyframes you want to adjust to create a 
+time-stretching boundary that way. Click Time Stretch a second time to turn it off.
+Shape Box: Turn on the Shape Box to draw a bounding box around a group of control 
+points you want to adjust in order to horizontally squish and stretch (using the top/bottom/
+left/right handles), corner pin (using the corner handles), move (dragging on the box 
+boundary), or corner stretch (Command-drag the corner handles). 
+Show Key Markers: Turning on this control shows keyframes in the top ruler that 
+correspond to the frame at which each visible control point appears. The colors of these 
+keyframes correspond to the color of the control points they’re indicating.
+Thumbnail Timeline in the Fusion Page
+In the Fusion page of DaVinci Resolve, the Thumbnail timeline (hidden by default) can be opened by 
+clicking the Clips button in the UI toolbar and appears underneath the Node Editor when it’s open. 
+The Thumbnail timeline shows every clip in the current Timeline, giving you a way to navigate from one 
+clip to another. Each thumbnail has a pop-up menu for creating and switching among multiple versions 
+of compositions, and resetting the current composition, when necessary.
+The Thumbnail timeline lets you navigate the Timeline and manage versions of compositions.
+1361Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Right-clicking on any thumbnail exposes a contextual menu.
+The contextual menu for the Thumbnail timeline
+To open another clip:
+  Click any thumbnail to jump to that clip’s composition. The current clip is outlined in orange.
+To navigate the Thumbnail timeline:
+  Middle-click and drag the Timeline left or right to scroll through the clips in the Timeline.
+  Click and drag the slider at the bottom of the Thumbnail timeline to scroll through the 
+clips in the Timeline.
+To create and manage versions of compositions:
+  To create a new version of a composition: Right-click the current thumbnail, and choose Create 
+New Composition from the contextual menu.
+  To load a different composition: Right-click the current thumbnail, and choose “NameOfVersion” 
+> Load from the contextual menu.
+  To delete a composition: Right-click the current thumbnail, and choose “NameOfVersion” > 
+Delete from the contextual menu.
+  To rename a composition: Right-click the current thumbnail, and choose “NameOfVersion” > 
+Rename from the contextual menu.
+To reset the current composition:
+  Right-click the current thumbnail, and choose Reset Current Composition from the contextual menu.
+To change how thumbnails are identified:
+  Double-click the area underneath any thumbnail to toggle among clip format, clip name, and the 
+composition version name.
+The Media Pool in the Fusion Page
+In DaVinci Resolve’s Fusion page, the Media Pool continues to serve its purpose as the repository 
+of all media you’ve imported into your project. This makes it easy to add additional clips to your 
+compositions simply by dragging the clip you want from the Media Pool into the Node Editor. 
+The media you add appears as a new MediaIn node in your composition, ready to be integrated into 
+your node tree however you need it. 
+TIP: If you drag one or more clips from the Media Pool onto a connection line between two 
+nodes in the Node Editor, the clips are automatically connected to that line via enough Merge 
+nodes to connect them all. 
+1362Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+For more information on using the myriad features of the Media Pool, jump to this chapter: 
+Adding and Organizing Media with the M edia Pool.
+The Media Pool in Thumbnail mode showing video clips
+Importing Media Into the Media Pool on the Fusion Page
+If you find yourself in the Fusion page and you need to quickly import a few clips for immediate use, 
+you can do so in a couple of different ways.
+To add media by dragging one or more clips from the 
+Finder to the Fusion page Media Pool (macOS only):
+1 Select one or more clips in the Finder.
+2 Drag those clips into the Media Pool of DaVinci Resolve, or to a bin in the Bin list. Those clips are 
+added to the Media Pool of your project.
+To use the Import Media command in the Fusion page Media Pool:
+1 With the Fusion page open, right-click anywhere in the Media Pool, and choose Import Media.
+2 Use the Import dialog to select one or more clips to import, and click Open. Those clips are added 
+to the Media Pool of your project.
+For more information on importing media using the myriad features of the Media page, jump to 
+this chapter: Adding and Organizing Media with the M edia Pool.
+1363Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Bins in Fusion Studio
+Bins in Fusion Studio are similar to the Media Pool in DaVinci Resolve. Bins are organizational panels 
+that provide an easy way of accessing commonly used tools, settings, macros, compositions, and 
+media content. They can keep all your custom content and resources close at hand, so you can use 
+them without searching through your hard drives. Bins can also be shared over a network to improve a 
+collaborative workflow with other Fusion Studio artists.
+The Bins window
+To open the Bins window:
+Choose File > Bins from the menu bar. 
+Similar to the Media Pool in DaVinci Resolve, when adding an item to the Fusion bins, a link 
+is created between the item on disk and the bins. Fusion does not copy the file into its own 
+cache or hard drive space. The file remains in its original format and in its original location.
+Bins Interface
+The Bins window is actually a separate application used to save content you may want to reuse at a 
+later time. The Bins window is separated into two panels. The sidebar on the left is a bin list where 
+items are placed into categories, while the panel on the right displays the selected bin’s content.
+The Bin list sidebar
+1364Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+The Bin list organizes content into bins or folders using a hierarchical List view. These folders can be 
+organized to suit your workflow, but standard folders are provided for Clips, Compositions, Favorites, 
+Settings, and Tools. Parent folders contain subfolders that hold the content. For instance, the Tools bin 
+is a parent folder to all the categories of tools. To access subfolders, click the disclosure arrow to the 
+left of the parent folder’s name. 
+When you select a bin from the bin list, the contents of the folder are displayed in the Contents panel 
+as thumbnail icons.
+The Bins icon view
+A toolbar along the bottom of the bin provides access to organization, playback, and editing controls.
+The Bins toolbar
+New Folder: Creates a new folder in the current window.
+New Reel: Creates an empty reel that can contain multiple clips edited 
+together into a timeline. 
+New Clip: Opens a dialog to link a new media file into a bin.
+Studio Player: Opens a playback viewer for a selected clip.
+1365Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Icon/List view: This button toggles between showing contents of a bin in thumbnail view 
+and list view.
+Checkerboard: Shows a checkerboard pattern in a clip thumbnail to signify transparency.
+Thumbnail size: Provides a few preset sizes for thumbnail icons.
+Right-clicking in any area of the bin window displays a pop-up menu to access most of a bin’s 
+features. Right-clicking on an item in a bin shows the same menu with additional options for 
+renaming, playing, or deleting the item.
+The Bin Studio Player
+Selecting a clip in a bin and clicking the Studio Player button or double-clicking the clip opens the 
+Studio Player. The Studio Player can be used to view clips, view metadata, and add notes.
+The Bin Studio Player
+For more information on Bins, refer to the Fusion Referance Manual .
+1366Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+The Console
+The Console is a window in which you can see the error, log, script, and input messages that may 
+explain something Fusion is trying to do in greater detail. The Console is also where you can read 
+FusionScript outputs, or input FusionScripts directly. In DaVinci Resolve, the Console is available by 
+choosing Workspace > Console or choosing View > Console in Fusion Studio. There is also a Console 
+button in the Fusion Studio User Interface toolbar.
+Occasionally the Status bar displays a badge to let you know there’s a message in the Console you 
+might be interested in.
+The Console window
+A toolbar at the top of the Console contains controls governing what the Console shows. 
+At the top left, the Clear Screen button clears the contents of the Console. The next four 
+buttons toggle the visibility of error messages, log messages, script messages, and input 
+echoing. Showing only a particular kind of message can help you find what you’re looking 
+for when you’re under the gun at 3:00 in the morning. The next three buttons let you choose 
+the input script language. Lua 5.1 is the default and is installed with Fusion. Python 2.x and 
+Python 3.x require that you install the appropriate Python environment on your computer. 
+Because scripts in the Console are executed immediately, you can switch between input 
+languages at any time. 
+At the bottom of the Console is an Entry field. You can type scripting commands here 
+for execution in the current comp context. Scripts are entered one line at a time, and are 
+executed immediately. For more information on scripting, see the Fusion Scripting Manual.
+1367Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Customizing Fusion
+This section explains how you can customize Fusion to accommodate whatever workflow 
+you’re pursuing.
+The Fusion Settings Window
+Fusion has its own settings window, accessible by choosing Fusion > Fusion Settings in DaVinci 
+Resolve, or in Fusion Studio by choosing Fusion > Preferences on macOS or File > Preferences on 
+Windows or Linux. This window has a variety of options for customizing the Fusion experience. 
+For more information, jump to this chapter: Preferences . You can also refer to Chapter 15 of 
+the Fusion Reference Manual.
+The Fusion Settings window set to the General panel
+Saving Fusion Layouts 
+It is possible to customize the layout and configuration of panels to suit the size of the desktop and 
+monitor, or to match personal preferences. 
+In DaVinci Resolve, configure and resize the panels you want displayed and then:
+Choose Workspace > Layout Presets > Save Layout Presets. 
+1368Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+In Fusion Studio, configure and resize the panels you want displayed and then:
+• Click the Grab Document Layout button in the Preferences > Layout panel to save the layout 
+for all new Compositions. 
+• Click the Grab Program Layout button to remember the size and position of any floating 
+views, and enable the Create Floating Views checkbox to automatically create the floating 
+windows when Fusion restarts. 
+Showing and Hiding Panels
+The UI toolbar at the top of the screen lets you open panels you need and hide those you don’t. It’s 
+the simplest way to create a layout for your particular needs at the moment. 
+The UI toolbar of the Fusion page
+Resizing Panels
+You can change the overall size of each panel using preset configurations, or you can adjust them 
+manually. The viewers and Work panel are inverse of each other. The more space used to display the 
+Work panel, the less space available for the viewers. To resize a panel, manually drag anywhere along 
+the raised border surrounding the edges of the panel.
+Dragging the edge between 
+two viewers to resize it
+Fusion Studio Floating Frame
+Fusion Studio includes a Floating Frame window that can be used to house any panel. 
+To place a panel in the Floating Frame, do the following:
+1 In Fusion Studio, choose Window > New Floating Frame.
+2 Right-click in the Floating Frame and choose the panel from Add View submenu.
+When using multiple monitors, you can choose to have floating panels spread across your displays 
+for greater flexibility.
+1369Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Fusion Keyboard Remapping
+When using the Fusion page, functions and tools can be mapped to hot keys on your keyboard by 
+choosing DaVinci Resolve > Keyboard Customization. In the Commands column of the Keyboard 
+Customization window, select Panels > Fusion Page. 
+For more information on using the Keyboard Customization window, jump to this chapter: 
+System and User Preferences.
+Fusion Studio Keyboard Remapping
+When using Fusion Studio, functions and tools can be mapped to hot keys on your keyboard by 
+choosing Views > Customize Hotkeys.
+The Fusion Hotkey Manager dialog is divided into two sections. The left is where you select the 
+functional area where you want to assign a keyboard shortcut. The right side displays the keyboard 
+shortcut if one exists. You can use the New button at the bottom of the dialog to add a new 
+keyboard shortcut.
+The Fusion Studio Hotkey Manager window
+1370Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+For instance, if you want to add a shortcut for a specific node:
+1 Open the Keyboard Hotkey Manager. 
+2 Select Views > Effect from the Target area of the Hotkey Manager.
+3 Below the Key/Action area, click the New button to create a new keyboard shortcut for the Node.
+4 In the Edit Hotkey window, click the Tools disclosure arrow, and then select Blur to display all the 
+Blur-related nodes.
+5 Select Glow in the Action panel.
+6 At the top of the Edit Hotkey window, type G as the shortcut for the Glow node, and then click OK.
+7 Glow and the G hotkey will now appear in the Key/Action area on the right.
+8 Click OK to close the Hotkey Manager.
+9 Click in the Node Editor and press G to add a Glow node.
+Undo and Redo
+Undo and Redo commands let you back out of steps you’ve taken or commands you’ve executed and 
+reapply them if you change your mind. Fusion is capable of undoing the entire history of things you’ve 
+done since creating or opening a particular project. When you close a project, its entire undo history is 
+purged. The next time you begin work on a project, its undo history starts anew.
+There is no practical limit to the number of steps that are undoable (although there may be a 
+limit to what you can remember).
+To simply undo or redo changes you’ve made one at a time:
+• Choose Edit > Undo (Command-Z) to undo the previous change.
+• Choose Edit > Redo (Shift-Command-Z) to redo to the next change.
+1371Fusion Fundamentals | Chapter 63 Exploring the Fusion Interface
+FUSION
+Chapter 64
+Getting Clips 
+into Fusion
+This chapter details the various ways you can move clips  
+into Fusion as you build your compositions. 
+Contents
+Preparing Compositions in the Fusion Page ������������������������������������������������������������������������������������������������������������������������� 1373
+Working on Single Clips in the Fusion Page  ��������������������������������������������������������������������������������������������������������������������������� 1373
+Turning One or More Clips into Fusion Clips �������������������������������������������������������������������������������������������������������������������������� 1374
+Referenced Fusion Compositions  ����������������������������������������������������������������������������������������������������������������������������������������������� 1376
+Adding Fusion Composition Generators  ���������������������������������������������������������������������������������������������������������������������������������� 1379
+Creating a Fusion Composition Clip in a Bin �������������������������������������������������������������������������������������������������������������������������  1380
+Resetting a Fusion Clip  �������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1380
+Using Fusion Transitions  ����������������������������������������������������������������������������������������������������������������������������������������������������������������� 1380
+Adding Clips from the Media Pool �����������������������������������������������������������������������������������������������������������������������������������������������  1381
+Finding Clips in the Media Pool from the Node Editor �����������������������������������������������������������������������������������������������������  1382
+Adding Clips from the File System ����������������������������������������������������������������������������������������������������������������������������������������� ����  1382
+Using MediaIn Nodes  ����������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1382
+MediaIn Node Inputs  �������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1382
+Inspector Properties of MediaIn Nodes  ����������������������������������������������������������������������������������������������������������������������������������� 1383
+Using Loader and Saver Nodes in the Fusion Page ���������������������������������������������������������������������������������������������������������  1386
+Preparing Compositions in Fusion Studio  ����������������������������������������������������������������������������������������������������������������������������� 1388
+Setting Up a Composition ����������������������������������������������������������������������������������������������������������������������������������������������������������������  1391
+Reading Clips into Fusion Studio ������������������������������������������������������������������������������������������������������������������������������������������������  1392
+Aligning Clips in a Fusion Studio Composition ��������������������������������������������������������������������������������������������������������������������  1393
+Loader Node Inputs  ���������������������������������������������������������������������������������������������������������������������������������������������������������������������������  1394
+OGraf HTML Graphics and Lottie Animations  ���������������������������������������������������������������������������������������������������������������������� 1394
+Using Proxies for Better Performance ������������������������������������������������������������������������������������������������������������������������������������� 1395
+Presetting Proxy Quality  ������������������������������������������������������������������������������������������������������������������������������������������������������������������ 1396
+File Format Options ��������������������������������������������������������������������������������������������������������������������������������������������������������������������������� 1396
+Loading Audio WAV Files in Fusion Studio ����������������������������������������������������������������������������������������������������������������������������  1399
+1372Fusion Fundamentals | Chapter 64 Getting Clips into Fusion
+FUSION

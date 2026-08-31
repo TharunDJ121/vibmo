@@ -1,0 +1,1207 @@
+Chapter 45
+Modifying Clips  
+in the Timeline
+Once you’ve edited a variety of clips into the Timeline, you’ll start working with 
+them as you refine your edit. 
+In this chapter, you’ll learn simple methods of modifying clips, including resizing, splitting, shuffling, 
+disabling, copying and pasting, and duplicating.
+Contents
+Keyboard Shortcuts in This Chapter ������������������ 963
+Moving, Resizing, and 
+Rolling Clips in Selection Mode  ���������������������������� 964
+Trimming Gaps ��������������������������������������������������������������� 967
+Modifying Clip Duration Via Timecode  ������������� 967
+Resizing or Trimming Clips 
+in the Source Viewer �������������������������������������������������� 968
+Using the Selection Tool  ������������������������������������������� 968
+Using the Trim Tool ������������������������������������������������������ 969
+Doing a Slip Edit in the Viewer �������������������������������  969
+Shuffle/Swap Insert Edits  ����������������������������������������� 969
+Splitting and Joining Clips  ����������������������������������������� 971
+Through Edits ������������������������������������������������������������������ 972
+Enabling and Disabling Clips and Tracks  ��������� 972
+Copying and Pasting  
+Clips in the Timeline  ���������������������������������������������������� 974
+Paste Insert  ����������������������������������������������������������������������� 974
+Cut/Copy/Paste of Partial Clip 
+Segments Using In and Out Points �����������������������  974
+Copying and Pasting Clips 
+to a Different Track  ��������������������������������������������������� 975
+Audio Channels When 
+Copying and Pasting Audio Clips  �������������������������� 975
+Auto Align Clips �������������������������������������������������������������� 976
+Duplicating Clips and 
+Transitions in the Timeline ��������������������������������������� 978
+Smart Reframe (Studio Version Only) ������������������� 978
+Split Photoshop PSD Layers 
+into Individual Timeline Tracks  ������������������������������� 979
+Affinity by Canva .af File Support �������������������������  981
+Apple Cinematic Mode (Mac OS Only) ���������������  984
+Using Apple Cinematic Mode in 
+DaVinci Resolve ������������������������������������������������������������� 985
+Scene Cut Detection on the Timeline  ��������������  986
+Clean Up Video Tracks ���������������������������������������������� 987
+962Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Keyboard Shortcuts in This Chapter
+Here’s a list of of keyboard shortcuts you might find helpful that relate to topics found in this chapter.
+Key Shortcut Function
+A Selection tool/mode
+V Select nearest edit to playhead
+Shift-V Select clip intersecting playhead
+U Select incoming, outgoing, or centered part of edit
+Option-U Toggle selection among video+audio, video only, and audio only
+Up, Down Arrow Keys Move selection to previous/next edit or clip
+Comma, Period “Nudge” keys to move a selected edit or clip left or right a 
+frame at a time
+Shift-Comma, Period “Fast Nudge” keys to move a selected edit or clip left or right 5 
+frames at a time (customizable)
+Shift-Left, Right Bracket ([, ]) Trim Start to Playhead and Trim End to Playhead to trim a clip at 
+the position of the playhead
+E Extend edit to move a selected edit point to the playhead
+B Razor blade tool for adding cuts to clips using the pointer
+Command-Backslash (\) Insert edit; adds a cut to the clip(s) at the position of the playhead
+Delete Delete clip and leave gap (lift edit)
+Forward Delete Ripple delete; deletes a clip and moves the rest of the Timeline 
+left to fill the gap
+N Toggle timeline snapping off and on
+Command-Shift-L Toggle linked selection off and on
+Command-D Change clip duration
+Command-Shift (modifier)
+While dragging, holding Command-Shift lets you “shuffle” or 
+“swap” edit clips forward or backward to rearrange clips in 
+the Timeline
+D Disable/Enable selected clips
+Command-X Cut selected clips, leave gap
+Command-Shift-X Ripple cut selection; close gap left by cut clip(s)
+Command-C Copy selected clips
+Command-V Paste clips
+Command-Shift-V Paste insert clips
+963Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Moving, Resizing, and 
+Rolling Clips in Selection Mode
+After editing a series of clips into a timeline, the next thing even the most careful of editors probably 
+needs to do is to start making changes. The simplest changes are made in Selection Mode, using the 
+regular arrow pointer. 
+The Selection Mode button at 
+left is enabled; the Trim mode 
+button at right is disabled
+This is the default mode when you open DaVinci Resolve, and allows you to move clips to other places 
+in the Timeline, resize them to make them longer or shorter, and roll the edit points between two clips 
+to move the edit to an earlier or later position on the Timeline. What this tool does depends entirely on 
+what you click to select as you work.
+Manipulating clips using the mouse: 
+1 Click the Selection Mode tool (the arrow), or press A.
+2 Do one of the following:
+To move clips in the Timeline: Drag any clip in the Timeline to any other position. If you drag a clip 
+to overlap another clip, the clip you’re dragging overwrites the clip you’re dropping it onto.
+Moving a clip in the Timeline to overwrite part of another clip;  
+a tooltip shows you how many frames you’ve moved
+To move clips in the Timeline up or down to other tracks while keeping them at the same time: 
+Hold the Shift key down while dragging clips up or down in the Timeline. Or, you can hold the 
+Option key down and press Up or Down Arrow.
+964Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Moving a clip into another track without sliding it in time by holding the Shift key down
+To shorten or lengthen clips: Move the Selection Mode pointer over the beginning or end of a 
+clip, and when it turns into the Resize cursor, drag the In or Out point to the left or right to change 
+the clip’s length. As you do so, the audio will scrub along with the Resize cursor.
+Resizing a clip in the Timeline to create a gap; a tooltip shows the offset, and outlines 
+show you how much media is available in the clip being adjusted
+To roll any edit: Move the Selection Mode pointer over any edit point, and when it turns into the 
+Roll Edit cursor, drag it to the left or right to move the edit point while simultaneously resizing the 
+outgoing and incoming edits points of the two clips surrounding it. As you do so, the audio will 
+scrub along with the right clip’s In point.
+Rolling an edit; a tooltip shows the offset, and an outline shows the available area you can roll within
+965Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Manipulating clips using the keyboard:
+1 Press A to choose Selection Mode.
+2 Do one of the following:
+  To roll any edit incrementally: Select the closest edit point to the playhead using the V key, 
+moving the selection to another edit, if necessary, by using the Up Arrow and Down Arrow keys. 
+Then press the Comma key (nudge 1 frame left) or Period key (nudge 1 frame right) to roll the 
+selected edit to the left or right. Shift-Comma and Shift-Period nudges by 5 frames.
+  To roll any edit using the playhead: Select the closest edit point to the playhead using the V 
+key, moving the selection to another edit, if necessary, by using the Up Arrow and Down Arrow 
+keys. Then use the JKL keys to move the playhead to the frame you want to move the edit to, 
+and press E to do an “extend” edit.
+  To shorten or lengthen clips incrementally:  Select the closest edit point to the playhead using 
+the V key, then use the U key to toggle the selection among the end of the outgoing clip and 
+the beginning of the incoming clip. Then, press the Comma key (nudge 1 frame left) or Period 
+key (nudge 1 frame right) to shorten or lengthen that side of the clip. If you nudge one end of 
+a clip to overlap another, the clip you’re nudging overwrites the adjacent clip. Shift-Comma 
+and Shift-Period nudges by 5 frames. In Selection mode, this either leaves a gap or overwrites 
+neighboring clips.
+  To shorten clips using the playhead: Use the JKL keys to move the playhead over the frame 
+in the Timeline where you want to set a new In or Out point for that clip, then press Shift-Left 
+Bracket ([) to “trim start,” or Shift-Right Bracket (]) to “trim end.” No selection is necessary. In 
+Selection mode, this leaves a gap.
+  To lengthen clips using the playhead: Select the closest edit point to the playhead using the 
+V key, then use the U key to toggle the selection among the end of the outgoing clip and the 
+beginning of the incoming clip. Then, use the JKL keys to move the playhead to the frame to 
+want to extend that edit point to, and press E to do an “extend” edit. In Selection mode, this 
+overwrites neighboring clips.
+  To move clips forward or back in the Timeline: To select a clip in preparation for moving it, 
+either click it, or use the Spacebar or JKL keys to move the playhead over it and press Shift-V. 
+Then press the Comma key (nudge 1 frame left) or Period key (nudge 1 frame right) to move 
+the clip to the left or right. If you nudge a clip to overlap another clip, the clip you’re nudging 
+overwrites the adjacent clip. Shift-Comma and Shift-Period nudges by 5 frames. In Selection 
+mode, this leaves a gap.
+  To move clips up or down to other tracks: To select a clip in preparation for moving it, 
+either click it, or use the Spacebar or JKL keys to move the playhead over it and press 
+Shift-V. Then, press Option-Up Arrow to move the Video and Audio of that clip to the next 
+higher-numbered track, or press Option-Down Arrow to move the Video and Audio to the next 
+lower-numbered track.
+TIP: You can hold down the Shift key while nudging a selection to do a “fast nudge.” 
+The duration of a fast nudge is customizable in the Editing panel of the User Preferences. 
+By default it’s five frames, but you can set it to whatever you want.
+966Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Trimming Gaps
+The start and end of gaps can also be rippled using the Trim tool. 
+For more information, jump to this chapter: Trimming .
+Using the Trim tool to ripple the Out point of a gap to narrow it
+Modifying Clip Duration Via Timecode
+You can change a clip’s duration numerically in one of two ways.
+To change a selected clip’s duration:
+1 Decide if you want to ripple the Timeline or overwrite neighboring clips when you change a 
+clip’s duration. If you want to ripple the Timeline, choose the Trim tool. If you want to overwrite 
+neighboring clips or leave a gap, choose the Selection tool.
+2 Do one of the following:
+  Select a clip and choose Clip > Change Clip Duration.
+  Right-click any clip in the Timeline and choose Change Clip Duration from the contextual menu. 
+3 When the Edit Duration Change dialog appears, enter a new duration in the Timecode field, and 
+click Change. 
+A window for changing the duration 
+of a clip in the Timeline
+For more information on timecode entry, jump to this chapter: Preparing Clips for Editing and 
+Viewer Playback.
+967Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Resizing or Trimming Clips 
+in the Source Viewer
+You can also open a clip from the Timeline into the Source Viewer to perform trimming in different 
+ways. You can do this in one of two ways:
+  Double-click a clip in the Timeline to open it into the Source Viewer.
+  Move the playhead over a clip in the Timeline, press Shift-V to select that clip, and then press the 
+Return or Enter key to open it into the Source Viewer.
+Once you open a clip into the Source Viewer, the Source Viewer has focus, enabling you to use the 
+Spacebar or JKL commands to move the playhead around in the Viewer in order to make edits. How 
+these edits affect the Timeline depends on whether you use the Selection tool or the Trim tool.
+TIP: To instead open a match frame of a clip in the Timeline using the pointer, hold the 
+Option key down while double-clicking a clip.
+Using the Selection Tool
+When the Selection tool is selected, you can drag the In and Out markers, or use the playhead and I 
+and O keyboard shortcuts to resize that clip in the Timeline.
+A Timeline clip opened in the Source Viewer, resizing the clip and leaving 
+a gap by dragging its out point in the Source Viewer (red arrows).
+968Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Using the Trim Tool
+When the Trim tool is selected, dragging the In and Out points, or setting new ones using the I and 
+O keys resizes the clip while rippling the Timeline left or right as necessary.
+Doing a Slip Edit in the Viewer
+If you hold the Shift key down while dragging the In or Out point of a timeline clip you’ve opened in the 
+Source Viewer, you’ll move both the In and Out points together, doing a slip edit of that clip’s content 
+in the Timeline. This works using either the Selection or Edit tools.
+Shuffle/Swap Insert Edits
+A Shuffle Insert edit (sometimes referred to as a Swap Insert edit) lets you quickly rearrange one or 
+more selected clips in the Timeline simply by Command-Shift dragging them to the left or right. When 
+you do so, the surrounding clips automatically move to the right or left to switch places with the clip 
+or clips that you’re dragging. This is a really fast way to reorder clips to try out different arrangements, 
+without needing to drag clips onto multiple tracks to get them out of the way, first.
+You have a lot of flexibility in how you shuffle clips around. You can select one clip, or multiple 
+consecutive clips to shuffle. If you select multiple consecutive clips, they’ll move together as a single 
+block. You can even select multiple consecutive clips on multiple tracks to shuffle around the Timeline 
+as a single item.
+Furthermore, you can also select clips that are part of split edits, where the audio and video 
+In and Out points start or end at different frames. In this case, how other clips move in the 
+Timeline to make room for the split edit clip you’re dragging depends on whether you click the 
+video or audio portion of the clip to start dragging:
+• If you click-and-drag the video portion of the clip, then all clips will rearrange themselves 
+based on the duration of that video item on that track, so that all video items on that track 
+rearrange themselves without either overwriting one another or leaving gaps. As you drag 
+to shuffle the selection through the Timeline, overlapping linked audio items will either 
+overwrite the audio on neighboring clips, or leave a gap.
+• If you click-and-drag the audio portion of the clip, then all clips will rearrange themselves 
+based on the duration of that audio item on that track, so that all audio items on that track 
+rearrange themselves without either overwriting one another or leaving gaps. As you drag 
+to shuffle the selection through the Timeline, overlapping linked video items will either 
+overwrite the video on neighboring clips, or leave a gap.
+Given the rules previously described, shuffling clips is really easy, and you can do so in one 
+of two ways.
+To shuffle insert clips with adjacent clips in the Timeline:
+1 Turn snapping on.
+2 Select one or more consecutive clips you want to shuffle.
+3 Press and hold the Command and Shift keys down and drag either the video or audio portion of 
+the selected clips to the left or right. 
+969Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+So long as you move clips to the In or Out points of adjacent clips, they’ll automatically switch 
+places with the selection of clips you’re dragging. Snapping will help make sure that you align 
+clip(s) you’re dragging with previously existing edit points until dropped in the desired location.
+Before and after clip L being shuffled with clips I, K, and J in a scene to rearrange the sequence
+To shuffle insert one clip into adjacent clips in the Timeline:
+1 Turn snapping off.
+2 Select one or more consecutive clips in the Timeline that you want to shuffle.
+3 Press and hold the Command and Shift keys down and drag either the video or audio portion of 
+the selected clips to the left or right. 
+The selection of clips you’re dragging will be more easily inserted in the middle of adjacent clips 
+as you drag with snapping turned off, and the cut portion of each clip will be moved into the 
+gap that’s left behind by the clip(s) you’re dragging. Drop the clip into the desired location when 
+you’re finished.
+Before and after clip L being inserted into the middle of Clip K, which is split in half to make way for it
+To shuffle insert multiple clips to another position in the Timeline:
+1 Select all of the clips you want to move to another position on the Timeline. 
+2 Press and hold the Command and Shift keys, and drag the clips left or right. Make sure the item 
+you click to drag is on the same track as the majority of clips you’re rearranging; the item you click 
+defines which track is used to guide the rearrangement of clips. 
+In the following example, the video item of Clip C is selected on track V1, so as it’s dragged to 
+the right, all clips on other tracks are rearranged according to the duration and location of clips B 
+and C on track V1. As a result, clips on tracks other than V1 may be overwritten, or leave gaps, as 
+necessary for the items on track V1 to be rearranged cleanly.
+970Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Before and after a group of clips being shuffled to the left of the clip that was 
+clicked to drag defines how all other clips will be rearranged
+To shuffle insert multiple clips from the Media Pool or Source Viewer into the Timeline:
+1 Either select one or more clips in the Media Pool or open a clip in the Source Viewer.
+2 Press and hold the Command and Shift keys, and drag the selection from the Media Pool or 
+Source Viewer into the Timeline. 
+3 As you drag, the clips you’re dragging will be inserted into the Timeline at the pointer location. 
+Release the mouse to finish making the edit.
+Splitting and Joining Clips
+In many situations you may find yourself splitting clips (adding edits) in order to separate multiple clips 
+that were inadvertently baked together, or to cut up clips into sections that you’re planning on applying 
+different effects to or grading differently.
+Methods of splitting and joining clips:
+  To split a clip once: Drag the playhead to the frame where you want to split a clip, and press 
+Command-Backslash (\) to split every clip on a track with Auto Select enabled.
+  To split many clips: Click the Razor Edit mode button (or press B), and then click clips in the 
+Timeline to split as many clips as you want.
+TIP: Using the Blade Edit Mode or Split Clip command on a clip that’s currently selected 
+preserves the selection on the first half of the clip after cutting.
+971Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Through Edits
+When you split a clip, a through edit appears to show that you currently have an edit with continuous 
+timecode running from the outgoing to the incoming half. This is called a through edit, and is displayed 
+with a dotted line running along its edge so you know that it’s special.
+A through edit seen in the Timeline
+To eliminate a through edit, do one of the following:
+  Select it in the Timeline, and press Delete.
+  Right-click a through edit in the Timeline, and choose Delete Through Edit.
+TIP: You can show an isolated list of every through edit in the Timeline by opening the 
+Edit Index and choosing “Show Through Edits” in the Edit Index Option menu. Clicking any 
+item in the list jumps the playhead to that through edit, making it easy to check all the through 
+edits in a timeline to see if they’re necessary or not.
+Enabling and Disabling Clips and Tracks
+As you work in the Timeline, you’ll find there are times when you want to disable clips that you don’t 
+want to appear during playback, without actually removing them from the edit. For example, you may 
+decide to disable superimposed clips that are positioned as insert shots in the middle of a scene 
+because of a client’s notes, but you don’t want to eliminate the clips because they might change 
+their minds.
+A disabled clip oµn track V2
+972Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+In another example, you’ve edited a series of titles on track V3, so you need to disable track V3 in its 
+entirety to output a textless version of the movie as a deliverable.
+When a clip or track is disabled, clips within it appear dimmed, and these disabled clips don’t appear 
+in the Color page, and aren’t output to tape or rendered to disk in the Deliver page until that track is 
+re-enabled first.
+Track V3 is disabled, making the Timeline textless as a result
+To disable/enable one or more clips in the Timeline:
+  Select one or more clips, then right-click the selection and check or uncheck Enable Clip in the 
+contextual menu, or press D to toggle a clip’s enabled state. 
+To disable/enable an entire track:
+  Click the track enable button.
+You can change multiple Track Header controls in the Edit page (Lock Track, Visibility, 
+Auto Track Selection, etc.) by simply clicking on an icon and dragging your pointer up or down 
+across the track headers. You can do this for one type of control at a time and not across 
+Audio and Video tracks.
+Clicking on the Lock icon on A1, then  
+dragging the pointer down to A3,  
+will lock all audio tracks in between.
+973Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Copying and Pasting Clips in the Timeline
+Clips can be cut, copied, and pasted in a variety of ways using standard keyboard shortcuts. You can 
+cut or copy one clip or a selection of several, and you can also choose to copy or cut just the video or 
+audio media of a clip. When pasting, you can paste to the same timeline, or to a different timeline if you 
+want to move media from one to another.
+Methods of doing simple cut, copy, and paste:
+  To cut one or more clips, leaving a gap: Make a selection, and choose Edit > Cut (Command-X). 
+The selected clip or clips are removed from the Timeline and stored in memory for pasting.
+  To ripple cut one or more clips and ripple the Timeline to close the gap: Make a selection, and 
+choose Edit > Ripple Cut (Command-Shift-X). The selected clip or clips are removed from the 
+Timeline and stored in memory for pasting. All clips on tracks with Auto Select enabled will be 
+rippled to the left to fill the gap left by the cut clips.
+  To copy one or more clips: Make a selection, and choose Edit > Copy (Command-C). The selected 
+clip or clips are left in the Timeline, but copies are stored in memory for pasting.
+  To paste one or more clips to the same track: Move the playhead to the frame where you want 
+the pasted selection to start, and then choose Edit > Paste (Command-V). By default, each copied 
+clip is pasted onto the same track it was copied from. 
+  Pasted clips will be added at the Playhead position. 
+  Pasted clips overwrite any clips in that track that are in the way. 
+  Pasted clips are automatically selected, ready for nudging left or right, or for other operations.
+  To paste one or more clips to a different track: Pasting clips to a different track requires a slightly 
+different procedure. Move the playhead to the frame where you want the pasted selection to start, 
+then either Option-click any empty area on the track you want to paste the clip(s) to or Option-click 
+the Auto Select control of that track to solo that track, and then choose Edit > Paste (Command-V). 
+  Pasted clips will be added at the Playhead position. 
+  Pasted clips overwrite any clips in that track that are in the way. 
+  Pasted clips are automatically selected, ready for nudging left or right, or for other operations.
+Paste Insert
+Another paste command, Edit > Paste Insert (Command-Shift-V), lets you paste clips that you cut 
+or copied via an insert edit, so that an edit is added at the position of the playhead to clips that are 
+already in the Timeline, and all media to the right of the playhead is rippled farther right to make 
+room for the clip or clips being pasted. As with all other ripple edits, only clips on tracks with their 
+Auto Select control turned on are affected. Pasted clips are automatically selected, ready for nudging 
+left or right, or for other operations.
+Cut/Copy/Paste of Partial Clip Segments Using In and Out Points
+By default, pasted clips will be added at the playhead position. You can use the Timeline’s In and Out 
+points to cut and copy partial segments of longer clips in various ways. This is a valuable technique for 
+doing in-depth audio and dialog editing, although it’s useful for copying partial segments of any kind 
+of clip in the Timeline.
+IMPORTANT: In order to use In and Out points for pasting, you must first go to Preferences > 
+User > Editing, and check the box “Prioritize pasting to the in and out range.”
+974Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+To cut or copy part of a clip to paste elsewhere:
+1 Set In and Out points to isolate the part of the clip you want to cut or copy. You can use the 
+Auto Select controls to include or omit clip segments on specific tracks while you do this.
+2 Press Command-X to cut or Command-C to copy that clip segment.
+3 Clear the In and Out points by pressing Option-X. Otherwise, you’ll paste the clip segment right 
+back into the same place it started.
+4 Move the playhead to the frame of the Timeline you want the pasted clip to start, and use the 
+Paste or Paste Insert commands to paste the clip segment there. Pasted clips are automatically 
+selected, ready for nudging left or right, or for other operations.
+You can also use In and Out points to paste only a partial segment of a much longer clip that you’ve 
+cut or copied.
+To paste only part of a clip:
+1 Select a clip, and press Command-X to cut or Command-C to copy that clip.
+2 Set In and Out points to identify the region of the Timeline you want to paste into.
+3 Use the Paste or Paste Insert commands to paste only as much of the Cut or Copied clip as will fit 
+between the In and Out points you’ve placed. Pasted clips are automatically selected, ready for 
+nudging left or right, or for other operations.
+Copying and Pasting Clips to a Different Track 
+If all Auto Select controls on all tracks are turned on, clips are always pasted back to the same track 
+they were copied from, starting at the position of the playhead. This is valuable for the many instances 
+where you’ll find yourself copying and pasting clips you want to repeat, especially when doing 
+audio editing. 
+However, if you want to paste the clips you cut or copied to a different track entirely, you need to use 
+the Auto Select controls to specify which track you want to paste to. Here are the rules:
+  You can force paste what you copied to a specific track by Option-clicking that track’s Auto Select 
+control to solo it before pasting. 
+  When one or more Auto Select controls are disabled, then clips are pasted to the lowest-
+numbered track with an enabled Auto Select control. 
+  If you’ve copied clips on multiple tracks, clips on the lowest copied track will be pasted to the 
+lowest Auto Select enabled track, and all other clips will be pasted to higher tracks, with new 
+tracks automatically created, if necessary.
+  If Auto Select is disabled on every single track, then a new track will be created above all other 
+video tracks and/or below all other audio tracks, and the clip will be pasted into this new track, 
+which has Auto Select turned on.
+Audio Channels When Copying and Pasting Audio Clips
+Copying and pasting audio has one other consideration. If you’re force pasting a clip into a different 
+track, the track you solo the Auto Select control of could possibly be set to an audio channel mapping 
+that doesn’t match the clips you’re pasting there. An example of when this would happen is if you copy 
+stereo audio clips from a stereo track and paste them to a mono audio track.
+DaVinci Resolve allows you to do this, so you have the freedom of pasting audio clips to any track you 
+want to. However, extra audio channels within clips that exceed the number of channels supported by 
+the audio track they’re on will be muted. Fortunately, this situation is easy to rectify. Simply right-click 
+the track header of the problem audio track, and use the Change Track Type To submenu to change 
+its channel mapping to one more appropriate to the clips you’ve pasted into it.
+975Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Auto Align Clips
+Auto Align Clips slides one or more selected clips to align with the timecode or audio waveforms of 
+another clip that has matching timecode or audio. This function works for video clips, which can be 
+aligned using timecode, and for audio clips, which can be aligned using either timecode or waveform 
+matching. Waveform matching can also be used if you’re working with audio/video clips. 
+You can only select one clip per video or audio track to align, and they all will align to whichever clip 
+is on the lowest-numbered video or audio track. Clips selected that have no overlapping timecode or 
+audio waveform will not be moved and left in their original position on the Timeline.
+For example, clip AA on track V1 overlaps with clip BB on track V2, but not with clip JJ on 
+track V3, or clip KK on track V4. Selecting all clips and using Auto Align Edits will slide clip 
+BB to align with clip AA, but clips JJ and KK won’t be moved because they don’t overlap 
+with clip AA.
+The original Timeline with clip AA and clip BB that have some overlapping audio but are out-of-sync.
+The same timeline after the Auto Align command. Clip BB has been slipped to sync via audio waveform 
+with clip AA. Clips JJ and KK were also selected, but because they had no overlapping timecode or audio, 
+they remained in place. 
+976Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+In another example, clip AA on track V1 overlaps with clips BB, CC, and DD on tracks V2, V3, 
+and V4 respectively. Selecting all clips and using Auto Align Edits will slide clips BB, CC, and 
+DD to be aligned with clip AA.
+The original Timeline with clip AA, and clip BB, CC, and DD all have overlapping audio, but are out of sync.
+The same timeline after the Auto Align command. All clips are now in sync and the audio waveforms now all 
+match. All the other clips moved to clip AA’s position because it was the lowest clip on the Timeline.
+To use Auto Align clips:
+1 Arrange the clips you want to align with one another on the Timeline so that there’s one clip per 
+track. All clips will sync to the clip on the lowest track number. All clips must have overlapping 
+timecode or audio waveforms.
+2 Select every clip that you want to align (only one per track).
+3 Right-click one of the selected clips, and choose an option from the Auto Align Clips submenu, 
+either “Based on Timecode,” or “Based on Waveform.”
+4 Select the track that you want to use as the audio waveform to which you want to sync.
+If Timecode is selected, the operation will be instant. If Waveform is used, a progress bar 
+will appear showing you how long it will take DaVinci Resolve to analyze the selected audio 
+waveforms before your clips are aligned. If you’ve selected clips that can’t be aligned, a warning 
+box will appear and tell you which clips had errors.
+977Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+For video, this can be useful for multi-camera editing situations where you want to align an 
+insert with the action of an alternate angle. For audio, this is useful for situations where you 
+have multiple recordings of the same audio that you want to align for further editing. 
+NOTE: Waveform matching won’t work for re-recorded audio, such as dialog that’s been 
+re-recorded using the ADR tools of the Fairlight page, as the correspondence between two 
+waveforms must be precise for a match to be found.
+Duplicating Clips and 
+Transitions in the Timeline
+One or more clips can be duplicated by making a selection, and then Option-dragging the selected 
+clips to another position and/or track in the Timeline. When duplicating clips in this way, you must hold 
+the Option key down until you release the mouse button.
+Individual selected transitions can also be duplicated by Option-dragging them to another edit point.
+Smart Reframe (Studio Version Only)
+The Smart Reframe feature in DaVinci Resolve makes it easier to quickly reframe material across 
+extreme aspect ratio changes. It’s useful for situations where you’ve shot a 16:9 horizontal video and 
+find yourself needing to create a vertically-oriented 9:16 version for mobile phones and social media 
+deliverables, or using 4:3 archival footage in a 2.39:1 widescreen movie. Smart Reframe can be used 
+manually, or automatically executed using the DaVinci Resolve Neural Engine.
+Smart Reframe in action, with the Reference Point bounding box active (right)
+The Smart Reframe tool is found in the Sizing tab of the Inspector and is available in both the 
+Cut and Edit pages.
+To use the Smart Reframe tool:
+1 Duplicate your Timeline, right-click the Timeline and choose Timelines > Timeline Settings, and 
+click Use Custom Settings to change the Timeline Resolution to the aspect ratio needed for 
+delivery. Make sure that “Mismatched resolution files” is set to “Scale full frame with crop,” and 
+click OK. 
+2 Select one or more clips you want to reframe, and open the Inspector to the Video tab.
+978Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+3 Open the Smart Reframe controls, leave the Object of Interest drop-down menu set to Auto (if 
+you’ve selected more than one clip, Auto is the only setting available), and click “Reframe.” DaVinci 
+Resolve will analyze your footage and should automatically adjust each individual clip’s position to 
+a more aesthetically pleasing framing. 
+4 (Optional) If the “Auto” setting does not give you desirable results for a particular clip, you can 
+manually select the main subject using the following steps:
+a) To manually select the subject area, choose “Reference Point” from the Object of Interest 
+drop-down menu, and click the Target icon just to the right of the menu. This automatically sets 
+the Viewer mode to Smart Reframe, exposing the onscreen controls for choosing a reference.
+b) Drag the Reference Point bounding box around the main subject of interest in the frame. 
+You may use the Transform controls directly above in the Inspector to move the source clip 
+around if your subject is outside the current framing. 
+5 (Optional) If you want to limit the AI to only reframing on one axis, you can select either Pan Only, 
+or Tilt Only from the Mode selector.
+6 Click Reframe.
+The Inspector’s Smart Reframe controls showing 
+the manual Reference Point selected.
+DaVinci Resolve locks onto and, if necessary, tracks your subject using the reference you’ve 
+selected, automatically panning and scanning the original clip as needed to keep the 
+reference within the new aspect ratio. While involving a bit of manual adjustment, this function 
+still dramatically reduces the time involved in pan and scanning footage by manually adjusting 
+and keyframing the sizing controls.
+Split Photoshop PSD Layers 
+into Individual Timeline Tracks
+You can right-click on an Adobe Photoshop Document (.psd) in a timeline and select Split PSD Layers 
+in Place to expand each layer of the file into it’s own track. The number of new tracks created will 
+correspond with the number of layers in the file.
+You can split Photoshop PSD layers into individual tracks by right -clicking 
+on them and selecting Split PSD Layers in Place.
+979Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+The results of splitting a PSD file.
+DaVinci Resolve reads and splits rasterized flattened layers, so some steps need to be taken 
+when preparing the underlying PSD asset before import. Merging layers in Photoshop to 
+create flattened layers is generally a manual process. The intention is to simplify the image 
+structure, bake Photoshop-specific effects and rasterize fonts to ensure compatibility with 
+DaVinci Resolve. Here is a breakdown of the process:
+Rasterize transparency and effects
+If your layers/fonts contain effects like shadows or gradients, merging them can sometimes 
+alter their appearance. Consider rasterizing before merging. To do this, select one or 
+more layers, right-click and choose Rasterize Layer Style. This is recommended for text 
+layers as well.
+Merge and flatten similar layers
+Arrange similar layers together and select the layers you want to merge. Right-click on the 
+selected layers and choose Merge Layers (Cmd/Control+E) to combine the selected layers 
+into one ‘flat’ layer. Depending on the complexity of the Photoshop document, consider using 
+the option: File > Scripts > Flatten All Layer Effects.
+Name layers
+Rename the layers to describe the underlying image, effect or element. Naming the flattened 
+layers at this stage allows DaVinci Resolve to use the names in the split clips.
+980Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Affinity by Canva .af File Support
+Affinity by Canva .af files can now be decoded natively in the DaVinci Resolve timeline. When an 
+Affinity file is imported to the media pool, it will be flattened and rasterized by default. This image can 
+be used in a timeline similar to any other still image format.
+Once on the timeline, you can split the Affinity file back into its individual layers again, with each layer 
+expanding to a new video track. If the Affinity file comprises of multiple layer levels or groups, these 
+will initially be composited together on a single video track, but can be further split into individual 
+layers as needed.
+To split an Affinity by Canva .af file on the timeline:
+1 Select the .af clip on the timeline.
+2 Right-click on it and select Split Layers in Place
+For example, this Affinity file comprises of a group of several layers, and those layers are sub-
+grouped into head, body, and legs.
+The original layered Affinity file.
+Bring the file into a timeline to rasterize and flatten all of the layers by default.
+981Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+The Affinity file in a timeline.
+Right-clicking on the image in the timeline and selecting Split Layers into Place  will expand the 
+file into its first set of layer groupings on the timeline—in this case, Head, Body, and Legs.
+The Affinity, broken up into Head Body and Legs layers.
+982Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+If you wish, you can further subdivide the layers into more tracks, by right-clicking on one of the 
+layers in the timeline and once again selecting Split Layers in Place. From here, you can see the 
+Body group split up into its individual layers.
+The Body layer group, expanded into its component layers.
+From here you can then modify, animate or edit the individual layers further in DaVinci Resolve. 
+You can also combine layers again by selecting them and making a compound clip.
+Back in Affinity, you can continue to change and modify the image, and once those changes are 
+saved, they will automatically update inside DaVinci Resolve. 
+However, making major changes in the layer grouping and hierarchy in Affinity may not reflect 
+correctly back into DaVinci Resolve, and in such instances, you should re-import the changed 
+.af file into the media pool again.
+983Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Apple Cinematic Mode (Mac OS Only)
+Recent models of Apple iPhone have a Cinematic mode that use lidar to emulate the depth of field 
+characteristics of a lens iris. You can use this mode to artificially create shallow depth of field looks 
+or to pull focus from one focal point to another. This functionality can be accessed directly in the Edit 
+Timeline of DaVinci Resolve.
+Apple Cinematic mode with an F-Stop of 16; note the in focus background. The Yellow square denotes the focus point.
+Apple Cinematic mode with an F-Stop of 2; note the blurred background. The Yellow square denotes the focus point.
+984Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Using Apple Cinematic Mode in DaVinci Resolve
+Using Cinematic footage recorded on an iPhone takes some additional steps to bring into 
+DaVinci Resolve and is only available on the MacOS version.
+To import iPhone Cinematic footage into DaVinci Resolve:
+1 On your iPhone, the camera mode must be turned to Cinematic before you record the video.
+2 Once the video is finished, find the video in the Photos app and press the Share icon.
+IMPORTANT: In the Share interface, select “Export Unmodified Original.” Sharing any 
+other way (like AirDrop) will remove the cinematic information from your video.
+3 Choose a location to save to on your phone in the Files interface.
+4 From the Files interface, find the cinematic video, tap it, and then select the Share button again.
+5 Now export the cinematic video via AirDrop or other method to your computer.
+6 Open DaVinci Resolve and import the cinematic video into the Media Pool as normal.
+Put the Viewer Overlay in Cinematic mode (circled) in the drop-down menu.
+To use the Cinematic tools in DaVinci Resolve:
+1 Put a Cinematic Video clip on the timeline and select it.
+2 In the Viewer Overlay, select Cinematic from the drop-down menu.
+3 In the Video Inspector, the Cinematic toolset should appear at the bottom of the list.
+4 Choose a recorded focus point in the Viewer, designated by a yellow rectangle.
+5 Use the F-Stop controls to adjust the depth of field.
+985Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Scene Cut Detection on the Timeline 
+If you need to break down a previously edited video into its component clips for re-editing or color 
+correction, you can do so directly in the Timeline. Using the DaVinci Neural Engine, DaVinci Resolve 
+can automatically analyze and split up an edited video into individual clips.
+Timeline Scene Cut Detection is also available in the Cut page. If you prefer, you can continue to use 
+the original Scene Cut Detection tool found in the Media Pool.
+To use Scene Cut Detection on the Timeline:
+1 Select one or more clips you want to split on the Timeline. Alternately, you can limit Scene Cut 
+Detection to just a portion of a clip by setting In and Out points on the Timeline around the section 
+you want to analyze.
+2 Choose Timeline > Detect Scene Cuts.
+A dialogue box appears, “Detecting scene cuts in clips x of x.” This process can take some time, 
+depending on the length, number, and complexity of the clips you’ve selected. When the Scene 
+Cut Detection has finished, the clip you selected will be broken up into a number of through edits 
+that now can be used as independent clips. 
+Checking and Fixing Your Results
+If the Neural Engine has made an error, you can fix it manually by navigating to the cut using the 
+Up and Down Arrow keys to go back and forth in the Timeline, and by then doing one of the following:
+  To remove a Cut: Click the through edit to select it, and press the “Delete” key.
+  To make a New Cut: Place the timeline indicator at the cut point, and choose Timeline > 
+Split Clips (Command-\).
+A single clip of a finished edit, consisting of multiple cuts before the Detect Scene Cuts command.
+Multiple individual clips extracted from the edited clip via Detect Scene Cut; the operation has been 
+contained by the In and Out points, and one of the resulting through edits has been highlighted in green.
+986Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Clean Up Video Tracks
+While it’s convenient to be able to edit overlapping clips on multiple video tracks to try slipping clips 
+back and forth, or to stack multiple takes or versions of a VFX clip, there comes a time when all those 
+unnecessary clips take a toll on the visual organization of your timeline, not to mention your colorist’s 
+sanity. For this reason, a trio of commands for cleaning up your timeline have been added to the 
+Timeline> Video> Clean Up Video Tracks menu. These are:
+  Flatten Unused Clips: All superimposed clips with In and Out points that are aligned with clips 
+below them are moved down to track V1, so long as they don’t have any kind of opacity, composite 
+mode, transition, or fade effect applied to them making them a compositing effect.
+  Disable Unused Clips: All clips that are underneath superimposed clips that don’t have any kind of 
+opacity, composite mode, transition, or fade effect applied to them are disabled.
+  Change Unused Clips Color:  All clips that are underneath superimposed clips that don’t have 
+any kind of opacity, composite mode, transition, or fade effect applied to them have their color 
+changed to whatever you select.
+(Top) The original timeline, (Bottom) The Flatten Unused Clips command is used to move superimposed clips with 
+In and Out points that match other clips underneath them to track V1 to simplify the Timeline for future work.
+987Edit | Chapter 45 Modifying Clips in the Timeline
+EDIT
+Chapter 46
+Three- and 
+Four-Point Editing
+A more controlled form of editing is to use three- and four-point editing to make a 
+specific range of source media fit into a specific range of the Timeline. 
+This chapter covers the basics of three- and four-point editing, as well as the wide variety of edit 
+commands that are available.
+Contents
+Keyboard Shortcuts in This Chapter ������������������ 989
+Introduction to Three-Point Editing ��������������������  990
+Choosing a Track to Edit and 
+Using the Source Track Selector  �������������������������� 990
+Setting In and Out Points in the Timeline  �������� 992
+Mark Clip and Mark Current Selection  �������������� 994
+Preview Marks During Three -Point Editing ���� 996
+Dragging Preview Marks to Change an Edit ����  997
+The Rules of Three-Point Editing  ������������������������� 998
+Editing Rules for Split In and Out Points ������������  999
+Editing a Specific Range of the 
+Source Clip Into the Timeline  ���������������������������������� 999
+Editing Part of a Source Clip to Fit Into 
+a Specific Range of the Timeline ��������������������������  1001
+Backtiming a Source Clip When 
+Editing Into the Timeline  ������������������������������������������ 1002
+Switch Focus to Timeline After Edit ������������������  1003
+Different Types of 
+Three- and Four-Point Edits ���������������������������������� 1004
+Overwrite Edits ������������������������������������������������������������� 1004
+Insert Edits  ���������������������������������������������������������������������� 1005
+Replace Edits ����������������������������������������������������������������  1006
+Fit to Fill ���������������������������������������������������������������������������� 1009
+Place on Top ��������������������������������������������������������������������� 1011
+Ripple Overwrite  ���������������������������������������������������������� 1012
+Append to End ��������������������������������������������������������������� 1014
+Insert Selected Clips to 
+Timeline Using Timecode  ����������������������������������������� 1014
+Insert Selected Clips to 
+Timeline With Handles  ����������������������������������������������  1015
+Three-Point Editing From the Media Pool ������  1016
+Example: Assembling Clips Into the 
+Timeline From the Media Pool �������������������������������  1016
+988Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Keyboard Shortcuts in This Chapter
+Here’s a list of of keyboard shortcuts you might find helpful that relate to topics found in this chapter.
+Key Shortcut Function
+Command-1 Choose Media Pool Bin list
+Command-2 Choose Media Pool browser area
+Arrow Keys Move selection in the Media Pool Bin list or browser area 
+to choose a bin or clip
+Return or Enter Open selected clip or timeline into the Source Viewer
+Q Toggle focus between Source and Timeline Viewers
+I, O Set In or Out point
+Shift-I, O Move playhead to In or Out point
+Option-I, O Delete In or Out point
+Shift-A Set In and Out points to match the current clip selection in 
+the Timeline
+X Set In and Out points to fit the current clip at playhead in 
+the Timeline
+Option-X Delete both In and Out points
+Command-Shift-Up, Down Arrow Move video destination control up or down to another track
+Command-Option-Up, Down Arrow Move audio destination control up or down to another track
+Option-1 through 8 Set video destination control to that track number; 
+press again to enable/disable
+Command-Option-1 t horugh 8 Set audio destination control to that track number; 
+press again to enable/disable
+Option-F1 through F8 Toggle video auto-select for that track number
+Option-F9 Toggle all video auto-select controls off or on
+Option-Command-F1 t hrough F8 Toggle audio auto-select for that track number
+Option-Command-F9 Toggle all audio auto-select controls off or on
+Option-Shift-Q
+Toggles “Switch to Timeline After Edit,” to set whether focus 
+stays on the Source Viewer or switches to the Timeline after 
+you make an edit; on by default
+F9 Insert Edit selected clip(s) from Media Pool or 
+Source Viewer to the Timeline
+F10 Overwrite Edit selected clip(s) from Media Pool or 
+Source Viewer to the Timeline
+F11 Replace Edit the first of selected clip(s) from Media Pool or 
+Source Viewer to the Timeline
+989Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Key Shortcut Function
+F12 Place On Top Edit from Media Pool or Source Viewer to 
+the Timeline
+Shift-F10 Ripple Overwrite from Media Pool or Source Viewer to 
+the Timeline
+Shift-F11 Fit to Fill from Media Pool or Source Viewer to the Timeline
+Shift-F12 Append To End Edit from Media Pool or Source Viewer to 
+the Timeline
+Undo Command-Z
+Redo Command-Shift-Z
+Introduction to Three-Point Editing
+Three-point editing is a standard editorial method that’s shared with many other post-production 
+applications, so this procedure should feel familiar. The idea is that you need only set any combination 
+of three In and Out points in the source clip and Timeline to edit a clip into your program at a specific 
+time, and DaVinci Resolve automatically figures out the fourth edit point that’s necessary to execute 
+the edit. Three-point editing is most commonly accomplished using overwrite and insert edits.
+Choosing a Track to Edit and 
+Using the Source Track Selector
+The Source Track Selector is where you decide which audio and video components of your source 
+clip will be edited to which particular tracks in your timeline, Setting the destination control of a track is 
+a vital step in the process of creating an edit and is easy to do.
+When using the Source Track Selector, source tracks 
+are blue (left), and timeline tracks are red (right)
+990Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+The left side column (in blue) represents the tracks found in source clips selected in the media pool or 
+loaded in the source viewer (i.e. a clip with one video track V1, and four audio tracks A1-6). The right 
+side column (in red) represents the destination tracks on your timeline (i.e. two video tracks V1-2 and 
+six audio tracks A1-6). The Source Track Selector lets you choose which track of the source clip is 
+edited into which track on the timeline. 
+The source tracks can be dragged to various destination tracks or they can be accessed through the 
+Timeline > Source Track Selector menu. For example, you can take the video track of your source 
+clip (blue v1), and insert it on video track 2 of your timeline (red v2) by dragging the blue v1 icon next 
+to the red V2 icon. You could also do this by selecting Timeline > Source Track Selector > Select/
+Deselect v2.
+Dragging the Source (blue) video track 1, to 
+patch it to Timeline destination (red) video 
+track 2 for editing into that track
+To assign the destination tracks of incoming (blue) source clips, do one of the following:
+• Drag the source control (blue) to any track in the timeline.
+• Click on the source control (blue) then click on any destination control (red) in the timeline.
+• Press Command-Shift Up Arrow and Down Arrow to move the Video source control up and 
+down among different video tracks, or press Command-Option Up Arrow and Down Arrow 
+to move the Audio source control up and down among different audio tracks.
+• Press Option-1 through 8 to patch a source to a video destination, or press Option-
+Command-1 through 8 to patch a source to audio destination on tracks 1 through 8.
+• Choose any operation in Timeline > Source Track Selector submenu. All Source Track 
+Selector options are listed there along with their associated keyboard shortcuts.
+There is an additional way to select audio sources, as there can be many of these versus just 
+a single video source. You can right-click on a blue source audio channel and route a different 
+source audio track to the timeline track by selecting it from the context menu.
+ 
+Alternatively you can right-click on an audio source track 
+(A3 blue), and select another source audio track to patch 
+to timeline track A3 Red from the context menu 
+991Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+You can also disable the Video or Audio destination controls in situations where you want to edit a 
+source video clip into the Timeline without its audio, or vice versa.
+To disable or reenable a source or destination control:
+  Click an already assigned source or destination icon to toggle it off and then on again. 
+  Disabled destination controls are unhighlighted.
+If you’ve set and reset the track selectors over and over and gotten yourself confused, you 
+can always set the track selectors back to their default value.
+To reset all track selectors: Select Timeline > Source Track Selector > Reset Track Selectors.
+Setting In and Out Points in the Timeline
+When you’re setting up an edit to the Timeline, you can oftentimes get away with simply putting the 
+Timeline playhead at the frame where you want to edit the incoming source clip. In the absence of In 
+or Out points, the playhead is used as the In point. However, you can set up different kinds of edits by 
+setting specific In and Out points to define different ranges of the Timeline.
+Methods of setting and clearing In and Out points in the Timeline:
+  To set an In or Out point: Select the Timeline or Timeline Viewer by clicking or pressing the Q key, 
+then use the transport controls, jog bar, or control panel buttons to move the playhead, and press 
+the I key to set an In point, or the O key to set an Out point.
+  To clear In or Out points: With the Timeline Viewer selected, press Option-I to clear the current In 
+point, or Option-O to clear the current Out point.
+  To clear both the In and Out points at once: Press Option-X.
+In and Out points shown in the Timeline, with unmarked areas outside the selection dimmed
+Methods of moving In and Out points in the Timeline:
+  Move the playhead, and then press the I or O keys to change the In or Out points to the new 
+position of the playhead.
+  Drag any In or Out point in the Timeline ruler to another position.
+The area of the Timeline outside the region that’s currently defined by In and Out points is dimmed, to 
+call attention to the portion of the Timeline that will be affected by the next edit you’ll make.
+992Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+To move the playhead to an In or Out point in preparation for making an adjustment:
+  Press Shift-I to immediately move the playhead to the current In point, or Shift-O to move the 
+playhead to the current Out point. 
+The Go to In and Go to Out commands are capable of placing the playhead at the implicit 
+(but unmarked) In and Out points defined by a three point edit you’re setting up, even when 
+Preview Marks have not been enabled. For example, if you mark In and Out points in the Timeline, 
+and you then mark an In point for a clip in the Source Viewer, pressing Shift-O (Go to Out) 
+automatically moves the Source Viewer playhead to the frame that will be the Out point of that clip 
+were you to execute this edit.
+In and Out points set in the Timeline and an In point set 
+in the Source Viewer set up a three point edit.
+Using Go to Out to move the Source Viewer playhead to 
+the implicit Out point defined by a three point edit
+993Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Mark Clip and Mark Current Selection
+These commands are automatic ways of setting In and Out points in the Timeline both at once, using 
+the timing of other clips. They’re both exceptionally handy for defining the range of an incoming edit 
+using clips that are already in the Timeline that you want to replace, or gaps in the Timeline that you 
+want to fill. 
+In short, Mark Clip uses the first and last frame of a target clip or gap in the Timeline to automatically 
+set Timeline In and Out points for editing. For example, if there’s a shot in an edit that you want to 
+replace with a different take of the same action, or there’s a gap in a sequence of clips that you’d like 
+to quickly fill with B-roll, you can use the Mark Clip command to help set this up.
+Mark Current Selection uses the first and last frames of a range of selected clips to automatically 
+set Timeline In and Out points for editing. A good example is when you have a series of clips in the 
+Timeline, all of which you’d like to overwrite with a single incoming source clip, you can use the Mark 
+Current Selection command.
+To use Mark Clip:
+1 Move the playhead to intersect either a clip you want to use to set In and Out points, or a gap 
+(empty area) between two other clips that you want to target. The playhead can be on any frame of 
+this clip, it doesn’t matter which.
+Positioning the playhead at a clip you want to mark
+2 If there are other clips on a multi-track timeline that overlap the clip you’re targeting for this 
+operation, then the clip on the lowest video track will be used as the target to set the In and 
+Out points. If you want to target a clip on a higher track, then either disable the Auto Selection 
+controls of all timelines underneath, or Option-click the Auto Selection control of the track with the 
+clip you’re targeting to solo it, which will force that track to be the target of this operation.
+3 Press the X key to automatically set In and Out points that match the first and last frames of the 
+target clip.
+994Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Using Mark Clip to set In and Out points that match a clip’s duration
+TIP: To clear both In and Out points, press Option-X, which is the opposite of this command.
+To use Mark Selection:
+1 Select one or more clips in the Timeline.
+Selecting clips you want to use as a range to mark In and Out points
+2 Press Shift-A to automatically set In and Out points that match the first and last frames of 
+the selection. A range of discontinuous clips will produce the same result as a range of 
+continuous clips.
+Marking a selection to set In and Out points
+TIP: You can also mark gaps in the Timeline with Mark Selection.
+995Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Preview Marks During Three-Point Editing
+In order to help you see what will happen whenever you execute a three-point edit, preview marks 
+appear in either the Source Viewer or the Timeline Ruler to let you know the exact duration of the 
+Timeline that’s about to be affected by the edit you’re preparing to make. To prevent them from being 
+a distraction, preview marks only appear once you’ve explicitly marked three edit points in the Source 
+Viewer and Timeline, and they can be turned on and off by choosing View > Show Preview Marks.
+For example, if you set In and Out points in the Source Viewer, and an In point in the Timeline, 
+then a preview marker will appear in the Timeline Ruler to show the implied Out point in the 
+Timeline of the edit you’re about to make.
+A preview marker in the Timeline shows the Timeline Out point being 
+automatically calculated by DaVinci Resolve based on the In and Out points 
+that are set in the Viewer, and the In point in the Timeline
+On the other hand, if you set both In and Out points in the Timeline, and only an Out point in 
+the Source Viewer, a preview marker appears in the jog bar of the Source Viewer to show you 
+the implied In point, in the Source Viewer, of the edit you’re about to make.
+A preview marker in the Source Viewer shows the Source Viewer In point 
+being automatically calculated by DaVinci Resolve based on the In and Out 
+points that are set in the Timeline, and the In point in the Source Viewer
+996Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+If you like, you can move the playhead to the position of the preview mark by using Shift-I 
+if the preview mark is an In point, or Shift-O if the preview marker is an Out point.
+Dragging Preview Marks to Change an Edit
+You can drag preview marks to alter the edit you’re about to make. When you drag a preview mark, 
+the corresponding In or Out point that’s opposite the Viewer with focus is altered to accommodate 
+the new three-point edit you’re setting up. For example, if you have an In point in the Source Viewer, 
+and In and Out points set in the Timeline, a preview mark appears in the Source Viewer to show the 
+Out point that will be used to edit the clip in the Source Viewer into the Timeline. However, you can 
+drag this preview mark to the left in the Source Viewer, and the result will be that the Out point in the 
+Timeline will move along with it, since you’re retiming the edit.
+Dragging a preview mark in the Source Viewer  
+changes the opposite edit point in the Timeline
+997Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+The Rules of Three-Point Editing
+In the previous examples, three-point editing was being used by virtue of source In and Out points 
+being set to define a range of the source clip to be edited into the Timeline, and the Timeline playhead 
+being used as the acting Timeline In point; three points defined the edit to be made. However, three-
+point editing is also very useful when you need to overwrite sections of a previously edited timeline 
+with new source clips in a controlled manner, such as when adding an insert shot to a scene to cover a 
+particular change you’re making that would break continuity.
+Depending on the combination of Source and Timeline In and Out points you set, the following rules 
+govern three-point editing:
+  If there is no In point in the source clip: The first frame of media will be used as the acting source 
+In point. This can be seen by the thick bar that extends to the left of the Out point in the Source 
+Viewer’s jog bar.
+A thick bar indicates which part of the source clip will be used in the absence of a Source In point
+  If there is no Out point in the source clip: The last frame of media will used as the acting source 
+Out point. This can be seen by the thick bar that extends to the right of the In point in the Source 
+Viewer’s jog bar.
+A thick bar indicates which part of the source clip will be used in the absence of a Source Out point
+  If there are no In or Out points in the Timeline: The playhead will be used as the acting 
+Timeline In point. 
+  If you set a Timeline In point but no Timeline Out point:  The whole range from the In to Out 
+points of the source clip is edited into the Timeline such that the Source In point is aligned with the 
+Timeline In point. This can be seen by the thick bar that extends to the right of the In point in the 
+Timeline Ruler.
+A thick bar indicates where the Source clip will be edited in the absence of a Timeline Out point
+998Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+  If you set a Timeline Out point but no Timeline In point:  The incoming source clip will be 
+backtimed so the Out point of the source clip is aligned with the Timeline Out point. This can be 
+seen by the thick bar that extends to the left of the Out point in the Timeline Ruler.
+A thick bar indicates a backtimed edit in the absence of a Timeline In point
+  If you set Timeline In and Out points but only a Source Out point: In this case, the incoming 
+source clip will also be backtimed so the Out point of the source clip is aligned with the Timeline 
+Out point, with the Timeline edit points defining the duration of the source clip being edited.
+  If you set all four Source In and Out and Timeline In and Out edit points: The Timeline edit points 
+dictate the duration of source clip that is edited into the Timeline, and the frame at the Source In 
+point is aligned with the Timeline In point, unless you perform a Fit to Fill or ripple overwrite edit, 
+both of which can be done as four-point edits.
+TIP: If you want to use all four Source and Timeline edit points to retime a source clip to fit 
+into a specific range of the Timeline, use a Fit to Fill edit instead of an overwrite edit.
+Editing Rules for Split In and Out Points
+If you’ve created split In and Out points in the Source Viewer or Timeline, the following rules apply:
+  If the Source Viewer has split In and Out Points: The leftmost split point of the incoming clip, 
+whether video or audio, will be aligned with the playhead when the clip is edited; the other split 
+point will be offset to the right.
+  If the Timeline has split In and Out Points:  The In point of the incoming clip will be aligned with 
+the leftmost split point, whether video or audio; the accompanying audio or video In point will be 
+offset to the split point to the right.
+Editing a Specific Range of the Source Clip Into the Timeline
+This section provides some common examples of three-point editing when performing edits in the 
+middle of a previously edited timeline. In the following example, you have a specific range of source 
+media that you need to edit into the Timeline, and you don’t particularly care what gets overwritten in 
+the Timeline by the incoming clip.
+1 Set In and Out points in a source clip, either in the Media Pool or in the Source Viewer.
+999Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Setting source clip In and Out points
+2 To set where you want the incoming clip to go, set the destination control to the tracks you want to 
+edit onto, and then do one of the following:
+  Move the Timeline playhead to the frame you want to use as the Timeline In point for the edit.
+  Set a Timeline In point for the edit.
+Using the playhead to act as a Timeline In point
+3 To make the edit, click the Overwrite Clip button in the toolbar, press the F10 key, or drag a clip 
+onto the appropriate overlay in the Timeline Viewer.
+The resulting edit; the duration of the source clip defines the duration of the edit
+1000Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Editing Part of a Source Clip to Fit Into 
+a Specific Range of the Timeline
+In this example, you have a section of a clip or a gap in the edited sequence of clips in the Timeline 
+that you want to fill with as much of the current source clip as it will take to “plug the hole.”
+1 Set an In point in the source clip, if necessary, to define the first frame of the range of source 
+media that you want to edit into the Timeline.
+Setting a source clip In point only
+2 Set In and Out points in the Timeline to set both where you want the incoming clip to go, and how 
+much of the incoming clip you want to use.
+Setting both In and Out points of the Timeline for a gap
+3 To make the edit, click the Overwrite Clip button in the toolbar, press the F10 key, or drag a clip 
+onto the appropriate overlay in the Timeline Viewer.
+1001Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+The resulting edit; the duration of the Timeline edit points define how much of the source clip is edited
+Backtiming a Source Clip When Editing Into the Timeline
+In this last example, you’ve got a specific moment in the second half of a source clip that you need to 
+align with an Out point in the Timeline, such that the remaining duration of the incoming clip overwrites 
+the edited sequence of clips from the right to the left. This is referred to as backtiming, when you’re 
+lining up a Source Out point with a Timeline Out point in order to make an edit, and can be set up one 
+of two ways.
+Backtiming method one:
+1 Set In and Out points in the source clip, either in the Media Pool or in the Source Viewer.
+2 Set an Out point in the Timeline, at the frame where you want the corresponding Out point of the 
+incoming source clip to be aligned.
+Setting up a backtimed match-on-action edit via In and Out points in the 
+Source Viewer, and only an Out point in the Timeline
+3 To make the edit, click the Overwrite Clip button in the toolbar, press the F10 key, or drag a clip 
+onto the overwrite overlay in the Timeline Viewer.
+The resulting edit, aligning the Out point of the source clip with the Out point of the Timeline
+1002Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Backtiming method two:
+1 Set an Out point in the source clip, either in the Media Pool or in the Source Viewer.
+2 Set In and Out points in the Timeline to set both where you want the incoming clip to go, and how 
+much of the incoming clip you want to use.
+Setting up a backtimed edit by setting an Out point in the Source Viewer, and In 
+and Out points in the Timeline to define the duration of the edit
+3 To make the edit, click the Overwrite Clip button in the toolbar, press the F10 key, or drag a clip 
+onto the appropriate overlay in the Timeline Viewer.
+The resulting edit, aligning the Out point of the source clip with the Out point of the Timeline
+Switch Focus to Timeline After Edit
+A setting in the Edit menu, “Switch focus to timeline after edit” (Option-Shift-Q), lets you set whether 
+or not DaVinci Resolve changes the application focus from the Source Viewer to the Timeline Viewer/
+Timeline every time you make an edit. This setting is on by default.
+For example, if you’re assembling clips from many different source files into the Timeline, and trimming 
+the results as you go, leaving this option on may save you time. In this case, after every edit, the 
+focus switches from the Source Viewer to the Timeline, so you can quickly select the clip or edit point 
+you want to trim and make your adjustments before loading the next clip into the Source Viewer in 
+preparation for the next edit.
+On the other hand, if you’re editing several pieces from a long interview clip into the Timeline, you may 
+want to turn this setting off to make it easy to continue playing forward in the Source Viewer, setting 
+In and Out points and editing clips into the Timeline as you go. After every edit, focus remains on the 
+Source Viewer, so you can continue making edits from the same source clip without interruption.
+1003Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Different Types of 
+Three- and Four-Point Edits
+This section covers the different types of edits that are available for cutting source clips into the 
+currently open Timeline.
+Overwrite Edits
+The most common type of edit you’ll make, an overwrite edit eliminates whatever media was in the 
+Timeline previously with the incoming source clip taking the place of whatever was there. Overwrite 
+edits are commonly used when initially assembling clips, or doing three-point editing.
+Overwrite edits do not ripple the Timeline.
+To overwrite one or more clips in the Timeline:
+1 Move the playhead to the frame of the Timeline where you want to insert a clip.
+2 Click the appropriate audio and video destination controls in the Source Track Selector of the 
+tracks you want to edit the incoming source clip onto. If necessary, create new tracks.
+3 Select a single clip in the Media Pool to open it into the Source Viewer, then set In and Out points 
+to define the range of media you want to insert.
+4 To make the edit, choose Edit > Overwrite, click the Overwrite Clip button in the toolbar, press the 
+F10 key, or drag a clip onto the Overwrite overlay in the Timeline Viewer.
+Before and after an overwrite edit, the Timeline duration stays the same
+The selected clips in the Media Pool are overwrite edited to the selected track starting at the 
+position of the playhead, eliminating whatever was there originally while adding incoming clip. No 
+other clips are rippled during this operation.
+1004Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Insert Edits
+An insert edit splits whatever media is already in the Timeline at the position of the playhead, and 
+pushes that media to the right to make room for the incoming clip.
+Insert edits have the effect of rippling almost all clips in the Timeline that are to the right of the insert 
+edit point you’re making, pushing them farther to the right by the duration of the incoming source 
+clip. However, clips in any tracks of the Timeline that overlap to the left of the insert edit point aren’t 
+rippled, and remain in place.
+For example, if you’re insert editing a clip into the middle of a sequence of clips in track V1 and A1 of 
+the Timeline, and there’s also a clip of music edited into track A2 that overlaps well to the left of the 
+insert edit point, the music clip remains where it is, but the other clips on track V1 and A1 that are to the 
+right of your edit point on are pushed to the right.
+To insert edit one or more clips into the Timeline:
+1 Move the playhead to the frame of the Timeline where you want to insert a clip.
+2 Click the appropriate audio and video destination controls in the Source Track Selector of the 
+tracks you want to edit the incoming source clip onto. If necessary, create new tracks.
+3 If necessary, set In and Out points in the clip or clips you want to insert edit into the Timeline using 
+the controls of the Media Pool or the Source Viewer.
+4 Do one of the following:
+  Select one or more clips in the Media Pool, right-click one of the selected clips, and choose 
+“Insert Selected Clips to Timeline.” 
+  Choose Edit > Insert, click the Insert Edit button in the toolbar, press the F9 key, or drag any clip 
+onto the Insert overlay in the Timeline Viewer.
+The selected clips are insert edited to the selected track at the position of the playhead, pushing 
+all other media in the destination track back by the total duration of the selected clips, except for 
+clips on other tracks that overlap to the left of the edit point (as seen by the overlapping music clip 
+in the example below).
+Before and after an insert edit, the Timeline gets longer as non-overlapping 
+clips to the left of the edit point are rippled to the right
+1005Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Replace Edits
+Replace edits are a unique three-point edit type that aligns the frame at the Source Viewer playhead 
+with the frame at the Timeline playhead when the edit is executed. This is the fastest edit type to use 
+when you need to align an action at a specific frame of video, or a sound at a specific frame of audio, 
+to a particular frame’s action or sound in the video or audio of the Timeline.
+The fastest way of using the replace edit is to not bother setting either In or Out points in the Source 
+Viewer, and to either use the duration of an existing clip intersecting the Timeline to define the edit, or 
+a pair of timeline In/Out points specifying either a section of a clip you want to overwrite, or an empty 
+section of the Timeline to which you want to edit.
+Replace edits do not ripple the Timeline.
+Replace Edits to Replace Existing Clips in the Timeline
+A replace edit automatically replaces an existing clip in the Timeline with a clip in the Source Viewer, 
+so long as that clip overlaps the playhead and is on a track with its destination control enabled. When 
+you make a replace edit in this way, DaVinci Resolve automatically uses the duration of the Timeline 
+clip to define the duration of the incoming media, and the positions of the Viewer and Timeline 
+playheads to line up how the incoming media should be placed. This is an extremely fast edit to make, 
+since you needn’t use any In or Out points at all.
+To replace a clip in the Timeline:
+1 Move the playhead in the Timeline to the clip that you want to replace, and align it with a frame 
+that you want to line up with a frame in the clip you’ll be replace editing into the Timeline.
+2 Click the appropriate audio and video destination controls in the Source Track Selector of the 
+track containing the clip you want to replace.
+3 Open a clip into the Source Viewer.
+4 Move the playhead in the Source Viewer to the frame that you want to line up with the frame at the 
+position of the playhead in the Timeline.
+In the Source Viewer to the left is a VFX clip we want to edit into the Timeline to 
+replace the existing Timeline clip, shown in the Timeline Viewer at right
+1006Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+In the example shown above, the original clip that was shot on location of a car driving past a slab 
+of real concrete (shown in the Timeline Viewer at right) is going to be replaced by a VFX shot of 
+a concrete wall with a small hole for the car to drive through (shown in the Source Viewer at left). 
+The playhead in the Source Viewer is aligned on the very same frame as the playhead in the 
+Timeline Viewer, which can be seen by the identical position of the white stripe on the road in the 
+lower right-hand corner of the picture.
+5 Now that the playheads are aligned on the frames that must match one another in both the Source 
+and Timeline Viewers, choose Edit > Replace, click the Replace Clip button in the toolbar, press 
+F11, or drag any clip onto the Replace overlay in the Timeline Viewer.
+The resulting replace edit, in which the original timeline clip is replaced by the 
+incoming Source Viewer clip by aligning the frames at each playhead
+The camera original clip in the Timeline is now replaced with the VFX source clip from the 
+Media Pool, with the source frame at the Source Viewer playhead aligned with the frame at the 
+Timeline playhead.
+Replace Edits to Edit Clips Into Empty Tracks
+You can also use a replace edit to edit a clip into an empty track of the Timeline so that the frame at 
+the position of the Source playhead is aligned with the Timeline playhead, and the In and Out points 
+of the incoming clip fall where they may. This is useful when you want to “spot” a particular action of an 
+alternate take or a cue in a sound effect to a specific frame of the Timeline.
+To use replace edit to spot a sound effect or action video clip into the Timeline:
+1 Move the playhead in the Timeline to the clip that contains the moment you want to align the new 
+incoming audio or video clip with, and position it on the exact frame that you want to line up with a 
+frame of the clip you’re going to edit into the Timeline.
+2 Click the appropriate audio and video destination controls in the Source Track Selector of the 
+empty track you want to edit the incoming clip into.
+3 Open a clip into the Source Viewer.
+4 Move the playhead in the Source Viewer to the frame that you want to line up with the frame 
+at the position of the playhead in the Timeline. This may be the sample of a sound effect that 
+corresponds to the action in a particular frame of your program’s video, or a frame of video that 
+corresponds to a particular sound in your program’s audio.
+5 In the example shown below, the beginning of an audio cue of a billiard ball being hit is being lined 
+up with the frame in which the cue ball is first hit in the video.
+1007Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+6 If necessary, set In and Out points in the Timeline to restrict how much of the incoming clip will be 
+edited. Otherwise, the entire source clip will be edited into the Timeline.
+In the Source Viewer to the left is an SFX clip we want to edit into the Timeline to match 
+the visuals of a cue ball being hit, shown in the Timeline Viewer at right
+7 Now that the playheads are aligned on the frames that must match one another in both the 
+Source and Timeline Viewers, choose Edit > Replace, click the Replace Clip button in the toolbar, 
+press F11, or drag any clip onto the Replace overlay in the Timeline Viewer.
+The resulting replace edit, in which the incoming  
+Source Viewer clip is aligned perfectly with the video
+The SFX source clip has now been edited into the specified audio track, with the source frame at the 
+Source Viewer playhead perfectly aligned with the frame at the Timeline playhead so that the cue ball 
+hit is in sync with the visuals.
+Replace Edit Using Clips Already in the Timeline
+To facilitate workflows where multiple clips are stacked in the Timeline to manually track different 
+takes or versions of stock footage, VFX clips, or other versionable media, there’s a method of drag 
+and drop replace editing that copies the grade of the clip being replaced to the clip you’re replacing 
+it with at the same time, so that newer versions of effects can inherit the same grade as the previous 
+version of the effect being replaced. This only works for clips that have already been edited into the 
+Timeline and that are superimposed (over or under) other clips in the Timeline, such as in the following 
+screenshot. Be aware that this technique can also be used for multiple selected clips on the Timeline 
+to do several replace edits all at once.
+1008Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+(Left) Before replace editing a clip in the Timeline, 
+(Right) After Command-dragging a clip over one under it in the 
+Timeline to replace edit the one below with the one above
+To replace edit one clip that’s stacked on the Timeline into another:
+1 Select one or more clips that are already on the Timeline. Typically these will be clips that are 
+superimposed over other clips.
+2 Hold the command key down while dragging one superimposed clip on top of another to 
+overwrite a clip and copy its grade to the clip you’re overwriting it with.
+NOTE: This won’t work with clips you’re editing into the Timeline from the Media Pool or 
+Source Viewer.
+Fit to Fill
+Fit to fill edits are the only edit type that actually use all four edit points, and it’s the only edit type that 
+retimes clips at the same time as they’re being edited. By setting In and Out points in the incoming 
+source clip, and another pair of In and Out points in the Timeline, you can stretch or compress the 
+timing of the specified range of source media to cover the entire specified range of the Timeline. In the 
+process, the speed ratio of the clip changes so the clip plays in either fast or slow motion.
+Fit to fill edits are especially valuable when you have a source clip in which the action is slightly slow, 
+and you just want to speed it up by squeezing it into a shorter duration of the Timeline. They’re also 
+incredibly handy in situations when you have a gap in an edited sequence of clips to fill with a source 
+clip that’s just not long enough, but in which slightly slower motion won’t be noticeable.
+Fit to fill edits do not ripple the Timeline.
+To use fit to fill to edit a clip into the Timeline:
+1 Do one of the following to define where in the Timeline to edit the incoming clip:
+a) You can set both In and Out points in the Timeline, to define the duration you want to fill with 
+the incoming source clip as a three-point edit.
+b) You can clear the Timeline In and Out points (pressing Option-X), so that you can instead use 
+the duration of whichever clip or gap intersects the playhead on the track with the destination 
+controls assigned to them in the Source Track Selector. In the following screenshot, the clip can 
+easily be edited to take the place of the gap by positioning the playhead anywhere within it. 
+1009Edit | Chapter 46 Three- and Four -Point Editing
+EDIT
+Setting timeline In and Out points to mark a gap
+2 Next, you’ll need to set both In and Out points in the Source Viewer to define a longer or shorter 
+source clip that you want to fill into the available space. In this example, we have a very short 
+section of the source clip defined that, because of the matching action in the Timeline, must be fit 
+into the larger gap seen above.
+Setting In and Out points in a source clip to define a shorter duration 
+segment that you want to completely fill the gap
+3 Click the audio and video destination controls in the Source Track Selector of the tracks you want 
+to edit the incoming source clip onto. If necessary, create new tracks.
+4 Choose Edit > Fit to Fill, drag any clip onto the Fit to Fill overlay in the Timeline Viewer, 
+or press Shift-F11.
+1010Edit | Chapter 46 Three- and Four -Point Editing
+EDIT

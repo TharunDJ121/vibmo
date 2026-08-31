@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any
+from typing import Any, Optional
 from vibmo.scene.scene import Scene
 from vibmo.core.color import Color, colors
 from vibmo.audio.track import AudioTrack
@@ -12,17 +12,24 @@ from vibmo.fx.filters import Vignette
 
 class SocialAudiogramTemplate:
     @classmethod
-    def create_scene(cls, podcast_title: str, episode_name: str, duration: float = 6.0) -> Scene:
+    def create_scene(
+        cls,
+        podcast_title: str = "The Future of AI",
+        episode_name: str = "Episode 1",
+        audio: Optional[str] = None,
+        duration: float = 6.0,
+        **kwargs: Any,
+    ) -> Scene:
         scene = Scene(width=1080, height=1920, fps=60, duration=duration, background=colors.SLATE_900)
 
         # Audio track placeholder using an empty or generated file if possible
-        audio = AudioTrack("dummy.mp3")
+        audio_track = AudioTrack(audio or "dummy.mp3")
 
         # We need an Avatar for Stage 1
         avatar = scene.add(Avatar(size=400, position=(540, 500)))
 
         # Audio-reactive pulsating glow ring
-        spectrum = scene.add(CircularSpectrum(audio=audio, radius=250, position=(540, 500), colors_palette=[colors.EMERALD_500]))
+        spectrum = scene.add(CircularSpectrum(audio=audio_track, radius=250, position=(540, 500), colors_palette=[colors.EMERALD_500]))
 
         # TikTok-style KineticCaptions displaying dynamic bouncing karaoke subtitles
         words = []
@@ -54,11 +61,25 @@ class SocialAudiogramTemplate:
 
 class TmplSocialAudiogramSuite(SocialAudiogramTemplate):
     @classmethod
-    def build_scene(cls, **kwargs):
+    def build_scene(
+        cls,
+        title: Optional[str] = None,
+        podcast_title: Optional[str] = None,
+        episode: Optional[str] = None,
+        episode_name: Optional[str] = None,
+        audio: Optional[str] = None,
+        duration: float = 6.0,
+        **kwargs: Any,
+    ) -> Scene:
+        p_title = title if title is not None else (podcast_title if podcast_title is not None else "The Future of AI")
+        e_name = episode if episode is not None else (episode_name if episode_name is not None else "Episode 1")
+        aud = audio if audio is not None else kwargs.pop("audio_file", "dummy.mp3")
         return cls.create_scene(
-            podcast_title=kwargs.get("title", "The Future of AI"),
-            episode_name=kwargs.get("episode", "Episode 1"),
-            duration=kwargs.get("duration", 6.0),
+            podcast_title=p_title,
+            episode_name=e_name,
+            audio=aud,
+            duration=duration,
+            **kwargs,
         )
 
 

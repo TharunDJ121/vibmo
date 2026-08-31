@@ -1,0 +1,998 @@
+[
+  {
+    "title": "Contents",
+    "page": 3,
+    "chapters": []
+  },
+  {
+    "title": "Getting Started",
+    "page": 10,
+    "chapters": []
+  },
+  {
+    "title": "DaVinci Resolve Interface",
+    "page": 12,
+    "chapters": [
+      {
+        "title": "Introduction to DaVinci Resolve",
+        "page": 13
+      },
+      {
+        "title": "Using the DaVinci Resolve User Interface",
+        "page": 55
+      }
+    ]
+  },
+  {
+    "title": "Setup and Workflows",
+    "page": 74,
+    "chapters": [
+      {
+        "title": "Managing Projects and Project Libraries",
+        "page": 75
+      },
+      {
+        "title": "System and User Preferences",
+        "page": 97
+      },
+      {
+        "title": "DaVinci Control Panels Setup",
+        "page": 132
+      },
+      {
+        "title": "Project Settings",
+        "page": 139
+      },
+      {
+        "title": "Camera Raw Settings",
+        "page": 170
+      },
+      {
+        "title": "Improving Performance,Proxies, andthe Render Cache",
+        "page": 196
+      },
+      {
+        "title": "Data Levels, Color Management, and ACES",
+        "page": 225
+      },
+      {
+        "title": "HDR Setup and Grading",
+        "page": 259
+      },
+      {
+        "title": "Image Sizing and Resolution Independence",
+        "page": 292
+      },
+      {
+        "title": "Data Burn-In",
+        "page": 307
+      },
+      {
+        "title": "Resolve Live",
+        "page": 312
+      },
+      {
+        "title": "Stereoscopic Workflows",
+        "page": 320
+      },
+      {
+        "title": "Using Variables and Keywords",
+        "page": 344
+      }
+    ]
+  },
+  {
+    "title": "Ingest and Organize Media",
+    "page": 351,
+    "chapters": [
+      {
+        "title": "Using the Media Page",
+        "page": 352
+      },
+      {
+        "title": "Adding and Organizing Media with the Media Pool",
+        "page": 371
+      },
+      {
+        "title": "Using Clip Metadata",
+        "page": 417
+      },
+      {
+        "title": "Using the Inspector in the Media Page",
+        "page": 439
+      },
+      {
+        "title": "Syncing Audio and Video",
+        "page": 452
+      },
+      {
+        "title": "Modifying Clips and Clip Attributes",
+        "page": 461
+      },
+      {
+        "title": "Importing and Conforming Timelines",
+        "page": 476
+      },
+      {
+        "title": "Using Scene Detection",
+        "page": 549
+      },
+      {
+        "title": "Ingesting From Tape",
+        "page": 558
+      },
+      {
+        "title": "Capturing From the Cintel Film Scanner",
+        "page": 565
+      }
+    ]
+  },
+  {
+    "title": "Photo",
+    "page": 589,
+    "chapters": [
+      {
+        "title": "Using the Photo Page",
+        "page": 590
+      },
+      {
+        "title": "Importing Images to the Photo Page",
+        "page": 600
+      },
+      {
+        "title": "Using Photo Albums",
+        "page": 606
+      },
+      {
+        "title": "Editing Images in the Photo Page",
+        "page": 614
+      },
+      {
+        "title": "Photo Effects",
+        "page": 638
+      },
+      {
+        "title": "Capture and Tethering",
+        "page": 644
+      },
+      {
+        "title": "Exporting Images",
+        "page": 648
+      }
+    ]
+  },
+  {
+    "title": "Cut",
+    "page": 653,
+    "chapters": [
+      {
+        "title": "Using the Cut Page",
+        "page": 654
+      },
+      {
+        "title": "Importing and Organizing Media in the Cut Page",
+        "page": 672
+      },
+      {
+        "title": "Fast Editing in the Cut Page",
+        "page": 695
+      },
+      {
+        "title": "Trimming in the Cut Page",
+        "page": 735
+      },
+      {
+        "title": "Using the Inspector in the Cut Page",
+        "page": 754
+      },
+      {
+        "title": "Video and Audio Effects in the Cut Page",
+        "page": 775
+      },
+      {
+        "title": "Quick Export",
+        "page": 810
+      }
+    ]
+  },
+  {
+    "title": "Edit",
+    "page": 813,
+    "chapters": [
+      {
+        "title": "Using the Edit Page",
+        "page": 814
+      },
+      {
+        "title": "Creating and Working with Timelines",
+        "page": 858
+      },
+      {
+        "title": "Preparing Clips for Editing and Viewer Playback",
+        "page": 883
+      },
+      {
+        "title": "Editing Basics",
+        "page": 910
+      },
+      {
+        "title": "Using the Inspector in the Edit Page",
+        "page": 941
+      },
+      {
+        "title": "Modifying Clips in the Timeline",
+        "page": 962
+      },
+      {
+        "title": "Three- and Four‑Point Editing",
+        "page": 988
+      },
+      {
+        "title": "Text Based Editing",
+        "page": 1017
+      },
+      {
+        "title": "Marking and Finding Clips in the Timeline",
+        "page": 1034
+      },
+      {
+        "title": "Multicam Editing",
+        "page": 1060
+      },
+      {
+        "title": "Take Selectors, Compound Clips, and Nested Timelines",
+        "page": 1074
+      },
+      {
+        "title": "Trimming",
+        "page": 1086
+      },
+      {
+        "title": "Working with Audio in the Edit Page",
+        "page": 1120
+      },
+      {
+        "title": "Media Management",
+        "page": 1168
+      }
+    ]
+  },
+  {
+    "title": "Editing Effects and Transitions",
+    "page": 1176,
+    "chapters": [
+      {
+        "title": "Editing, Adding, and Copying Effects and Filters",
+        "page": 1177
+      },
+      {
+        "title": "Using Transitions",
+        "page": 1193
+      },
+      {
+        "title": "Titles, Generators, and Stills",
+        "page": 1212
+      },
+      {
+        "title": "Compositing and Transforms in the Timeline",
+        "page": 1236
+      },
+      {
+        "title": "Speed Effects",
+        "page": 1253
+      },
+      {
+        "title": "Subtitles and Closed Captioning",
+        "page": 1267
+      },
+      {
+        "title": "Keyframing Effects",
+        "page": 1289
+      },
+      {
+        "title": "VFX Connect",
+        "page": 1310
+      }
+    ]
+  },
+  {
+    "title": "Fusion Fundamentals",
+    "page": 1317,
+    "chapters": [
+      {
+        "title": "Introduction to Compositing in Fusion",
+        "page": 1318
+      },
+      {
+        "title": "Exploring the Fusion Interface",
+        "page": 1324
+      },
+      {
+        "title": "Getting Clips into Fusion",
+        "page": 1372
+      },
+      {
+        "title": "Rendering Using Saver Nodes",
+        "page": 1400
+      },
+      {
+        "title": "Working in the Node Editor",
+        "page": 1423
+      },
+      {
+        "title": "Node Groups, Macros, and Fusion Templates",
+        "page": 1473
+      },
+      {
+        "title": "Using Viewers",
+        "page": 1496
+      },
+      {
+        "title": "Editing Parameters in the Inspector",
+        "page": 1539
+      },
+      {
+        "title": "Animating in Fusion’s Keyframes Editor",
+        "page": 1565
+      },
+      {
+        "title": "Animating in Fusion’s Spline Editor",
+        "page": 1582
+      },
+      {
+        "title": "Animating with Motion Paths",
+        "page": 1611
+      },
+      {
+        "title": "Using Modifiers, Expressions, and Custom Controls",
+        "page": 1629
+      },
+      {
+        "title": "Preferences",
+        "page": 1642
+      },
+      {
+        "title": "Controlling Image Processing and Resolution",
+        "page": 1689
+      },
+      {
+        "title": "Managing Color for Visual Effects",
+        "page": 1700
+      },
+      {
+        "title": "Understanding Image Channels",
+        "page": 1714
+      },
+      {
+        "title": "Compositing Layers in Fusion",
+        "page": 1750
+      },
+      {
+        "title": "Rotoscoping with Masks",
+        "page": 1774
+      },
+      {
+        "title": "Paint",
+        "page": 1798
+      },
+      {
+        "title": "Using the Tracker Node",
+        "page": 1825
+      },
+      {
+        "title": "Planar Tracking",
+        "page": 1861
+      },
+      {
+        "title": "Using Open FX, Resolve FX, and Fuse Plugins",
+        "page": 1868
+      },
+      {
+        "title": "3D Compositing Basics",
+        "page": 1873
+      },
+      {
+        "title": "3D Camera Tracking",
+        "page": 1929
+      },
+      {
+        "title": "Particle Systems",
+        "page": 1947
+      },
+      {
+        "title": "Optical Flow and Stereoscopic Nodes",
+        "page": 1956
+      }
+    ]
+  },
+  {
+    "title": "Fusion Page Effects",
+    "page": 1969,
+    "chapters": [
+      {
+        "title": "3D Nodes",
+        "page": 1970
+      },
+      {
+        "title": "3D Light Nodes",
+        "page": 2086
+      },
+      {
+        "title": "3D Material Nodes",
+        "page": 2105
+      },
+      {
+        "title": "3D Texture Nodes",
+        "page": 2134
+      },
+      {
+        "title": "Blur Nodes",
+        "page": 2161
+      },
+      {
+        "title": "Color Nodes",
+        "page": 2186
+      },
+      {
+        "title": "Composite Nodes",
+        "page": 2260
+      },
+      {
+        "title": "Deep Image Nodes",
+        "page": 2279
+      },
+      {
+        "title": "Deep Pixel Nodes",
+        "page": 2308
+      },
+      {
+        "title": "Effect Nodes",
+        "page": 2324
+      },
+      {
+        "title": "Film Nodes",
+        "page": 2362
+      },
+      {
+        "title": "Filter Nodes",
+        "page": 2380
+      },
+      {
+        "title": "Flow Nodes",
+        "page": 2399
+      },
+      {
+        "title": "Flow Organizational Nodes",
+        "page": 2402
+      },
+      {
+        "title": "Fuses",
+        "page": 2407
+      },
+      {
+        "title": "Generator Nodes",
+        "page": 2409
+      },
+      {
+        "title": "I/O Nodes",
+        "page": 2456
+      },
+      {
+        "title": "Krokodove Nodes",
+        "page": 2483
+      },
+      {
+        "title": "Layer Nodes",
+        "page": 2488
+      },
+      {
+        "title": "LUT Nodes",
+        "page": 2502
+      },
+      {
+        "title": "Mask Nodes",
+        "page": 2511
+      },
+      {
+        "title": "Matte Nodes",
+        "page": 2552
+      },
+      {
+        "title": "Metadata Nodes",
+        "page": 2620
+      },
+      {
+        "title": "Miscellaneous Nodes",
+        "page": 2628
+      },
+      {
+        "title": "Optical Flow",
+        "page": 2667
+      },
+      {
+        "title": "Paint Node",
+        "page": 2687
+      },
+      {
+        "title": "Particle Nodes",
+        "page": 2696
+      },
+      {
+        "title": "Position Nodes",
+        "page": 2754
+      },
+      {
+        "title": "Resolve Connect",
+        "page": 2772
+      },
+      {
+        "title": "Shape Nodes",
+        "page": 2778
+      },
+      {
+        "title": "Stereo Nodes",
+        "page": 2820
+      },
+      {
+        "title": "Tracking Nodes",
+        "page": 2853
+      },
+      {
+        "title": "Transform Nodes",
+        "page": 2908
+      },
+      {
+        "title": "USD Nodes",
+        "page": 2936
+      },
+      {
+        "title": "VR Nodes",
+        "page": 2997
+      },
+      {
+        "title": "Warp Nodes",
+        "page": 3010
+      },
+      {
+        "title": "Modifiers",
+        "page": 3041
+      }
+    ]
+  },
+  {
+    "title": "Color",
+    "page": 3084,
+    "chapters": [
+      {
+        "title": "Introduction to Color Grading",
+        "page": 3085
+      },
+      {
+        "title": "Using the Color Page",
+        "page": 3097
+      },
+      {
+        "title": "Viewers, Monitoring, and Video Scopes",
+        "page": 3115
+      },
+      {
+        "title": "Color Page Timeline and Lightbox",
+        "page": 3159
+      },
+      {
+        "title": "Automated Grading Commands and Imported Grades",
+        "page": 3175
+      },
+      {
+        "title": "Camera Raw Palette",
+        "page": 3189
+      },
+      {
+        "title": "Primaries Palette",
+        "page": 3195
+      },
+      {
+        "title": "HDR Palette",
+        "page": 3214
+      },
+      {
+        "title": "RGB Mixer",
+        "page": 3238
+      },
+      {
+        "title": "Curves",
+        "page": 3244
+      },
+      {
+        "title": "ColorSlice",
+        "page": 3265
+      },
+      {
+        "title": "Color Warper",
+        "page": 3272
+      },
+      {
+        "title": "Secondary Qualifiers",
+        "page": 3294
+      },
+      {
+        "title": "Secondary Windows",
+        "page": 3322
+      },
+      {
+        "title": "Magic Mask",
+        "page": 3338
+      },
+      {
+        "title": "Motion Tracking Windows",
+        "page": 3366
+      },
+      {
+        "title": "Using the Gallery",
+        "page": 3392
+      },
+      {
+        "title": "Grade Management",
+        "page": 3409
+      },
+      {
+        "title": "Node Editing Basics",
+        "page": 3446
+      },
+      {
+        "title": "Image Processing Order of Operations",
+        "page": 3469
+      },
+      {
+        "title": "Serial, Parallel, and Layer Nodes",
+        "page": 3472
+      },
+      {
+        "title": "Combining Keys and Using Mattes",
+        "page": 3480
+      },
+      {
+        "title": "Channel Splitting and Image Compositing",
+        "page": 3504
+      },
+      {
+        "title": "Keyframing in the Color Page",
+        "page": 3519
+      },
+      {
+        "title": "Copying and Importing Grades Using ColorTrace",
+        "page": 3534
+      },
+      {
+        "title": "Using LUTs",
+        "page": 3544
+      }
+    ]
+  },
+  {
+    "title": "Color Page Effects",
+    "page": 3554,
+    "chapters": [
+      {
+        "title": "Using Open FX and Resolve FX",
+        "page": 3555
+      },
+      {
+        "title": "Sizing and Image Stabilization",
+        "page": 3567
+      },
+      {
+        "title": "The Motion Effects and Blur Palettes",
+        "page": 3582
+      }
+    ]
+  },
+  {
+    "title": "Resolve FX Overview",
+    "page": 3594,
+    "chapters": [
+      {
+        "title": "Resolve FX",
+        "page": 3595
+      },
+      {
+        "title": "Resolve FX Blur",
+        "page": 3598
+      },
+      {
+        "title": "Resolve FX Color",
+        "page": 3610
+      },
+      {
+        "title": "Resolve FX Film Emulation",
+        "page": 3623
+      },
+      {
+        "title": "Resolve FX Generate",
+        "page": 3639
+      },
+      {
+        "title": "Resolve FX Key",
+        "page": 3641
+      },
+      {
+        "title": "Resolve FX Light",
+        "page": 3654
+      },
+      {
+        "title": "Resolve FX OpenColorIO",
+        "page": 3670
+      },
+      {
+        "title": "Resolve FX Refine",
+        "page": 3673
+      },
+      {
+        "title": "Resolve FX Revival",
+        "page": 3704
+      },
+      {
+        "title": "Resolve FX Sharpen",
+        "page": 3724
+      },
+      {
+        "title": "Resolve FX Stylize",
+        "page": 3728
+      },
+      {
+        "title": "Resolve FX Temporal",
+        "page": 3750
+      },
+      {
+        "title": "Resolve FX Texture",
+        "page": 3754
+      },
+      {
+        "title": "Resolve FX Transform",
+        "page": 3764
+      },
+      {
+        "title": "Resolve FX Warp ",
+        "page": 3805
+      }
+    ]
+  },
+  {
+    "title": "Fairlight",
+    "page": 3814,
+    "chapters": [
+      {
+        "title": "Using the Fairlight Page",
+        "page": 3815
+      },
+      {
+        "title": "Setting Up Tracks, Busses, and Patching",
+        "page": 3870
+      },
+      {
+        "title": "Transport Controls, Timeline Navigation, and Markers",
+        "page": 3894
+      },
+      {
+        "title": "Using Markers",
+        "page": 3901
+      },
+      {
+        "title": "Recording",
+        "page": 3903
+      },
+      {
+        "title": "ADR (Automated Dialog Replacement)",
+        "page": 3913
+      },
+      {
+        "title": "Editing Basics in the Fairlight Page",
+        "page": 3923
+      },
+      {
+        "title": "The Fairlight Inspector",
+        "page": 3979
+      },
+      {
+        "title": "Mixing in the Fairlight Page",
+        "page": 3999
+      },
+      {
+        "title": "Mix Automation",
+        "page": 4048
+      },
+      {
+        "title": "Track Groups",
+        "page": 4072
+      },
+      {
+        "title": "Audio Effects",
+        "page": 4077
+      },
+      {
+        "title": "Fairlight FX",
+        "page": 4089
+      },
+      {
+        "title": "Audio Meters and Audio Monitoring",
+        "page": 4129
+      },
+      {
+        "title": "Signal Flow Diagrams",
+        "page": 4142
+      },
+      {
+        "title": "Immersive Audio Workflows",
+        "page": 4144
+      }
+    ]
+  },
+  {
+    "title": "Deliver",
+    "page": 4170,
+    "chapters": [
+      {
+        "title": "Delivery Effects Processing",
+        "page": 4171
+      },
+      {
+        "title": "Using the Deliver Page",
+        "page": 4176
+      },
+      {
+        "title": "Rendering Media",
+        "page": 4185
+      },
+      {
+        "title": "Delivering DCP and IMF",
+        "page": 4218
+      },
+      {
+        "title": "Delivering to Tape",
+        "page": 4233
+      },
+      {
+        "title": "Exporting Timelines to Other Applications",
+        "page": 4241
+      }
+    ]
+  },
+  {
+    "title": "Blackmagic Cloud",
+    "page": 4252,
+    "chapters": [
+      {
+        "title": "Blackmagic Cloud Project Server",
+        "page": 4253
+      },
+      {
+        "title": "Blackmagic Cloud Storage",
+        "page": 4263
+      },
+      {
+        "title": "Blackmagic Cloud Presentations",
+        "page": 4276
+      },
+      {
+        "title": "Blackmagic Cloud Organizations",
+        "page": 4287
+      },
+      {
+        "title": "Live Sync",
+        "page": 4299
+      }
+    ]
+  },
+  {
+    "title": "Project Libraries, Collaborative, and Remote Workflows",
+    "page": 4306,
+    "chapters": [
+      {
+        "title": "Managing Project Libraries and Project Servers",
+        "page": 4307
+      },
+      {
+        "title": "Collaborative Workflow",
+        "page": 4327
+      },
+      {
+        "title": "Remote Grading and Remote Monitor",
+        "page": 4343
+      }
+    ]
+  },
+  {
+    "title": "Immersive and VR",
+    "page": 4351,
+    "chapters": [
+      {
+        "title": "VR",
+        "page": 4352
+      },
+      {
+        "title": "Apple Immersive Workflow",
+        "page": 4359
+      }
+    ]
+  },
+  {
+    "title": "Advanced Workflows",
+    "page": 4409,
+    "chapters": [
+      {
+        "title": "Workflow Integrations",
+        "page": 4410
+      },
+      {
+        "title": "Creating DCTL LUTs",
+        "page": 4421
+      },
+      {
+        "title": "TCP Protocol for DaVinci Resolve Transport Control",
+        "page": 4426
+      }
+    ]
+  },
+  {
+    "title": "Menu Descriptions",
+    "page": 4429,
+    "chapters": [
+      {
+        "title": "DaVinci Resolve",
+        "page": 4430
+      },
+      {
+        "title": "File",
+        "page": 4431
+      },
+      {
+        "title": "Edit",
+        "page": 4432
+      },
+      {
+        "title": "Trim",
+        "page": 4433
+      },
+      {
+        "title": "Timeline",
+        "page": 4434
+      },
+      {
+        "title": "Clip",
+        "page": 4435
+      },
+      {
+        "title": "Mark",
+        "page": 4436
+      },
+      {
+        "title": "View",
+        "page": 4437
+      },
+      {
+        "title": "Playback",
+        "page": 4438
+      },
+      {
+        "title": "Fusion",
+        "page": 4439
+      },
+      {
+        "title": "Color",
+        "page": 4440
+      },
+      {
+        "title": "Fairlight",
+        "page": 4441
+      },
+      {
+        "title": "Workspace",
+        "page": 4442
+      },
+      {
+        "title": "Help",
+        "page": 4443
+      }
+    ]
+  }
+]

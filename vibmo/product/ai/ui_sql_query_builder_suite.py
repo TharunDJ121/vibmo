@@ -1,274 +1,426 @@
-import math
-import cairo
-from typing import Any, List, Optional, Tuple, Union
+"""
+Visual SQL Query Builder UI Suite for Vibmo / Motio.
+Components:
+- VisualSqlQueryBuilder
+- SchemaTableNode (VisualSqlQueryBlock)
+- TableJoinConnectorCurve
+- SqlSyntaxHighlightView
+- ExecutionTimePill
+"""
 
+from __future__ import annotations
+import math
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
+import cairo
+
+from vibmo.core.color import Color, colors
+from vibmo.core.vector import Vector2D
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
 from vibmo.scene.node import Node
-from vibmo.core.color import Color
 from vibmo.spatial.shadows import DropShadow
 
 
-class VisualSqlQueryBlock(Node):
-    """
-    Visual block with SELECT columns, FROM table, and WHERE conditions.
-    """
+class SchemaTableNode(Node):
+    """Visual table schema block with column names, data types, and primary key badges."""
 
     def __init__(
         self,
         table_name: str = "users",
-        select_columns: List[str] = None,
-        where_conditions: List[str] = None,
-        width: float = 300.0,
-        x: float = 0.0,
-        y: float = 0.0,
+        columns: Optional[List[Tuple[str, str, bool]]] = None,
+        select_columns: Optional[List[str]] = None,
+        where_conditions: Optional[List[str]] = None,
+        tables: Optional[Union[List[str], List[Dict[str, Any]]]] = None,
+        query: Optional[str] = None,
+        width: float = 230.0,
+        height: Optional[float] = None,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
         self.table_name = table_name
-        self.select_columns = select_columns or ["id", "name", "email"]
-        self.where_conditions = where_conditions or ["status = 'active'"]
-        self.width = width
-        self.x = x
-        self.y = y
-        # We will calculate height based on content
-        self.row_height = 32.0
-        self.header_height = 40.0
-        self.height = self.header_height + self.row_height * (len(self.select_columns) + len(self.where_conditions) + 2) # +2 for SELECT/WHERE headers
+        self.select_columns = list(select_columns) if select_columns is not None else []
+        self.where_conditions = list(where_conditions) if where_conditions is not None else []
+        self.tables = list(tables) if tables is not None else []
+        self.query = query
+
+        if columns is not None:
+            self.columns = columns
+        elif self.select_columns:
+            self.columns = [(c, "VARCHAR", i == 0) for i, c in enumerate(self.select_columns)]
+        else:
+            self.columns = [("id", "BIGINT", True), ("name", "VARCHAR", False), ("email", "VARCHAR", False), ("created_at", "TIMESTAMP", False)]
+
+        self.width_val = float(width)
+        if height is not None:
+            self.height_val = float(height)
+            self.height = self.height_val
+        elif select_columns is not None and where_conditions is not None:
+            self.height = 40.0 + 32.0 * (len(self.select_columns) + len(self.where_conditions) + 2)
+            self.height_val = self.height
+        else:
+            self.height_val = 40.0 + len(self.columns) * 26.0
+            self.height = self.height_val
+
+        self.join_curve = TableJoinConnectorCurve(p1=(260.0, 134.0), p2=(460.0, 160.0), color=colors.CYAN)
+        self.add(self.join_curve)
+
+    def draw_join_relation(
+        self,
+        table_a: Optional[str] = None,
+        table_b: Optional[str] = None,
+        table1: Optional[str] = None,
+        table2: Optional[str] = None,
+        duration: float = 1.2,
+        ease: EasingFunc = Ease.out_quad,
+    ) -> AnimationAction:
+        self.join_curve.progress.set(0.0)
+        return self.join_curve.progress.to(1.0, duration=duration, ease=ease)
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        return (0.0, 0.0, self.width_val, self.height_val)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
         ctx.save()
-        ctx.translate(self.x, self.y)
 
-        # Draw block background
-        r = 12.0
-        ctx.new_path()
-        ctx.arc(self.width - r, r, r, -math.pi * 0.5, 0)
-        ctx.arc(self.width - r, self.height - r, r, 0, math.pi * 0.5)
-        ctx.arc(r, self.height - r, r, math.pi * 0.5, math.pi)
-        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
-        ctx.close_path()
+        # Box
+        r = 10.0
+        if hasattr(ctx, "new_path"):
+            ctx.new_path()
+        if hasattr(ctx, "arc"):
+            ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+            ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+            ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+            ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        if hasattr(ctx, "close_path"):
+            ctx.close_path()
 
-        ctx.set_source_rgba(1.0, 1.0, 1.0, 1.0)
-        ctx.fill_preserve()
-        ctx.set_source_rgba(0.9, 0.9, 0.9, 1.0)
-        ctx.set_line_width(1.0)
+        ctx.set_source_rgba(0.06, 0.09, 0.15, 0.95)
+        if hasattr(ctx, "fill_preserve"):
+            ctx.fill_preserve()
+        else:
+            ctx.fill()
+        ctx.set_source_rgba(0.2, 0.3, 0.45, 0.7)
+        if hasattr(ctx, "set_line_width"):
+            ctx.set_line_width(1.0)
         ctx.stroke()
 
         # Header background
-        ctx.save()
-        ctx.new_path()
-        ctx.arc(self.width - r, r, r, -math.pi * 0.5, 0)
-        ctx.line_to(self.width, self.header_height)
-        ctx.line_to(0, self.header_height)
-        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
-        ctx.close_path()
-        ctx.set_source_rgba(0.2, 0.6, 1.0, 0.1) # Light blue header
+        if hasattr(ctx, "new_path"):
+            ctx.new_path()
+        if hasattr(ctx, "arc"):
+            ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        if hasattr(ctx, "line_to"):
+            ctx.line_to(w, 34.0)
+            ctx.line_to(0, 34.0)
+        if hasattr(ctx, "arc"):
+            ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        if hasattr(ctx, "close_path"):
+            ctx.close_path()
+        ctx.set_source_rgba(0.1, 0.15, 0.25, 0.9)
         ctx.fill()
-        ctx.restore()
 
-        # Table Name (Header)
-        ctx.set_source_rgba(0.1, 0.1, 0.1, 1.0)
-        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-        ctx.set_font_size(16.0)
-        ctx.move_to(16.0, 26.0)
-        ctx.show_text(self.table_name)
-
-        current_y = self.header_height + 24.0
-
-        # SELECT
-        ctx.set_source_rgba(0.5, 0.5, 0.5, 1.0)
-        ctx.set_font_size(12.0)
-        ctx.move_to(16.0, current_y)
-        ctx.show_text("SELECT")
-        current_y += self.row_height
-
-        ctx.set_source_rgba(0.2, 0.2, 0.2, 1.0)
-        ctx.set_font_size(14.0)
-        for col in self.select_columns:
-            ctx.move_to(32.0, current_y)
-            ctx.show_text(col)
-            current_y += self.row_height
-
-        # WHERE
-        if self.where_conditions:
-            ctx.set_source_rgba(0.5, 0.5, 0.5, 1.0)
+        # Table Name
+        if hasattr(ctx, "select_font_face"):
+            ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        if hasattr(ctx, "set_font_size"):
             ctx.set_font_size(12.0)
-            ctx.move_to(16.0, current_y)
-            ctx.show_text("WHERE")
-            current_y += self.row_height
+        ctx.set_source_rgba(0.95, 0.98, 1.0, 0.95)
+        ctx.move_to(12.0, 22.0)
+        if hasattr(ctx, "show_text"):
+            ctx.show_text(f"Table: {self.table_name}")
 
-            ctx.set_source_rgba(0.2, 0.2, 0.2, 1.0)
-            ctx.set_font_size(14.0)
-            for cond in self.where_conditions:
-                ctx.move_to(32.0, current_y)
-                ctx.show_text(cond)
-                current_y += self.row_height
+        # Columns
+        for i, (col_name, col_type, is_pk) in enumerate(self.columns):
+            cy = 54.0 + i * 26.0
+            if is_pk:
+                ctx.set_source_rgba(0.95, 0.75, 0.2, 0.95)
+                if hasattr(ctx, "select_font_face"):
+                    ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+                if hasattr(ctx, "set_font_size"):
+                    ctx.set_font_size(10.0)
+                ctx.move_to(12.0, cy)
+                if hasattr(ctx, "show_text"):
+                    ctx.show_text("PK")
+            else:
+                ctx.set_source_rgba(0.4, 0.5, 0.65, 0.7)
+                if hasattr(ctx, "arc"):
+                    ctx.arc(16.0, cy - 3.0, 2.5, 0, 2 * math.pi)
+                ctx.fill()
 
+            # Column Name
+            if hasattr(ctx, "select_font_face"):
+                ctx.select_font_face("Consolas", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+            if hasattr(ctx, "set_font_size"):
+                ctx.set_font_size(11.0)
+            ctx.set_source_rgba(0.9, 0.95, 1.0, 0.9)
+            ctx.move_to(28.0, cy)
+            if hasattr(ctx, "show_text"):
+                ctx.show_text(col_name)
+
+            # Column Type
+            if hasattr(ctx, "set_font_size"):
+                ctx.set_font_size(9.0)
+            ctx.set_source_rgba(0.45, 0.55, 0.7, 0.8)
+            ext = ctx.text_extents(col_type) if hasattr(ctx, "text_extents") else None
+            ext_w = ext.width if ext and hasattr(ext, "width") else 30.0
+            ctx.move_to(w - ext_w - 12.0, cy)
+            if hasattr(ctx, "show_text"):
+                ctx.show_text(col_type)
+
+        super().draw(ctx, time)
         ctx.restore()
+
+
+VisualSqlQueryBlock = SchemaTableNode
 
 
 class TableJoinConnectorCurve(Node):
-    """
-    Smooth Bézier curved link connecting foreign key column to primary key table.
-    """
+    """Dynamic bezier curve connecting foreign key columns between 2 tables."""
 
     def __init__(
         self,
-        start_pos: Tuple[float, float] = (0.0, 0.0),
-        end_pos: Tuple[float, float] = (100.0, 100.0),
-        color: Color = Color.hex("#3b82f6"),
-        thickness: float = 3.0,
+        p1: Optional[Tuple[float, float]] = None,
+        p2: Optional[Tuple[float, float]] = None,
+        start_pos: Tuple[float, float] = (240.0, 160.0),
+        end_pos: Tuple[float, float] = (420.0, 160.0),
+        color: Union[Color, str] = colors.CYAN,
+        thickness: float = 2.5,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self.start_pos = start_pos
-        self.end_pos = end_pos
-        self.color = color
-        self.thickness = thickness
+        self.start_pos = p1 if p1 is not None else start_pos
+        self.end_pos = p2 if p2 is not None else end_pos
+        self.p1 = self.start_pos
+        self.p2 = self.end_pos
+        self.color = Color.from_any(color)
+        self.thickness = float(thickness)
+        self.progress = Signal(1.0, f"{self.name}.progress")
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
+        prog = max(0.0, min(1.0, self.progress.get(time)))
+        if prog <= 0.0:
+            return
+
         ctx.save()
-        x0, y0 = self.start_pos
-        x1, y1 = self.end_pos
+        x1, y1 = self.start_pos
+        x2, y2 = self.end_pos
+        dx = (x2 - x1) * prog
+        dy = (y2 - y1) * prog
 
-        # Control points for horizontal smooth curve
-        cp_offset = abs(x1 - x0) * 0.5
-        cx0 = x0 + cp_offset
-        cy0 = y0
-        cx1 = x1 - cp_offset
-        cy1 = y1
-
-        ctx.move_to(x0, y0)
-        ctx.curve_to(cx0, cy0, cx1, cy1, x1, y1)
-
-        r, g, b, a = self.color.to_tuple_rgba()
-        ctx.set_source_rgba(r, g, b, a)
-        ctx.set_line_width(self.thickness)
-        ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+        ctx.set_source_rgba(*self.color.to_cairo())
+        if hasattr(ctx, "set_line_width"):
+            ctx.set_line_width(self.thickness)
+        ctx.move_to(x1, y1)
+        if hasattr(ctx, "curve_to"):
+            ctx.curve_to(x1 + dx * 0.5, y1, x1 + dx * 0.5, y1 + dy, x1 + dx, y1 + dy)
+        elif hasattr(ctx, "line_to"):
+            ctx.line_to(x1 + dx, y1 + dy)
         ctx.stroke()
         ctx.restore()
 
 
 class SqlSyntaxHighlightView(Node):
-    """
-    Syntax-highlighted SQL preview code window below builder.
-    """
+    """Generated SQL syntax highlighted text card."""
 
     def __init__(
         self,
-        sql_query: str = "SELECT * FROM users;",
-        width: float = 600.0,
-        height: float = 200.0,
-        x: float = 0.0,
-        y: float = 0.0,
+        sql_query: Optional[str] = None,
+        sql_text: Optional[str] = None,
+        width: float = 680.0,
+        height: float = 90.0,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self.sql_query = sql_query
-        self.width = width
-        self.height = height
-        self.x = x
-        self.y = y
-        self.shadow = DropShadow.elevated(blur=16.0, offset=(0, 8), color=Color.hex("#000000").with_alpha(0.1))
+        self.sql_query = sql_query or sql_text or "SELECT u.id, u.name, o.total_usd\nFROM users u\nJOIN orders o ON u.id = o.user_id\nWHERE o.status = 'completed';"
+        self.sql_text = Signal(self.sql_query, f"{self.name}.sql_text")
+        self.width_val = float(width)
+        self.height_val = float(height)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
+        text = self.sql_text.get(time)
+
         ctx.save()
-        ctx.translate(self.x, self.y)
-
         r = 8.0
-        ctx.new_path()
-        ctx.arc(self.width - r, r, r, -math.pi * 0.5, 0)
-        ctx.arc(self.width - r, self.height - r, r, 0, math.pi * 0.5)
-        ctx.arc(r, self.height - r, r, math.pi * 0.5, math.pi)
-        ctx.arc(r, r, r, math.pi, math.pi * 1.5)
-        ctx.close_path()
+        if hasattr(ctx, "new_path"):
+            ctx.new_path()
+        if hasattr(ctx, "arc"):
+            ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+            ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+            ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+            ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        if hasattr(ctx, "close_path"):
+            ctx.close_path()
 
-        ctx.set_source_rgba(0.1, 0.1, 0.12, 1.0) # Dark background
+        ctx.set_source_rgba(0.04, 0.06, 0.1, 0.9)
         ctx.fill()
+        ctx.set_source_rgba(0.18, 0.25, 0.35, 0.6)
+        if hasattr(ctx, "set_line_width"):
+            ctx.set_line_width(1.0)
+        ctx.stroke()
 
-        # Terminal dots (macOS style)
-        dot_colors = [(1.0, 0.36, 0.33), (1.0, 0.76, 0.15), (0.15, 0.79, 0.25)]
-        for i, color in enumerate(dot_colors):
-            ctx.arc(20.0 + i * 20.0, 20.0, 6.0, 0, math.pi * 2)
-            ctx.set_source_rgba(*color, 1.0)
-            ctx.fill()
+        # SQL lines
+        if hasattr(ctx, "select_font_face"):
+            ctx.select_font_face("Consolas", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        if hasattr(ctx, "set_font_size"):
+            ctx.set_font_size(12.0)
 
-        # Simple Syntax Highlighting
-        ctx.select_font_face("monospace", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-        ctx.set_font_size(14.0)
-        
-        current_x = 20.0
-        current_y = 50.0
-
-        keywords = ["SELECT", "FROM", "WHERE", "JOIN", "ON", "AND", "OR", "ORDER BY", "GROUP BY", "LIMIT"]
-        
-        # Super simple tokenizer for demonstration
-        tokens = self.sql_query.split()
-        for token in tokens:
-            if token.upper() in keywords:
-                ctx.set_source_rgba(0.7, 0.3, 0.7, 1.0) # Purple for keywords
-            else:
-                ctx.set_source_rgba(0.9, 0.9, 0.9, 1.0) # White for other text
-            
-            ctx.move_to(current_x, current_y)
-            ctx.show_text(token)
-            
-            te = ctx.text_extents(token + " ")
-            current_x += te.x_advance
-            if current_x > self.width - 40.0:
-                current_x = 20.0
-                current_y += 24.0
+        lines = text.split("\n")
+        for i, line in enumerate(lines[:4]):
+            ctx.set_source_rgba(0.2, 0.85, 1.0, 0.95)
+            ctx.move_to(16.0, 24.0 + i * 18.0)
+            if hasattr(ctx, "show_text"):
+                ctx.show_text(line)
 
         ctx.restore()
 
 
 class ExecutionTimePill(Node):
+    """Badge indicating SQL query execution time (`2.4 ms (Index Scan)`)."""
+
+    def __init__(
+        self,
+        time_ms: float = 2.4,
+        scan_type: str = "Index Scan",
+        width: float = 160.0,
+        height: float = 26.0,
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.time_ms = float(time_ms)
+        self.scan_type = str(scan_type)
+        self.width_val = float(width)
+        self.height_val = float(height)
+
+    def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
+        ctx.save()
+        r = 6.0
+        if hasattr(ctx, "new_path"):
+            ctx.new_path()
+        if hasattr(ctx, "arc"):
+            ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+            ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+            ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
+            ctx.arc(r, r, r, math.pi, math.pi * 1.5)
+        if hasattr(ctx, "close_path"):
+            ctx.close_path()
+
+        ctx.set_source_rgba(0.06, 0.18, 0.12, 0.85)
+        ctx.fill()
+        ctx.set_source_rgba(0.1, 0.85, 0.45, 0.7)
+        if hasattr(ctx, "set_line_width"):
+            ctx.set_line_width(1.0)
+        ctx.stroke()
+
+        if hasattr(ctx, "select_font_face"):
+            ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        if hasattr(ctx, "set_font_size"):
+            ctx.set_font_size(10.0)
+        ctx.set_source_rgba(0.2, 0.95, 0.55, 0.95)
+        ctx.move_to(12.0, 16.0)
+        if hasattr(ctx, "show_text"):
+            ctx.show_text(f"{self.time_ms:.1f} ms ({self.scan_type})")
+        ctx.restore()
+
+
+class VisualSqlQueryBuilder(Node):
     """
-    Badge showing query latency (⚡ 14.2ms (Index Scan)).
+    Visual SQL Query Builder Suite.
+    Renders relational table schema entities, animated bezier JOIN connectors,
+    interactive query syntax preview, and execution planning pills.
     """
 
     def __init__(
         self,
-        time_ms: float = 14.2,
-        scan_type: str = "Index Scan",
-        x: float = 0.0,
-        y: float = 0.0,
+        tables: Optional[List[Dict[str, Any]]] = None,
+        width: float = 780.0,
+        height: float = 480.0,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self.time_ms = time_ms
-        self.scan_type = scan_type
-        self.x = x
-        self.y = y
+        self.width_val = float(width)
+        self.height_val = float(height)
+        self.shadow = DropShadow(color=Color(0.0, 0.0, 0.0, 0.5), blur=32.0, offset=(0.0, 16.0))
+
+        # Schema Table 1 (users)
+        self.table_users = SchemaTableNode(
+            table_name="users",
+            columns=[("id", "BIGINT", True), ("name", "VARCHAR", False), ("email", "VARCHAR", False), ("created_at", "TIMESTAMP", False)],
+            width=230.0,
+        )
+        self.table_users.position.set(Vector2D(30.0, 80.0))
+
+        # Schema Table 2 (orders)
+        self.table_orders = SchemaTableNode(
+            table_name="orders",
+            columns=[("id", "BIGINT", True), ("user_id", "BIGINT", False), ("total_usd", "NUMERIC", False), ("status", "VARCHAR", False)],
+            width=230.0,
+        )
+        self.table_orders.position.set(Vector2D(460.0, 80.0))
+
+        # JOIN Connector curve
+        self.join_curve = TableJoinConnectorCurve(p1=(260.0, 134.0), p2=(460.0, 160.0), color=colors.CYAN)
+        self.join_curve.progress.set(1.0)
+
+        # SQL Syntax View at bottom
+        self.sql_view = SqlSyntaxHighlightView(
+            sql_text="SELECT u.id, u.name, o.total_usd\nFROM users u\nJOIN orders o ON u.id = o.user_id\nWHERE o.status = 'completed';",
+            width=self.width_val - 48.0,
+            height=92.0,
+        )
+        self.sql_view.position.set(Vector2D(24.0, 360.0))
+
+        # Execution time pill
+        self.exec_pill = ExecutionTimePill(time_ms=2.4)
+        self.exec_pill.position.set(Vector2D(self.width_val - 190.0, 24.0))
+
+        self.add(self.table_users, self.table_orders, self.join_curve, self.sql_view, self.exec_pill)
+
+    def draw_join_relation(
+        self,
+        table_a: Optional[str] = None,
+        table_b: Optional[str] = None,
+        table1: Optional[str] = None,
+        table2: Optional[str] = None,
+        duration: float = 1.2,
+        ease: EasingFunc = Ease.out_quad,
+    ) -> AnimationAction:
+        """
+        Fluent generator animation verb to draw bezier JOIN relationship between schema tables.
+        """
+        self.join_curve.progress.set(0.0)
+        return self.join_curve.progress.to(1.0, duration=duration, ease=ease)
+
+    def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
+        return (0.0, 0.0, self.width_val, self.height_val)
 
     def draw(self, ctx: Any, time: float = 0.0) -> None:
+        w, h = self.width_val, self.height_val
         ctx.save()
-        ctx.translate(self.x, self.y)
 
-        text = f"⚡ {self.time_ms:.1f}ms ({self.scan_type})"
-        
-        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-        ctx.set_font_size(14.0)
-        te = ctx.text_extents(text)
-        
-        padding_x = 16.0
-        padding_y = 8.0
-        width = te.x_advance + padding_x * 2
-        height = te.height + padding_y * 2
-        
-        r = height / 2.0
-
+        # Canvas card
+        r = 16.0
         ctx.new_path()
-        ctx.arc(width - r, r, r, -math.pi * 0.5, 0)
-        ctx.arc(width - r, height - r, r, 0, math.pi * 0.5)
-        ctx.arc(r, height - r, r, math.pi * 0.5, math.pi)
+        ctx.arc(w - r, r, r, -math.pi * 0.5, 0)
+        ctx.arc(w - r, h - r, r, 0, math.pi * 0.5)
+        ctx.arc(r, h - r, r, math.pi * 0.5, math.pi)
         ctx.arc(r, r, r, math.pi, math.pi * 1.5)
         ctx.close_path()
 
-        ctx.set_source_rgba(0.1, 0.1, 0.1, 0.8) # Dark pill
-        ctx.fill()
+        ctx.set_source_rgba(0.04, 0.06, 0.1, 0.95)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(0.18, 0.25, 0.38, 0.8)
+        ctx.set_line_width(1.5)
+        ctx.stroke()
 
-        ctx.set_source_rgba(1.0, 0.8, 0.2, 1.0) # Yellow/Orange text
-        ctx.move_to(padding_x, padding_y + te.height)
-        ctx.show_text(text)
+        # Title
+        ctx.select_font_face("Inter", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        ctx.set_font_size(15.0)
+        ctx.set_source_rgba(0.95, 0.98, 1.0, 0.95)
+        ctx.move_to(24.0, 42.0)
+        ctx.show_text("Visual Relational SQL Query Builder")
 
+        super().draw(ctx, time)
         ctx.restore()

@@ -358,6 +358,20 @@ class Scene:
             resume=resume,
         )
 
+    def export_otio(self, output_path: str, timeline_name: Optional[str] = None) -> str:
+        """Exports the scene timeline and markers to OpenTimelineIO (.otio) JSON format."""
+        from vibmo.render.otio_exporter import OtioExporter
+        return OtioExporter.export_scene(self, output_path, timeline_name=timeline_name)
+
+    def export_fcp_xml(self, output_path: str, project_name: str = "Vibmo Sequence") -> None:
+        """Exports the scene to Final Cut Pro 7 XML format for DaVinci Resolve / Premiere Pro."""
+        from vibmo.render.fcp_exporter import Fcp7Exporter
+        from vibmo.core.schema import VibmoProject
+        proj = getattr(self, "project", None)
+        if proj is None:
+            proj = VibmoProject(width=self.width, height=self.height, fps=int(self.fps), duration=self.duration)
+        Fcp7Exporter.export(proj, output_path, project_name=project_name)
+
     def validate(self) -> List[str]:
         """Performs a comprehensive pre-flight check on scene nodes, assets, and animation timings.
         Returns a list of warning/error messages. If empty, the scene is 100% valid.
@@ -451,6 +465,82 @@ class Scene:
             _print_node(n)
 
         return "\n".join(lines)
+
+    def to_project(self) -> Any:
+        """Exports the current Scene state to a serializable VibmoProject schema."""
+        from vibmo.core.schema import VibmoProject, Track, Shot, Layer, LayerType
+        
+        proj = VibmoProject(
+            width=self.width,
+            height=self.height,
+            fps=int(self.fps),
+            duration=self.duration
+        )
+        
+        # In this first iteration, we dump the root nodes into a single Shot in a single Track.
+        # A fully structured NLE timeline would map self.tracks to proj.tracks.
+        main_shot = Shot(id="main_shot", start_time=0.0, duration=self.duration)
+        
+        for idx, node in enumerate(self.nodes):
+            # Simplistic mapping of node types to LayerTypes
+            l_type = LayerType.COMPONENT
+            if node.__class__.__name__ == "Text":
+                l_type = LayerType.TEXT
+            elif node.__class__.__name__ == "ImageNode":
+                l_type = LayerType.IMAGE
+            elif node.__class__.__name__ == "VideoNode":
+                l_type = LayerType.VIDEO
+                
+            layer = Layer(
+                id=f"layer_{idx}_{node.name}",
+                type=l_type,
+                name=node.name,
+                start_time=0.0,
+                duration=self.duration,
+                properties={"type": node.__class__.__name__}
+            )
+            main_shot.layers.append(layer)
+            
+        proj.add_shot(0, main_shot)
+        return proj
+
+    @classmethod
+    def from_project(cls, proj: Any) -> Scene:
+        """Rehydrates a Scene from a VibmoProject schema."""
+        scene = cls(
+            width=proj.width,
+            height=proj.height,
+            fps=proj.fps,
+            duration=proj.duration
+        )
+        
+        # Import node classes for hydration
+        from vibmo.typography.text import Text
+        from vibmo.scene.node import Node
+        
+        # In a full implementation, we would iterate through all tracks and shots.
+        # For this foundation, we'll extract layers from the first shot of the first track.
+        if proj.tracks and proj.tracks[0].shots:
+            main_shot = proj.tracks[0].shots[0]
+            for layer in main_shot.layers:
+                node_type = layer.properties.get("type", "Node")
+                node = None
+                
+                # Simple Factory Pattern
+                if node_type == "Text":
+                    node = Text(
+                        text=layer.properties.get("text", layer.name),
+                        font_size=layer.properties.get("font_size", 32),
+                        font_family=layer.properties.get("font_family", "Inter")
+                    )
+                else:
+                    # Generic fallback
+                    node = Node(name=layer.name)
+                    
+                if node:
+                    scene.add(node)
+                    
+        return scene
 
     def preview(self, host: str = "127.0.0.1", port: int = 8000) -> None:
         """Launches the interactive in-browser studio for direct visual editing."""

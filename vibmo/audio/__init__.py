@@ -22,6 +22,20 @@ from vibmo.audio.sfx_library import (
     ProceduralSFXGenerator,
     AudioDucker,
 )
+from vibmo.audio.energy import (
+    AudioEnergyAnalyzer,
+    AudioEnergyProfile,
+    EnergyFrame,
+)
+from vibmo.audio.ducker import (
+    VoiceoverDucker,
+    VoiceoverSegment,
+)
+from vibmo.audio.beat_sync import (
+    BeatSyncGrid,
+    TimelineSFXTable,
+    SFXCue,
+)
 
 __all__ = [
     "AudioTrack",
@@ -43,4 +57,13 @@ __all__ = [
     # Procedural SFX & Ducking
     "ProceduralSFXGenerator",
     "AudioDucker",
+    "AudioEnergyAnalyzer",
+    "AudioEnergyProfile",
+    "EnergyFrame",
+    "VoiceoverDucker",
+    "VoiceoverSegment",
+    "BeatSyncGrid",
+    "TimelineSFXTable",
+    "SFXCue",
 ]
+

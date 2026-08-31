@@ -5,7 +5,7 @@ Cinematic Bokeh & Ambient Particle Backdrops.
 from __future__ import annotations
 import math
 import random
-from typing import Any, Tuple, Union, List
+from typing import Any, List, Optional, Tuple, Union
 import cairo
 
 from vibmo.core.color import Color, colors
@@ -22,7 +22,12 @@ class DriftingBokehOrbs(Node):
         width: float = 1920.0,
         height: float = 1080.0,
         count: int = 50,
+        bubble_count: Optional[int] = None,
+        blur_radius: Optional[float] = None,
         speed_multiplier: float = 1.0,
+        speed: Optional[float] = None,
+        drift_speed: Optional[float] = None,
+        palette: Optional[List[Union[Color, str]]] = None,
         base_color: Union[Color, str] = colors.WHITE,
         shape: str = "circle", # "circle" or "hexagon"
         **kwargs: Any,
@@ -30,25 +35,36 @@ class DriftingBokehOrbs(Node):
         super().__init__(**kwargs)
         self.w = float(width)
         self.h = float(height)
-        self.count = int(count)
-        self.speed_multiplier = float(speed_multiplier)
+        self.count = int(bubble_count if bubble_count is not None else count)
+        actual_speed = drift_speed if drift_speed is not None else (speed if speed is not None else speed_multiplier)
+        self.speed_multiplier = float(actual_speed)
         self.base_color = Color.from_any(base_color)
+        self.palette = [Color.from_any(c) for c in palette] if palette else None
         self.shape = shape
+        self.blur_radius = float(blur_radius) if blur_radius is not None else 60.0
         
         # Initialize particles
         self.particles = []
-         # Deterministic for testing/consistency
-        for _ in range(self.count):
+        # Deterministic for testing/consistency
+        for i in range(self.count):
+            min_r = max(5.0, self.blur_radius * 0.5)
+            max_r = self.blur_radius * 2.0
+            p_color = self.palette[i % len(self.palette)] if self.palette else self.base_color
             self.particles.append({
                 "x": random.uniform(0, self.w),
                 "y": random.uniform(0, self.h),
-                "radius": random.uniform(20.0, 150.0),
+                "radius": random.uniform(min_r, max_r),
                 "speed_y": random.uniform(10.0, 40.0),
                 "drift_x": random.uniform(-10.0, 10.0),
                 "phase": random.uniform(0, math.pi * 2),
                 "opacity": random.uniform(0.1, 0.6),
-                "depth": random.uniform(0.5, 2.0)
+                "depth": random.uniform(0.5, 2.0),
+                "color": p_color,
             })
+
+    @property
+    def bubble_count(self) -> int:
+        return self.count
 
     def local_bounds(self, time: float = 0.0) -> Tuple[float, float, float, float]:
         return (0.0, 0.0, self.w, self.h)
@@ -76,7 +92,7 @@ class DriftingBokehOrbs(Node):
             # Subtle pulsation based on time and phase
             current_opacity = p["opacity"] * (0.8 + 0.2 * math.sin(time * 2.0 + p["phase"]))
             
-            c = self.base_color
+            c = p.get("color", self.base_color)
             
             if self.shape == "hexagon":
                 self._draw_hexagon(ctx, 0, 0, p["radius"])
@@ -287,3 +303,14 @@ class GoldenDustAmbience(Node):
                 ctx.restore()
                 
         ctx.restore()
+
+
+# Semantic Alias
+BokehLightBubbles = DriftingBokehOrbs
+
+__all__ = [
+    "DriftingBokehOrbs",
+    "BokehLightBubbles",
+    "AnamorphicLensGleamBackdrop",
+    "GoldenDustAmbience",
+]

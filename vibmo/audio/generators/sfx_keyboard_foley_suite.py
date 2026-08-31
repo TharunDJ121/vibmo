@@ -200,3 +200,27 @@ class KeyboardFoleySuite:
             audio[-fade_len:] *= np.linspace(1, 0, fade_len)
 
         return np.clip(audio, -1.0, 1.0).astype(np.float32)
+
+    @staticmethod
+    def mechanical_keystroke(switch: str = "blue", duration: float = None) -> np.ndarray:
+        """Mechanical keyboard keystroke Foley synthesizing authentic switch profiles."""
+        switch_lower = str(switch).lower()
+        if "blue" in switch_lower or "clicky" in switch_lower:
+            dur = duration if duration is not None else 0.06
+            return KeyboardFoleySuite.clicky_blue_switch(duration=dur)
+        elif "brown" in switch_lower or "tactile" in switch_lower:
+            dur = duration if duration is not None else 0.05
+            return KeyboardFoleySuite.tactile_brown_switch(duration=dur)
+        elif "red" in switch_lower or "linear" in switch_lower:
+            dur = duration if duration is not None else 0.04
+            return KeyboardFoleySuite.linear_red_switch(duration=dur)
+        elif "space" in switch_lower:
+            dur = duration if duration is not None else 0.09
+            return KeyboardFoleySuite.spacebar_thud(duration=dur)
+        elif "typewriter" in switch_lower or "bell" in switch_lower:
+            dur = duration if duration is not None else 0.6
+            return KeyboardFoleySuite.typewriter_bell(duration=dur)
+        else:
+            dur = duration if duration is not None else 0.06
+            return KeyboardFoleySuite.clicky_blue_switch(duration=dur)
+

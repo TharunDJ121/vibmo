@@ -47,23 +47,41 @@ class MediaCardWidget(QFrame):
         layout.setContentsMargins(4, 4, 4, 4)
         layout.setSpacing(2)
 
-        # Thumbnail Placeholder Surface
+        # Thumbnail Surface
         thumb = QFrame()
         thumb.setStyleSheet("background-color: #0D0D10; border-radius: 4px;")
         t_layout = QVBoxLayout(thumb)
-        t_layout.setContentsMargins(4, 4, 4, 4)
+        t_layout.setContentsMargins(0, 0, 0, 0)
+        t_layout.setSpacing(0)
 
-        # Icon / Badge based on kind
-        icons = {"video": "🎬", "audio": "🎵", "image": "🖼", "font": "🔤", "lut": "🎨"}
-        icon_lbl = QLabel(icons.get(media_item.kind, "📁"))
-        icon_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        icon_lbl.setStyleSheet("font-size: 18px;")
-        t_layout.addWidget(icon_lbl)
+        thumb_b64 = media_item.metadata.get("thumbnail_b64") if media_item.metadata else None
+        if thumb_b64:
+            import base64
+            from PySide6.QtGui import QImage
+            img_data = base64.b64decode(thumb_b64)
+            qimg = QImage.fromData(img_data)
+            thumb_pix = QPixmap.fromImage(qimg).scaled(120, 60, Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation)
+            thumb_lbl = QLabel()
+            thumb_lbl.setPixmap(thumb_pix)
+            thumb_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            thumb_lbl.setStyleSheet("border-radius: 4px; border: none;")
+            t_layout.addWidget(thumb_lbl)
+        else:
+            # Icon / Badge based on kind
+            icons = {"video": "🎬", "audio": "🎵", "image": "🖼", "font": "🔤", "lut": "🎨"}
+            icon_lbl = QLabel(icons.get(media_item.kind, "📁"))
+            icon_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            icon_lbl.setStyleSheet("font-size: 18px; border: none;")
+            t_layout.addWidget(icon_lbl)
 
         # Duration / Kind badge
-        dur_lbl = QLabel("03:16" if media_item.kind == "video" else media_item.kind.upper())
+        dur_str = media_item.metadata.get("duration_formatted") if media_item.metadata else None
+        if not dur_str:
+            dur_str = "VIDEO" if media_item.kind == "video" else media_item.kind.upper()
+            
+        dur_lbl = QLabel(dur_str)
         dur_lbl.setAlignment(Qt.AlignmentFlag.AlignRight)
-        dur_lbl.setStyleSheet("color: #00E5FF; font-size: 9px; font-weight: bold; background: rgba(0,0,0,0.6); border-radius: 2px; padding: 1px 3px;")
+        dur_lbl.setStyleSheet("color: #00E5FF; font-size: 9px; font-weight: bold; background: rgba(0,0,0,0.7); border-radius: 2px; padding: 1px 4px; margin: 2px;")
         t_layout.addWidget(dur_lbl)
 
         layout.addWidget(thumb, 1)
@@ -75,9 +93,16 @@ class MediaCardWidget(QFrame):
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         if event.button() == Qt.MouseButton.LeftButton:
+            import json
             drag = QDrag(self)
             mime = QMimeData()
-            mime.setText(self.media_item.id)
+            payload = {
+                "media_id": self.media_item.id,
+                "name": self.media_item.name,
+                "duration_frames": self.media_item.duration_frames or 120,
+                "kind": self.media_item.kind,
+            }
+            mime.setText(json.dumps(payload))
             drag.setMimeData(mime)
 
             pix = QPixmap(100, 24)

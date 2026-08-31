@@ -25,6 +25,8 @@ class FlexLayout:
         padding: float = 24.0,
         fixed_width: Optional[float] = None,
         fixed_height: Optional[float] = None,
+        wrap: bool = False,
+        align_content: str = "start",
         time: float = 0.0,
     ) -> Tuple[float, float, List[Tuple[float, float]]]:
         """
@@ -39,7 +41,6 @@ class FlexLayout:
         is_row = direction.startswith("row")
         is_reverse = "reverse" in direction
 
-        # 1. Measure all children bounds
         boxes = []
         for child in children:
             bx, by, bw, bh = child.local_bounds(time)
@@ -51,66 +52,105 @@ class FlexLayout:
         if is_reverse:
             boxes.reverse()
 
-        # 2. Compute Main & Cross Axis Totals
-        n = len(boxes)
-        if is_row:
-            total_main = sum(b[0] for b in boxes) + max(0, n - 1) * gap
-            max_cross = max((b[1] for b in boxes), default=0.0)
-        else:
-            total_main = sum(b[1] for b in boxes) + max(0, n - 1) * gap
-            max_cross = max((b[0] for b in boxes), default=0.0)
+        time_width = fixed_width if fixed_width is not None else 0.0
+        time_height = fixed_height if fixed_height is not None else 0.0
+        max_main_avail = time_width - padding * 2.0 if is_row else time_height - padding * 2.0
 
-        computed_w = fixed_width if fixed_width is not None else (total_main + padding * 2.0 if is_row else max_cross + padding * 2.0)
-        computed_h = fixed_height if fixed_height is not None else (max_cross + padding * 2.0 if is_row else total_main + padding * 2.0)
+        lines = []
+        current_line = []
+        current_main_size = 0.0
+        current_cross_size = 0.0
 
-        inner_w = max(0.0, computed_w - padding * 2.0)
-        inner_h = max(0.0, computed_h - padding * 2.0)
-        main_available = inner_w if is_row else inner_h
+        for i, (bw, bh) in enumerate(boxes):
+            c_main = bw if is_row else bh
+            c_cross = bh if is_row else bw
 
-        # 3. Justify Content (Main Axis Distribution)
-        free_space = max(0.0, main_available - total_main)
-        spacing = gap
-        start_offset = 0.0
+            if wrap and max_main_avail > 0 and (fixed_width if is_row else fixed_height):
+                if current_line and current_main_size + gap + c_main > max_main_avail:
+                    lines.append((current_line, current_main_size, current_cross_size))
+                    current_line = []
+                    current_main_size = 0.0
+                    current_cross_size = 0.0
 
-        if justify == "center":
-            start_offset = free_space * 0.5
-        elif justify == "end":
-            start_offset = free_space
-        elif justify == "space_between" and n > 1:
-            start_offset = 0.0
-            spacing = (main_available - sum(b[0] if is_row else b[1] for b in boxes)) / (n - 1)
-        elif justify == "space_around" and n > 0:
-            unit = free_space / (n * 2)
-            start_offset = unit
-            spacing = unit * 2.0
+            if current_line:
+                current_main_size += gap
+            current_main_size += c_main
+            current_cross_size = max(current_cross_size, c_cross)
+            current_line.append((i, bw, bh))
 
-        # 4. Position Children
-        positions: List[Tuple[float, float]] = []
-        curr_main = padding + start_offset
+        if current_line:
+            lines.append((current_line, current_main_size, current_cross_size))
 
-        for bw, bh in boxes:
-            child_main = bw if is_row else bh
-            child_cross = bh if is_row else bw
-            cross_avail = inner_h if is_row else inner_w
+        total_cross = sum(line_cross for _, _, line_cross in lines) + max(0, len(lines) - 1) * gap
+        max_main = max((line_main for _, line_main, _ in lines), default=0.0)
 
-            # Align Items (Cross Axis)
-            if align_items == "center":
-                cross_offset = (cross_avail - child_cross) * 0.5
-            elif align_items == "end":
-                cross_offset = cross_avail - child_cross
-            else:  # "start" or "stretch"
-                cross_offset = 0.0
+        content_w = max_main if is_row else total_cross
+        content_h = total_cross if is_row else max_main
 
-            curr_cross = padding + cross_offset
+        total_w = time_width if fixed_width else (content_w + padding * 2.0)
+        total_h = time_height if fixed_height else (content_h + padding * 2.0)
 
-            if is_row:
-                positions.append((curr_main, curr_cross))
-            else:
-                positions.append((curr_cross, curr_main))
+        inner_w = max(0.0, total_w - padding * 2.0)
+        inner_h = max(0.0, total_h - padding * 2.0)
+        cross_avail = inner_h if is_row else inner_w
 
-            curr_main += child_main + spacing
+        free_cross = max(0.0, cross_avail - total_cross)
+        cross_start = 0.0
+        cross_gap = gap
+
+        if align_content == "center":
+            cross_start = free_cross * 0.5
+        elif align_content == "end":
+            cross_start = free_cross
+        elif align_content == "space_between" and len(lines) > 1:
+            cross_gap = free_cross / (len(lines) - 1) + gap
+        elif align_content == "space_around" and len(lines) > 0:
+            unit = free_cross / (len(lines) * 2)
+            cross_start = unit
+            cross_gap = gap + unit * 2
+
+        curr_cross = padding + cross_start
+
+        positions: List[Tuple[float, float]] = [(0.0, 0.0)] * len(boxes)
+
+        for line_items, line_main, line_cross in lines:
+            main_avail = inner_w if is_row else inner_h
+            free_main = max(0.0, main_avail - line_main)
+            main_start = 0.0
+            main_gap = gap
+
+            if justify == "center":
+                main_start = free_main * 0.5
+            elif justify == "end":
+                main_start = free_main
+            elif justify == "space_between" and len(line_items) > 1:
+                main_gap = free_main / (len(line_items) - 1) + gap
+            elif justify == "space_around" and len(line_items) > 0:
+                unit = free_main / (len(line_items) * 2)
+                main_start = unit
+                main_gap = gap + unit * 2
+
+            curr_main = padding + main_start
+
+            for i, bw, bh in line_items:
+                c_main = bw if is_row else bh
+                c_cross = bh if is_row else bw
+
+                item_cross_offset = 0.0
+                if align_items == "center":
+                    item_cross_offset = (line_cross - c_cross) * 0.5
+                elif align_items == "end":
+                    item_cross_offset = line_cross - c_cross
+
+                child_x = curr_main if is_row else (curr_cross + item_cross_offset)
+                child_y = (curr_cross + item_cross_offset) if is_row else curr_main
+
+                positions[i] = (child_x, child_y)
+                curr_main += c_main + main_gap
+
+            curr_cross += line_cross + cross_gap
 
         if is_reverse:
             positions.reverse()
 
-        return (computed_w, computed_h, positions)
+        return (total_w, total_h, positions)

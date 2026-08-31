@@ -10,7 +10,9 @@ import numpy as np
 
 from vibmo.core.vector import Vector2D
 from vibmo.core.color import Color, colors
-from vibmo.core.signal import Signal
+from vibmo.core.signal import Signal, AnimationAction
+from vibmo.core.easing import Ease, EasingFunc
+from vibmo.timeline.scheduler import ParallelGroup
 from vibmo.scene.node import Node
 
 
@@ -247,10 +249,8 @@ class StatisticalBoxPlot(Node):
         default_colors = [colors.BLUE, colors.EMERALD, colors.PURPLE, colors.AMBER, colors.ROSE]
         self.colors_list = [Color.from_any(c) for c in (colors_list or default_colors)]
 
-        # Compute stats
         self.stats = [calculate_box_stats(d) for d in datasets]
 
-        # Determine global bounds if not provided
         all_vals = []
         for d in datasets:
             all_vals.extend(d)
@@ -268,7 +268,10 @@ class StatisticalBoxPlot(Node):
             self.y_min = y_min if y_min is not None else 0.0
             self.y_max = y_max if y_max is not None else 1.0
 
-        # Build children
+        self.whiskers: List[WhiskersErrorBars] = []
+        self.boxes: List[InterquartileBox] = []
+        self.pings: List[AnimatedOutlierPings] = []
+
         n = len(self.datasets)
         if n == 0:
             return
@@ -316,6 +319,32 @@ class StatisticalBoxPlot(Node):
             self.add(box)
             self.add(pings)
 
+            self.whiskers.append(whisker)
+            self.boxes.append(box)
+            self.pings.append(pings)
+
+    def extend_whiskers(
+        self,
+        duration: float = 1.2,
+        delay: float = 0.0,
+        stagger: float = 0.05,
+        ease: Optional[EasingFunc] = None
+    ) -> ParallelGroup:
+        """Animates statistical quartile boxes and whiskers extending smoothly."""
+        e = ease or Ease.out_expo
+        actions = []
+        for i, (whisker, box, ping) in enumerate(zip(self.whiskers, self.boxes, self.pings)):
+            whisker.reveal.set(0.0)
+            box.reveal.set(0.0)
+            ping.ping_progress.set(0.0)
+            actions.append(box.reveal.to(1.0, duration=duration, delay=delay + i * stagger, ease=e))
+            actions.append(whisker.reveal.to(1.0, duration=duration, delay=delay + i * stagger + 0.05, ease=e))
+            actions.append(ping.ping_progress.to(1.0, duration=duration * 0.8, delay=delay + i * stagger + 0.1, ease=Ease.out_cubic))
+        return ParallelGroup(actions)
+
     def draw(self, ctx: Any, time: float = 0.0) -> None:
-        # Override Node to make sure children draw with time=10.0 for tests where time is not cleanly propagating if signals are messed up
         super().draw(ctx, time)
+
+
+BoxAndWhiskerPlot = StatisticalBoxPlot
+OutlierDotNode = AnimatedOutlierPings

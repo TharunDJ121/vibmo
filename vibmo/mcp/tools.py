@@ -1,7 +1,7 @@
 """
-Vibmo Model Context Protocol (MCP) Tool Handlers.
+Vibmo Model Context Protocol (MCP) Tool Handlers (v2).
 Enables AI Agents (Claude, Cursor, Antigravity, ChatGPT, Gemini) to directly generate,
-inspect, validate, and render motion graphics.
+inspect, surgically edit, validate, preview frames, and render motion graphics.
 """
 
 from __future__ import annotations
@@ -11,12 +11,17 @@ import json
 import base64
 import tempfile
 import traceback
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
+from PIL import Image
+
+from vibmo.ai.schema import generate_component_schemas
+from vibmo.ai.graph import run_motion_edit
+from vibmo.ai.autonomous import AutonomousPipeline
+from vibmo.ai.surgical_editor import SurgicalSceneEditor
 
 
 def tool_list_components() -> Dict[str, Any]:
     """Returns an inventory of all available semantic components, charts, cards, and motion verbs."""
-    from vibmo.ai.schema import generate_component_schemas
     schemas = generate_component_schemas()
     return {
         "count": len(schemas),
@@ -40,7 +45,7 @@ def tool_list_components() -> Dict[str, Any]:
 
 def tool_search_icons(query: str, limit: int = 15) -> Dict[str, Any]:
     """Searches 200,000+ vector icons by keyword (Lucide, Heroicons, Phosphor, Tabler, Material)."""
-    from vibmo.importers.icons import BUILTIN_ICONS, IconifyResolver
+    from vibmo.importers.icons import BUILTIN_ICONS
     q = query.lower().strip()
     matches = []
 
@@ -66,25 +71,25 @@ def tool_validate_scene(code: str) -> Dict[str, Any]:
     """Executes a Vibmo script in a sandbox and validates layout, timing, and font health."""
     scope: Dict[str, Any] = {}
     try:
-        exec("from vibmo.agent_api import *", scope)
+        exec("from motio.agent_api import *", scope)
         exec(code, scope)
-        scene = scope.get("scene")
+        scene = scope.get("scene") or scope.get("seq")
         if not scene:
             for v in scope.values():
                 if hasattr(v, "nodes") and hasattr(v, "validate"):
                     scene = v
                     break
         if not scene:
-            return {"valid": False, "error": "No 'scene' object found in provided code snippet"}
+            return {"valid": False, "error": "No 'scene' or 'seq' object found in provided code snippet"}
 
-        issues = scene.validate()
-        structure = scene.describe()
+        issues = scene.validate() if hasattr(scene, "validate") else []
+        structure = scene.describe() if hasattr(scene, "describe") else {}
         return {
             "valid": len(issues) == 0,
             "issues": issues,
-            "duration": scene.duration,
-            "fps": scene.fps,
-            "node_count": len(scene.nodes),
+            "duration": getattr(scene, "duration", 0.0),
+            "fps": getattr(scene, "fps", 60.0),
+            "node_count": len(getattr(scene, "nodes", [])),
             "structure": structure,
         }
     except Exception as e:
@@ -102,29 +107,29 @@ def tool_inspect_storyboard(code: str, rows: int = 2, cols: int = 3) -> Dict[str
     
     scope: Dict[str, Any] = {}
     try:
-        exec("from vibmo.agent_api import *", scope)
+        exec("from motio.agent_api import *", scope)
         exec(code, scope)
-        scene = scope.get("scene")
+        scene = scope.get("scene") or scope.get("seq")
         if not scene:
             for v in scope.values():
                 if hasattr(v, "storyboard"):
                     scene = v
                     break
         if not scene:
-            return {"success": False, "error": "No 'scene' object found in code"}
+            return {"success": False, "error": "No 'scene' or 'seq' object found in code"}
 
         scene.storyboard(path=out_png, rows=rows, cols=cols)
         
         with open(out_png, "rb") as f:
             b64_img = base64.b64encode(f.read()).decode("utf-8")
 
-        issues = scene.validate()
+        issues = scene.validate() if hasattr(scene, "validate") else []
         return {
             "success": True,
             "storyboard_path": out_png,
             "image_base64": b64_img,
             "issues": issues,
-            "duration": scene.duration,
+            "duration": getattr(scene, "duration", 0.0),
             "frames_rendered": rows * cols,
         }
     except Exception as e:
@@ -135,13 +140,45 @@ def tool_inspect_storyboard(code: str, rows: int = 2, cols: int = 3) -> Dict[str
         }
 
 
+def tool_get_frame_preview(code: str, time: float = 1.0, scale: float = 0.5) -> Dict[str, Any]:
+    """Renders a single frame at timestamp `time` and returns base64 JPEG for instant visual inspection."""
+    scope: Dict[str, Any] = {}
+    try:
+        exec("from motio.agent_api import *", scope)
+        exec(code, scope)
+        scene = scope.get("scene") or scope.get("seq")
+        if not scene:
+            return {"success": False, "error": "No Scene or Sequence object found in code."}
+
+        temp_img_path = os.path.join(tempfile.gettempdir(), f"frame_{int(time*1000)}.jpg")
+        if hasattr(scene, "render_frame"):
+            rgba = scene.render_frame(time=time, scale=scale)
+            img = Image.fromarray(rgba, "RGBA").convert("RGB")
+            img.save(temp_img_path, format="JPEG", quality=80)
+        elif hasattr(scene, "snapshot"):
+            scene.snapshot(time=time, path=temp_img_path)
+
+        with open(temp_img_path, "rb") as f:
+            b64_img = base64.b64encode(f.read()).decode("utf-8")
+
+        return {
+            "success": True,
+            "time": time,
+            "scale": scale,
+            "image_base64": b64_img,
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e), "traceback": traceback.format_exc()}
+
+
 def tool_generate_scene_from_prompt(
     prompt: str,
     duration: float = 4.0,
     output_video: Optional[str] = None,
     output_storyboard: Optional[str] = None,
+    provider: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Generates an animated scene from a text prompt and renders a storyboard/video."""
+    """Synthesizes an animated scene from a text prompt and generates a storyboard / video preview."""
     from vibmo.scene.scene import Scene
     try:
         scene = Scene.from_prompt(prompt, duration=duration)
@@ -150,17 +187,15 @@ def tool_generate_scene_from_prompt(
             "prompt": prompt,
             "duration": scene.duration,
             "node_count": len(scene.nodes),
-            "structure": scene.describe(),
+            "structure": scene.describe() if hasattr(scene, "describe") else {},
         }
 
-        # Render storyboard if requested or default
-        sb_path = output_storyboard or os.path.join(tempfile.gettempdir(), "prompt_storyboard.png")
+        sb_path = output_storyboard or os.path.join(tempfile.gettempdir(), f"prompt_storyboard_{os.getpid()}.png")
         scene.storyboard(sb_path)
         with open(sb_path, "rb") as f:
             results["storyboard_base64"] = base64.b64encode(f.read()).decode("utf-8")
         results["storyboard_path"] = sb_path
 
-        # Render video if requested
         if output_video:
             scene.render(output_video, quality="fast")
             results["video_path"] = os.path.abspath(output_video)
@@ -174,6 +209,40 @@ def tool_generate_scene_from_prompt(
         }
 
 
+def tool_ai_edit(
+    prompt: str,
+    current_code: str,
+    provider: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Surgically modifies existing Vibmo code using LLM reasoning and AST precision."""
+    res = run_motion_edit(prompt=prompt, current_code=current_code, provider=provider)
+    return {
+        "success": res.get("is_valid", True),
+        "prompt": prompt,
+        "updated_code": res.get("updated_code", current_code),
+        "message": res.get("response_message", ""),
+        "errors": res.get("validation_errors", []),
+        "logs": res.get("execution_log", []),
+    }
+
+
+def tool_autonomous_render(
+    prompt: str,
+    output_video: str = "output.mp4",
+    provider: Optional[str] = None,
+    quality: str = "high",
+    visual_critique: bool = False,
+) -> Dict[str, Any]:
+    """End-to-end prompt-to-video generation, validation, and rendering."""
+    return AutonomousPipeline.generate_and_render(
+        prompt=prompt,
+        output_video_path=output_video,
+        provider=provider,
+        quality=quality,
+        visual_critique=visual_critique,
+    )
+
+
 def tool_render_scene(
     code: str,
     output_path: str = "output.mp4",
@@ -183,9 +252,9 @@ def tool_render_scene(
     """Executes Vibmo code and renders the final video file (MP4, WebM, ProRes, GIF)."""
     scope: Dict[str, Any] = {}
     try:
-        exec("from vibmo.agent_api import *", scope)
+        exec("from motio.agent_api import *", scope)
         exec(code, scope)
-        scene = scope.get("scene")
+        scene = scope.get("scene") or scope.get("seq")
         if not scene:
             for v in scope.values():
                 if hasattr(v, "render"):
@@ -200,7 +269,7 @@ def tool_render_scene(
             "success": True,
             "output_path": out_abs,
             "file_size_bytes": os.path.getsize(out_abs) if os.path.exists(out_abs) else 0,
-            "duration": scene.duration,
+            "duration": getattr(scene, "duration", 0.0),
         }
     except Exception as e:
         return {
@@ -305,4 +374,3 @@ def tool_mutate_state_graph(
         return {"success": True, "action": action, "result": result}
     except Exception as e:
         return {"success": False, "error": str(e), "traceback": traceback.format_exc()}
-

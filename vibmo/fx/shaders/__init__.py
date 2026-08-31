@@ -39,6 +39,21 @@ from vibmo.fx.shaders.fx_vhs_tape_tracking_suite import (
     ColorBleedChromaShift,
     AnalogStaticSnowBurst,
 )
+from vibmo.fx.shaders.fx_ascii_render_filter import (
+    AsciiRenderFilter,
+    AsciiRenderShader,
+)
+from vibmo.fx.shaders.fx_security_cam_overlay import (
+    SecurityCamOverlay,
+    CctvSurveillanceHud,
+)
+from vibmo.fx.shaders.fx_shader_neural_voronoi import (
+    ShaderNeuroNoise,
+    ShaderVoronoiGrid,
+)
+from vibmo.fx.shaders.fx_underwater_ripple import (
+    UnderwaterRippleFilter,
+)
 
 __all__ = [
     "GpuFilterBase",
@@ -69,4 +84,11 @@ __all__ = [
     "HeadSwitchJitter",
     "ColorBleedChromaShift",
     "AnalogStaticSnowBurst",
+    "AsciiRenderFilter",
+    "AsciiRenderShader",
+    "SecurityCamOverlay",
+    "CctvSurveillanceHud",
+    "ShaderNeuroNoise",
+    "ShaderVoronoiGrid",
+    "UnderwaterRippleFilter",
 ]

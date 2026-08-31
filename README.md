@@ -1,57 +1,82 @@
-# ✦ Motio / Vibmo: The AI-Agent Native Motion Design Framework in Python
+# ✦ Vibmo / Motio: The AI-Agent Native Motion Design Framework in Python
 
 > **Zero-boilerplate semantic motion graphics for developers, designers, and AI agents.**  
-> Built for world-class SaaS launch videos, product UI demos, kinetic typography, vector metamorphosis, and audio visualizations without manual keyframe math.
+> Built for world-class SaaS launch videos, product UI demos, kinetic typography, 3D data visualization, vector metamorphosis, and procedural audio synthesis without manual keyframe math.
 
 ---
 
-## 🧭 Why Motio?
+## 🧭 Why Vibmo?
 
-Unlike math-only animators (such as Manim) or low-level video editors (such as MoviePy), **Motio** is built for **high-level semantic design** and **vibe coding**. You declare *what* you want using intuitive motion verbs (`.pop_in()`, `.tilt_3d()`, `.morph_to()`, `.zoom_to()`, `.reveal_characters()`), and Motio automatically computes the spring physics, easing curves, ModernGL GPU post-shaders, and FFmpeg streaming.
+Unlike math-only animators (such as Manim) or low-level video editors (such as MoviePy), **Vibmo** is built for **high-level semantic design** and **vibe coding**. You declare *what* you want using intuitive motion verbs (`.pop_in()`, `.tilt_3d()`, `.morph_to()`, `.zoom_to()`, `.reveal_characters()`), and Vibmo automatically computes the spring physics, easing curves, ModernGL GPU post-shaders, and FFmpeg streaming.
 
 ```python
-from motio.agent_api import *
+from vibmo.agent_api import *
 
-scene = Scene(width=1920, height=1080, fps=60, duration=4.5, background=colors.DARK_NAVY)
-card = scene.add(GlassCard(padding=32, corner_radius=24, position=(240, 200)))
-card.add(
-    Icon("lucide:sparkles", size=36, color=colors.CYAN),
-    KineticText("Automated Motion in Python", font_size=32, bold=True),
-    MetricCounter(start_val=0, end_val=250000, prefix="$", suffix=" MRR", font_size=52, bold=True, color=colors.EMERALD),
+# 1. Initialize Scene (1080p @ 60 FPS, Dark aesthetic)
+scene = Scene(
+    width=1920,
+    height=1080,
+    fps=60,
+    duration=5.0,
+    background=colors.DARK_NAVY,
 )
-scene.add_post_fx(Vignette(intensity=0.25), FilmGrain(amount=0.01))
 
+# 2. Add Background & Cinematic Post-FX
+bg = MeshGradientFlow(speed=0.6, complexity=4)
+scene.add(bg)
+scene.add_post_fx(Vignette(intensity=0.25), FilmGrain(amount=0.015))
+
+# 3. Assemble Semantic UI Components
+card = GlassCard(direction="column", gap=16, padding=32, corner_radius=24, position=(240, 200))
+icon = Icon("lucide:sparkles", size=36, color=colors.CYAN)
+title = KineticText("Automated Motion in Python", font_size=32, bold=True)
+counter = MetricCounter(start_val=0, end_val=250000, prefix="$", suffix=" MRR", font_size=52, bold=True, color=colors.EMERALD)
+
+card.add(icon, title, counter)
+scene.add(card)
+
+# 4. Choreograph with Natural Verbs
 @scene.animate
 def main():
-    yield card.pop_in()
+    # Pop in the card with spring physics
+    yield card.pop_in(delay=0.1, duration=0.8)
+    
+    # Staggered wave reveal of heading characters while counting numbers
     yield scene.all(
-        card.children[1].reveal_characters(stagger=0.025),
-        card.children[2].count_to(duration=1.8, ease=Ease.out_expo),
+        title.reveal_characters(stagger=0.025),
+        counter.count_to(duration=1.8, ease=Ease.out_expo),
+        icon.bounce(amplitude=1.3, count=2),
     )
+    
+    # Gentle continuous floating idle
     card.float_idle(amplitude=6, speed=1.2)
     yield scene.wait(1.5)
 
+# 5. Visual Storyboard, Live Studio & Video Export
 if __name__ == "__main__":
-    scene.storyboard("preview.png")
-    scene.render("output.mp4", quality="high")
+    scene.storyboard("preview.png")                # Instant 6-frame progression
+    # scene.preview()                             # Opens live interactive Web Studio in browser
+    scene.render("output.mp4", quality="high")     # Master 1080p 60FPS export
 ```
 
 ---
 
 ## ⚡ Key Capabilities & Feature Matrix
 
-* **📱 Hardware Frames & Device Mockups**: `BrowserWindow`, `PhoneFrame`, `TabletFrame`, `LaptopFrame`, `WatchFrame`, `DesktopFrame`.
+* **📱 15+ Hardware Chassis & Device Enclosures**: `BrowserWindow`, `FoldableDeviceFrame`, `RuggedSmartwatchFrame`, `SuperUltrawideMonitorFrame`, `PosTerminalFrame`, `CameraViewfinderOverlay`, `MinimalistEInkTabletFrame`, `SmartHomeHubFrame`, `RetroArcadeCrtCabinet`, `SpatialVisorFrame`, `OledCinemaTvFrame`, `AutomotiveCockpitDash`, `HandheldGamingConsoleFrame`, `CyberdeckChassisFrame`, `MultiMonitorDeveloperRig`.
 * **🔄 Vector Shape Metamorphosis**: `MorphPath` with deterministic arc-length resampling for seamless geometric morphing (Circle $\rightarrow$ Star $\rightarrow$ Heart $\rightarrow$ Play $\rightarrow$ Gear $\rightarrow$ Custom SVG).
 * **🎥 Frame-Accurate Video Primitives**: `VideoNode` / `Asset.video()` with trimming, speed ramping, looping, and dynamic region zooming (`video.zoom_to_region()`).
-* **🎭 Compositing Graph, Masks & Mattes**: `Precomp`, `AlphaMatte`, `LumaMatte`, `AdjustmentLayer`, and 17 layer blend modes (`Multiply`, `Screen`, `Overlay`, etc.).
-* **📐 2.5D Depth, Perspective & Soft Shadows**: `Matrix3D`, 3D tilt (`card.tilt_3d(pitch, yaw)`), and multi-pass soft `DropShadow`.
-* **🎨 25+ Visual FX & Shaders**: `FilmGrain`, `Vignette`, `BackdropBlur`, `Bloom`, `Glow`, `ChromaticAberration`, `DepthOfField`, `TiltShift`, `Glitch`, `Pixelate`, `Halftone`, `Duotone`, `Gridlines`, `Checkerboard`, `Scanlines`.
-* **🎞️ 18 Modern Transitions**: `Slide`, `PushCut`, `Iris`, `Wipe`, `BookFlip`, `Flip`, `Ripple`, `CrossFade`, `ZoomPunch`, `GlitchTransition`, `LightLeak`.
-* **🎵 Audio Reactivity, Procedural SFX & Stem Mixer**: Procedural foley generator (pops, clicks, whooshes, risers, bass drops), multi-track stem mixer (`AudioStemMixer`), dynamic audio ducking (`AudioDucker`), and 6 audio visualizers (`SpectrumBars`, `CircularSpectrum`, `VinylRecord`, `WaveformRibbon`).
-* **🤖 AI & Intelligent UI Components**: `ModelCard`, `ChatInputBar`, `EditorialDoc`, `PillLaunchButton`, `CommandPalette`, `DataTable`, `AvatarGroup`.
-* **📊 Complete Data Visualization Suite**: `AreaChart`, `Sparkline`, `BarChart`, `PieChart`, `DonutChart`, `GaugeChart`, `LineChart`, `RadarChart`, `FunnelChart`, `CandlestickChart`, `MathFormula` (LaTeX), and `Axes` (2D plots).
-* **💻 Interactive Web Studio Pro**: Real-time 60 FPS in-browser workstation with NLE timeline, live canvas drag handles, node graph, audio mixer, and embedded Python IDE (`Ctrl+E`).
-* **🤖 Antigravity AI Agent Skill & MCP**: Full MCP server integration and dedicated Antigravity skill package for autonomous video generation.
+* **🎭 Compositing Graph, Masks & Mattes**: `Precomp`, `AlphaMatte`, `LumaMatte`, `AdjustmentLayer`, and 18 layer blend modes (`Multiply`, `Screen`, `Overlay`, `ColorDodge`, etc.).
+* **📐 2.5D Depth, Perspective & Soft Shadows**: `Matrix3D`, 3D camera tracker with rack focus, 3D tilt (`card.tilt_3d(pitch, yaw)`), and multi-pass soft `DropShadow`.
+* **🎨 25+ Visual FX & Shaders**: `FilmGrain`, `Vignette`, `BackdropBlur`, `Bloom`, `Glow`, `ChromaticAberration`, `DepthOfField`, `TiltShift`, `Glitch`, `Pixelate`, `Halftone`, `Duotone`, `Gridlines`, `CrtPhosphorBloomShader`, `VhsTapeTrackingShader`, `AnamorphicStreakFlare`, `LiquidGlassRefractionFilter`, `AsciiMatrixArtFilter`.
+* **🎞️ 18 Modern Transitions**: `Slide`, `PushCut`, `Iris`, `Wipe`, `BookFlip`, `Flip`, `Ripple`, `CrossFade`, `ZoomPunch`, `GlitchTransition`, `LightLeak`, and Remocn cinematic transitions.
+* **🎵 Procedural Foley & Stem Mixer**: 15 procedural sound suites (Whoosh, Keystrokes, Bass Drops, UI Clicks, Ambient Drones, Risers), multi-track stem mixer (`AudioStemMixer`), dynamic audio ducking (`AudioDucker`), and 6 audio visualizers (`SpectrumBars`, `CircularSpectrum`, `VinylRecord`, `WaveformRibbon`).
+* **🤖 AI & SaaS Interactive UI Suites**: `StreamingTokenOutput`, `TreeOfThoughtTree`, `DiffusionCanvas`, `AgentTeamThread`, `VectorEmbeddingsVisualizer`, `PricingTierMatrix`, `ApiKeyVault`, `GitPrTimeline`, `TelemetryDialHUD`, `VisualSqlQueryBuilder`, `WebhookActivityFeed`, `TokenQuotaMeter`, `CodeSandboxPlayground`, `FeatureComparisonMatrix`, `PromptDiffViewer`.
+* **📊 Complete Financial & 3D Chart Engines**: `CandlestickChartPro`, `RadialSunburstHierarchy`, `SpeedometerHudDial`, `SurfaceMesh3DPlot`, `BubbleScatter4DPlot`, `WaterfallFinancialChart`, `ChoroplethGeoMap`, `ViolinDensityPlot`, `MarketCapTreemap`, `SankeyFlowDiagram`, `OrganicWaveStreamgraph`, `PolarRoseCoxcombChart`, `BoxAndWhiskerPlot`, `ParetoAnalysisChart`.
+* **✍️ Kinetic Typography & Title Sequences**: `GlitchDecryptorText`, `LiquidWaveText`, `IsometricExtruded3DText`, `RealisticNeonStrobeSign`, `ParticleFlameText`, `SplitFlapAirportBoard`, `MatrixRainTypography`, `SlitScanVideoSynthText`, `OdometerTumblerCounter`, `RubberStampTitleSlam`, `MagneticGravityLetters`, `HologramChromaText`, `PhosphorTerminalTypewriter`, `BrushCalligraphyPathReveal`, `ElasticSquashBounceTitle`.
+* **🌈 Color Science & HDR Mastering**: DaVinci Intermediate wide-gamut math, DaVinci DRT tone mapping, ITU-R BT.2408 203-nit diffuse white scaling, and Dolby Vision dynamic L1 metadata analysis.
+* **💻 Interactive Web Studio Pro**: Real-time 60 FPS in-browser workstation with NLE timeline, live canvas drag handles, Fusion node graph, Fairlight audio mixer, and embedded Monaco Python IDE (`Ctrl+E`).
+* **🤖 Model Context Protocol (MCP) & AI Agent Skill**: Built-in JSON-RPC 2.0 stdio MCP server enabling Claude Desktop, Cursor, Antigravity, and AI agents to validate scenes, generate animations, and render videos autonomously.
 
 ---
 
@@ -59,14 +84,14 @@ if __name__ == "__main__":
 
 ```bash
 # Clone repository
-git clone https://github.com/vibmo-engine/vibmo.git
-cd "motion graphics"
+git clone https://github.com/TharunDJ121/vibmo.git
+cd vibmo
 
-# Install in editable mode
+# Install in editable mode with all dependencies
 pip install -e .
 ```
 
-*Prerequisite: `ffmpeg` installed and available on system PATH.*
+*Prerequisite: `ffmpeg` installed and available on system `PATH`.*
 
 ---
 
@@ -89,18 +114,19 @@ vibmo render examples/saas_product_demo.py -q high --resume
 vibmo render examples/saas_product_demo.py -q draft       # 2-second fast preview
 vibmo render examples/saas_product_demo.py -p prores      # Apple ProRes 4444 with Alpha
 vibmo render examples/saas_product_demo.py -p webm        # WebM Transparent Overlay
+
+# 5. Launch Model Context Protocol (MCP) Server for AI Agents
+vibmo mcp
 ```
 
 ---
 
-## 📚 Complete Documentation & Skill References
+## 📚 Complete Documentation & Master Catalogs
 
-- 📖 **[Comprehensive API Reference Manual](file:///c:/Users/djtha/projects/motion%20graphics/docs/API_REFERENCE.md)**: Exhaustive documentation for every single class, method, argument, and type in the framework.
-- 🎨 **[Asset Creation & Registration Guide](file:///c:/Users/djtha/projects/motion%20graphics/.agents/skills/motio-motion-graphics/references/asset_creation_guide.md)**: How to create, generate, load, and register every asset type (Images, Videos, Icons, Audio, Procedural Foley, Gradients, Textures, HTML/Tailwind, Lottie, Custom Components, Shaders).
-- 🧩 **[Component Catalog Reference](file:///c:/Users/djtha/projects/motion%20graphics/.agents/skills/motio-motion-graphics/references/component_catalog.md)**: Visual components, hardware frames, mockups, AI widgets, and charts.
-- 🎬 **[Motion Verbs & Transitions Cheat Sheet](file:///c:/Users/djtha/projects/motion%20graphics/.agents/skills/motio-motion-graphics/references/motion_verbs_cheat_sheet.md)**: All motion actions, 18 transition types, and physics force fields.
-- 🚀 **[Showcase Production Recipes](file:///c:/Users/djtha/projects/motion%20graphics/.agents/skills/motio-motion-graphics/examples/recipes.md)**: Copy-pasteable recipes for SaaS demos, mobile features, shape morphs, and audio visualizers.
-- 🤖 **[Antigravity Agent Skill](file:///c:/Users/djtha/projects/motion%20graphics/.agents/skills/motio-motion-graphics/SKILL.md)**: Agent instructions and inspection loops.
+- 📖 **[`PROJECT_CATALOG.md`](PROJECT_CATALOG.md)**: Exhaustive master reference covering all 13 Asset & Component Suites, complete parameter matrices, and runnable recipes.
+- 🤖 **[`AGENTS.md`](AGENTS.md)**: AI Agent Vibe Coding Guide and inspection protocols for Claude, Antigravity, Cursor, and Codex.
+- 🏛️ **[`ARCHITECTURE.md`](ARCHITECTURE.md)**: Deep dive into the 6 runtime engine layers (Authoring, Rigging, PyCairo Rasterizer, ModernGL Shaders, FFmpeg Streaming, and Studio Pro).
+- 📖 **[`docs/API_REFERENCE.md`](docs/API_REFERENCE.md)**: Comprehensive API reference manual for all classes, methods, and types.
 
 ---
 
@@ -108,19 +134,21 @@ vibmo render examples/saas_product_demo.py -p webm        # WebM Transparent Ove
 
 | Script | Description |
 | :--- | :--- |
-| [`examples/saas_product_demo.py`](file:///c:/Users/djtha/projects/motion%20graphics/examples/saas_product_demo.py) | Flagship 130-line SaaS launch demo with `BrowserWindow`, `Cursor`, `Spotlight`, `MetricCounter`, and Camera directing. |
-| [`examples/morph_showcase.py`](file:///c:/Users/djtha/projects/motion%20graphics/examples/morph_showcase.py) | Fluid vector shape metamorphosis across Circle $\rightarrow$ Star $\rightarrow$ Heart $\rightarrow$ Gear $\rightarrow$ Play $\rightarrow$ Check. |
-| [`examples/audio_visualizer.py`](file:///c:/Users/djtha/projects/motion%20graphics/examples/audio_visualizer.py) | Advanced 360-degree radial music visualizer with `CircularSpectrum`, `VinylRecord`, `WaveformRibbon`, and beat reactivity. |
-| [`examples/showcase_math.py`](file:///c:/Users/djtha/projects/motion%20graphics/examples/showcase_math.py) | Mathematical LaTeX animations (`MathFormula`) and dynamic 2D function plotting (`Axes.plot()`). |
-| [`examples/showcase_advanced.py`](file:///c:/Users/djtha/projects/motion%20graphics/examples/showcase_advanced.py) | Glassmorphic cards, syntax-highlighted `CodeWindow`, and staggered kinetic typography. |
-| [`examples/asset_expansion_demo.py`](file:///c:/Users/djtha/projects/motion%20graphics/examples/asset_expansion_demo.py) | Full demonstration of expanded transitions, pattern effects, and the asset library. |
+| [`examples/saas_product_demo.py`](examples/saas_product_demo.py) | Flagship 130-line SaaS launch demo with `BrowserWindow`, `Cursor`, `Spotlight`, `MetricCounter`, and Camera directing. |
+| [`examples/morph_showcase.py`](examples/morph_showcase.py) | Fluid vector shape metamorphosis across Circle $\rightarrow$ Star $\rightarrow$ Heart $\rightarrow$ Gear $\rightarrow$ Play $\rightarrow$ Check. |
+| [`examples/audio_visualizer.py`](examples/audio_visualizer.py) | Advanced 360-degree radial music visualizer with `CircularSpectrum`, `VinylRecord`, `WaveformRibbon`, and beat reactivity. |
+| [`examples/showcase_math.py`](examples/showcase_math.py) | Mathematical LaTeX animations (`MathFormula`) and dynamic 2D function plotting (`Axes.plot()`). |
+| [`examples/showcase_advanced.py`](examples/showcase_advanced.py) | Glassmorphic cards, syntax-highlighted `CodeWindow`, and staggered kinetic typography. |
+| [`examples/showcase_fintech_candlestick.py`](examples/showcase_fintech_candlestick.py) | Pro financial dashboard with `CandlestickChartPro`, volume subplots, and animated indicator overlays. |
+| [`examples/showcase_kinetic_typography.py`](examples/showcase_kinetic_typography.py) | Multi-scene typography showcase with neon strobes, slit-scan, and glitch decryptions. |
+| [`examples/showcase_saas_glass.py`](examples/showcase_saas_glass.py) | Modern dark-mode Bento grid and glassmorphism interface animations. |
 
 ---
 
 ## 🧪 Testing
 
 ```bash
-# Run test suite
+# Run complete test suite (1,400+ unit & integration tests)
 pytest tests/
 ```
 
@@ -128,3 +156,4 @@ pytest tests/
 
 ## 📄 License
 MIT License. Built for developers, designers, and AI agents.
+

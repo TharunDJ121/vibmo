@@ -7,6 +7,9 @@ class RiserTensionSuite:
     Generates 48kHz float32 NumPy audio arrays.
     """
 
+    SAMPLE_RATE = 48000
+
+
     @staticmethod
     def shepard_tone_riser(duration: float = 2.5, base_freq: float = 65.4, octaves: int = 5) -> np.ndarray:
         """

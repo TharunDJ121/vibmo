@@ -1,6 +1,7 @@
 """
-High-Performance GLSL Shaders for ModernGL Hardware-Accelerated GPU Post-Processing.
-Includes Bloom, Glow, Gaussian Blur, Chromatic Aberration, Vignette, Film Grain, and Color Grading.
+High-Performance GLSL Shaders for ModernGL Hardware-Accelerated GPU Post-Processing and Layer Compositing.
+Includes Bloom, Glow, Gaussian Blur, Chromatic Aberration, Vignette, Film Grain,
+Photoshop/After Effects Blend Modes, Track Mattes, 3D Quad Projection, and 3D LUTs.
 """
 
 VERTEX_SHADER_QUAD = """
@@ -12,6 +13,229 @@ out vec2 v_uv;
 void main() {
     v_uv = in_uv;
     gl_Position = vec4(in_vert, 0.0, 1.0);
+}
+"""
+
+VERTEX_SHADER_3D_QUAD = """
+#version 330
+uniform mat4 u_mvp;
+in vec3 in_vert;
+in vec2 in_uv;
+out vec2 v_uv;
+
+void main() {
+    v_uv = in_uv;
+    gl_Position = u_mvp * vec4(in_vert, 1.0);
+}
+"""
+
+FRAGMENT_SHADER_QUAD_TEXTURE = """
+#version 330
+uniform sampler2D u_texture;
+uniform float u_opacity;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+void main() {
+    vec4 col = texture(u_texture, v_uv);
+    fragColor = vec4(col.rgb, col.a * clamp(u_opacity, 0.0, 1.0));
+}
+"""
+
+FRAGMENT_SHADER_BLEND_MODES = """
+#version 330
+uniform sampler2D u_base_texture;
+uniform sampler2D u_layer_texture;
+uniform int u_blend_mode;
+uniform float u_opacity;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+// RGB <-> HSL conversions for color blend modes
+vec3 rgb2hsl(vec3 c) {
+    float cmin = min(min(c.r, c.g), c.b);
+    float cmax = max(max(c.r, c.g), c.b);
+    float delta = cmax - cmin;
+    vec3 hsl = vec3(0.0);
+    hsl.z = (cmax + cmin) * 0.5;
+
+    if (delta > 1e-5) {
+        hsl.y = hsl.z < 0.5 ? delta / (cmax + cmin) : delta / (2.0 - cmax - cmin);
+        if (c.r == cmax) hsl.x = (c.g - c.b) / delta;
+        else if (c.g == cmax) hsl.x = 2.0 + (c.b - c.r) / delta;
+        else hsl.x = 4.0 + (c.r - c.g) / delta;
+        hsl.x = fract(hsl.x / 6.0);
+    }
+    return hsl;
+}
+
+float hue2rgb(float p, float q, float t) {
+    if (t < 0.0) t += 1.0;
+    if (t > 1.0) t -= 1.0;
+    if (t < 1.0/6.0) return p + (q - p) * 6.0 * t;
+    if (t < 1.0/2.0) return q;
+    if (t < 2.0/3.0) return p + (q - p) * (2.0/3.0 - t) * 6.0;
+    return p;
+}
+
+vec3 hsl2rgb(vec3 hsl) {
+    if (hsl.y < 1e-5) return vec3(hsl.z);
+    float q = hsl.z < 0.5 ? hsl.z * (1.0 + hsl.y) : hsl.z + hsl.y - hsl.z * hsl.y;
+    float p = 2.0 * hsl.z - q;
+    return vec3(
+        hue2rgb(p, q, hsl.x + 1.0/3.0),
+        hue2rgb(p, q, hsl.x),
+        hue2rgb(p, q, hsl.x - 1.0/3.0)
+    );
+}
+
+void main() {
+    vec4 base = texture(u_base_texture, v_uv);
+    vec4 layer = texture(u_layer_texture, v_uv);
+    float op = clamp(u_opacity, 0.0, 1.0) * layer.a;
+    
+    if (op <= 1e-5) {
+        fragColor = base;
+        return;
+    }
+
+    vec3 b = base.rgb;
+    vec3 l = layer.rgb;
+    vec3 blended = l;
+
+    // 0: Normal
+    if (u_blend_mode == 0) {
+        blended = l;
+    }
+    // 1: Multiply
+    else if (u_blend_mode == 1) {
+        blended = b * l;
+    }
+    // 2: Screen
+    else if (u_blend_mode == 2) {
+        blended = 1.0 - (1.0 - b) * (1.0 - l);
+    }
+    // 3: Overlay
+    else if (u_blend_mode == 3) {
+        blended = mix(2.0 * b * l, 1.0 - 2.0 * (1.0 - b) * (1.0 - l), step(0.5, b));
+    }
+    // 4: Darken
+    else if (u_blend_mode == 4) {
+        blended = min(b, l);
+    }
+    // 5: Lighten
+    else if (u_blend_mode == 5) {
+        blended = max(b, l);
+    }
+    // 6: Color Dodge
+    else if (u_blend_mode == 6) {
+        blended = clamp(b / max(vec3(1e-4), 1.0 - l), 0.0, 1.0);
+    }
+    // 7: Color Burn
+    else if (u_blend_mode == 7) {
+        blended = clamp(1.0 - (1.0 - b) / max(vec3(1e-4), l), 0.0, 1.0);
+    }
+    // 8: Hard Light
+    else if (u_blend_mode == 8) {
+        blended = mix(2.0 * b * l, 1.0 - 2.0 * (1.0 - b) * (1.0 - l), step(0.5, l));
+    }
+    // 9: Soft Light
+    else if (u_blend_mode == 9) {
+        blended = (1.0 - 2.0 * l) * b * b + 2.0 * l * b;
+    }
+    // 10: Difference
+    else if (u_blend_mode == 10) {
+        blended = abs(b - l);
+    }
+    // 11: Exclusion
+    else if (u_blend_mode == 11) {
+        blended = b + l - 2.0 * b * l;
+    }
+    // 12: Hue
+    else if (u_blend_mode == 12) {
+        vec3 baseH = rgb2hsl(b);
+        vec3 layerH = rgb2hsl(l);
+        blended = hsl2rgb(vec3(layerH.x, baseH.y, baseH.z));
+    }
+    // 13: Saturation
+    else if (u_blend_mode == 13) {
+        vec3 baseH = rgb2hsl(b);
+        vec3 layerH = rgb2hsl(l);
+        blended = hsl2rgb(vec3(baseH.x, layerH.y, baseH.z));
+    }
+    // 14: Color
+    else if (u_blend_mode == 14) {
+        vec3 baseH = rgb2hsl(b);
+        vec3 layerH = rgb2hsl(l);
+        blended = hsl2rgb(vec3(layerH.x, layerH.y, baseH.z));
+    }
+    // 15: Luminosity
+    else if (u_blend_mode == 15) {
+        vec3 baseH = rgb2hsl(b);
+        vec3 layerH = rgb2hsl(l);
+        blended = hsl2rgb(vec3(baseH.x, baseH.y, layerH.z));
+    }
+    // 16: Add
+    else if (u_blend_mode == 16) {
+        blended = min(vec3(1.0), b + l);
+    }
+    // 17: Subtract
+    else if (u_blend_mode == 17) {
+        blended = max(vec3(0.0), b - l);
+    }
+
+    vec3 final_rgb = mix(base.rgb, blended, op);
+    float final_a = clamp(base.a + op * (1.0 - base.a), 0.0, 1.0);
+    fragColor = vec4(final_rgb, final_a);
+}
+"""
+
+FRAGMENT_SHADER_TRACK_MATTE = """
+#version 330
+uniform sampler2D u_target_texture;
+uniform sampler2D u_matte_texture;
+uniform int u_matte_type; // 0: Alpha, 1: Luma
+uniform bool u_inverted;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+void main() {
+    vec4 target = texture(u_target_texture, v_uv);
+    vec4 matte = texture(u_matte_texture, v_uv);
+    
+    float factor = 1.0;
+    if (u_matte_type == 0) {
+        factor = matte.a;
+    } else {
+        factor = dot(matte.rgb, vec3(0.299, 0.587, 0.114));
+    }
+
+    if (u_inverted) {
+        factor = 1.0 - factor;
+    }
+
+    factor = clamp(factor, 0.0, 1.0);
+    fragColor = vec4(target.rgb, target.a * factor);
+}
+"""
+
+FRAGMENT_SHADER_LUT3D = """
+#version 330
+uniform sampler2D u_texture;
+uniform sampler3D u_lut;
+uniform float u_intensity;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+void main() {
+    vec4 color = texture(u_texture, v_uv);
+    vec3 graded = texture(u_lut, color.rgb).rgb;
+    vec3 final_rgb = mix(color.rgb, graded, clamp(u_intensity, 0.0, 1.0));
+    fragColor = vec4(final_rgb, color.a);
 }
 """
 
